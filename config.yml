@@ -1,21 +1,3 @@
-# Homer
-A very simple static HOMepage for your servER.
-Add all your useful service, external links, notes... or anything.
-
-If you need authentication support, you're on your own (it can be secured using a web server auth module or exposing it only through a VPN network / SSH tunneling, ...)
-
-![screenshot](https://github.com/bastienwirtz/homer/blob/master/screenshot.png)
-
-**How to build / install it? Where is the webpack config?**
-There is no build system (😱), use it like that! It'meant to be stupid simple & zero maintenance required. just copy the static files somewhere, and visit the `index.html`.
- 
-
-## configuration
-
-Title, icons, links, colors, and services can be configured in the `config.yml` file, using [yaml](http://yaml.org/) format.
-
-
-```yaml
 ---
 # Homepage configuration
 # See https://fontawesome.com/v4.7.0/icons/ for icons options
@@ -25,7 +7,9 @@ subtitle: "Homer"
 logo: "assets/homer.png"
 
 # Optional message
+# See https://bulma.io/documentation/components/message/#colors for styling options.
 message:
+  style: "is-warning"
   title: "Optional message!"
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula."
 
@@ -77,5 +61,3 @@ services:
         subtitle: "Pingdom public reports overview"
         tag: "CI"
         url: "#"
-
-```
