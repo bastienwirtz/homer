@@ -5,6 +5,7 @@
 title: "Simple homepage"
 subtitle: "Homer"
 logo: "assets/homer.png"
+icon: "fas fa-skull-crossbones"
 
 # Optional message
 # See https://bulma.io/documentation/components/message/#colors for styling options.
@@ -16,10 +17,10 @@ message:
 # Optional navbar
 links:
   - name: "ansible"
-    icon: "fa-github"
+    icon: "fab fa-github"
     url: "https://github.com/xxxxx/ansible/"
   - name: "Wiki"
-    icon: "fa-book"
+    icon: "fas fa-book"
     url: "https://wiki.xxxxxx.com/"
 
 # Services
@@ -27,7 +28,7 @@ links:
 # Leave only a "items" key if not using group (group name & icon are optional, section separation will not be displayed).
 services:
   - name: "DevOps"
-    icon: "fa-code-fork"
+    icon: "fas fa-code-branch"
     items:
       - name: "Jenkins"
         logo: "/assets/tools/jenkins.png"
@@ -40,7 +41,7 @@ services:
         tag: "haproxy"
         url: "#"
   - name: "Monitoring"
-    icon: "fa-heartbeat"
+    icon: "fas fa-heartbeat"
     items:
       - name: "M/Monit"
         logo: "/assets/tools/monit.png"

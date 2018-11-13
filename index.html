@@ -1,107 +1,122 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <title>Homer</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
   <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
   <link rel="stylesheet" href="app.css">
 </head>
+
 <body>
-<div id="app" v-if="config">
-  <div id="bighead">
-    <section class="first-line">
-      <div class="container">
-        <img v-if="config.logo" :src="config.logo" />
-        <div class="dashboard-title">
-          <span v-cloak class="headline">{{ config.subtitle }}</span>
-          <h1 v-cloak>{{ config.title }}</h1>
-        </div>
-      </div>
-    </section>
-    <div v-if="config.links" class="container-fluid">
-      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div id="app" v-if="config">
+    <div id="bighead">
+      <section class="first-line">
         <div class="container">
-          <div class="navbar-menu">
-            <div class="navbar-start">
-              <a v-for="link in config.links" class="navbar-item" :href="link.url">
-                <i v-if="link.icon" style="margin-right: 6px;" class="fa" :class="link.icon"></i>
-                {{ link.name }}
-              </a>
-            </div>
-            <div class="end">
-              <div class="search-bar">
-                <label for="search" class="search-label"></label>
-                <input type="text" id="search" v-model="filter"/>
+          <div class="logo">
+            <img v-if="config.logo" :src="config.logo" />
+            <i v-if="config.icon" :class="config.icon"></i>
+          </div>
+          <div class="dashboard-title">
+            <span v-cloak class="headline">{{ config.subtitle }}</span>
+            <h1 v-cloak>{{ config.title }}</h1>
+          </div>
+        </div>
+      </section>
+      <div v-if="config.links" class="container-fluid">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="container">
+            <div class="navbar-menu">
+              <div class="navbar-start">
+                <a v-for="link in config.links" class="navbar-item" :href="link.url">
+                  <i v-if="link.icon" style="margin-right: 6px;" :class="link.icon"></i>
+                  {{ link.name }}
+                </a>
+              </div>
+              <div class="end">
+                <div class="search-bar">
+                  <label for="search" class="search-label"></label>
+                  <input type="text" id="search" v-model="filter" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </div>
-  </div>
 
-  <section id="main-section" class="section">
-    <div class="container">
-      <!-- Optional messages -->
-      <article v-cloak v-if="config && config.message" class="message" :class="config.message.style">
-        <div v-if="config.message.title" class="message-header">
-          <p>{{ config.message.title }}</p>
-        </div>
-        <div v-if="config.message.content" class="message-body">
-          {{ config.message.content }}
-        </div>
-      </article>
+    <section id="main-section" class="section">
+      <div class="container">
+        <!-- Optional messages -->
+        <article v-cloak v-if="config && config.message" class="message" :class="config.message.style">
+          <div v-if="config.message.title" class="message-header">
+            <p>{{ config.message.title }}</p>
+          </div>
+          <div v-if="config.message.content" class="message-body">
+            {{ config.message.content }}
+          </div>
+        </article>
 
-      <h2 v-cloak v-if="filter"><i class="fa fa-search"></i> Search</h2>
+        <h2 v-cloak v-if="filter"><i class="fas fa-search"></i> Search</h2>
 
-      <div v-for="(group, index) in config.services">
-        <h2 v-if="!filter && group.name"><i v-if="group.icon" class="fa" :class="group.icon"></i><span v-else>#</span> {{ group.name }}</h2>
-        <div v-for="items in group.rows">
-          <div class="columns">
-            <div v-for="item in items" v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))" class="column">
-              <div>
-                <div v-if='item' class="card">
-                  <a :href="item.url">
-                    <div class="card-content">
-                      <div class="media">
-                        <div v-if="item.logo" class="media-left">
-                          <figure class="image is-48x48">
-                            <img :src="item.logo" />
-                          </figure>
+        <div v-for="(group, index) in config.services">
+          <h2 v-if="!filter && group.name"><i v-if="group.icon" :class="group.icon"></i><span v-else>#</span>
+            {{ group.name }}</h2>
+          <div v-for="items in group.rows">
+            <div class="columns">
+              <div v-for="item in items" v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))"
+                class="column">
+                <div>
+                  <div v-if='item' class="card">
+                    <a :href="item.url">
+                      <div class="card-content">
+                        <div class="media">
+                          <div v-if="item.logo" class="media-left">
+                            <figure class="image is-48x48">
+                              <img :src="item.logo" />
+                            </figure>
+                          </div>
+                          <div v-if="item.icon" class="media-left">
+                            <figure class="image is-48x48">
+                              <i style="font-size: 35px" :class="item.icon"></i>
+                            </figure>
+                          </div>
+                          <div class="media-content">
+                            <p class="title is-4">{{ item.name }}</p>
+                            <p class="subtitle is-6">{{ item.subtitle }}</p>
+                          </div>
                         </div>
-                        <div class="media-content">
-                          <p class="title is-4">{{ item.name }}</p>
-                          <p class="subtitle is-6">{{ item.subtitle }}</p>
-                        </div>
+                        <strong v-if="item.tag" class="tag">#{{ item.tag }}</strong>
                       </div>
-                      <strong v-if="item.tag" class="tag">#{{ item.tag }}</strong>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
-
-<footer class="footer">
-  <div class="container">
-    <div class="content has-text-centered">
-      <p>Created with <span class="has-text-danger">❤️</span> with <a href="#">bulma</a>, <a href="#">vuejs</a> & <a href="#">font awesome</a>// Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fa fa-github-alt"></i></a>.</p>
-    </div>
+    </section>
   </div>
-</footer>
 
-<script src="https://unpkg.com/vue"></script>
-<script src="vendors/js-yaml.min.js"></script>
-<script src="app.js"></script>
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a>
+          & <a href="#">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/vue"></script>
+  <script src="vendors/js-yaml.min.js"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>

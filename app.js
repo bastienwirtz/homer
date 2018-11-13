@@ -4,13 +4,12 @@ var app = new Vue({
         config: null,
         filter: ''
     },
-    beforeCreate () {
+    beforeCreate() {
         let that = this;
 
         return getConfig().then(function (config) {
-            console.log(config);
             const size = 3;
-            config.services.forEach(function(service) {
+            config.services.forEach(function (service) {
                 service.rows = [];
                 items = service.items;
                 while (items.length) {
@@ -18,7 +17,7 @@ var app = new Vue({
                 }
 
                 if (service.rows.length) {
-                    let last = service.rows.length-1;
+                    let last = service.rows.length - 1;
                     service.rows[last] = service.rows[last].concat(Array(size - service.rows[last].length));
                 }
             });
@@ -31,12 +30,12 @@ var app = new Vue({
 
 
 function getConfig() {
-    return fetch('config.yml').then(function(response) {
+    return fetch('config.yml').then(function (response) {
         if (response.status !== 200) {
             return;
         }
 
-        return response.text().then(function(body){
+        return response.text().then(function (body) {
             return jsyaml.load(body);
         });
     });

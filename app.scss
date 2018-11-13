@@ -1,6 +1,8 @@
 $primary-color: #3367d6;
 $secondary-color: #4285f4;
 
+html { height: 100%; }
+
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #F5F5F5;
@@ -19,9 +21,8 @@ body {
     margin-top: 3rem;
     margin-bottom: 1rem;
 
-    .fa {
+    .fas, .fab, .far {
       margin-right: 10px;
-      color: $secondary-color;
     }
 
     span {
@@ -61,19 +62,26 @@ body {
         padding: 10px 0;
       }
 
-      img {
+      .logo {
         float: left;
-        max-height: 70px;
-        max-width: 70px;
-        padding: 10px;
+        i {
+          vertical-align: top;
+          padding: 8px 15px;
+          font-size: 50px
+        }
+
+        img {
+          padding: 10px;
+          max-height: 70px;
+          max-width: 70px;
+        }
       }
     }
     .navbar {
       background-color: $secondary-color;
 
       a {
-        color: #152138;
-
+        color: #ffffff;
         &:hover {
           background-color: lighten( $secondary-color, 5% );
         }
@@ -96,6 +104,9 @@ body {
 
     .subtitle {
       font-size: .9em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .column {
@@ -151,7 +162,8 @@ body {
   }
 
   .card-content {
-    height: 110px;
+    height: 85px;
+    padding: 1.3rem;
   }
 
   .footer {

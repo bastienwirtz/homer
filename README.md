@@ -8,7 +8,7 @@ If you need authentication support, you're on your own (it can be secured using 
 
 **How to build / install it? Where is the webpack config?**
 There is no build system (😱), use it like that! It'meant to be stupid simple & zero maintenance required. just copy the static files somewhere, and visit the `index.html`.
- 
+
 
 ## configuration
 
@@ -18,11 +18,13 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 ```yaml
 ---
 # Homepage configuration
-# See https://fontawesome.com/v4.7.0/icons/ for icons options
+# See https://fontawesome.com/icons for icons options
 
 title: "Simple homepage"
 subtitle: "Homer"
 logo: "assets/homer.png"
+# Alternatively a fa icon can be provided:
+# icon: "fas fa-skull-crossbones"
 
 # Optional message
 message:
@@ -48,6 +50,8 @@ services:
     items:
       - name: "Jenkins"
         logo: "/assets/tools/jenkins.png"
+        # Alternatively a fa icon can be provided:
+        # icon: "fab fa-jenkins"
         subtitle: "Continuous integration server"
         tag: "CI"
         url: "#"
