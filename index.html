@@ -7,8 +7,8 @@
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <title>Homer</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
   <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
   <link rel="stylesheet" href="app.css">
@@ -18,18 +18,18 @@
   <div id="app" v-if="config">
     <div id="bighead">
       <section class="first-line">
-        <div class="container">
+        <div v-cloak class="container">
           <div class="logo">
             <img v-if="config.logo" :src="config.logo" />
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
           <div class="dashboard-title">
-            <span v-cloak class="headline">{{ config.subtitle }}</span>
-            <h1 v-cloak>{{ config.title }}</h1>
+            <span class="headline">{{ config.subtitle }}</span>
+            <h1>{{ config.title }}</h1>
           </div>
         </div>
       </section>
-      <div v-if="config.links" class="container-fluid">
+      <div v-cloak v-if="config.links" class="container-fluid">
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="container">
             <div class="navbar-menu">
@@ -52,50 +52,53 @@
     </div>
 
     <section id="main-section" class="section">
-      <div class="container">
-        <!-- Optional messages -->
-        <article v-cloak v-if="config && config.message" class="message" :class="config.message.style">
-          <div v-if="config.message.title" class="message-header">
-            <p>{{ config.message.title }}</p>
-          </div>
-          <div v-if="config.message.content" class="message-body">
-            {{ config.message.content }}
-          </div>
-        </article>
+      <div v-cloak class="container">
+        <div v-if="offline" class="offline-message">
+          <i class="far fa-dizzy"></i>
+          <h1>You're offline bro. <i class="fas fa-redo-alt" v-on:click="checkOffline()"></i></h1>
+        </div>
+        <div v-else>
+          <!-- Optional messages -->
+          <article v-if="config && config.message" class="message" :class="config.message.style">
+            <div v-if="config.message.title" class="message-header">
+              <p>{{ config.message.title }}</p>
+            </div>
+            <div v-if="config.message.content" class="message-body">
+              {{ config.message.content }}
+            </div>
+          </article>
 
-        <h2 v-cloak v-if="filter"><i class="fas fa-search"></i> Search</h2>
+          <h2 v-if="filter"><i class="fas fa-search"></i> Search</h2>
 
-        <div v-for="(group, index) in config.services">
-          <h2 v-if="!filter && group.name"><i v-if="group.icon" :class="group.icon"></i><span v-else>#</span>
-            {{ group.name }}</h2>
-          <div v-for="items in group.rows">
-            <div class="columns">
-              <div v-for="item in items" v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))"
-                class="column">
-                <div>
-                  <div v-if='item' class="card">
-                    <a :href="item.url">
-                      <div class="card-content">
-                        <div class="media">
-                          <div v-if="item.logo" class="media-left">
-                            <figure class="image is-48x48">
-                              <img :src="item.logo" />
-                            </figure>
-                          </div>
-                          <div v-if="item.icon" class="media-left">
-                            <figure class="image is-48x48">
-                              <i style="font-size: 35px" :class="item.icon"></i>
-                            </figure>
-                          </div>
-                          <div class="media-content">
-                            <p class="title is-4">{{ item.name }}</p>
-                            <p class="subtitle is-6">{{ item.subtitle }}</p>
-                          </div>
+          <div v-for="(group, index) in config.services">
+            <h2 v-if="!filter && group.name"><i v-if="group.icon" :class="group.icon"></i><span v-else>#</span>
+              {{ group.name }}</h2>
+            <div class="columns is-multiline">
+              <div v-for="item in group.items"
+                v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))"
+                class="column is-one-third-widescreen">
+                <div v-if='item' class="card">
+                  <a :href="item.url">
+                    <div class="card-content">
+                      <div class="media">
+                        <div v-if="item.logo" class="media-left">
+                          <figure class="image is-48x48">
+                            <img :src="item.logo" />
+                          </figure>
                         </div>
-                        <strong v-if="item.tag" class="tag">#{{ item.tag }}</strong>
+                        <div v-if="item.icon" class="media-left">
+                          <figure class="image is-48x48">
+                            <i style="font-size: 35px" :class="item.icon"></i>
+                          </figure>
+                        </div>
+                        <div class="media-content">
+                          <p class="title is-4">{{ item.name }}</p>
+                          <p class="subtitle is-6">{{ item.subtitle }}</p>
+                        </div>
                       </div>
-                    </a>
-                  </div>
+                      <strong class="tag" v-if="item.tag">#{{ item.tag }}</strong>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -108,13 +111,15 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a>
-          & <a href="#">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>
+        <p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a
+            href="https://vuejs.org/">vuejs</a>
+          & <a href="#">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i
+              class="fab fa-github-alt"></i></a></p>
       </div>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.min.js"></script>
   <script src="vendors/js-yaml.min.js"></script>
   <script src="app.js"></script>
 </body>

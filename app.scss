@@ -6,7 +6,7 @@ html { height: 100%; }
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #F5F5F5;
-  height: 100%;
+  min-height: 100%;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Lato', sans-serif;
@@ -109,7 +109,7 @@ body {
       text-overflow: ellipsis;
     }
 
-    .column {
+    .container {
       padding: 1.2rem .75rem;
     }
 
@@ -136,7 +136,7 @@ body {
     background-color: $secondary-color;
     position: absolute;
     top: 1rem;
-    right: -0.3rem;
+    right: -0.2rem;
     width: 3px;
     overflow: hidden;
     transition: all 0.2s ease-out;
@@ -210,6 +210,23 @@ body {
 
       &:focus-within .search-label::before {
           color: #4a4a4a;
+      }
+  }
+
+  .offline-message {
+      text-align: center;
+      margin: 35px 0;
+
+      i {
+        font-size: 2rem;
+      }
+
+      i.fa-redo-alt {
+        font-size: 1.3rem;
+        line-height: 1rem;
+        vertical-align: middle;
+        cursor: pointer;
+        color: #3273dc;
       }
   }
 

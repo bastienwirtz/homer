@@ -4,7 +4,7 @@ html {
 body {
   font-family: 'Raleway', sans-serif;
   background-color: #F5F5F5;
-  height: 100%; }
+  min-height: 100%; }
   body h1, body h2, body h3, body h4, body h5, body h6 {
     font-family: 'Lato', sans-serif; }
   body h1 {
@@ -66,7 +66,7 @@ body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
-    body #main-section .column {
+    body #main-section .container {
       padding: 1.2rem .75rem; }
     body #main-section .message {
       margin-top: 45px;
@@ -82,7 +82,7 @@ body {
     background-color: #4285f4;
     position: absolute;
     top: 1rem;
-    right: -0.3rem;
+    right: -0.2rem;
     width: 3px;
     overflow: hidden;
     transition: all 0.2s ease-out;
@@ -137,3 +137,14 @@ body {
       height: 20px; }
     body .search-bar:focus-within .search-label::before {
       color: #4a4a4a; }
+  body .offline-message {
+    text-align: center;
+    margin: 35px 0; }
+    body .offline-message i {
+      font-size: 2rem; }
+    body .offline-message i.fa-redo-alt {
+      font-size: 1.3rem;
+      line-height: 1rem;
+      vertical-align: middle;
+      cursor: pointer;
+      color: #3273dc; }
