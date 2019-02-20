@@ -7,8 +7,8 @@
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <title>Homer</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
   <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
   <link rel="stylesheet" href="app.css">
@@ -40,6 +40,8 @@
                 </a>
               </div>
               <div class="end">
+                <a v-on:click="vlayout = !vlayout" class="icon-button navbar-item"><i
+                    :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
                 <div class="search-bar">
                   <label for="search" class="search-label"></label>
                   <input type="text" id="search" v-model="filter" />
@@ -70,39 +72,30 @@
 
           <h2 v-if="filter"><i class="fas fa-search"></i> Search</h2>
 
-          <div v-for="(group, index) in config.services">
-            <h2 v-if="!filter && group.name"><i v-if="group.icon" :class="group.icon"></i><span v-else>#</span>
-              {{ group.name }}</h2>
-            <div class="columns is-multiline">
-              <div v-for="item in group.items"
-                v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))"
-                class="column is-one-third-widescreen">
-                <div v-if='item' class="card">
-                  <a :href="item.url">
-                    <div class="card-content">
-                      <div class="media">
-                        <div v-if="item.logo" class="media-left">
-                          <figure class="image is-48x48">
-                            <img :src="item.logo" />
-                          </figure>
-                        </div>
-                        <div v-if="item.icon" class="media-left">
-                          <figure class="image is-48x48">
-                            <i style="font-size: 35px" :class="item.icon"></i>
-                          </figure>
-                        </div>
-                        <div class="media-content">
-                          <p class="title is-4">{{ item.name }}</p>
-                          <p class="subtitle is-6">{{ item.subtitle }}</p>
-                        </div>
-                      </div>
-                      <strong class="tag" v-if="item.tag">#{{ item.tag }}</strong>
-                    </div>
-                  </a>
-                </div>
-              </div>
+          <!-- Horizontal layout -->
+          <div v-if="!vlayout || filter" class="columns is-multiline">
+            <template v-for="(group, index) in config.services">
+              <h2 v-if="!filter && group.name" class="column is-full"><i v-if="group.icon" :class="group.icon"></i><span
+                  v-else>#</span>
+                {{ group.name }}</h2>
+              <service v-for="item in group.items" v-bind:item="item" class="column is-one-third-widescreen"
+                v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))">
+              </service>
+            </template>
+          </div>
+
+          <!-- Vertical layout -->
+          <div v-if="!filter && vlayout" class="columns is-multiline layout-vertical">
+            <div class="column is-one-third-widescreen" v-for="(group, index) in config.services">
+              <h2 v-if="!filter && group.name"><i v-if="group.icon" :class="group.icon"></i><span v-else>#</span>
+                {{ group.name }}</h2>
+              <service v-for="item in group.items" v-bind:item="item"
+                v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))">
+              </service>
             </div>
           </div>
+
+
         </div>
       </div>
     </section>

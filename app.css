@@ -11,7 +11,7 @@ body {
     font-size: 2rem; }
   body h2 {
     font-size: 1.7rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 1rem; }
     body h2 .fas, body h2 .fab, body h2 .far {
       margin-right: 10px; }
@@ -92,6 +92,8 @@ body {
     border: none;
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
     transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms; }
+    body .card a {
+      outline: none; }
   body .card:hover {
     background-color: #FFFFFF;
     transform: translate(0, -3px); }
@@ -102,17 +104,26 @@ body {
   body .card-content {
     height: 85px;
     padding: 1.3rem; }
+  body .layout-vertical .card {
+    border-radius: 0; }
+  body .layout-vertical .column div:first-of-type .card {
+    border-radius: 5px 5px 0 0; }
+  body .layout-vertical .column div:last-child .card {
+    border-radius: 0 0 5px 5px; }
   body .footer {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     text-align: left;
     background-color: #fafafa;
-    border-top: 1px solid #F5F5F5; }
+    border-top: 1px solid #F5F5F5;
+    color: #676767;
+    font-size: 0.85rem; }
   body .search-bar {
-    position: relative; }
+    position: relative;
+    display: inline-block; }
     body .search-bar #search {
       border: none;
       background-color: #5f98f6;
@@ -137,6 +148,8 @@ body {
       height: 20px; }
     body .search-bar:focus-within .search-label::before {
       color: #4a4a4a; }
+  body .icon-button {
+    display: inline-block; }
   body .offline-message {
     text-align: center;
     margin: 35px 0; }

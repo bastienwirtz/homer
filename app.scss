@@ -18,7 +18,7 @@ body {
 
   h2 {
     font-size: 1.7rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
 
     .fas, .fab, .far {
@@ -147,7 +147,11 @@ body {
     border-radius: 5px;
     border: none;
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
+
+    a {
+      outline: none;
+    }
   }
 
   .card:hover {
@@ -166,19 +170,36 @@ body {
     padding: 1.3rem;
   }
 
+  .layout-vertical {
+    .card {
+      border-radius: 0;
+    }
+
+    .column div:first-of-type .card {
+      border-radius: 5px 5px 0 0;
+    }
+
+    .column div:last-child .card {
+      border-radius: 0 0 5px 5px;
+    }
+  }
+
   .footer {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     text-align: left;
     background-color: #fafafa;
     border-top: 1px solid #F5F5F5;
+    color: #676767;
+    font-size: 0.85rem;
   }
 
   .search-bar {
     position: relative;
+    display: inline-block;
     #search {
       border: none;
       background-color: lighten( $secondary-color, 6% );
@@ -211,6 +232,10 @@ body {
       &:focus-within .search-label::before {
           color: #4a4a4a;
       }
+  }
+
+  .icon-button {
+    display: inline-block;
   }
 
   .offline-message {
