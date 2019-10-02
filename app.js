@@ -4,7 +4,8 @@ const app = new Vue({
         config: null,
         offline: false,
         filter: '',
-        vlayout: true
+        vlayout: true,
+        overrideDark: null
     },
     created: function () {
         let that = this;
@@ -22,6 +23,13 @@ const app = new Vue({
             }
         }, false);
     },
+    computed: {
+        isDark: function() {
+            return this.overrideDark !== null
+                ? this.overrideDark
+                : matchMedia("(prefers-color-scheme: dark)").matches;
+        }
+      },
     methods: {
         checkOffline: function () {
             let that = this;
@@ -44,6 +52,9 @@ const app = new Vue({
                 });
             });
         },
+        toggleTheme: function() {
+            this.overrideDark = !this.isDark;
+        }
     }
 });
 

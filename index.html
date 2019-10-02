@@ -14,7 +14,10 @@
 </head>
 
 <body>
-  <div id="app" v-if="config">
+  <div id="app" v-if="config" :class="{
+    'is-dark': overrideDark === true,
+    'is-light': overrideDark === false
+  }">
     <div id="bighead">
       <section class="first-line">
         <div v-cloak class="container">
@@ -39,6 +42,11 @@
                 </a>
               </div>
               <div class="end">
+                  <a
+                    v-on:click="toggleTheme()"
+                    aria-label="Toggle dark mode"
+                    ><i class="fas fa-adjust"></i>
+                </a>
                 <a v-on:click="vlayout = !vlayout" class="icon-button navbar-item"><i
                     :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
                 <div class="search-bar">
@@ -98,18 +106,17 @@
         </div>
       </div>
     </section>
+    <footer class="footer">
+        <div class="container">
+          <div class="content has-text-centered">
+            <p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a
+                href="https://vuejs.org/">vuejs</a>
+              & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i
+                  class="fab fa-github-alt"></i></a></p>
+          </div>
+        </div>
+      </footer>
   </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">
-        <p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a
-            href="https://vuejs.org/">vuejs</a>
-          & <a href="#">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i
-              class="fab fa-github-alt"></i></a></p>
-      </div>
-    </div>
-  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
   <script src="vendors/js-yaml.min.js"></script>
