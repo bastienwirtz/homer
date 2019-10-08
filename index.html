@@ -14,10 +14,7 @@
 </head>
 
 <body>
-  <div id="app" v-if="config" :class="{
-    'is-dark': overrideDark === true,
-    'is-light': overrideDark === false
-  }">
+  <div id="app" v-if="config" :class="[isDark ? 'is-dark' : 'is-light']">
     <div id="bighead">
       <section class="first-line">
         <div v-cloak class="container">
@@ -47,7 +44,7 @@
                     aria-label="Toggle dark mode"
                     ><i class="fas fa-adjust"></i>
                 </a>
-                <a v-on:click="vlayout = !vlayout" class="icon-button navbar-item"><i
+                <a v-on:click="toggleLayout()" class="icon-button navbar-item"><i
                     :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
                 <div class="search-bar">
                   <label for="search" class="search-label"></label>
