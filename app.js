@@ -5,11 +5,18 @@ const app = new Vue({
         offline: false,
         filter: '',
         vlayout: true,
-        overrideDark: null
+        isDark: null
     },
     created: function () {
         let that = this;
+        
+        this.isDark = 'overrideDark' in localStorage ? 
+            JSON.parse(localStorage.overrideDark) : matchMedia("(prefers-color-scheme: dark)").matches;
 
+        if ('vlayout' in localStorage) {
+            this.vlayout = JSON.parse(localStorage.vlayout)
+        }
+        
         this.checkOffline();
         that.getConfig().then(function (config) {
             that.config = config;
@@ -23,13 +30,6 @@ const app = new Vue({
             }
         }, false);
     },
-    computed: {
-        isDark: function() {
-            return this.overrideDark !== null
-                ? this.overrideDark
-                : matchMedia("(prefers-color-scheme: dark)").matches;
-        }
-      },
     methods: {
         checkOffline: function () {
             let that = this;
@@ -53,8 +53,13 @@ const app = new Vue({
             });
         },
         toggleTheme: function() {
-            this.overrideDark = !this.isDark;
-        }
+            this.isDark = !this.isDark;
+            localStorage.overrideDark = this.isDark; 
+        }, 
+        toggleLayout: function() {
+            this.vlayout = !this.vlayout;
+            localStorage.vlayout = this.vlayout; 
+        }, 
     }
 });
 
