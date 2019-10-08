@@ -11,10 +11,10 @@ self.addEventListener('install', event => {
                     '/app.js',
                     '/vendors/js-yaml.min.js',
                     '/assets/logo.png',
-                    'https://use.fontawesome.com/releases/v5.5.0/css/all.css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css',
-                    'https://fonts.googleapis.com/css?family=Lato|Raleway',
-                    'https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css',
+                    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css',
+                    'https://fonts.googleapis.com/css?family=Lato|Raleway&display=swap',
+                    'https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
                 ])
             )
     )
