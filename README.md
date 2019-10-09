@@ -1,8 +1,7 @@
 # Homer
-A very simple static HOMepage for your servER.
-Add all your useful service, external links, notes... or anything.
+A dead simple static **HOM**epage for your serv**ER** to keep your services on hand, from a simple `yaml` configuration file.
 
-If you need authentication support, you're on your own (it can be secured using a web server auth module or exposing it only through a VPN network / SSH tunneling, ...)
+If you need authentication support, you're on your own (it can be secured using a web server auth module or exposing it only through a VPN network / SSH tunnel, ...)
 
 ![screenshot](https://github.com/bastienwirtz/homer/blob/master/screenshot.png)
 
