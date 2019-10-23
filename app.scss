@@ -212,6 +212,10 @@ body {
     overflow: hidden;
     transition: all 0.2s ease-out;
     padding: 0;
+    
+    .tag-text {
+      display: none;
+    }
   }
 
   .card {
@@ -232,6 +236,10 @@ body {
       width: auto;
       color: #ffffff;
       padding: 0 0.75em;
+      
+      .tag-text {
+        display: block;
+      }
     }
   }
 

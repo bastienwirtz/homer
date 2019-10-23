@@ -165,6 +165,8 @@ body {
     overflow: hidden;
     transition: all 0.2s ease-out;
     padding: 0; }
+    body .tag .tag-text {
+      display: none; }
   body .card {
     border-radius: 5px;
     border: none;
@@ -178,6 +180,8 @@ body {
       width: auto;
       color: #ffffff;
       padding: 0 0.75em; }
+      body .card:hover .tag .tag-text {
+        display: block; }
   body .card-content {
     height: 85px;
     padding: 1.3rem; }

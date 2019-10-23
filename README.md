@@ -58,6 +58,7 @@ services:
         logo: "/assets/tools/rabbitmq.png"
         subtitle: "Manage & monitor RabbitMQ server"
         tag: "haproxy"
+        tagstyle: "is-success"
         url: "#"
   - name: "Monitoring"
     icon: "fa-heartbeat"
