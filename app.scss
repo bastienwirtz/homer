@@ -9,7 +9,8 @@ $theme-light: (
   text: #363636,
   text-title: #303030,
   text-subtitle: #424242,
-  card-shadow: rgba(0, 0, 0, 0.1)
+  card-shadow: rgba(0, 0, 0, 0.1),
+  a-hover: #363636
 );
 $theme-dark: (
   background: #131313,
@@ -17,7 +18,8 @@ $theme-dark: (
   text: #eaeaea,
   text-title: #fafafa,
   text-subtitle: #f5f5f5,
-  card-shadow: rgba(0, 0, 0, 0.4)
+  card-shadow: rgba(0, 0, 0, 0.4),
+  a-hover: #ffdd57
 );
 
   
@@ -25,7 +27,12 @@ $theme-dark: (
 @mixin theme($theme) {
   background-color: map-get($theme, "background");
   color: map-get($theme, "text");
-
+  a {
+    &:hover {
+      color: map-get($theme, "a-hover");
+    }
+  }
+  
   .title {
     color: map-get($theme, "text-title");
   }
@@ -154,6 +161,7 @@ body {
       a {
         color: #ffffff;
         &:hover {
+          color: #ffffff;
           background-color: lighten( $secondary-color, 5% );
         }
       }
