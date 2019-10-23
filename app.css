@@ -219,11 +219,12 @@ body {
         width: 250px;
         background-color: #ffffff; }
     body .search-bar .search-label::before {
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
       position: absolute;
       top: 12px;
       left: 8px;
       content: "\f002";
+      font-weight: 900;
       width: 20px;
       height: 20px; }
     body .search-bar:focus-within .search-label::before {
