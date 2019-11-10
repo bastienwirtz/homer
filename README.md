@@ -42,7 +42,7 @@ links:
 
 # Services
 # First level array represent a group.
-# Leave only a "items" key if not using group (group name & icon are optional, section separation will not be displayed).
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "DevOps"
     icon: "fa-code-fork"
@@ -58,6 +58,7 @@ services:
         logo: "/assets/tools/rabbitmq.png"
         subtitle: "Manage & monitor RabbitMQ server"
         tag: "haproxy"
+        # Optional tagstyle
         tagstyle: "is-success"
         url: "#"
   - name: "Monitoring"
