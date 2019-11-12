@@ -85,7 +85,9 @@ Vue.component('service', {
                         <p class="subtitle is-6">{{ item.subtitle }}</p>
                     </div>
                 </div>
-                <strong class="tag" v-if="item.tag">#{{ item.tag }}</strong>
+                <div class="tag" :class="item.tagstyle" v-if="item.tag">
+                    <strong class="tag-text">#{{ item.tag }}</strong>
+                </div>
             </div>
         </a>
     </div></div>`

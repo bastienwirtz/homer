@@ -9,6 +9,8 @@ body {
     transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
     background-color: #f5f5f5;
     color: #363636; }
+    body #app a:hover {
+      color: #363636; }
     body #app .title {
       color: #303030; }
     body #app .subtitle {
@@ -25,6 +27,8 @@ body {
       body #app {
         background-color: #f5f5f5;
         color: #363636; }
+        body #app a:hover {
+          color: #363636; }
         body #app .title {
           color: #303030; }
         body #app .subtitle {
@@ -41,6 +45,8 @@ body {
       body #app {
         background-color: #131313;
         color: #eaeaea; }
+        body #app a:hover {
+          color: #ffdd57; }
         body #app .title {
           color: #fafafa; }
         body #app .subtitle {
@@ -56,6 +62,8 @@ body {
     body #app.is-light {
       background-color: #f5f5f5;
       color: #363636; }
+      body #app.is-light a:hover {
+        color: #363636; }
       body #app.is-light .title {
         color: #303030; }
       body #app.is-light .subtitle {
@@ -71,6 +79,8 @@ body {
     body #app.is-dark {
       background-color: #131313;
       color: #eaeaea; }
+      body #app.is-dark a:hover {
+        color: #ffdd57; }
       body #app.is-dark .title {
         color: #fafafa; }
       body #app.is-dark .subtitle {
@@ -130,6 +140,7 @@ body {
       body #bighead .navbar a {
         color: #ffffff; }
         body #bighead .navbar a:hover {
+          color: #ffffff;
           background-color: #5a95f5; }
   body #main-section {
     margin-bottom: 2rem;
@@ -165,6 +176,8 @@ body {
     overflow: hidden;
     transition: all 0.2s ease-out;
     padding: 0; }
+    body .tag .tag-text {
+      display: none; }
   body .card {
     border-radius: 5px;
     border: none;
@@ -178,6 +191,8 @@ body {
       width: auto;
       color: #ffffff;
       padding: 0 0.75em; }
+      body .card:hover .tag .tag-text {
+        display: block; }
   body .card-content {
     height: 85px;
     padding: 1.3rem; }
@@ -215,11 +230,12 @@ body {
         width: 250px;
         background-color: #ffffff; }
     body .search-bar .search-label::before {
-      font-family: 'FontAwesome';
+      font-family: 'Font Awesome 5 Free';
       position: absolute;
       top: 12px;
       left: 8px;
       content: "\f002";
+      font-weight: 900;
       width: 20px;
       height: 20px; }
     body .search-bar:focus-within .search-label::before {
