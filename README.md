@@ -27,6 +27,7 @@ logo: "assets/homer.png"
 
 # Optional message
 message:
+  # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
   style: "is-warning"
   title: "Optional message!"
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula."
@@ -85,3 +86,16 @@ services:
         url: "#"
 
 ```
+
+If you choose to fetch message information from an endpoint, the output format should be:
+
+```json
+{
+	"style": null,
+	"title": "Lorem ipsum 42",
+	"content": "LA LA LA Lorem ipsum dolor sit amet, ....."
+}
+```
+
+`null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
+Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar)
