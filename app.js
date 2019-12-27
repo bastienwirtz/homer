@@ -10,13 +10,13 @@ const app = new Vue({
     created: async function () {
         let that = this;
 
-        this.isDark = 'overrideDark' in localStorage ? 
+        this.isDark = 'overrideDark' in localStorage ?
             JSON.parse(localStorage.overrideDark) : matchMedia("(prefers-color-scheme: dark)").matches;
 
         if ('vlayout' in localStorage) {
             this.vlayout = JSON.parse(localStorage.vlayout)
         }
-        
+
         this.checkOffline();
         try {
             this.config =  await this.getConfig();
@@ -78,8 +78,8 @@ const app = new Vue({
         }, 
         toggleLayout: function() {
             this.vlayout = !this.vlayout;
-            localStorage.vlayout = this.vlayout; 
-        }, 
+            localStorage.vlayout = this.vlayout;
+        },
     }
 });
 
@@ -115,6 +115,6 @@ Vue.component('service', {
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/worker.js');
+        navigator.serviceWorker.register('worker.js');
     });
 }
