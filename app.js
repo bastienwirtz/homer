@@ -7,7 +7,7 @@ const app = new Vue({
         vlayout: true,
         isDark: null
     },
-    created: function () {
+    created: async function () {
         let that = this;
 
         this.isDark = 'overrideDark' in localStorage ?
@@ -18,11 +18,23 @@ const app = new Vue({
         }
 
         this.checkOffline();
-        that.getConfig().then(function (config) {
-            that.config = config;
-        }).catch(function () {
-            that.offline = true;
-        });
+        try {
+            this.config =  await this.getConfig();
+        } catch (error) {
+            this.offline = true;
+        }
+
+        // Look for a new message if an endpoint is provided.
+        if (this.config.message.url) {
+            this.getMessage(this.config.message.url).then(function(message){
+                // keep the original config value if no value is provided by the endpoint
+                for (const prop of ['title','style','content']) {
+                    if (prop in message && message[prop] !== null) {
+                        that.config.message[prop] = message[prop];
+                    }    
+                }
+            });
+        }
 
         document.addEventListener('visibilitychange', function () {
             if (document.visibilityState == "visible") {
@@ -50,6 +62,14 @@ const app = new Vue({
                 return response.text().then(function (body) {
                     return jsyaml.load(body);
                 });
+            });
+        },
+        getMessage: function (url) {
+            return fetch(url).then(function (response) {
+                if (response.status != 200) {
+                    return;
+                }
+                return response.json();
             });
         },
         toggleTheme: function() {
