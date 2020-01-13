@@ -9,12 +9,15 @@ self.addEventListener('install', event => {
                     'config.yml',
                     'app.css',
                     'app.js',
+                    'vendors/vue.min.js',
                     'vendors/js-yaml.min.js',
+                    'vendors/font-awesone.min.css',
+                    'vendors/bulma.min.css',
                     'assets/logo.png',
-                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css',
-                    'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css',
-                    'https://fonts.googleapis.com/css?family=Lato|Raleway&display=swap',
-                    'https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js',
+                    'webfonts/raleway/raleway-v14-latin-regular.woff',
+                    'webfonts/raleway/raleway-v14-latin-regular.woff2',
+                    'webfonts/lato/lato-v16-latin-regular.woff',
+                    'webfonts/lato/lato-v16-latin-regular.woff2',
                 ])
             )
     )
