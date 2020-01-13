@@ -139,7 +139,7 @@ body {
       background-color: #4285f4; }
       body #bighead .navbar a {
         color: #ffffff; }
-        body #bighead .navbar a:hover {
+        body #bighead .navbar a:hover, body #bighead .navbar a:focus {
           color: #ffffff;
           background-color: #5a95f5; }
   body #main-section {

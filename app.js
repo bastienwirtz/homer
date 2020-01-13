@@ -87,7 +87,7 @@ Vue.component('service', {
     props: ['item'],
     template: `<div>
     <div class="card">
-        <a :href="item.url">
+        <a :href="item.url" :target="item.target">
             <div class="card-content">
                 <div class="media">
                     <div v-if="item.logo" class="media-left">

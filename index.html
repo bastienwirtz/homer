@@ -33,7 +33,7 @@
           <div class="container">
             <div class="navbar-menu">
               <div class="navbar-start">
-                <a v-for="link in config.links" class="navbar-item" :href="link.url">
+                <a v-for="link in config.links" class="navbar-item" :href="link.url" :target="link.target">
                   <i v-if="link.icon" style="margin-right: 6px;" :class="link.icon"></i>
                   {{ link.name }}
                 </a>

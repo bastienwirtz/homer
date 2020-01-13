@@ -160,7 +160,7 @@ body {
 
       a {
         color: #ffffff;
-        &:hover {
+        &:hover, &:focus {
           color: #ffffff;
           background-color: lighten( $secondary-color, 5% );
         }

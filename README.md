@@ -37,6 +37,7 @@ links:
   - name: "ansible"
     icon: "fa-github"
     url: "https://github.com/xxxxx/ansible/"
+    target: '_blank' # optionnal html a tag target attribute
   - name: "Wiki"
     icon: "fa-book"
     url: "https://wiki.xxxxxx.com/"
@@ -55,6 +56,7 @@ services:
         subtitle: "Continuous integration server"
         tag: "CI"
         url: "#"
+        target: '_blank' # optionnal html a tag target attribute
       - name: "RabbitMQ Management"
         logo: "/assets/tools/rabbitmq.png"
         subtitle: "Manage & monitor RabbitMQ server"
