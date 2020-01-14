@@ -14,6 +14,7 @@ self.addEventListener('install', event => {
                     'vendors/font-awesone.min.css',
                     'vendors/bulma.min.css',
                     'assets/logo.png',
+                    'assets/favicon.png',
                     'webfonts/raleway/raleway-v14-latin-regular.woff',
                     'webfonts/raleway/raleway-v14-latin-regular.woff2',
                     'webfonts/lato/lato-v16-latin-regular.woff',
