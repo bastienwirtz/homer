@@ -25,7 +25,7 @@ const app = new Vue({
         }
 
         // Look for a new message if an endpoint is provided.
-        if (this.config.message.url) {
+        if (this.config.message && this.config.message.url) {
             this.getMessage(this.config.message.url).then(function(message){
                 // keep the original config value if no value is provided by the endpoint
                 for (const prop of ['title','style','content']) {
