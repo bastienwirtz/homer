@@ -2,18 +2,18 @@
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
 
-title: "Simple homepage"
+title: "Demo homepage"
 subtitle: "Homer"
 logo: "assets/logo.png"
-icon: "fas fa-skull-crossbones"
+# icon: "fas fa-skull-crossbones" Optional icon
 
 # Optional message
-# See https://bulma.io/documentation/components/message/#colors for styling options.
+# 
 message:
   # url: https://....
-  style: "is-warning"
-  title: "Optional message!"
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula."
+  style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
+  title: "Demo !" 
+  content: "This is a dummy homepage demo. Find more information on github.com/bastienwirtz/homer"
 
 # Optional navbar
 links:
@@ -36,7 +36,7 @@ services:
         logo: "assets/tools/jenkins.png"
         subtitle: "Continuous integration server"
         tag: "CI"
-        url: "#"
+        url: "https://jenkins.io/"
         target: '_blank' # optionnal html a tag target attribute
       - name: "RabbitMQ Management"
         logo: "assets/tools/rabbitmq.png"
@@ -45,7 +45,7 @@ services:
         # Optional tagstyle
         # Same styling options as the optional message.
         tagstyle: "is-success"
-        url: "#"
+        url: "https://www.rabbitmq.com/"
   - name: "Monitoring"
     icon: "fas fa-heartbeat"
     items:
@@ -53,18 +53,18 @@ services:
         logo: "assets/tools/monit.png"
         subtitle: "Monitor & manage all monit enabled hosts"
         tag: "monit"
-        url: "#"
+        url: "https://mmonit.com/monit/"
       - name: "Grafana"
         logo: "assets/tools/grafana.png"
         subtitle: "Metric analytics & dashboards"
-        url: "#"
+        url: "https://grafana.com/"
       - name: "Kibana"
         logo: "assets/tools/elastic.png"
         subtitle: "Explore & visualize logs"
         tag: "elk"
-        url: "#"
+        url: "https://www.elastic.co/products/kibana"
       - name: "Website monitoring"
         logo: "assets/tools/pingdom.png"
         subtitle: "Pingdom public reports overview"
         tag: "CI"
-        url: "#"
+        url: "https://www.pingdom.com/"
