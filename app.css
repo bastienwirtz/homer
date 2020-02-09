@@ -188,7 +188,7 @@ body {
     color: #4285f4;
     background-color: #4285f4;
     position: absolute;
-    top: 1rem;
+    top: 2.8rem;
     right: -0.2rem;
     width: 3px;
     overflow: hidden;
@@ -214,6 +214,44 @@ body {
   body .card-content {
     height: 85px;
     padding: 1.3rem; }
+  body .notif {
+    color: white;
+    font-size: .9em;
+    font-family: sans-serif;
+    position: absolute;
+    top: 2px;
+    right: 3px;
+}
+  body .info {
+    background-color: #4fb5d6;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    border-radius: 0.25em;
+    position: relative;
+    display: none;
+}
+  body .warning {
+    background-color: #d08d2e;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    border-radius: 0.25em;
+    position: relative;
+    display: none;
+}
+  body .error {
+    background-color: #e51111;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    border-radius: 0.25em;
+    position: relative;
+    display: none;
+}
   body .layout-vertical .card {
     border-radius: 0; }
   body .layout-vertical .column div:first-of-type .card {

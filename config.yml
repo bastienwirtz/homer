@@ -46,6 +46,16 @@ services:
         # Same styling options as the optional message.
         tagstyle: "is-success"
         url: "https://www.rabbitmq.com/"
+      - name: "Radarr"
+        logo: "assets/tools/radarr.png"
+        subtitle: "Video library manager for movies"
+        url: "http://mydomain.com:7878/calendar"
+        target: '_blank'
+        # Optional healthcheck to fetch service notification badges through its api
+        healthcheck:
+            type: "radarr" # Can be 'radarr', 'sonarr' or 'medusa'
+            rooturl: "http://mydomain.com:7878"
+            apikey: "xxxxx"
   - name: "Monitoring"
     icon: "fas fa-heartbeat"
     items:

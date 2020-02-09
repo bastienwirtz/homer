@@ -234,7 +234,7 @@ body {
     color: $secondary-color;
     background-color: $secondary-color;
     position: absolute;
-    top: 1rem;
+    top: 2.8rem;
     right: -0.2rem;
     width: 3px;
     overflow: hidden;
@@ -274,6 +274,48 @@ body {
   .card-content {
     height: 85px;
     padding: 1.3rem;
+  }
+  
+  .notif {
+    color: white;
+    font-size: .9em;
+    font-family: sans-serif;
+    position: absolute;
+    top: 2px;
+    right: 3px;
+  }
+
+  .info {
+    background-color: #4fb5d6;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    border-radius: 0.25em;
+    position: relative;
+    display: none;
+  }
+
+  .warning {
+    background-color: #d08d2e;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    border-radius: 0.25em;
+    position: relative;
+    display: none;
+  }
+  
+  .error {
+    background-color: #e51111;
+    padding-right: 0.4em;
+    padding-left: 0.4em;
+    padding-top: 0.2em;
+    padding-bottom: 0.3em;
+    border-radius: 0.25em;
+    position: relative;
+    display: none;
   }
 
   .layout-vertical {
