@@ -172,7 +172,8 @@ body {
       font-size: .9em;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis; }
+      text-overflow: ellipsis;
+      width: 240px; }
     body #main-section .container {
       padding: 1.2rem .75rem; }
     body #main-section .message {
