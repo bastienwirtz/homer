@@ -7,8 +7,17 @@ If you need authentication support, you're on your own (it can be secured using 
 
 ![screenshot](https://github.com/bastienwirtz/homer/blob/master/screenshot.png)
 
-**How to build / install it? Where is the webpack config?**
-There is no build system (😱), use it like that! It'meant to be stupid simple & zero maintenance required. just copy the static files somewhere, and visit the `index.html`.
+## installation
+
+### Using docker
+
+```sh
+sudo docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml b4bz/homer:latest
+```
+
+### Manually
+
+**How to build / install it?** There is no build system (😱), use it like that! It'meant to be stupid simple & zero maintenance required. just copy the static files somewhere, and visit the `index.html`.
 
 
 ## configuration
