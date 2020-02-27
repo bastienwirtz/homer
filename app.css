@@ -230,6 +230,10 @@ body {
     color: #676767;
     font-size: 0.85rem;
     transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms; }
+  body .no-footer #main-section {
+    margin-bottom: 0; }
+  body .no-footer .footer {
+    display: none; }
   body .search-bar {
     position: relative;
     display: inline-block; }

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <div id="app" v-if="config" :class="[isDark ? 'is-dark' : 'is-light']">
+  <div id="app" v-if="config" :class="[isDark ? 'is-dark' : 'is-light', !config.footer ? 'no-footer': '']">
     <div id="bighead">
       <section class="first-line">
         <div v-cloak class="container">
@@ -104,11 +104,8 @@
     </section>
     <footer class="footer">
         <div class="container">
-          <div class="content has-text-centered">
-            <p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a
-                href="https://vuejs.org/">vuejs</a>
-              & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i
-                  class="fab fa-github-alt"></i></a></p>
+          <div class="content has-text-centered" v-if="config.footer" v-html="config.footer">
+            
           </div>
         </div>
       </footer>

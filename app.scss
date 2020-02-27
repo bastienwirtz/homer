@@ -302,6 +302,16 @@ body {
     transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
   }
 
+  .no-footer {
+    #main-section {
+      margin-bottom: 0;
+    }
+    
+    .footer {
+      display: none;
+    }
+  }
+
   .search-bar {
     position: relative;
     display: inline-block;
