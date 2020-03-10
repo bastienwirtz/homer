@@ -12,7 +12,7 @@ If you need authentication support, you're on your own (it can be secured using 
 ### Using docker
 
 ```sh
-sudo docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml b4bz/homer:latest
+sudo docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/local/assets/:/www/assets b4bz/homer:latest
 ```
 
 ### Manually
@@ -34,7 +34,8 @@ title: "Simple homepage"
 subtitle: "Homer"
 logo: "assets/homer.png"
 # Alternatively a fa icon can be provided:
-# icon: "fas fa-skull-crossbones"
+# icon: "fas fa-skull-crossbones"  
+footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>'  # set false if you want to hide it.header:
 
 # Optional message
 message:
@@ -42,7 +43,6 @@ message:
   style: "is-warning"
   title: "Optional message!"
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula."
-  footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>'  # set false if you want to hide it.
 
 # Optional navbar
 links:
