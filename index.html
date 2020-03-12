@@ -13,7 +13,10 @@
 </head>
 
 <body>
-  <div id="app" v-if="config" :class="[isDark ? 'is-dark' : 'is-light', !config.footer ? 'no-footer': '']">
+  <div id="app" v-if="config" 
+    :class="[isDark ? 'is-dark' : 'is-light', !config.footer ? 'no-footer': '']" 
+    :style="{ '--primary-color': config['primary-color'], '--secondary-color': config['secondary-color'] }"
+  >
     <div id="bighead">
       <section class="first-line">
         <div v-cloak class="container">

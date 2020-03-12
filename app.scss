@@ -1,5 +1,8 @@
-$primary-color: #3367d6;
-$secondary-color: #4285f4;
+:root {
+  --primary-color: #3367d6;
+  --secondary-color: #4285f4;
+  --secondary-color-highlight: #ffffff1b;
+}
 
 
 // /!\ Keep background colors sync with `theme-color` meta info
@@ -125,7 +128,7 @@ body {
 
     span {
       font-weight: bold;
-      color: $secondary-color;
+      color: var(--secondary-color);
     }
   }
 
@@ -143,7 +146,7 @@ body {
     .first-line {
       height: 100px;
       vertical-align: center;
-      background-color: $primary-color;
+      background-color: var(--primary-color);
 
       h1 {
         margin-top: -12px;
@@ -176,13 +179,13 @@ body {
       }
     }
     .navbar {
-      background-color: $secondary-color;
+      background-color: var(--secondary-color);
 
       a {
         color: #ffffff;
         &:hover, &:focus {
           color: #ffffff;
-          background-color: lighten( $secondary-color, 5% );
+          background-color: var(--secondary-color-highlight);
         }
       }
     }
@@ -231,8 +234,8 @@ body {
   }
 
   .tag {
-    color: $secondary-color;
-    background-color: $secondary-color;
+    color: var(--secondary-color);
+    background-color: var(--secondary-color);
     position: absolute;
     top: 1rem;
     right: -0.2rem;
@@ -317,7 +320,7 @@ body {
     display: inline-block;
     #search {
       border: none;
-      background-color: lighten( $secondary-color, 6% );
+      background-color: var(--secondary-color-highlight);
       border-radius: 5px;
       padding: 2px 12px 2px 30px;
       margin: 10px 0;
