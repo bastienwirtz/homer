@@ -37,6 +37,10 @@ logo: "assets/homer.png"
 # icon: "fas fa-skull-crossbones"  
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>'  # set false if you want to hide it.header:
 
+# Optional Color Changes
+# primary-color: "#3367d6"
+# secondary-color: "#4285f4"
+
 # Optional message
 message:
   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
