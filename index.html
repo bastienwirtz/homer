@@ -15,7 +15,7 @@
 <body>
   <div id="app" v-if="config" :class="[isDark ? 'is-dark' : 'is-light', !config.footer ? 'no-footer': '']">
     <div id="bighead">
-      <section class="first-line">
+      <section class="first-line" v-show="config.header">
         <div v-cloak class="container">
           <div class="logo">
             <img v-if="config.logo" :src="config.logo" />
