@@ -5,7 +5,8 @@ const app = new Vue({
         offline: false,
         filter: '',
         vlayout: true,
-        isDark: null
+        isDark: null,
+        showMenu: false
     },
     created: async function () {
         let that = this;
@@ -80,6 +81,9 @@ const app = new Vue({
             this.vlayout = !this.vlayout;
             localStorage.vlayout = this.vlayout;
         },
+        toggleMenu: function() {
+            this.showMenu = !this.showMenu;
+        }
     }
 });
 
