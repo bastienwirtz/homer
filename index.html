@@ -30,24 +30,37 @@
       <div v-cloak v-if="config.links" class="container-fluid">
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="container">
-            <div class="navbar-menu">
+            <div class="navbar-brand">
+              <a role="button" 
+                class="navbar-burger" :class="{ 'is-active': showMenu }" 
+                aria-label="menu" aria-expanded="false"
+                v-on:click="toggleMenu()">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+            <div class="navbar-menu" :class="{ 'is-active': showMenu }">
               <div class="navbar-start">
                 <a v-for="link in config.links" class="navbar-item" :href="link.url" :target="link.target">
                   <i v-if="link.icon" style="margin-right: 6px;" :class="link.icon"></i>
                   {{ link.name }}
                 </a>
               </div>
-              <div class="end">
+              <div class="navbar-end">
+                <div class="navbar-item">
                   <a
                     v-on:click="toggleTheme()"
                     aria-label="Toggle dark mode"
+                    class="icon-button"
                     ><i class="fas fa-adjust"></i>
-                </a>
-                <a v-on:click="toggleLayout()" class="icon-button navbar-item"><i
-                    :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
-                <div class="search-bar">
-                  <label for="search" class="search-label"></label>
-                  <input type="text" id="search" v-model="filter" />
+                  </a>
+                  <a v-on:click="toggleLayout()" class="icon-button"><i
+                      :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
+                  <div class="search-bar">
+                    <label for="search" class="search-label"></label>
+                    <input type="text" id="search" v-model="filter" />
+                  </div>
                 </div>
               </div>
             </div>
