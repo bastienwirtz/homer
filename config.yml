@@ -16,6 +16,7 @@ message:
   content: "This is a dummy homepage demo. Find more information on github.com/bastienwirtz/homer"
 
 # Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
   - name: "ansible"
     icon: "fab fa-github"
