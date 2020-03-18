@@ -175,7 +175,7 @@ body {
         }
       }
     }
-    .navbar {
+    .navbar, .navbar-menu {
       background-color: $secondary-color;
 
       a {
@@ -185,6 +185,9 @@ body {
           background-color: lighten( $secondary-color, 5% );
         }
       }
+    }
+    .navbar-end {
+      text-align: right;
     }
   }
 
@@ -320,7 +323,7 @@ body {
       background-color: lighten( $secondary-color, 6% );
       border-radius: 5px;
       padding: 2px 12px 2px 30px;
-      margin: 10px 0;
+      margin: 0 0 0 12px;
       transition: all 100ms linear;
       color: #ffffff;
       height: 30px;
@@ -337,12 +340,13 @@ body {
     .search-label::before {
       font-family: 'Font Awesome 5 Free';
       position: absolute;
-      top: 12px;
-      left: 8px;
+      top: 4px;
+      left: 16px;
       content: "\f002";
       font-weight: 900;
       width: 20px;
       height: 20px;
+      color: #ffffff;
     }
 
       &:focus-within .search-label::before {
@@ -352,6 +356,7 @@ body {
 
   .icon-button {
     display: inline-block;
+    padding: 0 12px;
   }
 
   .offline-message {
