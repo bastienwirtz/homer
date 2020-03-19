@@ -85,6 +85,35 @@ const app = new Vue({
         toggleMenu: function() {
             this.showMenu = !this.showMenu;
         }
+    },
+    mounted() {
+        function isSmallScreen() {
+            return window.matchMedia('screen and (max-width: 1023px)').matches;
+        }
+        this._keyListener = function(e) {
+            if (e.key === '/') {
+                if (isSmallScreen()) {
+                    this.showMenu = true;
+                }
+                Vue.nextTick(() => {
+                    this.$refs.search.focus();
+                });
+
+                e.preventDefault();
+            }
+            if (e.key === 'Escape') {
+                this.filter = '';
+                this.$refs.search.blur();
+                if (isSmallScreen()) {
+                    this.showMenu = false;
+                }
+            }
+        }
+
+        document.addEventListener('keydown', this._keyListener.bind(this));
+    },
+    beforeDestroy() {
+        document.removeEventListener('keydown', this._keyListener);
     }
 });
 

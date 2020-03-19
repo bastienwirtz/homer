@@ -59,7 +59,7 @@
                       :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
                   <div class="search-bar">
                     <label for="search" class="search-label"></label>
-                    <input type="text" id="search" v-model="filter" />
+                    <input type="text" id="search" ref="search" v-model="filter" />
                   </div>
                 </div>
               </div>
