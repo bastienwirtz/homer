@@ -5,9 +5,15 @@ A dead simple static **HOM**epage for your serv**ER** to keep your services on h
 
 If you need authentication support, you're on your own (it can be secured using a web server auth module or exposing it only through a VPN network / SSH tunnel, ...)
 
-![screenshot](https://github.com/bastienwirtz/homer/blob/master/screenshot.png)
+![screenshot](https://raw.github.com/bastienwirtz/homer/master/screenshot.png)
 
-## installation
+## Roadmap
+
+- [ ] Colors / theme customization
+- [ ] Enable PWA support (making possible to "install" - add to homescreen - it)
+- [ ] Improve maintenability (external library import & service workers cached file list.)
+
+## Installation
 
 ### Using docker
 
@@ -17,10 +23,10 @@ sudo docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/
 
 ### Manually
 
-**How to build / install it?** There is no build system (😱), use it like that! It'meant to be stupid simple & zero maintenance required. just copy the static files somewhere, and visit the `index.html`.
+**How to build / install it?** There is no build system (😱), use it like that! It's meant to be stupid simple & zero maintenance required. Just copy the static files somewhere, and visit the `index.html`.
 
 
-## configuration
+## Configuration
 
 Title, icons, links, colors, and services can be configured in the `config.yml` file, using [yaml](http://yaml.org/) format.
 
@@ -113,4 +119,4 @@ If you choose to fetch message information from an endpoint, the output format s
 ```
 
 `null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
-Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar)
+Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar).
