@@ -2,7 +2,7 @@
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
 
-title: "Demo homepage"
+title: "Demo dashboard"
 subtitle: "Homer"
 logo: "assets/logo.png"
 # icon: "fas fa-skull-crossbones" Optional icon
@@ -20,11 +20,11 @@ message:
 links:
   - name: "ansible"
     icon: "fab fa-github"
-    url: "https://github.com/xxxxx/ansible/"
+    url: "https://github.com/bastienwirtz/homer"
     target: '_blank' # optionnal html a tag target attribute
   - name: "Wiki"
     icon: "fas fa-book"
-    url: "https://wiki.xxxxxx.com/"
+    url: "https://www.wikipedia.org/"
 
 # Services
 # First level array represent a group.

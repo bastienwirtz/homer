@@ -6,7 +6,6 @@ self.addEventListener('install', event => {
                 cache.addAll([
                     '.',
                     'index.html',
-                    'config.yml',
                     'app.css',
                     'app.js',
                     'vendors/vue.min.js',
