@@ -10,6 +10,7 @@
   <link defer rel="stylesheet" href="vendors/font-awesone.min.css">
   <link defer rel="stylesheet" href="vendors/bulma.min.css">
   <link rel="stylesheet" href="app.css">
+  <link rel="search" type="application/opensearchdescription+xml" href="opensearch.xml" title="search">
 </head>
 
 <body>
@@ -115,6 +116,35 @@
         </div>
       </div>
     </section>
+
+    <!-- Golinks -->
+    <section v-if="config.golinks.display" class="section">
+      <div class="container">
+        <h1 class="title">Go Links</h1>
+
+        <div class="table-container">
+          <table class="table is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Prefix</th>
+                <th>URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="golink in config.golinks.services">
+                <tr>
+                  <th>{{ golink.name }}</th>
+                  <td><code>{{ golink.prefix }}</code></td>
+                  <td>{{ golink.url }}</td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
           <div class="content has-text-centered" v-if="config.footer" v-html="config.footer">
@@ -126,6 +156,7 @@
 
   <script src="vendors/vue.min.js"></script>
   <script src="vendors/js-yaml.min.js"></script>
+  <script src="vendors/vue-router.min.js"></script>
   <script src="app.js"></script>
 </body>
 

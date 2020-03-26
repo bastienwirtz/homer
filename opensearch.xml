@@ -1,0 +1,9 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>Homer</ShortName>
+    <Description>Homer GoLinks</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Url type="text/html" method="get" template="http://192.168.0.4:5581/homer-orig/index.html">
+    <Param name="q" value="{searchTerms}"/>
+    </Url>
+</OpenSearchDescription>

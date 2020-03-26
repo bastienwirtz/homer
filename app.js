@@ -1,4 +1,10 @@
+var router = new VueRouter({
+    mode: 'history',
+    routes: []
+});
+
 const app = new Vue({
+    router,
     el: '#app',
     data: {
         config: null,
@@ -24,6 +30,11 @@ const app = new Vue({
             document.title = this.config.title + ' | Homer';
         } catch (error) {
             this.offline = true;
+        }
+
+        // Check if golinks is activated and query parameter "q" exists and then analyze and redirect to external page
+        if (this.config.golinks && this.$route.query.q) {
+            this.redirectGolink(this.$route.query.q);
         }
 
         // Look for a new message if an endpoint is provided.
@@ -84,6 +95,39 @@ const app = new Vue({
         },
         toggleMenu: function() {
             this.showMenu = !this.showMenu;
+        },
+        redirectGolink: function (parameter) {
+            console.log("Query Parameter: " + parameter);
+
+            prefix = parameter.split(" ", 1)[0]
+            if (prefix) {
+                console.log("Prefix: " + prefix);
+                golink = this.config.golinks.services.find(x => x.prefix === prefix);
+
+                if (golink) {
+                    console.log("Golink Pre-URL: " + golink.url);
+                    phrase = parameter.substring(parameter.indexOf(" ") + 1);
+
+                    if (phrase) {
+                        console.log("Phrase: " + phrase);
+                        redirectUrl = golink.url.replace("%s", phrase)
+                        console.log("Golink Redirect-URL: " + redirectUrl);
+    
+                    } else {
+                        console.log("Invalid Phrase");
+                    }
+                } else {
+                    redirectUrl = this.config.golinks.default.replace("%s", parameter);
+                    console.log("Golink not configured; using default: " + redirectUrl);
+                }
+                
+            } else {
+                console.log("Invalid Prefix");
+            }
+
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            }
         }
     },
     mounted() {
