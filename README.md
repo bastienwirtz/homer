@@ -106,6 +106,74 @@ services:
         tag: "CI"
         url: "#"
 
+golinks:
+  # What is "GoLinks"?
+  # You can make Homer the default search engine in your browser.
+  # For example, if you search for the search term "g how high is the Leaning Tower of Pisa", this search will be performed at Google.
+  # If you replace the "g" with a "d", the search will be performed at DuckDuckGo.
+  #
+  # Some useful examples are mentioned below
+  
+  # Warning: If you want to use "golinks" you have to adjust the URL to your Homer instance in the opensearch.xml file
+
+  # Should a list of the Golink services getting displayed in Homer
+  display: false
+
+  default: "https://duckduckgo.com/?q=%s"
+
+  services:
+
+    - name: "Google"
+      prefix: "g"
+      url: "https://www.google.com/search?q=%s&btnK"
+
+    - name: "Google Image"
+      prefix: "gi"
+      url: "https://www.google.com/search?q=%s&um=1&ie=UTF-8&hl=en&tbm=isch"
+
+    - name: "Google I feel Lucky"
+      prefix: "gl"
+      url: "https://www.google.com/search?q=%s&btnI"
+
+    - name: "Google Maps"
+      prefix: "gm"
+      url: "http://maps.google.com/maps?q=%s"
+
+    - name: "Amazon"
+      prefix: "a"
+      url: "https://www.amazon.de/s?k=%s"
+
+    - name: "DuckDuckGo"
+      prefix: "d"
+      url: "https://duckduckgo.com/?q=%s"
+
+    - name: "eBay"
+      prefix: "e"
+      url: "https://www.ebay.de/sch/i.html?&_nkw=%s"
+
+    - name: "Google Definitions"
+      prefix: "gdef"
+      url: "http://www.google.com/search?q=define%%3A+%s&hl=en&lr=&oi=definel&defl=all"
+
+    - name: "Geizhals"
+      prefix: "gh"
+      url: "https://geizhals.de/?fs=%s&hloc=de&in="
+
+    - name: "Idealo"
+      prefix: "i"
+      url: "https://www.idealo.de/preisvergleich/MainSearchProductCategory.html?q=%s"
+
+    - name: "IMDB"
+      prefix: "imdb"
+      url: "http://www.imdb.com/find?q=%s"
+
+    - name: "Wikipedia"
+      prefix: "wp"
+      url: "http://en.wikipedia.org/?search=%s"
+
+    - name: "Youtube"
+      prefix: "y"
+      url: "http://www.youtube.com/results?search_type=search_videos&search_sort=relevance&search_query=%s&search=Search"
 ```
 
 If you choose to fetch message information from an endpoint, the output format should be:
@@ -120,3 +188,9 @@ If you choose to fetch message information from an endpoint, the output format s
 
 `null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
 Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar).
+
+## What is the "GoLink" functionality?
+
+You can set Homer as the default search engine in your browser.
+For example, if you search for the search term "g how high is the Leaning Tower of Pisa", this search will be performed at Google.
+If you replace the "g" with a "d", the search will be performed at DuckDuckGo.
