@@ -68,6 +68,13 @@ $theme-dark: (
     }
   }
 
+  .message {
+    background-color: map-get($theme, "card-background");
+    .message-body {
+      color: map-get($theme, "text");
+    }
+  }
+
   .footer {
     background-color:  map-get($theme, "card-background");
     box-shadow: 0 2px 15px 0 map-get($theme, "card-shadow");
