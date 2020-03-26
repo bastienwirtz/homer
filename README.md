@@ -194,3 +194,5 @@ Empty values (either in `config.yml` or the endpoint data) will hide the element
 You can set Homer as the default search engine in your browser.
 For example, if you search for the search term "g how high is the Leaning Tower of Pisa", this search will be performed at Google.
 If you replace the "g" with a "d", the search will be performed at DuckDuckGo.
+
+The "GoLinks" functionality is inspired by the "GoLinks" Golang implementation: https://github.com/prologic/golinks
