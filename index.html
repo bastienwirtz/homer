@@ -59,7 +59,9 @@
                       :class="['fas', vlayout ? 'fa-list' : 'fa-columns']"></i></a>
                   <div class="search-bar">
                     <label for="search" class="search-label"></label>
-                    <input type="text" id="search" ref="search" v-model="filter" />
+                    <input type="text" id="search" ref="search" v-model="filter"
+                      v-on:keyup.enter.exact="navigateToFirstService()"
+                      v-on:keyup.alt.enter="navigateToFirstService('_blank')" />
                   </div>
                 </div>
               </div>
@@ -95,7 +97,7 @@
                   v-else>#</span>
                 {{ group.name }}</h2>
               <service v-for="item in group.items" v-bind:item="item" class="column is-one-third-widescreen"
-                v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))">
+                v-if="!filter || (item && matchesFilter(item))">
               </service>
             </template>
           </div>
@@ -106,7 +108,7 @@
               <h2 v-if="!filter && group.name"><i v-if="group.icon" :class="group.icon"></i><span v-else>#</span>
                 {{ group.name }}</h2>
               <service v-for="item in group.items" v-bind:item="item"
-                v-if="!filter || (item && (item.name.toLowerCase().includes(filter.toLowerCase()) || (item.tag && item.tag.toLowerCase().includes(filter.toLowerCase()))))">
+                v-if="!filter || (item && matchesFilter(item))">
               </service>
             </div>
           </div>
