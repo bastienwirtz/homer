@@ -84,6 +84,26 @@ const app = new Vue({
         },
         toggleMenu: function() {
             this.showMenu = !this.showMenu;
+        },
+        matchesFilter: function(item) {
+            return (item.name.toLowerCase().includes(this.filter.toLowerCase())
+                || (item.tag && item.tag.toLowerCase().includes(this.filter.toLowerCase())))
+        },
+        firstMatchingService: function() {
+            for (group of this.config.services) {
+                for (item of group.items) {
+                    if (this.matchesFilter(item)) {
+                        return item;
+                    }
+                }
+            }
+            return null;
+        },
+        navigateToFirstService: function(target) {
+            service = this.firstMatchingService();
+            if (service) {
+                window.open(service.url, target || service.target || '_self');
+            }
         }
     },
     mounted() {

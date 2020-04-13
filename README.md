@@ -3,6 +3,13 @@ A dead simple static **HOM**epage for your serv**ER** to keep your services on h
 
 **Check out the live demo [here](https://homer-demo.netlify.com/).**
 
+It supports keyboard shortcuts:
+
+* `/` Start searching.
+* `Escape` Stop searching.
+* `Enter` Open the first matching result (respects the bookmark's `_target` property).
+* `Alt`/`Option` + `Enter` Open the first matching result in a new tab.
+
 If you need authentication support, you're on your own (it can be secured using a web server auth module or exposing it only through a VPN network / SSH tunnel, ...)
 
 ![screenshot](https://raw.github.com/bastienwirtz/homer/master/screenshot.png)
