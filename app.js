@@ -5,14 +5,10 @@ const app = new Vue({
         offline: false,
         filter: '',
         vlayout: true,
-        isDark: null,
         showMenu: false
     },
     created: async function () {
         let that = this;
-
-        this.isDark = 'overrideDark' in localStorage ?
-            JSON.parse(localStorage.overrideDark) : matchMedia("(prefers-color-scheme: dark)").matches;
 
         if ('vlayout' in localStorage) {
             this.vlayout = JSON.parse(localStorage.vlayout)
@@ -24,6 +20,10 @@ const app = new Vue({
             document.title = this.config.title + ' | Homer';
         } catch (error) {
             this.offline = true;
+        }
+
+        if (this.config.theme) {
+            less.modifyVars(this.config.theme);
         }
 
         // Look for a new message if an endpoint is provided.
@@ -74,10 +74,6 @@ const app = new Vue({
                 return response.json();
             });
         },
-        toggleTheme: function() {
-            this.isDark = !this.isDark;
-            localStorage.overrideDark = this.isDark; 
-        }, 
         toggleLayout: function() {
             this.vlayout = !this.vlayout;
             localStorage.vlayout = this.vlayout;

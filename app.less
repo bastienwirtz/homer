@@ -1,92 +1,44 @@
-$primary-color: #3367d6;
-$secondary-color: #4285f4;
-
-
-// /!\ Keep background colors sync with `theme-color` meta info
-$theme-light: (
-  background: #f5f5f5,
-  card-background: #ffffff,
-  text: #363636,
-  text-title: #303030,
-  text-subtitle: #424242,
-  card-shadow: rgba(0, 0, 0, 0.1),
-  a-hover: #363636
-);
-$theme-dark: (
-  background: #131313,
-  card-background: #2b2b2b,
-  text: #eaeaea,
-  text-title: #fafafa,
-  text-subtitle: #f5f5f5,
-  card-shadow: rgba(0, 0, 0, 0.4),
-  a-hover: #ffdd57
-);
+@primary-color: #3367d6;
+@secondary-color: #4285f4;
+@secondary-color-light: #4285f4;
+@background: #f5f5f5;
+@card-background: #ffffff;
+@text: #363636;
+@text-title: #303030;
+@text-subtitle: #424242;
+@card-shadow: rgba(0, 0, 0, 0.1);
+@a-hover: #363636;
 
 /* raleway-regular - latin */
 @font-face {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Raleway'), local('Raleway-Regular'),
-       url('./webfonts/raleway/raleway-v14-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./webfonts/raleway/raleway-v14-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Raleway"), local("Raleway-Regular"),
+    url("./webfonts/raleway/raleway-v14-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./webfonts/raleway/raleway-v14-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 /* lato-regular - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Lato Regular'), local('Lato-Regular'),
-       url('./webfonts/lato/lato-v16-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./webfonts/lato/lato-v16-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: local("Lato Regular"), local("Lato-Regular"),
+    url("./webfonts/lato/lato-v16-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./webfonts/lato/lato-v16-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-@mixin theme($theme) {
-  background-color: map-get($theme, "background");
-  color: map-get($theme, "text");
-  a {
-    &:hover {
-      color: map-get($theme, "a-hover");
-    }
-  }
-  
-  .title {
-    color: map-get($theme, "text-title");
-  }
-  .subtitle {
-    color: map-get($theme, "text-subtitle");
-  }
-
-  .card {
-    background-color: map-get($theme, "card-background");
-    box-shadow: 0 2px 15px 0 map-get($theme, "card-shadow");
-    &:hover {
-      background-color: map-get($theme, "card-background");
-    }
-  }
-
-  .message {
-    background-color: map-get($theme, "card-background");
-    .message-body {
-      color: map-get($theme, "text");
-    }
-  }
-
-  .footer {
-    background-color:  map-get($theme, "card-background");
-    box-shadow: 0 2px 15px 0 map-get($theme, "card-shadow");
-  }
-}
-
-html { 
-  height: 100%; 
+html {
+  height: 100%;
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   height: 100%;
 
   #app {
@@ -94,27 +46,49 @@ body {
     transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
 
     // Default theme
-    @include theme($theme-light);
-
-    // System pref theme
-    @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
-      @include theme($theme-light);
-    }
-    @media (prefers-color-scheme: dark) {
-      @include theme($theme-dark);
+    background-color: @background;
+    color: @text;
+    a {
+      &:hover {
+        color: @a-hover;
+      }
     }
 
-    // User override theme
-    &.is-light {
-      @include theme($theme-light);
+    .title {
+      color: @text-title;
     }
-    &.is-dark {
-      @include theme($theme-dark);
+    .subtitle {
+      color: @text-subtitle;
+    }
+
+    .card {
+      background-color: @card-background;
+      box-shadow: 0 2px 15px 0 @card-shadow;
+      &:hover {
+        background-color: @card-background;
+      }
+    }
+
+    .message {
+      background-color: @card-background;
+      .message-body {
+        color: @text;
+      }
+    }
+
+    .footer {
+      background-color: @card-background;
+      box-shadow: 0 2px 15px 0 @card-shadow;
     }
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lato', sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Lato", sans-serif;
   }
 
   h1 {
@@ -126,18 +100,20 @@ body {
     margin-top: 2rem;
     margin-bottom: 1rem;
 
-    .fas, .fab, .far {
+    .fas,
+    .fab,
+    .far {
       margin-right: 10px;
     }
 
     span {
       font-weight: bold;
-      color: $secondary-color;
+      color: @secondary-color;
     }
   }
 
   [v-cloak] {
-    display: none
+    display: none;
   }
 
   #bighead {
@@ -150,7 +126,7 @@ body {
     .first-line {
       height: 100px;
       vertical-align: center;
-      background-color: $primary-color;
+      background-color: @primary-color;
 
       h1 {
         margin-top: -12px;
@@ -172,7 +148,7 @@ body {
         i {
           vertical-align: top;
           padding: 8px 15px;
-          font-size: 50px
+          font-size: 50px;
         }
 
         img {
@@ -182,14 +158,16 @@ body {
         }
       }
     }
-    .navbar, .navbar-menu {
-      background-color: $secondary-color;
+    .navbar,
+    .navbar-menu {
+      background-color: @secondary-color;
 
       a {
         color: #ffffff;
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
           color: #ffffff;
-          background-color: lighten( $secondary-color, 5% );
+          background-color: lighten(@secondary-color, 5%);
         }
       }
     }
@@ -212,14 +190,14 @@ body {
     }
 
     .subtitle {
-      font-size: .9em;
+      font-size: 0.9em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .container {
-      padding: 1.2rem .75rem;
+      padding: 1.2rem 0.75rem;
     }
 
     .message {
@@ -241,8 +219,8 @@ body {
   }
 
   .tag {
-    color: $secondary-color;
-    background-color: $secondary-color;
+    color: @secondary-color;
+    background-color: @secondary-color;
     position: absolute;
     top: 1rem;
     right: -0.2rem;
@@ -250,7 +228,7 @@ body {
     overflow: hidden;
     transition: all 0.2s ease-out;
     padding: 0;
-    
+
     .tag-text {
       display: none;
     }
@@ -274,7 +252,7 @@ body {
       width: auto;
       color: #ffffff;
       padding: 0 0.75em;
-      
+
       .tag-text {
         display: block;
       }
@@ -316,7 +294,7 @@ body {
     #main-section {
       margin-bottom: 0;
     }
-    
+
     .footer {
       display: none;
     }
@@ -327,7 +305,7 @@ body {
     display: inline-block;
     #search {
       border: none;
-      background-color: lighten( $secondary-color, 6% );
+      background-color: lighten(@secondary-color, 6%);
       border-radius: 5px;
       padding: 2px 12px 2px 30px;
       margin: 0 0 0 12px;
@@ -335,7 +313,6 @@ body {
       color: #ffffff;
       height: 30px;
       width: 100px;
-
 
       &:focus {
         color: #000000;
@@ -345,7 +322,7 @@ body {
     }
 
     .search-label::before {
-      font-family: 'Font Awesome 5 Free';
+      font-family: "Font Awesome 5 Free";
       position: absolute;
       top: 4px;
       left: 16px;
@@ -356,9 +333,9 @@ body {
       color: #ffffff;
     }
 
-      &:focus-within .search-label::before {
-          color: #4a4a4a;
-      }
+    &:focus-within .search-label::before {
+      color: #4a4a4a;
+    }
   }
 
   .icon-button {
@@ -367,20 +344,19 @@ body {
   }
 
   .offline-message {
-      text-align: center;
-      margin: 35px 0;
+    text-align: center;
+    margin: 35px 0;
 
-      i {
-        font-size: 2rem;
-      }
+    i {
+      font-size: 2rem;
+    }
 
-      i.fa-redo-alt {
-        font-size: 1.3rem;
-        line-height: 1rem;
-        vertical-align: middle;
-        cursor: pointer;
-        color: #3273dc;
-      }
+    i.fa-redo-alt {
+      font-size: 1.3rem;
+      line-height: 1rem;
+      vertical-align: middle;
+      cursor: pointer;
+      color: #3273dc;
+    }
   }
-
 }

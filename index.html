@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,11 +8,10 @@
   <title>Homer</title>
   <link defer rel="stylesheet" href="vendors/font-awesone.min.css">
   <link defer rel="stylesheet" href="vendors/bulma.min.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet/less" type="text/css" href="app.less" />
 </head>
-
 <body>
-  <div id="app" v-if="config" :class="[isDark ? 'is-dark' : 'is-light', !config.footer ? 'no-footer': '']">
+  <div id="app" v-if="config" :class="[ !config.footer ? 'no-footer': '']">
     <div id="bighead">
       <section class="first-line">
         <div v-cloak class="container">
@@ -128,7 +126,7 @@
 
   <script src="vendors/vue.min.js"></script>
   <script src="vendors/js-yaml.min.js"></script>
+  <script src="vendors/less.min.js"></script>
   <script src="app.js"></script>
 </body>
-
 </html>
