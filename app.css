@@ -187,9 +187,15 @@ body {
     padding: 0; }
     body #main-section h2 {
       border-bottom: 1px dashed #ccc;
-      padding-bottom: 10px; }
+      padding-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     body #main-section .title {
-      font-size: 1.1em; }
+      font-size: 1.1em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
     body #main-section .subtitle {
       font-size: .9em;
       white-space: nowrap;
@@ -205,7 +211,8 @@ body {
       body #main-section .message .message-body {
         border: none; }
   body .media-content {
-    overflow: inherit; }
+    overflow: hidden;
+    text-overflow: inherit; }
   body .tag {
     color: #4285f4;
     background-color: #4285f4;

@@ -81,6 +81,14 @@ $theme-dark: (
   }
 }
 
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 html { 
   height: 100%; 
 }
@@ -205,17 +213,17 @@ body {
     h2 {
       border-bottom: 1px dashed #ccc;
       padding-bottom: 10px;
+      @include ellipsis();
     }
 
     .title {
       font-size: 1.1em;
+      @include ellipsis();
     }
 
     .subtitle {
       font-size: .9em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      @include ellipsis();
     }
 
     .container {
@@ -237,7 +245,8 @@ body {
   }
 
   .media-content {
-    overflow: inherit;
+    overflow: hidden;
+    text-overflow: inherit;
   }
 
   .tag {
