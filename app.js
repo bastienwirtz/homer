@@ -21,7 +21,7 @@ const app = new Vue({
         this.checkOffline();
         try {
             this.config =  await this.getConfig();
-            document.title = this.config.title + ' | Homer';
+            document.title = this.config.title + ' | ' + this.config.subtitle;
         } catch (error) {
             this.offline = true;
         }
