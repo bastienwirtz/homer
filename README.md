@@ -61,11 +61,11 @@ message:
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
   - name: "ansible"
-    icon: "fa-github"
+    icon: "fab fa-github"
     url: "https://github.com/xxxxx/ansible/"
     target: '_blank' # optionnal html a tag target attribute
   - name: "Wiki"
-    icon: "fa-book"
+    icon: "fas fa-book"
     url: "https://wiki.xxxxxx.com/"
 
 # Services
@@ -73,7 +73,7 @@ links:
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "DevOps"
-    icon: "fa-code-fork"
+    icon: "fa fa-code-fork"
     items:
       - name: "Jenkins"
         logo: "/assets/tools/jenkins.png"
@@ -91,7 +91,7 @@ services:
         tagstyle: "is-success"
         url: "#"
   - name: "Monitoring"
-    icon: "fa-heartbeat"
+    icon: "fas fa-heartbeat"
     items:
       - name: "M/Monit"
         logo: "/assets/tools/monit.png"
