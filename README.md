@@ -127,3 +127,14 @@ If you choose to fetch message information from an endpoint, the output format s
 
 `null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
 Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar).
+
+### Style Options
+
+Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](https://bulma.io/documentation/modifiers/syntax/). You'll notice in the config there is a `tagstyle` option. It can be set to any of the bulma modifiers. You'll probably want to use one of these 4 main colors:
+
+- `is-info` (blue)
+- `is-success` (green)
+- `is-warning` (yellow)
+- `is-danger` (red)
+
+You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers/syntax/) for other options regarding size, style, or state.
