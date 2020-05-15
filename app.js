@@ -56,13 +56,19 @@ const app = new Vue({
                 that.offline = true;
             });
         },
-        getConfig: function (event) {
-            return fetch('config.yml').then(function (response) {
+        getConfig: function (path = 'config.yml') {
+            return fetch(path).then(function (response) {
+                const that = this;
                 if (response.status != 200) {
                     return
                 }
                 return response.text().then(function (body) {
                     return jsyaml.load(body);
+                }).then(function (config) {
+                    if (config.externalConfig) {
+                        return that.getConfig(config.externalConfig)
+                    }
+                    return config     
                 });
             });
         },
