@@ -3,3 +3,4 @@ dockerfile
 *.md
 .git
 screenshot.png
+docker-compose.override.yml

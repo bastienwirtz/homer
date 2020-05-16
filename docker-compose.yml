@@ -1,0 +1,10 @@
+version: '2.1'
+services:
+  homer:
+    image: b4bz/homer:latest
+    build: .
+    volumes:
+      - './config.yml:/www/config.yml'
+      - './assets/:/www/assets'
+    ports:
+    - '8080:8080'
