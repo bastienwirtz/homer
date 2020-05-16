@@ -1,4 +1,5 @@
 # Homer
+
 A dead simple static **HOM**epage for your serv**ER** to keep your services on hand, from a simple `yaml` configuration file.
 
 **Check out the live demo [here](https://homer-demo.netlify.app).**
@@ -16,9 +17,9 @@ If you need authentication support, you're on your own (it can be secured using 
 
 ## Roadmap
 
-- [ ] Colors / theme customization
-- [ ] Enable PWA support (making possible to "install" - add to homescreen - it)
-- [ ] Improve maintenability (external library import & service workers cached file list.)
+* [ ] Colors / theme customization
+* [ ] Enable PWA support (making possible to "install" - add to homescreen - it)
+* [ ] Improve maintainability (external library import & service workers cached file list.)
 
 ## Installation
 
@@ -32,11 +33,9 @@ sudo docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/
 
 **How to build / install it?** There is no build system (😱), use it like that! It's meant to be stupid simple & zero maintenance required. Just copy the static files somewhere, and visit the `index.html`.
 
-
 ## Configuration
 
 Title, icons, links, colors, and services can be configured in the `config.yml` file, using [yaml](http://yaml.org/) format.
-
 
 ```yaml
 ---
@@ -63,7 +62,7 @@ links:
   - name: "ansible"
     icon: "fab fa-github"
     url: "https://github.com/xxxxx/ansible/"
-    target: '_blank' # optionnal html a tag target attribute
+    target: '_blank' # optional html a tag target attribute
   - name: "Wiki"
     icon: "fas fa-book"
     url: "https://wiki.xxxxxx.com/"
@@ -82,7 +81,7 @@ services:
         subtitle: "Continuous integration server"
         tag: "CI"
         url: "#"
-        target: '_blank' # optionnal html a tag target attribute
+        target: '_blank' # optional html a tag target attribute
       - name: "RabbitMQ Management"
         logo: "/assets/tools/rabbitmq.png"
         subtitle: "Manage & monitor RabbitMQ server"
@@ -119,9 +118,9 @@ If you choose to fetch message information from an endpoint, the output format s
 
 ```json
 {
-	"style": null,
-	"title": "Lorem ipsum 42",
-	"content": "LA LA LA Lorem ipsum dolor sit amet, ....."
+  "style": null,
+  "title": "Lorem ipsum 42",
+  "content": "LA LA LA Lorem ipsum dolor sit amet, ....."
 }
 ```
 
