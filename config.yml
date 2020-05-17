@@ -21,7 +21,7 @@ links:
   - name: "ansible"
     icon: "fab fa-github"
     url: "https://github.com/bastienwirtz/homer"
-    target: '_blank' # optionnal html a tag target attribute
+    target: '_blank' # optional html a tag target attribute
   - name: "Wiki"
     icon: "fas fa-book"
     url: "https://www.wikipedia.org/"
@@ -38,7 +38,7 @@ services:
         subtitle: "Continuous integration server"
         tag: "CI"
         url: "https://jenkins.io/"
-        target: '_blank' # optionnal html a tag target attribute
+        target: '_blank' # optional html a tag target attribute
       - name: "RabbitMQ Management"
         logo: "assets/tools/rabbitmq.png"
         subtitle: "Manage & monitor RabbitMQ server"
