@@ -12,4 +12,4 @@ RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} &
 
 USER darkhttpd
 
-ENTRYPOINT ["darkhttpd","/www/"]
+ENTRYPOINT ["darkhttpd","/www/", "--no-listing"]
