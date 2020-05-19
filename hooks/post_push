@@ -1,0 +1,7 @@
+#!/bin/bash
+
+docker manifest push --purge b4bz/homer:latest
+docker manifest create b4bz/homer:latest b4bz/homer:latest-amd64 b4bz/homer:latest-arm32v7 b4bz/homer:latest-arm64v8
+docker manifest annotate b4bz/homer:latest b4bz/homer:latest-arm32v7 --os linux --arch arm
+docker manifest annotate b4bz/homer:latest b4bz/homer:latest-arm64v8 --os linux --arch arm64 --variant v8
+docker manifest push --purge b4bz/homer:latest
