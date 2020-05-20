@@ -1,4 +1,5 @@
 FROM arm32v7/alpine:3.11
+COPY qemu-arm-static /usr/bin
 
 COPY ./ /www/
 
