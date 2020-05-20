@@ -1,12 +1,13 @@
-FROM alpine AS builder
+FROM alpine as qemu
 
-# Download QEMU, see https://github.com/docker/hub-feedback/issues/1261
-ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-aarch64.tar.gz
-RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
+ARG QEMU_VERSION "v4.2.0-7"
+
+RUN wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_VERSION}/qemu-aarch64-static && chmod +x qemu-aarch64-static
 
 FROM arm64v8/alpine:3.11
 COPY qemu-arm-static /usr/bin
 
+COPY --from=qemu qemu-aarch64-static /usr/bin/
 COPY ./ /www/
 
 ENV USER darkhttpd
@@ -15,7 +16,8 @@ ENV GID 911
 ENV UID 911
 
 RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
-    apk add -U darkhttpd
+    apk add -U darkhttpd && \
+    rm /usr/bin/qemu-aarch64-static
 
 USER darkhttpd
 
