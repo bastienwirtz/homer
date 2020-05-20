@@ -1,6 +1,12 @@
-FROM arm32v7/alpine:3.11
-COPY qemu-arm-static /usr/bin
+FROM alpine as qemu
 
+ARG QEMU_VERSION "v4.2.0-7"
+
+RUN wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_VERSION}/qemu-arm-static && chmod +x qemu-arm-static
+
+FROM arm32v7/alpine:3.11
+
+COPY --from=qemu qemu-arm-static /usr/bin/
 COPY ./ /www/
 
 ENV USER darkhttpd
@@ -9,7 +15,8 @@ ENV GID 911
 ENV UID 911
 
 RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
-    apk add -U darkhttpd
+    apk add -U darkhttpd && \
+    rm /usr/bin/qemu-arm-static
 
 USER darkhttpd
 
