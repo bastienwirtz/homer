@@ -1,13 +1,26 @@
+# build stage
+FROM node:lts-alpine as build-stage
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN yarn install
+
+COPY . .
+RUN yarn build
+
+# Multi arch build support
 FROM alpine as qemu
 
 ARG QEMU_VERSION="v4.2.0-7"
 
 RUN wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_VERSION}/qemu-aarch64-static && chmod +x qemu-aarch64-static
 
+# production stage
 FROM arm64v8/alpine:3.11
 
 COPY --from=qemu qemu-aarch64-static /usr/bin/
-COPY ./ /www/
+COPY --from=build-stage /app/dist /www/
 
 ENV USER darkhttpd
 ENV GROUP darkhttpd

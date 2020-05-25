@@ -1,6 +1,18 @@
+# build stage
+FROM node:lts-alpine as build-stage
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN yarn install
+
+COPY . .
+RUN yarn build
+
+# production stage
 FROM alpine:3.11
 
-COPY ./ /www/
+COPY --from=build-stage /app/dist /www/
 
 ENV USER darkhttpd
 ENV GROUP darkhttpd

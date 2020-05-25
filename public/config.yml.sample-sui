@@ -1,0 +1,64 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/icons for icons options
+
+title: "Hello beautiful!"
+subtitle: "App dashboard"
+logo: false
+# icon: "fas fa-skull-crossbones" Optional icon
+
+header: true
+
+# Optionnal theme customization
+theme: sui
+colors:
+  light:
+    highlight-primary: transparent
+    highlight-secondary: transparent
+    highlight-hover: "#4a4a4a"
+    text-subtitle: "#424242"
+  dark:
+    background: "#2B2C56"
+    highlight-primary: transparent
+    highlight-secondary: transparent
+    highlight-hover: "#200b35"
+    text-subtitle: "#6375e8"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+links: []
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "APPLICATIONS"
+    items:
+      - name: "Jenkins"
+        logo: "assets/tools/jenkins.png"
+        subtitle: "Continuous integration server"
+        url: "https://jenkins.io/"
+      - name: "RabbitMQ Management"
+        logo: "assets/tools/rabbitmq.png"
+        subtitle: "Manage & monitor RabbitMQ server"
+        # Optional tagstyle
+        # Same styling options as the optional message.
+        tagstyle: "is-success"
+        url: "https://www.rabbitmq.com/"
+      - name: "M/Monit"
+        logo: "assets/tools/monit.png"
+        subtitle: "Monitor & manage all monit enabled hosts"
+        url: "https://mmonit.com/monit/"
+      - name: "Grafana"
+        logo: "assets/tools/grafana.png"
+        subtitle: "Metric analytics & dashboards"
+        url: "https://grafana.com/"
+      - name: "Kibana"
+        logo: "assets/tools/elastic.png"
+        subtitle: "Explore & visualize logs"
+        url: "https://www.elastic.co/products/kibana"
+      - name: "Website monitoring"
+        logo: "assets/tools/pingdom.png"
+        subtitle: "Pingdom public reports overview"
+        tag: "CI"
+        url: "https://www.pingdom.com/"
