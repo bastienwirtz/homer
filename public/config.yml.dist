@@ -65,7 +65,7 @@ services:
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
-        subtitle: "Bookmark exemple"
+        subtitle: "Bookmark example"
         tag: "app"
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optionnal html a tag target attribute

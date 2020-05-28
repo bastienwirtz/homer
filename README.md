@@ -61,9 +61,9 @@ npm install
 npm run serve
 ```
 
-### themes
+### Themes
 
-Theme are meant to be simple customization (written in [scss](https://sass-lang.com/documentation/syntax)).
+Themes are meant to be simple customization (written in [scss](https://sass-lang.com/documentation/syntax)).
 To addd a new theme, just add a file in the theme directory, and put all style in the `body #app.theme-<name>` scope. Then import it in the main style file.
 
 ```scss
@@ -81,7 +81,7 @@ body #app.theme-my-awesome-theme. { ... }
 
 ## Configuration
 
-Title, icons, links, colors, and services can be configured in the `config.yml` file, using [yaml](http://yaml.org/) format.
+Title, icons, links, colors, and services can be configured in the `config.yml` file (located in project root directory once built, or in the `public/` directory in developement mode), using [yaml](http://yaml.org/) format.
 
 ```yaml
 ---
@@ -142,7 +142,7 @@ links:
   - name: "ansible"
     icon: "fab fa-github"
     url: "https://github.com/xxxxx/ansible/"
-    target: "_blank" # optional html a tag target attribute
+    target: "_blank" # optional html tag target attribute
   - name: "Wiki"
     icon: "fas fa-book"
     url: "https://wiki.xxxxxx.com/"
@@ -161,7 +161,7 @@ services:
         subtitle: "Continuous integration server"
         tag: "CI"
         url: "#"
-        target: "_blank" # optional html a tag target attribute
+        target: "_blank" # optional html tag target attribute
       - name: "RabbitMQ Management"
         logo: "/assets/tools/rabbitmq.png"
         subtitle: "Manage & monitor RabbitMQ server"
