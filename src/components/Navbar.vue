@@ -20,6 +20,7 @@
           <div class="navbar-start">
             <a
               class="navbar-item"
+              rel="noreferrer"
               v-for="link in links"
               :key="link.url"
               :href="link.url"

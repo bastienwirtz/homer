@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="card">
-      <a :href="item.url" :target="item.target">
+      <a :href="item.url" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div class="media">
             <div v-if="item.logo" class="media-left">
               <figure class="image is-48x48">
-                <img :src="item.logo" />
+                <img :src="item.logo" :alt="`${item.name} logo`" />
               </figure>
             </div>
             <div v-if="item.icon" class="media-left">
