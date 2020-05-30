@@ -5,7 +5,7 @@
     :class="[
       `theme-${config.theme}`,
       isDark ? 'is-dark' : 'is-light',
-      !config.footer ? 'no-footer' : ''
+      !config.footer ? 'no-footer' : '',
     ]"
   >
     <DynamicTheme :themes="config.colors" />
@@ -132,7 +132,7 @@ export default {
     SearchInput,
     SettingToggle,
     DarkMode,
-    DynamicTheme
+    DynamicTheme,
   },
   data: function () {
     return {
@@ -142,7 +142,7 @@ export default {
       filter: "",
       vlayout: true,
       isDark: null,
-      showMenu: false
+      showMenu: false,
     };
   },
   created: async function () {
@@ -205,10 +205,10 @@ export default {
         {
           name: filter,
           icon: "fas fa-search",
-          items: searchResultItems
-        }
+          items: searchResultItems,
+        },
       ];
-    }
-  }
+    },
+  },
 };
 </script>

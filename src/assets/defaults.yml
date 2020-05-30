@@ -35,5 +35,6 @@ colors:
     card-shadow: rgba(0, 0, 0, 0.4)
     link-hover: "#ffdd57"
 
+message: ~
 links: []
 services: []
