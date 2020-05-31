@@ -15,7 +15,9 @@ jobs:
         run: |
           yarn install
           yarn build
-          zip --junk-paths homer dist/*
+      - name: Create artifact
+        working-directory: "dist"
+        run: zip -r ../homer.zip ./*
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
