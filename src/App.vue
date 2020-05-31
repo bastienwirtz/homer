@@ -151,8 +151,6 @@ export default {
       let config = await this.getConfig();
 
       this.config = merge(defaults, config);
-
-      console.log(this.config);
       this.services = this.config.services;
       document.title = `${this.config.title} | ${this.config.subtitle}`;
     } catch (error) {

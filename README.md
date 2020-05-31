@@ -28,7 +28,7 @@ If you need authentication support, you're on your own (it can be secured using 
 ### Using docker
 
 ```sh
-sudo docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/local/assets/:/www/assets b4bz/homer:latest
+docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/local/assets/:/www/assets b4bz/homer:latest
 ```
 
 ### Manually
