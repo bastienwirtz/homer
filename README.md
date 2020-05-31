@@ -47,6 +47,8 @@ npm run build
 ```
 
 Then your dashboard is ready to use in the `/dist` directory.
+The `dist` directory is meant to be served by an HTTP server, so **it will not work if you open dist/index.html directly over file:// protocol**.
+
 Use it like any static HTML content (use a webserver or open the html index directly).
 
 ## Developement
