@@ -1,0 +1,23 @@
+/* raleway-regular - latin */
+@font-face {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Raleway"), local("Raleway-Regular"),
+    url("./webfonts/raleway/raleway-v14-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./webfonts/raleway/raleway-v14-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* lato-regular - latin */
+@font-face {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Lato Regular"), local("Lato-Regular"),
+    url("./webfonts/lato/lato-v16-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./webfonts/lato/lato-v16-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
