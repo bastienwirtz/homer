@@ -146,27 +146,26 @@ export default {
     };
   },
   created: async function () {
-    try {
-      const defaults = jsyaml.load(defaultConfig);
-      let config = await this.getConfig();
-
-      this.config = merge(defaults, config);
-      this.services = this.config.services;
-      document.title = `${this.config.title} | ${this.config.subtitle}`;
-    } catch (error) {
-      this.offline = true;
-    }
+    const defaults = jsyaml.load(defaultConfig);
+    let config = await this.getConfig();
+    this.config = merge(defaults, config);
+    this.services = this.config.services;
+    document.title = `${this.config.title} | ${this.config.subtitle}`;
   },
   methods: {
     getConfig: function () {
-      return fetch("config.yml").then(function (response) {
-        if (response.status != 200) {
-          return;
-        }
-        return response.text().then(function (body) {
-          return jsyaml.load(body);
+      return fetch("config.yml")
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          return response.text().then((body) => {
+            return jsyaml.load(body);
+          });
+        })
+        .catch((error) => {
+          return this.handleErrors("⚠️ Error loading configuration", error);
         });
-      });
     },
     matchesFilter: function (item) {
       return (
@@ -206,6 +205,15 @@ export default {
           items: searchResultItems,
         },
       ];
+    },
+    handleErrors: function (title, content) {
+      return {
+        message: {
+          title: title,
+          style: "is-danger",
+          content: content,
+        },
+      };
     },
   },
 };
