@@ -51,7 +51,7 @@ The `dist` directory is meant to be served by an HTTP server, so **it will not w
 
 Use it like any static HTML content (use a webserver or open the html index directly).
 
-## Developement
+## Development
 
 ```sh
 # Using yarn (recommended)
