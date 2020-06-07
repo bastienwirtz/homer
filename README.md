@@ -1,14 +1,14 @@
 # Homer
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Contribution Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![Gitter chat](https://img.shields.io/badge/chat-on_gitter-008080.svg?style=flat-square)](https://gitter.im/homer-dashboard)
+[![Gitter](https://badges.gitter.im/homer-dashboard/community.svg)](https://gitter.im/homer-dashboard/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Dowload](https://img.shields.io/badge/Dowload-homer.zip-orange)](https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/awesome-selfhosted/awesome-selfhosted)
 
 A dead simple static **HOM**epage for your serv**ER** to keep your s
 ervices on hand, from a simple `yaml` configuration file.
 
-## [Live demo](https://homer-demo.netlify.app)  • [Chat](https://gitter.im/homer-dashboard/)
+## [Live demo](https://homer-demo.netlify.app)  • [Chat](https://gitter.im/homer-dashboard/community)
 ![screenshot](https://raw.github.com/bastienwirtz/homer/master/screenshot.png)
 
 ## Table of Contents
@@ -41,6 +41,14 @@ Homer is a full static html/js dashboard, generated from the source in `/src` us
 ```sh
 docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/local/assets/:/www/assets b4bz/homer:latest
 ```
+
+As a bind mount is used here, docker will not copy the initial content of the `assets` directory to the mounted directory. 
+You can initialise your assets directory with the content provided in this repository
+```sh
+cp -r /public/assets/* /your/local/assets/
+```
+
+**Alternatively** if you just want to provide images/icons without customizing the other files (app manifest & pwa icons), you can mount a custom directory in the `www` directory and use it in your `config.yml` for icons path.
 
 ### Using the release tarball (prebuilt, ready to use)
 
