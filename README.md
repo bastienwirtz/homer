@@ -166,7 +166,6 @@ services:
         tag: "other"
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optionnal html a tag target attribute
-      
 ```
 
 If you choose to fetch message information from an endpoint, the output format should be:
