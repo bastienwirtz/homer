@@ -1,13 +1,14 @@
 # Homer
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Contribution Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Gitter chat](https://img.shields.io/badge/chat-on_gitter-008080.svg?style=flat-square)](https://gitter.im/homer-dashboard)
 [![Dowload](https://img.shields.io/badge/Dowload-homer.zip-orange)](https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip)
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/awesome-selfhosted/awesome-selfhosted)
 
 A dead simple static **HOM**epage for your serv**ER** to keep your s
 ervices on hand, from a simple `yaml` configuration file.
 
-## [Live demo](https://homer-demo.netlify.app).
+## [Live demo](https://homer-demo.netlify.app)  • [Chat](https://gitter.im/homer-dashboard/)
 ![screenshot](https://raw.github.com/bastienwirtz/homer/master/screenshot.png)
 
 ## Table of Contents
