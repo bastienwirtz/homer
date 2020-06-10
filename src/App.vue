@@ -68,7 +68,7 @@
                 v-for="item in group.items"
                 :key="item.name"
                 v-bind:item="item"
-                class="column is-one-third-widescreen"
+                :class="['column', `is-${12 / config.columns}`]"
               />
             </template>
           </div>
@@ -79,7 +79,7 @@
             class="columns is-multiline layout-vertical"
           >
             <div
-              class="column is-one-third-widescreen"
+              :class="['column', `is-${12 / config.columns}`]"
               v-for="group in services"
               :key="group.name"
             >
