@@ -63,7 +63,7 @@
               </h2>
               <Service
                 v-for="item in group.items"
-                :key="item.url"
+                :key="item.name"
                 v-bind:item="item"
                 class="column is-one-third-widescreen"
               />
@@ -153,19 +153,28 @@ export default {
     document.title = `${this.config.title} | ${this.config.subtitle}`;
   },
   methods: {
-    getConfig: function () {
-      return fetch("config.yml")
-        .then((response) => {
-          if (!response.ok) {
-            throw Error(response.statusText);
-          }
-          return response.text().then((body) => {
+    getConfig: function (path = "config.yml") {
+      return fetch(path).then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+
+        const that = this;
+        return response
+          .text()
+          .then((body) => {
             return jsyaml.load(body);
+          })
+          .then(function (config) {
+            if (config.externalConfig) {
+              return that.getConfig(config.externalConfig);
+            }
+            return config;
+          })
+          .catch((error) => {
+            return this.handleErrors("⚠️ Error loading configuration", error);
           });
-        })
-        .catch((error) => {
-          return this.handleErrors("⚠️ Error loading configuration", error);
-        });
+      });
     },
     matchesFilter: function (item) {
       return (

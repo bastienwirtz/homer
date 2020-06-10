@@ -85,6 +85,10 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
 
+# Optional: Use external configuration file. 
+# Using this will ignore remaining config in this file
+# externalConfig: https://example.com/server-luci/config.yaml
+
 title: "App dashboard"
 subtitle: "Homer"
 logo: "assets/homer.png"
