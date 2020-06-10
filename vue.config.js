@@ -10,6 +10,8 @@ module.exports = {
   publicPath: "",
   pwa: {
     manifestPath: "assets/manifest.json",
+    appleMobileWebAppStatusBarStyle: "black",
+    appleMobileWebAppCapable: "yes",
     iconPaths: {
       favicon32: "assets/icons/favicon-32x32.png",
       favicon16: "assets/icons/favicon-16x16.png",
