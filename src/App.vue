@@ -49,7 +49,10 @@
 
     <section id="main-section" class="section">
       <div v-cloak class="container">
-        <ConnectivityChecker @network:status-update="offline = $event" />
+        <ConnectivityChecker
+          v-if="config.connectivityCheck"
+          @network:status-update="offline = $event"
+        />
         <div v-if="!offline">
           <!-- Optional messages -->
           <Message :item="config.message" />
