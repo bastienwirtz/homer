@@ -22,6 +22,6 @@ ENV UID 911
 RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
     apk add -U darkhttpd
 
-USER darkhttpd
+USER ${USER}
 
 ENTRYPOINT ["darkhttpd","/www/", "--no-listing"]

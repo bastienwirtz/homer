@@ -31,6 +31,6 @@ RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} &
     apk add -U darkhttpd && \
     rm /usr/bin/qemu-aarch64-static
 
-USER darkhttpd
+USER ${USER}
 
 ENTRYPOINT ["darkhttpd","/www/","--no-listing"]
