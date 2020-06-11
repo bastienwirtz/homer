@@ -12,8 +12,6 @@ RUN yarn build
 # production stage
 FROM alpine:3.11
 
-COPY --from=build-stage /app/dist /www/
-
 ENV USER darkhttpd
 ENV GROUP darkhttpd
 ENV GID 911
@@ -23,5 +21,7 @@ RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} &
     apk add -U darkhttpd
 
 USER ${USER}
+
+COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
 
 ENTRYPOINT ["darkhttpd","/www/", "--no-listing"]
