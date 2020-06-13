@@ -21,25 +21,6 @@ The extension loads Homer in an iframe on your new tab page, meaning you have to
   target: '_top'
 ```
 
-## Use Homer as a custom "new tab" page
-#### `by @vosdev`
-
-This [extension](https://addons.mozilla.org/firefox/addon/custom-new-tab-page) allows you to have your homer dashboard in your new tab page, while leaving focus on the address bar meaning you can still type right away if you want to search or go to a page that is not on your homer dash.
-
-The extension loads Homer in an iframe on your new tab page, meaning you have to add `target: '_top'` to each of your items.
-
-```yaml
-- name: "Reddit"
-  logo: "assets/daily/reddit.png"
-  url: "https://reddit.com"
-  target: '_top'
-
-- name: "YouTube"
-  logo: "assets/daily/youtube.png"
-  url: "https://youtube.com"
-  target: '_top'
-```
-
 ## YAML Anchors
 #### `by @JamiePhonic`
 
