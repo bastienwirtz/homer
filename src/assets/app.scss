@@ -191,6 +191,10 @@ body {
         border: none;
       }
     }
+
+    .message.hide {
+      display: none;
+    }
   }
 
   .media-content {
