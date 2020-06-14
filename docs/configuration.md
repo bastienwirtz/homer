@@ -58,7 +58,7 @@ colors:
 # Optional message
 message:
   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
-  style: "is-warning"
+  style: "is-warning" # 'hide' can be added to hide the message block until endpoint overrides it.
   title: "Optional message!"
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
