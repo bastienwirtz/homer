@@ -110,3 +110,17 @@ docker create \
   --restart unless-stopped \
   linuxserver/code-server
 ```
+
+
+## Get the news headlines in Homer
+#### `by @JamiePhonic`
+
+Homer allows you to set a "message" that will appear at the top of the page, however, you can also supply a `url:`.
+
+If the URL you specified returns a JSON object that defines a `title` and `content` item, homer will replace these values from your `config.yml` with the ones in the returned object.
+
+So, using [Node-Red](https://nodered.org/docs/getting-started/) and a quick flow, you can process an RSS feed to replace the message with a news item!
+
+To get started, simply import [this flow](https://flows.nodered.org/flow/4b6406c9a684c26ace0430dd1826e95d) into your Node-Red instance and change the RSS feed in the "Get News RSS Feed" node to one of your choosing! 
+
+So far, the flow has been tested with BBC News and Sky News, however it should be easy to modify the flow to work with other RSS feeds if they dont work out of the box!
