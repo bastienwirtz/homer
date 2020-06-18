@@ -21,12 +21,10 @@ ENV PORT 8080
 RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
     apk add -U darkhttpd
 
-RUN echo "darkhttpd /www/ --no-listing --port $PORT" > /entrypoint.sh
-RUN set -ex chown ${USER}:${GROUP} /entrypoint.sh
+COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
+COPY --chown=${USER}:${GROUP} entrypoint.sh /entrypoint.sh
 
 USER ${USER}
-
-COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
-
 EXPOSE ${PORT}
+VOLUME [ "/www/config.yml", "/www/assets" ]
 ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
