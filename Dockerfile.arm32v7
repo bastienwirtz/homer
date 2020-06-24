@@ -32,9 +32,10 @@ RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} &
     rm /usr/bin/qemu-arm-static
 
 COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
+COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist/assets /www/default-assets
 COPY --chown=${USER}:${GROUP} entrypoint.sh /entrypoint.sh
 
 USER ${USER}
 EXPOSE ${PORT}
-VOLUME [ "/www/config.yml", "/www/assets" ]
+VOLUME /www/assets
 ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]

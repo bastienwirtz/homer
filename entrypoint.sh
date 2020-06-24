@@ -1,6 +1,15 @@
 #!/bin/sh
 
-yes n | cp -i /www/config.yml.dist /www/config.yml
-while true; do echo n; done | cp -Ri /app/dist/www/assets /www/assets 2>/dev/null
+# Ensure default assets are present.
+while true; do echo n; done | cp -Ri /www/default-assets/* /www/assets/ &> /dev/null
 
-darkhttpd /www/ --no-listing --port $PORT
+# Ensure compatibility with previous version (config.yml was in the root directory)
+if [ -f "/www/config.yml" ]; then
+    yes n | cp -i /www/config.yml /www/assets/ &> /dev/null
+fi
+
+# Install default config if no one is available.
+yes n | cp -i /www/default-assets/config.yml.dist /www/assets/config.yml &> /dev/null
+
+chown -R $UID:$GID /www/assets/*
+exec su-exec $USER:$GROUP darkhttpd /www/ --no-listing --port "$PORT"

@@ -1,6 +1,6 @@
 ## Configuration
 
-Title, icons, links, colors, and services can be configured in the `config.yml` file (located in project root directory once built, or in the `public/` directory in developement mode), using [yaml](http://yaml.org/) format.
+Title, icons, links, colors, and services can be configured in the `config.yml` file (located in `/assets` directory once built, or in the `public/assets` directory in developement mode), using [yaml](http://yaml.org/) format.
 
 ```yaml
 ---
