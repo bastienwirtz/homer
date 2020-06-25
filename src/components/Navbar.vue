@@ -29,7 +29,7 @@
               <i
                 v-if="link.icon"
                 style="margin-right: 6px;"
-                :class="link.icon"
+                :class="['fa-fw', link.icon]"
               ></i>
               {{ link.name }}
             </a>

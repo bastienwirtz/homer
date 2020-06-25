@@ -14,7 +14,7 @@
         <div v-cloak class="container">
           <div class="logo">
             <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
-            <i v-if="config.icon" :class="config.icon"></i>
+            <i v-if="config.icon" :class="['fa-fw', config.icon]"></i>
           </div>
           <div class="dashboard-title">
             <span class="headline">{{ config.subtitle }}</span>
@@ -61,7 +61,7 @@
           <div v-if="!vlayout || filter" class="columns is-multiline">
             <template v-for="group in services">
               <h2 v-if="group.name" class="column is-full group-title">
-                <i v-if="group.icon" :class="group.icon"></i>
+                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 {{ group.name }}
               </h2>
               <Service
@@ -84,7 +84,7 @@
               :key="group.name"
             >
               <h2 v-if="group.name" class="group-title">
-                <i v-if="group.icon" :class="group.icon"></i>
+                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 {{ group.name }}
               </h2>
               <Service
