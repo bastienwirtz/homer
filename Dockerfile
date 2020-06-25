@@ -19,7 +19,7 @@ ENV UID 911
 ENV PORT 8080
 
 RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
-    apk add -U darkhttpd
+    apk add -U --no-cache darkhttpd
 
 COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
 COPY --chown=${USER}:${GROUP} entrypoint.sh /entrypoint.sh
