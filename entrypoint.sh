@@ -1,6 +1,8 @@
 #!/bin/sh
 
-yes n | cp -i /www/config.yml.dist /www/config.yml
-while true; do echo n; done | cp -Ri /app/dist/www/assets /www/assets 2>/dev/null
+if ! [ -f 'config.yml' ]; then
+    echo '/www/config.yml not found. Using default config.' 1>&2
+    cp config.yml.dist config.yml
+fi
 
-darkhttpd /www/ --no-listing --port $PORT
+exec darkhttpd /www/ --no-listing --port "$PORT"
