@@ -26,5 +26,5 @@ COPY --chown=${USER}:${GROUP} entrypoint.sh /entrypoint.sh
 
 USER ${USER}
 EXPOSE ${PORT}
-VOLUME [ "/www/config.yml", "/www/assets" ]
+VOLUME /www/assets
 ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
