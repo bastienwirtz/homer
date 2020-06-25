@@ -34,6 +34,7 @@ RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} &
 COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
 COPY --chown=${USER}:${GROUP} entrypoint.sh /entrypoint.sh
 
+WORKDIR /www
 USER ${USER}
 EXPOSE ${PORT}
 VOLUME /www/assets
