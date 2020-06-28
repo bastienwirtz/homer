@@ -38,31 +38,25 @@ ervices on hand, from a simple `yaml` configuration file.
 
 Homer is a full static html/js dashboard, generated from the source in `/src` using webpack. It's meant to be served by an HTTP server, **it will not work if you open dist/index.html directly over file:// protocol**.
 
-For more information about the `config.yml` file see [configuration](docs/configuration.md) the section.
+See [documentation](docs/configuration.md) for information about the configuration (`assets/config.yml`) options.
 
 ### Using docker
 
 ```sh
-docker run -p 8080:8080 -v /your/local/config.yml:/www/config.yml -v /your/local/assets/:/www/assets b4bz/homer:latest
+docker run -p 8080:8080 -v /your/local/assets/:/www/assets b4bz/homer:latest
 ```
 
-As a bind mount is used here, docker will not copy the initial content of the `assets` directory to the mounted directory. 
-You can initialise your assets directory with the content provided in this repository
-```sh
-cp -r /public/assets/* /your/local/assets/
-```
-
-**Alternatively** if you just want to provide images/icons without customizing the other files (app manifest & pwa icons), you can mount a custom directory in the `www` directory and use it in your `config.yml` for icons path.
+Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
 
 ### Using the release tarball (prebuilt, ready to use)
 
-Download and extract the latest the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `config.yml.dist` file to `config.yml`, and put it behind a webserver.
+Download and extract the latest the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a webserver.
  
 ```sh
 wget https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip
 unzip homer.zip
 cd homer
-cp config.yml.dist config.yml
+cp assets/config.yml.dist assets/config.yml
 npx serve # or python -m http.server 8010 or apache, nginx ...
 ```
 

@@ -74,7 +74,7 @@ Great if you have a lot of services or a lot of tags!
 
 Homer doesn't yet provide a way to edit your configuration from inside Homer itself, but that doesnt mean it cant be done!
 
-You can setup and use [Code-Server](https://github.com/cdr/code-server) to edit your config.yml file from anywhere!
+You can setup and use [Code-Server](https://github.com/cdr/code-server) to edit your `config.yml` file from anywhere!
 
 If you're running Homer in docker, you can setup a Code-Server container and pass your homer config directory into it.
 Simply pass your homer config directory as and extra -v parameter to your code-server container:

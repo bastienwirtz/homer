@@ -156,7 +156,7 @@ export default {
     document.title = `${this.config.title} | ${this.config.subtitle}`;
   },
   methods: {
-    getConfig: function (path = "config.yml") {
+    getConfig: function (path = "assets/config.yml") {
       return fetch(path).then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
