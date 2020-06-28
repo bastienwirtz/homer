@@ -129,3 +129,11 @@ Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](h
 - `is-danger` (red)
 
 You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers/syntax/) for other options regarding size, style, or state.
+
+### PWA Icons
+
+In order to easily generate all required icon preset for the PWA to work, a tool like [vue-pwa-asset-generator](https://www.npmjs.com/package/vue-pwa-asset-generator) can be used:
+
+```bash
+npx vue-pwa-asset-generator -a {your_512x512_source_png} -o {your_output_folder}
+```

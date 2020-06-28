@@ -9,7 +9,7 @@ A dead simple static **HOM**epage for your serv**ER** to keep your s
 ervices on hand, from a simple `yaml` configuration file.
 
 ## [Live demo](https://homer-demo.netlify.app)  • [Chat](https://gitter.im/homer-dashboard/community)
-![screenshot](https://raw.github.com/bastienwirtz/homer/master/screenshot.png)
+![screenshot](https://raw.github.com/bastienwirtz/homer/master/docs/screenshot.png)
 
 ## Table of Contents
 - [Features](#features)
