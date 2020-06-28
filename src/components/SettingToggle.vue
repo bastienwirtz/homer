@@ -1,6 +1,6 @@
 <template>
   <a v-on:click="toggleSetting()" class="navbar-item is-inline-block-mobile">
-    <span><i :class="['fas', value ? icon : iconAlt]"></i></span>
+    <span><i :class="['fas', 'fa-fw', value ? icon : iconAlt]"></i></span>
     <slot></slot>
   </a>
 </template>

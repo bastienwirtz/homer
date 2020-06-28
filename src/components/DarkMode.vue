@@ -4,7 +4,7 @@
     aria-label="Toggle dark mode"
     class="navbar-item is-inline-block-mobile"
   >
-    <i class="fas fa-adjust"></i>
+    <i class="fas fa-fw fa-adjust"></i>
   </a>
 </template>
 
