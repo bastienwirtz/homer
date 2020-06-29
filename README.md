@@ -70,11 +70,40 @@ See [documentation](docs/configuration.md) for information about the configurati
 
 ### Using docker
 
+To launch container :
+
 ```sh
 docker run -p 8080:8080 -v /your/local/assets/:/www/assets b4bz/homer:latest
 ```
 
 Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
+
+### Using docker-compose
+
+The `docker-compose.yml` file must be edited to match your needs.
+Set the port and volume (equivalent to -p and -v arguments) :
+
+```yaml
+volumes:
+  - /your/local/assets/:/www/assets
+ports:
+  - 8080:8080
+```
+
+To launch container :
+
+```sh
+cd /path/to/docker-compose.yml
+docker-compose up -d
+```
+
+Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner, also in `docker-compose.yml` :
+
+```yaml
+environment:
+- UID=1000
+- GID=1000
+```
 
 ### Using the release tarball (prebuilt, ready to use)
 
