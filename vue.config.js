@@ -10,6 +10,9 @@ module.exports = {
   publicPath: "",
   pwa: {
     manifestPath: "assets/manifest.json",
+    manifestOptions: {
+      start_url: '../',
+    },
     appleMobileWebAppStatusBarStyle: "black",
     appleMobileWebAppCapable: "yes",
     name: "Homer Dashboard",
