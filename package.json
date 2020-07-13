@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
-    "bulma": "^0.8.2",
+    "@fortawesome/fontawesome-free": "^5.13.1",
+    "bulma": "^0.9.0",
     "core-js": "^3.6.4",
     "js-yaml": "^3.14.0",
     "lodash.merge": "^4.6.2",
@@ -17,19 +17,19 @@
     "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.1",
-    "@vue/cli-plugin-eslint": "~4.4.1",
-    "@vue/cli-plugin-pwa": "~4.4.1",
-    "@vue/cli-service": "~4.4.1",
+    "@vue/cli-plugin-babel": "~4.4.6",
+    "@vue/cli-plugin-eslint": "~4.4.6",
+    "@vue/cli-plugin-pwa": "~4.4.6",
+    "@vue/cli-service": "~4.4.6",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint": "^7.4.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
     "prettier": "^2.0.5",
     "raw-loader": "^4.0.1",
-    "sass": "^1.26.8",
-    "sass-loader": "^8.0.2",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
     "vue-template-compiler": "^2.6.11"
   }
 }
