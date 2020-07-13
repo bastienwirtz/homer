@@ -11,7 +11,7 @@ module.exports = {
   pwa: {
     manifestPath: "assets/manifest.json",
     manifestOptions: {
-      start_url: '../',
+      start_url: "../",
     },
     appleMobileWebAppStatusBarStyle: "black",
     appleMobileWebAppCapable: "yes",

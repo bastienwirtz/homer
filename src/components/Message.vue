@@ -3,7 +3,11 @@
     <div v-if="message.title" class="message-header">
       <p>{{ message.title }}</p>
     </div>
-    <div v-if="message.content" class="message-body" v-html="message.content"></div>
+    <div
+      v-if="message.content"
+      class="message-body"
+      v-html="message.content"
+    ></div>
   </article>
 </template>
 

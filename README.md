@@ -36,7 +36,7 @@
 </p>
 
 <p align="center">
-	<img src="https://raw.github.com/bastienwirtz/homer/master/docs/screenshot.png">
+	<img src="https://raw.github.com/bastienwirtz/homer/master/docs/screenshot.png" width="100%">
 </p>
 
 ## Table of Contents
