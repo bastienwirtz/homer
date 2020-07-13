@@ -150,7 +150,13 @@ export default {
   },
   created: async function () {
     const defaults = jsyaml.load(defaultConfig);
-    let config = await this.getConfig();
+    let config;
+    try {
+      config = await this.getConfig();
+    } catch (error) {
+      console.log(error);
+      config = this.handleErrors("⚠️ Error loading configuration", error);
+    }
     this.config = merge(defaults, config);
     this.services = this.config.services;
     document.title = `${this.config.title} | ${this.config.subtitle}`;
@@ -158,8 +164,13 @@ export default {
   methods: {
     getConfig: function (path = "assets/config.yml") {
       return fetch(path).then((response) => {
+        if (response.redirected) {
+          // This allows to work with authentication proxies.
+          window.location.href = response.url;
+          return;
+        }
         if (!response.ok) {
-          throw Error(response.statusText);
+          throw Error(`${response.statusText}: ${response.body}`);
         }
 
         const that = this;
@@ -173,9 +184,6 @@ export default {
               return that.getConfig(config.externalConfig);
             }
             return config;
-          })
-          .catch((error) => {
-            return this.handleErrors("⚠️ Error loading configuration", error);
           });
       });
     },
