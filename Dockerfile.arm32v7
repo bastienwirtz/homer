@@ -28,7 +28,7 @@ ENV UID 911
 ENV PORT 8080
 
 RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
-    apk add -U darkhttpd su-exec && \
+    apk add -U --no-cache darkhttpd su-exec && \
     rm /usr/bin/qemu-arm-static
 
 COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
