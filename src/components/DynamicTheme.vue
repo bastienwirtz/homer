@@ -25,7 +25,13 @@ export default {
     getVars: function (theme) {
       let vars = [];
       for (const themeVars in theme) {
-        vars.push(`--${themeVars}: ${theme[themeVars]}`);
+        let value = `${theme[themeVars]}`;
+        if (!value) {
+          value = "inital";
+        } else if (themeVars == "background-image") {
+          value = `url(${theme[themeVars]})`;
+        }
+        vars.push(`--${themeVars}: ${value}`);
       }
       return vars.join(";");
     },

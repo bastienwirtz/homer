@@ -42,6 +42,7 @@ colors:
     text-subtitle: "#424242"
     card-shadow: rgba(0, 0, 0, 0.1)
     link-hover: "#363636"
+    background-image: "assets/your/light/bg.png"
   dark:
     highlight-primary: "#3367d6"
     highlight-secondary: "#4285f4"
@@ -54,6 +55,7 @@ colors:
     text-subtitle: "#f5f5f5"
     card-shadow: rgba(0, 0, 0, 0.4)
     link-hover: "#ffdd57"
+    background-image: "assets/your/dark/bg.png"
 
 # Optional message
 message:
