@@ -160,6 +160,9 @@ export default {
     this.config = merge(defaults, config);
     this.services = this.config.services;
     document.title = `${this.config.title} | ${this.config.subtitle}`;
+    if (this.config.stylesheet) {
+      this.createStylesheet(`@import "${this.config.stylesheet}";`);
+    }
   },
   methods: {
     getConfig: function (path = "assets/config.yml") {
@@ -234,6 +237,11 @@ export default {
           content: content,
         },
       };
+    },
+    createStylesheet: function(css) {
+      let style = document.createElement('style');
+      style.appendChild(document.createTextNode(css));
+      document.head.appendChild(style);
     },
   },
 };
