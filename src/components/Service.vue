@@ -2,7 +2,10 @@
   <div>
     <div class="card">
       <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
+        <div
+          class="card-content"
+          :style="(item.color && item.color.background) ? {backgroundColor: item.color.background} : null"
+        >
           <div class="media">
             <div v-if="item.logo" class="media-left">
               <figure class="image is-48x48">
@@ -15,8 +18,14 @@
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p
+                class="title is-4"
+                :style="(item.color && item.color.text) ? {color: item.color.text} : null"
+              >{{ item.name }}</p>
+              <p
+                class="subtitle is-6"
+                :style="(item.color && item.color.text) ? {color: item.color.text} : null"
+              >{{ item.subtitle }}</p>
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
