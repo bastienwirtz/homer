@@ -106,6 +106,9 @@ services:
         tag: "other"
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optionnal html a tag target attribute
+        # colors: # optional custom colors for card
+        #   background: #66a5e2
+        #   text: #000000
 ```
 
 If you choose to fetch message information from an endpoint, the output format should be:
