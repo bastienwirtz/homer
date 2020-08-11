@@ -159,7 +159,7 @@ export default {
     }
     this.config = merge(defaults, config);
     this.services = this.config.services;
-    document.title = `${this.config.title} | ${this.config.subtitle}`;
+    document.title = this.config.documentTitle || `${this.config.title} | ${this.config.subtitle}`;
     if (this.config.stylesheet) {
       let stylesheet = "";
       for (const file of this.config.stylesheet) {
