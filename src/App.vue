@@ -161,7 +161,11 @@ export default {
     this.services = this.config.services;
     document.title = `${this.config.title} | ${this.config.subtitle}`;
     if (this.config.stylesheet) {
-      this.createStylesheet(`@import "${this.config.stylesheet}";`);
+      let stylesheet = '';
+      for (const file of this.config.stylesheet) {
+        stylesheet += `@import "${file}";`;
+      }
+      this.createStylesheet(stylesheet);
     }
   },
   methods: {
