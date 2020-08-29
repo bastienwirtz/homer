@@ -5,9 +5,9 @@ Here is a collection of neat tips and tricks that Homer users have come up with!
 ## Use Homer as a custom "new tab" page
 #### `by @vosdev`
 
-This [extension](https://addons.mozilla.org/firefox/addon/custom-new-tab-page) allows you to have your homer dashboard in your new tab page, while leaving focus on the address bar meaning you can still type right away if you want to search or go to a page that is not on your homer dash.
+These extensions for [Firefox](https://addons.mozilla.org/firefox/addon/custom-new-tab-page) and [Chrome & Friends](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) allow you to have your homer dashboard in your new tab page, while leaving focus on the address bar meaning you can still type right away if you want to search or go to a page that is not on your homer dash.
 
-The extension loads Homer in an iframe on your new tab page, meaning you have to add `target: '_top'` to each of your items.
+The firefox extension loads Homer in an iframe on your new tab page, meaning you have to add `target: '_top'` to each of your items.
 
 ```yaml
 - name: "Reddit"
