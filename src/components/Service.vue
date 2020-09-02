@@ -4,7 +4,7 @@
       <a :href="item.url" :target="item.target" rel="noreferrer">
         <div
           class="card-content"
-          :style="(item.colors && item.colors.background) ? {backgroundColor: item.colors.background} : null"
+          :class="item.class"
         >
           <div class="media">
             <div v-if="item.logo" class="media-left">
@@ -20,11 +20,11 @@
             <div class="media-content">
               <p
                 class="title is-4"
-                :style="(item.colors && item.colors.text) ? {color: item.colors.text} : null"
+                :class="item.class"
               >{{ item.name }}</p>
               <p
                 class="subtitle is-6"
-                :style="(item.colors && item.colors.text) ? {color: item.colors.text} : null"
+                :class="item.class"
               >{{ item.subtitle }}</p>
             </div>
           </div>
