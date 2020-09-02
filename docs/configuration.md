@@ -26,6 +26,11 @@ connectivityCheck: true # whether you want to display a message when the apps ar
 # Optional theming
 theme: default # 'default' or one of the theme available in 'src/assets/themes'.
 
+# Optional custom stylesheet
+# Will load custom CSS files. Especially useful for custom icon sets.
+# stylesheet:
+#   - "assets/custom.css"
+
 # Here is the exaustive list of customization parameters
 # However all value are optional and will fallback to default if not set.
 # if you want to change only some of the colors, feel free to remove all unused key.

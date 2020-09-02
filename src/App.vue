@@ -14,7 +14,7 @@
         <div v-cloak class="container">
           <div class="logo">
             <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
-            <i v-if="config.icon" :class="['fa-fw', config.icon]"></i>
+            <i v-if="config.icon" :class="config.icon"></i>
           </div>
           <div class="dashboard-title">
             <span class="headline">{{ config.subtitle }}</span>
@@ -160,6 +160,13 @@ export default {
     this.config = merge(defaults, config);
     this.services = this.config.services;
     document.title = `${this.config.title} | ${this.config.subtitle}`;
+    if (this.config.stylesheet) {
+      let stylesheet = '';
+      for (const file of this.config.stylesheet) {
+        stylesheet += `@import "${file}";`;
+      }
+      this.createStylesheet(stylesheet);
+    }
   },
   methods: {
     getConfig: function (path = "assets/config.yml") {
@@ -234,6 +241,11 @@ export default {
           content: content,
         },
       };
+    },
+    createStylesheet: function(css) {
+      let style = document.createElement('style');
+      style.appendChild(document.createTextNode(css));
+      document.head.appendChild(style);
     },
   },
 };
