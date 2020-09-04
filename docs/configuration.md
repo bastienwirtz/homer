@@ -110,7 +110,8 @@ services:
         subtitle: "Another example"
         tag: "other"
         url: "https://www.reddit.com/r/selfhosted/"
-        target: "_blank" # optionnal html a tag target attribute
+        target: "_blank" # optional html a tag target attribute
+        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
 ```
 
 If you choose to fetch message information from an endpoint, the output format should be:

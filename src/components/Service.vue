@@ -2,7 +2,10 @@
   <div>
     <div class="card">
       <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
+        <div
+          class="card-content"
+          :class="item.class"
+        >
           <div class="media">
             <div v-if="item.logo" class="media-left">
               <figure class="image is-48x48">
@@ -15,8 +18,14 @@
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p
+                class="title is-4"
+                :class="item.class"
+              >{{ item.name }}</p>
+              <p
+                class="subtitle is-6"
+                :class="item.class"
+              >{{ item.subtitle }}</p>
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
