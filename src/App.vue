@@ -161,7 +161,7 @@ export default {
     this.services = this.config.services;
     document.title = `${this.config.title} | ${this.config.subtitle}`;
     if (this.config.stylesheet) {
-      let stylesheet = '';
+      let stylesheet = "";
       for (const file of this.config.stylesheet) {
         stylesheet += `@import "${file}";`;
       }
@@ -242,8 +242,8 @@ export default {
         },
       };
     },
-    createStylesheet: function(css) {
-      let style = document.createElement('style');
+    createStylesheet: function (css) {
+      let style = document.createElement("style");
       style.appendChild(document.createTextNode(css));
       document.head.appendChild(style);
     },

@@ -13,7 +13,7 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 
 title: "App dashboard"
 subtitle: "Homer"
-logo: "assets/homer.png"
+logo: "assets/logo.png"
 # Alternatively a fa icon can be provided:
 # icon: "fas fa-skull-crossbones"
 
