@@ -9,7 +9,7 @@ logo: false
 
 header: true
 
-# Optionnal theme customization
+# Optional theme customization
 theme: sui
 colors:
   light:
