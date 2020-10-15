@@ -37,4 +37,8 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.media-left img {
+  max-height: 100%;
+}
+</style>
