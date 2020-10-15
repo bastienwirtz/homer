@@ -42,7 +42,8 @@ colors:
 message:
   #url: https://b4bz.io
   style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
-  title: "👋 Demo !"
+  title: "Demo !"
+  icon: "fa fa-grin"
   content: "This is a dummy homepage demo. <br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
 
 # Optional navbar

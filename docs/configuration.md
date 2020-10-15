@@ -68,6 +68,7 @@ message:
   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
   style: "is-warning"
   title: "Optional message!"
+  icon: "fa fa-exclamation-triangle"
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 # Optional navbar

@@ -1,7 +1,10 @@
 <template>
   <article v-if="show" class="message" :class="message.style">
-    <div v-if="message.title" class="message-header">
-      <p>{{ message.title }}</p>
+    <div v-if="message.title || message.icon" class="message-header">
+      <p>
+        <i v-if="message.icon" :class="`fa-fw ${message.icon}`"></i>
+        {{ message.title }}
+      </p>
     </div>
     <div
       v-if="message.content"
