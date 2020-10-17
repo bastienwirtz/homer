@@ -13,17 +13,17 @@
   text-overflow: ellipsis;
 }
 
-html {
+html, body, body #app {
   height: 100%;
+  background-color: var(--background);
 }
 
 body {
   font-family: "Raleway", sans-serif;
-  height: 100%;
 
   #app {
+    height: auto;
     min-height: 100%;
-    background-color: var(--background);
     background-image: var(--background-image);
     background-size: cover;
     background-position: center;
