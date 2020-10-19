@@ -86,7 +86,7 @@ links:
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "Application"
-    icon: "fa fa-code-fork"
+    icon: "fas fa-code-branch"
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
