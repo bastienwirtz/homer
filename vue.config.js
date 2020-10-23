@@ -1,3 +1,5 @@
+const manifestOptions = require("./public/assets/manifest.json");
+
 module.exports = {
   chainWebpack: (config) => {
     config.module
@@ -12,9 +14,9 @@ module.exports = {
     manifestPath: "assets/manifest.json",
     appleMobileWebAppStatusBarStyle: "black",
     appleMobileWebAppCapable: "yes",
-    name: "Homer Dashboard",
-    themeColor: "#3367D6",
-    manifestOptions: require('./public/assets/manifest.json'),
+    name: manifestOptions.name,
+    themeColor: manifestOptions.theme_color,
+    manifestOptions,
     iconPaths: {
       favicon32: "assets/icons/favicon-32x32.png",
       favicon16: "assets/icons/favicon-16x16.png",
