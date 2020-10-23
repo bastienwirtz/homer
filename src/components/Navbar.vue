@@ -9,7 +9,7 @@
             aria-expanded="false"
             class="navbar-burger"
             :class="{ 'is-active': showMenu }"
-            v-on:click="$emit('navbar:toggle')"
+            v-on:click="$emit('navbar-toggle')"
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
