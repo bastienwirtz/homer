@@ -1,6 +1,6 @@
 <template>
   <a v-on:click="toggleSetting()" class="navbar-item is-inline-block-mobile">
-    <span><i :class="['fas', 'fa-fw', value ? icon : iconAlt]"></i></span>
+    <span><i :class="['fas', 'fa-fw', value ? icon : secondaryIcon]"></i></span>
     <slot></slot>
   </a>
 </template>
@@ -15,13 +15,12 @@ export default {
   },
   data: function () {
     return {
+      secondaryIcon: null,
       value: true,
     };
   },
   created: function () {
-    if (!this.iconAlt) {
-      this.iconAlt = this.icon;
-    }
+    this.secondaryIcon = this.iconAlt || this.icon;
 
     if (this.name in localStorage) {
       this.value = JSON.parse(localStorage[this.name]);

@@ -26,7 +26,7 @@
       <Navbar
         :open="showMenu"
         :links="config.links"
-        @navbar:toggle="showMenu = !showMenu"
+        @navbar-toggle="showMenu = !showMenu"
       >
         <DarkMode @updated="isDark = $event" />
 
@@ -40,9 +40,9 @@
         <SearchInput
           class="navbar-item is-inline-block-mobile"
           @input="filterServices"
-          @search:focus="showMenu = true"
-          @search:open="navigateToFirstService"
-          @search:cancel="filterServices"
+          @search-focus="showMenu = true"
+          @search-open="navigateToFirstService"
+          @search-cancel="filterServices"
         />
       </Navbar>
     </div>
@@ -51,7 +51,7 @@
       <div v-cloak class="container">
         <ConnectivityChecker
           v-if="config.connectivityCheck"
-          @network:status-update="offline = $event"
+          @network-status-update="offline = $event"
         />
         <div v-if="!offline">
           <!-- Optional messages -->

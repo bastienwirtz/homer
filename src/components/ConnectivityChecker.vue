@@ -44,7 +44,7 @@ export default {
           that.offline = true;
         })
         .finally(function () {
-          that.$emit("network:status-update", that.offline);
+          that.$emit("network-status-update", that.offline);
         });
     },
   },
