@@ -6,8 +6,8 @@
       ref="search"
       :value="value"
       @input="$emit('input', $event.target.value.toLowerCase())"
-      @keyup.enter.exact="$emit('search:open')"
-      @keyup.alt.enter="$emit('search:open', '_blank')"
+      @keyup.enter.exact="$emit('search-open')"
+      @keyup.alt.enter="$emit('search-open', '_blank')"
     />
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     this._keyListener = function (event) {
       if (event.key === "/") {
         event.preventDefault();
-        this.$emit("search:focus");
+        this.$emit("search-focus");
         this.$nextTick(() => {
           this.$refs.search.focus();
         });
@@ -28,7 +28,7 @@ export default {
       if (event.key === "Escape") {
         this.$refs.search.value = "";
         this.$refs.search.blur();
-        this.$emit("search:cancel");
+        this.$emit("search-cancel");
       }
     };
     document.addEventListener("keydown", this._keyListener.bind(this));
