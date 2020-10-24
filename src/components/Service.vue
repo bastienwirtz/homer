@@ -1,44 +1,26 @@
 <template>
-  <div>
-    <div class="card" :class="item.class">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
-          <div class="media">
-            <div v-if="item.logo" class="media-left">
-              <figure class="image is-48x48">
-                <img :src="item.logo" :alt="`${item.name} logo`" />
-              </figure>
-            </div>
-            <div v-if="item.icon" class="media-left">
-              <figure class="image is-48x48">
-                <i style="font-size: 35px;" :class="['fa-fw', item.icon]"></i>
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
-            </div>
-          </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
-            <strong class="tag-text">#{{ item.tag }}</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <component v-bind:is="component" :item="item"></component>
 </template>
 
 <script>
+import Generic from "./services/Generic.vue";
+
 export default {
   name: "Service",
+  components: {
+    Generic,
+  },
   props: {
     item: Object,
   },
+  computed: {
+    component() {
+      const type = this.item.type || "Generic";
+      if (type == "Generic") {
+        return Generic;
+      }
+      return () => import(`./services/${type}.vue`);
+    },
+  },
 };
 </script>
-
-<style scoped lang="scss">
-.media-left img {
-  max-height: 100%;
-}
-</style>

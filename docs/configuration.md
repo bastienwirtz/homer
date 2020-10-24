@@ -107,11 +107,12 @@ services:
   - name: "Other group"
     icon: "fas fa-heartbeat"
     items:
-      - name: "Another app"
+      - name: "Pi-hole"
         logo: "assets/tools/sample.png"
-        subtitle: "Another example"
+        subtitle: "Network-wide Ad Blocking"
         tag: "other"
-        url: "https://www.reddit.com/r/selfhosted/"
+        url: "http://192.168.0.151/admin"
+        type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
         target: "_blank" # optional html a tag target attribute
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
 ```
