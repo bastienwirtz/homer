@@ -6,10 +6,10 @@ First off, thank you for considering contributing to Homer!
 
 ### Project philosophy
 
-Homer is meant to be a light and very simple dashboard that keeps all your usefull utilities at hands. The few features implemented in Homer focus on
+Homer is meant to be a light and very simple dashboard that keeps all your useful utilities at hands. The few features implemented in Homer focus on
 UX and usability. If you are looking for a full featured dashboard, there is tons of great stuff out there like https://heimdall.site/, https://github.com/rmountjoy92/DashMachine or https://organizr.app/.
 
-- Configuration is stored in a simple config file, avoiding the need for a backend/database while making possible to use versionning or [config template](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html).
+- Configuration is stored in a simple config file, avoiding the need for a backend/database while making possible to use versioning or [config template](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html).
 - Only modern browsers are supported, feel free to use any JS features without any polyfill as soon as the latest version of the major browsers supports them.
 
 ### Roadmap
@@ -21,7 +21,7 @@ Feel free to open an issue if you have any question.
 
 ### Code of conduct and guidelines
 
-First of all, we expect everyone (contributors and maintainers alike) to respect the [Code of conduct](https://github.com/bastienwirtz/homer/blob/master/CODE_OF_CONDUCT.md). It is not a recomandation, it is mandatory.
+First of all, we expect everyone (contributors and maintainers alike) to respect the [Code of conduct](https://github.com/bastienwirtz/homer/blob/master/CODE_OF_CONDUCT.md). It is not a recommendation, it is mandatory.
 
 For all contributions, please respect the following guidelines:
 

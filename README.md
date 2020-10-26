@@ -45,7 +45,7 @@
 - [Configuration](docs/configuration.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
 - [Roadmap](#roadmap) 
-- [Developement](docs/developement.md)
+- [Development](docs/development.md)
 
 
 ## Features
