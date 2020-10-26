@@ -97,6 +97,8 @@ services:
         tag: "app"
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
+        info: "https://github.com/bastienwirtz/homer/tree/main/docs" # optional link to documentation
+        infotarget: "_blank" # same as target, but for icon link
       - name: "Another one"
         logo: "assets/tools/sample2.png"
         subtitle: "Another application"
