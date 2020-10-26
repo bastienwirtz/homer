@@ -11,23 +11,21 @@
 <script>
 export default {
   name: "Darkmode",
-  data: function () {
-    return {
-      isDark: null,
-    };
-  },
+  props: ["isDark"],
   created: function () {
-    this.isDark =
+    var isDark =
       "overrideDark" in localStorage
         ? JSON.parse(localStorage.overrideDark)
-        : matchMedia("(prefers-color-scheme: dark)").matches;
-    this.$emit("updated", this.isDark);
+        : this.isDark === null
+        ? matchMedia("(prefers-color-scheme: dark)").matches
+        : this.isDark;
+    this.$emit("updated", isDark);
   },
   methods: {
     toggleTheme: function () {
-      this.isDark = !this.isDark;
-      localStorage.overrideDark = this.isDark;
-      this.$emit("updated", this.isDark);
+      var isDark = !this.isDark;
+      localStorage.overrideDark = isDark;
+      this.$emit("updated", isDark);
     },
   },
 };

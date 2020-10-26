@@ -28,7 +28,7 @@
         :links="config.links"
         @navbar-toggle="showMenu = !showMenu"
       >
-        <DarkMode @updated="isDark = $event" />
+        <DarkMode :isDark="this.isDark" @updated="isDark = $event" />
 
         <LayoutToggle
           @updated="vlayout = $event"
@@ -159,6 +159,8 @@ export default {
     }
     this.config = merge(defaults, config);
     this.services = this.config.services;
+    this.isDark = this.config.theme_use_dark;
+    this.vlayout = this.config.vlayout;
     document.title =
       this.config.documentTitle ||
       `${this.config.title} | ${this.config.subtitle}`;
