@@ -49,6 +49,14 @@ body {
       &:hover {
         background-color: var(--card-background);
       }
+     
+      .linkoverlay {
+        position:absolute;
+        left:0;
+        top:0;
+        bottom:0;
+        right:0;
+      }
     }
 
     .message {
@@ -196,10 +204,20 @@ body {
       }
     }
   }
-
+  .media-left {
+    pointer-events: none;
+    z-index: 1;
+  }
   .media-content {
     overflow: hidden;
     text-overflow: inherit;
+  }
+  .infolink {
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0;
   }
 
   .tag {
