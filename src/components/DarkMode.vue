@@ -11,7 +11,9 @@
 <script>
 export default {
   name: "Darkmode",
-  props: ["isDark"],
+  props: {
+    isDark: Boolean,
+  },
   created: function () {
     let isDark =
       "overrideDark" in localStorage
