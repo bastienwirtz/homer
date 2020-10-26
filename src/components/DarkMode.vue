@@ -13,7 +13,7 @@ export default {
   name: "Darkmode",
   props: ["isDark"],
   created: function () {
-    var isDark =
+    let isDark =
       "overrideDark" in localStorage
         ? JSON.parse(localStorage.overrideDark)
         : this.isDark === null
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     toggleTheme: function () {
-      var isDark = !this.isDark;
+      let isDark = !this.isDark;
       localStorage.overrideDark = isDark;
       this.$emit("updated", isDark);
     },

@@ -31,6 +31,7 @@
         <DarkMode :isDark="this.isDark" @updated="isDark = $event" />
 
         <LayoutToggle
+          :vlayout="this.vlayout"
           @updated="vlayout = $event"
           name="vlayout"
           icon="fa-list"
@@ -145,7 +146,7 @@ export default {
       offline: false,
       services: null,
       showMenu: false,
-      vlayout: true,
+      vlayout: null,
     };
   },
   created: async function () {

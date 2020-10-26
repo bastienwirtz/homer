@@ -1,6 +1,6 @@
 <template>
-  <a v-on:click="toggleSetting()" class="navbar-item is-inline-block-mobile">
-    <span><i :class="['fas', 'fa-fw', value ? icon : secondaryIcon]"></i></span>
+  <a v-on:click="toggleLayout()" class="navbar-item is-inline-block-mobile">
+    <span><i :class="['fas', 'fa-fw', vlayout ? icon : secondaryIcon]"></i></span>
     <slot></slot>
   </a>
 </template>
@@ -12,27 +12,31 @@ export default {
     name: String,
     icon: String,
     iconAlt: String,
+    vlayout: Boolean,
   },
   data: function () {
     return {
       secondaryIcon: null,
-      value: true,
     };
   },
   created: function () {
     this.secondaryIcon = this.iconAlt || this.icon;
-
+    let vlayout;
     if (this.name in localStorage) {
-      this.value = JSON.parse(localStorage[this.name]);
+      vlayout = JSON.parse(localStorage[this.name]);
+    } else {
+	vlayout = this.vlayout === null 
+        ? true 
+        : this.vlayout;
     }
 
-    this.$emit("updated", this.value);
+    this.$emit("updated", vlayout);
   },
   methods: {
-    toggleSetting: function () {
-      this.value = !this.value;
-      localStorage[this.name] = this.value;
-      this.$emit("updated", this.value);
+    toggleLayout: function () {
+      let vlayout = !this.vlayout;
+      localStorage[this.name] = vlayout;
+      this.$emit("updated", vlayout);
     },
   },
 };
