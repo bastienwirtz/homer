@@ -25,7 +25,7 @@ export default {
       for (const themeVars in theme) {
         let value = `${theme[themeVars]}`;
         if (!value) {
-          value = "inital";
+          value = "initial";
         } else if (themeVars == "background-image") {
           value = `url(${theme[themeVars]})`;
         }
