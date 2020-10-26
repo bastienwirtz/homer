@@ -3,7 +3,6 @@ export default {};
 </script>
 
 <style></style>
-*/
 
 <script>
 export default {};
@@ -29,7 +28,7 @@ export default {};
           </div>
           <div v-if="item.icon" class="media-left">
             <figure class="image is-48x48">
-              <i style="font-size: 35px;" :class="['fa-fw', item.icon]"></i>
+              <i class="thirty-five" :class="['fa-fw', item.icon]"></i>
             </figure>
           </div>
           <div class="media-content">
@@ -37,7 +36,8 @@ export default {};
             <p class="subtitle is-6">{{ item.subtitle }}</p>
           </div>
         </div>
-        <a v-if="item.info"
+        <a
+          v-if="item.info"
           :href="item.info"
           :target="item.infotarget"
           rel="noreferrer"
