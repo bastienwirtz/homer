@@ -22,10 +22,12 @@ header: true # Set to false to hide the header
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+vlayout: true # default to the vertical layout
 connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
 # Optional theming
 theme: default # 'default' or one of the theme available in 'src/assets/themes'.
+theme_use_dark: false # true or false, useful for overriding browser default in new sessions
 
 # Optional custom stylesheet
 # Will load custom CSS files. Especially useful for custom icon sets.
@@ -97,6 +99,8 @@ services:
         tag: "app"
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
+        info: "https://github.com/bastienwirtz/homer/tree/main/docs" # optional link to documentation
+        infotarget: "_blank" # same as target, but for icon link
       - name: "Another one"
         logo: "assets/tools/sample2.png"
         subtitle: "Another application"
