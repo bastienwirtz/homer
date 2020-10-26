@@ -30,7 +30,7 @@
       >
         <DarkMode @updated="isDark = $event" />
 
-        <SettingToggle
+        <LayoutToggle
           @updated="vlayout = $event"
           name="vlayout"
           icon="fa-list"
@@ -119,7 +119,7 @@ import ConnectivityChecker from "./components/ConnectivityChecker.vue";
 import Service from "./components/Service.vue";
 import Message from "./components/Message.vue";
 import SearchInput from "./components/SearchInput.vue";
-import SettingToggle from "./components/SettingToggle.vue";
+import LayoutToggle from "./components/LayoutToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
 
@@ -128,24 +128,24 @@ import defaultConfig from "./assets/defaults.yml";
 export default {
   name: "App",
   components: {
-    Navbar,
     ConnectivityChecker,
-    Service,
-    Message,
-    SearchInput,
-    SettingToggle,
     DarkMode,
     DynamicTheme,
+    Message,
+    Navbar,
+    SearchInput,
+    Service,
+    LayoutToggle,
   },
   data: function () {
     return {
       config: null,
-      services: null,
-      offline: false,
       filter: "",
-      vlayout: true,
       isDark: null,
+      offline: false,
+      services: null,
       showMenu: false,
+      vlayout: true,
     };
   },
   created: async function () {

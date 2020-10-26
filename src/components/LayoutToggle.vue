@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "SettingToggle",
+  name: "LayoutToggle",
   props: {
     name: String,
     icon: String,
