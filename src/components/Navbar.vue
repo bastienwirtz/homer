@@ -21,8 +21,8 @@
             <a
               class="navbar-item"
               rel="noreferrer"
-              v-for="link in links"
-              :key="link.url"
+              v-for="(link, key) in links"
+              :key="key"
               :href="link.url"
               :target="link.target"
             >
