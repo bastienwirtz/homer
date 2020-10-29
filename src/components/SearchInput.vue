@@ -2,6 +2,7 @@
   <div class="search-bar">
     <label for="search" class="search-label"></label>
     <input
+      id="searchBox"
       type="text"
       ref="search"
       :value="value"

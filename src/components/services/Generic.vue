@@ -31,7 +31,12 @@ export default {};
               <p class="subtitle is-6">{{ item.subtitle }}</p>
             </div>
           </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
+          <div
+            v-on:click="filterTag()"
+            class="tag"
+            :class="item.tagstyle"
+            v-if="item.tag"
+          >
             <strong class="tag-text">#{{ item.tag }}</strong>
           </div>
         </div>
@@ -45,6 +50,11 @@ export default {
   name: "Generic",
   props: {
     item: Object,
+  },
+  methods: {
+    filterTag: function () {
+      this.$emit("filter", this.item.tag.toLowerCase());
+    },
   },
 };
 </script>

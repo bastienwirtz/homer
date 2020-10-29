@@ -1,5 +1,5 @@
 <template>
-  <component v-bind:is="component" :item="item"></component>
+  <component v-on="$listeners" v-bind:is="component" :item="item"></component>
 </template>
 
 <script>

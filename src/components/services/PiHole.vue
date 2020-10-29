@@ -22,7 +22,12 @@
               {{ status.status }}
             </div>
           </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
+          <div
+            v-on:click="filterTag()"
+            class="tag"
+            :class="item.tagstyle"
+            v-if="item.tag"
+          >
             <strong class="tag-text">#{{ item.tag }}</strong>
           </div>
         </div>
@@ -50,6 +55,9 @@ export default {
       this.status = await fetch(`${this.item.url}/api.php`).then((response) =>
         response.json()
       );
+    },
+    filterTag: function () {
+      this.$emit("filter", this.item.tag.toLowerCase());
     },
   },
 };
