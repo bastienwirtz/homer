@@ -24,7 +24,7 @@
           </div>
           <div
             v-on:click="filterTag()"
-            class="tag"
+            class="tag is-clickable"
             :class="item.tagstyle"
             v-if="item.tag"
           >
