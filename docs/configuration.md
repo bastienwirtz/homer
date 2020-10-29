@@ -115,6 +115,7 @@ services:
         type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
         target: "_blank" # optional html a tag target attribute
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
+        # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
 If you choose to fetch message information from an endpoint, the output format should be:
