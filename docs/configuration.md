@@ -25,14 +25,14 @@ columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
 connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
 # Optional theming
-theme: default # 'default' or one of the theme available in 'src/assets/themes'.
+theme: default # 'default' or one of the themes available in 'src/assets/themes'.
 
 # Optional custom stylesheet
 # Will load custom CSS files. Especially useful for custom icon sets.
 # stylesheet:
 #   - "assets/custom.css"
 
-# Here is the exaustive list of customization parameters
+# Here is the exhaustive list of customization parameters
 # However all value are optional and will fallback to default if not set.
 # if you want to change only some of the colors, feel free to remove all unused key.
 colors:
@@ -83,7 +83,7 @@ links:
     url: "https://github.com/bastienwirtz/homer"
 
 # Services
-# First level array represent a group.
+# First level array represents a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "Application"

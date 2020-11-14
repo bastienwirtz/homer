@@ -8,7 +8,7 @@
 </h1>
 
 <h4 align="center">
-	A dead simple static <strong>HOM</strong>epage for your serv<strong>ER</strong> to keep your services on hand, from a simple `yaml` configuration file.
+	A dead simple static <strong>HOM</strong>epage for your serv<strong>ER</strong> to keep your services on hand, from a simple <code>yaml</code> configuration file.
 </h4>
 
 <p align="center">
@@ -44,7 +44,7 @@
 - [Getting started](#getting-started)
 - [Configuration](docs/configuration.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
-- [Roadmap](#roadmap) 
+- [Roadmap](#roadmap)
 - [Development](docs/development.md)
 
 
@@ -52,7 +52,7 @@
 - [yaml](http://yaml.org/) file configuration
 - Installable (pwa)
 - Search
-- Grouping 
+- Grouping
 - Theme customization
 - Offline heathcheck
 - keyboard shortcuts:
@@ -70,7 +70,7 @@ See [documentation](docs/configuration.md) for information about the configurati
 
 ### Using docker
 
-To launch container :
+To launch container:
 
 ```sh
 docker run -p 8080:8080 -v /your/local/assets/:/www/assets b4bz/homer:latest
@@ -81,7 +81,7 @@ Default assets will be automatically installed in the `/www/assets` directory. U
 ### Using docker-compose
 
 The `docker-compose.yml` file must be edited to match your needs.
-Set the port and volume (equivalent to -p and -v arguments) :
+Set the port and volume (equivalent to `-p` and `-v` arguments):
 
 ```yaml
 volumes:
@@ -90,25 +90,25 @@ ports:
   - 8080:8080
 ```
 
-To launch container :
+To launch container:
 
 ```sh
 cd /path/to/docker-compose.yml
 docker-compose up -d
 ```
 
-Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner, also in `docker-compose.yml` :
+Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner, also in `docker-compose.yml`:
 
 ```yaml
 environment:
-- UID=1000
-- GID=1000
+  - UID=1000
+  - GID=1000
 ```
 
 ### Using the release tarball (prebuilt, ready to use)
 
-Download and extract the latest the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a webserver.
- 
+Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a webserver.
+
 ```sh
 wget https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip
 unzip homer.zip

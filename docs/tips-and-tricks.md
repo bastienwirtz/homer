@@ -48,36 +48,36 @@ and then simply reference these pre-defined (anchored) tags in each item like so
 ```yaml
 - name: "VS Code"
   logo: "/assets/vscode.png"
-  subtitle: "Develope Code Anywhere, On Anything!"
-  <<: *App # Regerence to the predefined "App" Tag
+  subtitle: "Develop Code Anywhere, On Anything!"
+  <<: *App # Reference to the predefined "App" Tag
   url: "https://vscode.example.com/"
   target: "_blank" # optional html tag target attribute
 ````
 
-Then when Homer reads your config, it will substitute your anchors automatically, the the above example is equal to:
+Then when Homer reads your config, it will substitute your anchors automatically, the above example is equal to:
 
 ```yaml
 - name: "VS Code"
   logo: "/assets/vscode.png"
-  subtitle: "Develope Code Anywhere, On Anything!"
+  subtitle: "Develop Code Anywhere, On Anything!"
   tag: "App"
   tagstyle: "is-medium is-info"
   url: "https://vscode.example.com/"
   target: "_blank" # optional html tag target attribute
 ```
 
-The end result is that if you want to update the name or style of any particular tag, just update it once, in the tags section! 
+The end result is that if you want to update the name or style of any particular tag, just update it once, in the tags section!
 Great if you have a lot of services or a lot of tags!  
 
 ## Remotely edit your config with Code Server
 #### `by @JamiePhonic`
 
-Homer doesn't yet provide a way to edit your configuration from inside Homer itself, but that doesn't mean it cant be done!
+Homer doesn't yet provide a way to edit your configuration from inside Homer itself, but that doesn't mean it can't be done!
 
 You can setup and use [Code-Server](https://github.com/cdr/code-server) to edit your `config.yml` file from anywhere!
 
 If you're running Homer in docker, you can setup a Code-Server container and pass your homer config directory into it.
-Simply pass your homer config directory as and extra -v parameter to your code-server container:
+Simply pass your homer config directory as an extra -v parameter to your code-server container:
 ```
 -v '/your/local/homer/config-dir/':'/config/homer':'rw'
 ```
@@ -85,7 +85,7 @@ This will map your homer config directory (For example, /docker/appdata/homer/) 
 
 As a bonus, Code-Server puts the "current folder" as a parameter in the URL bar, so you could add a `links:` entry in Homer that points to your code-server instance with the directory pre-filled for essentially 1 click editing!
 
-For example: 
+For example:
 ```yml
 links:
   - name: Edit config
