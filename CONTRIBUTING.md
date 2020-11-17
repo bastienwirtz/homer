@@ -26,7 +26,7 @@ First of all, we expect everyone (contributors and maintainers alike) to respect
 For all contributions, please respect the following guidelines:
 
 * Each pull request should implement ONE feature or bugfix. If you want to add or fix more than one thing, submit more than one pull request.
-* Do not commit changes to files that are irrelevant to your feature or bugfix (eg: `.gitignore`).
+* Do not commit changes to files that are irrelevant to your feature or bugfix (e.g. `.gitignore`).
 * Do not add unnecessary dependencies.
 * Be aware that the pull request review process is not immediate, and is generally proportional to the size of the pull request.
 
@@ -34,7 +34,7 @@ For all contributions, please respect the following guidelines:
 
 ### Discuss about ideas
 
-If you want to add a feature, it's often best to talk about it before starting working on it and submitting a pull request. It's not mandatory at all, but
+If you want to add a feature, it's often best to talk about it before starting to work on it and submitting a pull request. It's not mandatory at all, but
 feel free to open an issue to present your idea.
 
 ### How to submit a contribution
