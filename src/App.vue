@@ -199,6 +199,7 @@ export default {
     matchesFilter: function (item) {
       return (
         item.name.toLowerCase().includes(this.filter) ||
+        (item.subtitle && item.subtitle.toLowerCase().includes(this.filter)) ||
         (item.tag && item.tag.toLowerCase().includes(this.filter))
       );
     },
