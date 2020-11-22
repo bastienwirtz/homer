@@ -66,7 +66,7 @@
               </h2>
               <Service
                 v-for="item in group.items"
-                :key="item.name"
+                :key="item.url"
                 v-bind:item="item"
                 :class="['column', `is-${12 / config.columns}`]"
               />
