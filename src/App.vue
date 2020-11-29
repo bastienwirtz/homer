@@ -65,8 +65,8 @@
                 {{ group.name }}
               </h2>
               <Service
-                v-for="item in group.items"
-                :key="item.url"
+                v-for="(item, index) in group.items"
+                :key="index"
                 v-bind:item="item"
                 :class="['column', `is-${12 / config.columns}`]"
               />
@@ -88,9 +88,9 @@
                 {{ group.name }}
               </h2>
               <Service
-                v-for="item in group.items"
+                v-for="(item, index) in group.items"
+                :key="index"
                 v-bind:item="item"
-                :key="item.url"
               />
             </div>
           </div>
