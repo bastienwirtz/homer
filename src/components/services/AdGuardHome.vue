@@ -18,7 +18,11 @@
               <p class="title is-4">{{ item.name }}</p>
               <p class="subtitle is-6">{{ item.subtitle }}</p>
             </div>
-            <div v-if="status" class="status" v-bind:class="status.protection_enabled ? 'enabled' : 'disabled'">
+            <div
+              v-if="status"
+              class="status"
+              v-bind:class="status.protection_enabled ? 'enabled' : 'disabled'"
+            >
               {{ status.protection_enabled }}
             </div>
           </div>
@@ -47,9 +51,9 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/control/status`).then((response) =>
-        response.json()
-      );
+      this.status = await fetch(
+        `${this.item.url}/control/status`
+      ).then((response) => response.json());
     },
   },
 };
