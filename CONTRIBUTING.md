@@ -21,7 +21,7 @@ Feel free to open an issue if you have any question.
 
 ### Code of conduct and guidelines
 
-First of all, we expect everyone (contributors and maintainers alike) to respect the [Code of conduct](https://github.com/bastienwirtz/homer/blob/master/CODE_OF_CONDUCT.md). It is not a recommendation, it is mandatory.
+First of all, we expect everyone (contributors and maintainers alike) to respect the [Code of conduct](https://github.com/bastienwirtz/homer/blob/main/CODE_OF_CONDUCT.md). It is not a recommendation, it is mandatory.
 
 For all contributions, please respect the following guidelines:
 
@@ -42,6 +42,6 @@ feel free to open an issue to present your idea.
 The general process to submit a contribution is as follow:
 1. Create your own fork of the code
 2. Do the changes in your fork
-3. Make sure to fill the [pull request description](https://github.com/bastienwirtz/homer/blob/master/.github/PULL_REQUEST_TEMPLATE.md) properly.
+3. Make sure to fill the [pull request description](https://github.com/bastienwirtz/homer/blob/main/.github/PULL_REQUEST_TEMPLATE.md) properly.
 
 ### Happy coding :metal:
