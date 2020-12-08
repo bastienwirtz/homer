@@ -11,12 +11,19 @@
             </div>
             <div v-if="item.icon" class="media-left">
               <figure class="image is-48x48">
-                <i style="font-size: 35px;" :class="['fa-fw', item.icon]"></i>
+                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
               </figure>
             </div>
             <div class="media-content">
               <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p class="subtitle is-6">
+                <template v-if="item.subtitle">
+                  {{ item.subtitle }}
+                </template>
+                <template v-else-if="status">
+                  {{ percentage }}% blocked
+                </template>
+              </p>
             </div>
             <div v-if="status" class="status" :class="status.status">
               {{ status.status }}
@@ -42,6 +49,20 @@ export default {
       status: null,
     };
   },
+  computed: {
+    percentage: function () {
+      if (this.status) {
+        return this.status.ads_percentage_today.toFixed(1);
+      }
+      return "";
+    },
+    blocked: function () {
+      if (this.status) {
+        return this.status.dns_queries_today.toFixed(0);
+      }
+      return "";
+    },
+  },
   created: function () {
     this.fetchStatus();
   },
@@ -66,13 +87,13 @@ export default {
   &.enabled:before {
     background-color: #94e185;
     border-color: #78d965;
-    box-shadow: 0px 0px 4px 1px #94e185;
+    box-shadow: 0 0 4px 1px #94e185;
   }
 
   &.disabled:before {
     background-color: #c9404d;
     border-color: #c42c3b;
-    box-shadow: 0px 0px 4px 1px #c9404d;
+    box-shadow: 0 0 4px 1px #c9404d;
   }
 
   &:before {
