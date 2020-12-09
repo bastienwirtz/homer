@@ -21,7 +21,7 @@
                   {{ item.subtitle }}
                 </template>
                 <template v-else-if="status">
-                  {{ percentage }}% blocked
+                  {{ percentage }}&percnt; blocked
                 </template>
               </p>
             </div>
@@ -44,27 +44,29 @@ export default {
   props: {
     item: Object,
   },
-  data: () => {
-    return {
-      status: null,
-    };
-  },
+  data: () => ({
+    status: {
+      status: "",
+      ads_percentage_today: 0,
+    },
+  }),
   computed: {
-    blocked: function () {
+    percentage: function () {
       if (this.status) {
-        return this.status.dns_queries_today.toFixed(0);
+        return this.status.ads_percentage_today.toFixed(1);
       }
       return "";
     },
   },
-  created: function () {
+  created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/api.php`).then((response) =>
-        response.json()
-      );
+      const url = `${this.item.url}/api.php`;
+      this.status = await fetch(url)
+        .then((response) => response.json())
+        .catch((e) => console.log(e));
     },
   },
 };
