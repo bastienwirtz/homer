@@ -109,7 +109,7 @@ services:
     items:
       - name: "Pi-hole"
         logo: "assets/tools/sample.png"
-        subtitle: "Network-wide Ad Blocking"
+        # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "other"
         url: "http://192.168.0.151/admin"
         type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`

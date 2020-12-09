@@ -11,15 +11,22 @@
             </div>
             <div v-if="item.icon" class="media-left">
               <figure class="image is-48x48">
-                <i style="font-size: 35px;" :class="['fa-fw', item.icon]"></i>
+                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
               </figure>
             </div>
             <div class="media-content">
               <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p class="subtitle is-6">
+                <template v-if="item.subtitle">
+                  {{ item.subtitle }}
+                </template>
+                <template v-else-if="api">
+                  {{ percentage }}&percnt; blocked
+                </template>
+              </p>
             </div>
-            <div v-if="status" class="status" :class="status.status">
-              {{ status.status }}
+            <div v-if="api" class="status" :class="api.status">
+              {{ api.status }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -37,19 +44,29 @@ export default {
   props: {
     item: Object,
   },
-  data: () => {
-    return {
-      status: null,
-    };
+  data: () => ({
+    api: {
+      status: "",
+      ads_percentage_today: 0,
+    },
+  }),
+  computed: {
+    percentage: function () {
+      if (this.api) {
+        return this.api.ads_percentage_today.toFixed(1);
+      }
+      return "";
+    },
   },
-  created: function () {
+  created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/api.php`).then((response) =>
-        response.json()
-      );
+      const url = `${this.item.url}/api.php`;
+      this.api = await fetch(url)
+        .then((response) => response.json())
+        .catch((e) => console.log(e));
     },
   },
 };
@@ -66,13 +83,13 @@ export default {
   &.enabled:before {
     background-color: #94e185;
     border-color: #78d965;
-    box-shadow: 0px 0px 4px 1px #94e185;
+    box-shadow: 0 0 4px 1px #94e185;
   }
 
   &.disabled:before {
     background-color: #c9404d;
     border-color: #c42c3b;
-    box-shadow: 0px 0px 4px 1px #c9404d;
+    box-shadow: 0 0 4px 1px #c9404d;
   }
 
   &:before {
