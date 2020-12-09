@@ -50,12 +50,6 @@ export default {
     };
   },
   computed: {
-    percentage: function () {
-      if (this.status) {
-        return this.status.ads_percentage_today.toFixed(1);
-      }
-      return "";
-    },
     blocked: function () {
       if (this.status) {
         return this.status.dns_queries_today.toFixed(0);
