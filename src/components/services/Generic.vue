@@ -2,7 +2,8 @@
 export default {};
 </script>
 
-<style></style> */
+<style></style>
+*/
 
 <script>
 export default {};
@@ -27,7 +28,7 @@ export default {};
             </div>
             <div v-if="item.icon" class="media-left">
               <figure class="image is-48x48">
-                <i style="font-size: 35px;" :class="['fa-fw', item.icon]"></i>
+                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
               </figure>
             </div>
             <div class="media-content">

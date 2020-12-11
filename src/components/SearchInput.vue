@@ -5,7 +5,7 @@
       type="text"
       ref="search"
       :value="value"
-      @input="$emit('input', $event.target.value.toLowerCase())"
+      @input="search($event.target.value)"
       @keyup.enter.exact="$emit('search-open')"
       @keyup.alt.enter="$emit('search-open', '_blank')"
     />
@@ -20,18 +20,48 @@ export default {
     this._keyListener = function (event) {
       if (event.key === "/") {
         event.preventDefault();
-        this.$emit("search-focus");
-        this.$nextTick(() => {
-          this.$refs.search.focus();
-        });
+        this.focus();
       }
       if (event.key === "Escape") {
-        this.$refs.search.value = "";
-        this.$refs.search.blur();
-        this.$emit("search-cancel");
+        this.cancel();
       }
     };
     document.addEventListener("keydown", this._keyListener.bind(this));
+
+    // fill seach from get parameter.
+    const search = new URLSearchParams(window.location.search).get("search");
+    if (search) {
+      this.$refs.search.value = search;
+      this.search(search);
+      this.focus();
+    }
+  },
+  methods: {
+    focus: function () {
+      this.$emit("search-focus");
+      this.$nextTick(() => {
+        this.$refs.search.focus();
+      });
+    },
+    setSearchURL: function (value) {
+      const url = new URL(window.location);
+      if (value === "") {
+        url.searchParams.delete("search");
+      } else {
+        url.searchParams.set("search", value);
+      }
+      window.history.replaceState("search", null, url);
+    },
+    cancel: function () {
+      this.setSearchURL("");
+      this.$refs.search.value = "";
+      this.$refs.search.blur();
+      this.$emit("search-cancel");
+    },
+    search: function (value) {
+      this.setSearchURL(value);
+      this.$emit("input", value.toLowerCase());
+    },
   },
   beforeDestroy() {
     document.removeEventListener("keydown", this._keyListener);
