@@ -223,6 +223,7 @@ body {
     border: none;
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
     transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
+    overflow: visible;
 
     a {
       outline: none;
