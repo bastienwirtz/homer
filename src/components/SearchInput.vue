@@ -6,8 +6,8 @@
       ref="search"
       :value="value"
       @input="search($event.target.value)"
-      @keyup.enter.exact="$emit('search-open')"
-      @keyup.alt.enter="$emit('search-open', '_blank')"
+      @keyup.enter.exact="open()"
+      @keyup.alt.enter="open('_blank')"
     />
   </div>
 </template>
@@ -37,6 +37,12 @@ export default {
     }
   },
   methods: {
+    open: function (target = null) {
+      if (!this.$refs.search.value) {
+        return;
+      }
+      this.$emit("search-open", target);
+    },
     focus: function () {
       this.$emit("search-focus");
       this.$nextTick(() => {
