@@ -1,16 +1,3 @@
-<script>
-export default {};
-</script>
-
-<style></style>
-*/
-
-<script>
-export default {};
-</script>
-
-<style></style>
-
 <template>
   <div>
     <div
@@ -20,7 +7,7 @@ export default {};
     >
       <a :href="item.url" :target="item.target" rel="noreferrer">
         <div class="card-content">
-          <div class="media">
+          <div :class="mediaClass">
             <div v-if="item.logo" class="media-left">
               <figure class="image is-48x48">
                 <img :src="item.logo" :alt="`${item.name} logo`" />
@@ -33,7 +20,9 @@ export default {};
             </div>
             <div class="media-content">
               <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p class="subtitle is-6" v-if="item.subtitle">
+                {{ item.subtitle }}
+              </p>
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -51,11 +40,23 @@ export default {
   props: {
     item: Object,
   },
+  computed: {
+    mediaClass: function () {
+      return { media: true, "no-subtitle": !this.item.subtitle };
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-.media-left img {
-  max-height: 100%;
+.media-left {
+  .image {
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    max-height: 100%;
+  }
 }
 </style>
