@@ -66,6 +66,15 @@ colors:
 # Optional message
 message:
   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
+  # mapping: # allows to map fields from the remote format to the one expected by Homer
+  #   title: 'id' # use value from field 'id' as title
+  #   content: 'value' # value from field 'value' as content
+  #
+  # Real example using chucknorris.io for showing Chuck Norris facts as messages:
+  # url: https://api.chucknorris.io/jokes/random
+  # mapping:
+  #   title: 'id'
+  #   content: 'value'
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"
