@@ -81,6 +81,11 @@ links:
   - name: "link 2"
     icon: "fas fa-book"
     url: "https://github.com/bastienwirtz/homer"
+  # this will link to a second homer page that will load config from page2.yml and keep default config values as in config.yml file
+  # see url field and assets/page.yml used in this example:
+  - name: "Second Page"
+    icon: "fas fa-file-alt"
+    url: "/page2"
 
 # Services
 # First level array represents a group.

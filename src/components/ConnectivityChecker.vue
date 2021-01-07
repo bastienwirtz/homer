@@ -33,7 +33,7 @@ export default {
   methods: {
     checkOffline: function () {
       let that = this;
-      return fetch(window.location.href + "?alive", {
+      return fetch(window.location.origin + "?alive", {
         method: "HEAD",
         cache: "no-store",
       })
