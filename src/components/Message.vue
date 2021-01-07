@@ -45,7 +45,6 @@ export default {
           }
         }
       }
-      console.log(this.item.refreshInterval);
       if (this.item.refreshInterval) setTimeout(this.getMessage, this.item.refreshInterval);
     },
 
