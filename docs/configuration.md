@@ -69,12 +69,14 @@ message:
   # mapping: # allows to map fields from the remote format to the one expected by Homer
   #   title: 'id' # use value from field 'id' as title
   #   content: 'value' # value from field 'value' as content
+  # refreshInterval: 10000 # time interval to refresh message
   #
   # Real example using chucknorris.io for showing Chuck Norris facts as messages:
   # url: https://api.chucknorris.io/jokes/random
   # mapping:
   #   title: 'id'
   #   content: 'value'
+  # refreshInterval: 10000
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"

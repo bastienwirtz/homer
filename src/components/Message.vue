@@ -29,20 +29,27 @@ export default {
   created: async function () {
     // Look for a new message if an endpoint is provided.
     this.message = Object.assign({}, this.item);
-    if (this.item && this.item.url) {
-      let fetchedMessage = await this.getMessage(this.item.url);
-      if (this.item.mapping) fetchedMessage = this.mapRemoteMessage(fetchedMessage);
-      // keep the original config value if no value is provided by the endpoint
-      for (const prop of ["title", "style", "content"]) {
-        if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
-          this.message[prop] = fetchedMessage[prop];
-        }
-      }
-    }
+    await this.getMessage();
     this.show = this.message.title || this.message.content;
   },
+
   methods: {
-    getMessage: function (url) {
+    getMessage: async function() {
+      if (this.item && this.item.url) {
+        let fetchedMessage = await this.downloadMessage(this.item.url);
+        if (this.item.mapping) fetchedMessage = this.mapRemoteMessage(fetchedMessage);
+        // keep the original config value if no value is provided by the endpoint
+        for (const prop of ["title", "style", "content"]) {
+          if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
+            this.message[prop] = fetchedMessage[prop];
+          }
+        }
+      }
+      console.log(this.item.refreshInterval);
+      if (this.item.refreshInterval) setTimeout(this.getMessage, this.item.refreshInterval);
+    },
+
+    downloadMessage: function (url) {
       return fetch(url).then(function (response) {
         if (response.status != 200) {
           return;
