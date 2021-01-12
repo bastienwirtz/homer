@@ -6,7 +6,11 @@
           <div class="media">
             <div v-if="image" class="media-left">
               <figure class="image is-48x48">
-                <img :src="`http://openweathermap.org/img/wn/` + image + `@2x.png`" :alt="conditions" :title="conditions" />
+                <img
+                  :src="`http://openweathermap.org/img/wn/` + image + `@2x.png`"
+                  :alt="conditions"
+                  :title="conditions"
+                />
               </figure>
             </div>
             <div v-if="item.icon" class="media-left">
@@ -21,10 +25,10 @@
                   {{ item.subtitle }}
                 </template>
                 <template v-else-if="api">
-                  {{ temp }} 
-				  <span v-if="this.item.units == 'metric'">&deg;C</span>
-				  <span v-else-if="this.item.units == 'imperial'">&deg;F</span>				  
-				  <span v-else>K</span>
+                  {{ temp }}
+                  <span v-if="this.item.units == 'metric'">&deg;C</span>
+                  <span v-else-if="this.item.units == 'imperial'">&deg;F</span>
+                  <span v-else>K</span>
                 </template>
               </p>
             </div>
@@ -47,36 +51,38 @@ export default {
   data: () => ({
     api: {
       name: "",
-	  weather: [{
-		main: "",
-		description: "",
-		icon: ""
-	  }],
+      weather: [
+        {
+          main: "",
+          description: "",
+          icon: "",
+        },
+      ],
       main: {
-		temp: "",
-		humidity: ""
-	  }
-    }
+        temp: "",
+        humidity: "",
+      },
+    },
   }),
   computed: {
     temp: function () {
       if (this.api) {
-		return parseInt(this.api.main.temp).toFixed(1);
+        return parseInt(this.api.main.temp).toFixed(1);
       }
       return "";
     },
-	image: function () {
-	  if (this.api) {
-		return this.api.weather[0].icon;
-	  }
-	  return "";
-	},
-	conditions: function () {
-	  if (this.api) {
-		return this.api.weather[0].description;
-	  }
-	  return "";
-	}
+    image: function () {
+      if (this.api) {
+        return this.api.weather[0].icon;
+      }
+      return "";
+    },
+    conditions: function () {
+      if (this.api) {
+        return this.api.weather[0].description;
+      }
+      return "";
+    },
   },
   created() {
     this.fetchStatus();
