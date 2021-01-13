@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}?q=${this.item.location}&appid=${this.item.apiKey}&units=${this.item.units}`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.item.location}&appid=${this.item.apiKey}&units=${this.item.units}`;
       this.api = await fetch(url)
         .then((response) => response.json())
         .catch((e) => console.log(e));
