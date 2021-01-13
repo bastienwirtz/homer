@@ -4,7 +4,7 @@
       <a :href="item.url" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div class="media">
-            <div v-if="image" class="media-left">
+            <div v-if="image" class="media-left" :class="item.background">
               <figure class="image is-48x48">
                 <img
                   :src="`http://openweathermap.org/img/wn/` + image + `@2x.png`"
@@ -99,7 +99,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.media-left img {
-  max-height: 100%;
+.media-left {
+  &.circle,
+  &.square {
+    background-color: #e4e4e4;
+  }
+
+  &.circle {
+    border-radius: 90%;
+  }
+
+  img {
+    max-height: 100%;
+  }
+}
+
+// Add a circular border around the weather image when in dark mode.
+// Otherwise the image is not distinguishable.
+.is-dark {
+  .media-left {
+    &.circle,
+    &.square {
+      background-color: #909090;
+    }
+  }
 }
 </style>

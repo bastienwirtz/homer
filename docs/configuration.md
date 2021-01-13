@@ -7,7 +7,7 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
 
-# Optional: Use external configuration file. 
+# Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
 # externalConfig: https://example.com/server-luci/config.yaml
 
@@ -117,6 +117,8 @@ services:
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
+
+View the (Custom Services)[customservices.md] file for details about all available custom services (like PiHole).
 
 If you choose to fetch message information from an endpoint, the output format should be:
 
