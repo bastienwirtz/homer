@@ -1,4 +1,4 @@
-# Tips & Tricks
+# Custom Services
 
 Here is an overview of all custom services that are avaiable within Homer.
 
@@ -25,11 +25,11 @@ The following configuration is available for the OpenWeatherMap service
 
 ```
 items:
-       - name: "Weather"
-         url: "https://api.openweathermap.org/data/2.5/weather"
-         location: "Amsterdam" # your location.
-         apiKey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
-         units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
-         background: "square" choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
-         type: "OpenWeather"
+     - name: "Weather"
+       url: "https://api.openweathermap.org/data/2.5/weather"
+       location: "Amsterdam" # your location.
+       apiKey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
+       units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
+       background: "square" choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
+       type: "OpenWeather"
 ```

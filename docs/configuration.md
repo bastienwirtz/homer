@@ -118,7 +118,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-View the (Custom Services)[customservices.md] file for details about all available custom services (like PiHole).
+View the [Custom Services](customservices.md) file for details about all available custom services (like PiHole).
 
 If you choose to fetch message information from an endpoint, the output format should be:
 
