@@ -29,6 +29,6 @@ items:
        location: "Amsterdam" # your location.
        apiKey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
        units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
-       background: "square" choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
+       background: "square" # choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
        type: "OpenWeather"
 ```

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card" :class="item.class">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
+      <a :href="`https://openweathermap.org/city/` + locationId" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div class="media">
             <div v-if="image" class="media-left" :class="item.background">
@@ -25,10 +25,15 @@
                   {{ item.subtitle }}
                 </template>
                 <template v-else-if="api">
-                  {{ temp }}
-                  <span v-if="this.item.units == 'metric'">&deg;C</span>
-                  <span v-else-if="this.item.units == 'imperial'">&deg;F</span>
-                  <span v-else>K</span>
+                  <template v-if="temp !== ''">
+                    {{ temp }}
+                    <span v-if="this.item.units === 'metric'">&deg;C</span>
+                    <span v-else-if="this.item.units === 'imperial'">&deg;F</span>
+                    <span v-else>K</span>
+                  </template>
+                  <template v-else> 
+                    <span class="error">Data could not be retrieved</span>                      
+                  </template>
                 </template>
               </p>
             </div>
@@ -49,7 +54,9 @@ export default {
     item: Object,
   },
   data: () => ({
+    error: false,
     api: {
+      id: "",
       name: "",
       weather: [
         {
@@ -65,8 +72,14 @@ export default {
     },
   }),
   computed: {
-    temp: function () {
+    locationId: function () {
       if (this.api) {
+        return this.api.id;
+      }
+      return "";
+    },
+    temp: function () {
+      if (this.api && this.api.main.temp !== "") {
         return parseInt(this.api.main.temp).toFixed(1);
       }
       return "";
@@ -92,13 +105,19 @@ export default {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.item.location}&appid=${this.item.apiKey}&units=${this.item.units}`;
       this.api = await fetch(url)
         .then((response) => response.json())
-        .catch((e) => console.log(e));
+        .catch((e) => { 
+          this.error = true; 
+          console.log(e) 
+        });
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
+
+// Add a border around the weather image.
+// Otherwise the image is not always distinguishable.
 .media-left {
   &.circle,
   &.square {
@@ -114,8 +133,11 @@ export default {
   }
 }
 
-// Add a circular border around the weather image when in dark mode.
-// Otherwise the image is not distinguishable.
+.error {
+  color: #de0000;
+}
+
+// Change background color in dark mode.
 .is-dark {
   .media-left {
     &.circle,
