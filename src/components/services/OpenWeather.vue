@@ -19,7 +19,7 @@
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-4">{{ item.location }}</p>
+              <p class="title is-4">{{ locationName }}</p>
               <p class="subtitle is-6">
                 <template v-if="item.subtitle">
                   {{ item.subtitle }}
@@ -78,6 +78,12 @@ export default {
       }
       return "";
     },
+    locationName: function () {
+      if (this.api) {
+        return this.api.name;
+      }
+      return "";
+    },
     temp: function () {
       if (this.api && this.api.main.temp !== "") {
         return parseInt(this.api.main.temp).toFixed(1);
@@ -102,7 +108,16 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.item.location}&appid=${this.item.apiKey}&units=${this.item.units}`;
+      let locationQuery;
+
+      // If a specific location ID was specified, use it. Otherwise retrieve value from location (name).
+      if (this.item.locationId) {
+        locationQuery = `id=${this.item.locationId}`;
+      } else {
+        locationQuery = `q=${this.item.location}`;
+      }
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${this.item.apiKey}&units=${this.item.units}`;
       this.api = await fetch(url)
         .then((response) => response.json())
         .catch((e) => { 
