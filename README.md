@@ -70,6 +70,8 @@ See [documentation](docs/configuration.md) for information about the configurati
 
 ### Using docker
 
+#### Using built-in server
+
 To launch container:
 
 ```sh
@@ -77,6 +79,14 @@ docker run -p 8080:8080 -v /your/local/assets/:/www/assets b4bz/homer:latest
 ```
 
 Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
+
+#### Generating static files
+
+```sh
+docker run --interactive --tty --volume $PWD/assets/:/www/assets --volume $PWD/output/:/output --entrypoint /bin/sh b4bz/homer:latest -c 'cp -rv /www/. /output/'
+```
+
+Files will be put in the `output` directory. You can serve them with any server.
 
 ### Using docker-compose
 
