@@ -197,6 +197,11 @@ body {
     }
   }
 
+  .media.no-subtitle {
+    display: flex;
+    align-items: center;
+  }
+
   .media-content {
     overflow: hidden;
     text-overflow: inherit;
