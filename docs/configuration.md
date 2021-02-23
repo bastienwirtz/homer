@@ -85,7 +85,7 @@ links:
   # see url field and assets/page.yml used in this example:
   - name: "Second Page"
     icon: "fas fa-file-alt"
-    url: "/page2"
+    url: "#page2"
 
 # Services
 # First level array represents a group.

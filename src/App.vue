@@ -13,7 +13,7 @@
       <section v-if="config.header" class="first-line">
         <div v-cloak class="container">
           <div class="logo">
-            <a href="/"><img v-if="config.logo" :src="config.logo" alt="dashboard logo" /></a>
+            <a href="#"><img v-if="config.logo" :src="config.logo" alt="dashboard logo" /></a>
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
           <div class="dashboard-title">
@@ -151,11 +151,12 @@ export default {
   created: async function () {
     const defaults = jsyaml.load(defaultConfig);
     let config;
+    window.onhashchange = function() { location.reload(); };
     try {
       config = await this.getConfig();
-      const path = (window.location.pathname != '/') ? window.location.pathname : null;
+      const path = (window.location.hash.substring(1) != '') ? window.location.hash.substring(1) : null;
       if (path) {
-        let pathConfig = await this.getConfig(`assets${path}.yml`); // the slash (/) is included in the pathname
+        let pathConfig = await this.getConfig(`assets/${path}.yml`); // the slash (/) is included in the pathname
         for (const prop in pathConfig) config[prop] = pathConfig[prop];
       }
       // config = await this.getConfig(path ? `assets/${path}.yml` : null);
