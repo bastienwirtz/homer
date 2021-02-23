@@ -145,9 +145,9 @@ Now, you can do that using the `mapping` field in your `message` configuration. 
 ```yml
 message:
   url: https://api.chucknorris.io/jokes/random
-    mapping:
-      title: 'id'
-      content: 'value'
+  mapping:
+    title: 'id'
+    content: 'value'
 ```
 
 As you would see, using the ID as a title doesn't seem nice, that's why when a field is empty it would keep the default values, like this:
@@ -155,8 +155,8 @@ As you would see, using the ID as a title doesn't seem nice, that's why when a f
 ```yml
 message:
   url: https://api.chucknorris.io/jokes/random
-    mapping:
-      content: 'value'
+  mapping:
+    content: 'value'
   title: "Chuck Norris Facts!"
 ```
 
@@ -165,8 +165,8 @@ and even an error message in case the `url` didn't respond or threw an error:
 ```yml
 message:
   url: https://api.chucknorris.io/jokes/random
-    mapping:
-      content: 'value'
+  mapping:
+    content: 'value'
   title: "Chuck Norris Facts!"
   content: "Message could not be loaded"
 ```

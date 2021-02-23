@@ -69,7 +69,7 @@ message:
   # mapping: # allows to map fields from the remote format to the one expected by Homer
   #   title: 'id' # use value from field 'id' as title
   #   content: 'value' # value from field 'value' as content
-  # refreshInterval: 10000 # time interval to refresh message
+  # refreshInterval: 10000 # Optional: time interval to refresh message
   #
   # Real example using chucknorris.io for showing Chuck Norris facts as messages:
   # url: https://api.chucknorris.io/jokes/random
@@ -129,7 +129,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-If you choose to fetch message information from an endpoint, the output format should be:
+If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
 ```json
 {
