@@ -99,6 +99,8 @@ links:
 services:
   - name: "Application"
     icon: "fas fa-code-branch"
+    # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
+    # logo: "path/to/logo"
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
