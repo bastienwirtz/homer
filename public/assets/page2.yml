@@ -1,0 +1,34 @@
+# this config is used by a page linked in the navbar
+# this pages will use the same configuration from config.yml, but will overwrite fields present here
+
+# this overwrites title and subtitle:
+title: "Page2"
+subtitle: "this is the second page"
+
+# this overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
+message:
+
+# as we want to include a differente link here (so we can get back to home page), we need to replicate all links or they will be revome when overwriting the links field:
+links:
+  - name: "Home"
+    icon: "fas fa-home"
+    url: "/"
+  - name: "Contribute"
+    icon: "fab fa-github"
+    url: "https://github.com/bastienwirtz/homer"
+    target: "_blank" # optional html a tag target attribute
+  - name: "Wiki"
+    icon: "fas fa-book"
+    url: "https://www.wikipedia.org/"
+
+# we keep the first group from the main page, but remove the second group. We need to replicate that first group or it will be removed:
+services:
+  - name: "NEW"
+    icon: "fas fa-cloud"
+    items:
+      - name: "Awesome app on a second page!"
+        logo: "assets/tools/sample.png"
+        subtitle: "Bookmark example"
+        tag: "app"
+        url: "https://www.reddit.com/r/selfhosted/"
+        target: "_blank"
