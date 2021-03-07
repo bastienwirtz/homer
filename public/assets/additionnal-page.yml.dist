@@ -1,18 +1,20 @@
-# this config is used by a page linked in the navbar
-# this pages will use the same configuration from config.yml, but will overwrite fields present here
+---
+# Additionnal page configuration
 
-# this overwrites title and subtitle:
-title: "Page2"
-subtitle: "this is the second page"
+# Additionnal configurations are loaded using its file name, minus the extension, as an anchor (https://<mydashboad>#<config>). 
+# `config.yml` is still used as a base configuration, and all values here will overwrite it, so you don't have to re-defined everything
 
-# this overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
-message:
+
+subtitle: "this is another dashboard page"
+
+# This overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
+message: ~
 
 # as we want to include a differente link here (so we can get back to home page), we need to replicate all links or they will be revome when overwriting the links field:
 links:
   - name: "Home"
     icon: "fas fa-home"
-    url: "/"
+    url: "#"
   - name: "Contribute"
     icon: "fab fa-github"
     url: "https://github.com/bastienwirtz/homer"
@@ -21,9 +23,8 @@ links:
     icon: "fas fa-book"
     url: "https://www.wikipedia.org/"
 
-# we keep the first group from the main page, but remove the second group. We need to replicate that first group or it will be removed:
 services:
-  - name: "NEW"
+  - name: "More applications on another page!"
     icon: "fas fa-cloud"
     items:
       - name: "Awesome app on a second page!"
