@@ -4,7 +4,7 @@
     aria-label="Toggle dark mode"
     class="navbar-item is-inline-block-mobile"
   >
-    <i :class="`${faClasses[mode]}`" class="fa-fw"></i>
+    <i :class="`${faClasses[mode]}`" class="fa-fw" :title="`${titles[mode]}`"></i>
   </a>
 </template>
 
@@ -15,11 +15,13 @@ export default {
     return {
       isDark: null,
       faClasses: null,
+      titles: null,
       mode: null,
     };
   },
   created: function () {
     this.faClasses = ["fas fa-adjust", "fas fa-circle", "far fa-circle"];
+    this.titles = ["Auto-switch", "Light theme", "Dark theme"]
     this.mode = 0;
     if ("overrideDark" in localStorage) {
       // Light theme is 1 and Dark theme is 2
