@@ -4,7 +4,11 @@
     aria-label="Toggle dark mode"
     class="navbar-item is-inline-block-mobile"
   >
-    <i :class="`${faClasses[mode]}`" class="fa-fw" :title="`${titles[mode]}`"></i>
+    <i
+      :class="`${faClasses[mode]}`"
+      class="fa-fw"
+      :title="`${titles[mode]}`"
+    ></i>
   </a>
 </template>
 
@@ -21,7 +25,7 @@ export default {
   },
   created: function () {
     this.faClasses = ["fas fa-adjust", "fas fa-circle", "far fa-circle"];
-    this.titles = ["Auto-switch", "Light theme", "Dark theme"]
+    this.titles = ["Auto-switch", "Light theme", "Dark theme"];
     this.mode = 0;
     if ("overrideDark" in localStorage) {
       // Light theme is 1 and Dark theme is 2
@@ -32,33 +36,37 @@ export default {
   },
   methods: {
     toggleTheme: function () {
-      this.mode = (this.mode + 1) % 3
-      switch(this.mode) {
+      this.mode = (this.mode + 1) % 3;
+      switch (this.mode) {
         // Default behavior
         case 0:
           localStorage.removeItem("overrideDark");
-          break
+          break;
         // Force light theme
         case 1:
           localStorage.overrideDark = false;
-          break
+          break;
         // Force dark theme
         case 2:
           localStorage.overrideDark = true;
-          break
+          break;
         default:
           // Should be unreachable
-          break
+          break;
       }
 
       this.isDark = this.getIsDark();
       this.$emit("updated", this.isDark);
     },
 
-    getIsDark: function() {
-      const values = [matchMedia("(prefers-color-scheme: dark)").matches, false, true];
+    getIsDark: function () {
+      const values = [
+        matchMedia("(prefers-color-scheme: dark)").matches,
+        false,
+        true,
+      ];
       return values[this.mode];
-    }
+    },
   },
 };
 </script>
