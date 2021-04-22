@@ -42,19 +42,29 @@ export default {
   },
   methods: {
     getMessage: async function () {
-      if (this.item && this.item.url) {
+      if (!this.item) {
+        return;
+      }
+      if (this.item.url) {
         let fetchedMessage = await this.downloadMessage(this.item.url);
-        if (this.item.mapping)
+        console.log("done");
+        if (this.item.mapping) {
           fetchedMessage = this.mapRemoteMessage(fetchedMessage);
+        }
+
         // keep the original config value if no value is provided by the endpoint
+        const message = this.message;
         for (const prop of ["title", "style", "content"]) {
           if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
-            this.message[prop] = fetchedMessage[prop];
+            message[prop] = fetchedMessage[prop];
           }
         }
+        this.message = { ...message }; // Force computed property to re-evaluate
       }
-      if (this.item.refreshInterval)
+
+      if (this.item.refreshInterval) {
         setTimeout(this.getMessage, this.item.refreshInterval);
+      }
     },
 
     downloadMessage: function (url) {
