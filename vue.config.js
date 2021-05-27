@@ -1,6 +1,11 @@
 const manifestOptions = require("./public/assets/manifest.json");
 
+let inGitpod = "GITPOD_WORKSPACE_ID" in process.env
+
 module.exports = {
+  devServer: {
+    disableHostCheck: inGitpod //disable host check if in gitpod
+  },
   chainWebpack: (config) => {
     config.module
       .rule("yaml")
