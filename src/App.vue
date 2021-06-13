@@ -60,24 +60,14 @@
           <Message :item="config.message" />
 
           <!-- Horizontal layout -->
-          <div v-if="!vlayout || filter" class="columns is-multiline">
-            <template v-for="group in services">
-              <h2 v-if="group.name" class="column is-full group-title">
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
-                  <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
-                  </figure>
-                </div>
-                {{ group.name }}
-              </h2>
-              <Service
-                v-for="(item, index) in group.items"
-                :key="index"
-                v-bind:item="item"
-                :class="['column', `is-${12 / config.columns}`]"
-              />
-            </template>
+          <div v-if="!vlayout || filter">
+            <Accordion
+              v-for="(group, groupIndex) in services"
+              :key="group.name + groupIndex"
+              v-bind:group="group"
+              v-bind:horizontal="true"
+              v-bind:width="12 / config.columns"
+            />
           </div>
 
           <!-- Vertical layout -->
@@ -85,26 +75,13 @@
             v-if="!filter && vlayout"
             class="columns is-multiline layout-vertical"
           >
-            <div
-              :class="['column', `is-${12 / config.columns}`]"
-              v-for="group in services"
-              :key="group.name"
-            >
-              <h2 v-if="group.name" class="group-title">
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
-                  <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
-                  </figure>
-                </div>
-                {{ group.name }}
-              </h2>
-              <Service
-                v-for="(item, index) in group.items"
-                :key="index"
-                v-bind:item="item"
-              />
-            </div>
+            <Accordion
+              v-for="(group, groupIndex) in services"
+              :key="group.name + groupIndex"
+              v-bind:group="group"
+              v-bind:horizontal="false"
+              v-bind:width="12 / config.columns"
+            />
           </div>
         </div>
       </div>
@@ -128,12 +105,13 @@ const merge = require("lodash.merge");
 
 import Navbar from "./components/Navbar.vue";
 import ConnectivityChecker from "./components/ConnectivityChecker.vue";
-import Service from "./components/Service.vue";
 import Message from "./components/Message.vue";
 import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
+
+import Accordion from "./components/Accordion.vue";
 
 import defaultConfig from "./assets/defaults.yml";
 
@@ -142,12 +120,12 @@ export default {
   components: {
     Navbar,
     ConnectivityChecker,
-    Service,
     Message,
     SearchInput,
     SettingToggle,
     DarkMode,
     DynamicTheme,
+    Accordion,
   },
   data: function () {
     return {
