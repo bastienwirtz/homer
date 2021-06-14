@@ -254,16 +254,16 @@ body {
     padding: 1.3rem;
   }
 
-  .layout-vertical {
+  .layout-vertical {    
     .card {
       border-radius: 0;
     }
 
-    .column div:first-of-type .card {
+    .column div div:first-of-type .card {
       border-radius: 5px 5px 0 0;
     }
 
-    .column div:last-child .card {
+    .column div div:last-child .card {
       border-radius: 0 0 5px 5px;
     }
   }
@@ -348,4 +348,27 @@ body {
 
 .group-logo {
   float: left;
+}
+
+
+
+
+
+// Accordion dropdown animation
+.dropdown-leave-active {
+  animation: growDown 150ms ease-in-out reverse;
+  transform-origin: top center;
+}
+.dropdown-enter-active {
+  animation: growDown 150ms ease-in-out forwards;
+  transform-origin: top center;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0)
+  }
+  100% {
+    transform: scaleY(1)
+  }
 }

@@ -30,15 +30,23 @@
           open ? 'fa-chevron-down' : 'fa-chevron-up',
           'media-right',
         ]"
+        style="float:right;"
       ></i>
     </h2>
-    <Service
-      :class="{ column: horizontal, [`is-${width}`]: horizontal }"
-      v-show="open"
-      v-for="(item, index) in group.items"
-      :key="index"
-      v-bind:item="item"
-    />
+    
+    <transition name="dropdown">
+      <div
+        v-if="open"
+        :class="{'column is-full columns is-multiline':horizontal}"
+      >
+        <Service
+          :class="{ column: horizontal, [`is-${width}`]: horizontal }"
+          v-for="(item, index) in group.items"
+          :key="index"
+          v-bind:item="item"
+        />
+      </div>
+    </transition>
   </div>
 </template>
 

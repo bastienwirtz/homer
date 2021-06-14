@@ -110,7 +110,6 @@ import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
-
 import Accordion from "./components/Accordion.vue";
 
 import defaultConfig from "./assets/defaults.yml";
