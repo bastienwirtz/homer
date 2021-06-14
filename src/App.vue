@@ -62,8 +62,8 @@
           <!-- Horizontal layout -->
           <div v-if="!vlayout || filter">
             <Accordion
-              v-for="(group, groupIndex) in services"
-              :key="group.name + groupIndex"
+              v-for="group in services"
+              :key="group.name"
               v-bind:group="group"
               v-bind:horizontal="true"
               v-bind:width="12 / config.columns"
@@ -76,8 +76,8 @@
             class="columns is-multiline layout-vertical"
           >
             <Accordion
-              v-for="(group, groupIndex) in services"
-              :key="group.name + groupIndex"
+              v-for="group in services"
+              :key="group.name"
               v-bind:group="group"
               v-bind:horizontal="false"
               v-bind:width="12 / config.columns"

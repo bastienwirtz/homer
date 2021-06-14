@@ -2,7 +2,7 @@
   <div
     :class="{
       'columns is-multiline': horizontal,
-      'column': vertical,
+      column: vertical,
       [`is-${width}`]: vertical,
     }"
   >
@@ -30,14 +30,14 @@
           open ? 'fa-chevron-down' : 'fa-chevron-up',
           'media-right',
         ]"
-        style="float:right;"
+        style="float: right"
       ></i>
     </h2>
-    
+
     <transition name="dropdown">
       <div
         v-if="open"
-        :class="{'column is-full columns is-multiline':horizontal}"
+        :class="{ 'column is-full columns is-multiline': horizontal }"
       >
         <Service
           :class="{ column: horizontal, [`is-${width}`]: horizontal }"
@@ -78,9 +78,11 @@ export default {
       vertical: !this.horizontal,
     };
   },
-  created: function() {
+  created: function () {
     if (this.group.name + "_Open" in localStorage) {
-      this.open = this.value = JSON.parse(localStorage[this.group.name + "_Open"]);
+      this.open = this.value = JSON.parse(
+        localStorage[this.group.name + "_Open"]
+      );
     }
   },
   methods: {
