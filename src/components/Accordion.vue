@@ -78,9 +78,15 @@ export default {
       vertical: !this.horizontal,
     };
   },
+  created: function() {
+    if (this.group.name + "_Open" in localStorage) {
+      this.open = this.value = JSON.parse(localStorage[this.group.name + "_Open"]);
+    }
+  },
   methods: {
     toggle() {
       this.open = !this.open;
+      localStorage[this.group.name + "_Open"] = this.open;
     },
   },
 };
