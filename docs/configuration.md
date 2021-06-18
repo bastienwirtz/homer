@@ -87,6 +87,8 @@ message:
 links:
   - name: "Link 1"
     icon: "fab fa-github"
+    # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
+    # logo: "path/to/logo"
     url: "https://github.com/bastienwirtz/homer"
     target: "_blank" # optional html tag target attribute
   - name: "link 2"
