@@ -2,9 +2,9 @@
 version: "2"
 services:
   homer:
-    image: b4bz/homer
+    #image: b4bz/homer
     #To build from source, comment previous line and uncomment below
-    #build: .
+    build: .
     container_name: homer
     volumes:
       - /your/local/assets/:/www/assets
