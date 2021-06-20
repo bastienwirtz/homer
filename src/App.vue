@@ -20,7 +20,15 @@
           </div>
           <div class="dashboard-title">
             <span class="headline">{{ config.subtitle }}</span>
+            <domain-checker 
+              v-if="config.domainChecker && config.domainChecker.enabled"
+              v-show="domain" 
+              class="domain" 
+              :config="config.domainChecker"
+              @domain-update="domain = $event"
+            /> 
             <h1>{{ config.title }}</h1>
+            
           </div>
         </div>
       </section>
@@ -134,6 +142,7 @@ import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
+import DomainChecker from './components/DomainChecker.vue';
 
 import defaultConfig from "./assets/defaults.yml";
 
@@ -148,11 +157,13 @@ export default {
     SettingToggle,
     DarkMode,
     DynamicTheme,
+    DomainChecker,
   },
   data: function () {
     return {
       config: null,
       services: null,
+      domain: null,
       offline: false,
       filter: "",
       vlayout: true,
