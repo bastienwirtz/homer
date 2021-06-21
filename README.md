@@ -83,6 +83,10 @@ docker run -d \
 
 Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
 
+## Host in subfolder
+
+If you would like to host Homer in a subfolder, for e.g. behind a reverse proxy, supply the name of subfolder by using the `SUBFOLDER` env var.
+
 ### Using docker-compose
 
 The `docker-compose.yml` file must be edited to match your needs.
