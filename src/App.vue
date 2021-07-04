@@ -60,24 +60,22 @@
           <Message :item="config.message" />
 
           <!-- Horizontal layout -->
-          <div v-if="!vlayout || filter" class="columns is-multiline">
-            <template v-for="group in services">
-              <h2 v-if="group.name" class="column is-full group-title">
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
-                  <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
-                  </figure>
-                </div>
-                {{ group.name }}
-              </h2>
-              <Service
-                v-for="(item, index) in group.items"
-                :key="index"
-                v-bind:item="item"
-                :class="['column', `is-${12 / config.columns}`]"
-              />
-            </template>
+          <div v-if="!vlayout || filter" class="container-fluid">
+            <div
+              v-for="group in services"
+              :key="group.name"
+              style="width: 100%"
+            >
+              <ServiceGroupTitle :group="group" />
+              <div class="columns is-multiline">
+                <Service
+                  v-for="(item, index) in group.items"
+                  :key="index"
+                  v-bind:item="item"
+                  :class="['column', `is-${12 / config.columns}`]"
+                />
+              </div>
+            </div>
           </div>
 
           <!-- Vertical layout -->
@@ -90,15 +88,7 @@
               v-for="group in services"
               :key="group.name"
             >
-              <h2 v-if="group.name" class="group-title">
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
-                  <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
-                  </figure>
-                </div>
-                {{ group.name }}
-              </h2>
+              <ServiceGroupTitle :group="group" />
               <Service
                 v-for="(item, index) in group.items"
                 :key="index"
@@ -128,6 +118,7 @@ const merge = require("lodash.merge");
 
 import Navbar from "./components/Navbar.vue";
 import ConnectivityChecker from "./components/ConnectivityChecker.vue";
+import ServiceGroupTitle from "./components/ServiceGroupTitle.vue";
 import Service from "./components/Service.vue";
 import Message from "./components/Message.vue";
 import SearchInput from "./components/SearchInput.vue";
@@ -142,6 +133,7 @@ export default {
   components: {
     Navbar,
     ConnectivityChecker,
+    ServiceGroupTitle,
     Service,
     Message,
     SearchInput,
