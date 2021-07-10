@@ -124,6 +124,8 @@ services:
         url: "#"
   - name: "Other group"
     icon: "fas fa-heartbeat"
+    # Optionally make this group collapsable, and set default state to open
+    collapsed: false
     items:
       - name: "Pi-hole"
         logo: "assets/tools/sample.png"
