@@ -350,6 +350,10 @@ body {
   float: left;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 // Accordion dropdown animation
 .dropdown-leave-active {
   animation: growDown 150ms ease-in-out reverse;

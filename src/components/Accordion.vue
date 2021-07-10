@@ -11,10 +11,10 @@
       :class="[
         {
           'column is-full': horizontal,
+          pointer: this.group.collapsed !== undefined,
         },
         'group-title',
       ]"
-      style="cursor: pointer"
       v-on:click="toggle"
     >
       <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
@@ -25,6 +25,7 @@
       </div>
       {{ group.name }}
       <i
+        v-if="this.group.collapsed !== undefined"
         :class="[
           'fas',
           open ? 'fa-chevron-down' : 'fa-chevron-up',
@@ -80,15 +81,17 @@ export default {
   },
   created: function () {
     if (this.group.name + "_Open" in localStorage) {
-      this.open = this.value = JSON.parse(
-        localStorage[this.group.name + "_Open"]
-      );
+      this.open = JSON.parse(localStorage[this.group.name + "_Open"]);
+    } else {
+      this.open = this.group.collapsed ? false : true;
     }
   },
   methods: {
     toggle() {
-      this.open = !this.open;
-      localStorage[this.group.name + "_Open"] = this.open;
+      if (this.group.collapsed !== undefined) {
+        this.open = !this.open;
+        localStorage[this.group.name + "_Open"] = this.open;
+      }
     },
   },
 };

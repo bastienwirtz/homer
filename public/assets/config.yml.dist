@@ -68,6 +68,7 @@ links:
 services:
   - name: "Applications"
     icon: "fas fa-cloud"
+    collapsed: false # optionally make group collapsable, default state is true/false for new connections
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
