@@ -16,14 +16,21 @@
             </div>
             <div class="media-content">
               <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p class="subtitle is-6">
+                <template v-if="item.subtitle">
+                  {{ item.subtitle }}
+                </template>
+                <template v-else-if="stats">
+                  {{ percentage }}&percnt; blocked
+                </template>
+              </p>
             </div>
             <div
               v-if="status"
               class="status"
               v-bind:class="status.protection_enabled ? 'enabled' : 'disabled'"
             >
-              {{ status.protection_enabled }}
+              {{ status.protection_enabled ? 'enabled' : 'disabled' }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -44,16 +51,41 @@ export default {
   data: () => {
     return {
       status: null,
+      stats: null,
     };
+  },
+  computed: {
+    percentage: function () {
+      if (this.stats) {
+        return (this.stats.num_blocked_filtering * 100 / this.stats.num_dns_queries).toFixed(2);
+      }
+      return "";
+    },
   },
   created: function () {
     this.fetchStatus();
+    if (!this.item.subtitle) {
+      this.fetchStats();
+    }
   },
   methods: {
     fetchStatus: async function () {
       this.status = await fetch(
-        `${this.item.url}/control/status`
-      ).then((response) => response.json());
+        `${this.item.url}/control/status`,
+        {
+          credentials: 'include'
+        }
+      ).then((response) => response.json())
+      .catch((e) => console.log(e));
+    },
+    fetchStats: async function () {
+      this.stats = await fetch(
+        `${this.item.url}/control/stats`,
+        {
+          credentials: 'include'
+        }
+      ).then((response) => response.json())
+      .catch((e) => console.log(e));
     },
   },
 };
