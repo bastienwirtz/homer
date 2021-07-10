@@ -25,12 +25,8 @@
                 </template>
               </p>
             </div>
-            <div
-              v-if="status"
-              class="status"
-              v-bind:class="status.protection_enabled ? 'enabled' : 'disabled'"
-            >
-              {{ status.protection_enabled ? 'enabled' : 'disabled' }}
+            <div v-if="!item.subtitle" class="status" :class="protection">
+              {{ protection }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -57,9 +53,17 @@ export default {
   computed: {
     percentage: function () {
       if (this.stats) {
-        return (this.stats.num_blocked_filtering * 100 / this.stats.num_dns_queries).toFixed(2);
+        return (
+          (this.stats.num_blocked_filtering * 100) /
+          this.stats.num_dns_queries
+        ).toFixed(2);
       }
       return "";
+    },
+    protection: function () {
+      if (this.status) {
+        return this.status.protection_enabled ? "enabled" : "disabled";
+      } else return "unknown";
     },
   },
   created: function () {
@@ -70,22 +74,18 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(
-        `${this.item.url}/control/status`,
-        {
-          credentials: 'include'
-        }
-      ).then((response) => response.json())
-      .catch((e) => console.log(e));
+      this.status = await fetch(`${this.item.url}/control/status`, {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .catch((e) => console.log(e));
     },
     fetchStats: async function () {
-      this.stats = await fetch(
-        `${this.item.url}/control/stats`,
-        {
-          credentials: 'include'
-        }
-      ).then((response) => response.json())
-      .catch((e) => console.log(e));
+      this.stats = await fetch(`${this.item.url}/control/stats`, {
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .catch((e) => console.log(e));
     },
   },
 };
@@ -109,6 +109,12 @@ export default {
     background-color: #c9404d;
     border-color: #c42c3b;
     box-shadow: 0px 0px 4px 1px #c9404d;
+  }
+
+  &.unknown:before {
+    background-color: #c9c740;
+    border-color: #ccc935;
+    box-shadow: 0px 0px 4px 1px #c9c740;
   }
 
   &:before {
