@@ -37,8 +37,12 @@ export default {
         method: "HEAD",
         cache: "no-store",
       })
-        .then(function () {
-          that.offline = false;
+        .then(function (response) {
+          if (response.status >= 200 && response.status < 300) {
+            that.offline = false;
+          } else {
+            that.offline = true;
+          }
         })
         .catch(function () {
           that.offline = true;
