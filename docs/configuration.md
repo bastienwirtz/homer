@@ -167,16 +167,3 @@ In order to easily generate all required icon preset for the PWA to work, a tool
 ```bash
 npx vue-pwa-asset-generator -a {your_512x512_source_png} -o {your_output_folder}
 ```
-
-### Supported services
-
-Currently the following services are supported for showing quick infos on the card. They can be used by setting the type to one of the following values at the item.
-
-- PiHole
-- AdGuardHome
-- PaperlessNG
-
-### Additional configuration
-
-#### Paperless
-For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
