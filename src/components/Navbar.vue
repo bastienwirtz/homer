@@ -26,7 +26,7 @@
               :href="link.url"
               :target="link.target"
             >
-              <img :src="link.logo" />
+              <img v-if="link.logo" :src="link.logo" alt="link-logo"/>
               <i
                 v-if="link.icon"
                 :class="['fa-fw', link.icon, { 'mr-2': link.name }]"
