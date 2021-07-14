@@ -139,6 +139,18 @@ body {
           max-width: 70px;
         }
       }
+
+      .domain {
+        float: right;
+        margin-top: 5px;
+        margin-right: 15px;
+        border: none;
+        background-color: var(--highlight-hover);
+        border-radius: 5px;
+        padding: 5px;
+        color: #ffffff;
+        height: 30px;
+      }
     }
     .navbar,
     .navbar-menu {

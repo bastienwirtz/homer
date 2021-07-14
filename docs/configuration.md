@@ -24,6 +24,26 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
 connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
+domainChecker: # optional domain checker
+  enabled: true
+  method: "url" # 'url' (matches browser URL) or 'ping' (pings specified URL)
+  url:
+    method: "hostname" # 'hostname' (matches hostname) or 'regex' (matches href via regex)
+    hostnames:
+      local:
+        - "localhost"
+        - "127.0.0.1"
+      remote:
+        - "github.io"
+    regex:
+      http: "^http"
+      https: "^https"
+  ping: # pings url(s) and matches domain
+    local:
+      - "http://localhost:8080"
+    remote:
+      - "github.io"
+
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
 
@@ -115,6 +135,10 @@ services:
         tag: "app"
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
+        override: # override based on domain key
+          local: # override below properties if domain is 'local'
+            name: "Local app"
+            url: "http://localhost:8080"
       - name: "Another one"
         logo: "assets/tools/sample2.png"
         subtitle: "Another application"
@@ -127,6 +151,7 @@ services:
     items:
       - name: "Pi-hole"
         logo: "assets/tools/sample.png"
+        hidden: true # optional, hides entry by default
         # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "other"
         url: "http://192.168.0.151/admin"
@@ -134,6 +159,9 @@ services:
         target: "_blank" # optional html a tag target attribute
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
+        override:
+          local: # shows entry if domain is "local"
+            hidden: false
 ```
 
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
