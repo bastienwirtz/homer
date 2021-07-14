@@ -51,9 +51,9 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(
-        `${this.item.url}/control/status`
-      ).then((response) => response.json());
+      this.status = await fetch(`${this.item.url}/control/status`).then(
+        (response) => response.json()
+      );
     },
   },
 };

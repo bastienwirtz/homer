@@ -52,20 +52,22 @@ export default {
       if (this.item.subtitle != null) return; // omitting unnecessary ajax call as the subtitle is showing
       var apikey = this.item.apikey;
       if (!apikey) {
-        console.error("apikey is not present in config.yml for the paperless entry!");
+        console.error(
+          "apikey is not present in config.yml for the paperless entry!"
+        );
         return;
       }
       const url = `${this.item.url}/api/documents/`;
       this.api = await fetch(url, {
-          headers: {
-            "Authorization": "Token " + this.item.apikey
-          }
-        })
-        .then(function(response) {
+        headers: {
+          Authorization: "Token " + this.item.apikey,
+        },
+      })
+        .then(function (response) {
           if (!response.ok) {
-            throw new Error("Not 2xx response")
+            throw new Error("Not 2xx response");
           } else {
-            return response.json()
+            return response.json();
           }
         })
         .catch((e) => console.log(e));

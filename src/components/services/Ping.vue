@@ -53,8 +53,8 @@ export default {
     fetchStatus: async function () {
       const url = `${this.item.url}`;
       this.api.status = await fetch(url)
-        .then((response) => "enabled")
-        .catch((e) => "disabled");
+        .then(() => "enabled")
+        .catch(() => "disabled");
     },
   },
 };
