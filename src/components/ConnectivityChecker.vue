@@ -38,11 +38,7 @@ export default {
         cache: "no-store",
       })
         .then(function (response) {
-          if (response.status >= 200 && response.status < 300) {
-            that.offline = false;
-          } else {
-            that.offline = true;
-          }
+          that.offline = !response.ok;
         })
         .catch(function () {
           that.offline = true;
