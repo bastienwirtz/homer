@@ -43,8 +43,8 @@
 - [Features](#features)
 - [Getting started](#getting-started)
 - [Configuration](docs/configuration.md)
+- [Custom services](docs/customservices.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
-- [Roadmap](#roadmap)
 - [Development](docs/development.md)
 
 
@@ -134,9 +134,3 @@ npm run build
 ```
 
 Then your dashboard is ready to use in the `/dist` directory.
-
-
-## Roadmap
-
-- [ ] Add new themes.
-- [ ] Add support for custom service card (add custom feature to some service / app link)

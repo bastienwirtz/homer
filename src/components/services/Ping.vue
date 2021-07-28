@@ -22,8 +22,8 @@
                 </template>
               </p>
             </div>
-            <div v-if="api" class="status" :class="api.status">
-              {{ api.status }}
+            <div v-if="status" class="status" :class="status">
+              {{ status }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -42,9 +42,7 @@ export default {
     item: Object,
   },
   data: () => ({
-    api: {
-      status: "",
-    },
+    status: null,
   }),
   created() {
     this.fetchStatus();
@@ -52,9 +50,16 @@ export default {
   methods: {
     fetchStatus: async function () {
       const url = `${this.item.url}`;
-      this.api.status = await fetch(url)
-        .then((response) => "enabled")
-        .catch((e) => "disabled");
+      fetch(url, { method: "HEAD", cache: "no-cache" })
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          this.status = "online";
+        })
+        .catch(() => {
+          this.status = "offline";
+        });
     },
   },
 };
@@ -68,16 +73,16 @@ export default {
   font-size: 0.8rem;
   color: var(--text-title);
 
-  &.enabled:before {
+  &.online:before {
     background-color: #94e185;
     border-color: #78d965;
-    box-shadow: 0 0 4px 1px #94e185;
+    box-shadow: 0 0 5px 1px #94e185;
   }
 
-  &.disabled:before {
+  &.offline:before {
     background-color: #c9404d;
     border-color: #c42c3b;
-    box-shadow: 0 0 4px 1px #c9404d;
+    box-shadow: 0 0 5px 1px #c9404d;
   }
 
   &:before {

@@ -83,13 +83,13 @@ export default {
   &.enabled:before {
     background-color: #94e185;
     border-color: #78d965;
-    box-shadow: 0 0 4px 1px #94e185;
+    box-shadow: 0 0 5px 1px #94e185;
   }
 
   &.disabled:before {
     background-color: #c9404d;
     border-color: #c42c3b;
-    box-shadow: 0 0 4px 1px #c9404d;
+    box-shadow: 0 0 5px 1px #c9404d;
   }
 
   &:before {
