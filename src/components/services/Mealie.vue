@@ -55,35 +55,36 @@ export default {
     fetchStatus: async function () {
       if (this.item.subtitle != null) return; // omitting unnecessary ajax call as the subtitle is showing
       var apikey = this.item.apikey;
-      if (apikey) {
-        const url = `${this.item.url}/api/meal-plans/today/`;
-        this.meal = await fetch(url, {
-            headers: {
-              "Authorization": "Bearer " + this.item.apikey,
-              "Accept": "application/json"
-            }
-          })
-          .then(function(response) {
-            if (!response.ok) {
-              throw new Error("Not 2xx response")
-            } else {
-              if (response != null) {
-                return response.json();
-              }
-            }
-          })
-          .catch((e) => console.log(e));
-      }
-      const url = `${this.item.url}/api/debug/statistics/`;
-      this.stats = await fetch(url)
-        .then(function(response) {
-          if (!response.ok) {
-            throw new Error("Not 2xx response")
-          } else {
+      this.meal = await fetch(`${this.item.url}/api/meal-plans/today/`, {
+        headers: {
+          "Authorization": "Bearer " + this.item.apikey,
+          "Accept": "application/json"
+        }
+      })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error("Not 2xx response")
+        } else {
+          if (response != null) {
             return response.json();
           }
-        })
-        .catch((e) => console.log(e));
+        }
+      })
+      .catch((e) => console.log(e));
+      this.stats = await fetch(`${this.item.url}/api/debug/statistics/`, {
+        headers: {
+          "Authorization": "Bearer " + this.item.apikey,
+          "Accept": "application/json"
+        }
+      })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error("Not 2xx response")
+        } else {
+          return response.json();
+        }
+      })
+      .catch((e) => console.log(e));
     },
   },
 };
