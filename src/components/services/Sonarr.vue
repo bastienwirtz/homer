@@ -70,10 +70,7 @@ export default {
   },
   methods: {
     fetchConfig: function () {
-      fetch(`${this.item.url}/api/health`, {
-        credentials: "include",
-        headers: { "X-Api-Key": `${this.item.apikey}` },
-      })
+      fetch(`${this.item.url}/api/health?apiKey=${this.item.apikey}`)
         .then((response) => {
           if (response.status != 200) {
             throw new Error(response.statusText);
@@ -95,10 +92,7 @@ export default {
           console.error(e);
           this.serverError = true;
         });
-      fetch(`${this.item.url}/api/queue`, {
-        credentials: "include",
-        headers: { "X-Api-Key": `${this.item.apikey}` },
-      })
+      fetch(`${this.item.url}/api/queue?apiKey=${this.item.apikey}`)
         .then((response) => {
           if (response.status != 200) {
             throw new Error(response.statusText);
