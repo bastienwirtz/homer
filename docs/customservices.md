@@ -51,3 +51,70 @@ For Paperless you need an API-Key which you have to store at the item in the fie
 ## Ping
 
 For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
+
+### CORS Issues
+
+If try you to "ping" services, which have a differ domain as the homer service then may you get a `Cross-Origin Request Blocked` messages (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors).
+
+Possible solutions:
+
+* Modify the target sever configuration so that the response of the server included following header- `Access-Control-Allow-Origin: *` (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests)
+
+* Use a cors proxy sever  like `cors-container` (https://github.com/imjacobclark/cors-container)
+
+#### Example docker compose file
+
+```yml
+---
+version: "2"
+services:
+  homer:
+    image: b4bz/homer
+    #To build from source, comment previous line and uncomment below
+    #build: .
+    container_name: homer
+    volumes:
+      - /your/local/assets/:/www/assets
+    ports:
+      - 8080:8080
+    #environment:
+    #  - UID=1000
+    #  - GID=1000
+    restart: unless-stopped
+  #The cors-container service which avoid "allow" cross-domain requests, can use with the CorsPing type
+  cors-container:
+    image: imjacobclark/cors-container:latest
+    container_name: cors-container
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+```
+#### Example confiq.yml file
+
+```yml
+---
+title: "Demo dashboard"
+subtitle: "Homer"
+logo: "logo.png"
+
+header: true
+footer: false
+
+services:
+  - name: "Applications"
+    icon: "fas fa-cloud"
+    items:
+      - name: "Awesome app"
+        type: Ping
+        logo: "assets/tools/sample.png"
+        subtitle: "Bookmark example"
+        tag: "app"
+        url: "https://www.reddit.com/r/selfhosted/"
+      - name: "Github repo"
+        type: CorsPing
+        icon: "fab fa-github"
+        tag: "app"
+        url: "https://github.com/bastienwirtz/homer"
+        # domain name and protocol (http/https) have to be the same as of the homer server
+        cors_proxy: "http://localhost:3000/https://github.com/bastienwirtz/homer"
+```
