@@ -37,8 +37,8 @@ export default {
         method: "HEAD",
         cache: "no-store",
       })
-        .then(function () {
-          that.offline = false;
+        .then(function (response) {
+          that.offline = !response.ok;
         })
         .catch(function () {
           that.offline = true;

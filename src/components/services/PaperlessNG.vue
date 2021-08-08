@@ -21,12 +21,9 @@
                   {{ item.subtitle }}
                 </template>
                 <template v-else-if="api">
-                  {{ percentage }}&percnt; blocked
+                  happily storing {{ api.count }} documents
                 </template>
               </p>
-            </div>
-            <div v-if="api" class="status" :class="api.status">
-              {{ api.status }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -40,32 +37,39 @@
 
 <script>
 export default {
-  name: "PiHole",
+  name: "Paperless",
   props: {
     item: Object,
   },
   data: () => ({
-    api: {
-      status: "",
-      ads_percentage_today: 0,
-    },
+    api: null,
   }),
-  computed: {
-    percentage: function () {
-      if (this.api) {
-        return this.api.ads_percentage_today.toFixed(1);
-      }
-      return "";
-    },
-  },
   created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}/api.php`;
-      this.api = await fetch(url)
-        .then((response) => response.json())
+      if (this.item.subtitle != null) return; // omitting unnecessary ajax call as the subtitle is showing
+      var apikey = this.item.apikey;
+      if (!apikey) {
+        console.error(
+          "apikey is not present in config.yml for the paperless entry!"
+        );
+        return;
+      }
+      const url = `${this.item.url}/api/documents/`;
+      this.api = await fetch(url, {
+        headers: {
+          Authorization: "Token " + this.item.apikey,
+        },
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Not 2xx response");
+          } else {
+            return response.json();
+          }
+        })
         .catch((e) => console.log(e));
     },
   },
@@ -75,31 +79,5 @@ export default {
 <style scoped lang="scss">
 .media-left img {
   max-height: 100%;
-}
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.enabled:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-
-  &.disabled:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
 }
 </style>

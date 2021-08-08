@@ -20,13 +20,10 @@
                 <template v-if="item.subtitle">
                   {{ item.subtitle }}
                 </template>
-                <template v-else-if="api">
-                  {{ percentage }}&percnt; blocked
-                </template>
               </p>
             </div>
-            <div v-if="api" class="status" :class="api.status">
-              {{ api.status }}
+            <div v-if="status" class="status" :class="status">
+              {{ status }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -40,33 +37,29 @@
 
 <script>
 export default {
-  name: "PiHole",
+  name: "Ping",
   props: {
     item: Object,
   },
   data: () => ({
-    api: {
-      status: "",
-      ads_percentage_today: 0,
-    },
+    status: null,
   }),
-  computed: {
-    percentage: function () {
-      if (this.api) {
-        return this.api.ads_percentage_today.toFixed(1);
-      }
-      return "";
-    },
-  },
   created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}/api.php`;
-      this.api = await fetch(url)
-        .then((response) => response.json())
-        .catch((e) => console.log(e));
+      const url = `${this.item.url}`;
+      fetch(url, { method: "HEAD", cache: "no-cache" })
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          this.status = "online";
+        })
+        .catch(() => {
+          this.status = "offline";
+        });
     },
   },
 };
@@ -80,13 +73,13 @@ export default {
   font-size: 0.8rem;
   color: var(--text-title);
 
-  &.enabled:before {
+  &.online:before {
     background-color: #94e185;
     border-color: #78d965;
     box-shadow: 0 0 5px 1px #94e185;
   }
 
-  &.disabled:before {
+  &.offline:before {
     background-color: #c9404d;
     border-color: #c42c3b;
     box-shadow: 0 0 5px 1px #c9404d;

@@ -211,7 +211,7 @@ body {
     color: var(--highlight-secondary);
     background-color: var(--highlight-secondary);
     position: absolute;
-    top: 1rem;
+    bottom: 1rem;
     right: -0.2rem;
     width: 3px;
     overflow: hidden;
@@ -224,7 +224,6 @@ body {
   }
 
   .card {
-    border-radius: 5px;
     border: none;
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
     transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
@@ -260,11 +259,13 @@ body {
     }
 
     .column div:first-of-type .card {
-      border-radius: 5px 5px 0 0;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
     }
 
     .column div:last-child .card {
-      border-radius: 0 0 5px 5px;
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
     }
   }
 
