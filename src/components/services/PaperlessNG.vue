@@ -59,7 +59,7 @@ export default {
       }
       const url = `${this.item.url}/api/documents/`;
       this.api = await fetch(url, {
-        credentials: 'include',
+        credentials: "include",
         headers: {
           Authorization: "Token " + this.item.apikey,
         },
