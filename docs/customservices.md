@@ -51,3 +51,8 @@ For Paperless you need an API-Key which you have to store at the item in the fie
 ## Ping
 
 For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
+
+
+## SpeedtestTracker
+
+For the SpeedtestTracker service you just need to define a entry with type `SpeedtestTracker`.
