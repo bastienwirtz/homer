@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}`;
+      const url = typeof this.item.health_url === 'undefined' ? `${this.item.url}` : `${this.item.health_url}`;
       fetch(url, { method: "HEAD", cache: "no-cache" })
         .then((response) => {
           if (!response.ok) {
