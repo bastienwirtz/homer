@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-/dist
 
 # local env files
 .env.local
@@ -21,6 +20,6 @@ yarn-error.log*
 *.sw?
 
 # App configuration
-config.yml
+
 
 .drone.yml
