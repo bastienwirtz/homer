@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+/* Custom card colors */
+/* Use with `class:` property of services in config.yml */
+body #app .card.green {
+  background-color: #006600;
+  color: #00ff00;
+}
