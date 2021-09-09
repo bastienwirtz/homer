@@ -106,7 +106,7 @@ body {
     }
 
     .first-line {
-      height: 100px;
+      min-height: 100px;
       vertical-align: center;
       background-color: var(--highlight-primary);
 
@@ -121,7 +121,7 @@ body {
       }
 
       .container {
-        height: 80px;
+        min-height: 80px;
         padding: 10px 0;
       }
 
