@@ -15,10 +15,16 @@
 <script>
 export default {
   name: "SearchInput",
-  props: ["value"],
+  props: {
+    value: String,
+    hotkey: {
+      type: String,
+      default: "/"
+    }
+  },
   mounted() {
     this._keyListener = function (event) {
-      if (event.key === "/") {
+      if (event.key === this.hotkey) {
         event.preventDefault();
         this.focus();
       }

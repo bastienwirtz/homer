@@ -19,6 +19,8 @@ logo: "assets/logo.png"
 # icon: "fas fa-skull-crossbones"
 
 header: true # Set to false to hide the header
+# Optional: Different hotkey for search, defaults to "/"
+# hotkey: "Shift"
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
