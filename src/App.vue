@@ -30,6 +30,9 @@
         :links="config.links"
         @navbar-toggle="showMenu = !showMenu"
       >
+
+        <Clock v-if="config.clock"/>
+
         <DarkMode @updated="isDark = $event" />
 
         <SettingToggle
@@ -134,12 +137,14 @@ import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
+import Clock from "./components/Clock";
 
 import defaultConfig from "./assets/defaults.yml";
 
 export default {
   name: "App",
   components: {
+    Clock,
     Navbar,
     ConnectivityChecker,
     Service,
