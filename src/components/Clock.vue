@@ -23,8 +23,12 @@ export default {
   methods: {
     getTime: function () {
       const now = new Date();
-      this.timestamp = now.getHours() + ":" + now.getMinutes();
+      this.timestamp = `${this.formatNumber(now.getHours())}:${this.formatNumber(now.getMinutes())}`;
     },
+    formatNumber: function (number) {
+      number = (`0${number}`).slice(-2);
+      return number;
+    }
   },
 };
 </script>

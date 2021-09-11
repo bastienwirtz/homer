@@ -31,7 +31,7 @@
         @navbar-toggle="showMenu = !showMenu"
       >
 
-        <Clock v-if="config.clock"/>
+        <Clock v-if="config.navbar && config.navbar.clock"/>
 
         <DarkMode @updated="isDark = $event" />
 
