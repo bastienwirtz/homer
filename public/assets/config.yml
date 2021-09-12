@@ -74,14 +74,27 @@ services:
         icon: "fas fa-map-marked-alt"
         url: "https://maps.google.com"
         target: "_blank" # optional html a tag target attribute
+      - name: "Amazon"
+        icon: "fab fa-amazon"
+        url: "http://amazon.co.uk/"
+        target: "_blank" # optional html a tag target attribute
+  - name: "Train"
+    icon: "fas fa-train"
+    items:
       - name: "RTT"
         subtitle: "Real Time Trains"
         icon: "fas fa-train"
         url: "http://realtimetrains.co.uk/"
         target: "_blank" # optional html a tag target attribute
-      - name: "Amazon"
-        icon: "fab fa-amazon"
-        url: "http://amazon.co.uk/"
+      - name: "RTT - PWE to GLC"
+        subtitle: "Pollokshaws East to Glasgow Central"
+        icon: "fas fa-arrow-right"
+        url: "https://www.realtimetrains.co.uk/search/detailed/gb-nr:PWE/to/gb-nr:GLC?stp=WVS&show=all&order=wtt"
+        target: "_blank" # optional html a tag target attribute
+      - name: "RTT - GLC to PWD"
+        subtitle: "Glasgow Central to Pollokshaws East"
+        icon: "fas fa-arrow-left"
+        url: "https://www.realtimetrains.co.uk/search/detailed/gb-nr:GLC/to/gb-nr:PWE?stp=WVS&show=all&order=wtt"
         target: "_blank" # optional html a tag target attribute
   - name: "Other"
     icon: "fas fa-icons"
