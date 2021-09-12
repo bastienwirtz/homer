@@ -67,15 +67,18 @@ services:
     icon: "fas fa-server"
     items:
       - name: "GMail"
-        icon: "fas fa-at"
+#        icon: "fas fa-at"
+        logo: "assets/tools/google-mail.png"
         url: "https://mail.google.com"
         target: "_blank" # optional html a tag target attribute
       - name: "Maps"
-        icon: "fas fa-map-marked-alt"
+#        icon: "fas fa-map-marked-alt"
+        logo: "assets/tools/googlemaps.png"
         url: "https://maps.google.com"
         target: "_blank" # optional html a tag target attribute
       - name: "Amazon"
-        icon: "fab fa-amazon"
+#        icon: "fab fa-amazon"
+        logo: "assets/tools/amazon.png"
         url: "http://amazon.co.uk/"
         target: "_blank" # optional html a tag target attribute
   - name: "Train"
@@ -83,7 +86,8 @@ services:
     items:
       - name: "RTT"
         subtitle: "Real Time Trains"
-        icon: "fas fa-train"
+#        icon: "fas fa-train"
+        logo: "assets/tools/rtt.png"
         url: "http://realtimetrains.co.uk/"
       - name: "RTT - PWE to GLC"
         subtitle: "Pollokshaws East to Glasgow Central"
@@ -104,4 +108,19 @@ services:
       - name: "Daily Health Check"
         icon: "fas fa-shield-virus"
         url: "https://jpmc.co1.qualtrics.com/jfe/form/SV_9M0Lr3A4z1xY7B3?Q_TS_ID=TS_37yhpLreARsWqWx&Q_TS_RS=Self&Q_EE_ANON=1&_=1"
+        target: "_blank" # optional html a tag target attribute
+  - name: "Other"
+    icon: "fas fa-icons"
+    items:      
+      - name: "Wikipedia"
+        icon: "fab fa-wikipedia-w"
+        url: "http://en.wikipedia.org/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "Todoist"
+        logo: "assets/tools/todoist.png"
+        url: "https://todoist.com/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "DuckDuckGo"
+        logo: "assets/tools/duckduckgo.png"
+        url: "https://duckduckgo.com"
         target: "_blank" # optional html a tag target attribute
