@@ -53,9 +53,7 @@ export default {
     fetchStatus: async function () {
       this.status = await fetch(`${this.item.url}/control/status`, {
         credentials: "include",
-      }).then(
-        (response) => response.json()
-      );
+      }).then((response) => response.json());
     },
   },
 };
