@@ -50,4 +50,4 @@ For Paperless you need an API-Key which you have to store at the item in the fie
 
 ## Ping
 
-For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
+For Ping you need an API-Key which you have to store at the item in the field `apikey`.
