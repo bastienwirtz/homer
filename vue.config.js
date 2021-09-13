@@ -12,6 +12,7 @@ module.exports = {
   publicPath: "",
   pwa: {
     manifestPath: "assets/manifest.json",
+    manifestCrossorigin: "use-credentials",
     appleMobileWebAppStatusBarStyle: "black",
     appleMobileWebAppCapable: "yes",
     name: manifestOptions.name,

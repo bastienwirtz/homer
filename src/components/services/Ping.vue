@@ -16,14 +16,14 @@
             </div>
             <div class="media-content">
               <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
+              <p class="subtitle is-6">
+                <template v-if="item.subtitle">
+                  {{ item.subtitle }}
+                </template>
+              </p>
             </div>
-            <div
-              v-if="status"
-              class="status"
-              v-bind:class="status.protection_enabled ? 'enabled' : 'disabled'"
-            >
-              {{ status.protection_enabled }}
+            <div v-if="status" class="status" :class="status">
+              {{ status }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -37,23 +37,33 @@
 
 <script>
 export default {
-  name: "AdGuardHome",
+  name: "Ping",
   props: {
     item: Object,
   },
-  data: () => {
-    return {
-      status: null,
-    };
-  },
-  created: function () {
+  data: () => ({
+    status: null,
+  }),
+  created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/control/status`, {
+      const url = `${this.item.url}`;
+      fetch(url, {
+        method: "HEAD",
+        cache: "no-cache",
         credentials: "include",
-      }).then((response) => response.json());
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          this.status = "online";
+        })
+        .catch(() => {
+          this.status = "offline";
+        });
     },
   },
 };
@@ -67,16 +77,16 @@ export default {
   font-size: 0.8rem;
   color: var(--text-title);
 
-  &.enabled:before {
+  &.online:before {
     background-color: #94e185;
     border-color: #78d965;
-    box-shadow: 0px 0px 4px 1px #94e185;
+    box-shadow: 0 0 5px 1px #94e185;
   }
 
-  &.disabled:before {
+  &.offline:before {
     background-color: #c9404d;
     border-color: #c42c3b;
-    box-shadow: 0px 0px 4px 1px #c9404d;
+    box-shadow: 0 0 5px 1px #c9404d;
   }
 
   &:before {

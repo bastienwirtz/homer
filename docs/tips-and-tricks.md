@@ -113,6 +113,64 @@ docker create \
 
 
 ## Get the news headlines in Homer
+
+### Mapping Fields
+Most times, the url you're getting headlines from follows a different schema than the one expected by Homer.
+
+For example, if you would like to show jokes from ChuckNorris.io, you'll find that the url https://api.chucknorris.io/jokes/random is giving you info like this:
+
+```json
+{
+  "categories": [],
+  "created_at": "2020-01-05 13:42:22.089095",
+  "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+  "id": "MR2-BnMBR667xSpQBIleUg",
+  "updated_at": "2020-01-05 13:42:22.089095",
+  "url": "https://api.chucknorris.io/jokes/MR2-BnMBR667xSpQBIleUg",
+  "value": "Chuck Norris can quitely sneak up on himself"
+}
+```
+
+but... you need that info to be transformed to something like this:
+
+```json
+{
+  "title": "MR2-BnMBR667xSpQBIleUg",
+  "content": "Chuck Norris can quitely sneak up on himself"
+}
+```
+
+Now, you can do that using the `mapping` field in your `message` configuration. This example would be something like this:
+
+```yml
+message:
+  url: https://api.chucknorris.io/jokes/random
+  mapping:
+    title: 'id'
+    content: 'value'
+```
+
+As you would see, using the ID as a title doesn't seem nice, that's why when a field is empty it would keep the default values, like this:
+
+```yml
+message:
+  url: https://api.chucknorris.io/jokes/random
+  mapping:
+    content: 'value'
+  title: "Chuck Norris Facts!"
+```
+
+and even an error message in case the `url` didn't respond or threw an error:
+
+```yml
+message:
+  url: https://api.chucknorris.io/jokes/random
+  mapping:
+    content: 'value'
+  title: "Chuck Norris Facts!"
+  content: "Message could not be loaded"
+```
+
 #### `by @JamiePhonic`
 
 Homer allows you to set a "message" that will appear at the top of the page, however, you can also supply a `url:`.

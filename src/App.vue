@@ -13,7 +13,9 @@
       <section v-if="config.header" class="first-line">
         <div v-cloak class="container">
           <div class="logo">
-            <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
+            <a href="#">
+              <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
+            </a>
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
           <div class="dashboard-title">
@@ -62,6 +64,11 @@
             <template v-for="group in services">
               <h2 v-if="group.name" class="column is-full group-title">
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
+                <div v-else-if="group.logo" class="group-logo media-left">
+                  <figure class="image is-48x48">
+                    <img :src="group.logo" :alt="`${group.name} logo`" />
+                  </figure>
+                </div>
                 {{ group.name }}
               </h2>
               <Service
@@ -85,6 +92,11 @@
             >
               <h2 v-if="group.name" class="group-title">
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
+                <div v-else-if="group.logo" class="group-logo media-left">
+                  <figure class="image is-48x48">
+                    <img :src="group.logo" :alt="`${group.name} logo`" />
+                  </figure>
+                </div>
                 {{ group.name }}
               </h2>
               <Service
@@ -149,28 +161,41 @@ export default {
     };
   },
   created: async function () {
-    const defaults = jsyaml.load(defaultConfig);
-    let config;
-    try {
-      config = await this.getConfig();
-    } catch (error) {
-      console.log(error);
-      config = this.handleErrors("⚠️ Error loading configuration", error);
-    }
-    this.config = merge(defaults, config);
-    this.services = this.config.services;
-    document.title =
-      this.config.documentTitle ||
-      `${this.config.title} | ${this.config.subtitle}`;
-    if (this.config.stylesheet) {
-      let stylesheet = "";
-      for (const file of this.config.stylesheet) {
-        stylesheet += `@import "${file}";`;
-      }
-      this.createStylesheet(stylesheet);
-    }
+    this.buildDashboard();
+    window.onhashchange = this.buildDashboard;
   },
   methods: {
+    buildDashboard: async function () {
+      const defaults = jsyaml.load(defaultConfig);
+      let config;
+      try {
+        config = await this.getConfig();
+        const path =
+          window.location.hash.substring(1) != ""
+            ? window.location.hash.substring(1)
+            : null;
+
+        if (path) {
+          let pathConfig = await this.getConfig(`assets/${path}.yml`); // the slash (/) is included in the pathname
+          config = Object.assign(config, pathConfig);
+        }
+      } catch (error) {
+        console.log(error);
+        config = this.handleErrors("⚠️ Error loading configuration", error);
+      }
+      this.config = merge(defaults, config);
+      this.services = this.config.services;
+      document.title =
+        this.config.documentTitle ||
+        `${this.config.title} | ${this.config.subtitle}`;
+      if (this.config.stylesheet) {
+        let stylesheet = "";
+        for (const file of this.config.stylesheet) {
+          stylesheet += `@import "${file}";`;
+        }
+        this.createStylesheet(stylesheet);
+      }
+    },
     getConfig: function (path = "assets/config.yml") {
       return fetch(path).then((response) => {
         if (response.redirected) {

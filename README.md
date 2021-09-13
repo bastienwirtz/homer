@@ -43,8 +43,8 @@
 - [Features](#features)
 - [Getting started](#getting-started)
 - [Configuration](docs/configuration.md)
+- [Custom services](docs/customservices.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
-- [Roadmap](#roadmap)
 - [Development](docs/development.md)
 
 
@@ -73,7 +73,11 @@ See [documentation](docs/configuration.md) for information about the configurati
 To launch container:
 
 ```sh
-docker run -p 8080:8080 -v /your/local/assets/:/www/assets b4bz/homer:latest
+docker run -d \
+  -p 8080:8080 \
+  -v </your/local/assets/>:/www/assets \
+  --restart=always \
+  b4bz/homer:latest
 ```
 
 Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
@@ -130,9 +134,3 @@ npm run build
 ```
 
 Then your dashboard is ready to use in the `/dist` directory.
-
-
-## Roadmap
-
-- [ ] Add new themes.
-- [ ] Add support for custom service card (add custom feature to some service / app link)
