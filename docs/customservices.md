@@ -23,14 +23,13 @@ The following configuration is available for the PiHole service.
 ## OpenWeatherMap
 
 Using the OpenWeatherMap service you can display weather information about a given location.
-
-The following configuration is available for the OpenWeatherMap service
+The following configuration is available for the OpenWeatherMap service:
 
 ```
 items:
      - name: "Weather"
        location: "Amsterdam" # your location.
-       locationId: "2759794" # OpenWeatherMap city ID.
+       locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
        apiKey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
        units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
        background: "square" # choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
