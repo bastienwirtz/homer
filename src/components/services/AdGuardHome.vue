@@ -25,7 +25,7 @@
                 </template>
               </p>
             </div>
-            <div v-if="!item.subtitle" class="status" :class="protection">
+            <div class="status" :class="protection">
               {{ protection }}
             </div>
           </div>
