@@ -7,7 +7,7 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
 
-# Optional: Use external configuration file. 
+# Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
 # externalConfig: https://example.com/server-luci/config.yaml
 
@@ -136,6 +136,9 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
+
+View [Custom Services](customservices.md) for details about all available custom services (like PiHole) and how to configure them.
+
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
 ```json
@@ -167,3 +170,20 @@ In order to easily generate all required icon preset for the PWA to work, a tool
 ```bash
 npx vue-pwa-asset-generator -a {your_512x512_source_png} -o {your_output_folder}
 ```
+
+### Supported services
+
+Currently the following services are supported for showing quick infos on the card. They can be used by setting the type to one of the following values at the item.
+
+- PiHole
+- AdGuardHome
+- PaperlessNG
+- Mealie
+
+### Additional configuration
+
+#### Paperless
+For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
+
+#### Mealie
+First off make sure to remove an existing `subtitle` as it will take precedence if set. Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
