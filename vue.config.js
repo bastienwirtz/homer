@@ -10,6 +10,7 @@ module.exports = {
       .end();
   },
   publicPath: "",
+  outputDir: "dist/" + (process.env.HOMER_URL_PREFIX || ""),
   pwa: {
     manifestPath: "assets/manifest.json",
     manifestCrossorigin: "use-credentials",

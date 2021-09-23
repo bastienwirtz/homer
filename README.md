@@ -109,6 +109,15 @@ environment:
   - GID=1000
 ```
 
+In case homer runs behind a reverse proxy (eg Traefik) and a URL prefix is used, this prefix can be set via the environment variables: (default: /)
+
+```yaml
+environment:
+  - HOMER_URL_PREFIX=/homer
+```
+
+By setting the prefix, homer can be accessed via eg www.example.com/homer
+
 ### Using the release tarball (prebuilt, ready to use)
 
 Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a webserver.
