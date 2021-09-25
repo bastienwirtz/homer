@@ -47,7 +47,7 @@
 - [Custom services](docs/customservices.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
 - [Development](docs/development.md)
-
+- [Troubleshooting](docs/troubleshooting.md)
 
 ## Features
 

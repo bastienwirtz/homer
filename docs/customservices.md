@@ -4,6 +4,8 @@ Some service can use a specific a component that provides some extra features by
 configuration. Available services are in `src/components/`. Here is an overview of all custom services that are available
 within Homer.
 
+If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
+
 ## PiHole
 
 Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
