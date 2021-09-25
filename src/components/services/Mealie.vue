@@ -20,9 +20,7 @@
                 <template v-if="item.subtitle">
                   {{ item.subtitle }}
                 </template>
-                <template v-else-if="meal">
-                  Today: {{ meal.name }}
-                </template>
+                <template v-else-if="meal"> Today: {{ meal.name }} </template>
                 <template v-else-if="stats">
                   happily keeping {{ stats.totalRecipes }} recipes organized
                 </template>
@@ -54,37 +52,36 @@ export default {
   methods: {
     fetchStatus: async function () {
       if (this.item.subtitle != null) return; // omitting unnecessary ajax call as the subtitle is showing
-      var apikey = this.item.apikey;
       this.meal = await fetch(`${this.item.url}/api/meal-plans/today/`, {
         headers: {
-          "Authorization": "Bearer " + this.item.apikey,
-          "Accept": "application/json"
-        }
+          Authorization: "Bearer " + this.item.apikey,
+          Accept: "application/json",
+        },
       })
-      .then(function(response) {
-        if (!response.ok) {
-          throw new Error("Not 2xx response")
-        } else {
-          if (response != null) {
-            return response.json();
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Not 2xx response");
+          } else {
+            if (response != null) {
+              return response.json();
+            }
           }
-        }
-      })
-      .catch((e) => console.log(e));
+        })
+        .catch((e) => console.log(e));
       this.stats = await fetch(`${this.item.url}/api/debug/statistics/`, {
         headers: {
-          "Authorization": "Bearer " + this.item.apikey,
-          "Accept": "application/json"
-        }
+          Authorization: "Bearer " + this.item.apikey,
+          Accept: "application/json",
+        },
       })
-      .then(function(response) {
-        if (!response.ok) {
-          throw new Error("Not 2xx response")
-        } else {
-          return response.json();
-        }
-      })
-      .catch((e) => console.log(e));
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Not 2xx response");
+          } else {
+            return response.json();
+          }
+        })
+        .catch((e) => console.log(e));
     },
   },
 };
