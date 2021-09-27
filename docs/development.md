@@ -1,4 +1,4 @@
-## Development
+# Development
 
 ```sh
 # Using yarn (recommended)
@@ -10,7 +10,7 @@ npm install
 npm run serve
 ```
 
-### Themes
+## Themes
 
 Themes are meant to be simple customization (written in [scss](https://sass-lang.com/documentation/syntax)).
 To add a new theme, just add a file in the theme directory, and put all style in the `body #app.theme-<name>` scope. Then import it in the main style file.
