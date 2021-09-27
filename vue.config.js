@@ -9,7 +9,7 @@ module.exports = {
       .loader("raw-loader")
       .end();
   },
-  publicPath: "",
+  publicPath: process.env.PUBLIC_PATH,
   pwa: {
     manifestPath: "assets/manifest.json",
     manifestCrossorigin: "use-credentials",

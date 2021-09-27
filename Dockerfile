@@ -1,6 +1,8 @@
 # build stage
 FROM node:lts-alpine as build-stage
 
+ENV PUBLIC_PATH ""
+
 WORKDIR /app
 
 COPY package*.json ./

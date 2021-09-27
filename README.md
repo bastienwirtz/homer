@@ -80,7 +80,7 @@ docker run -d \
   b4bz/homer:latest
 ```
 
-Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
+Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`). If you want to run the project under a sub-path rather than a domain or subdomain (e.g. `mydomain.com/homer/`) you can assign the `PUBLIC_PATH` env var with value of your path (note the sub-path must have a [trailing slash](https://cli.vuejs.org/config/#publicpath)).
 
 ### Using docker-compose
 
@@ -107,6 +107,20 @@ Default assets will be automatically installed in the `/www/assets` directory. U
 environment:
   - UID=1000
   - GID=1000
+```
+
+Use the `PUBLIC_PATH` env var to run the project under a specific path in the `docker-compose.yml`:
+
+```yaml
+environment:
+  - PUBLIC_PATH="/homer/"
+```
+
+To run an example of the project using a sub-path behind traefik, as a reverse-proxy, run the following:
+
+```sh
+cd /path/to/docker-compose.subpath.yml
+docker-compose -f docker-compose.subpath.yml up -d
 ```
 
 ### Using the release tarball (prebuilt, ready to use)

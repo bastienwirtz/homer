@@ -1,0 +1,50 @@
+---
+version: "3"
+
+services:
+  homer:
+    image: b4bz/homer
+    #To build from source, comment previous line and uncomment below
+    # build: .
+    environment:
+      PUBLIC_PATH: "/homer/"
+      #  - UID=1000
+      #  - GID=1000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homer.entrypoints=web"
+      - "traefik.http.routers.homer.rule=Host(`localhost`) && PathPrefix(`/homer`)"
+      - "traefik.http.middlewares.homer-stripprefix.stripprefix.prefixes=/homer"
+      - "traefik.http.middlewares.homer-redirectregex.redirectregex.regex=^(.*)/homer$$"
+      - "traefik.http.middlewares.homer-redirectregex.redirectregex.replacement=$$1/homer/"
+      - "traefik.http.middlewares.homer-redirectregex.redirectregex.permanent=true"
+      - "traefik.http.routers.homer.middlewares=homer-redirectregex, homer-stripprefix"
+      - "traefik.http.routers.homer.service=homer"
+      - "traefik.http.services.homer.loadbalancer.server.port=8080"
+    networks:
+      - traefik
+    restart: unless-stopped
+    # volumes:
+    #   - /your/local/assets/:/www/assets
+
+  traefik:
+    image: traefik
+    command:
+      - "--accesslog=true"
+      - "--entrypoints.web.address=:80"
+      - "--providers.docker=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=traefik"
+      - "--providers.docker.watch=true"
+    networks:
+      - traefik
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  traefik:
+    name: traefik
