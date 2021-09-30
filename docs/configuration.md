@@ -131,6 +131,7 @@ services:
         tag: "other"
         url: "http://192.168.0.151/admin"
         type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
+        # fetchWithCredentials: true # optional adds cookies to fetch calls for external data. Useful for services running behind SSO clients e.g. Authelia
         target: "_blank" # optional html a tag target attribute
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
