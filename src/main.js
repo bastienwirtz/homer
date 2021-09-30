@@ -14,6 +14,21 @@ Vue.component("DynamicStyle", {
   },
 });
 
+Vue.mixin({
+  methods: {
+    fetchOptions(options = {}) {
+      if (
+        this.item &&
+        this.item.fetchWithCredentials &&
+        this.item.fetchWithCredentials == true
+      ) {
+        options.credentials = "include";
+      }
+      return options;
+    },
+  },
+});
+
 new Vue({
   render: (h) => h(App),
 }).$mount("#app");

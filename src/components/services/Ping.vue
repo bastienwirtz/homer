@@ -50,11 +50,10 @@ export default {
   methods: {
     fetchStatus: async function () {
       const url = `${this.item.url}`;
-      fetch(url, {
+      fetch(url, this.fetchOptions({
         method: "HEAD",
         cache: "no-cache",
-        credentials: "include",
-      })
+      }))
         .then((response) => {
           if (!response.ok) {
             throw Error(response.statusText);

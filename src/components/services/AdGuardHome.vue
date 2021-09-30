@@ -74,16 +74,18 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/control/status`, {
-        credentials: "include",
-      })
+      this.status = await fetch(
+        `${this.item.url}/control/status`,
+        this.fetchOptions()
+      )
         .then((response) => response.json())
         .catch((e) => console.log(e));
     },
     fetchStats: async function () {
-      this.stats = await fetch(`${this.item.url}/control/stats`, {
-        credentials: "include",
-      })
+      this.stats = await fetch(
+        `${this.item.url}/control/stats`,
+        this.fetchOptions()
+      )
         .then((response) => response.json())
         .catch((e) => console.log(e));
     },

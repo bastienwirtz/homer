@@ -64,9 +64,8 @@ export default {
   methods: {
     fetchStatus: async function () {
       const url = `${this.item.url}/api.php`;
-      this.api = await fetch(url, {
-        credentials: "include",
-      })
+      const fetchOptions = this.fetchOptions();
+      this.api = await fetch(url, fetchOptions)
         .then((response) => response.json())
         .catch((e) => console.log(e));
     },
