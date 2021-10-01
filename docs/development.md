@@ -27,3 +27,27 @@ body #app.theme-my-awesome-theme. { ... }
 ...
 @import "./themes/my-awesome-theme.scss";
 ```
+
+## Fetch Options
+
+In order to make your service work with the global `fetchWithCredentials` attribute, you need to include a call to `this.fetchOptions()` as the optional second parameter of your `fetch` call. This allows us to hook in and add global options for all fetch calls as needed.
+
+`fetchOptions()` itself takes an optional object just like the usual `fetch` param, and would conditionally add other options as needed.
+
+### Basic example
+```js
+fetch(
+  `${this.item.url}/api/health?apikey=${this.item.apikey}`,
+  this.fetchOptions()
+)
+```
+
+### Example with other fetch options
+```js
+fetch(
+  `${this.item.url}/api/v2/config`,
+  this.fetchOptions({
+    headers: { "X-Api-Key": `${this.item.apikey}` },
+  })
+)
+```

@@ -1,4 +1,4 @@
-# Troubleshooting
+ong# Troubleshooting
 
 ## My custom service card doesn't work, nothing appears or offline status is displayed (pi-hole, sonarr, ping, ...)
 
@@ -17,3 +17,18 @@ To resolve this, you can either:
 * Host all your target service under the same domain & port.
 * Modify the target sever configuration so that the response of the server included following header- `Access-Control-Allow-Origin: *` (<https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests>). It might be an option in the targeted service, otherwise depending on how the service is hosted, the proxy or web server can seamlessly add it.
 * Use a cors proxy sever like [`cors-container`](https://github.com/imjacobclark/cors-container), [`cors-anywhere`](https://github.com/Rob--W/cors-anywhere) or many others.
+
+
+## I use a single sign on tool, like Authelia. How do I get the service calls to not hit the login page?
+
+All the services use the JS `fetch` function. By default, a `fetch` call doesn't include the browser cookies that store your SSO session credentials. If you want to include cookie info in the API calls, you can add the global `fetchWithCredentials` attribute to your service item. Here's an example below for PiHole.
+
+```yml
+- name: "Pi-Hole"
+  logo: "assets/icons/pihole.svg"
+  url: "https://pihole.mydomain.com/admin"
+  type: "PiHole"
+  fetchWithCredentials: true
+```
+
+> **Note for developers:** Read the information in `docs/development.md` for how to make sure your service template works with `fetchWithCredentials`
