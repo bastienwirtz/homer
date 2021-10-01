@@ -1,4 +1,4 @@
-ong# Troubleshooting
+# Troubleshooting
 
 ## My custom service card doesn't work, nothing appears or offline status is displayed (pi-hole, sonarr, ping, ...)
 
