@@ -9,6 +9,9 @@ module.exports = {
       .loader("raw-loader")
       .end();
   },
+  configureWebpack: {
+    devtool: "source-map",
+  },
   publicPath: "",
   pwa: {
     manifestPath: "assets/manifest.json",
