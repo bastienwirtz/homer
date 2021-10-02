@@ -3,6 +3,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 
 import "@fortawesome/fontawesome-free/css/all.css";
+import versionCompare from "./mixins/versionCompare.js";
 
 import "./assets/app.scss";
 
@@ -13,6 +14,8 @@ Vue.component("DynamicStyle", {
     return createElement("style", this.$slots.default);
   },
 });
+
+Vue.mixin(versionCompare);
 
 new Vue({
   render: (h) => h(App),

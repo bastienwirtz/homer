@@ -73,3 +73,38 @@ For Paperless you need an API-Key which you have to store at the item in the fie
 ## Ping
 
 For Ping you need an API-Key which you have to store at the item in the field `apikey`.
+
+## Wikijs
+
+Using the Wikijs service you can display info about your local Wikijs instance version right on your Homer dashboard.
+Displaying the new version if available with a orange glowing dot. (Subtitle: A new version is available!)
+Displaying a green glowing dot if wikijs is up-to-date. (Subtitle: Wiki.js is up-to-date)
+Subtitle can be overriden by the subtitle field on your configuration item.
+
+The following configuration is available for the Wikijs service.
+
+```yaml
+items:
+  - name: 'Wiki.js'
+    logo: 'assets/tools/sample.png'
+    # subtitle: "Documentation platform" # optional, if no subtitle is defined, Wikijs message will be shown (A new version is available! / Wiki.js is up-to-date.)
+    url: 'http://192.168.0.152'
+    apikey: '01234deb70424befb1f4ef6a23456789'
+    type: 'Wikijs'
+```
+
+**Remarks:**
+You have to enable the API communication in wikijs and set the API key in the apikey field of your configuration item.
+The Wiki.js API key and activation can be found in Administration > API Access. (You have to generate one API key)
+You have to configure your CORS from the wiki.js instance otherwise you will get some CORS errors. GraphQL can not handle the pre-flight call and you have to set the response code to 200.
+
+Example nginx configuration:
+
+```
+add_header 'Access-Control-Allow-Origin' 'https://homer.mydomain.com';
+add_header 'Access-Control-Allow-Headers' 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization';
+
+if ($request_method = OPTIONS) {
+return 200;
+}
+```
