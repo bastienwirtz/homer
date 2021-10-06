@@ -72,7 +72,8 @@ For Paperless you need an API-Key which you have to store at the item in the fie
 
 ## Ping
 
-For Ping you need to set the type to Ping and provide a URL.
+For Ping you need to set the type to Ping and provide a url.
+
 ```yaml
 items:
    - name: "Awesome app"
