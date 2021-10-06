@@ -40,5 +40,28 @@ colors:
     background-image: ""
 
 message: ~
+navbar:
+  widgets:
+    - type: "Clock"
 links: []
-services: []
+services:
+  - name: "Media"
+    icon: "fas fa-photo-video"
+    items:
+    - name: "YouTube"
+      logo: "tools/youtube.png"
+      tag: "movies"
+      url: "https://www.youtube.com"
+      target: "_blank"
+    - name: "JustWatch"
+      logo: "justwatch.png"
+      tag: "movies"
+      url: "https://www.justwatch.com/"
+    - name: "Netflix"
+      logo: "src/assets/tools/netflix.png"
+      tag: "movies"
+      url: "https://www.netflix.com/browse"
+    - name: "Netflix"
+      icon: "fas fa-code-branch"
+      tag: "movies"
+      url: "https://www.netflix.com/browse"
