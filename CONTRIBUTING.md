@@ -12,10 +12,6 @@ UX and usability. If you are looking for a full featured dashboard, there is ton
 - Configuration is stored in a simple config file, avoiding the need for a backend/database while making possible to use versioning or [config template](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html).
 - Only modern browsers are supported, feel free to use any JS features without any polyfill as soon as the latest version of the major browsers supports them.
 
-### Roadmap
-
-If you want to know more about the project direction or looking for something to work on, checkout the [roadmap](https://github.com/bastienwirtz/homer#Roadmap)!
-Feel free to open an issue if you have any question.
 
 # Ground Rules
 
@@ -40,8 +36,9 @@ feel free to open an issue to present your idea.
 ### How to submit a contribution
 
 The general process to submit a contribution is as follow:
-1. Create your own fork of the code
-2. Do the changes in your fork
-3. Make sure to fill the [pull request description](https://github.com/bastienwirtz/homer/blob/main/.github/PULL_REQUEST_TEMPLATE.md) properly.
+1. Take a look to the [development guideline](https://github.com/bastienwirtz/homer/blob/main/docs/development.md).
+2. Create your own fork of the code
+3. Do the changes in your fork
+4. Make sure to fill the [pull request description](https://github.com/bastienwirtz/homer/blob/main/.github/PULL_REQUEST_TEMPLATE.md) properly.
 
 ### Happy coding :metal:
