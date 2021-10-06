@@ -20,13 +20,11 @@
                 <template v-if="item.subtitle">
                   {{ item.subtitle }}
                 </template>
-                <template v-else-if="api">
-                  {{ percentage }}&percnt; blocked
+                <template v-else-if="meal"> Today: {{ meal.name }} </template>
+                <template v-else-if="stats">
+                  happily keeping {{ stats.totalRecipes }} recipes organized
                 </template>
               </p>
-            </div>
-            <div v-if="api" class="status" :class="api.status">
-              {{ api.status }}
             </div>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
@@ -40,34 +38,49 @@
 
 <script>
 export default {
-  name: "PiHole",
+  name: "Mealie",
   props: {
     item: Object,
   },
   data: () => ({
-    api: {
-      status: "",
-      ads_percentage_today: 0,
-    },
+    stats: null,
+    meal: null,
   }),
-  computed: {
-    percentage: function () {
-      if (this.api) {
-        return this.api.ads_percentage_today.toFixed(1);
-      }
-      return "";
-    },
-  },
   created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}/api.php`;
-      this.api = await fetch(url, {
-        credentials: "include",
+      if (this.item.subtitle != null) return; // omitting unnecessary ajax call as the subtitle is showing
+      this.meal = await fetch(`${this.item.url}/api/meal-plans/today/`, {
+        headers: {
+          Authorization: "Bearer " + this.item.apikey,
+          Accept: "application/json",
+        },
       })
-        .then((response) => response.json())
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Not 2xx response");
+          } else {
+            if (response != null) {
+              return response.json();
+            }
+          }
+        })
+        .catch((e) => console.log(e));
+      this.stats = await fetch(`${this.item.url}/api/debug/statistics/`, {
+        headers: {
+          Authorization: "Bearer " + this.item.apikey,
+          Accept: "application/json",
+        },
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("Not 2xx response");
+          } else {
+            return response.json();
+          }
+        })
         .catch((e) => console.log(e));
     },
   },
@@ -77,31 +90,5 @@ export default {
 <style scoped lang="scss">
 .media-left img {
   max-height: 100%;
-}
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.enabled:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-
-  &.disabled:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
 }
 </style>
