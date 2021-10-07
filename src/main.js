@@ -15,8 +15,6 @@ Vue.component("DynamicStyle", {
   },
 });
 
-Vue.mixin(versionCompare);
-
 new Vue({
   render: (h) => h(App),
 }).$mount("#app");

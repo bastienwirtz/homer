@@ -22,7 +22,7 @@ const isPositiveInteger = function (x) {
   return /^\d+$/.test(x);
 };
 
-const versionCompare = function (v1, v2) {
+const compare = function (v1, v2) {
   var v1parts = v1.split('.');
   var v2parts = v2.split('.');
 
@@ -60,8 +60,4 @@ const versionCompare = function (v1, v2) {
   return 0;
 };
 
-export default {
-  methods: {
-    versionCompare: versionCompare,
-  },
-};
+export default { compare };

@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import versionCompare from './../../mixins/versionCompare';
+
 export default {
   name: 'Wikijs',
   props: {
@@ -58,7 +60,6 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const that = this;
       const url = `${this.item.url}/graphql`;
 
       this.content = await fetch(url, {
@@ -80,14 +81,15 @@ export default {
 
           const currentVersion = data.data.system.info.currentVersion;
           const newVersion = data.data.system.info.latestVersion;
-          const result = that.versionCompare(currentVersion, newVersion);
+          const result = versionCompare.compare(currentVersion, newVersion);
           let cssClass = '';
           let message = '';
 
           if (result == -1) {
             cssClass = 'update-available';
             message = 'A new version is available!';
-          } else if (result == 0) {
+          }
+          else if (result == 0) {
             cssClass = 'update-to-date';
             message = 'Wiki.js is up-to-date.';
           }
