@@ -1,20 +1,20 @@
 <template>
   <div
-    id="app"
-    v-if="config"
-    :class="[
+      id="app"
+      v-if="config"
+      :class="[
       `theme-${config.theme}`,
       isDark ? 'is-dark' : 'is-light',
       !config.footer ? 'no-footer' : '',
     ]"
   >
-    <DynamicTheme :themes="config.colors" />
+    <DynamicTheme :themes="config.colors"/>
     <div id="bighead">
       <section v-if="config.header" class="first-line">
         <div v-cloak class="container">
           <div class="logo">
             <a href="#">
-              <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
+              <img v-if="config.logo" :src="config.logo" alt="dashboard logo"/>
             </a>
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
@@ -26,28 +26,32 @@
       </section>
 
       <Navbar
-        :open="showMenu"
-        :links="config.links"
-        @navbar-toggle="showMenu = !showMenu"
+          :open="showMenu"
+          :links="config.links"
+          @navbar-toggle="showMenu = !showMenu"
       >
 
-        <Clock v-if="config.navbar && config.navbar.clock"/>
+        <Widget
+            v-for="(item, index) in widgets"
+            :key="index"
+            v-bind:item="item"
+        />
 
-        <DarkMode @updated="isDark = $event" />
+        <DarkMode @updated="isDark = $event"/>
 
         <SettingToggle
-          @updated="vlayout = $event"
-          name="vlayout"
-          icon="fa-list"
-          iconAlt="fa-columns"
+            @updated="vlayout = $event"
+            name="vlayout"
+            icon="fa-list"
+            iconAlt="fa-columns"
         />
 
         <SearchInput
-          class="navbar-item is-inline-block-mobile"
-          @input="filterServices"
-          @search-focus="showMenu = true"
-          @search-open="navigateToFirstService"
-          @search-cancel="filterServices"
+            class="navbar-item is-inline-block-mobile"
+            @input="filterServices"
+            @search-focus="showMenu = true"
+            @search-open="navigateToFirstService"
+            @search-cancel="filterServices"
         />
       </Navbar>
     </div>
@@ -55,12 +59,12 @@
     <section id="main-section" class="section">
       <div v-cloak class="container">
         <ConnectivityChecker
-          v-if="config.connectivityCheck"
-          @network-status-update="offline = $event"
+            v-if="config.connectivityCheck"
+            @network-status-update="offline = $event"
         />
         <div v-if="!offline">
           <!-- Optional messages -->
-          <Message :item="config.message" />
+          <Message :item="config.message"/>
 
           <!-- Horizontal layout -->
           <div v-if="!vlayout || filter" class="columns is-multiline">
@@ -69,43 +73,43 @@
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 <div v-else-if="group.logo" class="group-logo media-left">
                   <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
+                    <img :src="group.logo" :alt="`${group.name} logo`"/>
                   </figure>
                 </div>
                 {{ group.name }}
               </h2>
               <Service
-                v-for="(item, index) in group.items"
-                :key="index"
-                v-bind:item="item"
-                :class="['column', `is-${12 / config.columns}`]"
+                  v-for="(item, index) in group.items"
+                  :key="index"
+                  v-bind:item="item"
+                  :class="['column', `is-${12 / config.columns}`]"
               />
             </template>
           </div>
 
           <!-- Vertical layout -->
           <div
-            v-if="!filter && vlayout"
-            class="columns is-multiline layout-vertical"
+              v-if="!filter && vlayout"
+              class="columns is-multiline layout-vertical"
           >
             <div
-              :class="['column', `is-${12 / config.columns}`]"
-              v-for="group in services"
-              :key="group.name"
+                :class="['column', `is-${12 / config.columns}`]"
+                v-for="group in services"
+                :key="group.name"
             >
               <h2 v-if="group.name" class="group-title">
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 <div v-else-if="group.logo" class="group-logo media-left">
                   <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
+                    <img :src="group.logo" :alt="`${group.name} logo`"/>
                   </figure>
                 </div>
                 {{ group.name }}
               </h2>
               <Service
-                v-for="(item, index) in group.items"
-                :key="index"
-                v-bind:item="item"
+                  v-for="(item, index) in group.items"
+                  :key="index"
+                  v-bind:item="item"
               />
             </div>
           </div>
@@ -116,9 +120,9 @@
     <footer class="footer">
       <div class="container">
         <div
-          class="content has-text-centered"
-          v-if="config.footer"
-          v-html="config.footer"
+            class="content has-text-centered"
+            v-if="config.footer"
+            v-html="config.footer"
         ></div>
       </div>
     </footer>
@@ -126,9 +130,7 @@
 </template>
 
 <script>
-const jsyaml = require("js-yaml");
-const merge = require("lodash.merge");
-
+import Widget from "./components/Widget";
 import Navbar from "./components/Navbar.vue";
 import ConnectivityChecker from "./components/ConnectivityChecker.vue";
 import Service from "./components/Service.vue";
@@ -137,14 +139,16 @@ import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
-import Clock from "./components/Clock";
 
 import defaultConfig from "./assets/defaults.yml";
+
+const jsyaml = require("js-yaml");
+const merge = require("lodash.merge");
 
 export default {
   name: "App",
   components: {
-    Clock,
+    Widget,
     Navbar,
     ConnectivityChecker,
     Service,
@@ -158,6 +162,7 @@ export default {
     return {
       config: null,
       services: null,
+      widgets: null,
       offline: false,
       filter: "",
       vlayout: true,
@@ -176,9 +181,9 @@ export default {
       try {
         config = await this.getConfig();
         const path =
-          window.location.hash.substring(1) != ""
-            ? window.location.hash.substring(1)
-            : null;
+            window.location.hash.substring(1) != ""
+                ? window.location.hash.substring(1)
+                : null;
 
         if (path) {
           let pathConfig = await this.getConfig(`assets/${path}.yml`); // the slash (/) is included in the pathname
@@ -190,9 +195,10 @@ export default {
       }
       this.config = merge(defaults, config);
       this.services = this.config.services;
+      this.widgets = this.config.navbar.widgets;
       document.title =
-        this.config.documentTitle ||
-        `${this.config.title} | ${this.config.subtitle}`;
+          this.config.documentTitle ||
+          `${this.config.title} | ${this.config.subtitle}`;
       if (this.config.stylesheet) {
         let stylesheet = "";
         for (const file of this.config.stylesheet) {
@@ -214,23 +220,23 @@ export default {
 
         const that = this;
         return response
-          .text()
-          .then((body) => {
-            return jsyaml.load(body);
-          })
-          .then(function (config) {
-            if (config.externalConfig) {
-              return that.getConfig(config.externalConfig);
-            }
-            return config;
-          });
+            .text()
+            .then((body) => {
+              return jsyaml.load(body);
+            })
+            .then(function (config) {
+              if (config.externalConfig) {
+                return that.getConfig(config.externalConfig);
+              }
+              return config;
+            });
       });
     },
     matchesFilter: function (item) {
       return (
-        item.name.toLowerCase().includes(this.filter) ||
-        (item.subtitle && item.subtitle.toLowerCase().includes(this.filter)) ||
-        (item.tag && item.tag.toLowerCase().includes(this.filter))
+          item.name.toLowerCase().includes(this.filter) ||
+          (item.subtitle && item.subtitle.toLowerCase().includes(this.filter)) ||
+          (item.tag && item.tag.toLowerCase().includes(this.filter))
       );
     },
     navigateToFirstService: function (target) {
