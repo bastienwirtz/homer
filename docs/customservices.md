@@ -72,7 +72,16 @@ For Paperless you need an API-Key which you have to store at the item in the fie
 
 ## Ping
 
-For Ping you need an API-Key which you have to store at the item in the field `apikey`.
+For Ping you need to set the type to Ping and provide a url.
+
+```yaml
+items:
+   - name: "Awesome app"
+     type: Ping
+     logo: "assets/tools/sample.png"
+     subtitle: "Bookmark example" tag: "app" 
+     url: "https://www.reddit.com/r/selfhosted/" 
+```
 
 ## Wikijs
 
