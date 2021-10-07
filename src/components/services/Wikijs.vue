@@ -1,11 +1,6 @@
 <template>
   <Generic :item="item">
-    <template #icon>
-      <!-- left area containing the icon -->
-    </template>
     <template #content>
-      <!-- main area containing the title, subtitle, ... -->
-
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
         <template v-if="item.subtitle">
@@ -17,7 +12,6 @@
       </p>
     </template>
     <template #indicator>
-      <!-- top right area, empty by default -->
       <div v-if="newVersion" class="status" :class="cssClass">
         {{ newVersion }}
       </div>
