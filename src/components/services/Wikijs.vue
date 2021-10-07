@@ -61,34 +61,6 @@ export default {
       const that = this;
       const url = `${this.item.url}/graphql`;
 
-      const processResponse = function (responseData) {
-        if (responseData.errors && responseData.errors.length > 0) {
-          console.error(responseData.errors);
-          return;
-        }
-
-        var currentVersion = responseData.data.system.info.currentVersion;
-        var newVersion = responseData.data.system.info.latestVersion;
-        var result = that.versionCompare(currentVersion, newVersion);
-        var cssClass = '';
-        var message = '';
-
-        if (result == -1) {
-          cssClass = 'update-available';
-          message = 'A new version is available!';
-        } else if (result == 0) {
-          cssClass = 'update-to-date';
-          message = 'Wiki.js is up-to-date.';
-        }
-
-        return {
-          cssClass: cssClass,
-          message: message,
-          currentVersion: currentVersion,
-          newVersion: newVersion,
-        };
-      };
-
       this.content = await fetch(url, {
         method: 'POST',
         body: JSON.stringify({
@@ -100,7 +72,33 @@ export default {
         },
       })
         .then((response) => response.json())
-        .then((data) => processResponse(data))
+        .then((data) => {
+          if (data.errors && data.errors.length > 0) {
+            console.error(data.errors);
+            return;
+          }
+
+          const currentVersion = data.data.system.info.currentVersion;
+          const newVersion = data.data.system.info.latestVersion;
+          const result = that.versionCompare(currentVersion, newVersion);
+          let cssClass = '';
+          let message = '';
+
+          if (result == -1) {
+            cssClass = 'update-available';
+            message = 'A new version is available!';
+          } else if (result == 0) {
+            cssClass = 'update-to-date';
+            message = 'Wiki.js is up-to-date.';
+          }
+
+          return {
+            cssClass,
+            message,
+            currentVersion,
+            newVersion,
+          };
+        })
         .catch((e) => console.log(e));
     },
   },

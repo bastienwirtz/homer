@@ -96,15 +96,3 @@ items:
 **Remarks:**
 You have to enable the API communication in wikijs and set the API key in the apikey field of your configuration item.
 The Wiki.js API key and activation can be found in Administration > API Access. (You have to generate one API key)
-You have to configure your CORS from the wiki.js instance otherwise you will get some CORS errors. GraphQL can not handle the pre-flight call and you have to set the response code to 200.
-
-Example nginx configuration:
-
-```
-add_header 'Access-Control-Allow-Origin' 'https://homer.mydomain.com';
-add_header 'Access-Control-Allow-Headers' 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization';
-
-if ($request_method = OPTIONS) {
-return 200;
-}
-```
