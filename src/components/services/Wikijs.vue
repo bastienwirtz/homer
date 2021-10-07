@@ -1,44 +1,32 @@
 <template>
-  <div>
-    <div class="card" :class="item.class">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
-          <div class="media">
-            <div v-if="item.logo" class="media-left">
-              <figure class="image is-48x48">
-                <img :src="item.logo" :alt="`${item.name} logo`" />
-              </figure>
-            </div>
-            <div v-if="item.icon" class="media-left">
-              <figure class="image is-48x48">
-                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">
-                <template v-if="item.subtitle">
-                  {{ item.subtitle }}
-                </template>
-                <template v-else-if="content">
-                  {{ content.message }}
-                </template>
-              </p>
-            </div>
-            <div v-if="content" class="status" :class="content.cssClass">
-              {{ content.newVersion }}
-            </div>
-          </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
-            <strong class="tag-text">#{{ item.tag }}</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <Generic :item="item">
+    <template #icon>
+      <!-- left area containing the icon -->
+    </template>
+    <template #content>
+      <!-- main area containing the title, subtitle, ... -->
+
+      <p class="title is-4">{{ item.name }}</p>
+      <p class="subtitle is-6">
+        <template v-if="item.subtitle">
+          {{ item.subtitle }}
+        </template>
+        <template v-else-if="message">
+          {{ message }}
+        </template>
+      </p>
+    </template>
+    <template #indicator>
+      <!-- top right area, empty by default -->
+      <div v-if="newVersion" class="status" :class="cssClass">
+        {{ newVersion }}
+      </div>
+    </template>
+  </Generic>
 </template>
 
 <script>
+import Generic from './Generic.vue';
 import versionCompare from './../../mixins/versionCompare';
 
 export default {
@@ -46,13 +34,14 @@ export default {
   props: {
     item: Object,
   },
+  components: {
+    Generic,
+  },
   data: () => ({
-    content: {
-      cssClass: '',
-      message: '',
-      currentVersion: '',
-      newVersion: '',
-    },
+    cssClass: '',
+    message: '',
+    currentVersion: '',
+    newVersion: '',
   }),
   computed: {},
   created() {
@@ -62,7 +51,7 @@ export default {
     fetchStatus: async function () {
       const url = `${this.item.url}/graphql`;
 
-      this.content = await fetch(url, {
+      await fetch(url, {
         method: 'POST',
         body: JSON.stringify({
           query: '{ system { info { currentVersion latestVersion } } }',
@@ -79,27 +68,30 @@ export default {
             return;
           }
 
-          const currentVersion = data.data.system.info.currentVersion;
-          const newVersion = data.data.system.info.latestVersion;
-          const result = versionCompare.compare(currentVersion, newVersion);
+          this.currentVersion = data.data.system.info.currentVersion;
+          this.newVersion = data.data.system.info.latestVersion;
+
+          const result = versionCompare.compare(
+            this.currentVersion,
+            this.newVersion
+          );
+
           let cssClass = '';
           let message = '';
 
           if (result == -1) {
             cssClass = 'update-available';
             message = 'A new version is available!';
-          }
-          else if (result == 0) {
+          } else if (result == 0) {
             cssClass = 'update-to-date';
             message = 'Wiki.js is up-to-date.';
           }
 
-          return {
-            cssClass,
-            message,
-            currentVersion,
-            newVersion,
-          };
+          this.cssClass = cssClass;
+          this.message = message;
+
+          console.log(this.currentVersion);
+          console.log(this.newVersion);
         })
         .catch((e) => console.log(e));
     },
