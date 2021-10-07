@@ -1,16 +1,5 @@
 <template>
   <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="message">
-          {{ message }}
-        </template>
-      </p>
-    </template>
     <template #indicator>
       <div v-if="newVersion" class="status" :class="cssClass">
         {{ newVersion }}
@@ -33,7 +22,6 @@ export default {
   },
   data: () => ({
     cssClass: '',
-    message: '',
     currentVersion: '',
     newVersion: '',
   }),
@@ -82,10 +70,10 @@ export default {
           }
 
           this.cssClass = cssClass;
-          this.message = message;
-
-          console.log(this.currentVersion);
-          console.log(this.newVersion);
+          
+          if (!this.item.subtitle) {
+            this.item.subtitle = message;
+          }
         })
         .catch((e) => console.log(e));
     },
