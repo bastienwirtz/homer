@@ -3,7 +3,6 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 
 import "@fortawesome/fontawesome-free/css/all.css";
-import versionCompare from "./mixins/versionCompare.js";
 
 import "./assets/app.scss";
 
