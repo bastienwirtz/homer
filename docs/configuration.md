@@ -88,6 +88,10 @@ message:
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 # Optional navbar
+navbar:
+  widgets:
+    - type: "Clock"
+      militaryTime: true # Optional, defaults to false and displays AM/PM
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
   - name: "Link 1"

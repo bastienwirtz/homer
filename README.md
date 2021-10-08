@@ -44,6 +44,7 @@
 - [Features](#features)
 - [Getting started](#getting-started)
 - [Configuration](docs/configuration.md)
+- [Widgets](docs/widgets.md)
 - [Custom services](docs/customservices.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
 - [Development](docs/development.md)
