@@ -34,7 +34,7 @@ export default {
     };
     document.addEventListener("keydown", this._keyListener.bind(this));
 
-    // fill seach from get parameter.
+    // fill search from get parameter.
     const search = new URLSearchParams(window.location.search).get("search");
     if (search) {
       this.$refs.search.value = search;
