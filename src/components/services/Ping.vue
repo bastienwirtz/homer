@@ -9,10 +9,12 @@
 </template>
 
 <script>
+import service from "@/mixins/service.js";
 import Generic from "./Generic.vue";
 
 export default {
   name: "Ping",
+  mixins: [service],
   props: {
     item: Object,
   },
@@ -27,16 +29,8 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}`;
-      fetch(url, {
-        method: "HEAD",
-        cache: "no-cache",
-        credentials: "include",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw Error(response.statusText);
-          }
+      this.fetch("/", { method: "HEAD", cache: "no-cache" }, false)
+        .then(() => {
           this.status = "online";
         })
         .catch(() => {
