@@ -20,10 +20,12 @@
 </template>
 
 <script>
+import service from "@/mixins/service.js";
 import Generic from "./Generic.vue";
 
 export default {
   name: "AdGuardHome",
+  mixins: [service],
   props: {
     item: Object,
   },
@@ -60,18 +62,14 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/control/status`, {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .catch((e) => console.log(e));
+      this.status = await this.fetch("/control/status").catch((e) =>
+        console.log(e)
+      );
     },
     fetchStats: async function () {
-      this.stats = await fetch(`${this.item.url}/control/stats`, {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .catch((e) => console.log(e));
+      this.stats = await this.fetch("/control/stats").catch((e) =>
+        console.log(e)
+      );
     },
   },
 };

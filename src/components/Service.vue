@@ -1,5 +1,5 @@
 <template>
-  <component v-bind:is="component" :item="item"></component>
+  <component v-bind:is="component" :item="item" :proxy="proxy"></component>
 </template>
 
 <script>
@@ -9,6 +9,7 @@ export default {
   name: "Service",
   props: {
     item: Object,
+    proxy: Object,
   },
   computed: {
     component() {

@@ -75,7 +75,8 @@
               <Service
                 v-for="(item, index) in group.items"
                 :key="index"
-                v-bind:item="item"
+                :item="item"
+                :proxy="config.proxy"
                 :class="['column', `is-${12 / config.columns}`]"
               />
             </template>
@@ -103,7 +104,8 @@
               <Service
                 v-for="(item, index) in group.items"
                 :key="index"
-                v-bind:item="item"
+                :item="item"
+                :proxy="config.proxy"
               />
             </div>
           </div>

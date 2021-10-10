@@ -26,6 +26,11 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
 connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
+# Optional: Proxy / hosting option
+proxy:
+  # NOT All custom services implements this new option YET. Support will be extended very soon.
+  useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
 
