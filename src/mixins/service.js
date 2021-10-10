@@ -12,7 +12,7 @@ export default {
     }
   },
   methods: {
-    fetch: function (path, init) {
+    fetch: function (path, init, json = true) {
       let options = {};
 
       if (this.proxy?.useCredentials) {
@@ -35,7 +35,8 @@ export default {
         if (!response.ok) {
           throw new Error("Not 2xx response");
         }
-        return response.json();
+
+        return json ? response.json() : response;
       });
     },
   },
