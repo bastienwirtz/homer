@@ -6,16 +6,15 @@ within Homer.
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
-
 ## Common options
 
 ```yaml
-- name: "My Service"
-  logo: "assets/tools/sample.png"
-  url: "http://my-service-link"
-  endpoint: "http://my-service-endpoint" # Optional: alternative base URL used to fetch service data is necessary.
+- name: 'My Service'
+  logo: 'assets/tools/sample.png'
+  url: 'http://my-service-link'
+  endpoint: 'http://my-service-endpoint' # Optional: alternative base URL used to fetch service data is necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
-  type: "<type>"
+  type: '<type>'
 ```
 
 ⚠️🚧 `endpoint` & `useCredentials` new options are not yet supported by all custom services (but will be very soon).
@@ -92,4 +91,16 @@ For Ping you need to set the type to Ping and provide a url.
   logo: "assets/tools/sample.png"
   subtitle: "Bookmark example" tag: "app" 
   url: "https://www.reddit.com/r/selfhosted/" 
+```
+
+## Prometheus
+
+For Prometheus you need to set the type to Prometheus and provide a url.
+
+```yaml
+- name: "Prometheus"
+  type: Prometheus
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  # subtitle: "Monitor data server"
 ```
