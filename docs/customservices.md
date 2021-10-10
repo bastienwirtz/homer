@@ -14,8 +14,11 @@ If you experiencing any issue, please have a look to the [troubleshooting](troub
   logo: "assets/tools/sample.png"
   url: "http://my-service-link"
   endpoint: "http://my-service-endpoint" # Optional: alternative base URL used to fetch service data is necessary.
+  useCredentials: false # Optional: Override global proxy.useCredentials configuration.
   type: "<type>"
 ```
+
+⚠️🚧 `endpoint` & `useCredentials` new options are not yet supported by all custom services (but will be very soon).
 
 ## PiHole
 

@@ -26,7 +26,8 @@ connectivityCheck: true # whether you want to display a message when the apps ar
 
 # Optional: Proxy / hosting option
 proxy:
-  useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level.
+  # NOT All custom services implements this new option YET. Support will be extended very soon.
+  useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
 
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
