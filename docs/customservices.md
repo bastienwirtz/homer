@@ -6,15 +6,16 @@ within Homer.
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
+
 ## Common options
 
 ```yaml
-- name: 'My Service'
-  logo: 'assets/tools/sample.png'
-  url: 'http://my-service-link'
-  endpoint: 'http://my-service-endpoint' # Optional: alternative base URL used to fetch service data is necessary.
+- name: "My Service"
+  logo: "assets/tools/sample.png"
+  url: "http://my-service-link"
+  endpoint: "http://my-service-endpoint" # Optional: alternative base URL used to fetch service data is necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
-  type: '<type>'
+  type: "<type>"
 ```
 
 ⚠️🚧 `endpoint` & `useCredentials` new options are not yet supported by all custom services (but will be very soon).
