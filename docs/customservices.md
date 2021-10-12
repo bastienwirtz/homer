@@ -80,7 +80,14 @@ The Radarr/Sonarr API key can be found in Settings > General. It is needed to ac
 
 ## PaperlessNG
 
-For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
+This service displays total number of documents stored. Two lines are required:
+
+```yaml
+  type: "PaperlessNG"
+  apikey: "0123456789abcdef123456789abcdef"
+```
+
+API key can be generated in Settings > Administration > Auth Tokens
 
 ## Ping
 
