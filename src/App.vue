@@ -73,7 +73,7 @@
               </h2>
               <Service
                 v-for="(item, index) in group.items"
-                :key="index"
+                :key="group.name + '-' + index"
                 :item="item"
                 :proxy="config.proxy"
                 :class="['column', `is-${12 / config.columns}`]"
