@@ -15,6 +15,9 @@
 <script>
 export default {
   name: "Darkmode",
+  props: {
+    defaultValue: String,
+  },
   data: function () {
     return {
       isDark: null,
@@ -30,6 +33,17 @@ export default {
     if ("overrideDark" in localStorage) {
       // Light theme is 1 and Dark theme is 2
       this.mode = JSON.parse(localStorage.overrideDark) ? 2 : 1;
+    } else {
+      switch (this.defaultValue) {
+        case "light":
+          this.mode = 1;
+          break;
+        case "dark":
+          this.mode = 2;
+          break;
+        default:
+          this.mode = 0;
+      }
     }
     this.isDark = this.getIsDark();
     this.$emit("updated", this.isDark);

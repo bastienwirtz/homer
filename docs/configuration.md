@@ -29,6 +29,11 @@ proxy:
   # NOT All custom services implements this new option YET. Support will be extended very soon.
   useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
 
+# Set the default layout and color scheme
+defaults:
+  layout: columns # Either 'columns', or 'list'
+  colorTheme: auto # One of 'auto', 'light', or 'dark'
+
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
 

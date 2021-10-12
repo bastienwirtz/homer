@@ -30,13 +30,17 @@
         :links="config.links"
         @navbar-toggle="showMenu = !showMenu"
       >
-        <DarkMode @updated="isDark = $event" />
+        <DarkMode
+          @updated="isDark = $event"
+          :defaultValue="this.config.defaults.colorTheme"
+        />
 
         <SettingToggle
           @updated="vlayout = $event"
           name="vlayout"
           icon="fa-list"
           iconAlt="fa-columns"
+          :defaultValue="this.config.defaults.layout == 'columns'"
         />
 
         <SearchInput
