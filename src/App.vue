@@ -41,6 +41,7 @@
 
         <SearchInput
           class="navbar-item is-inline-block-mobile"
+          :hotkey=searchHotkey()
           @input="filterServices"
           @search-focus="showMenu = true"
           @search-open="navigateToFirstService"
@@ -167,6 +168,11 @@ export default {
     window.onhashchange = this.buildDashboard;
   },
   methods: {
+    searchHotkey() {
+      if (this.config.hotkey && this.config.hotkey.search) {
+        return this.config.hotkey.search;
+      }
+    },
     buildDashboard: async function () {
       const defaults = jsyaml.load(defaultConfig);
       let config;
