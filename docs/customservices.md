@@ -97,8 +97,9 @@ For Ping you need to set the type to Ping and provide a url.
 - name: "Awesome app"
   type: Ping
   logo: "assets/tools/sample.png"
-  subtitle: "Bookmark example" tag: "app" 
-  url: "https://www.reddit.com/r/selfhosted/" 
+  subtitle: "Bookmark example"
+  tag: "app"
+  url: "https://www.reddit.com/r/selfhosted/"
 ```
 
 ## Prometheus
