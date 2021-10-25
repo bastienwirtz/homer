@@ -43,7 +43,7 @@ The following configuration is available for the OpenWeatherMap service:
 - name: "Weather"
   location: "Amsterdam" # your location.
   locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
-  apiKey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
+  apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
   units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
   background: "square" # choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
   type: "OpenWeather"
