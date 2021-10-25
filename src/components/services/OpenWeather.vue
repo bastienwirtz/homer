@@ -64,7 +64,8 @@ export default {
         locationQuery = `q=${this.item.location}`;
       }
 
-      const url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${this.item.apikey}&units=${this.item.units}`;
+      const apiKey = this.item.apikey || this.item.apiKey;
+      const url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${apiKey}&units=${this.item.units}`;
       fetch(url)
         .then((response) => {
           if (!response.ok) {
