@@ -113,3 +113,24 @@ For Prometheus you need to set the type to Prometheus and provide a url.
   url: "http://192.168.0.151/"
   # subtitle: "Monitor data server"
 ```
+
+## AdGuard Home
+For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
+In `config.yml`
+```yaml
+- name: "Adguard"
+  logo: "assets/tools/adguardhome.png"
+  url: "https://adguard.exemple.com"
+  target: "_blank"
+  type: "AdGuardHome"
+```
+In your conf files for your AdGuard Home instance
+```
+location /control/stats {
+  proxy_set_header Authorization "Basic [admin:password in Base64]";
+}
+
+location /control/status {
+  proxy_set_header Authorization "Basic [admin:password in Base64]";
+}
+```
