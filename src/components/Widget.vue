@@ -10,7 +10,6 @@ export default {
   },
   computed: {
     component() {
-      console.log(JSON.stringify(this.item))
       return () => import(`./widgets/${this.item.type}.vue`);
     },
   },

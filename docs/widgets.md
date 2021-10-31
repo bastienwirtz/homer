@@ -2,7 +2,7 @@
 
 The navbar allows to be customized with widgets which provide extra features.  
 Some widgets may require extra configuration.  
-Available widgets are in `src/components/`.  
+Available widgets are in `src/components/widgets/`.  
 Here is an overview of all widgets that are available within Homer.
 
 ## Clock
