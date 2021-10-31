@@ -1,3 +1,4 @@
+
 # build stage
 FROM node:lts-alpine as build-stage
 
@@ -7,6 +8,7 @@ COPY package*.json ./
 RUN yarn install --frozen-lockfile
 
 COPY . .
+ARG VUE_APP_DISABLE_PWA=false
 RUN yarn build
 
 # Multi arch build support
