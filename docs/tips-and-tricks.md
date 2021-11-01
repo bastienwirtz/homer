@@ -33,7 +33,7 @@ Using Anchoring, you can define all your tags and their styles once like this: (
 
 ```yaml
 # Some pre-defined tag styles. reference these using <<: *{NAME} inside an item definition; For Example, <<: *Apps
-tags: 
+tags:
   Favourite: &Favourite
     - tag: "Favourite"
       tagstyle: "is-medium is-primary"
@@ -42,7 +42,7 @@ tags:
       tagstyle: "is-medium is-success"
   Apps: &Apps
     - tag: "App"
-      tagstyle: "is-medium is-info"      
+      tagstyle: "is-medium is-info"
 ```
 
 and then simply reference these pre-defined (anchored) tags in each item like so:
@@ -69,7 +69,7 @@ Then when Homer reads your config, it will substitute your anchors automatically
 ```
 
 The end result is that if you want to update the name or style of any particular tag, just update it once, in the tags section!
-Great if you have a lot of services or a lot of tags!  
+Great if you have a lot of services or a lot of tags!
 
 ## Remotely edit your config with Code Server
 
@@ -175,6 +175,17 @@ message:
   url: https://api.chucknorris.io/jokes/random
   mapping:
     content: 'value'
+  title: "Chuck Norris Facts!"
+  content: "Message could not be loaded"
+```
+
+Additionally if you want to show both the creation date of the fact as well as the fact itself, you can use variables in your YAML configuration. Do this by adding a `$` in front of the variable name. Homer will replace these variables with the values received from the API call.
+
+```yml
+message:
+  url: https://api.chucknorris.io/jokes/random
+  mapping:
+    content: 'Fact: $value, created at $created_at'
   title: "Chuck Norris Facts!"
   content: "Message could not be loaded"
 ```

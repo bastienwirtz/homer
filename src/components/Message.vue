@@ -2,7 +2,7 @@
   <article v-if="show" class="message" :class="message.style">
     <div v-if="message.title || message.icon" class="message-header">
       <p>
-        <i v-if="message.icon" :class="`fa-fw ${message.icon}`"></i>
+        <em v-if="message.icon" :class="`fa-fw ${message.icon}`"></em>
         {{ message.title }}
       </p>
     </div>
@@ -42,36 +42,29 @@ export default {
   },
   methods: {
     getMessage: async function () {
-      if (!this.item) {
+      if (!this.item)
         return;
-      }
       if (this.item.url) {
         let fetchedMessage = await this.downloadMessage(this.item.url);
-        console.log("done");
-        if (this.item.mapping) {
+        if (this.item.mapping)
           fetchedMessage = this.mapRemoteMessage(fetchedMessage);
-        }
 
         // keep the original config value if no value is provided by the endpoint
         const message = this.message;
-        for (const prop of ["title", "style", "content", "icon"]) {
-          if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
+        for (const prop of ["title", "style", "content", "icon"])
+          if (prop in fetchedMessage && fetchedMessage[prop] !== null)
             message[prop] = fetchedMessage[prop];
-          }
-        }
         this.message = { ...message }; // Force computed property to re-evaluate
       }
 
-      if (this.item.refreshInterval) {
+      if (this.item.refreshInterval)
         setTimeout(this.getMessage, this.item.refreshInterval);
-      }
     },
 
     downloadMessage: function (url) {
       return fetch(url).then(function (response) {
-        if (response.status != 200) {
+        if (response.status != 200)
           return;
-        }
         return response.json();
       });
     },
@@ -81,7 +74,12 @@ export default {
       // map property from message into mapped according to mapping config (only if field has a value):
       for (const prop in this.item.mapping)
         if (message[this.item.mapping[prop]])
+          // Replace the keyword
           mapped[prop] = message[this.item.mapping[prop]];
+        else if (this.item.mapping[prop])
+          // Replace the keywords in the string if they start with a $
+          for (const p in message)
+            mapped[prop] = this.item.mapping[prop].replaceAll("$" + p, message[p])
       return mapped;
     },
   },
