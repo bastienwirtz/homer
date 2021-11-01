@@ -3,11 +3,16 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-        <template v-if="item.subtitle && !item.apikey">
+        <template v-if="item.subtitle && printerstatus == null">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="api"> Status: {{printerstatus}} </template>
-        <template v-if="printerstatus == 'Printing'">|| Progress: {{ printerprogress }}% <br> Elapsed: {{ printtime }} || Left: {{ printtimeleft }} </template>
+        <template v-else-if="api" && printerstatus !="null">
+          Status: {{ printerstatus }}
+        </template>
+        <template v-if="printerstatus == 'Printing'"
+          >|| Progress: {{ printerprogress }}% <br />
+          Elapsed: {{ printtime }} || Left: {{ printtimeleft }}
+        </template>
       </p>
     </template>
   </Generic>
@@ -16,7 +21,6 @@
 <script>
 import service from "@/mixins/service.js";
 import Generic from "./Generic.vue";
-
 
 export default {
   name: "OctoPi",
@@ -33,7 +37,7 @@ export default {
       state: "",
       job: {
         file: {
-            display: "",
+          display: "",
         },
       },
       progress: {
@@ -47,41 +51,57 @@ export default {
   computed: {
     printerstatus: function () {
       if (this.api && this.api.code != false) {
-        return (this.api.state)
-      }else if (this.api.code != false) {
-        return ("Offline")
+        return this.api.state;
+      } else if (this.api.code != false) {
+        return "Offline";
       }
+      return null;
     },
     printerprogress: function () {
       if (this.api) {
-        return this.api.progress.completion.toFixed()
+        return this.api.progress.completion.toFixed();
       }
+      return 0;
     },
     printtime: function () {
       if (this.api) {
         var timestamp = this.api.progress.printTime;
         var hours = Math.floor(timestamp / 60 / 60);
-        var minutes = Math.floor(timestamp / 60) - (hours * 60);
+        var minutes = Math.floor(timestamp / 60) - hours * 60;
         var seconds = timestamp % 60;
-        if (hours   < 10) {hours   = "0" + hours;}
-        if (minutes < 10) {minutes = "0" + minutes;}
-        if (seconds < 10) {seconds = "0" + seconds;}
-        var formatted = hours + ':' + minutes;
-        return formatted
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        var formatted = hours + ":" + minutes;
+        return formatted;
       }
+      return 0;
     },
     printtimeleft: function () {
       if (this.api) {
         var timestamp = this.api.progress.printTimeLeft;
         var hours = Math.floor(timestamp / 60 / 60);
-        var minutes = Math.floor(timestamp / 60) - (hours * 60);
+        var minutes = Math.floor(timestamp / 60) - hours * 60;
         var seconds = timestamp % 60;
-        if (hours   < 10) {hours   = "0" + hours;}
-        if (minutes < 10) {minutes = "0" + minutes;}
-        if (seconds < 10) {seconds = "0" + seconds;}
-        var formatted = hours + ':' + minutes;
-        return formatted
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        var formatted = hours + ":" + minutes;
+        return formatted;
       }
+      return 0;
     },
   },
   created() {
@@ -89,8 +109,10 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      if(this.item.apikey) {
-        this.api = await this.fetch("api/job?apikey="+`${this.item.apikey}`).catch((e) => console.log(e), this.api.code = false);
+      if (this.item.apikey) {
+        this.api = await this.fetch(
+          "api/job?apikey=" + `${this.item.apikey}`
+        ).catch((e) => console.log(e), (this.api.code = false));
       }
     },
   },
