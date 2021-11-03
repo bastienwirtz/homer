@@ -13,7 +13,7 @@
       <section v-if="config.header" class="first-line">
         <div v-cloak class="container">
           <div class="logo">
-            <a href="#">
+            <a href="">
               <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
             </a>
             <i v-if="config.icon" :class="config.icon"></i>
