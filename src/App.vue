@@ -41,6 +41,7 @@
 
         <SearchInput
           class="navbar-item is-inline-block-mobile"
+          :hotkey=searchHotkey()
           @input="filterServices"
           @search-focus="showMenu = true"
           @search-open="navigateToFirstService"
@@ -74,7 +75,8 @@
               <Service
                 v-for="(item, index) in group.items"
                 :key="index"
-                v-bind:item="item"
+                :item="item"
+                :proxy="config.proxy"
                 :class="['column', `is-${12 / config.columns}`]"
               />
             </template>
@@ -102,7 +104,8 @@
               <Service
                 v-for="(item, index) in group.items"
                 :key="index"
-                v-bind:item="item"
+                :item="item"
+                :proxy="config.proxy"
               />
             </div>
           </div>
@@ -165,6 +168,11 @@ export default {
     window.onhashchange = this.buildDashboard;
   },
   methods: {
+    searchHotkey() {
+      if (this.config.hotkey && this.config.hotkey.search) {
+        return this.config.hotkey.search;
+      }
+    },
     buildDashboard: async function () {
       const defaults = jsyaml.load(defaultConfig);
       let config;
