@@ -2,6 +2,12 @@
 
 If you want to contribute to Homer, please read the [contributing guidelines](https://github.com/bastienwirtz/homer/blob/main/CONTRIBUTING.md) first. 
 
+## Local development config
+
+When developing locally, put your `config.yml` file at `public/assets/config.yml`. The config file is included in the `.gitignore` 
+
+## Serve locally
+
 ```sh
 # Using yarn (recommended)
 yarn install
@@ -73,26 +79,23 @@ body #app.theme-my-awesome-theme. { ... }
 @import "./themes/my-awesome-theme.scss";
 ```
 
-## Fetch Options
+## Fetching data with `this.fetch`
 
-In order to make your service work with the global `fetchWithCredentials` attribute, you need to include a call to `this.fetchOptions()` as the optional second parameter of your `fetch` call. This allows us to hook in and add global options for all fetch calls as needed.
-
-`fetchOptions()` itself takes an optional object just like the usual `fetch` param, and would conditionally add other options as needed.
+Homer wraps the standard `fetch` with a mixin that allows us to added global and per service header options to standard fetch calls. This should be transparent to development as long as you use `this.fetch` instead of the standard `fetch`.
 
 ### Basic example
 ```js
-fetch(
-  `${this.item.url}/api/health?apikey=${this.item.apikey}`,
-  this.fetchOptions()
+this.fetch(
+  `${this.item.url}/api/health?apikey=${this.item.apikey}`
 )
 ```
 
 ### Example with other fetch options
 ```js
-fetch(
+this.fetch(
   `${this.item.url}/api/v2/config`,
-  this.fetchOptions({
+  {
     headers: { "X-Api-Key": `${this.item.apikey}` },
-  })
+  }
 )
 ```
