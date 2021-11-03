@@ -71,12 +71,9 @@ export default {
   },
   methods: {
     fetchConfig: function () {
-      fetch(
-        `${this.item.url}/api/v2/config`,
-        this.fetchOptions({
-          headers: { "X-Api-Key": `${this.item.apikey}` },
-        })
-      )
+      this.fetch(`${this.item.url}/api/v2/config`, {
+        headers: { "X-Api-Key": `${this.item.apikey}` },
+      })
         .then((response) => {
           if (response.status != 200) {
             throw new Error(response.statusText);

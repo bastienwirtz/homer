@@ -58,14 +58,11 @@ export default {
         return;
       }
       const url = `${this.item.url}/api/documents/`;
-      this.api = await fetch(
-        url,
-        this.fetchOptions({
-          headers: {
-            Authorization: "Token " + this.item.apikey,
-          },
-        })
-      )
+      this.api = await this.fetch(url, {
+        headers: {
+          Authorization: "Token " + this.item.apikey,
+        },
+      })
         .then(function (response) {
           if (!response.ok) {
             throw new Error("Not 2xx response");

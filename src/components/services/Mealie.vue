@@ -52,15 +52,12 @@ export default {
   methods: {
     fetchStatus: async function () {
       if (this.item.subtitle != null) return; // omitting unnecessary ajax call as the subtitle is showing
-      this.meal = await fetch(
-        `${this.item.url}/api/meal-plans/today/`,
-        this.fetchOptions({
-          headers: {
-            Authorization: "Bearer " + this.item.apikey,
-            Accept: "application/json",
-          },
-        })
-      )
+      this.meal = await this.fetch(`${this.item.url}/api/meal-plans/today/`, {
+        headers: {
+          Authorization: "Bearer " + this.item.apikey,
+          Accept: "application/json",
+        },
+      })
         .then(function (response) {
           if (!response.ok) {
             throw new Error("Not 2xx response");
@@ -71,15 +68,12 @@ export default {
           }
         })
         .catch((e) => console.log(e));
-      this.stats = await fetch(
-        `${this.item.url}/api/debug/statistics/`,
-        this.fetchOptions({
-          headers: {
-            Authorization: "Bearer " + this.item.apikey,
-            Accept: "application/json",
-          },
-        })
-      )
+      this.stats = await this.fetch(`${this.item.url}/api/debug/statistics/`, {
+        headers: {
+          Authorization: "Bearer " + this.item.apikey,
+          Accept: "application/json",
+        },
+      })
         .then(function (response) {
           if (!response.ok) {
             throw new Error("Not 2xx response");

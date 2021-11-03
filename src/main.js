@@ -4,7 +4,7 @@ import "./registerServiceWorker";
 
 import "@fortawesome/fontawesome-free/css/all.css";
 
-import fetchOptions from "./mixins/fetchOptions.js";
+import service from "./mixins/service.js";
 import "./assets/app.scss";
 
 Vue.config.productionTip = false;
@@ -15,7 +15,7 @@ Vue.component("DynamicStyle", {
   },
 });
 
-Vue.mixin(fetchOptions);
+Vue.mixin(service);
 
 new Vue({
   render: (h) => h(App),
