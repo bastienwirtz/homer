@@ -124,3 +124,19 @@ services:
         logo: "assets/tools/duckduckgo.png"
         url: "https://duckduckgo.com"
         target: "_blank" # optional html a tag target attribute
+  - name: "Climbing"
+    icon: "fas fa-mountain"
+    items:      
+      - name: "TCA Life"
+        icon: "fas fa-newspaper"
+        url: "https://www.theclimbingacademy.com/tca-life/"
+        target: "_blank" # optional html a tag target attribute
+      - name: "TCA Current Occupation"
+        icon: "fas fa-tachometer"
+        url: "https://portal.rockgympro.com/portal/public/d0f355e237dda999f3112d94d3c762c7/occupancy?&iframeid=occupancyCounter&fId="
+        target: "_blank" # optional html a tag target attribute
+      - name: "TCA Capacity Tracker"
+        icon: "fas fa-chart"
+        url: "https://tcatracker.nw.r.appspot.com/"
+        target: "_blank" # optional html a tag target attribute
+
