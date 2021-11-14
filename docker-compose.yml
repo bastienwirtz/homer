@@ -7,10 +7,13 @@ services:
     build: https://github.com/FriendlyNGeeks/homer
     container_name: homer
     volumes:
-      - /your/local/assets/:/var/lib/docker/volumes/homer_data/_data
+      - config:/var/lib/homerrun
     ports:
       - 1000:8080
     #environment:
     #  - UID=1000
     #  - GID=1000
     restart: unless-stopped
+volumes:
+  config:
+    driver: local
