@@ -12,4 +12,6 @@ fi
 yes n | cp -i /www/default-assets/config.yml.dist /www/assets/config.yml &> /dev/null
 
 chown -R $UID:$GID /www/assets
-exec su-exec $UID:$GID darkhttpd /www/ --no-listing --port "$PORT"
+
+echo "Starting webserver"
+lighttpd -D -f /lighttpd.conf
