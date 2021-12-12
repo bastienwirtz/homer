@@ -19,8 +19,8 @@ export default {
     value: String,
     hotkey: {
       type: String,
-      default: "/"
-    }
+      default: "/",
+    },
   },
   mounted() {
     this._keyListener = function (event) {

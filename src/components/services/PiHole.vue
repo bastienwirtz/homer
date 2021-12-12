@@ -1,59 +1,45 @@
 <template>
-  <div>
-    <div class="card" :class="item.class">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
-          <div class="media">
-            <div v-if="item.logo" class="media-left">
-              <figure class="image is-48x48">
-                <img :src="item.logo" :alt="`${item.name} logo`" />
-              </figure>
-            </div>
-            <div v-if="item.icon" class="media-left">
-              <figure class="image is-48x48">
-                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">
-                <template v-if="item.subtitle">
-                  {{ item.subtitle }}
-                </template>
-                <template v-else-if="api">
-                  {{ percentage }}&percnt; blocked
-                </template>
-              </p>
-            </div>
-            <div v-if="api" class="status" :class="api.status">
-              {{ api.status }}
-            </div>
-          </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
-            <strong class="tag-text">#{{ item.tag }}</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <Generic :item="item">
+    <template #content>
+      <p class="title is-4">{{ item.name }}</p>
+      <p class="subtitle is-6">
+        <template v-if="item.subtitle">
+          {{ item.subtitle }}
+        </template>
+        <template v-else-if="percentage">
+          {{ percentage }}&percnt; blocked
+        </template>
+      </p>
+    </template>
+    <template #indicator>
+      <div v-if="status" class="status" :class="status">
+        {{ status }}
+      </div>
+    </template>
+  </Generic>
 </template>
 
 <script>
+import service from "@/mixins/service.js";
+import Generic from "./Generic.vue";
+
 export default {
   name: "PiHole",
+  mixins: [service],
   props: {
     item: Object,
   },
+  components: {
+    Generic,
+  },
   data: () => ({
-    api: {
-      status: "",
-      ads_percentage_today: 0,
-    },
+    status: "",
+    ads_percentage_today: 0,
   }),
   computed: {
     percentage: function () {
-      if (this.api) {
-        return this.api.ads_percentage_today.toFixed(1);
+      if (this.ads_percentage_today) {
+        return this.ads_percentage_today.toFixed(1);
       }
       return "";
     },
@@ -63,21 +49,16 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const url = `${this.item.url}/api.php`;
-      this.api = await fetch(url, {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .catch((e) => console.log(e));
+      const result = await this.fetch("/api.php").catch((e) => console.log(e));
+
+      this.status = result.status;
+      this.ads_percentage_today = result.ads_percentage_today;
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.media-left img {
-  max-height: 100%;
-}
 .status {
   font-size: 0.8rem;
   color: var(--text-title);
