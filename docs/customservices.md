@@ -18,8 +18,6 @@ If you experiencing any issue, please have a look to the [troubleshooting](troub
   type: "<type>"
 ```
 
-⚠️🚧 `endpoint` & `useCredentials` new options are not yet supported by all custom services (but will be very soon).
-
 ## PiHole
 
 Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
