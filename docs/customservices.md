@@ -1,7 +1,11 @@
 # Custom Services
 
 Some service can use a specific a component that provides some extra features by adding a `type` key to the service yaml
-configuration. Available services are in `src/components/`. Here is an overview of all custom services that are available
+configuration and, where applicable, an apikey. Note that config.yml is exposed at /assets/config.yml via HTTP and any
+apikey included in the configuration file is exposed to anyone who can access the homer instance. Only include an apikey
+if your homer instance is secured behind some form of authentication or access restriction.
+
+Available services are in `src/components/`. Here is an overview of all custom services that are available
 within Homer.
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
