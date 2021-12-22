@@ -1,48 +1,36 @@
 <template>
-  <div>
-    <div class="card" :class="item.class">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
-          <div class="media">
-            <div v-if="item.logo" class="media-left">
-              <figure class="image is-48x48">
-                <img :src="item.logo" :alt="`${item.name} logo`" />
-              </figure>
-            </div>
-            <div v-if="item.icon" class="media-left">
-              <figure class="image is-48x48">
-                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">
-                <template v-if="item.subtitle">
-                  {{ item.subtitle }}
-                </template>
-                <template v-else-if="stats">
-                  {{ percentage }}&percnt; blocked
-                </template>
-              </p>
-            </div>
-            <div class="status" :class="protection">
-              {{ protection }}
-            </div>
-          </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
-            <strong class="tag-text">#{{ item.tag }}</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <Generic :item="item">
+    <template #content>
+      <p class="title is-4">{{ item.name }}</p>
+      <p class="subtitle is-6">
+        <template v-if="item.subtitle">
+          {{ item.subtitle }}
+        </template>
+        <template v-else-if="stats">
+          {{ percentage }}&percnt; blocked
+        </template>
+      </p>
+    </template>
+    <template #indicator>
+      <div class="status" :class="protection">
+        {{ protection }}
+      </div>
+    </template>
+  </Generic>
 </template>
 
 <script>
+import service from "@/mixins/service.js";
+import Generic from "./Generic.vue";
+
 export default {
   name: "AdGuardHome",
+  mixins: [service],
   props: {
     item: Object,
+  },
+  components: {
+    Generic,
   },
   data: () => {
     return {
@@ -74,18 +62,14 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.status = await fetch(`${this.item.url}/control/status`, {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .catch((e) => console.log(e));
+      this.status = await this.fetch("/control/status").catch((e) =>
+        console.log(e)
+      );
     },
     fetchStats: async function () {
-      this.stats = await fetch(`${this.item.url}/control/stats`, {
-        credentials: "include",
-      })
-        .then((response) => response.json())
-        .catch((e) => console.log(e));
+      this.stats = await this.fetch("/control/stats").catch((e) =>
+        console.log(e)
+      );
     },
   },
 };
