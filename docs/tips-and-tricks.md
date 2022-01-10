@@ -135,7 +135,7 @@ For example, if you would like to show jokes from ChuckNorris.io, you'll find th
   "id": "MR2-BnMBR667xSpQBIleUg",
   "updated_at": "2020-01-05 13:42:22.089095",
   "url": "https://api.chucknorris.io/jokes/MR2-BnMBR667xSpQBIleUg",
-  "value": "Chuck Norris can quitely sneak up on himself"
+  "value": "Chuck Norris can quietly sneak up on himself"
 }
 ```
 
@@ -144,7 +144,7 @@ but... you need that info to be transformed to something like this:
 ```json
 {
   "title": "MR2-BnMBR667xSpQBIleUg",
-  "content": "Chuck Norris can quitely sneak up on himself"
+  "content": "Chuck Norris can quietly sneak up on himself"
 }
 ```
 
