@@ -104,6 +104,19 @@ For Ping you need to set the type to Ping and provide a url.
   url: "https://www.reddit.com/r/selfhosted/"
 ```
 
+## Get
+
+For Get you need to set the type to Get and provide a url. This performs a GET request rather than Pings HEAD request.
+
+```yaml
+- name: "Awesome app"
+  type: Get
+  logo: "assets/tools/sample.png"
+  subtitle: "Bookmark example"
+  tag: "app"
+  url: "https://www.reddit.com/r/selfhosted/"
+```
+
 ## Prometheus
 
 For Prometheus you need to set the type to Prometheus and provide a url.
