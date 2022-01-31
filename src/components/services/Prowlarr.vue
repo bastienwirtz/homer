@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import service from "@/mixins/service.js"
-import Generic from "./Generic.vue"
+import service from "@/mixins/service.js";
+import Generic from "./Generic.vue";
 
 export default {
   name: "Prowlarr",
@@ -38,32 +38,32 @@ export default {
       warnings: null,
       errors: null,
       serverError: false,
-    }
+    };
   },
   created: function () {
-    this.fetchConfig()
+    this.fetchConfig();
   },
   methods: {
     fetchConfig: function () {
       this.fetch(`/api/v1/health?apikey=${this.item.apikey}`)
         .then((health) => {
-          this.warnings = 0
-          this.errors = 0
+          this.warnings = 0;
+          this.errors = 0;
           for (var i = 0; i < health.length; i++) {
             if (health[i].type == "warning") {
-              this.warnings++
+              this.warnings++;
             } else if (health[i].type == "error") {
-              this.errors++
+              this.errors++;
             }
           }
         })
         .catch((e) => {
-          console.error(e)
-          this.serverError = true
-        })
+          console.error(e);
+          this.serverError = true;
+        });
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
