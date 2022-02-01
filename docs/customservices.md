@@ -79,6 +79,16 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of Lidarr, Radarr or Sonarr application.
 The Lidarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
+If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example: 
+
+```yaml
+- name: "Radarr"
+  type: "Radarr"
+  url: "http://localhost:8989/"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+  target: "_blank" # optional html tag target attribute
+  legacyApi: true
+```
 
 ## PaperlessNG
 
