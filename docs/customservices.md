@@ -84,9 +84,9 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
 ```yaml
 - name: "Radarr"
   type: "Radarr"
-  url: "http://localhost:8989/"
+  url: "http://localhost:7878/"
   apikey: "MY-SUPER-SECRET-API-KEY"
-  target: "_blank" # optional html tag target attribute
+  target: "_blank"
   legacyApi: true
 ```
 

@@ -75,9 +75,18 @@ export default {
       this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = 0;
-          for (var i = 0; i < queue.length; i++) {
-            if (queue[i].movie) {
-              this.activity++;
+
+          if (this.item.legacyApi) {
+            for (var i = 0; i < queue.length; i++) {
+              if (queue[i].series) {
+                this.activity++;
+              }
+            }
+          } else {
+            for (const record of queue.records) {
+              if (record.movieId) {
+                this.activity++;
+              }
             }
           }
         })
