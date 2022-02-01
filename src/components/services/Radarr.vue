@@ -78,7 +78,7 @@ export default {
 
           if (this.item.legacyApi) {
             for (var i = 0; i < queue.length; i++) {
-              if (queue[i].series) {
+              if (queue[i].movie) {
                 this.activity++;
               }
             }
