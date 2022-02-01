@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const result = await this.fetch("/api.php").catch((e) => console.log(e));
+      const result = await this.fetch("/api.php", {credentials: 'include'}).catch((e) => console.log(e));
 
       this.status = result.status;
       this.ads_percentage_today = result.ads_percentage_today;
