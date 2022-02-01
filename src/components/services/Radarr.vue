@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     fetchConfig: function () {
-      this.fetch(`/api/health?apikey=${this.item.apikey}`)
+      this.fetch(`/api/v3/health?apikey=${this.item.apikey}`)
         .then((health) => {
           this.warnings = 0;
           this.errors = 0;
@@ -64,7 +64,7 @@ export default {
           console.error(e);
           this.serverError = true;
         });
-      this.fetch(`/api/queue?apikey=${this.item.apikey}`)
+      this.fetch(`/api/v3/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = 0;
           for (var i = 0; i < queue.length; i++) {
