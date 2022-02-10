@@ -211,6 +211,7 @@ export default {
           window.location.href = response.url;
           return;
         }
+
         if (!response.ok) {
           throw Error(`${response.statusText}: ${response.body}`);
         }
