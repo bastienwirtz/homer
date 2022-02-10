@@ -56,7 +56,7 @@
 - Search
 - Grouping
 - Theme customization
-- Offline heath check
+- Offline health check
 - keyboard shortcuts:
   - `/` Start searching.
   - `Escape` Stop searching.
