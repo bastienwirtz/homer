@@ -11,5 +11,10 @@ fi
 # Install default config if no one is available.
 yes n | cp -i /www/default-assets/config.yml.dist /www/assets/config.yml &> /dev/null
 
-chown -R $UID:$GID /www/assets
-exec su-exec $UID:$GID darkhttpd /www/ --no-listing --port "$PORT"
+# Skip chown & su-exec if we are already non-root
+if [ "$(whoami)" == "root" ] ; then
+    chown -R $UID:$GID /www/assets
+    exec su-exec $UID:$GID darkhttpd /www/ --no-listing --port "$PORT"
+else
+    exec darkhttpd /www/ --no-listing --port "$PORT"
+fi
