@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.fetch("/", { method: "HEAD", cache: "no-cache" }, false)
+      this.fetch("/", { method: "HEAD", cache: "no-cache", credentials: "include" }, false)
         .then(() => {
           this.status = "online";
         })
