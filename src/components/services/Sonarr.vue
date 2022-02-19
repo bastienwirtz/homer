@@ -83,11 +83,7 @@ export default {
               }
             }
           } else {
-            for (const record of queue.records) {
-              if (record.seriesId) {
-                this.activity++;
-              }
-            }
+            this.activity = queue.totalRecords;
           }
         })
         .catch((e) => {
