@@ -122,6 +122,14 @@ cp assets/config.yml.dist assets/config.yml
 npx serve # or python -m http.server 8010 or apache, nginx ...
 ```
 
+### Build docker
+
+Docker for all platforms can be build locally with docker [buildx](https://docs.docker.com/buildx/working-with-buildx/):
+
+```sh
+docker buildx build --platform=linux/amd64,linux/arm/v7,linux/arm64  .
+```
+
 ### Build manually
 
 ```sh
