@@ -86,8 +86,9 @@ export default {
         } else if (this.item.mapping[prop]) {
           // Replace the keywords in the string if they start with a $
           for (const p in message) {
-            mapped[prop] = this.item.mapping[prop].replaceAll("$" + p, message[p])
+            this.item.mapping[prop] = this.item.mapping[prop].replaceAll("$" + p, message[p])
           }
+          mapped[prop] = this.item.mapping[prop]
         }
       }
       return mapped;
