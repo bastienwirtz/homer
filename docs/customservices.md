@@ -45,7 +45,7 @@ The following configuration is available for the OpenWeatherMap service:
 - name: "Weather"
   location: "Amsterdam" # your location.
   locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
-  apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
+  apikey: "<MY-SUPER-SECRET-API-KEY>" # insert your own API key here. Request one from https://openweathermap.org/api.
   units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
   background: "square" # choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
   type: "OpenWeather"
@@ -61,7 +61,7 @@ Two lines are needed in the config.yml :
 
 ```yaml
   type: "Medusa"
-  apikey: "01234deb70424befb1f4ef6a23456789"
+  apikey: "<MY-SUPER-SECRET-API-KEY>"
 ```
 
 The url must be the root url of Medusa application.
@@ -74,18 +74,18 @@ Two lines are needed in the config.yml :
 
 ```yaml
   type: "Lidarr", "Prowlarr", "Radarr" or "Sonarr"
-  apikey: "01234deb70424befb1f4ef6a23456789"
+  apikey: "<MY-SUPER-SECRET-API-KEY>"
 ```
 
 The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
 The Lidarr, Prowlarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
-If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example: 
+If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example:
 
 ```yaml
 - name: "Radarr"
   type: "Radarr"
   url: "http://localhost:7878/"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "<MY-SUPER-SECRET-API-KEY>"
   target: "_blank"
   legacyApi: true
 ```
@@ -96,7 +96,7 @@ This service displays total number of documents stored. Two lines are required:
 
 ```yaml
   type: "PaperlessNG"
-  apikey: "0123456789abcdef123456789abcdef"
+  apikey: "<MY-SUPER-SECRET-API-KEY>"
 ```
 
 API key can be generated in Settings > Administration > Auth Tokens
