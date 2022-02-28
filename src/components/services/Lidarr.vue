@@ -14,7 +14,7 @@
         <strong
           v-if="serverError"
           class="notif errors"
-          title="Connection error to Radarr API, check url and apikey in config.yml"
+          title="Connection error to Lidarr API, check url and apikey in config.yml"
           >?</strong
         >
       </div>
@@ -26,11 +26,8 @@
 import service from "@/mixins/service.js";
 import Generic from "./Generic.vue";
 
-const V3_API = "/api/v3";
-const LEGACY_API = "/api";
-
 export default {
-  name: "Radarr",
+  name: "Lidarr",
   mixins: [service],
   props: {
     item: Object,
@@ -49,14 +46,9 @@ export default {
   created: function () {
     this.fetchConfig();
   },
-  computed: {
-    apiPath() {
-      return this.item.legacyApi ? LEGACY_API : V3_API;
-    },
-  },
   methods: {
     fetchConfig: function () {
-      this.fetch(`${this.apiPath}/health?apikey=${this.item.apikey}`)
+      this.fetch(`/api/v1/health?apikey=${this.item.apikey}`)
         .then((health) => {
           this.warnings = 0;
           this.errors = 0;
@@ -72,19 +64,9 @@ export default {
           console.error(e);
           this.serverError = true;
         });
-      this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
+      this.fetch(`/api/v1/queue/status?apikey=${this.item.apikey}`)
         .then((queue) => {
-          this.activity = 0;
-
-          if (this.item.legacyApi) {
-            for (var i = 0; i < queue.length; i++) {
-              if (queue[i].movie) {
-                this.activity++;
-              }
-            }
-          } else {
-            this.activity = queue.totalRecords;
-          }
+          this.activity = queue.totalCount;
         })
         .catch((e) => {
           console.error(e);
@@ -104,7 +86,10 @@ export default {
   right: 0.5em;
   .notif {
     display: inline-block;
-    padding: 0.2em 0.35em;
+    padding-right: 0.35em;
+    padding-left: 0.35em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
     border-radius: 0.25em;
     position: relative;
     margin-left: 0.3em;

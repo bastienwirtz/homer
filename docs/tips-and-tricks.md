@@ -51,7 +51,7 @@ and then simply reference these pre-defined (anchored) tags in each item like so
 - name: "VS Code"
   logo: "/assets/vscode.png"
   subtitle: "Develop Code Anywhere, On Anything!"
-  <<: *App # Reference to the predefined "App" Tag
+  <<: *Apps # Reference to the predefined "App" Tag
   url: "https://vscode.example.com/"
   target: "_blank" # optional html tag target attribute
 ````
