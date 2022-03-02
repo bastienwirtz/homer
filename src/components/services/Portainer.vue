@@ -48,7 +48,7 @@ export default {
       }
       return this.containers.filter((container) => {
         return container.State.toLowerCase() === "dead";
-      }).length || 1;
+      }).length;
     },
     misc: function () {
       if (!this.containers) {
