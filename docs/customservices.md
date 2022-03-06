@@ -125,3 +125,19 @@ For Prometheus you need to set the type to Prometheus and provide a url.
   url: "http://192.168.0.151/"
   # subtitle: "Monitor data server"
 ```
+
+## Portainer
+
+This service displays info about the total number of containers managed by your Portainer instance.
+In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
+it to the apikey field.
+
+See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
+
+```yaml
+- name: "Portainer"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "Portainer"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+```
