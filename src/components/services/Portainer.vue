@@ -8,7 +8,11 @@
         <strong v-if="dead > 0" class="notif dead" title="Dead">
           {{ dead }}
         </strong>
-        <strong v-if="misc > 0" class="notif misc" title="Other (creating, paused, exited, etc.)">
+        <strong
+          v-if="misc > 0"
+          class="notif misc"
+          title="Other (creating, paused, exited, etc.)"
+        >
           {{ misc }}
         </strong>
       </div>
@@ -55,7 +59,10 @@ export default {
         return "";
       }
       return this.containers.filter((container) => {
-        return container.State.toLowerCase() !== "running" && container.State.toLowerCase() !== "dead";
+        return (
+          container.State.toLowerCase() !== "running" &&
+          container.State.toLowerCase() !== "dead"
+        );
       }).length;
     },
   },
@@ -68,18 +75,20 @@ export default {
         "X-Api-Key": this.item.apikey,
       };
 
-      this.endpoints = await this.fetch("/api/endpoints", { headers })
-        .catch((e) => {
+      this.endpoints = await this.fetch("/api/endpoints", { headers }).catch(
+        (e) => {
           console.error(e);
-        });
+        }
+      );
 
       let containers = [];
       for (let endpoint of this.endpoints) {
         const uri = `/api/endpoints/${endpoint.Id}/docker/containers/json?all=1`;
-        const endpointContainers = await this.fetch(uri, { headers })
-          .catch((e) => {
+        const endpointContainers = await this.fetch(uri, { headers }).catch(
+          (e) => {
             console.error(e);
-          });
+          }
+        );
 
         containers = containers.concat(endpointContainers);
       }

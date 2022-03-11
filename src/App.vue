@@ -56,6 +56,9 @@
           v-if="config.connectivityCheck"
           @network-status-update="offline = $event"
         />
+
+        <GetStarted v-if="loaded && !services" />
+
         <div v-if="!offline">
           <!-- Optional messages -->
           <Message :item="config.message" />
@@ -130,6 +133,7 @@ const jsyaml = require("js-yaml");
 const merge = require("lodash.merge");
 
 import Navbar from "./components/Navbar.vue";
+import GetStarted from "./components/GetStarted.vue";
 import ConnectivityChecker from "./components/ConnectivityChecker.vue";
 import Service from "./components/Service.vue";
 import Message from "./components/Message.vue";
@@ -144,6 +148,7 @@ export default {
   name: "App",
   components: {
     Navbar,
+    GetStarted,
     ConnectivityChecker,
     Service,
     Message,
@@ -154,6 +159,7 @@ export default {
   },
   data: function () {
     return {
+      loaded: false,
       config: null,
       services: null,
       offline: false,
@@ -166,6 +172,7 @@ export default {
   created: async function () {
     this.buildDashboard();
     window.onhashchange = this.buildDashboard;
+    this.loaded = true;
   },
   methods: {
     searchHotkey() {
@@ -193,6 +200,7 @@ export default {
       }
       this.config = merge(defaults, config);
       this.services = this.config.services;
+
       document.title =
         this.config.documentTitle ||
         `${this.config.title} | ${this.config.subtitle}`;
