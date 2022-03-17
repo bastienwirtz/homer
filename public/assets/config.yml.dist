@@ -1,6 +1,7 @@
 ---
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
+# Use version 5.15.4
 
 title: "Demo dashboard"
 subtitle: "Homer"
