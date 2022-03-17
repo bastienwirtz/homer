@@ -6,6 +6,7 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 ---
 # Homepage configuration
 # See https://fontawesome.com/icons for icons options
+# Use version 5.15.4
 
 # Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
