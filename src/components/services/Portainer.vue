@@ -90,7 +90,7 @@ export default {
           }
         );
 
-        if(endpointContainers){
+        if (endpointContainers) {
           containers = containers.concat(endpointContainers);
         }
       }
