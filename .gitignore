@@ -24,3 +24,9 @@ yarn-error.log*
 config.yml
 
 .drone.yml
+
+# Python venv
+venv
+
+# MkDocs
+site

@@ -1,0 +1,81 @@
+# Project information
+site_name: Homer
+site_url: https://bastienwirtz.github.io/homer/
+
+# Repository
+repo_name: bastienwirtz/homer
+repo_url: https://github.com/bastienwirtz/homer
+edit_uri: ""
+
+# Stylesheet
+extra_css:
+  - stylesheets/styles.css
+
+# Theme
+theme:
+  logo: images/logo.png
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)" 
+      scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)" 
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  features:
+    - content.code.annotate
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+# Copyright - name for footer text
+copyright: Homer dashboard
+
+# Socials
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/bastienwirtz/homer
+    - icon: fontawesome/brands/gitter
+      link: https://gitter.im/homer-dashboard/community
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/b4bz/homer
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+# Page tree
+nav:
+  - Home: index.md
+  - Configuration: configuration.md
+  - Custom services: customservices.md
+  - Tips & tricks: tips-and-tricks.md
+  - Development: development.md
+  - Troubleshooting: troubleshooting.md
