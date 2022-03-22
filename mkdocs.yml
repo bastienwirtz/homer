@@ -1,22 +1,21 @@
 # Project information
 site_name: Homer
-site_url: https://bastienwirtz.github.io/homer/
+site_url: https://bastienwirtz.github.io/
 
 # Repository
 repo_name: bastienwirtz/homer
 repo_url: https://github.com/bastienwirtz/homer
 edit_uri: ""
 
-# Stylesheet
-extra_css:
-  - stylesheets/styles.css
-
 # Theme
 theme:
+  favicon: images/logo.png
   logo: images/logo.png
   name: material
+  custom_dir: docs/overrides/
   icon:
     repo: fontawesome/brands/github
+  language: en
   palette:
     - media: "(prefers-color-scheme: light)" 
       scheme: default
@@ -42,6 +41,9 @@ theme:
     - search.share
     - search.suggest
     - toc.follow
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
 
 # Copyright - name for footer text
 copyright: Homer dashboard
@@ -76,6 +78,7 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
+  - Getting started: getting_started.md
   - Configuration: configuration.md
   - Custom services: customservices.md
   - Tips & tricks: tips-and-tricks.md

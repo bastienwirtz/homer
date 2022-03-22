@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+<link
+  rel="stylesheet"
+  href="{{ 'overrides/assets/stylesheets/home.css' | url }}" />
+{% endblock %}
+
+{% block tabs %}
+{{ super() }}
+
+<section class="hero">
+  <div class="md-grid md-typeset hero-container">
+    <div class="hero-content">
+      <div class="hero-title">
+        <img src="images/logo.png" draggable="false" />
+        <h1>Homer</h1>
+      </div>
+      <p>
+        A dead simple static <strong>HOM</strong>epage for your serv<strong>ER</strong>
+        to keep your services on hand, from a simple <code>yaml</code> configuration file.
+      </p>
+      <a
+        href="{{ page.next_page.url | url }}"
+        title="{{ page.next_page.title | striptags }}"
+        class="md-button md-button-primary"
+      >
+        Get started
+      </a>
+      <a
+        href="{{ config.repo_url }}"
+        title="{{ lang.t('source.link.title') }}"
+        class="md-button"
+      >
+        Go to GitHub
+      </a>
+    </div>
+    <img class="hero-image" src="images/screenshot.png" draggable="false" />
+  </div>
+</section>
+
+<div>
+  TODO!
+</div>
+{% endblock %}
+
+{% block site_nav %}{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}
