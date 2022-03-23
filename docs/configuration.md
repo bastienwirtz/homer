@@ -1,6 +1,8 @@
 # Configuration
 
-Title, icons, links, colors, and services can be configured in the `config.yml` file (located in `/assets` directory once built, or in the `public/assets` directory in development mode), using [yaml](http://yaml.org/) format.
+Title, icons, links, colors, and services can be configured in the `config.yml`
+file (located in `/assets` directory once built, or in the `public/assets`
+directory in development mode), using [yaml](http://yaml.org/) format.
 
 ```yaml
 ---
@@ -13,40 +15,57 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 
 title: "App dashboard"
 subtitle: "Homer"
-# documentTitle: "Welcome" # Customize the browser tab text
+# Customize the browser tab text
+# documentTitle: "Welcome"
 logo: "assets/logo.png"
-# Alternatively a fa icon can be provided:
+# Alternatively a Font Awesome icon can be provided
 # icon: "fas fa-skull-crossbones"
 
-header: true # Set to false to hide the header
-# Optional: Different hotkey for search, defaults to "/"
+# Set to false to hide the header
+header: true
+# Set to false to hide the footer
+footer: >
+  <p>Created with <span class="has-text-danger">❤️</span> with
+  <a href="https://bulma.io/">bulma</a>,
+  <a href="https://vuejs.org/">vuejs</a>, &
+  <a href="https://fontawesome.com/">font awesome</a>
+  // Fork me on <a href="https://github.com/bastienwirtz/homer">
+  <i class="fab fa-github-alt"></i></a></p>
+
+# Use "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
+columns: "3"
+# Whether you want to display a message when the apps are not accessible
+# anymore (VPN disconnected for example)
+connectivityCheck: true
+
+# Optional: Set a different hotkey for search, defaults to "/"
 # hotkey:
 #   search: "Shift"
-footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
-
-columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
-connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
 
 # Optional: Proxy / hosting option
 proxy:
-  useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+  # Send cookies & authorization headers when fetching service specific data.
+  # Set to `true` if you use an authentication proxy. Can be overrided on
+  # service level.
+  useCredentials: false
 
 # Set the default layout and color scheme
 defaults:
   layout: columns # Either 'columns', or 'list'
   colorTheme: auto # One of 'auto', 'light', or 'dark'
 
-# Optional theming
-theme: default # 'default' or one of the themes available in 'src/assets/themes'.
+# Optional theming: 'default' or one of the themes available in
+# 'src/assets/themes'.
+theme: default
 
 # Optional custom stylesheet
 # Will load custom CSS files. Especially useful for custom icon sets.
 # stylesheet:
 #   - "assets/custom.css"
 
-# Here is the exhaustive list of customization parameters
-# However all value are optional and will fallback to default if not set.
-# if you want to change only some of the colors, feel free to remove all unused key.
+# Here is the exhaustive list of customization parameters, however all values
+# are optional and will fallback to default if not set. If you want to change
+# only some of the colors, feel free to remove all unused keys.
 colors:
   light:
     highlight-primary: "#3367d6"
@@ -79,25 +98,30 @@ colors:
 
 # Optional message
 message:
-  # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
-  # mapping: # allows to map fields from the remote format to the one expected by Homer
-  #   title: 'id' # use value from field 'id' as title
-  #   content: 'value' # value from field 'value' as content
-  # refreshInterval: 10000 # Optional: time interval to refresh message
-  #
-  # Real example using chucknorris.io for showing Chuck Norris facts as messages:
-  # url: https://api.chucknorris.io/jokes/random
-  # mapping:
-  #   title: 'id'
-  #   content: 'value'
-  # refreshInterval: 10000
+  # Uses Bulma. See https://bulma.io/documentation/components/message/#colors
+  # for styling options.
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
+  # Can optionally fetch information from an endpoint to override value below.
+  # url: "https://<my-api-endpoint>"
+  # mapping: # Select the appropriate fields from the response object.
+  #   title: 'id'       # Use value from field 'id' as title
+  #   content: 'value'  # Use value from field 'value' as content
+  # refreshInterval: 10000 # Optional: time interval to refresh message
+  #
+  # Real example using chucknorris.io for showing Chuck Norris facts:
+  # url: https://api.chucknorris.io/jokes/random
+  # mapping:
+  #   title: 'id'
+  #   content: 'value'
+  # refreshInterval: 10000
+
 # Optional navbar
-# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+# Specify [] for navbar (dark mode, layout, and search) without any links
+# links: [] 
 links:
   - name: "Link 1"
     icon: "fab fa-github"
@@ -106,19 +130,22 @@ links:
   - name: "link 2"
     icon: "fas fa-book"
     url: "https://github.com/bastienwirtz/homer"
-  # this will link to a second homer page that will load config from page2.yml and keep default config values as in config.yml file
-  # see url field and assets/page.yml used in this example:
+  # Urls starting with # will link to additional Homer pages. Passing "#page2"
+  # will load config from page2.yml as overrides on top of the default values
+  # set in this config.yml.
   - name: "Second Page"
     icon: "fas fa-file-alt"
     url: "#page2"
 
 # Services
-# First level array represents a group.
-# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+# First level array represents a group. Use only an "items" key if not using
+# groups (name, icon, & tagstyle are optional; section separation will not be
+# displayed).
 services:
   - name: "Application"
     icon: "fas fa-code-branch"
-    # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
+    # A path to an image can also be provided. Note that icon will take
+    # precedence if both icon and logo are set.
     # logo: "path/to/logo"
     items:
       - name: "Awesome app"
@@ -128,7 +155,8 @@ services:
         subtitle: "Bookmark example"
         tag: "app"
         url: "https://www.reddit.com/r/selfhosted/"
-        target: "_blank" # optional html tag target attribute
+        # Optional: HTML <a> tag target attribute
+        target: "_blank"
       - name: "Another one"
         logo: "assets/tools/sample2.png"
         subtitle: "Another application"
@@ -141,13 +169,20 @@ services:
     items:
       - name: "Pi-hole"
         logo: "assets/tools/sample.png"
-        # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
+        # Optional: If no subtitle is defined, PiHole statistics will be shown.
+        # subtitle: "Network-wide Ad Blocking"
         tag: "other"
         url: "http://192.168.0.151/admin"
-        type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
+        # Optional: Loads a specific component that provides extra features.
+        # MUST MATCH a file name (without file extension) available in
+        # `src/components/services`
+        type: "PiHole" 
+        # Optional: HTML <a> tag target attribute
+        target: "_blank"
+        # Optional: Custom CSS class for card, useful with custom stylesheet
+        # class: "green"
+        # Optional: Set background color directly without custom stylesheet
+        # background: red
 ```
 
 View [Custom Services](customservices.md) for details about all available custom services (like PiHole) and how to configure them.
@@ -167,7 +202,7 @@ Empty values (either in `config.yml` or the endpoint data) will hide the element
 
 ## Style Options
 
-Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](https://bulma.io/documentation/modifiers/syntax/). You'll notice in the config there is a `tagstyle` option. It can be set to any of the bulma modifiers. You'll probably want to use one of these 4 main colors:
+Homer uses [Bulma CSS](https://bulma.io/), which provides a [modifiers syntax](https://bulma.io/documentation/modifiers/syntax/). You'll notice in the config there is a `tagstyle` option. It can be set to any of the bulma modifiers. You'll probably want to use one of these 4 main colors:
 
 - `is-info` (blue)
 - `is-success` (green)
