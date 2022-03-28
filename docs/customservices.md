@@ -6,7 +6,16 @@ apikey included in the configuration file is exposed to anyone who can access th
 if your homer instance is secured behind some form of authentication or access restriction.
 
 Available services are in `src/components/`. Here is an overview of all custom services that are available
-within Homer.
+within Homer:
++ [PiHole](#pihole)
++ [OpenWeatherMap](#openweathermap)
++ [Medusa](#medusa)
++ [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
++ [PaperlessNG](#paperlessng)
++ [Ping](#ping)
++ [Prometheus](#prometheus)
++ [Portainer](#portainer)
++ [Emby](#emby)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -140,4 +149,17 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
   url: "http://192.168.0.151/"
   type: "Portainer"
   apikey: "MY-SUPER-SECRET-API-KEY"
+```
+
+## Emby
+
+You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
+
+```yaml
+- name: "Emby"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "Portainer"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
