@@ -159,7 +159,7 @@ You need to set the type to Emby, provide an api key and choose which stats to s
 - name: "Emby"
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
-  type: "Portainer"
+  type: "Emby"
   apikey: "MY-SUPER-SECRET-API-KEY"
   libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
