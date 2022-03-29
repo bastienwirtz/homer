@@ -7,7 +7,7 @@
           {{ item.subtitle }}
         </template>
         <template v-else>
-          {{ embyCount }} 
+          {{ embyCount }}
         </template>
       </p>
     </template>
@@ -42,18 +42,19 @@ export default {
   }),
   computed: {
     embyCount: function () {
-      if(this.item.libraryType === 'music')
-        return `${this.songCount} songs, ${this.albumCount} albums`
-      if(this.item.libraryType === 'movies')
-        return `${this.movieCount} movies`
-      if(this.item.libraryType === 'series')
-        return `${this.episodeCount} eps, ${this.seriesCount} series`
+      if (this.item.libraryType === "music")
+        return `${this.songCount} songs, ${this.albumCount} albums`;
+      else if (this.item.libraryType === "movies")
+        return `${this.movieCount} movies`;
+      else if (this.item.libraryType === "series")
+        return `${this.episodeCount} eps, ${this.seriesCount} series`;
+      else return `wrong library type 💀`;
     },
   },
   created() {
     this.fetchServerStatus();
 
-    if(!this.item.subtitle && this.status !== "dead")
+    if (!this.item.subtitle && this.status !== "dead")
       this.fetchServerMediaStats();
   },
   methods: {
@@ -61,25 +62,25 @@ export default {
       const headers = {
         "X-Emby-Token": this.item.apikey,
       };
-      
-     await this.fetch("/System/info/public", { headers })
-                .then(response => {
-                  if(response.Id)
-                    this.status = "running";
-                  else  
-                    this.status = "dead";
-                })
-                .catch((e) => { 
-                  console.log(e);
-                  this.status = "dead";
-                });
+
+      await this.fetch("/System/info/public", { headers })
+        .then((response) => {
+          if (response.Id) this.status = "running";
+          else this.status = "dead";
+        })
+        .catch((e) => {
+          console.log(e);
+          this.status = "dead";
+        });
     },
     fetchServerMediaStats: async function () {
       const headers = {
         "X-Emby-Token": this.item.apikey,
       };
 
-      var data = await this.fetch("/items/counts", { headers }).catch((e) => { console.log(e); });    
+      var data = await this.fetch("/items/counts", { headers }).catch((e) => {
+        console.log(e);
+      });
 
       this.albumCount = data.AlbumCount;
       this.songCount = data.SongCount;
