@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     fetchServerStatus: async function () {
-      await this.fetch("/System/info/public")
+      this.fetch("/System/info/public")
         .then((response) => {
           if (response.Id) this.status = "running";
           else this.status = "dead";
