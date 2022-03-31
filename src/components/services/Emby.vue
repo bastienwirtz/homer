@@ -59,11 +59,7 @@ export default {
   },
   methods: {
     fetchServerStatus: async function () {
-      const headers = {
-        "X-Emby-Token": this.item.apikey,
-      };
-
-      await this.fetch("/System/info/public", { headers })
+      await this.fetch("/System/info/public")
         .then((response) => {
           if (response.Id) this.status = "running";
           else this.status = "dead";
