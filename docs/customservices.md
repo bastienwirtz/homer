@@ -141,3 +141,17 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
   type: "Portainer"
   apikey: "MY-SUPER-SECRET-API-KEY"
 ```
+
+## Uptime Kuma
+
+Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
+
+The following configuration is available for the UptimeKuma service.
+
+```yaml
+- name: "Uptime Kuma"
+  logo: "assets/tools/sample.png"
+  # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
+  url: "http://192.168.0.151:3001"
+  type: "UptimeKuma"
+```
