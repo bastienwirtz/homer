@@ -14,6 +14,7 @@ within Homer:
 + [PaperlessNG](#paperlessng)
 + [Ping](#ping)
 + [Prometheus](#prometheus)
++ [AdGuard Home](#adguard-home)
 + [Portainer](#portainer)
 + [Emby](#emby)
 
@@ -133,6 +134,17 @@ For Prometheus you need to set the type to Prometheus and provide a url.
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
   # subtitle: "Monitor data server"
+```
+
+## AdGuard Home
+For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
+
+```yaml
+- name: "Adguard"
+  logo: "assets/tools/adguardhome.png"
+  url: "https://adguard.exemple.com"
+  target: "_blank"
+  type: "AdGuardHome"
 ```
 
 ## Portainer
