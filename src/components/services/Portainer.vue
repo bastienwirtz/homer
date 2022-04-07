@@ -83,6 +83,12 @@ export default {
 
       let containers = [];
       for (let endpoint of this.endpoints) {
+        if (
+          this.item.environments &&
+          !this.item.environments.includes(endpoint.Name)
+        ) {
+          continue;
+        }
         const uri = `/api/endpoints/${endpoint.Id}/docker/containers/json?all=1`;
         const endpointContainers = await this.fetch(uri, { headers }).catch(
           (e) => {

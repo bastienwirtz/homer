@@ -140,6 +140,7 @@ For Prometheus you need to set the type to Prometheus and provide a url.
 This service displays info about the total number of containers managed by your Portainer instance.
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
+By default, every connected environments will be checked. To select specific ones,add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
 See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
 
@@ -149,6 +150,9 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
   url: "http://192.168.0.151/"
   type: "Portainer"
   apikey: "MY-SUPER-SECRET-API-KEY"
+  # environments:
+  #   - "raspberry"
+  #   - "local"
 ```
 
 ## Emby
