@@ -76,9 +76,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.media-left img {
-  max-height: 100%;
-}
 .status {
   font-size: 0.8rem;
   color: var(--text-title);

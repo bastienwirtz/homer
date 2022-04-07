@@ -12,6 +12,7 @@ export default {
     name: String,
     icon: String,
     iconAlt: String,
+    defaultValue: Boolean,
   },
   data: function () {
     return {
@@ -24,6 +25,8 @@ export default {
 
     if (this.name in localStorage) {
       this.value = JSON.parse(localStorage[this.name]);
+    } else {
+      this.value = this.defaultValue;
     }
 
     this.$emit("updated", this.value);
