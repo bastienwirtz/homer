@@ -37,6 +37,9 @@ export default {
     heartbeat: null,
   }),
   computed: {
+    dashboard: function () {
+      return this.item.slug ? this.item.slug : "default";
+    },
     status: function () {
       if (!this.incident) {
         return "";
@@ -65,16 +68,14 @@ export default {
     this.fetchStatus();
   },
   methods: {
-    fetchStatus: async function () {
-      const incident = await this.fetch("/api/status-page/incident").catch(
-        (e) => console.log(e)
-      );
-      this.incident = incident;
+    fetchStatus: function () {
+      this.fetch(`/api/status-page/${this.dashboard}`)
+        .catch((e) => console.log(e))
+        .then((resp) => (this.incident = resp));
 
-      const heartbeat = await this.fetch("/api/status-page/heartbeat").catch(
-        (e) => console.log(e)
-      );
-      this.heartbeat = heartbeat;
+      this.fetch(`/api/status-page/heartbeat/${this.dashboard}`)
+        .catch((e) => console.log(e))
+        .then((resp) => (this.heartbeat = resp));
     },
   },
 };
