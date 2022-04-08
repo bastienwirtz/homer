@@ -2,7 +2,7 @@
     <Generic :item="item">
     <template #indicator>
         <div>
-        <img :src=item.badge>
+        <img :src=item.badge />
         </div>
     </template>
     </Generic>
