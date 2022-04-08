@@ -10,7 +10,6 @@ within Homer.
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
-
 ## Common options
 
 ```yaml
@@ -79,7 +78,7 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
 The Lidarr, Prowlarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
-If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example: 
+If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example:
 
 ```yaml
 - name: "Radarr"
@@ -132,7 +131,7 @@ This service displays info about the total number of containers managed by your 
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
 
-See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
+See <https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens>
 
 ```yaml
 - name: "Portainer"
@@ -146,12 +145,15 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
 
 Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
 
-The following configuration is available for the UptimeKuma service.
+The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
+
+As usual, needs CORS to be enabled from the homer domain to uptime kuma.
 
 ```yaml
 - name: "Uptime Kuma"
   logo: "assets/tools/sample.png"
   # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
   url: "http://192.168.0.151:3001"
+  slug: "myCustomDashboard" # Defaults to "default" if not provided.
   type: "UptimeKuma"
 ```
