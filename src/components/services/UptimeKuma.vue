@@ -44,16 +44,51 @@ export default {
       if (!this.incident) {
         return "";
       }
-      return this.incident.ok && this.incident.incident == null
-        ? "good"
-        : "bad";
+      return this.incident.incident == null ? this.pageStatus : "bad";
+    },
+    lastHeartBeatList: function () {
+      let result = {};
+
+      for (let id in this.heartbeat.heartbeatList) {
+        let index = this.heartbeat.heartbeatList[id].length - 1;
+        result[id] = this.heartbeat.heartbeatList[id][index];
+      }
+
+      return result;
+    },
+    pageStatus: function () {
+      if (!this.heartbeat) {
+        return "";
+      }
+      if (Object.keys(this.heartbeat.heartbeatList).length === 0) {
+        return "";
+      }
+      let result = "good";
+      let hasUp = false;
+      for (let id in this.lastHeartBeatList) {
+        let beat = this.lastHeartBeatList[id];
+        console.log(beat.status);
+        if (beat.status == 1) {
+          hasUp = true;
+        } else {
+          result = "warn";
+        }
+      }
+      if (!hasUp) {
+        result = "bad";
+      }
+      return result;
     },
     statusMessage: function () {
       if (!this.incident) {
         return "";
       }
-      const inc = this.incident.incident;
-      return inc ? inc.title : "No Incidents";
+      if (this.incident.incident) {
+        return this.incident.incident.title;
+      }
+      return this.pageStatus == "warn"
+        ? "Partially Degraded Service"
+        : "All Systems Operational";
     },
     uptime: function () {
       if (!this.heartbeat) {
@@ -65,6 +100,7 @@ export default {
     },
   },
   created() {
+    this.item.url = `${this.item.url}/status/${this.dashboard}`;
     this.fetchStatus();
   },
   methods: {
@@ -90,6 +126,12 @@ export default {
     background-color: #94e185;
     border-color: #78d965;
     box-shadow: 0 0 5px 1px #94e185;
+  }
+
+  &.warn:before {
+    background-color: #f8a306;
+    border-color: #e1b35e;
+    box-shadow: 0 0 5px 1px #f8a306;
   }
 
   &.bad:before {
