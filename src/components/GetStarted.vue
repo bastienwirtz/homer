@@ -6,7 +6,7 @@
       <p>
         <a
           class="button is-primary mt-5 has-text-weight-bold"
-          href="https://github.com/bastienwirtz/homer/blob/main/README.md#getting-started"
+          href="https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md#configuration"
           target="_blank"
         >
           Get started

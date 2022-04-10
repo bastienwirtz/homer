@@ -62,7 +62,7 @@ export default {
       this.fetch("/System/info/public")
         .then((response) => {
           if (response.Id) this.status = "running";
-          else  throw new Error();
+          else throw new Error();
         })
         .catch((e) => {
           console.log(e);
