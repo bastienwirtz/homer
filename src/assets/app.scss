@@ -104,6 +104,10 @@ body {
 
     .dashboard-title {
       padding: 6px 0 0 80px;
+
+      &.no-logo {
+        padding-left: 0;
+      }
     }
 
     .first-line {
