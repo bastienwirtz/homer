@@ -84,6 +84,7 @@
                 :key="index"
                 :item="item"
                 :proxy="config.proxy"
+                :forwarder="config.forwarder"
                 :class="['column', `is-${12 / config.columns}`]"
               />
             </template>
@@ -113,6 +114,7 @@
                 :key="index"
                 :item="item"
                 :proxy="config.proxy"
+                :forwarder="config.forwarder"
               />
             </div>
           </div>
