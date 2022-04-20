@@ -109,7 +109,7 @@ export default {
         .then((resp) => (this.incident = resp));
 
       this.fetch(`/api/status-page/heartbeat/${this.dashboard}`)
-        .catch((e) => console.log(e))
+        .catch((e) => console.error(e))
         .then((resp) => (this.heartbeat = resp));
     },
   },
