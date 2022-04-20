@@ -147,8 +147,6 @@ Using the Uptime Kuma service you can display info about your instance uptime ri
 
 The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
 
-As usual, needs CORS to be enabled from the homer domain to uptime kuma.
-
 ```yaml
 - name: "Uptime Kuma"
   logo: "assets/tools/sample.png"
