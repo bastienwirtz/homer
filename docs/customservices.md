@@ -179,3 +179,18 @@ You need to set the type to Emby, provide an api key and choose which stats to s
   apikey: "MY-SUPER-SECRET-API-KEY"
   libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
+
+## Uptime Kuma
+
+Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
+
+The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
+
+```yaml
+- name: "Uptime Kuma"
+  logo: "assets/tools/sample.png"
+  # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
+  url: "http://192.168.0.151:3001"
+  slug: "myCustomDashboard" # Defaults to "default" if not provided.
+  type: "UptimeKuma"
+```
