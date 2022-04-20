@@ -10,6 +10,7 @@ within Homer.
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
+
 ## Common options
 
 ```yaml
@@ -78,7 +79,7 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
 The Lidarr, Prowlarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
-If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example:
+If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example: 
 
 ```yaml
 - name: "Radarr"
@@ -131,7 +132,7 @@ This service displays info about the total number of containers managed by your 
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
 
-See <https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens>
+See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
 
 ```yaml
 - name: "Portainer"
