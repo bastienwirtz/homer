@@ -105,7 +105,7 @@ export default {
   methods: {
     fetchStatus: function () {
       this.fetch(`/api/status-page/${this.dashboard}`)
-        .catch((e) => console.log(e))
+        .catch((e) => console.error(e))
         .then((resp) => (this.incident = resp));
 
       this.fetch(`/api/status-page/heartbeat/${this.dashboard}`)
