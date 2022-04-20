@@ -3,6 +3,7 @@ const merge = require("lodash.merge");
 export default {
   props: {
     proxy: Object,
+    forwarder: Object,
   },
   created: function () {
     // custom service often consume info from an API using the item link (url) as a base url,
@@ -27,9 +28,9 @@ export default {
           this.item.useCredentials === true ? "include" : "omit";
       }
 
-      if (this.proxy?.apikey) {
+      if (this.forwarder?.apikey) {
         options.headers = {
-          "X-Homer-Api-Key": this.proxy.apikey,
+          "X-Homer-Forwarder-Api-Key": this.forwarder.apikey,
         };
       }
 
@@ -39,12 +40,12 @@ export default {
 
       let url = path ? `${this.endpoint}/${path}` : this.endpoint;
 
-      if (this.proxy?.url) {
+      if (this.forwarder?.url) {
         options.headers = {
           ...(options.headers || {}),
-          "X-Homer-Api-Url": url,
+          "X-Homer-Forwarder-Url": url,
         };
-        url = this.proxy.url;
+        url = this.forwarder.url;
       }
 
       options = merge(options, init);
