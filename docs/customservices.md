@@ -6,7 +6,17 @@ apikey included in the configuration file is exposed to anyone who can access th
 if your homer instance is secured behind some form of authentication or access restriction.
 
 Available services are in `src/components/`. Here is an overview of all custom services that are available
-within Homer.
+within Homer:
++ [PiHole](#pihole)
++ [OpenWeatherMap](#openweathermap)
++ [Medusa](#medusa)
++ [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
++ [PaperlessNG](#paperlessng)
++ [Ping](#ping)
++ [Prometheus](#prometheus)
++ [AdGuard Home](#adguard-home)
++ [Portainer](#portainer)
++ [Emby](#emby)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -126,11 +136,23 @@ For Prometheus you need to set the type to Prometheus and provide a url.
   # subtitle: "Monitor data server"
 ```
 
+## AdGuard Home
+For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
+
+```yaml
+- name: "Adguard"
+  logo: "assets/tools/adguardhome.png"
+  url: "https://adguard.exemple.com"
+  target: "_blank"
+  type: "AdGuardHome"
+```
+
 ## Portainer
 
 This service displays info about the total number of containers managed by your Portainer instance.
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
+By default, every connected environments will be checked. To select specific ones,add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
 See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
 
@@ -140,4 +162,20 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
   url: "http://192.168.0.151/"
   type: "Portainer"
   apikey: "MY-SUPER-SECRET-API-KEY"
+  # environments:
+  #   - "raspberry"
+  #   - "local"
+```
+
+## Emby
+
+You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
+
+```yaml
+- name: "Emby"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "Emby"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
