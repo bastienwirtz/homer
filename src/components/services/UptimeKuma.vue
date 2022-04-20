@@ -67,7 +67,6 @@ export default {
       let hasUp = false;
       for (let id in this.lastHeartBeatList) {
         let beat = this.lastHeartBeatList[id];
-        console.log(beat.status);
         if (beat.status == 1) {
           hasUp = true;
         } else {
