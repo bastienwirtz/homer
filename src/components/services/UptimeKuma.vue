@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     fetchStatus: function () {
-      this.fetch(`/api/status-page/${this.dashboard}`)
+      this.fetch(`/api/status-page/${this.dashboard}?cachebust=${Date.now()}`)
         .catch((e) => console.error(e))
         .then((resp) => (this.incident = resp));
 
