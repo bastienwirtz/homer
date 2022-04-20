@@ -108,7 +108,7 @@ export default {
         .catch((e) => console.error(e))
         .then((resp) => (this.incident = resp));
 
-      this.fetch(`/api/status-page/heartbeat/${this.dashboard}`)
+      this.fetch(`/api/status-page/heartbeat/${this.dashboard}?cachebust=${Date.now()}`)
         .catch((e) => console.error(e))
         .then((resp) => (this.heartbeat = resp));
     },
