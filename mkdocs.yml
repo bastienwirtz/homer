@@ -7,29 +7,30 @@ repo_name: bastienwirtz/homer
 repo_url: https://github.com/bastienwirtz/homer
 edit_uri: ""
 
+# Custom CSS
+extra_css:
+  - stylesheets/open-props.1.3.16.min.css
+  - stylesheets/styles.css
+
 # Theme
 theme:
   favicon: images/logo.png
   logo: images/logo.png
   name: material
-  custom_dir: docs/overrides/
+  # custom_dir: docs/overrides/
   icon:
     repo: fontawesome/brands/github
   language: en
   palette:
     - media: "(prefers-color-scheme: light)" 
       scheme: default
-      primary: blue
-      accent: blue
       toggle:
-        icon: material/brightness-4
+        icon: fontawesome/solid/sun
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)" 
       scheme: slate
-      primary: blue
-      accent: blue
       toggle:
-        icon: material/brightness-7
+        icon: fontawesome/solid/moon
         name: Switch to light mode
   features:
     - content.code.annotate
@@ -46,7 +47,7 @@ theme:
   search_index_only: true
 
 # Copyright - name for footer text
-copyright: Homer dashboard
+copyright: Homer
 
 # Socials
 extra:
@@ -77,7 +78,7 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Home: index.md
+  - What is Homer: index.md
   - Getting started: getting_started.md
   - Configuration: configuration.md
   - Custom services: customservices.md

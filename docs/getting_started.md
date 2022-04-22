@@ -1,8 +1,10 @@
-Homer is a full static html/js dashboard, generated from the source in `/src` using webpack. It's meant to be served by an HTTP server, **it will not work if you open dist/index.html directly over file:// protocol**.
+## Using Docker
 
-See [documentation](docs/configuration.md) for information about the configuration (`assets/config.yml`) options.
+The fastest and recommended way to get your Homer instance up and running is
+with Docker. The Docker image comes with a web server built-in so that all you
+need to worry about is your config file.
 
-## Using docker
+### docker
 
 To launch container:
 
@@ -16,7 +18,7 @@ docker run -d \
 
 Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
 
-## Using docker-compose
+### docker-compose
 
 The `docker-compose.yml` file must be edited to match your needs.
 Set the port and volume (equivalent to `-p` and `-v` arguments):
@@ -43,7 +45,9 @@ environment:
   - GID=1000
 ```
 
-## Using the release tarball (prebuilt, ready to use)
+## Shipping your own web server
+
+### Prebuilt release tarball
 
 Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a web server.
 
@@ -55,7 +59,7 @@ cp assets/config.yml.dist assets/config.yml
 npx serve # or python -m http.server 8010 or apache, nginx ...
 ```
 
-## Build manually
+### Building from source
 
 ```sh
 # Using yarn (recommended)

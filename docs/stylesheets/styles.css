@@ -1,0 +1,71 @@
+/* Set some CSS variables for use throughout the page */
+
+:root>* {
+  --md-hue: 208; /* blue-7 hue */
+  --md-footer-bg-color: var(--md-code-bg-color);
+  --md-footer-fg-color: var(--md-code-fg-color);
+}
+
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: var(--blue-7);
+  --md-accent-fg-color: var(--violet-6);
+  --md-code-bg-color: var(--gray-2);
+  --md-default-fg-color--lightest: var(--gray-4);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--blue-5);
+  --md-accent-fg-color: var(--violet-4);
+}
+
+/* Override some default material styles */
+
+[dir=ltr] .md-header__title,
+[dir=rtl] .md-header__title {
+  margin-inline: 0.3rem;
+}
+
+.md-nav__title {
+  display: none;
+}
+
+.md-footer__link {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 0.7rem;
+}
+
+.md-footer__link:is(:focus,:hover) {
+  opacity: unset;
+}
+
+.md-footer__title {
+  line-height: unset;
+  margin-top: 0.65rem;
+  padding-inline: 0.6rem;
+}
+
+.md-footer__direction {
+  padding-inline: 0.6rem;
+}
+
+.md-footer-meta {
+  background-color: hsla(var(--md-hue), 15%, 10%, 1);
+}
+
+html .md-footer .md-footer-meta a:focus,
+html .md-footer .md-footer-meta a:hover,
+html .md-footer a:focus,
+html .md-footer a:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* Our custom styles */
+
+.hero-image {
+  width: 65%;
+  margin-inline-start: 17.5%;
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-3);
+}
