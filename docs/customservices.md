@@ -17,6 +17,7 @@ within Homer:
 + [AdGuard Home](#adguard-home)
 + [Portainer](#portainer)
 + [Emby](#emby)
++ [Uptime Kuma](#uptime-kuma)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
