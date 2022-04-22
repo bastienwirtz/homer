@@ -31,7 +31,13 @@ export default {
         path = path.slice(1);
       }
 
-      return fetch(`${this.endpoint}/${path}`, options).then((response) => {
+      let url = this.endpoint;
+
+      if (path) {
+        url = `${this.endpoint}/${path}`;
+      }
+
+      return fetch(url, options).then((response) => {
         if (!response.ok) {
           throw new Error("Not 2xx response");
         }

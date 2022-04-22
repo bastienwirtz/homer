@@ -1,6 +1,6 @@
 ---
 # Homepage configuration
-# See https://fontawesome.com/icons for icons options
+# See https://fontawesome.com/v5/search for icons options
 
 title: "Demo dashboard"
 subtitle: "Homer"
@@ -58,11 +58,11 @@ links:
   - name: "Wiki"
     icon: "fas fa-book"
     url: "https://www.wikipedia.org/"
-  # this will link to a second homer page that will load config from additionnal-page.yml and keep default config values as in config.yml file
-  # see url field and assets/additionnal-page.yml.dist used in this example:
+  # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
+  # see url field and assets/additional-page.yml.dist used in this example:
   - name: "another page!"
     icon: "fas fa-file-alt"
-    url: "#additionnal-page" 
+    url: "#additional-page" 
 
 # Services
 # First level array represent a group.

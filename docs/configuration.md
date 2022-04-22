@@ -5,7 +5,7 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 ```yaml
 ---
 # Homepage configuration
-# See https://fontawesome.com/icons for icons options
+# See https://fontawesome.com/v5/search for icons options
 
 # Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
@@ -30,6 +30,11 @@ connectivityCheck: true # whether you want to display a message when the apps ar
 # Optional: Proxy / hosting option
 proxy:
   useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+
+# Set the default layout and color scheme
+defaults:
+  layout: columns # Either 'columns', or 'list'
+  colorTheme: auto # One of 'auto', 'light', or 'dark'
 
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
