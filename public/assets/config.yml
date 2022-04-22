@@ -105,10 +105,10 @@ services:
         url: "http://myworkspace.jpmchase.com"
         subtitle: "JPMC Citrix Remote Access"
         target: "_blank" # optional html a tag target attribute
-      - name: "Daily Health Check"
-        icon: "fas fa-shield-virus"
-        url: "https://jpmc.co1.qualtrics.com/jfe/form/SV_9M0Lr3A4z1xY7B3?Q_TS_ID=TS_37yhpLreARsWqWx&Q_TS_RS=Self&Q_EE_ANON=1&_=1"
-        target: "_blank" # optional html a tag target attribute
+#      - name: "Daily Health Check"
+#        icon: "fas fa-shield-virus"
+#        url: "https://jpmc.co1.qualtrics.com/jfe/form/SV_9M0Lr3A4z1xY7B3?Q_TS_ID=TS_37yhpLreARsWqWx&Q_TS_RS=Self&Q_EE_ANON=1&_=1"
+#        target: "_blank" # optional html a tag target attribute
   - name: "Other"
     icon: "fas fa-icons"
     items:      
@@ -132,11 +132,11 @@ services:
         url: "https://www.theclimbingacademy.com/tca-life/"
         target: "_blank" # optional html a tag target attribute
       - name: "TCA Current Occupation"
-        icon: "fas fa-tachometer"
+        icon: "fas fa-tachometer-alt"
         url: "https://portal.rockgympro.com/portal/public/d0f355e237dda999f3112d94d3c762c7/occupancy?&iframeid=occupancyCounter&fId="
         target: "_blank" # optional html a tag target attribute
       - name: "TCA Capacity Tracker"
-        icon: "fas fa-chart"
+        icon: "fas fa-chart-area"
         url: "https://tcatracker.nw.r.appspot.com/"
         target: "_blank" # optional html a tag target attribute
 
