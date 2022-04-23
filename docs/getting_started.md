@@ -4,6 +4,12 @@ The fastest and recommended way to get your Homer instance up and running is
 with Docker. The Docker image comes with a web server built-in so that all you
 need to worry about is your config file.
 
+Internally, the Docker image looks for the assets in the `/www/assets` directory
+so you can bind a volume from your host machine to that directory in order to
+modify and persist the configuration files. The web server serves the dashboard
+on port 8080, but using a port binding will let you expose that to whatever
+external port you like.
+
 ### docker
 
 To launch container:
@@ -11,23 +17,39 @@ To launch container:
 ```sh
 docker run -d \
   -p 8080:8080 \
-  -v </your/local/assets/>:/www/assets \
+  -v </your/local/assets>:/www/assets \
   --restart=always \
   b4bz/homer:latest
 ```
 
-Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
+Use `UID` and/or `GID` env var to change the assets owner:
+
+```sh
+docker run -d \
+  -p 8080:8080 \
+  -v </your/local/assets>:/www/assets \
+  -e "UID=1000" -e "GID=1000" \
+  --restart=always \
+  b4bz/homer:latest
+```
 
 ### docker-compose
 
-The `docker-compose.yml` file must be edited to match your needs.
-Set the port and volume (equivalent to `-p` and `-v` arguments):
+It is recommended to use docker-compose to manage your Docker containers, and
+below you can find a simple compose yaml file. Copy the contents into a
+`docker-compose.yaml` and modify the volume binding to your desired directory to
+get started:
 
 ```yaml
-volumes:
-  - /your/local/assets/:/www/assets
-ports:
-  - 8080:8080
+version: '3.3'
+services:
+  homer:
+    restart: always
+    volumes:
+      - /your/local/assets:/www/assets
+    ports:
+      - 8080:8080
+    image: b4bz/homer
 ```
 
 To launch container:
@@ -37,12 +59,21 @@ cd /path/to/docker-compose.yml
 docker-compose up -d
 ```
 
-Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner, also in `docker-compose.yml`:
+Use `UID` and/or `GID` env var to change the assets owner:
 
 ```yaml
-environment:
-  - UID=1000
-  - GID=1000
+version: '3.3'
+services:
+  homer:
+    restart: always
+    volumes:
+      - /your/local/assets:/www/assets
+    ports:
+      - 8080:8080
+    environment:
+      - UID=1000
+      - GID=1000
+    image: b4bz/homer
 ```
 
 ## Shipping your own web server
