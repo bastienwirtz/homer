@@ -81,7 +81,7 @@ nav:
   - What is Homer: index.md
   - Getting started: getting_started.md
   - Configuration: configuration.md
-  - Custom services: customservices.md
-  - Tips & tricks: tips-and-tricks.md
+  - Custom services: custom_services.md
+  - Tips & tricks: tips_and_tricks.md
   - Development: development.md
   - Troubleshooting: troubleshooting.md
