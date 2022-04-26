@@ -7,7 +7,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "bulma": "^0.9.3",
     "core-js": "^3.21.1",
     "js-yaml": "^4.1.0",
