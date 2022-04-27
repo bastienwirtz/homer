@@ -1,5 +1,3 @@
-const merge = require("lodash.merge");
-
 export default {
   props: {
     proxy: Object,
@@ -27,27 +25,17 @@ export default {
           this.item.useCredentials === true ? "include" : "omit";
       }
 
-      if (this.proxy?.apikey) {
-        options.headers = {
-          "X-Homer-Api-Key": this.proxy.apikey,
-        };
-      }
+      options = Object.assign(options, init);
 
       if (path.startsWith("/")) {
         path = path.slice(1);
       }
 
-      let url = path ? `${this.endpoint}/${path}` : this.endpoint;
+      let url = this.endpoint;
 
-      if (this.proxy?.url) {
-        options.headers = {
-          ...(options.headers || {}),
-          "X-Homer-Api-Url": url,
-        };
-        url = this.proxy.url;
+      if (path) {
+        url = `${this.endpoint}/${path}`;
       }
-
-      options = merge(options, init);
 
       return fetch(url, options).then((response) => {
         if (!response.ok) {
