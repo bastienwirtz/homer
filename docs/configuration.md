@@ -185,12 +185,12 @@ services:
         # background: red
 ```
 
-View [Custom Services](customservices.md) for details about all available custom
-services (like PiHole) and how to configure them.
+View [Custom Services](custom_services.md) for details about all available
+custom services (like PiHole) and how to configure them.
 
 If you choose to fetch message information from an endpoint, the output format
 should be as follows (or you can
-[custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
+[custom map fields as shown in tips and tricks](tips_and_tricks#mapping-fields)):
 
 ```json
 {
