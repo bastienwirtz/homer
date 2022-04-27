@@ -14,7 +14,7 @@ and serve!
 your hearts content using the long list of [configuration](/configuration)
 options available! Add links to all your relevant services and web apps,
 categorize them in groups, and in some cases,
-[get live status data](/custom_services) right there on your home page. Customize
-your home page with your own images and CSS to make it fit your style!
+[get live status data](/custom_services) right there on your home page.
+Customize your home page with your own images and CSS to make it fit your style!
 
 
