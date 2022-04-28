@@ -17,4 +17,18 @@ categorize them in groups, and in some cases,
 [get live status data](/custom_services) right there on your home page.
 Customize your home page with your own images and CSS to make it fit your style!
 
+## Features
+
+- [yaml](http://yaml.org/) file configuration
+- Installable (pwa)
+- Search
+- Grouping
+- Theme customization
+- Offline health check
+- keyboard shortcuts:
+  - `/` Start searching.
+  - `Escape` Stop searching.
+  - `Enter` Open the first matching result (respects the bookmark's `_target` property).
+  - `Alt`/`Option` + `Enter` Open the first matching result in a new tab.
+
 
