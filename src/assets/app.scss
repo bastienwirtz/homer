@@ -163,8 +163,7 @@ body {
   }
 
   #main-section {
-    margin-bottom: 2rem;
-    padding: 0;
+    padding: 0 0 2.5rem 0;
 
     h2 {
       padding-bottom: 0px;
@@ -286,7 +285,7 @@ body {
 
   .no-footer {
     #main-section {
-      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .footer {
