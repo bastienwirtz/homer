@@ -73,7 +73,8 @@
               <h2 
                 v-if="group.name"
                 class="column is-full group-title"
-                :key="`header-${groupIndex}`">
+                :key="`header-${groupIndex}`"
+              >
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 <div v-else-if="group.logo" class="group-logo media-left">
                   <figure class="image is-48x48">
