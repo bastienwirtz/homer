@@ -70,7 +70,7 @@
           <!-- Horizontal layout -->
           <div v-if="!vlayout || filter" class="columns is-multiline">
             <template v-for="(group, groupIndex) in services">
-              <h2 
+              <h2
                 v-if="group.name"
                 class="column is-full group-title"
                 :key="`header-${groupIndex}`"
