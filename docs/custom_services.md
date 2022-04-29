@@ -195,3 +195,30 @@ The following configuration is available for the UptimeKuma service. Needs v1.13
   slug: "myCustomDashboard" # Defaults to "default" if not provided.
   type: "UptimeKuma"
 ```
+
+## Tautulli
+
+The Tautulli service can allow you to show the number of currently active
+streams on you Plex instance. An API key is required, and can be obtained from
+the "Web Interface" section of settings on the Tautulli web UI.
+
+```yaml
+- name: "Tautulli"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8181"
+  type: "Tautulli"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+```
+
+Because the service type and link don't necessarily have to match, you could
+even make the service type Tautulli on your Plex card and provide a separate
+endpoint pointing to Tautulli!
+
+```yaml
+- name: "Plex"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:32400/web" # Plex
+  endpoint: "http://192.168.0.151:8181" # Tautulli
+  type: "Tautulli"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+```
