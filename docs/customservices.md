@@ -18,6 +18,7 @@ within Homer:
 + [Portainer](#portainer)
 + [Emby](#emby)
 + [Uptime Kuma](#uptime-kuma)
++ [Tautulli](#tautulli)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
