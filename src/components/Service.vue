@@ -1,5 +1,10 @@
 <template>
-  <component v-bind:is="component" :item="item" :proxy="proxy"></component>
+  <component
+    v-bind:is="component"
+    :item="item"
+    :proxy="proxy"
+    :forwarder="forwarder"
+  ></component>
 </template>
 
 <script>
@@ -10,6 +15,7 @@ export default {
   props: {
     item: Object,
     proxy: Object,
+    forwarder: Object,
   },
   computed: {
     component() {
