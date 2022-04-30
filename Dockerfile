@@ -26,7 +26,7 @@ WORKDIR /www
 COPY lighttpd.conf /lighttpd.conf
 COPY entrypoint.sh /entrypoint.sh
 COPY --from=build-stage --chown=${UID}:${GID} /app/dist /www/
-COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist/assets /www/default-assets
+COPY --from=build-stage --chown=${UID}:${GID} /app/dist/assets /www/default-assets
 
 USER ${UID}:${GID}
 

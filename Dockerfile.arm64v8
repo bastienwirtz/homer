@@ -21,23 +21,25 @@ FROM arm64v8/alpine:3.11
 
 COPY --from=qemu qemu-aarch64-static /usr/bin/
 
-ENV USER lighttpd
-ENV GROUP lighttpd
-ENV GID 911
-ENV UID 911
+ENV GID 1000
+ENV UID 1000
 ENV PORT 8080
 ENV SUBFOLDER "/_"
+ENV INIT_ASSETS 1
 
-RUN addgroup -S ${GROUP} -g ${GID} && adduser -D -S -u ${UID} ${USER} ${GROUP} && \
+RUN addgroup -S lighttpd -g ${GID} && adduser -D -S -u ${UID} lighttpd lighttpd && \
     apk add -U --no-cache lighttpd && \
     rm /usr/bin/qemu-aarch64-static
 
 WORKDIR /www
 
 COPY lighttpd.conf /lighttpd.conf
-COPY --from=build-stage --chown=${USER}:${GROUP} /app/dist /www/
+COPY entrypoint.sh /entrypoint.sh
+COPY --from=build-stage --chown=${UID}:${GID} /app/dist /www/
+COPY --from=build-stage --chown=${UID}:${GID} /app/dist/assets /www/default-assets
 
-USER ${USER}
+USER ${UID}:${GID}
+
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:${PORT}/ || exit 1
 
