@@ -71,8 +71,6 @@ See [documentation](docs/configuration.md) for information about the configurati
 
 ### Using docker
 
-To launch container:
-
 ```sh
 docker run -d \
   -p 8080:8080 \
@@ -81,12 +79,19 @@ docker run -d \
   b4bz/homer:latest
 ```
 
-Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner (`docker run -e "UID=1000" -e "GID=1000" [...]`).
+Environment variables: 
+
+* **`INIT_ASSETS`** (default: `1`)
+Install exemple configuration file & assets (favicons, ...) to help you get started.
+
+* **`SUBFOLDER`** (default: `null`)
+If you would like to host Homer in a subfolder, (ex: *http://my-domain/**homer***), set this to the subfolder path (ex `/homer`).
+
 
 ### Using docker-compose
 
 The `docker-compose.yml` file must be edited to match your needs.
-Set the port and volume (equivalent to `-p` and `-v` arguments):
+You probably want to set the port mapping and volume binding (equivalent to `-p` and `-v` arguments):
 
 ```yaml
 volumes:
@@ -95,19 +100,11 @@ ports:
   - 8080:8080
 ```
 
-To launch container:
+Then launch the container:
 
 ```sh
-cd /path/to/docker-compose.yml
+cd /path/to/docker-compose.yml/
 docker-compose up -d
-```
-
-Default assets will be automatically installed in the `/www/assets` directory. Use `UID` and/or `GID` env var to change the assets owner, also in `docker-compose.yml`:
-
-```yaml
-environment:
-  - UID=1000
-  - GID=1000
 ```
 
 ### Using the release tarball (prebuilt, ready to use)
