@@ -82,7 +82,7 @@ docker run -d \
 Environment variables: 
 
 * **`INIT_ASSETS`** (default: `1`)
-Install exemple configuration file & assets (favicons, ...) to help you get started.
+Install example configuration file & assets (favicons, ...) to help you get started.
 
 * **`SUBFOLDER`** (default: `null`)
 If you would like to host Homer in a subfolder, (ex: *http://my-domain/**homer***), set this to the subfolder path (ex `/homer`).
