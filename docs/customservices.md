@@ -19,6 +19,7 @@ within Homer:
 + [Emby](#emby)
 + [Uptime Kuma](#uptime-kuma)
 + [Tautulli](#tautulli)
++ [What's Up Docker](#whats-up-docker)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -222,4 +223,18 @@ endpoint pointing to Tautulli!
   endpoint: "http://192.168.0.151:8181" # Tautulli
   type: "Tautulli"
   apikey: "MY-SUPER-SECRET-API-KEY"
+```
+
+## What's up Docker
+
+What's up Docker allow to display info about the number of container running and the number for which an update is available on your Homer dashboard.
+
+The following configuration is available for the WUD service.
+
+```yaml
+- name: "What's Up Docker"
+  logo: "assets/tools/sample.png"
+  subtitle: "Docker image update notifier"
+  url: "http://192.168.1.12:3001"
+  type: "WUD"
 ```
