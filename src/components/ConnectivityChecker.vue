@@ -29,15 +29,40 @@ export default {
       },
       false
     );
+    window.addEventListener(
+      "online",
+      function () {
+          that.checkOffline();
+      },
+      false
+    );
+    window.addEventListener(
+      "offline",
+      function () {
+        this.offline = true;
+      },
+      false
+    );
   },
   methods: {
     checkOffline: function () {
+      if (!navigator.onLine) {
+        this.offline = true;
+        return;
+      }
+
+      // extra check to make sure we're not offline
       let that = this;
       return fetch(window.location.href + "?alive", {
         method: "HEAD",
         cache: "no-store",
+        redirect: "manual"
       })
         .then(function (response) {
+          // opaqueredirect means request has been redirected, to auth provider probably
+          if (response.type === "opaqueredirect" && !response.ok) {
+            window.location.reload(true);
+          }
           that.offline = !response.ok;
         })
         .catch(function () {
