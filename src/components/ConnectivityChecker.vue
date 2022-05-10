@@ -17,6 +17,9 @@ export default {
     };
   },
   created: function () {
+    if (/t=\d+/.test(window.location.href)) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
     let that = this;
     this.checkOffline();
 
@@ -61,7 +64,7 @@ export default {
         .then(function (response) {
           // opaqueredirect means request has been redirected, to auth provider probably
           if (response.type === "opaqueredirect" && !response.ok) {
-            window.location.reload(true);
+            window.location.href = window.location.href + "?t="+(new Date().valueOf());
           }
           that.offline = !response.ok;
         })
