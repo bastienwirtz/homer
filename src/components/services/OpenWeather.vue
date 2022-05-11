@@ -22,7 +22,12 @@
               <div v-else>
                 <p class="title is-4">{{ name }}</p>
                 <p class="subtitle is-6">
-                  {{ temp | tempSuffix(this.item.units) }}
+                  <span>
+                    {{ temp | tempSuffix(this.item.units) }}
+                  </span>
+                  <span class="location-time">
+                    {{ locationTime }}
+                  </span>
                 </p>
               </div>
             </div>
@@ -49,9 +54,15 @@ export default {
     temp: null,
     conditions: null,
     error: false,
+    timezoneOffset: 0,
   }),
   created() {
     this.fetchWeather();
+  },
+  computed: {
+    locationTime: function () {
+      return this.calcTime(this.timezoneOffset);
+    },
   },
   methods: {
     fetchWeather: async function () {
@@ -79,11 +90,22 @@ export default {
           this.temp = parseInt(weather.main.temp).toFixed(1);
           this.icon = weather.weather[0].icon;
           this.conditions = weather.weather[0].description;
+          this.timezoneOffset = weather.timezone;
         })
         .catch((e) => {
           console.log(e);
           this.error = true;
         });
+    },
+    calcTime: (offset) => {
+      const localTime = new Date();
+      const utcTime =
+        localTime.getTime() + localTime.getTimezoneOffset() * 60000;
+      const calculatedTime = new Date(utcTime + 1000 * offset);
+      return calculatedTime.toLocaleString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
     },
   },
   filters: {
@@ -132,5 +154,10 @@ export default {
       background-color: #909090;
     }
   }
+}
+
+//Location Time
+.location-time {
+  margin-left: 20px;
 }
 </style>
