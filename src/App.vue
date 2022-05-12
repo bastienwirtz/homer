@@ -264,7 +264,8 @@ export default {
       return (
         item.name.toLowerCase().includes(this.filter) ||
         (item.subtitle && item.subtitle.toLowerCase().includes(this.filter)) ||
-        (item.tag && item.tag.toLowerCase().includes(this.filter))
+        (item.tag && item.tag.toLowerCase().includes(this.filter)) ||
+        (item.keywords && item.keywords.toLowerCase().includes(this.filter))
       );
     },
     navigateToFirstService: function (target) {
