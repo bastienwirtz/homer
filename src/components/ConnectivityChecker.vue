@@ -63,7 +63,7 @@ export default {
       })
         .then(function (response) {
           // opaqueredirect means request has been redirected, to auth provider probably
-          if (response.type === "opaqueredirect" && !response.ok) {
+          if ((response.type === "opaqueredirect" && !response.ok) || [401, 403].indexOf(response.status) != -1) {
             window.location.href = window.location.href + "?t="+(new Date().valueOf());
           }
           that.offline = !response.ok;
