@@ -16,7 +16,7 @@ within Homer:
 + [Prometheus](#prometheus)
 + [AdGuard Home](#adguard-home)
 + [Portainer](#portainer)
-+ [Emby](#emby)
++ [Emby / Jellyfin](#emby--jellyfin)
 + [Uptime Kuma](#uptime-kuma)
 + [Tautulli](#tautulli)
 
@@ -169,7 +169,7 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
   #   - "local"
 ```
 
-## Emby
+## Emby / Jellyfin
 
 You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
 
