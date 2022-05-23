@@ -127,7 +127,7 @@ services:
         # icon: "fab fa-jenkins"
         subtitle: "Bookmark example"
         tag: "app"
-        keywords: "self hosted reddit"
+        keywords: "self hosted reddit" # optional keyword used for searching purpose
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
       - name: "Another one"
