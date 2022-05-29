@@ -17,7 +17,7 @@ ARG QEMU_VERSION="v4.2.0-7"
 RUN wget https://github.com/multiarch/qemu-user-static/releases/download/${QEMU_VERSION}/qemu-aarch64-static && chmod +x qemu-aarch64-static
 
 # production stage
-FROM arm64v8/alpine:3.11
+FROM arm64v8/alpine:3.16
 
 COPY --from=qemu qemu-aarch64-static /usr/bin/
 
