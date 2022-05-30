@@ -8,7 +8,7 @@
 </h1>
 
 <h4 align="center">
- A dead simple static <strong>HOM</strong>epage for your serv<strong>ER</strong> to keep your services on hand, from a simple <code>yaml</code> configuration file.
+ A dead simple static homepage for your server to keep your services on hand, from a simple <code>yaml</code> configuration file.
 </h4>
 
 <p align="center">
