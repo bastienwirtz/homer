@@ -56,7 +56,8 @@ export default {
 
       // extra check to make sure we're not offline
       let that = this;
-      return fetch(window.location.href + "?alive", {
+      const aliveCheckUrl = window.location.href + "?t="+(new Date().valueOf());
+      return fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",
         redirect: "manual"
@@ -64,7 +65,7 @@ export default {
         .then(function (response) {
           // opaqueredirect means request has been redirected, to auth provider probably
           if ((response.type === "opaqueredirect" && !response.ok) || [401, 403].indexOf(response.status) != -1) {
-            window.location.href = window.location.href + "?t="+(new Date().valueOf());
+            window.location.href = aliveCheckUrl;
           }
           that.offline = !response.ok;
         })
