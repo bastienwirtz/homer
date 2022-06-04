@@ -75,7 +75,7 @@ export default {
       this.$emit("input", value.toLowerCase());
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener("keydown", this._keyListener);
   },
 };

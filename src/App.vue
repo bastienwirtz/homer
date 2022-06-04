@@ -140,8 +140,8 @@
 </template>
 
 <script>
-const jsyaml = require("js-yaml");
-const merge = require("lodash.merge");
+import jsyaml from "js-yaml";
+import merge from "lodash.merge";
 
 import Navbar from "./components/Navbar.vue";
 import GetStarted from "./components/GetStarted.vue";
@@ -153,7 +153,7 @@ import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
 
-import defaultConfig from "./assets/defaults.yml";
+import defaultConfig from "./assets/defaults.yml?raw";
 
 export default {
   name: "App",

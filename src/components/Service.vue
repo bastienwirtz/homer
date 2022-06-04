@@ -1,8 +1,9 @@
 <template>
-  <component v-bind:is="component" :item="item" :proxy="proxy"></component>
+  <component :is="component" :item="item" :proxy="proxy"></component>
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
 import Generic from "./services/Generic.vue";
 
 export default {
@@ -17,7 +18,7 @@ export default {
       if (type === "Generic") {
         return Generic;
       }
-      return () => import(`./services/${type}.vue`);
+      return defineAsyncComponent(() => import(`./services/${type}.vue`));
     },
   },
 };
