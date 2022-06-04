@@ -17,3 +17,9 @@ To resolve this, you can either:
 * Host all your target service under the same domain & port.
 * Modify the target server configuration so that the response of the server included following header- `Access-Control-Allow-Origin: *` (<https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests>). It might be an option in the targeted service, otherwise depending on how the service is hosted, the proxy or web server can seamlessly add it.
 * Use a cors proxy server like [`cors-container`](https://github.com/imjacobclark/cors-container), [`cors-anywhere`](https://github.com/Rob--W/cors-anywhere) or many others.
+
+## I am using an authentication proxy and homer says I am offline
+
+This should be a configuration issue.
+* Make sure the option `connectivityCheck` is set to `true` in configuration.
+* Check your proxy configuration, the expected behavior is to redirect user using a 302 to the login page when user is not authenticated.

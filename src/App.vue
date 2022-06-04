@@ -231,13 +231,7 @@ export default {
     },
     getConfig: function (path = "assets/config.yml") {
       return fetch(path).then((response) => {
-        if (response.redirected) {
-          // This allows to work with authentication proxies.
-          window.location.href = response.url;
-          return;
-        }
-
-        if (response.status == 404) {
+        if (response.status == 404 || response.redirected) {
           this.configNotFound = true;
           return {};
         }

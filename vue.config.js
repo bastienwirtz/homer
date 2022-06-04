@@ -26,4 +26,7 @@ module.exports = {
       msTileImage: "assets/icons/icon-any.png",
     },
   },
+  devServer: {
+    disableHostCheck: true
+  },
 };
