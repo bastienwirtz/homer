@@ -40,5 +40,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: b4bz/buildx-test:${{env.IMAGE_TAG}}
+          tags: b4bz/homer:${{env.IMAGE_TAG}}
           platforms: linux/amd64,linux/arm/v7,linux/arm64
