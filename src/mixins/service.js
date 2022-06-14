@@ -37,8 +37,25 @@ export default {
         url = `${this.endpoint}/${path}`;
       }
 
+      let ping = false;
+
+      if (options.ping) {
+        options.method = "HEAD";
+        options.mode = "no-cors";
+        options.cache = "no-cache";
+
+        json = false;
+        ping = true;
+
+        // ensure `ping` is not passed to `fetch`
+        delete options.ping;
+      }
+
       return fetch(url, options).then((response) => {
-        if (!response.ok) {
+        if (
+          !response.ok &&
+          (response.type !== "opaque" || (response.type === "opaque" && !ping))
+        ) {
           throw new Error("Not 2xx response");
         }
 
