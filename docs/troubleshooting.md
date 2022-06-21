@@ -23,3 +23,12 @@ To resolve this, you can either:
 This should be a configuration issue.
 * Make sure the option `connectivityCheck` is set to `true` in configuration.
 * Check your proxy configuration, the expected behavior is to redirect user using a 302 to the login page when user is not authenticated.
+
+## I put my API key into the OpenWeather service and it still isn't working
+
+If you have just made an OpenWeatherMap account and are a newly made API key, there is a high chance that you need to wait for it to be activated (often a few hours). If after waiting it still doesn't work, make sure to check the location you have provided since it may be an invalid location.
+
+For some basic debugging steps, you can: 
+* Check with a large city such as Amsterdam as the specified location.
+* Make sure your web browser is fetching the latest version of site after updating it with a new location (Ctrl + Shift + R).
+* ping api.openweathermap.org from the server.
