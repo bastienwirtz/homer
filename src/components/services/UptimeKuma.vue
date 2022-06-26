@@ -120,8 +120,11 @@ export default {
 
 <style scoped lang="scss">
 .status {
+  position: absolute;
   font-size: 0.8rem;
   color: var(--text-title);
+  top: 0.3em;
+  right: 0.5em;
 
   &.good:before {
     background-color: #94e185;
