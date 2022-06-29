@@ -1,8 +1,32 @@
 # Troubleshooting
 
+## My docker container refuse to start / is stuck at restarting.
+
+You might be facing a permission issue. First of all, check your container logs (adjust the container name if necessary): 
+
+```sh
+$ docker logs homer
+[...]
+Assets directory not writable. Check assets directory permissions & docker user or skip default assets install by setting the INIT_ASSETS env var to 0
+```
+
+In this case you need to make sure your mounted assests directory have the same GID / UID the container user have (default 1000:1000), and that the read and write permission is granted for the user or the group.
+
+You can either: 
+- Update your assets directory permissions (ex: `chown -R 1000:1000 /your/assets/folder/`, `chmod -R u+rw /your/assets/folder/`)
+- Change the docker user by using the `--user` arguments with docker cli or `user: 1000:1000` with docker compose.
+
+⚠️ Notes: 
+
+- **Do not** use env var to set the GID / UID of the user running container. Use the Docker `user` option.
+- **Do not** use 0:0 as a user value, it would be a security risk, and it's not guaranty to work.
+
+Check this [thread](https://github.com/bastienwirtz/homer/issues/459) for more information about debugging
+permission issues.
+
 ## My custom service card doesn't work, nothing appears or offline status is displayed (pi-hole, sonarr, ping, ...)
 
-You might by facing a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (Cross Origin Request Sharing) issue.
+You might be facing a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) (Cross Origin Request Sharing) issue.
 It happens when the targeted service is hosted on a different domain or port.
 Web browsers will not allow to fetch information from a different site without explicit permissions (the targeted service
 must include a special `Access-Control-Allow-Origin: *` HTTP headers).
