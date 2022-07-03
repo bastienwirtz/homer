@@ -99,6 +99,7 @@ export default {
     },
   },
   created() {
+    /* eslint-disable */
     this.item.url = `${this.item.url}/status/${this.dashboard}`;
     this.fetchStatus();
   },
