@@ -19,6 +19,7 @@ within Homer:
 + [Emby / Jellyfin](#emby--jellyfin)
 + [Uptime Kuma](#uptime-kuma)
 + [Tautulli](#tautulli)
++ [Healthchecks](#healthchecks)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -223,3 +224,16 @@ endpoint pointing to Tautulli!
   type: "Tautulli"
   apikey: "MY-SUPER-SECRET-API-KEY"
 ```
+
+## Healthchecks
+
+This service displays information about the configured status checks from the Healthchecks application.
+Two lines are needed in the config.yml :
+
+```yaml
+  type: "Healthchecks"
+  apikey: "01234deb70424befb1f4ef6a23456789"
+```
+
+The url must be the root url of the Healthchecks application.
+The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
