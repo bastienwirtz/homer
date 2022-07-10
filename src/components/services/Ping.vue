@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.fetch("/", { method: "HEAD", cache: "no-cache" }, false)
+      const method = typeof this.item.method === 'string' && this.item.method.toLowerCase() === "get" ? "GET" : "HEAD"
+      this.fetch("/", { method, cache: "no-cache" }, false)
         .then(() => {
           this.status = "online";
         })
@@ -45,6 +46,8 @@ export default {
 .status {
   font-size: 0.8rem;
   color: var(--text-title);
+  white-space: nowrap;
+  margin-left: 0.25rem;
 
   &.online:before {
     background-color: #94e185;
