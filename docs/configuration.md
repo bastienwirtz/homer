@@ -152,7 +152,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-View [Custom Services](customservices.md) for details about all available custom services (like PiHole) and how to configure them.
+View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
 
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
@@ -180,27 +180,4 @@ You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers
 
 ## PWA Icons
 
-In order to easily generate all required icon preset for the PWA to work, a tool like [vue-pwa-asset-generator](https://www.npmjs.com/package/vue-pwa-asset-generator) can be used:
-
-```bash
-npx vue-pwa-asset-generator -a {your_512x512_source_png} -o {your_output_folder}
-```
-
-## Supported services
-
-Currently the following services are supported for showing quick infos on the card. They can be used by setting the type to one of the following values at the item.
-
-- PiHole
-- AdGuardHome
-- PaperlessNG
-- Mealie
-
-## Additional configuration
-
-### Paperless
-
-For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
-
-### Mealie
-
-First off make sure to remove an existing `subtitle` as it will take precedence if set. Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
+See icons documentation [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).
