@@ -1,5 +1,8 @@
 <template>
-  <a v-on:click="toggleSetting()" class="navbar-item is-inline-block-mobile">
+  <a
+    @click.prevent="toggleSetting()"
+    class="navbar-item is-inline-block-mobile"
+  >
     <span><i :class="['fas', 'fa-fw', value ? icon : secondaryIcon]"></i></span>
     <slot></slot>
   </a>

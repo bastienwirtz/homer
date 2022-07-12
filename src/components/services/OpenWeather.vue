@@ -55,9 +55,9 @@ export default {
       if (!this.temp) return "";
 
       let unit = "K";
-      if (this.item.type === "metric") {
+      if (this.item.units === "metric") {
         unit = "°C";
-      } else if (this.item.type === "imperial") {
+      } else if (this.item.units === "imperial") {
         unit = "°F";
       }
       return `${this.temp} ${unit}`;

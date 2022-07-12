@@ -1,6 +1,6 @@
 <template>
   <a
-    v-on:click="toggleTheme()"
+    @click="toggleTheme()"
     aria-label="Toggle dark mode"
     class="navbar-item is-inline-block-mobile"
   >
