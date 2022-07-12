@@ -10,4 +10,4 @@ app.component("DynamicStyle", (_props, context) => {
   return h("style", {}, context.slots);
 });
 
-app.mount("#app");
+app.mount("#app-mount");
