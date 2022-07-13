@@ -2,7 +2,7 @@
 
 @import "./webfonts/webfonts.scss";
 
-@import "bulma";
+@import "../../node_modules/bulma/bulma";
 
 // Themes import
 @import "./themes/sui.scss";
@@ -13,7 +13,7 @@
   text-overflow: ellipsis;
 }
 
-html, body, body #app {
+html, body, body #app-mount, body #app {
   height: 100%;
   background-color: var(--background);
 }

@@ -5,11 +5,11 @@ If you want to contribute to Homer, please read the [contributing guidelines](ht
 ```sh
 # Using yarn (recommended)
 yarn install
-yarn serve
+yarn dev
 
 # **OR** Using npm
 npm install
-npm run serve
+npm run dev
 ```
 
 ## Custom services

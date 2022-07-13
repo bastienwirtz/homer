@@ -22,7 +22,7 @@
               <div v-else>
                 <p class="title is-4">{{ name }}</p>
                 <p class="subtitle is-6">
-                  {{ temp | tempSuffix(this.item.units) }}
+                  {{ temperature }}
                 </p>
               </div>
             </div>
@@ -50,6 +50,19 @@ export default {
     conditions: null,
     error: false,
   }),
+  computed: {
+    temperature: function () {
+      if (!this.temp) return "";
+
+      let unit = "K";
+      if (this.item.units === "metric") {
+        unit = "°C";
+      } else if (this.item.units === "imperial") {
+        unit = "°F";
+      }
+      return `${this.temp} ${unit}`;
+    },
+  },
   created() {
     this.fetchWeather();
   },
@@ -84,19 +97,6 @@ export default {
           console.log(e);
           this.error = true;
         });
-    },
-  },
-  filters: {
-    tempSuffix: function (value, type) {
-      if (!value) return "";
-
-      let unit = "K";
-      if (type === "metric") {
-        unit = "°C";
-      } else if (type === "imperial") {
-        unit = "°F";
-      }
-      return `${value} ${unit}`;
     },
   },
 };

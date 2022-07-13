@@ -10,15 +10,20 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Build project
+      - 
+        name: Checkout
+        uses: actions/checkout@v3
+      - 
+        name: Build project
         run: |
           yarn install
           yarn build
-      - name: Create artifact
+      - 
+        name: Create artifact
         working-directory: "dist"
         run: zip -r ../homer.zip ./*
-      - name: Create Release
+      - 
+        name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:

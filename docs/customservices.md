@@ -19,6 +19,7 @@ within Homer:
 + [Emby / Jellyfin](#emby--jellyfin)
 + [Uptime Kuma](#uptime-kuma)
 + [Tautulli](#tautulli)
++ [Mealie](#mealie)
 + [Healthchecks](#healthchecks)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
@@ -224,6 +225,11 @@ endpoint pointing to Tautulli!
   type: "Tautulli"
   apikey: "MY-SUPER-SECRET-API-KEY"
 ```
+
+## Mealie
+
+First off make sure to remove an existing `subtitle` as it will take precedence if set. 
+Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
 
 ## Healthchecks
 

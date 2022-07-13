@@ -56,7 +56,9 @@ export default {
 
       // extra check to make sure we're not offline
       let that = this;
-      const aliveCheckUrl = window.location.href + "?t=" + new Date().valueOf();
+      const aliveCheckUrl = `${window.location.origin}${
+        window.location.pathname
+      }/index.html?t=${new Date().valueOf()}`;
       return fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",
