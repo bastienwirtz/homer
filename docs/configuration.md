@@ -178,6 +178,18 @@ Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](h
 
 You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers/syntax/) for other options regarding size, style, or state.
 
+## Theming & customization
+
+See `colors` settings in the configuration example above.
+Favicon et application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
+The `/assets/manifest.json` can also be edited to change the app (pwa) name, description and other settings.
+
+### Community theme
+
+- [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
+- [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
+
+
 ## PWA Icons
 
 See icons documentation [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).
