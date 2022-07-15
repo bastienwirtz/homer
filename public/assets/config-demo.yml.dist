@@ -60,9 +60,9 @@ links:
     url: "https://www.wikipedia.org/"
   # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
   # see url field and assets/additional-page.yml.dist used in this example:
-  #- name: "another page!"
-  #  icon: "fas fa-file-alt"
-  #  url: "#additional-page" 
+  - name: "another page!"
+    icon: "fas fa-file-alt"
+    url: "#additional-page" 
 
 # Services
 # First level array represent a group.
