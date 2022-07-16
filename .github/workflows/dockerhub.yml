@@ -41,4 +41,4 @@ jobs:
         with:
           push: true
           tags: b4bz/homer:${{env.IMAGE_TAG}}
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
