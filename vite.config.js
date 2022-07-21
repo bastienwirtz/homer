@@ -34,6 +34,9 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        navigateFallback: null,
+      },
     }),
   ],
   resolve: {
