@@ -110,9 +110,12 @@ export default {
   methods: {
     fetchStatus: async function () {
       if (this.item.apikey) {
-        this.api = await this.fetch(
-          "api/job?apikey=" + `${this.item.apikey}`
-        ).catch((e) => console.log(e), (this.api.code = false));
+        try {
+          this.api = await this.fetch(`api/jov?apikey=${this.item.apikey}`);
+        } catch (e) {
+          console.error(e);
+          this.api.code = false;
+        }
       }
     },
   },
