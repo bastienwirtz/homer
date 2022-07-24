@@ -111,7 +111,7 @@ export default {
     fetchStatus: async function () {
       if (this.item.apikey) {
         try {
-          this.api = await this.fetch(`api/jov?apikey=${this.item.apikey}`);
+          this.api = await this.fetch(`api/job?apikey=${this.item.apikey}`);
         } catch (e) {
           console.error(e);
           this.api.code = false;
