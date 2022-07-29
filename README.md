@@ -89,6 +89,10 @@ Install example configuration file & assets (favicons, ...) to help you get star
 * **`SUBFOLDER`** (default: `null`)
 If you would like to host Homer in a subfolder, (ex: *http://my-domain/**homer***), set this to the subfolder path (ex `/homer`).
 
+* **`PORT`** (default: `8080`)
+If you would like to change internal port of Homer from default `8080` to your port choice.
+
+
 #### With docker-compose
 
 A [`docker-compose.yml`](docker-compose.yml) file is available as an example. It must be edited to match your needs. You probably want to adjust the port mapping and volume binding (equivalent to `-p` and `-v` arguments).
