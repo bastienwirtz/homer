@@ -26,7 +26,7 @@ This should be a configuration issue.
 
 ## I put my API key into the OpenWeather service and it still isn't working
 
-If you have just made an OpenWeatherMap account and a newly-made API key, there is a high chance that you need to wait for it to be activated (often a few hours). If after waiting it still doesn't work, make sure to check the location you have provided since it may be an invalid location.
+If you have just made an OpenWeatherMap account and/or a newly-made API key, there is a high chance that you need to wait for it to be activated (often a few hours). If after waiting it still doesn't work, make sure to check the location you have provided since it may be an invalid location.
 
 For some basic debugging steps, you can: 
 * Check with a large city such as Amsterdam as the specified location within your configuration.
