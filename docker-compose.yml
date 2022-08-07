@@ -4,7 +4,7 @@ services:
   homer:
     #image: b4bz/homer
     #To build from source, comment previous line and uncomment below
-    build: https://github.com/FriendlyNGeeks/homer
+    build: https://github.com/FriendlyNGeeks/homer-octoprint
     container_name: homer
     volumes:
       - config:/var/lib/homerrun
