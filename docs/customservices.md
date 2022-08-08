@@ -88,7 +88,7 @@ Two lines are needed in the config.yml :
 
 ```yaml
   type: "Lidarr", "Prowlarr", "Radarr" or "Sonarr"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "01234deb70424befb1f4ef6a23456789"
 ```
 
 The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
