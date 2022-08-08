@@ -1,7 +1,7 @@
 ---
-# Additionnal page configuration
+# Additional page configuration
 
-# Additionnal configurations are loaded using its file name, minus the extension, as an anchor (https://<mydashboad>#<config>). 
+# Additional configurations are loaded using its file name, minus the extension, as an anchor (https://<mydashboad>#<config>). 
 # `config.yml` is still used as a base configuration, and all values here will overwrite it, so you don't have to re-defined everything
 
 
