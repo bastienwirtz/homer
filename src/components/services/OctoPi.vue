@@ -7,12 +7,9 @@
           {{ item.subtitle }}
         </template>
         <template v-else-if="api" && printerstatus !="null">
-          Status: {{ printerstatus }}
+          {{ printerstatus }}<template v-if="printerstatus == 'Printing'">: {{ printerprogress }}% ({{ printtime }}/{{  printtimeleft }} left)</template>
         </template>
-        <template v-if="printerstatus == 'Printing'"
-          >|| Progress: {{ printerprogress }}% <br />
-          Elapsed: {{ printtime }} || Left: {{ printtimeleft }}
-        </template>
+
       </p>
     </template>
   </Generic>
