@@ -77,7 +77,7 @@ export default {
         if (seconds < 10) {
           seconds = "0" + seconds;
         }
-        return ${hours}+":"+${minutes};
+        return (${hours}+":"+${minutes});
     },
     printtimeleft: function () {
         if (!this.api) {
@@ -96,7 +96,7 @@ export default {
         if (seconds < 10) {
             seconds = "0" + seconds;
         }
-        return ${hours}+":"+${minutes};
+        return (${hours}+":"+${minutes});
     },
   },
   created() {
