@@ -20,7 +20,7 @@ import service from "@/mixins/service.js";
 import Generic from "./Generic.vue";
 
 export default {
-  name: "OctoPi",
+  name: "OctoPrint",
   mixins: [service],
   props: {
     item: Object,
