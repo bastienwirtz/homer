@@ -7,7 +7,7 @@
           {{ item.subtitle }}
         </template>
         <template v-else-if="api" && printerstatus !="null">
-          {{ printerstatus }}<template v-if="printerstatus == 'Printing'">: {{ printerprogress }}% ({{ printtime }}/{{  printtimeleft }} left)</template>
+         Status: {{ printerstatus }}<template v-if="printerstatus == 'Printing'">: {{ printerprogress }}% <br /> ({{ printtime }}/{{  printtimeleft }} left)</template>
         </template>
 
       </p>
@@ -61,11 +61,13 @@ export default {
       return 0;
     },
     printtime: function () {
-      if (this.api) {
-        var timestamp = this.api.progress.printTime;
-        var hours = Math.floor(timestamp / 60 / 60);
-        var minutes = Math.floor(timestamp / 60) - hours * 60;
-        var seconds = timestamp % 60;
+        if (!this.api) {
+            return 0;
+        }
+        const timestamp = this.api.progress.printTime;
+        let hours = Math.floor(timestamp / 60 / 60);
+        let minutes = Math.floor(timestamp / 60) - hours * 60;
+        let seconds = timestamp % 60;
         if (hours < 10) {
           hours = "0" + hours;
         }
@@ -75,30 +77,26 @@ export default {
         if (seconds < 10) {
           seconds = "0" + seconds;
         }
-        var formatted = hours + ":" + minutes;
-        return formatted;
-      }
-      return 0;
+        return ${hours}:${minutes};
     },
     printtimeleft: function () {
-      if (this.api) {
-        var timestamp = this.api.progress.printTimeLeft;
-        var hours = Math.floor(timestamp / 60 / 60);
-        var minutes = Math.floor(timestamp / 60) - hours * 60;
-        var seconds = timestamp % 60;
+        if (!this.api) {
+            return 0;
+        }
+        const timestamp = this.api.progress.printTimeLeft;
+        let  hours = Math.floor(timestamp / 60 / 60);
+        let minutes = Math.floor(timestamp / 60) - hours * 60;
+        let seconds = timestamp % 60;
         if (hours < 10) {
-          hours = "0" + hours;
+            hours = "0" + hours;
         }
         if (minutes < 10) {
-          minutes = "0" + minutes;
+            minutes = "0" + minutes;
         }
         if (seconds < 10) {
-          seconds = "0" + seconds;
+            seconds = "0" + seconds;
         }
-        var formatted = hours + ":" + minutes;
-        return formatted;
-      }
-      return 0;
+        return ${hours}:${minutes};
     },
   },
   created() {
