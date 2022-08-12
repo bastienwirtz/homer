@@ -29,7 +29,13 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const method = typeof this.item.method === 'string' && this.item.method.toLowerCase() === "get" ? "GET" : "HEAD"
+      const method = typeof this.item.method === 'string' ? this.item.method.toUpperCase() : 'unknown';
+
+      if (!['GET', 'HEAD', 'OPTION'].includes(method)) {
+        console.error(`Ping: ${method} is not a supported HTTP method`);
+        return;
+      }
+
       this.fetch("/", { method, cache: "no-cache" }, false)
         .then(() => {
           this.status = "online";
