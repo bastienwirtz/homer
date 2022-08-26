@@ -1,5 +1,5 @@
 # Publish pre-build release
-name: Upload Release Asset
+name: Create Github release
 
 on:
   push:
