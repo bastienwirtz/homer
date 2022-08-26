@@ -4,6 +4,7 @@
     v-if="config"
     :class="[
       `theme-${config.theme}`,
+      `page-${currentPage}`,
       isDark ? 'is-dark' : 'is-light',
       !config.footer ? 'no-footer' : '',
     ]"
@@ -171,6 +172,7 @@ export default {
   data: function () {
     return {
       loaded: false,
+      currentPage: null,
       configNotFound: false,
       config: null,
       services: null,
@@ -202,14 +204,11 @@ export default {
       let config;
       try {
         config = await this.getConfig();
-        const path =
-          window.location.hash.substring(1) != ""
-            ? window.location.hash.substring(1)
-            : null;
+        this.currentPage = window.location.hash.substring(1) || "default";
 
-        if (path) {
-          let pathConfig = await this.getConfig(`assets/${path}.yml`); // the slash (/) is included in the pathname
-          config = Object.assign(config, pathConfig);
+        if (this.currentPage !== "default") {
+          let pageConfig = await this.getConfig(`assets/${this.currentPage}.yml`);
+          config = Object.assign(config, pageConfig);
         }
       } catch (error) {
         console.log(error);
