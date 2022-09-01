@@ -85,9 +85,14 @@ export default {
       if (this.incident.incident) {
         return this.incident.incident.title;
       }
-      return this.pageStatus == "warn"
-        ? "Partially Degraded Service"
-        : "All Systems Operational";
+      switch(this.pageStatus){
+        case "good":
+          return "All Systems Operational";
+        case "warn":
+          return "Partially Degraded Service";
+        case "bad":
+          return "Degraded Service";
+      }
     },
     uptime: function () {
       if (!this.heartbeat) {
