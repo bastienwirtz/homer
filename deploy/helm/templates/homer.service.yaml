@@ -1,0 +1,14 @@
+{{- if .Values.apps.homer.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-homer
+spec:
+  type: {{ .Values.apps.homer.service.type }}
+  ports:
+  - port: {{ .Values.apps.homer.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.apps.homer.service.port }}
+  selector:
+    app: {{ .Release.Name }}-homer
+{{ end }}

@@ -1,0 +1,14 @@
+{{- if .Values.apps.homer.hpa.enabled }}
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Release.Name }}-homer
+spec:
+  maxReplicas: {{ .Values.apps.homer.hpa.max }}
+  minReplicas: {{ .Values.apps.homer.hpa.max }}
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Release.Name }}-homer
+  targetCPUUtilizationPercentage: {{ .Values.apps.homer.hpa.cpu_percentage }}
+{{ end }}

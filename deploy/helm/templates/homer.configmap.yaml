@@ -1,0 +1,8 @@
+{{- if .Values.apps.homer.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-homer-config
+data:
+  {{- toYaml .Values.apps.homer.configmap.config | nindent 2 }}
+{{ end }}

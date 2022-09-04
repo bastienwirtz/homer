@@ -1,0 +1,9 @@
+apiVersion: v2
+name: homer
+description: none
+
+type: application
+version: 22.08.1
+appVersion: v22.08.1
+
+dependencies: []

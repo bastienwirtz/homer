@@ -1,0 +1,36 @@
+{{- if .Values.apps.homer.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-homer
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-homer
+  strategy:
+    {{- toYaml .Values.apps.homer.deployment.strategy | nindent 4 }}
+  revisionHistoryLimit: {{ .Values.apps.homer.deployment.revisions }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-homer
+    spec:
+      containers:
+        - name: homer
+          image: "{{ .Values.apps.homer.deployment.image.name }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.apps.homer.deployment.image.pull_policy }}
+          volumeMounts:
+            - mountPath: "/www/assets"
+              name: config
+              readOnly: true
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Release.Name }}-homer-config
+            optional: false
+            items:
+              - key: config
+                path: config.yml
+{{ end }}
