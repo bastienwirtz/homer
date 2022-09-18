@@ -82,8 +82,8 @@ export default {
     // and upload rates. Values are saved to the `ul` and `dl`
     // properties.
     fetchRates: async function() {
-      this.getRate('throttle.global_down.rate', (ul) => this.ul = ul)
-        .then(() => this.getRate('throttle.global_up.rate', (dl) => this.dl = dl))
+      this.getRate('throttle.global_up.rate', (ul) => this.ul = ul)
+        .then(() => this.getRate('throttle.global_down.rate', (dl) => this.dl = dl))
         .catch(() => this.error = true);
     },
     // Perform a call to the XML-RPC service to fetch the number of
