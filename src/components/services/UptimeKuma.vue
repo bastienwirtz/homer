@@ -85,9 +85,22 @@ export default {
       if (this.incident.incident) {
         return this.incident.incident.title;
       }
-      return this.pageStatus == "warn"
-        ? "Partially Degraded Service"
-        : "All Systems Operational";
+
+      let message = "";
+      switch (this.pageStatus) {
+        case "good":
+          message = "All Systems Operational";
+          break;
+        case "warn":
+          message = "Partially Degraded Service";
+          break;
+        case "bad":
+          message = "Degraded Service";
+          break;
+        default:
+          message = "Unknown service status";
+      }
+      return message;
     },
     uptime: function () {
       if (!this.heartbeat) {
@@ -105,12 +118,13 @@ export default {
   },
   methods: {
     fetchStatus: function () {
-      this.fetch(`/api/status-page/${this.dashboard}?cachebust=${Date.now()}`)
+      const now = Date.now()
+      this.fetch(`/api/status-page/${this.dashboard}?cachebust=${now}`)
         .catch((e) => console.error(e))
         .then((resp) => (this.incident = resp));
 
       this.fetch(
-        `/api/status-page/heartbeat/${this.dashboard}?cachebust=${Date.now()}`
+        `/api/status-page/heartbeat/${this.dashboard}?cachebust=${now}`
       )
         .catch((e) => console.error(e))
         .then((resp) => (this.heartbeat = resp));

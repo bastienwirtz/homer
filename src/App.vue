@@ -207,7 +207,9 @@ export default {
         this.currentPage = window.location.hash.substring(1) || "default";
 
         if (this.currentPage !== "default") {
-          let pageConfig = await this.getConfig(`assets/${this.currentPage}.yml`);
+          let pageConfig = await this.getConfig(
+            `assets/${this.currentPage}.yml`
+          );
           config = Object.assign(config, pageConfig);
         }
       } catch (error) {
