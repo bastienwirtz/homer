@@ -34,6 +34,5 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:${PORT}/ || exit 1
 
 EXPOSE ${PORT}
-VOLUME /www/assets
 
 ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
