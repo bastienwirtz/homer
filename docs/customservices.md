@@ -21,6 +21,7 @@ within Homer:
 + [Tautulli](#tautulli)
 + [Mealie](#mealie)
 + [Healthchecks](#healthchecks)
++ [Proxmox](#proxmox)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -244,3 +245,20 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of the Healthchecks application.
 The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
+
+## Proxmox
+
+This service displays status information of a Proxmox node (VMs running and disk, memory and cpu used). It uses the proxmox API and [API Tokens](https://pve.proxmox.com/pve-docs/pveum-plain.html) for authorization so you need to generate one to set in the yaml config. You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
+
+Configuration example:
+
+```yaml
+- name: "Proxmox - Node"
+  logo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2FandOTP%2FandOTP%2Fissues%2F337&psig=AOvVaw2YKVuEUIBeTUikr7kAjm8D&ust=1665323538747000&source=images&cd=vfe&ved=0CAkQjRxqFwoTCPCTruLj0PoCFQAAAAAdAAAAABAN"
+  type: "Proxmox"
+  url: "https://your.proxmox.server"
+  node: "your-node-name"
+  warning_value: 50
+  danger_value: 80
+  api_token: "PVEAPIToken=root@pam!your-api-token-name=your-api-token-key"
+```
