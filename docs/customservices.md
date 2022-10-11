@@ -250,6 +250,17 @@ The Healthchecks API key can be found in Settings > API Access > API key (read-o
 
 This service displays status information of a Proxmox node (VMs running and disk, memory and cpu used). It uses the proxmox API and [API Tokens](https://pve.proxmox.com/pve-docs/pveum-plain.html) for authorization so you need to generate one to set in the yaml config. You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
 
+The API Token (or the user asigned to that token if not separated permissions is checked) are this:
+
+| Path               | Permission | Comments                                                          |
+| ------------------ | ---------- |                                                                   |
+| /nodes/<your-node> | Sys.Audit  |                                                                   |
+| /vms/<id-vm>       | VM.Audit   | You need to have this permission on any VM you want to be counted |
+
+It is highly recommended that you create and API Token with only these permissions on a read-only mode.
+
+If you get errors, they will be shown on browser's dev console. Main issues tend to be CORS related as Proxmox does not include CORS headers and you have to desploy it behind a reverse proxy and make the proxy add this headers.
+
 Configuration example:
 
 ```yaml

@@ -7,8 +7,11 @@
             {{ item.subtitle }}
           </template>
           <template v-else-if="vms">
-            <div v-if="error">
-              <strong class="danger">Error loading info!</strong>
+            <div v-if="loading">
+              <strong>Loading...</strong>
+            </div>
+            <div v-else-if="error">
+              <strong class="danger">Error loading info</strong>
             </div>
             <div v-else class="metrics">
               <span>VMs: <span class="is-number"><strong>{{ vms.running }}</strong>/{{vms.total}}</span></span>
@@ -18,6 +21,10 @@
             </div>
           </template>
         </p>
+      </template>
+      <template #indicator>
+        <i v-if="loading" class="fa fa-circle-notch fa-spin fa-2xl"></i>
+        <i v-if="error" class="fa fa-exclamation-circle fa-2xl danger"></i>
       </template>
     </Generic>
   </template>
@@ -43,7 +50,8 @@
       memoryUsed: 0,
       diskUsed: 0,
       cpuUsed: 0,
-      error: false
+      error: false,
+      loading: true
     }),
     created() {
       this.fetchStatus();
@@ -71,8 +79,10 @@
           this.vms.total += vms.data.length;
           this.vms.running += vms.data.filter( i => i.status === 'running' ).length;
           this.error = false;
+          this.loading = false;
         } catch(err) {
           console.log(err);
+          this.loading = false;
           this.error = true;
         }
       },
