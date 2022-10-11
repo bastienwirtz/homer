@@ -79,12 +79,11 @@
           this.vms.total += vms.data.length;
           this.vms.running += vms.data.filter( i => i.status === 'running' ).length;
           this.error = false;
-          this.loading = false;
         } catch(err) {
           console.log(err);
-          this.loading = false;
           this.error = true;
         }
+        this.loading = false;
       },
     },
   };
