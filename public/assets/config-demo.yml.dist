@@ -85,5 +85,6 @@ services:
         url: "#"
       - name: "Pi-hole"
         logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png"
-        url: "https://homer-demo-content.netlify.app/"
+        url: "#"
+        endpoint: "https://homer-demo-content.netlify.app/pihole"
         type: "PiHole"
