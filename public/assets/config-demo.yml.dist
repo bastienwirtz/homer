@@ -83,3 +83,8 @@ services:
         subtitle: "Another application"
         tag: "app"
         url: "#"
+      - name: "Pi-hole"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png"
+        url: "#"
+        endpoint: "https://homer-demo-content.netlify.app/pihole"
+        type: "PiHole"
