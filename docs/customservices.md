@@ -259,7 +259,7 @@ The API Token (or the user asigned to that token if not separated permissions is
 
 It is highly recommended that you create and API Token with only these permissions on a read-only mode.
 
-If you get errors, they will be shown on browser's dev console. Main issues tend to be CORS related as Proxmox does not include CORS headers and you have to desploy it behind a reverse proxy and make the proxy add this headers.
+If you get errors, they will be shown on browser's dev console. Main issues tend to be CORS related as Proxmox does not include CORS headers and you have to deploy it behind a reverse proxy and make the proxy add this headers.
 
 Configuration example:
 
