@@ -88,3 +88,12 @@ services:
         url: "#"
         endpoint: "https://homer-demo-content.netlify.app/pihole"
         type: "PiHole"
+      - name: "Proxmox - Node1"
+        logo: "https://camo.githubusercontent.com/2df2ac41e1b8a1484be236c75e395981b31bfd670eff46b5c182ea0be9475310/68747470733a2f2f7777772e70726f786d6f782e636f6d2f696d616765732f70726f786d6f782f50726f786d6f785f73796d626f6c5f7374616e646172645f6865782e706e67"
+        type: "Proxmox"
+        tag: "sys"
+        url: "https://homer-demo-content.netlify.app/proxmox"
+        node: "node1"
+        warning_value: 50
+        danger_value: 80
+        api_token: "PVEAPIToken=root@pam!monitoring=baaaa46c1-7aee-4f13-b3e5-754d856111a9"
