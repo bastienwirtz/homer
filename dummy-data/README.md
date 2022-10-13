@@ -11,5 +11,5 @@ The principle is simple: save a sample output of the API used in the service in 
 Example:
 ```
 mkdir pihole
-curl http://my-pihile.me/admin/api.php -o pihole/api.php # /admin is omited because for PiHole, the implementation expect it to be in the base url (`url` or `enpoint` property)
+curl http://my-pihole.me/admin/api.php -o pihole/api.php # /admin is omited because for PiHole, the implementation expect it to be in the base url (`url` or `enpoint` property)
 ```
