@@ -14,10 +14,10 @@
               <strong class="danger">Error loading info</strong>
             </div>
             <div v-else class="metrics">
-              <span>VMs: <span class="is-number"><strong>{{ vms.running }}</strong>/{{vms.total}}</span></span>
-              <span>Disk: <strong class="is-number" :class="statusClass(diskUsed)">{{ diskUsed }}%</strong></span>
-              <span>Mem: <strong class="is-number" :class="statusClass(memoryUsed)">{{ memoryUsed }}%</strong></span>
-              <span>CPU: <strong class="is-number" :class="statusClass(cpuUsed)">{{ cpuUsed }}%</strong></span>
+              <span>VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
+              <span>Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ diskUsed }}%</span></span>
+              <span>Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ memoryUsed }}%</span></span>
+              <span>CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ cpuUsed }}%</span></span>
             </div>
           </template>
         </p>
