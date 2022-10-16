@@ -13,7 +13,7 @@
             <div v-else-if="error">
               <strong class="danger">Error loading info</strong>
             </div>
-            <div v-else class="metrics">
+            <div v-else class="metrics" :class="{'is-size-7-mobile': item.small_font_on_small_screens}">
               <span>VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
               <span>Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ diskUsed }}%</span></span>
               <span>Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ memoryUsed }}%</span></span>
