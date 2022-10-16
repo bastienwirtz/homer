@@ -272,5 +272,6 @@ Configuration example:
   warning_value: 50
   danger_value: 80
   api_token: "PVEAPIToken=root@pam!your-api-token-name=your-api-token-key"
-  small_font_on_small_screens: true #optional: uses a smaller font for subtitle on small screens
+  small_font_on_small_screens: true #uses a smaller font for subtitle on small screens
+  hide_decimals: true # removes decimals from stats values.
 ```
