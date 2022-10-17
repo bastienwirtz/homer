@@ -14,10 +14,10 @@
               <strong class="danger">Error loading info</strong>
             </div>
             <div v-else class="metrics" :class="{'is-size-7-mobile': item.small_font_on_small_screens}">
-              <span v-if="showValue('vms')" class="margined">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
-              <span v-if="showValue('disk')" class="margined">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ diskUsed }}%</span></span>
-              <span v-if="showValue('mem')" class="margined">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ memoryUsed }}%</span></span>
-              <span v-if="showValue('cpu')" class="margined">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ cpuUsed }}%</span></span>
+              <span v-if="isValueShown('vms')" class="margined">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
+              <span v-if="isValueShown('disk')" class="margined">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ diskUsed }}%</span></span>
+              <span v-if="isValueShown('mem')" class="margined">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ memoryUsed }}%</span></span>
+              <span v-if="isValueShown('cpu')" class="margined">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ cpuUsed }}%</span></span>
             </div>
           </template>
         </p>
@@ -78,7 +78,7 @@
           this.diskUsed = ( (status.data.rootfs.used * 100) / status.data.rootfs.total ).toFixed(decimalsToShow);
           this.cpuUsed = (status.data.cpu * 100).toFixed(decimalsToShow);
           // vms:
-          if (this.showValue('vms')) {
+          if (this.isValueShown('vms')) {
             const vms = await this.fetch(`/api2/json/nodes/${this.item.node}/qemu`, options);
             this.vms.total += vms.data.length;
             this.vms.running += vms.data.filter( i => i.status === 'running' ).length;
@@ -92,7 +92,7 @@
         }
         this.loading = false;
       },
-      showValue(value) {
+      isValueShown(value) {
         return this.hide.indexOf(value) == -1;
       }
     },
