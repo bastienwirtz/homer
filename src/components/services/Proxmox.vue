@@ -13,11 +13,11 @@
             <div v-else-if="error">
               <strong class="danger">Error loading info</strong>
             </div>
-            <div v-else class="metrics" :class="{'is-size-7-mobile': item.small_font_on_small_screens}">
-              <span v-if="vms.total || vms.running">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
-              <span>Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ getStatValue(diskUsed) }}%</span></span>
-              <span>Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ getStatValue(memoryUsed) }}%</span></span>
-              <span>CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ getStatValue(cpuUsed) }}%</span></span>
+            <div v-else :class="{'is-size-7-mobile': item.small_font_on_small_screens, 'metrics': valuesToShowCount > 2}">
+              <span v-if="showValue('vms')" :class="{ 'margined': valuesToShowCount <= 2 }">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
+              <span v-if="showValue('disk')" :class="{ 'margined': valuesToShowCount <= 2 }">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ getStatValue(diskUsed) }}%</span></span>
+              <span v-if="showValue('mem')" :class="{ 'margined': valuesToShowCount <= 2 }">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ getStatValue(memoryUsed) }}%</span></span>
+              <span v-if="showValue('cpu')" :class="{ 'margined': valuesToShowCount <= 2 }">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ getStatValue(cpuUsed) }}%</span></span>
             </div>
           </template>
         </p>
@@ -50,11 +50,19 @@
       memoryUsed: 0,
       diskUsed: 0,
       cpuUsed: 0,
+      hide: [],
       error: false,
       loading: true
     }),
     created() {
+      if (this.item.hide) this.hide = this.item.hide;
       this.fetchStatus();
+    },
+    computed: {
+      valuesToShowCount() {
+        console.log(this.hide);
+        return 4 - this.hide.length;
+      }
     },
     methods: {
       statusClass(value) {
@@ -75,9 +83,13 @@
           this.diskUsed = ( (status.data.rootfs.used * 100) / status.data.rootfs.total ).toFixed(1);
           this.cpuUsed = (status.data.cpu * 100).toFixed(1);
           // vms:
-          const vms = await this.fetch(`/api2/json/nodes/${this.item.node}/qemu`, options);
-          this.vms.total += vms.data.length;
-          this.vms.running += vms.data.filter( i => i.status === 'running' ).length;
+          if (this.showValue('vms')) {
+            const vms = await this.fetch(`/api2/json/nodes/${this.item.node}/qemu`, options);
+            this.vms.total += vms.data.length;
+            this.vms.running += vms.data.filter( i => i.status === 'running' ).length;
+            // if no vms, hide this value:
+            if (this.vms.total == 0) this.hide.push('vms');
+          }
           this.error = false;
         } catch(err) {
           console.log(err);
@@ -87,6 +99,9 @@
       },
       getStatValue(value) {
         return this.item.hide_decimals ? value.split('.')[0] : value;
+      },
+      showValue(value) {
+        return this.hide.indexOf(value) == -1;
       }
     },
   };
@@ -108,6 +123,9 @@
   .metrics {
     display: flex;
     justify-content: space-between;
+  }
+  .margined:not(:first-child) {
+    margin-left: 0.3rem;
   }
   </style>
   
