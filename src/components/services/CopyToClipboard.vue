@@ -1,7 +1,7 @@
 <template>
   <Generic :item="item">
     <template #indicator>
-      <div class="status"><i ref="copyIcon" class="fa-regular fa-copy fa-xl" :class="{'scale': animate}" @click="copy($event)"></i></div>
+      <div class="status"><i ref="copyIcon" class="fa-regular fa-copy fa-xl" :class="{'scale': animate}" @click="copy()"></i></div>
     </template>
   </Generic>
 </template>
@@ -28,7 +28,7 @@ export default {
       (event) => { this.animate = false; });
   },
   methods: {
-    copy(event) {
+    copy() {
       javascript:navigator.clipboard.writeText(this.item.clipboard)
       this.animate = true;
     }
