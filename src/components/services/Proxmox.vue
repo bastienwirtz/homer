@@ -13,11 +13,11 @@
             <div v-else-if="error">
               <strong class="danger">Error loading info</strong>
             </div>
-            <div v-else :class="{'is-size-7-mobile': item.small_font_on_small_screens, 'metrics': valuesToShowCount > 2}">
-              <span v-if="showValue('vms')" :class="{ 'margined': valuesToShowCount <= 2 }">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
-              <span v-if="showValue('disk')" :class="{ 'margined': valuesToShowCount <= 2 }">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ getStatValue(diskUsed) }}%</span></span>
-              <span v-if="showValue('mem')" :class="{ 'margined': valuesToShowCount <= 2 }">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ getStatValue(memoryUsed) }}%</span></span>
-              <span v-if="showValue('cpu')" :class="{ 'margined': valuesToShowCount <= 2 }">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ getStatValue(cpuUsed) }}%</span></span>
+            <div v-else class="metrics" :class="{'is-size-7-mobile': item.small_font_on_small_screens}">
+              <span v-if="showValue('vms')" class="margined">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
+              <span v-if="showValue('disk')" class="margined">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ getStatValue(diskUsed) }}%</span></span>
+              <span v-if="showValue('mem')" class="margined">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ getStatValue(memoryUsed) }}%</span></span>
+              <span v-if="showValue('cpu')" class="margined">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ getStatValue(cpuUsed) }}%</span></span>
             </div>
           </template>
         </p>
@@ -57,12 +57,6 @@
     created() {
       if (this.item.hide) this.hide = this.item.hide;
       this.fetchStatus();
-    },
-    computed: {
-      valuesToShowCount() {
-        console.log(this.hide);
-        return 4 - this.hide.length;
-      }
     },
     methods: {
       statusClass(value) {
@@ -120,11 +114,7 @@
   .danger {
     color: red
   }
-  .metrics {
-    display: flex;
-    justify-content: space-between;
-  }
-  .margined:not(:first-child) {
+  .metrics .margined:not(:first-child) {
     margin-left: 0.3rem;
   }
   </style>
