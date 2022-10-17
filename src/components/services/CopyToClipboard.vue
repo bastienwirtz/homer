@@ -25,7 +25,7 @@ export default {
   mounted: function() {
     this.$refs.copyIcon.addEventListener(
       'animationend',
-      (event) => { this.animate = false; });
+      () => { this.animate = false; });
   },
   methods: {
     copy() {
