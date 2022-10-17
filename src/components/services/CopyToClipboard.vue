@@ -1,7 +1,7 @@
 <template>
   <Generic :item="item">
     <template #indicator>
-      <div class="status"><i class="fa-regular fa-copy fa-xl" :class="{'fa-beat': animate, 'copied-icon': animate}" @click="copy"></i></div>
+      <div class="status"><i ref="copyIcon" class="fa-regular fa-copy fa-xl" :class="{'scale': animate}" @click="copy($event)"></i></div>
     </template>
   </Generic>
 </template>
@@ -22,24 +22,62 @@ export default {
   data: () => ({
     animate: false
   }),
+  mounted: function() {
+    this.$refs.copyIcon.addEventListener(
+      'animationend',
+      (event) => { this.animate = false; });
+  },
   methods: {
-    copy() {
+    copy(event) {
       javascript:navigator.clipboard.writeText(this.item.clipboard)
       this.animate = true;
-      setTimeout(
-        () => { this.animate = false },
-        1000
-      );
     }
   },
 };
 </script>
 
 <style scoped lang="scss">
-.status {
+.scale {
+	-webkit-animation: scale-up 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-up 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.is-light i {
   color: black;
 }
-.copied-icon {
-  color: #5dbc9d;
+.is-dark i {
+  color: white;
+}
+  /**
+ * ----------------------------------------
+ * animation scale-down-center
+ * ----------------------------------------
+ */
+@-webkit-keyframes scale-up {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes scale-up {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.25);
+            transform: scale(1.25);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
 </style>
