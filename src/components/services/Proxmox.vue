@@ -15,9 +15,9 @@
             </div>
             <div v-else class="metrics" :class="{'is-size-7-mobile': item.small_font_on_small_screens}">
               <span v-if="showValue('vms')" class="margined">VMs: <span class="is-number"><span class="has-text-weight-bold">{{ vms.running }}</span>/{{vms.total}}</span></span>
-              <span v-if="showValue('disk')" class="margined">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ getStatValue(diskUsed) }}%</span></span>
-              <span v-if="showValue('mem')" class="margined">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ getStatValue(memoryUsed) }}%</span></span>
-              <span v-if="showValue('cpu')" class="margined">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ getStatValue(cpuUsed) }}%</span></span>
+              <span v-if="showValue('disk')" class="margined">Disk: <span class="has-text-weight-bold is-number" :class="statusClass(diskUsed)">{{ diskUsed }}%</span></span>
+              <span v-if="showValue('mem')" class="margined">Mem: <span class="has-text-weight-bold is-number" :class="statusClass(memoryUsed)">{{ memoryUsed }}%</span></span>
+              <span v-if="showValue('cpu')" class="margined">CPU: <span class="has-text-weight-bold is-number" :class="statusClass(cpuUsed)">{{ cpuUsed }}%</span></span>
             </div>
           </template>
         </p>
@@ -73,9 +73,10 @@
           }
           const status = await this.fetch(`/api2/json/nodes/${this.item.node}/status`, options);
           // main metrics:
-          this.memoryUsed = ( (status.data.memory.used * 100) / status.data.memory.total ).toFixed(1);
-          this.diskUsed = ( (status.data.rootfs.used * 100) / status.data.rootfs.total ).toFixed(1);
-          this.cpuUsed = (status.data.cpu * 100).toFixed(1);
+          const decimalsToShow = this.item.hide_decimals ? 0 : 1;
+          this.memoryUsed = ( (status.data.memory.used * 100) / status.data.memory.total ).toFixed(decimalsToShow);
+          this.diskUsed = ( (status.data.rootfs.used * 100) / status.data.rootfs.total ).toFixed(decimalsToShow);
+          this.cpuUsed = (status.data.cpu * 100).toFixed(decimalsToShow);
           // vms:
           if (this.showValue('vms')) {
             const vms = await this.fetch(`/api2/json/nodes/${this.item.node}/qemu`, options);
@@ -90,9 +91,6 @@
           this.error = true;
         }
         this.loading = false;
-      },
-      getStatValue(value) {
-        return this.item.hide_decimals ? value.split('.')[0] : value;
       },
       showValue(value) {
         return this.hide.indexOf(value) == -1;
