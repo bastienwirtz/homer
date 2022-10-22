@@ -82,9 +82,14 @@ export default {
     // and upload rates. Values are saved to the `ul` and `dl`
     // properties.
     fetchRates: async function() {
-      this.getRate('throttle.global_up.rate', (ul) => this.ul = ul)
-        .then(() => this.getRate('throttle.global_down.rate', (dl) => this.dl = dl))
-        .catch(() => this.error = true);
+      try {
+        await this.getRate('throttle.global_up.rate')
+          .then((ul) => this.ul = ul);
+        await this.getRate('throttle.global_down.rate')
+          .then((dl) => this.dl = dl);
+      } catch {
+        this.error = true;
+      }
     },
     // Perform a call to the XML-RPC service to fetch the number of
     // torrents.
@@ -95,17 +100,9 @@ export default {
     // the specified method name and parsing the XML. The response
     // is expected to adhere to the structure of a single numeric
     // value.
-    getRate: async function(methodName, callback) {
+    getRate: async function(methodName) {
       return this.getXml(methodName)
-        .then((xml) => {
-          const rate = parseInt(xml.getElementsByTagName('value')[0].firstChild.textContent, 10);
-
-          if (callback) {
-            callback(rate);
-          }
-
-          return Promise.resolve();
-        });
+        .then((xml) => parseInt(xml.getElementsByTagName('value')[0].firstChild.textContent, 10));
     },
     // Fetch the numer of torrents by requesting the download list
     // and counting the number of entries therein.
@@ -114,8 +111,7 @@ export default {
         .then((xml) => {
           const arrayEl = xml.getElementsByTagName('array');
           this.count = arrayEl ? arrayEl[0].getElementsByTagName('value').length : 0;
-          return Promise.resolve();
-        })
+        });
     },
     // Perform a call to the XML-RPC service and parse the response
     // as XML, which is then returned.
