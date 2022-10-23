@@ -1,7 +1,7 @@
 <template>
   <Generic :item="item">
     <template #indicator>
-      <div class="status"><i ref="copyIcon" class="fa-regular fa-copy fa-xl" :class="{'scale': animate}" @click="copy()"></i></div>
+      <div class="status"><i class="fa-regular fa-copy fa-xl" :class="{'scale': animate}" @click="copy()" @animationend="animate = false"></i></div>
     </template>
   </Generic>
 </template>
@@ -22,11 +22,6 @@ export default {
   data: () => ({
     animate: false
   }),
-  mounted: function() {
-    this.$refs.copyIcon.addEventListener(
-      'animationend',
-      () => { this.animate = false; });
-  },
   methods: {
     copy() {
       navigator.clipboard.writeText(this.item.clipboard)
