@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     copy() {
-      javascript:navigator.clipboard.writeText(this.item.clipboard)
+      navigator.clipboard.writeText(this.item.clipboard)
       this.animate = true;
     }
   },
