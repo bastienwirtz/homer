@@ -28,7 +28,20 @@
                 </p>
               </slot>
             </div>
-            <slot name="indicator" class="indicator"></slot>
+            <slot name="indicator" class="indicator">
+              <slot name="indicator" class="indicator">
+                <div v-if="item.indicator_logo" class="media-right">
+                  <figure class="image is-48x48">
+                    <img :src="item.indicator_logo" :alt="`${item.name} logo`" />
+                  </figure>
+                </div>
+                <div v-if="item.indicator_icon" class="media-right">
+                  <figure class="image is-48x48">
+                    <i style="font-size: 35px" :class="['fa-fw', item.indicator_icon]"></i>
+                  </figure>
+                </div>
+              </slot>
+            </slot>
           </div>
           <div class="tag" :class="item.tagstyle" v-if="item.tag">
             <strong class="tag-text">#{{ item.tag }}</strong>

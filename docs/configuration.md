@@ -126,6 +126,9 @@ services:
         logo: "assets/tools/sample.png"
         # Alternatively a fa icon can be provided:
         # icon: "fab fa-jenkins"
+        indicator_logo: "assets/tools/sample2.png"
+        # Alternatively a fa icon can be provided:
+        # indicator_icon: "fab fa-jenkins"
         subtitle: "Bookmark example"
         tag: "app"
         keywords: "self hosted reddit" # optional keyword used for searching purpose
