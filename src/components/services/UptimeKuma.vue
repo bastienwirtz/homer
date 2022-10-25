@@ -51,7 +51,9 @@ export default {
 
       for (let id in this.heartbeat.heartbeatList) {
         let index = this.heartbeat.heartbeatList[id].length - 1;
-        result[id] = this.heartbeat.heartbeatList[id][index];
+        if (index >= 0) {
+          result[id] = this.heartbeat.heartbeatList[id][index];
+        }
       }
 
       return result;
@@ -106,7 +108,10 @@ export default {
       if (!this.heartbeat) {
         return 0;
       }
-      const data = Object.values(this.heartbeat.uptimeList);
+      let data = [];
+      for (let id in this.lastHeartBeatList) {
+        data.push(this.heartbeat.uptimeList[id + "_24"]);
+      }
       const percent = data.reduce((a, b) => a + b, 0) / data.length || 0;
       return (percent * 100).toFixed(1);
     },
