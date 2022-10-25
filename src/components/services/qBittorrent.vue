@@ -5,12 +5,12 @@
       <p class="subtitle is-6">
         <span v-if="error" class="error">An error has occurred.</span>
         <template v-else>
-          <span class="down">
-            <p class="fas fa-download"></p> {{ downRate }}
+          <span class="down monospace">
+            <p class="fas fa-download "></p> {{ downRate }}
           </span>
-          <span class="up">
+          <span class="up monospace">
             <p class="fas fa-upload"></p> {{ upRate }}
-            </span>
+          </span>
         </template>
       </p>
     </template>
@@ -105,11 +105,18 @@ export default {
 .error {
   color: #e51111 !important;
 }
+
 .down {
   margin-right: 1em;
 }
+
 .count {
   color: var(--text);
   font-size: 0.8em;
+}
+
+.monospace {
+  font-weight: 300;
+  font-family: monospace;
 }
 </style>
