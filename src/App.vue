@@ -141,7 +141,7 @@
 </template>
 
 <script>
-import jsyaml from "js-yaml";
+import { parse } from "yaml";
 import merge from "lodash.merge";
 
 import Navbar from "./components/Navbar.vue";
@@ -200,7 +200,7 @@ export default {
       }
     },
     buildDashboard: async function () {
-      const defaults = jsyaml.load(defaultConfig);
+      const defaults = parse(defaultConfig);
       let config;
       try {
         config = await this.getConfig();
@@ -245,7 +245,7 @@ export default {
         return response
           .text()
           .then((body) => {
-            return jsyaml.load(body);
+            return parse(body);
           })
           .then(function (config) {
             if (config.externalConfig) {
