@@ -30,5 +30,5 @@ If you have just made an OpenWeatherMap account and/or a newly-made API key, the
 
 For some basic debugging steps, you can: 
 * Check with a large city such as Amsterdam as the specified location within your configuration.
-* Make sure your web browser is fetching the latest version of site after updating it with a new location (Ctrl + Shift + R).
-* ping api.openweathermap.org from the server.
+* Make sure your web browser is running the latest version of the homer configuration after updating the location (Ctrl + Shift + R).
+* Check for errors within the browser console (Ctrl + Shift + I) relating to api.openweathermap.org
