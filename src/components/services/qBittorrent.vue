@@ -75,8 +75,7 @@ export default {
   methods: {
     fetchCount: async function () {
       try {
-        const response = await fetch(`${this.endpoint}/api/v2/torrents/info`);
-        const body = await response.json();
+        const body = await this.fetch('/api/v2/torrents/info');
         this.error = false;
         this.count = body.length;
       } catch (e) {
@@ -86,8 +85,7 @@ export default {
     },
     getRate: async function () {
       try {
-        const response = await fetch(`${this.endpoint}/api/v2/transfer/info`);
-        const body = await response.json();
+        const body = await this.fetch('/api/v2/transfer/info');
         this.error = false;
         this.dl = body.dl_info_speed;
         this.ul = body.up_info_speed;
