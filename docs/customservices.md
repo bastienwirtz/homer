@@ -22,6 +22,7 @@ within Homer:
 + [Mealie](#mealie)
 + [Healthchecks](#healthchecks)
 + [rTorrent](#rtorrent)
++ [Proxmox](#proxmox)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -62,7 +63,7 @@ The following configuration is available for the OpenWeatherMap service:
   locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
   apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
   units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
-  background: "square" # choose which type of background you want behind the image. Can be one of: square, cicle, none. Defaults to none.
+  background: "square" # choose which type of background you want behind the image. Can be one of: square, circle, none. Defaults to none.
   type: "OpenWeather"
 ```
 
@@ -94,7 +95,7 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
 The Lidarr, Prowlarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
-If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example: 
+If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example:
 
 ```yaml
 - name: "Radarr"
@@ -118,7 +119,7 @@ API key can be generated in Settings > Administration > Auth Tokens
 
 ## Ping
 
-For Ping you need to set the type to Ping and provide a url.
+For Ping you need to set the type to Ping and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property.
 
 ```yaml
 - name: "Awesome app"
@@ -127,6 +128,7 @@ For Ping you need to set the type to Ping and provide a url.
   subtitle: "Bookmark example"
   tag: "app"
   url: "https://www.reddit.com/r/selfhosted/"
+  method: "head"
 ```
 
 ## Prometheus
@@ -262,4 +264,31 @@ servers can be found at https://enable-cors.org/server.html.
   type: "Rtorrent"
   rateInterval: 5000 # Interval for updating the download and upload rates.
   torrentInterval: 60000 # Interval for updating the torrent count.
+
+## Proxmox
+
+This service displays status information of a Proxmox node (VMs running and disk, memory and cpu used). It uses the proxmox API and [API Tokens](https://pve.proxmox.com/pve-docs/pveum-plain.html) for authorization so you need to generate one to set in the yaml config. You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
+
+The API Token (or the user asigned to that token if not separated permissions is checked) are this:
+
+| Path               | Permission | Comments                                                          |
+| ------------------ | ---------- |                                                                   |
+| /nodes/<your-node> | Sys.Audit  |                                                                   |
+| /vms/<id-vm>       | VM.Audit   | You need to have this permission on any VM you want to be counted |
+
+It is highly recommended that you create and API Token with only these permissions on a read-only mode.
+
+If you get errors, they will be shown on browser's dev console. Main issues tend to be CORS related as Proxmox does not include CORS headers and you have to deploy it behind a reverse proxy and make the proxy add this headers.
+
+Configuration example:
+
+```yaml
+- name: "Proxmox - Node"
+  logo: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fgithub.com%2FandOTP%2FandOTP%2Fissues%2F337&psig=AOvVaw2YKVuEUIBeTUikr7kAjm8D&ust=1665323538747000&source=images&cd=vfe&ved=0CAkQjRxqFwoTCPCTruLj0PoCFQAAAAAdAAAAABAN"
+  type: "Proxmox"
+  url: "https://your.proxmox.server"
+  node: "your-node-name"
+  warning_value: 50
+  danger_value: 80
+  api_token: "PVEAPIToken=root@pam!your-api-token-name=your-api-token-key"
 ```

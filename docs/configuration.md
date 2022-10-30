@@ -188,6 +188,7 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 
 - [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
 - [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
+- [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
 
 
 ## PWA Icons

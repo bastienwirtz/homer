@@ -22,7 +22,12 @@
               <div v-else>
                 <p class="title is-4">{{ name }}</p>
                 <p class="subtitle is-6">
-                  {{ temperature }}
+                  <span>
+                    {{ temperature }}
+                  </span>
+                  <span class="location-time">
+                    {{ locationTime }}
+                  </span>
                 </p>
               </div>
             </div>
@@ -49,6 +54,7 @@ export default {
     temp: null,
     conditions: null,
     error: false,
+    timezoneOffset: 0,
   }),
   computed: {
     temperature: function () {
@@ -61,6 +67,9 @@ export default {
         unit = "°F";
       }
       return `${this.temp} ${unit}`;
+    },
+    locationTime: function () {
+      return this.calcTime(this.timezoneOffset);
     },
   },
   created() {
@@ -78,7 +87,11 @@ export default {
       }
 
       const apiKey = this.item.apikey || this.item.apiKey;
-      const url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${apiKey}&units=${this.item.units}`;
+
+      let url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${apiKey}&units=${this.item.units}`;
+      if (this.item.endpoint) {
+        url = this.item.endpoint;
+      }
       fetch(url)
         .then((response) => {
           if (!response.ok) {
@@ -92,11 +105,22 @@ export default {
           this.temp = parseInt(weather.main.temp).toFixed(1);
           this.icon = weather.weather[0].icon;
           this.conditions = weather.weather[0].description;
+          this.timezoneOffset = weather.timezone;
         })
         .catch((e) => {
           console.log(e);
           this.error = true;
         });
+    },
+    calcTime: (offset) => {
+      const localTime = new Date();
+      const utcTime =
+        localTime.getTime() + localTime.getTimezoneOffset() * 60000;
+      const calculatedTime = new Date(utcTime + 1000 * offset);
+      return calculatedTime.toLocaleString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
     },
   },
 };
@@ -132,5 +156,10 @@ export default {
       background-color: #909090;
     }
   }
+}
+
+//Location Time
+.location-time {
+  margin-left: 20px;
 }
 </style>
