@@ -7,24 +7,27 @@ if your homer instance is secured behind some form of authentication or access r
 
 Available services are in `src/components/`. Here is an overview of all custom services that are available
 within Homer:
-+ [PiHole](#pihole)
-+ [OpenWeatherMap](#openweathermap)
-+ [Medusa](#medusa)
-+ [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
-+ [PaperlessNG](#paperlessng)
-+ [Ping](#ping)
-+ [Prometheus](#prometheus)
-+ [AdGuard Home](#adguard-home)
-+ [Portainer](#portainer)
-+ [Emby / Jellyfin](#emby--jellyfin)
-+ [Uptime Kuma](#uptime-kuma)
-+ [Tautulli](#tautulli)
-+ [Mealie](#mealie)
-+ [Healthchecks](#healthchecks)
-+ [Proxmox](#proxmox)
+
+- [Custom Services](#custom-services)
+  - [Common options](#common-options)
+  - [PiHole](#pihole)
+  - [OpenWeatherMap](#openweathermap)
+  - [Medusa](#medusa)
+  - [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
+  - [PaperlessNG](#paperlessng)
+  - [Ping](#ping)
+  - [Prometheus](#prometheus)
+  - [AdGuard Home](#adguard-home)
+  - [Portainer](#portainer)
+  - [Emby / Jellyfin](#emby--jellyfin)
+  - [Uptime Kuma](#uptime-kuma)
+  - [Tautulli](#tautulli)
+  - [Mealie](#mealie)
+  - [Healthchecks](#healthchecks)
+  - [Proxmox](#proxmox)
+  - [qBittorrent](#qbittorrent)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
-
 
 ## Common options
 
@@ -272,4 +275,23 @@ Configuration example:
   warning_value: 50
   danger_value: 80
   api_token: "PVEAPIToken=root@pam!your-api-token-name=your-api-token-key"
+```
+
+## qBittorrent
+
+This service displays the global upload and download rates, as well as the number of torrents
+listed. The service communicates with the qBittorrent API interface which needs
+to be accessible from the browser. Please consult
+[the instructions](https://github.com/qbittorrent/qBittorrent/pull/12579)
+for setting up qBittorrent and make sure the correct CORS-settings are applied. Examples for various
+servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
+
+```yaml
+- name: "qBittorrent"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.1.2:8080" # Your rTorrent web UI, f.e. ruTorrent or Flood.
+  type: "qBittorrent"
+  rateInterval: 2000 # Interval for updating the download and upload rates.
+  torrentInterval: 5000 # Interval for updating the torrent count.
+  target: "_blank" # optional html a tag target attribute
 ```
