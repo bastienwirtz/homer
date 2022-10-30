@@ -29,9 +29,12 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const method = typeof this.item.method === 'string' ? this.item.method.toUpperCase() : 'HEAD';
+      const method =
+        typeof this.item.method === "string"
+          ? this.item.method.toUpperCase()
+          : "HEAD";
 
-      if (!['GET', 'HEAD', 'OPTION'].includes(method)) {
+      if (!["GET", "HEAD", "OPTION"].includes(method)) {
         console.error(`Ping: ${method} is not a supported HTTP method`);
         return;
       }
