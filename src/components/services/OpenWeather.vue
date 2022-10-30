@@ -23,7 +23,7 @@
                 <p class="title is-4">{{ name }}</p>
                 <p class="subtitle is-6">
                   <span>
-                    {{ temp | tempSuffix(this.item.units) }}
+                    {{ temperature }}
                   </span>
                   <span class="location-time">
                     {{ locationTime }}
@@ -68,14 +68,12 @@ export default {
       }
       return `${this.temp} ${unit}`;
     },
-  },
-  created() {
-    this.fetchWeather();
-  },
-  computed: {
     locationTime: function () {
       return this.calcTime(this.timezoneOffset);
     },
+  },
+  created() {
+    this.fetchWeather();
   },
   methods: {
     fetchWeather: async function () {
@@ -89,7 +87,11 @@ export default {
       }
 
       const apiKey = this.item.apikey || this.item.apiKey;
-      const url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${apiKey}&units=${this.item.units}`;
+
+      let url = `https://api.openweathermap.org/data/2.5/weather?${locationQuery}&appid=${apiKey}&units=${this.item.units}`;
+      if (this.item.endpoint) {
+        url = this.item.endpoint;
+      }
       fetch(url)
         .then((response) => {
           if (!response.ok) {

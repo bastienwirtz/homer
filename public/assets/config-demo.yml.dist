@@ -100,6 +100,12 @@ services:
         keywords: "demo"
         url: "#"
         target: "_blank" 
+      - name: "Weather"
+        location: "Lyon"
+        apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
+        units: "metric"
+        endpoint: "https://homer-demo-content.netlify.app/openweather/weather"
+        type: "OpenWeather"
   - name: "interesting links"
     icon: "fas fa-solid fa-arrow-up-right-from-square"
     items:
