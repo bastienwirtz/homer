@@ -56,6 +56,19 @@ export default {
     error: false,
     timezoneOffset: 0,
   }),
+  computed: {
+    temperature: function () {
+      if (!this.temp) return "";
+
+      let unit = "K";
+      if (this.item.units === "metric") {
+        unit = "°C";
+      } else if (this.item.units === "imperial") {
+        unit = "°F";
+      }
+      return `${this.temp} ${unit}`;
+    },
+  },
   created() {
     this.fetchWeather();
   },
@@ -106,19 +119,6 @@ export default {
         hour: "2-digit",
         minute: "2-digit",
       });
-    },
-  },
-  filters: {
-    tempSuffix: function (value, type) {
-      if (!value) return "";
-
-      let unit = "K";
-      if (type === "metric") {
-        unit = "°C";
-      } else if (type === "imperial") {
-        unit = "°F";
-      }
-      return `${value} ${unit}`;
     },
   },
 };

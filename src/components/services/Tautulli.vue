@@ -50,14 +50,16 @@ export default {
   methods: {
     fetchStatus: async function () {
       try {
-        const response = await this.fetch(`/api/v2?apikey=${this.item.apikey}&cmd=get_activity`);
+        const response = await this.fetch(
+          `/api/v2?apikey=${this.item.apikey}&cmd=get_activity`
+        );
         this.error = false;
         this.stats = response.response.data;
       } catch (e) {
         this.error = true;
         console.error(e);
       }
-    }
+    },
   },
 };
 </script>

@@ -1,8 +1,0 @@
-#!/bin/bash
-
-IFS='-' read -r TAG string <<< "$DOCKER_TAG"
-
-docker manifest create b4bz/homer:$TAG b4bz/homer:$TAG-amd64 b4bz/homer:$TAG-arm32v7 b4bz/homer:$TAG-arm64v8
-docker manifest annotate b4bz/homer:$TAG b4bz/homer:$TAG-arm32v7 --os linux --arch arm
-docker manifest annotate b4bz/homer:$TAG b4bz/homer:$TAG-arm64v8 --os linux --arch arm64 --variant v8
-docker manifest push --purge b4bz/homer:$TAG

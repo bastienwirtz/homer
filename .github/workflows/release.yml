@@ -1,5 +1,5 @@
 # Publish pre-build release
-name: Upload Release Asset
+name: Create Github release
 
 on:
   push:
@@ -10,31 +10,24 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build project
+      - 
+        name: Checkout
+        uses: actions/checkout@v3
+      - 
+        name: Build project
         run: |
           yarn install
           yarn build
-      - name: Create artifact
+      - 
+        name: Create artifact
         working-directory: "dist"
         run: zip -r ../homer.zip ./*
-      - name: Create Release
+      - 
+        name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./homer.zip
-          asset_name: homer.zip
-          asset_content_type: application/zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true
+          files: |
+            homer.zip
