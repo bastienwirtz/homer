@@ -6,16 +6,19 @@
         <span v-if="error" class="error">An error has occurred.</span>
         <template v-else>
           <span class="down monospace">
-            <p class="fas fa-download "></p> {{ downRate }}
+            <p class="fas fa-download"></p>
+            {{ downRate }}
           </span>
           <span class="up monospace">
-            <p class="fas fa-upload"></p> {{ upRate }}
+            <p class="fas fa-upload"></p>
+            {{ upRate }}
           </span>
         </template>
       </p>
     </template>
     <template #indicator>
-      <span v-if="!error" class="count">{{ count }}
+      <span v-if="!error" class="count"
+        >{{ count }}
         <template v-if="count === 1">torrent</template>
         <template v-else>torrents</template>
       </span>
@@ -75,7 +78,7 @@ export default {
   methods: {
     fetchCount: async function () {
       try {
-        const body = await this.fetch('/api/v2/torrents/info');
+        const body = await this.fetch("/api/v2/torrents/info");
         this.error = false;
         this.count = body.length;
       } catch (e) {
@@ -85,7 +88,7 @@ export default {
     },
     getRate: async function () {
       try {
-        const body = await this.fetch('/api/v2/transfer/info');
+        const body = await this.fetch("/api/v2/transfer/info");
         this.error = false;
         this.dl = body.dl_info_speed;
         this.ul = body.up_info_speed;
@@ -96,7 +99,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped lang="scss">
