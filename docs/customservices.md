@@ -25,6 +25,7 @@ within Homer:
   - [Mealie](#mealie)
   - [Healthchecks](#healthchecks)
   - [Proxmox](#proxmox)
+  - [rTorrent](#rtorrent)
   - [qBittorrent](#qbittorrent)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
@@ -248,6 +249,27 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of the Healthchecks application.
 The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
+
+## rTorrent
+
+This service displays the global upload and download rates, as well as the number of torrents
+listed in rTorrent. The service communicates with the rTorrent XML-RPC interface which needs
+to be accessible from the browser. Please consult
+[the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
+for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
+servers can be found at https://enable-cors.org/server.html.
+
+```yaml
+- name: "rTorrent"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151" # Your rTorrent web UI, f.e. ruTorrent or Flood.
+  xmlrpc: "http://192.168.0.151:8081" # Reverse proxy for rTorrent's XML-RPC.
+  type: "Rtorrent"
+  rateInterval: 5000 # Interval for updating the download and upload rates.
+  torrentInterval: 60000 # Interval for updating the torrent count.
+  username: "username" # Username for logging into rTorrent (if applicable).
+  password: "password" # Password for logging into rTorrent (if applicable).
+
 
 ## Proxmox
 
