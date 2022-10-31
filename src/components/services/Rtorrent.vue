@@ -82,14 +82,13 @@ export default {
     // and upload rates. Values are saved to the `ul` and `dl`
     // properties.
     fetchRates: async function() {
-      try {
-        await this.getRate('throttle.global_up.rate')
-          .then((ul) => this.ul = ul);
-        await this.getRate('throttle.global_down.rate')
-          .then((dl) => this.dl = dl);
-      } catch {
-        this.error = true;
-      }
+      this.getRate('throttle.global_up.rate')
+        .then((ul) => this.ul = ul)
+        .catch(() => this.error = true);
+
+      this.getRate('throttle.global_down.rate')
+        .then((dl) => this.dl = dl)
+        .catch(() => this.error = true);
     },
     // Perform a call to the XML-RPC service to fetch the number of
     // torrents.
