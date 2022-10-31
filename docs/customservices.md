@@ -264,6 +264,9 @@ servers can be found at https://enable-cors.org/server.html.
   type: "Rtorrent"
   rateInterval: 5000 # Interval for updating the download and upload rates.
   torrentInterval: 60000 # Interval for updating the torrent count.
+  username: "username" # Username for logging into rTorrent (if applicable).
+  password: "password" # Password for logging into rTorrent (if applicable).
+
 
 ## Proxmox
 
