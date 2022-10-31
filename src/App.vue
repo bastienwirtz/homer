@@ -59,7 +59,7 @@
     </div>
 
     <section id="main-section" class="section">
-      <div v-cloak class="container">
+      <div v-cloak class="container" :class="{'is-fluid': config.full_width}">
         <ConnectivityChecker
           v-if="config.connectivityCheck"
           @network-status-update="offline = $event"
