@@ -10,7 +10,9 @@
 <h4 align="center">
  A dead simple static <strong>HOM</strong>epage for your serv<strong>ER</strong> to keep your services on hand, from a simple <code>yaml</code> configuration file.
 </h4>
-
+<p align="center"> 
+  <a href="https://www.buymeacoffee.com/bastien" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<p>
 <p align="center">
  <strong>
    <a href="https://homer-demo.netlify.app">Demo</a>
