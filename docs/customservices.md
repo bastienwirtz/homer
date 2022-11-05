@@ -27,6 +27,7 @@ within Homer:
   - [Proxmox](#proxmox)
   - [rTorrent](#rtorrent)
   - [qBittorrent](#qbittorrent)
+  - [CopyToClipboard](#copy-to-clipboard)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -316,4 +317,21 @@ servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
   rateInterval: 2000 # Interval for updating the download and upload rates.
   torrentInterval: 5000 # Interval for updating the torrent count.
   target: "_blank" # optional html a tag target attribute
+```
+
+## Copy to Clipboard
+
+This service displays the same information of a generic one, but shows an icon button on the indicator place (right side) you can click to get the content of the `clipboard` field copied to your clipboard.
+
+You can still provide an `url` that would be open when clicked anywhere but on the icon button.
+
+Configuration example:
+
+```yaml
+- name: "Copy me!"
+  logo: "assets/tools/sample.png"
+  subtitle: "Subtitle text goes here"
+  url: "#"
+  type: "CopyToClipboard"
+  clipboard: "this text will be copied to your clipboard"
 ```
