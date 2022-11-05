@@ -298,6 +298,11 @@ Configuration example:
   warning_value: 50
   danger_value: 80
   api_token: "PVEAPIToken=root@pam!your-api-token-name=your-api-token-key"
+  # values below this line are optional (default value are false/empty):
+  hide_decimals: true # removes decimals from stats values.
+  hide: ["vms", "vms_total", "lxcs", "lxcs_total", "disk", "mem", "cpu"] # hides values included in the array
+  small_font_on_small_screens: true # uses small font on small screens (like mobile)
+  small_font_on_desktop: true # uses small font on desktops (just in case you're showing much info)
 ```
 
 ## qBittorrent
