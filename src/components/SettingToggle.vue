@@ -1,5 +1,8 @@
 <template>
-  <a v-on:click="toggleSetting()" class="navbar-item is-inline-block-mobile">
+  <a
+    @click.prevent="toggleSetting()"
+    class="navbar-item is-inline-block-mobile"
+  >
     <span><i :class="['fas', 'fa-fw', value ? icon : secondaryIcon]"></i></span>
     <slot></slot>
   </a>
@@ -12,6 +15,7 @@ export default {
     name: String,
     icon: String,
     iconAlt: String,
+    defaultValue: Boolean,
   },
   data: function () {
     return {
@@ -24,6 +28,8 @@ export default {
 
     if (this.name in localStorage) {
       this.value = JSON.parse(localStorage[this.name]);
+    } else {
+      this.value = this.defaultValue;
     }
 
     this.$emit("updated", this.value);

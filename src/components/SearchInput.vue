@@ -15,10 +15,16 @@
 <script>
 export default {
   name: "SearchInput",
-  props: ["value"],
+  props: {
+    value: String,
+    hotkey: {
+      type: String,
+      default: "/",
+    },
+  },
   mounted() {
     this._keyListener = function (event) {
-      if (event.key === "/") {
+      if (event.key === this.hotkey) {
         event.preventDefault();
         this.focus();
       }
@@ -28,7 +34,7 @@ export default {
     };
     document.addEventListener("keydown", this._keyListener.bind(this));
 
-    // fill seach from get parameter.
+    // fill search from get parameter.
     const search = new URLSearchParams(window.location.search).get("search");
     if (search) {
       this.$refs.search.value = search;
@@ -69,7 +75,7 @@ export default {
       this.$emit("input", value.toLowerCase());
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener("keydown", this._keyListener);
   },
 };

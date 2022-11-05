@@ -47,7 +47,6 @@ export default {
       }
       if (this.item.url) {
         let fetchedMessage = await this.downloadMessage(this.item.url);
-        console.log("done");
         if (this.item.mapping) {
           fetchedMessage = this.mapRemoteMessage(fetchedMessage);
         }

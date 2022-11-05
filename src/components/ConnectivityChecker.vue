@@ -17,6 +17,9 @@ export default {
     };
   },
   created: function () {
+    if (/t=\d+/.test(window.location.href)) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
     let that = this;
     this.checkOffline();
 
@@ -29,15 +32,46 @@ export default {
       },
       false
     );
+    window.addEventListener(
+      "online",
+      function () {
+        that.checkOffline();
+      },
+      false
+    );
+    window.addEventListener(
+      "offline",
+      function () {
+        this.offline = true;
+      },
+      false
+    );
   },
   methods: {
     checkOffline: function () {
+      if (!navigator.onLine) {
+        this.offline = true;
+        return;
+      }
+
+      // extra check to make sure we're not offline
       let that = this;
-      return fetch(window.location.href + "?alive", {
+      const aliveCheckUrl = `${window.location.origin}${
+        window.location.pathname
+      }/index.html?t=${new Date().valueOf()}`;
+      return fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",
+        redirect: "manual",
       })
         .then(function (response) {
+          // opaqueredirect means request has been redirected, to auth provider probably
+          if (
+            (response.type === "opaqueredirect" && !response.ok) ||
+            [401, 403].indexOf(response.status) != -1
+          ) {
+            window.location.href = aliveCheckUrl;
+          }
           that.offline = !response.ok;
         })
         .catch(function () {

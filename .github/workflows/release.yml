@@ -1,0 +1,33 @@
+# Publish pre-build release
+name: Create Github release
+
+on:
+  push:
+    tags: [v*]
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: Checkout
+        uses: actions/checkout@v3
+      - 
+        name: Build project
+        run: |
+          yarn install
+          yarn build
+      - 
+        name: Create artifact
+        working-directory: "dist"
+        run: zip -r ../homer.zip ./*
+      - 
+        name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true
+          files: |
+            homer.zip

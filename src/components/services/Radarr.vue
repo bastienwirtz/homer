@@ -1,61 +1,42 @@
 <template>
-  <div>
-    <div class="card" :class="item.class">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
-          <div class="media">
-            <div v-if="item.logo" class="media-left">
-              <figure class="image is-48x48">
-                <img :src="item.logo" :alt="`${item.name} logo`" />
-              </figure>
-            </div>
-            <div v-if="item.icon" class="media-left">
-              <figure class="image is-48x48">
-                <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
-              </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">{{ item.name }}</p>
-              <p class="subtitle is-6">{{ item.subtitle }}</p>
-            </div>
-            <div class="notifs">
-              <strong
-                v-if="activity > 0"
-                class="notif activity"
-                title="Activity"
-                >{{ activity }}</strong
-              >
-              <strong
-                v-if="warnings > 0"
-                class="notif warnings"
-                title="Warning"
-                >{{ warnings }}</strong
-              >
-              <strong v-if="errors > 0" class="notif errors" title="Error">{{
-                errors
-              }}</strong>
-              <strong
-                v-if="serverError"
-                class="notif errors"
-                title="Connection error to Radarr API, check url and apikey in config.yml"
-                >?</strong
-              >
-            </div>
-          </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
-            <strong class="tag-text">#{{ item.tag }}</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
+  <Generic :item="item">
+    <template #indicator>
+      <div class="notifs">
+        <strong v-if="activity > 0" class="notif activity" title="Activity">
+          {{ activity }}
+        </strong>
+        <strong v-if="warnings > 0" class="notif warnings" title="Warning">
+          {{ warnings }}
+        </strong>
+        <strong v-if="errors > 0" class="notif errors" title="Error">
+          {{ errors }}
+        </strong>
+        <strong
+          v-if="serverError"
+          class="notif errors"
+          title="Connection error to Radarr API, check url and apikey in config.yml"
+          >?</strong
+        >
+      </div>
+    </template>
+  </Generic>
 </template>
 
 <script>
+import service from "@/mixins/service.js";
+import Generic from "./Generic.vue";
+
+const V3_API = "/api/v3";
+const LEGACY_API = "/api";
+
 export default {
   name: "Radarr",
+  mixins: [service],
   props: {
     item: Object,
+  },
+  components: {
+    Generic,
   },
   data: () => {
     return {
@@ -68,15 +49,14 @@ export default {
   created: function () {
     this.fetchConfig();
   },
+  computed: {
+    apiPath() {
+      return this.item.legacyApi ? LEGACY_API : V3_API;
+    },
+  },
   methods: {
     fetchConfig: function () {
-      fetch(`${this.item.url}/api/health?apikey=${this.item.apikey}`)
-        .then((response) => {
-          if (response.status != 200) {
-            throw new Error(response.statusText);
-          }
-          return response.json();
-        })
+      this.fetch(`${this.apiPath}/health?apikey=${this.item.apikey}`)
         .then((health) => {
           this.warnings = 0;
           this.errors = 0;
@@ -92,19 +72,18 @@ export default {
           console.error(e);
           this.serverError = true;
         });
-      fetch(`${this.item.url}/api/queue?apikey=${this.item.apikey}`)
-        .then((response) => {
-          if (response.status != 200) {
-            throw new Error(response.statusText);
-          }
-          return response.json();
-        })
+      this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = 0;
-          for (var i = 0; i < queue.length; i++) {
-            if (queue[i].movie) {
-              this.activity++;
+
+          if (this.item.legacyApi) {
+            for (var i = 0; i < queue.length; i++) {
+              if (queue[i].movie) {
+                this.activity++;
+              }
             }
+          } else {
+            this.activity = queue.totalRecords;
           }
         })
         .catch((e) => {
@@ -117,35 +96,30 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.media-left img {
-  max-height: 100%;
-}
 .notifs {
   position: absolute;
   color: white;
   font-family: sans-serif;
   top: 0.3em;
   right: 0.5em;
-}
-.notif {
-  padding-right: 0.35em;
-  padding-left: 0.35em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  border-radius: 0.25em;
-  position: relative;
-  margin-left: 0.3em;
-  font-size: 0.8em;
-}
-.activity {
-  background-color: #4fb5d6;
-}
+  .notif {
+    display: inline-block;
+    padding: 0.2em 0.35em;
+    border-radius: 0.25em;
+    position: relative;
+    margin-left: 0.3em;
+    font-size: 0.8em;
+    &.activity {
+      background-color: #4fb5d6;
+    }
 
-.warnings {
-  background-color: #d08d2e;
-}
+    &.warnings {
+      background-color: #d08d2e;
+    }
 
-.errors {
-  background-color: #e51111;
+    &.errors {
+      background-color: #e51111;
+    }
+  }
 }
 </style>

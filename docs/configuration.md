@@ -1,13 +1,13 @@
-## Configuration
+# Configuration
 
 Title, icons, links, colors, and services can be configured in the `config.yml` file (located in `/assets` directory once built, or in the `public/assets` directory in development mode), using [yaml](http://yaml.org/) format.
 
 ```yaml
 ---
 # Homepage configuration
-# See https://fontawesome.com/icons for icons options
+# See https://fontawesome.com/v5/search for icons options
 
-# Optional: Use external configuration file. 
+# Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
 # externalConfig: https://example.com/server-luci/config.yaml
 
@@ -19,10 +19,23 @@ logo: "assets/logo.png"
 # icon: "fas fa-skull-crossbones"
 
 header: true # Set to false to hide the header
+# Optional: Different hotkey for search, defaults to "/"
+# hotkey:
+#   search: "Shift"
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
-connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
+connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example).
+                        # You should set it to true when using an authentication proxy, it also reloads the page when a redirection is detected when checking connectivity.
+
+# Optional: Proxy / hosting option
+proxy:
+  useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+
+# Set the default layout and color scheme
+defaults:
+  layout: columns # Either 'columns', or 'list'
+  colorTheme: auto # One of 'auto', 'light', or 'dark'
 
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
@@ -47,6 +60,7 @@ colors:
     text-title: "#303030"
     text-subtitle: "#424242"
     card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
     link-hover: "#363636"
     background-image: "assets/your/light/bg.png"
   dark:
@@ -60,6 +74,7 @@ colors:
     text-title: "#fafafa"
     text-subtitle: "#f5f5f5"
     card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
     link-hover: "#ffdd57"
     background-image: "assets/your/dark/bg.png"
 
@@ -113,6 +128,7 @@ services:
         # icon: "fab fa-jenkins"
         subtitle: "Bookmark example"
         tag: "app"
+        keywords: "self hosted reddit" # optional keyword used for searching purpose
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
       - name: "Another one"
@@ -136,6 +152,8 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
+View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
+
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
 ```json
@@ -149,7 +167,7 @@ If you choose to fetch message information from an endpoint, the output format s
 `null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
 Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar).
 
-### Style Options
+## Style Options
 
 Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](https://bulma.io/documentation/modifiers/syntax/). You'll notice in the config there is a `tagstyle` option. It can be set to any of the bulma modifiers. You'll probably want to use one of these 4 main colors:
 
@@ -160,10 +178,19 @@ Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](h
 
 You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers/syntax/) for other options regarding size, style, or state.
 
-### PWA Icons
+## Theming & customization
 
-In order to easily generate all required icon preset for the PWA to work, a tool like [vue-pwa-asset-generator](https://www.npmjs.com/package/vue-pwa-asset-generator) can be used:
+See `colors` settings in the configuration example above.
+Favicon et application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
+The `/assets/manifest.json` can also be edited to change the app (pwa) name, description and other settings.
 
-```bash
-npx vue-pwa-asset-generator -a {your_512x512_source_png} -o {your_output_folder}
-```
+### Community theme
+
+- [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
+- [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
+- [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
+
+
+## PWA Icons
+
+See icons documentation [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).

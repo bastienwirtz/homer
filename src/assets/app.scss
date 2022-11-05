@@ -2,7 +2,7 @@
 
 @import "./webfonts/webfonts.scss";
 
-@import "bulma";
+@import "../../node_modules/bulma/bulma";
 
 // Themes import
 @import "./themes/sui.scss";
@@ -13,7 +13,7 @@
   text-overflow: ellipsis;
 }
 
-html, body, body #app {
+html, body, body #app-mount, body #app {
   height: 100%;
   background-color: var(--background);
 }
@@ -31,6 +31,7 @@ body {
     transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
 
     a {
+      color: var(--link);
       &:hover {
         color: var(--link-hover);
       }
@@ -103,10 +104,14 @@ body {
 
     .dashboard-title {
       padding: 6px 0 0 80px;
+
+      &.no-logo {
+        padding-left: 0;
+      }
     }
 
     .first-line {
-      height: 100px;
+      min-height: 100px;
       vertical-align: center;
       background-color: var(--highlight-primary);
 
@@ -121,7 +126,7 @@ body {
       }
 
       .container {
-        height: 80px;
+        min-height: 80px;
         padding: 10px 0;
       }
 
@@ -140,8 +145,7 @@ body {
         }
       }
     }
-    .navbar,
-    .navbar-menu {
+    .navbar {
       background-color: var(--highlight-secondary);
 
       a {
@@ -153,6 +157,9 @@ body {
           background-color: var(--highlight-hover);
         }
       }
+	.navbar-menu {
+      background-color: inherit;
+      }
     }
     .navbar-end {
       text-align: right;
@@ -160,8 +167,7 @@ body {
   }
 
   #main-section {
-    margin-bottom: 2rem;
-    padding: 0;
+    padding: 0 0 2.5rem 0;
 
     h2 {
       padding-bottom: 0px;
@@ -283,7 +289,7 @@ body {
 
   .no-footer {
     #main-section {
-      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .footer {

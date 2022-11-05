@@ -10,6 +10,12 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 columns: 3
 connectivityCheck: true
 
+defaults:
+  # columns, list
+  layout: columns
+  # auto, light, dark
+  colorTheme: auto
+
 theme: default
 colors:
   light:
@@ -23,6 +29,7 @@ colors:
     text-title: "#303030"
     text-subtitle: "#424242"
     card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
     link-hover: "#363636"
     background-image: ""
   dark:
@@ -36,9 +43,13 @@ colors:
     text-title: "#fafafa"
     text-subtitle: "#f5f5f5"
     card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
     link-hover: "#ffdd57"
     background-image: ""
 
 message: ~
 links: []
 services: []
+
+
+proxy: ~

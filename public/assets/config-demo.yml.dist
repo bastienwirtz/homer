@@ -1,0 +1,126 @@
+---
+# Homepage configuration
+# See https://fontawesome.com/v5/search for icons options
+
+title: "Demo dashboard"
+subtitle: "Homer"
+logo: "logo.png"
+# icon: "fas fa-skull-crossbones" # Optional icon
+
+header: true
+footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">Bulma</a>, <a href="https://vuejs.org/">Vue.js</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+
+# Optional theme customization
+theme: default
+colors:
+  light:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#f5f5f5"
+    card-background: "#ffffff"
+    text: "#363636"
+    text-header: "#ffffff"
+    text-title: "#303030"
+    text-subtitle: "#424242"
+    card-shadow: rgba(0, 0, 0, 0.1)
+    link: "#3273dc"
+    link-hover: "#363636"
+  dark:
+    highlight-primary: "#3367d6"
+    highlight-secondary: "#4285f4"
+    highlight-hover: "#5a95f5"
+    background: "#131313"
+    card-background: "#2b2b2b"
+    text: "#eaeaea"
+    text-header: "#ffffff"
+    text-title: "#fafafa"
+    text-subtitle: "#f5f5f5"
+    card-shadow: rgba(0, 0, 0, 0.4)
+    link: "#3273dc"
+    link-hover: "#ffdd57"
+
+# Optional message
+message:
+  style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
+  title: "👋 Welcome !"
+  content: "This demo page shows an overview of Homer possibilities. Feel free to click anywhere!<br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+
+# Optional navbar
+# links: [] # Allows for navbar (dark mode, layout, and search) without any links
+links:
+  - name: "Contribute"
+    icon: "fab fa-github"
+    url: "https://github.com/bastienwirtz/homer"
+    target: "_blank" # optional html a tag target attribute
+  - name: "Documentation"
+    icon: "fas fa-book"
+    url: "https://github.com/bastienwirtz/homer/blob/main/README.md#table-of-contents"
+  # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
+  # see url field and assets/additional-page.yml.dist used in this example:
+  - name: "another page!"
+    icon: "fas fa-file-alt"
+    url: "#additional-page" 
+
+# Services
+# First level array represent a group.
+# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
+services:
+  - name: "My apps"
+    icon: "fas fa-cloud"
+    items:
+      - name: "Pi-hole"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png"
+        url: "https://pi-hole.net/"
+        endpoint: "https://homer-demo-content.netlify.app/pihole"
+        type: "PiHole"
+      - name: "Proxmox - Node1"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/proxmox.png"
+        type: "Proxmox"
+        tag: "sys"
+        url: "https://www.proxmox.com/en/"
+        endpoint: "https://homer-demo-content.netlify.app/proxmox"
+        node: "node1"
+        warning_value: 50
+        danger_value: 80
+        api_token: "xxxxxxxxxxxx"
+      - name: "An awesome app"
+        logo: "assets/tools/sample.png"
+        subtitle: "Bookmark example"
+        tag: "app"
+        keywords: "self hosted reddit"
+        url: "https://www.reddit.com/r/selfhosted/"
+  - name: "Tools"
+    icon: "fa-solid fa-screwdriver-wrench"
+    items:
+      - name: "Example item"
+        logo: "assets/tools/sample.png"
+        subtitle: "This another example"
+        tag: "app"
+        keywords: "demo"
+        url: "#"
+        target: "_blank" 
+      - name: "Weather"
+        location: "Lyon"
+        apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
+        units: "metric"
+        endpoint: "https://homer-demo-content.netlify.app/openweather/weather"
+        type: "OpenWeather"
+  - name: "interesting links"
+    icon: "fas fa-solid fa-arrow-up-right-from-square"
+    items:
+      - name: "Buy me a coffee !"
+        subtitle: "If you want to support me, but me a coffee "
+        background: "#AC70DD"
+        logo: "data:image/png;base64,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"
+      - name: "r/selfhosted"
+        icon: "fa-brands fa-reddit-alien"
+        subtitle: "Bookmark example"
+        tag: "reddit"
+        url: "https://www.reddit.com/r/selfhosted/"
+        target: "_blank" 
+      - name: "Awesome selfhosted"
+        icon: "fa-brands fa-github-alt"
+        subtitle: "Another application"
+        tag: "awesome-list"
+        url: "https://github.com/awesome-selfhosted/awesome-selfhosted"
