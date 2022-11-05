@@ -4,6 +4,7 @@
     v-if="config"
     :class="[
       `theme-${config.theme}`,
+      `page-${currentPage}`,
       isDark ? 'is-dark' : 'is-light',
       !config.footer ? 'no-footer' : '',
     ]"
@@ -49,10 +50,10 @@
         <SearchInput
           class="navbar-item is-inline-block-mobile"
           :hotkey="searchHotkey()"
-          @input="filterServices"
+          @input="filterServices($event.target?.value)"
           @search-focus="showMenu = true"
-          @search-open="navigateToFirstService"
-          @search-cancel="filterServices"
+          @search-open="navigateToFirstService($event?.target?.value)"
+          @search-cancel="filterServices()"
         />
       </Navbar>
     </div>
@@ -140,8 +141,8 @@
 </template>
 
 <script>
-const jsyaml = require("js-yaml");
-const merge = require("lodash.merge");
+import { parse } from "yaml";
+import merge from "lodash.merge";
 
 import Navbar from "./components/Navbar.vue";
 import GetStarted from "./components/GetStarted.vue";
@@ -153,7 +154,7 @@ import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
 
-import defaultConfig from "./assets/defaults.yml";
+import defaultConfig from "./assets/defaults.yml?raw";
 
 export default {
   name: "App",
@@ -171,6 +172,7 @@ export default {
   data: function () {
     return {
       loaded: false,
+      currentPage: null,
       configNotFound: false,
       config: null,
       services: null,
@@ -198,18 +200,17 @@ export default {
       }
     },
     buildDashboard: async function () {
-      const defaults = jsyaml.load(defaultConfig);
+      const defaults = parse(defaultConfig);
       let config;
       try {
         config = await this.getConfig();
-        const path =
-          window.location.hash.substring(1) != ""
-            ? window.location.hash.substring(1)
-            : null;
+        this.currentPage = window.location.hash.substring(1) || "default";
 
-        if (path) {
-          let pathConfig = await this.getConfig(`assets/${path}.yml`); // the slash (/) is included in the pathname
-          config = Object.assign(config, pathConfig);
+        if (this.currentPage !== "default") {
+          let pageConfig = await this.getConfig(
+            `assets/${this.currentPage}.yml`
+          );
+          config = Object.assign(config, pageConfig);
         }
       } catch (error) {
         console.log(error);
@@ -231,13 +232,7 @@ export default {
     },
     getConfig: function (path = "assets/config.yml") {
       return fetch(path).then((response) => {
-        if (response.redirected) {
-          // This allows to work with authentication proxies.
-          window.location.href = response.url;
-          return;
-        }
-
-        if (response.status == 404) {
+        if (response.status == 404 || response.redirected) {
           this.configNotFound = true;
           return {};
         }
@@ -250,7 +245,7 @@ export default {
         return response
           .text()
           .then((body) => {
-            return jsyaml.load(body);
+            return parse(body);
           })
           .then(function (config) {
             if (config.externalConfig) {
@@ -261,10 +256,12 @@ export default {
       });
     },
     matchesFilter: function (item) {
+      const needle = this.filter?.toLowerCase();
       return (
-        item.name.toLowerCase().includes(this.filter) ||
-        (item.subtitle && item.subtitle.toLowerCase().includes(this.filter)) ||
-        (item.tag && item.tag.toLowerCase().includes(this.filter))
+        item.name.toLowerCase().includes(needle) ||
+        (item.subtitle && item.subtitle.toLowerCase().includes(needle)) ||
+        (item.tag && item.tag.toLowerCase().includes(needle)) ||
+        (item.keywords && item.keywords.toLowerCase().includes(needle))
       );
     },
     navigateToFirstService: function (target) {
@@ -276,6 +273,7 @@ export default {
       }
     },
     filterServices: function (filter) {
+      console.log(filter);
       this.filter = filter;
 
       if (!filter) {

@@ -1,0 +1,46 @@
+{
+    "coord": {
+      "lon": 4.5833,
+      "lat": 45.75
+    },
+    "weather": [
+      {
+        "id": 804,
+        "main": "Clouds",
+        "description": "overcast clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "stations",
+    "main": {
+      "temp": 23,
+      "feels_like": 22.3,
+      "temp_min": 21.75,
+      "temp_max": 25.03,
+      "pressure": 1019,
+      "humidity": 36,
+      "sea_level": 1019,
+      "grnd_level": 957
+    },
+    "visibility": 10000,
+    "wind": {
+      "speed": 2.29,
+      "deg": 174,
+      "gust": 6.22
+    },
+    "clouds": {
+      "all": 97
+    },
+    "dt": 1667136939,
+    "sys": {
+      "type": 2,
+      "id": 2005747,
+      "country": "FR",
+      "sunrise": 1667110705,
+      "sunset": 1667147524
+    },
+    "timezone": 3600,
+    "id": 2996943,
+    "name": "Lyon",
+    "cod": 200
+  }

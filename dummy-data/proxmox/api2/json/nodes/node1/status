@@ -1,0 +1,44 @@
+{
+    "data": {
+        "swap": {
+            "free": 8589930496,
+            "total": 8589930496,
+            "used": 0
+        },
+        "cpuinfo": {
+            "model": "Intel(R) Core(TM) i7-4790 CPU @3.60GHz",
+            "hvm": "1",
+            "user_hz": 100,
+            "sockets": 1,
+            "cpus": 8,
+            "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm abm cpuid_fault epb invpcid_single pti tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm xsaveopt dtherm ida arat pln pts",
+            "cores": 4,
+            "mhz": "4000.000"
+        },
+        "idle": 0,
+        "memory": {
+            "used": 6283382784,
+            "total": 12419133440,
+            "free": 6135750656
+        },
+        "rootfs": {
+            "avail": 22670036992,
+            "free": 24176627712,
+            "total": 29148368896,
+            "used": 4971741184
+        },
+        "uptime": 3390081,
+        "ksm": {
+            "shared": 1079975936
+        },
+        "cpu": 0.00440286186020914,
+        "kversion": "Linux 5.15.30-2-pve #1 SMP PVE 5.15.30-3 (Fri, 22 Apr 2022 18: 08: 27+0200)",
+        "loadavg": [
+            "0.00",
+            "0.01",
+            "0.04"
+        ],
+        "pveversion": "pve-manager/7.2-3/c743d6c1",
+        "wait": 0.00330214639515685
+    }
+}
