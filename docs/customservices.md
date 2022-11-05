@@ -28,6 +28,8 @@ within Homer:
   - [rTorrent](#rtorrent)
   - [qBittorrent](#qbittorrent)
   - [CopyToClipboard](#copy-to-clipboard)
+  - [Speedtest Tracker](#SpeedtestTracker)
+  - [What's Up Docker](#whats-up-docker)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -344,3 +346,17 @@ Configuration example:
 ## SpeedtestTracker
 
 For the SpeedtestTracker service you just need to define a entry with type `SpeedtestTracker`.
+
+## What's up Docker
+
+What's up Docker allow to display info about the number of container running and the number for which an update is available on your Homer dashboard.
+
+The following configuration is available for the WUD service.
+
+```yaml
+- name: "What's Up Docker"
+  logo: "assets/tools/sample.png"
+  subtitle: "Docker image update notifier"
+  url: "http://192.168.1.12:3001"
+  type: "WUD"
+```
