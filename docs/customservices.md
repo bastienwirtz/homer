@@ -340,3 +340,7 @@ Configuration example:
   type: "CopyToClipboard"
   clipboard: "this text will be copied to your clipboard"
 ```
+
+## SpeedtestTracker
+
+For the SpeedtestTracker service you just need to define a entry with type `SpeedtestTracker`.
