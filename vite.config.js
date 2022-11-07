@@ -21,6 +21,8 @@ export default defineConfig({
         short_name: "Homer",
         description: "Home Server Dashboard",
         theme_color: "#3367D6",
+        start_url: "../",
+        scope: "../",
         icons: [
           {
             src: "./icons/pwa-192x192.png",
