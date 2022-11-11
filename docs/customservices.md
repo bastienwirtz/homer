@@ -23,6 +23,7 @@ within Homer:
   - [Uptime Kuma](#uptime-kuma)
   - [Tautulli](#tautulli)
   - [Mealie](#mealie)
+  - [Miniflux](#miniflux)
   - [Healthchecks](#healthchecks)
   - [Proxmox](#proxmox)
   - [rTorrent](#rtorrent)
@@ -360,3 +361,19 @@ The following configuration is available for the WUD service.
   url: "http://192.168.1.12:3001"
   type: "WUD"
 ```
+
+## Miniflux
+
+_[Miniflux](https://miniflux.app/) is a minimalist and opinionated feed reader._
+
+This service communicates with the Miniflux API which needs to be accessible using an API key token which can be generated in the Miniflux management interface. The following configuration is available for the Miniflux service.
+
+```yaml
+- name: "Miniflux"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.1.12:8080"
+  api_token: "my_secret_api_token"
+  type: "Miniflux"
+```
+
+If you are using a reverse proxy, make sure the correct CORS settings are applied.
