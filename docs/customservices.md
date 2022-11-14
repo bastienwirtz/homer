@@ -272,6 +272,7 @@ servers can be found at https://enable-cors.org/server.html.
   torrentInterval: 60000 # Interval for updating the torrent count.
   username: "username" # Username for logging into rTorrent (if applicable).
   password: "password" # Password for logging into rTorrent (if applicable).
+```
 
 
 ## Proxmox
