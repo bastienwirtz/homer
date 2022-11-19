@@ -30,6 +30,7 @@ within Homer:
   - [CopyToClipboard](#copy-to-clipboard)
   - [Speedtest Tracker](#SpeedtestTracker)
   - [What's Up Docker](#whats-up-docker)
+  - [SABnzbd](#sabnzbd)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -360,4 +361,19 @@ The following configuration is available for the WUD service.
   subtitle: "Docker image update notifier"
   url: "http://192.168.1.12:3001"
   type: "WUD"
+```
+
+## SABnzbd
+
+The SABnzbd service can allow you to show the number of currently active
+downloads on your SABnzbd instance. An API key is required, and can be obtained from
+the "Config" > "General" section of the SABnzbd config in the SABnzbd web UI.
+
+```yaml
+- name: "SABnzbd"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8080"
+  type: "SABnzbd"
+  apikey: "MY-SUPER-SECRET-API-KEY"
+  downloadInterval: 5000 # (Optional) Interval (in ms) for updating the download count
 ```
