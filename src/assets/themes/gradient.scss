@@ -1,0 +1,148 @@
+/*
+ * Gradient theme
+ * Author: @gehno
+ */
+
+$radius: 10px;
+$margin: 5px;
+$margin-big: 20px;
+$background-color: var(--background);
+$main-color: rgba(255, 255, 255, 0.2);
+$text-color: var(--text);
+$hover-color: $background-color;
+$highlight-color: var(--highlight-primary);
+$background-gradient: linear-gradient(70deg, $background-color 0%, $highlight-color 200%);
+$box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 40%);
+
+body #app.theme-gradient {
+    background: $background-gradient;
+    background-size: cover;
+
+    a {
+        color: $text-color
+    }
+
+    h2 {
+        margin-top: $margin-big;
+    }
+
+    .message {
+        margin-top: $margin-big;
+        margin-bottom: $margin-big;
+
+    }
+
+    #bighead {
+        .first-line {
+            background-color: transparent;
+            min-height: 90px
+        }
+
+        .dashboard-title {
+
+            h1 {
+                color: $text-color;
+            }
+
+            .headline {
+                padding: 2px;
+                color: $text-color;
+            }
+        }
+    }
+
+    .navbar {
+        background-color: $main-color;
+        box-shadow: $box-shadow;
+
+        .navbar-burger {
+
+            &:hover,
+            &:focus {
+                background-color: $hover-color;
+            }
+        }
+
+        .navbar-item {
+            border-radius: $radius;
+            margin-left: $margin;
+            margin-right: $margin;
+            margin: $margin;
+            color: $text-color;
+
+            &:hover,
+            &:focus {
+                background-color: $hover-color;
+            }
+        }
+
+        .search-bar {
+            margin: 0;
+
+            &:hover,
+            &:focus {
+                background-color: transparent;
+
+                .search-label::before {
+
+                    background-color: $hover-color;
+                }
+
+                input {
+                    background-color: $hover-color;
+                }
+            }
+
+            .search-label::before {
+                color: $text-color;
+                background-color: transparent;
+            }
+
+            input {
+                background-color: $main-color;
+            }
+        }
+
+    }
+
+    .message {
+        border-radius: $radius;
+        background-color: $main-color;
+        box-shadow: $box-shadow;
+
+        .message-header {
+            border-top-left-radius: $radius;
+            border-top-right-radius: $radius;
+            background-color: $main-color;
+            color: $text-color;
+        }
+    }
+
+    .card {
+        background-color: $main-color;
+        border-radius: $radius;
+        margin-top: $margin;
+        margin-bottom: $margin;
+        box-shadow: $box-shadow;
+
+        &:hover,
+        &:focus {
+            background-color: $hover-color;
+        }
+
+    }
+
+    .footer {
+        position: relative;
+        background-color: $main-color;
+        box-shadow: $box-shadow;
+
+        .content {
+            color: $text-color
+        }
+    }
+
+    .tag {
+        background-color: $highlight-color;
+    }
+}
