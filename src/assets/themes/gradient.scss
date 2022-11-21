@@ -7,16 +7,17 @@ $radius: 10px;
 $margin: 5px;
 $margin-big: 20px;
 $background-color: var(--background);
-$main-color: rgba(255, 255, 255, 0.2);
+$main-color: var(--card-background);
 $text-color: var(--text);
 $hover-color: $background-color;
 $highlight-color: var(--highlight-primary);
-$background-gradient: linear-gradient(70deg, $background-color 0%, $highlight-color 200%);
+$background-gradient: repeating-radial-gradient(circle at 0 0, transparent 0, $background-color 500px), repeating-linear-gradient($background-color, $highlight-color);
+$main-color-gradient: linear-gradient(70deg, $main-color 0%, $highlight-color 300%);
 $box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 40%);
+
 
 body #app.theme-gradient {
     background: $background-gradient;
-    background-size: cover;
 
     a {
         color: $text-color
@@ -52,7 +53,7 @@ body #app.theme-gradient {
     }
 
     .navbar {
-        background-color: $main-color;
+        background-image: $main-color-gradient;
         box-shadow: $box-shadow;
 
         .navbar-burger {
@@ -107,19 +108,19 @@ body #app.theme-gradient {
 
     .message {
         border-radius: $radius;
-        background-color: $main-color;
+        background-image: $main-color-gradient;
         box-shadow: $box-shadow;
 
         .message-header {
             border-top-left-radius: $radius;
             border-top-right-radius: $radius;
-            background-color: $main-color;
+            background-image: $main-color-gradient;
             color: $text-color;
         }
     }
 
     .card {
-        background-color: $main-color;
+        background-image: $main-color-gradient;
         border-radius: $radius;
         margin-top: $margin;
         margin-bottom: $margin;
@@ -128,6 +129,7 @@ body #app.theme-gradient {
         &:hover,
         &:focus {
             background-color: $hover-color;
+            background-image: none;
         }
 
     }
@@ -135,6 +137,7 @@ body #app.theme-gradient {
     .footer {
         position: relative;
         background-color: $main-color;
+        background-image: $main-color-gradient;
         box-shadow: $box-shadow;
 
         .content {
