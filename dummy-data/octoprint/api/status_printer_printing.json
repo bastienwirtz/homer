@@ -1,0 +1,30 @@
+{
+	"job": {
+		"averagePrintTime": 669.3131185749999,
+		"estimatedPrintTime": 314.87566979223726,
+		"filament": {
+			"tool0": {
+				"length": 134.81171000000032,
+				"volume": 0.0
+			}
+		},
+		"file": {
+			"date": 1665547748,
+			"display": "CE3PRO_3mmX3mm Brass insert V2.gcode",
+			"name": "CE3PRO_3mmX3mm Brass insert V2.gcode",
+			"origin": "local",
+			"path": "MISC/CE3PRO_3mmX3mm Brass insert V2.gcode",
+			"size": 129581
+		},
+		"lastPrintTime": 669.3131185749999,
+		"user": "friendlyngeeks"
+	},
+	"progress": {
+		"completion": 0.1551153332664511,
+		"filepos": 201,
+		"printTime": 0,
+		"printTimeLeft": 668,
+		"printTimeLeftOrigin": "average"
+	},
+	"state": "Printing"
+}

@@ -31,6 +31,7 @@ within Homer:
   - [Speedtest Tracker](#SpeedtestTracker)
   - [What's Up Docker](#whats-up-docker)
   - [SABnzbd](#sabnzbd)
+  - [OctoPrint](#sabnzbd)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -84,7 +85,7 @@ Two lines are needed in the config.yml :
 
 ```yaml
   type: "Medusa"
-  apikey: "01234deb70424befb1f4ef6a23456789"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of Medusa application.
@@ -97,7 +98,7 @@ Two lines are needed in the config.yml :
 
 ```yaml
   type: "Lidarr", "Prowlarr", "Radarr" or "Sonarr"
-  apikey: "01234deb70424befb1f4ef6a23456789"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
@@ -108,7 +109,7 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
 - name: "Radarr"
   type: "Radarr"
   url: "http://localhost:7878/"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "<---insert-api-key-here--->"
   target: "_blank"
   legacyApi: true
 ```
@@ -119,7 +120,7 @@ This service displays total number of documents stored. Two lines are required:
 
 ```yaml
   type: "PaperlessNG"
-  apikey: "0123456789abcdef123456789abcdef"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 API key can be generated in Settings > Administration > Auth Tokens
@@ -175,7 +176,7 @@ See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
   type: "Portainer"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "<---insert-api-key-here--->"
   # environments:
   #   - "raspberry"
   #   - "local"
@@ -190,7 +191,7 @@ You need to set the type to Emby, provide an api key and choose which stats to s
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
   type: "Emby"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "<---insert-api-key-here--->"
   libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
 
@@ -220,7 +221,7 @@ the "Web Interface" section of settings on the Tautulli web UI.
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151:8181"
   type: "Tautulli"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 Because the service type and link don't necessarily have to match, you could
@@ -233,7 +234,7 @@ endpoint pointing to Tautulli!
   url: "http://192.168.0.151:32400/web" # Plex
   endpoint: "http://192.168.0.151:8181" # Tautulli
   type: "Tautulli"
-  apikey: "MY-SUPER-SECRET-API-KEY"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 ## Mealie
@@ -248,7 +249,7 @@ Two lines are needed in the config.yml :
 
 ```yaml
   type: "Healthchecks"
-  apikey: "01234deb70424befb1f4ef6a23456789"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of the Healthchecks application.
@@ -376,4 +377,17 @@ the "Config" > "General" section of the SABnzbd config in the SABnzbd web UI.
   type: "SABnzbd"
   apikey: "MY-SUPER-SECRET-API-KEY"
   downloadInterval: 5000 # (Optional) Interval (in ms) for updating the download count
+```
+
+## OctoPrint
+
+The OctoPrint service only needs an `apikey` & `url` and optionally a `display` option.
+
+```yaml
+- name: "Octoprint"
+  logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
+  apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
+  url: "http://192.168.0.151:8080"
+  display: "text" # 'text' or 'bar'. Default to `text`.
+  type: "OctoPrint"
 ```
