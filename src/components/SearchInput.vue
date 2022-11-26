@@ -19,8 +19,8 @@ export default {
     value: String,
     hotkey: {
       type: String,
-      default: "/"
-    }
+      default: "/",
+    },
   },
   mounted() {
     this._keyListener = function (event) {
@@ -75,7 +75,7 @@ export default {
       this.$emit("input", value.toLowerCase());
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     document.removeEventListener("keydown", this._keyListener);
   },
 };

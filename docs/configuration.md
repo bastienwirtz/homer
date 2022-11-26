@@ -5,7 +5,7 @@ Title, icons, links, colors, and services can be configured in the `config.yml` 
 ```yaml
 ---
 # Homepage configuration
-# See https://fontawesome.com/icons for icons options
+# See https://fontawesome.com/v5/search for icons options
 
 # Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
@@ -25,12 +25,17 @@ header: true # Set to false to hide the header
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
-connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example)
+connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example).
+                        # You should set it to true when using an authentication proxy, it also reloads the page when a redirection is detected when checking connectivity.
 
 # Optional: Proxy / hosting option
 proxy:
-  # NOT All custom services implements this new option YET. Support will be extended very soon.
   useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+
+# Set the default layout and color scheme
+defaults:
+  layout: columns # Either 'columns', or 'list'
+  colorTheme: auto # One of 'auto', 'light', or 'dark'
 
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
@@ -123,6 +128,7 @@ services:
         # icon: "fab fa-jenkins"
         subtitle: "Bookmark example"
         tag: "app"
+        keywords: "self hosted reddit" # optional keyword used for searching purpose
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
       - name: "Another one"
@@ -146,7 +152,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-View [Custom Services](customservices.md) for details about all available custom services (like PiHole) and how to configure them.
+View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
 
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
@@ -172,29 +178,19 @@ Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](h
 
 You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers/syntax/) for other options regarding size, style, or state.
 
+## Theming & customization
+
+See `colors` settings in the configuration example above.
+Favicon et application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
+The `/assets/manifest.json` can also be edited to change the app (pwa) name, description and other settings.
+
+### Community theme
+
+- [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
+- [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
+- [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
+
+
 ## PWA Icons
 
-In order to easily generate all required icon preset for the PWA to work, a tool like [vue-pwa-asset-generator](https://www.npmjs.com/package/vue-pwa-asset-generator) can be used:
-
-```bash
-npx vue-pwa-asset-generator -a {your_512x512_source_png} -o {your_output_folder}
-```
-
-## Supported services
-
-Currently the following services are supported for showing quick infos on the card. They can be used by setting the type to one of the following values at the item.
-
-- PiHole
-- AdGuardHome
-- PaperlessNG
-- Mealie
-
-## Additional configuration
-
-### Paperless
-
-For Paperless you need an API-Key which you have to store at the item in the field `apikey`.
-
-### Mealie
-
-First off make sure to remove an existing `subtitle` as it will take precedence if set. Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
+See icons documentation [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).

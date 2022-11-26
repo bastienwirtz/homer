@@ -10,6 +10,12 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 columns: 3
 connectivityCheck: true
 
+defaults:
+  # columns, list
+  layout: columns
+  # auto, light, dark
+  colorTheme: auto
+
 theme: default
 colors:
   light:

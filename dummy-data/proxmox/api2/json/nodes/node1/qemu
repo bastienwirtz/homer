@@ -1,0 +1,35 @@
+{
+	"data": [{
+		"disk": 0,
+		"mem": 983848043,
+		"cpus": 2,
+		"pid": 1218,
+		"maxdisk": 107374182400,
+		"netin": 43863882954,
+		"diskread": 0,
+		"diskwrite": 0,
+		"name": "HAOS",
+		"netout": 10426448652,
+		"cpu": 0.00879886290177172,
+		"uptime": 3390069,
+		"status": "running",
+		"maxmem": 3221225472,
+		"vmid": 100
+	}, {
+		"cpu": 0.00219971572544293,
+		"name": "debian1",
+		"netout": 919020028,
+		"vmid": 101,
+		"maxmem": 4294967296,
+		"uptime": 3390064,
+		"status": "running",
+		"maxdisk": 107374182400,
+		"pid": 1295,
+		"cpus": 2,
+		"disk": 0,
+		"mem": 2755160795,
+		"diskread": 0,
+		"diskwrite": 0,
+		"netin": 5105600872
+	}]
+}
