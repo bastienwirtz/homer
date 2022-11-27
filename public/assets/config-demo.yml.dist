@@ -93,6 +93,11 @@ services:
   - name: "Tools"
     icon: "fa-solid fa-screwdriver-wrench"
     items:
+      - name: "Octoprint"
+        logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
+        apikey: "xxxxxxxxxxxx"
+        endpoint: "https://homer-demo-content.netlify.app/octoprint"
+        type: "OctoPrint"
       - name: "Example item"
         logo: "assets/tools/sample.png"
         subtitle: "This another example"

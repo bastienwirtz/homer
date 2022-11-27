@@ -1,8 +1,8 @@
 @charset "utf-8";
 
 @import "./webfonts/webfonts.scss";
-
 @import "../../node_modules/bulma/bulma";
+@import "./components/status.scss";
 
 // Themes import
 @import "./themes/sui.scss";
