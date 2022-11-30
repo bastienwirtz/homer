@@ -78,6 +78,21 @@ colors:
     link-hover: "#ffdd57"
     background-image: "assets/your/dark/bg.png"
 
+# Optional web search engines
+searchEngines:
+  # name: name of search engine
+  # url: entrypoint of search
+  # icon: favicon
+  # key: query key of the search request
+  - name: google
+    url: "https://www.google.com/search"
+    icon: "https://www.google.com/favicon.ico"
+    key: "q"
+  - name: duckduckgo
+    url: "https://duckduckgo.com"
+    icon: "https://duckduckgo.com/favicon.ico"
+    key: "q"
+
 # Optional message
 message:
   # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
