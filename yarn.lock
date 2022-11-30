@@ -2396,6 +2396,11 @@ jest-worker@^26.2.1:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
+jmuxer@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.npmmirror.com/jmuxer/-/jmuxer-2.0.5.tgz#36328afb8412fd13e37725d410e3c39c00cb9a33"
+  integrity sha512-4qjXl8JS138WyCZZoOYwXq/qVrHcE0UIpt2lMtGyq2wuBSPMNSzP1K2CEWSrwAMgjZ9jD7Btc0SxMkiLIhoHsg==
+
 js-sdsl@^4.1.4:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/js-sdsl/-/js-sdsl-4.1.5.tgz#1ff1645e6b4d1b028cd3f862db88c9d887f26e2a"

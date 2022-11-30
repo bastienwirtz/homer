@@ -11,6 +11,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.0",
     "bulma": "^0.9.4",
+    "jmuxer": "^2.0.5",
     "lodash.merge": "^4.6.2",
     "vue": "^3.2.41",
     "yaml": "^2.1.3"
