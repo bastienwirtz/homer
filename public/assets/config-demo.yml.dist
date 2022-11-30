@@ -40,6 +40,16 @@ colors:
     link: "#3273dc"
     link-hover: "#ffdd57"
 
+searchEngines:
+  - name: google
+    url: "https://www.google.com/search"
+    icon: "https://www.google.com/favicon.ico"
+    key: "q"
+  - name: duckduckgo
+    url: "https://duckduckgo.com"
+    icon: "https://duckduckgo.com/favicon.ico"
+    key: "q"
+
 # Optional message
 message:
   style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.

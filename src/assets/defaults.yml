@@ -32,6 +32,8 @@ colors:
     link: "#3273dc"
     link-hover: "#363636"
     background-image: ""
+    box-shadow: rgba(0, 0, 0, 0.145) 0px 4px 8px, rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    web-search-background: "rgba(255, 255, 255, 0.5);"
   dark:
     highlight-primary: "#3367d6"
     highlight-secondary: "#4285f4"
@@ -46,6 +48,8 @@ colors:
     link: "#3273dc"
     link-hover: "#ffdd57"
     background-image: ""
+    box-shadow: rgba(0, 0, 0, 0.145) 0px 4px 8px, rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    web-search-background: "rgba(255, 255, 255, 0.5);"
 
 message: ~
 links: []
