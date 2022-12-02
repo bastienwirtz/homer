@@ -121,6 +121,8 @@ services:
     icon: "fas fa-code-branch"
     # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
     # logo: "path/to/logo"
+    # Use custom span size instead of 12/columns
+    # span: 6
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
