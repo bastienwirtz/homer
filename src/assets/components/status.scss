@@ -1,0 +1,48 @@
+.status {
+    font-size: 0.8rem;
+    color: var(--text-title);
+
+    &.offline:before, &.error:before {
+      background-color: #d65c68;
+      box-shadow: 0 0 5px 1px #d65c68;
+      color: #d65c68;
+    }
+  
+    &.pending:before {
+      background-color: #e8bb7d;
+      box-shadow: 0 0 5px 1px #e8bb7d;
+    }
+  
+    &.online:before, &.ready:before {
+      background-color: #94e185;
+      box-shadow: 0 0 5px 1px #94e185;
+    }
+  
+    &.in-progress:before {
+      background-color: #8fe87d;
+      box-shadow: 0 0 5px 1px #8fe87d;
+      animation: pulse 1s alternate infinite;
+    }
+  
+    @keyframes pulse {
+      0% {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0px 0px 10px 2px rgba(0, 255, 182, 0.3),
+          0px 0px 5px 2px rgba(0, 255, 135, 0.2);
+      }
+      100% {
+        background: rgba(255, 255, 255, 1);
+        box-shadow: inset 0px 0px 10px 2px rgba(0, 255, 182, 0.5),
+          0px 0px 15px 2px rgba(0, 255, 135, 1);
+      }
+    }
+  
+    &:before {
+      content: " ";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 10px;
+      border-radius: 8px;
+    }
+  }

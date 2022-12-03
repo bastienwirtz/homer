@@ -15,4 +15,4 @@ if [[ "${INIT_ASSETS}" == "1" ]] && [[ ! -f "/www/assets/config.yml" ]]; then
 fi
 
 echo "Starting webserver"
-lighttpd -D -f /lighttpd.conf
+exec lighttpd -D -f /lighttpd.conf

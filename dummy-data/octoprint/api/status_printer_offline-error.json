@@ -1,0 +1,26 @@
+{
+	"error": "SerialException: device reports readiness to read but returned no data (device disconnected or multiple access on port?)",
+	"job": {
+		"averagePrintTime": null,
+		"estimatedPrintTime": null,
+		"filament": null,
+		"file": {
+			"date": null,
+			"display": null,
+			"name": null,
+			"origin": null,
+			"path": null,
+			"size": null
+		},
+		"lastPrintTime": null,
+		"user": null
+	},
+	"progress": {
+		"completion": null,
+		"filepos": null,
+		"printTime": null,
+		"printTimeLeft": null,
+		"printTimeLeftOrigin": null
+	},
+	"state": "Offline after error"
+}
