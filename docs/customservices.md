@@ -32,6 +32,7 @@ within Homer:
   - [What's Up Docker](#whats-up-docker)
   - [SABnzbd](#sabnzbd)
   - [OctoPrint](#sabnzbd)
+  - [Tdarr](#tdarr)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -390,4 +391,17 @@ The OctoPrint service only needs an `apikey` & `url` and optionally a `display` 
   url: "http://192.168.0.151:8080"
   display: "text" # 'text' or 'bar'. Default to `text`.
   type: "OctoPrint"
+```
+
+## Tdarr
+
+The Tdarr service can allow you to show the number of currently queued items
+for transcoding on your Tdarr instance as well as the number of errored items.
+
+```yaml
+- name: "Tdarr"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8265"
+  type: "Tdarr"
+  checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
