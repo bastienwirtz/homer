@@ -121,6 +121,23 @@ cp assets/config.yml.dist assets/config.yml
 npx serve # or python -m http.server 8010 or apache, nginx ...
 ```
 
+### Using Helm
+
+Thanks to [@djjudas21](https://github.com/djjudas21) [charts](https://github.com/djjudas21/charts/tree/main/charts/homer):
+
+```sh
+helm repo add djjudas21 https://djjudas21.github.io/charts/
+helm repo update djjudas21
+
+# install with all defaults
+helm install homer djjudas21/homer
+
+# install with customisations
+wget https://raw.githubusercontent.com/djjudas21/charts/main/charts/homer/values.yaml
+# edit values.yaml
+helm install homer djjudas21/homer -f values.yaml
+```
+
 ### Build manually
 
 ```sh
