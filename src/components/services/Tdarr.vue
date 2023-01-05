@@ -77,7 +77,7 @@ export default {
           body: JSON.stringify({"headers":{"content-Type":"application/json"},"data":{"collection":"StatisticsJSONDB","mode":"getById","docID":"statistics","obj":{}},"timeout":1000}),
         };
         const response = await this.fetch(
-          `/api/v2/cruddb/`,
+          `/api/v2/cruddb`,
           options
         );
         this.error = false;
