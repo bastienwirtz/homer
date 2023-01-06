@@ -37,9 +37,6 @@ export default {
     ads_percentage_today: 0,
   }),
   computed: {
-    apiQuery() {
-      return this.item.apikey ? "`?summaryRaw&auth=${this.item.apikey}`" : "";
-    },
     percentage: function () {
       if (this.ads_percentage_today) {
         return this.ads_percentage_today.toFixed(1);
@@ -52,7 +49,10 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const result = await this.fetch("`/api.php${this.apiQuery}`")
+      const authQueryParams = this.item.apikey
+        ? `?summaryRaw&auth=${this.item.apikey}`
+        : "";
+      const result = await this.fetch(`/api.php${authQueryParams}`)
         .catch((e) => console.log(e));
 
       this.status = result.status;
