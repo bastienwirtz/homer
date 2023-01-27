@@ -10,7 +10,7 @@ $ docker logs homer
 Assets directory not writable. Check assets directory permissions & docker user or skip default assets install by setting the INIT_ASSETS env var to 0
 ```
 
-In this case you need to make sure your mounted assests directory have the same GID / UID the container user have (default 1000:1000), and that the read and write permission is granted for the user or the group.
+In this case you need to make sure your mounted assets directory have the same GID / UID the container user have (default 1000:1000), and that the read and write permission is granted for the user or the group.
 
 You can either: 
 - Update your assets directory permissions (ex: `chown -R 1000:1000 /your/assets/folder/`, `chmod -R u+rw /your/assets/folder/`)
