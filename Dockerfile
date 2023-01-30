@@ -9,6 +9,11 @@ RUN yarn install --frozen-lockfile
 COPY . .
 RUN yarn build
 
+# dashboard icons stage
+FROM bitnami/git as icons-stage
+WORKDIR /root
+RUN git clone https://github.com/walkxcode/dashboard-icons.git
+
 # production stage
 FROM alpine:3.16
 
@@ -27,6 +32,8 @@ COPY lighttpd.conf /lighttpd.conf
 COPY entrypoint.sh /entrypoint.sh
 COPY --from=build-stage --chown=${UID}:${GID} /app/dist /www/
 COPY --from=build-stage --chown=${UID}:${GID} /app/dist/assets /www/default-assets
+COPY --from=icons-stage --chown=${UID}:${GID} /root/dashboard-icons/png /www/assets/dashboard-icons/png
+COPY --from=icons-stage --chown=${UID}:${GID} /root/dashboard-icons/svg /www/assets/dashboard-icons/svg
 
 USER ${UID}:${GID}
 
