@@ -49,7 +49,11 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const result = await this.fetch("/api.php").catch((e) => console.log(e));
+      const authQueryParams = this.item.apikey
+        ? `?summaryRaw&auth=${this.item.apikey}`
+        : "";
+      const result = await this.fetch(`/api.php${authQueryParams}`)
+        .catch((e) => console.log(e));
 
       this.status = result.status;
       this.ads_percentage_today = result.ads_percentage_today;
