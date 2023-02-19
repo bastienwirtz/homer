@@ -32,6 +32,7 @@ within Homer:
   - [What's Up Docker](#whats-up-docker)
   - [SABnzbd](#sabnzbd)
   - [OctoPrint](#sabnzbd)
+  - [Tdarr](#tdarr)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -171,7 +172,7 @@ For AdGuard Home you need to set the type to AdGuard, if you have somes issues a
 This service displays info about the total number of containers managed by your Portainer instance.
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
-By default, every connected environments will be checked. To select specific ones,add an "environments" entry which can be a simple string or an array containing all the selected environments name.
+By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
 See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
 
@@ -394,4 +395,17 @@ The OctoPrint service only needs an `apikey` & `url` and optionally a `display` 
   url: "http://192.168.0.151:8080"
   display: "text" # 'text' or 'bar'. Default to `text`.
   type: "OctoPrint"
+```
+
+## Tdarr
+
+The Tdarr service can allow you to show the number of currently queued items
+for transcoding on your Tdarr instance as well as the number of errored items.
+
+```yaml
+- name: "Tdarr"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8265"
+  type: "Tdarr"
+  checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
