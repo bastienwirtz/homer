@@ -1,0 +1,27 @@
+{
+    "temperature": {
+        "bed": {
+            "actual": 20.52,
+            "offset": 0,
+            "target": 0.0
+        },
+        "tool0": {
+            "actual": 20.44,
+            "offset": 0,
+            "target": 0.0
+        }
+    },
+    "state": {
+        "text": "Operational",
+        "flags": {
+            "operational": true,
+            "paused": false,
+            "printing": false,
+            "cancelling": false,
+            "pausing": false,
+            "error": false,
+            "ready": true,
+            "closedOrError": false
+        }
+    }
+}
