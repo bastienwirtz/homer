@@ -53,6 +53,7 @@
 - [Tips & tricks](docs/tips-and-tricks.md)
 - [Development](docs/development.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Keeping forks in sync](docs/sync-fork.md)
 
 ## Features
 
