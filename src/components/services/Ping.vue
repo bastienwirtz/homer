@@ -54,17 +54,10 @@
       fetchStatus: async function () {
         const method = this.getMethod();
         this.fetch("/", { method, cache: "no-cache" }, false)
-          .then(() => {
-            this.status = "online";
-          })
-          .catch(() => {
-            this.status = "offline";
-          });
+          .then(() => this.status = "online")
+          .catch(() => this.status = "offline");
       },
       fetchUptimeKumaStatus: async function () {
-        console.log('Uptime-kuma URL', this.item.endpoint);
-        console.log('Uptime-kuma monitor ID', this.item.monitorID);
-
         this.fetch(`/api/badge/${this.item.monitorID}/status?upLabel=online&downLabel=offline`, { method: 'GET', cache: "no-cache" }, false)
           .then(async res => await res.text())
           .then(badgeSvg => this.status = badgeSvg.includes('online') ? 'online' : 'offline')
