@@ -161,7 +161,7 @@ For AdGuard Home you need to set the type to AdGuard, if you have somes issues a
 
 ```yaml
 - name: "Adguard"
-  logo: "assets/tools/adguardhome.png"
+  logo: "assets/tools/adguard-home.png"
   url: "https://adguard.exemple.com"
   target: "_blank"
   type: "AdGuardHome"
