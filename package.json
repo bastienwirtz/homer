@@ -13,7 +13,7 @@
     "bulma": "^0.9.4",
     "lodash.merge": "^4.6.2",
     "vue": "^3.2.41",
-    "yaml": "^2.1.3"
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
