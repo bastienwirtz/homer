@@ -1,0 +1,24 @@
+{
+  "arguments": {
+    "activeTorrentCount": 16,
+    "cumulative-stats": {
+      "downloadedBytes": 95397570485,
+      "filesAdded": 92,
+      "secondsActive": 777792,
+      "sessionCount": 6,
+      "uploadedBytes": 21985043465
+    },
+    "current-stats": {
+      "downloadedBytes": 790271483,
+      "filesAdded": 2,
+      "secondsActive": 645,
+      "sessionCount": 1,
+      "uploadedBytes": 386100159
+    },
+    "downloadSpeed": 5693440,
+    "pausedTorrentCount": 0,
+    "torrentCount": 16,
+    "uploadSpeed": 1967553
+  },
+  "result": "success"
+}
