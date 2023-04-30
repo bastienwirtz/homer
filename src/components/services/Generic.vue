@@ -62,6 +62,7 @@ export default {
 
   img {
     max-height: 100%;
+    object-fit: contain;
   }
 }
 </style>
