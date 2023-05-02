@@ -67,11 +67,22 @@ export default {
     },
 
     downloadMessage: function (url) {
-      return fetch(url).then(function (response) {
+      return fetch(url).then(async function (response) {
         if (response.status != 200) {
           return;
         }
-        return response.json();
+        const content_type = response.headers.get("Content-Type").split(";")[0];
+        switch (content_type) {
+          case "application/json": {
+            return response.json();
+          }
+          case "text/plain": {
+            return { content: await response.text() };
+          }
+          default: {
+            return response.json();
+          }
+        }
       });
     },
 
