@@ -47,6 +47,7 @@ export default {
     }
     this.isDark = this.getIsDark();
     this.$emit("updated", this.isDark);
+    this.watchIsDark();
   },
   methods: {
     toggleTheme: function () {
@@ -80,6 +81,13 @@ export default {
         true,
       ];
       return values[this.mode];
+    },
+
+    watchIsDark: function () {
+      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+        this.isDark = this.getIsDark();
+        this.$emit("updated", this.isDark);
+      });
     },
   },
 };
