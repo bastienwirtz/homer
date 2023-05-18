@@ -19,10 +19,19 @@ export default {
         options.credentials = "include";
       }
 
+      if (this.proxy?.headers) {
+        options.headers = this.proxy.headers;
+      }
+
       // Each item can override the credential settings
       if (this.item.useCredentials !== undefined) {
         options.credentials =
           this.item.useCredentials === true ? "include" : "omit";
+      }
+
+      // Each item can have their own headers
+      if (this.item.headers !== undefined) {
+        options.headers = this.item.headers;
       }
 
       options = Object.assign(options, init);
