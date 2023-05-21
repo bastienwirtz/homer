@@ -33,6 +33,7 @@ within Homer:
   - [SABnzbd](#sabnzbd)
   - [OctoPrint](#octoprint)
   - [Tdarr](#tdarr)
+  - [Nextcloud](#nextcloud)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -410,4 +411,18 @@ for transcoding on your Tdarr instance as well as the number of errored items.
   url: "http://192.168.0.151:8265"
   type: "Tdarr"
   checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
+```
+
+## Nextcloud
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Nextcloud is online, offline, or in [maintenance
+mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.html#maintenance-mode).
+Example configuration:
+
+```yaml
+- name: Nextcloud
+  type: Nextcloud
+  logo: assets/tools/sample.png
+  url: http://nextcloud.example.com
 ```
