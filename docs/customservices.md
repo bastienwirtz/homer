@@ -16,6 +16,7 @@ within Homer:
 - [CopyToClipboard](#copy-to-clipboard)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
+- [Gitea / Forgejo](#gitea--forgejo)
 - [Gotify](#gotify)
 - [Healthchecks](#healthchecks)
 - [Home Assistant](#home-assistant)
@@ -114,6 +115,17 @@ The FreshRSS service displays unread and subscriptions counts from your FreshRSS
   username: "<-- Your username -->"       
   password: "<-- Your password -->"
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Gitea / Forgejo
+
+This service displays a version string instead of a subtitle. Example configuration:
+
+```yaml
+- name: Forgejo
+  type: Gitea
+  logo: assets/tools/sample.png
+  url: http://git.example.com
 ```
 
 ## Gotify
