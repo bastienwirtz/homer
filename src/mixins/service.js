@@ -38,6 +38,11 @@ export default {
       }
 
       return fetch(url, options).then((response) => {
+        if (response.type == "opaque") {
+          // For no-cors requests, return empty response
+          return ""
+        }
+
         if (!response.ok) {
           throw new Error("Not 2xx response");
         }
