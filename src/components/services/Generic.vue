@@ -5,6 +5,8 @@
       :style="`background-color:${item.background};`"
       :class="item.class"
     >
+    <Info v-if="item.info" :item="item.info"/>
+
       <a :href="item.url" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div :class="mediaClass">
@@ -40,8 +42,13 @@
 </template>
 
 <script>
+import Info from "./Info.vue";
+
 export default {
   name: "Generic",
+  components: {
+    Info,
+  },
   props: {
     item: Object,
   },
