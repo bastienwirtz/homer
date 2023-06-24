@@ -599,7 +599,8 @@ the "Config" > "General" section of the SABnzbd config in the SABnzbd web UI.
   url: "http://192.168.0.151:8080"
   type: "SABnzbd"
   apikey: "MY-SUPER-SECRET-API-KEY"
-  downloadInterval: 5000 # (Optional) Interval (in ms) for updating the download count
+  downloadInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+  rateDisabled: false
 ```
 
 ## Scrutiny
