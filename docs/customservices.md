@@ -98,9 +98,10 @@ Two lines are needed in the config.yml :
 The url must be the root url of Medusa application.
 The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
 
-## Lidarr, Prowlarr, Sonarr and Radarr
+## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
 
-This service displays Activity (blue), Warning (orange) or Error (red) notifications bubbles from the Lidarr, Radarr or Sonarr application.
+This service displays Activity (blue), Warning (orange) or Error (red) notifications bubbles from the Lidarr, Readarr, Radarr or Sonarr application.
+Readarr display also a Missing (purple) notification bubbles.
 Two lines are needed in the config.yml :
 
 ```yaml
@@ -108,8 +109,8 @@ Two lines are needed in the config.yml :
   apikey: "<---insert-api-key-here--->"
 ```
 
-The url must be the root url of Lidarr, Prowlarr, Radarr or Sonarr application.
-The Lidarr, Prowlarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
+The url must be the root url of Lidarr, Prowlarr, Readarr, Radarr or Sonarr application.
+The Lidarr, Prowlarr, Readarr, Radarr or Sonarr API key can be found in Settings > General. It is needed to access the API.
 If you are using an older version of Radarr or Sonarr which don't support the new V3 api endpoints, add the following line to your service config "legacyApi: true", example:
 
 ```yaml
