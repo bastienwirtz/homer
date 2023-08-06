@@ -33,6 +33,7 @@ within Homer:
   - [SABnzbd](#sabnzbd)
   - [OctoPrint](#octoprint)
   - [Tdarr](#tdarr)
+  - [PiAlert](#pialert)
   - [Immich](#immich)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
@@ -411,6 +412,16 @@ for transcoding on your Tdarr instance as well as the number of errored items.
   url: "http://192.168.0.151:8265"
   type: "Tdarr"
   checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
+```
+
+## PiAlert
+
+The PiAlert service displays stats from your PiAlert server.
+
+```yaml
+- name: "PiAlert"
+  type: "PiAlert"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
 ## Immich
