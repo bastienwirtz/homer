@@ -34,6 +34,7 @@ within Homer:
   - [OctoPrint](#octoprint)
   - [Tdarr](#tdarr)
   - [PiAlert](#pialert)
+  - [Immich](#immich)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -423,3 +424,13 @@ The PiAlert service displays stats from your PiAlert server.
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
+## Immich
+
+The Immich service displays stats from your Immich server.
+
+```yaml
+- name: "Immich"
+  type: "Immich"
+  apikey: "<--- Your api key --->" # administrator user
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
