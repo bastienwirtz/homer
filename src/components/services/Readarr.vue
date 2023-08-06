@@ -52,29 +52,24 @@ export default {
   created: function () {
     this.fetchConfig();
   },
-  computed: {
-    apiPath() {
-      return API;
-    },
-  },
   methods: {
     fetchConfig: function () {
       const handleError = (e) => {
         console.error(e);
         this.serverError = true;
-      }
-      this.fetch(`${this.apiPath}/health?apikey=${this.item.apikey}`)
+      };
+      this.fetch(`${API}/health?apikey=${this.item.apikey}`)
         .then((health) => {
-          this.warnings = health.filter(h => h.type === 'warning').length;
-          this.errors = health.filter(h => h.type === 'errors').length;
+          this.warnings = health.filter((h) => h.type === "warning").length;
+          this.errors = health.filter((h) => h.type === "errors").length;
         })
         .catch(handleError);
-      this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
+      this.fetch(`${API}/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = queue.totalRecords;
         })
         .catch(handleError);
-        this.fetch(`${this.apiPath}/wanted/missing?apikey=${this.item.apikey}`)
+      this.fetch(`${API}/wanted/missing?apikey=${this.item.apikey}`)
         .then((missing) => {
           this.missing = missing.totalRecords;
         })
