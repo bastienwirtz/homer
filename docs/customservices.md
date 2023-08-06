@@ -104,7 +104,7 @@ The Medusa API key can be found in General configuration > Interface. It is need
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
 
 This service displays Activity (blue), Warning (orange) or Error (red) notifications bubbles from the Lidarr, Readarr, Radarr or Sonarr application.
-Readarr display also a Missing (purple) notification bubbles.
+Readarr and Sonarr display also a Missing (purple) notification bubbles.
 Two lines are needed in the config.yml :
 
 ```yaml
