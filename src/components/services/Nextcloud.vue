@@ -37,15 +37,10 @@ export default {
   }),
   computed: {
     status: function () {
-      if (this.fetchOk) {
-        if (this.maintenance) {
-          return "maintenance";
-        } else {
-          return "online";
-        }
-      } else {
+      if (!this.fetchOk) {
         return "offline";
       }
+      return this.maintenance ? "maintenance" : "online";
     },
   },
   created() {
