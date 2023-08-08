@@ -34,6 +34,8 @@ within Homer:
   - [OctoPrint](#octoprint)
   - [Tdarr](#tdarr)
   - [Nextcloud](#nextcloud)
+  - [PiAlert](#pialert)
+  - [Immich](#immich)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -425,4 +427,24 @@ Example configuration:
   type: Nextcloud
   logo: assets/tools/sample.png
   url: http://nextcloud.example.com
+
+## PiAlert
+
+The PiAlert service displays stats from your PiAlert server.
+
+```yaml
+- name: "PiAlert"
+  type: "PiAlert"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Immich
+
+The Immich service displays stats from your Immich server.
+
+```yaml
+- name: "Immich"
+  type: "Immich"
+  apikey: "<--- Your api key --->" # administrator user
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
