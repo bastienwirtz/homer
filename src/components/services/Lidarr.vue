@@ -5,6 +5,9 @@
         <strong v-if="activity > 0" class="notif activity" title="Activity">
           {{ activity }}
         </strong>
+        <strong v-if="missing > 0" class="notif missing" title="Missing">
+          {{ missing }}
+        </strong>
         <strong v-if="warnings > 0" class="notif warnings" title="Warning">
           {{ warnings }}
         </strong>
@@ -38,6 +41,7 @@ export default {
   data: () => {
     return {
       activity: null,
+      missing: null,
       warnings: null,
       errors: null,
       serverError: false,
@@ -48,6 +52,10 @@ export default {
   },
   methods: {
     fetchConfig: function () {
+      const handleError = (e) => {
+        console.error(e);
+        this.serverError = true;
+      };
       this.fetch(`/api/v1/health?apikey=${this.item.apikey}`)
         .then((health) => {
           this.warnings = 0;
@@ -60,18 +68,17 @@ export default {
             }
           }
         })
-        .catch((e) => {
-          console.error(e);
-          this.serverError = true;
-        });
+        .catch(handleError);
       this.fetch(`/api/v1/queue/status?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = queue.totalCount;
         })
-        .catch((e) => {
-          console.error(e);
-          this.serverError = true;
-        });
+        .catch(handleError);
+      this.fetch(`/api/v1/wanted/missing?apikey=${this.item.apikey}`)
+        .then((queue) => {
+          this.missing = queue.totalRecords;
+        })
+        .catch(handleError);
     },
   },
 };
@@ -96,6 +103,10 @@ export default {
     font-size: 0.8em;
     &.activity {
       background-color: #4fb5d6;
+    }
+
+    &.missing {
+      background-color: #9d00ff;
     }
 
     &.warnings {
