@@ -50,7 +50,7 @@
         <SearchInput
           class="navbar-item is-inline-block-mobile"
           :hotkey="searchHotkey()"
-          @input="filterServices($event.target?.value)"
+          @input="filterServices($event)"
           @search-focus="showMenu = true"
           @search-open="navigateToFirstService($event?.target?.value)"
           @search-cancel="filterServices()"

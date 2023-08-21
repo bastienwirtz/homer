@@ -5,7 +5,7 @@
       type="text"
       ref="search"
       :value="value"
-      @input="search($event.target.value)"
+      @input.stop="search($event.target.value)"
       @keyup.enter.exact="open()"
       @keyup.alt.enter="open('_blank')"
     />
