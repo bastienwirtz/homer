@@ -21,6 +21,6 @@ yarn-error.log*
 *.sw?
 
 # App configuration
-config.yml
+#config.yml
 
 .drone.yml
