@@ -51,13 +51,13 @@ colors:
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
-  - name: "Contribute"
-    icon: "fab fa-github"
-    url: "https://github.com/bastienwirtz/homer"
-    target: "_blank" # optional html a tag target attribute
-  - name: "Wiki"
+  - name: "Blog"
     icon: "fas fa-book"
-    url: "https://www.wikipedia.org/"
+    url: "https://vijayakumar.xyz"
+  - name: "Github"
+    icon: "fab fa-github"
+    url: "https://github.com/vijayakumarravi"
+    target: "_blank" # optional html a tag target attribute
   # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
   # see url field and assets/additional-page.yml.dist used in this example:
   #- name: "another page!"
