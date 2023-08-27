@@ -41,12 +41,12 @@ colors:
     link-hover: "#ffdd57"
 
 # Optional message
-message:
+#message:
   #url: https://b4bz.io
-  style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
-  title: "Demo !"
-  icon: "fa fa-grin"
-  content: "This is  homepage demo. <br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+  #  style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
+  #  title: "Demo !"
+  #  icon: "fa fa-grin"
+  #  content: "This is  homepage demo. <br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
 
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
@@ -68,18 +68,74 @@ links:
 # First level array represent a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
-  - name: "Applications"
+  - name: "Dashboards"
     icon: "fas fa-cloud"
     items:
-      - name: "Awesome app"
-        logo: "assets/tools/sample.png"
-        subtitle: "Bookmark example"
-        tag: "app"
-        keywords: "self hosted reddit"
-        url: "https://www.reddit.com/r/selfhosted/"
+      - name: "cloudflare dash"
+        logo: "https://dash.cloudflare.com/favicon.ico"
+        subtitle: "Cloudflare admin dashboard"
+        tag: "dash"
+        keywords: "Cloudflare admin dashboard"
+        url: "https://dash.cloudflare.com/4fc118cc61e84408cd4335a7544714bd/vijayakumar.xyz"
         target: "_blank" # optional html a tag target attribute
-      - name: "Another one"
-        logo: "assets/tools/sample2.png"
-        subtitle: "Another application"
+
+      - name: "Cloudflare zero trust"
+        logo: "https://dash.cloudflare.com/favicon.ico"
+        subtitle: "Cloudflare zero trust"
+        tag: "dash"
+        url: "https://one.dash.cloudflare.com/4fc118cc61e84408cd4335a7544714bd/"
+
+      - name: "Fly.io dash"
+        logo: "https://fly.io/phx/ui/images/favicon/favicon-595d1312b35dfe32838befdf8505515e.ico?vsn=d"
+        subtitle: "Fly.io Dashboard"
+        tag: "dash"
+        url: "https://fly.io/dashboard/vijayakumar-ravi"
+
+      - name: "Render Dashboard"
+        logo: "https://dashboard.render.com/favicon.ico"
+        subtitle: "render.com vault dashboard"
+        tag: "dash"
+        url: "https://dashboard.render.com/web/srv-cj9qb3hduelc73d91itg"
+
+  - name: "Services"
+    icon: "fas fa-server"
+    items:
+      - name: "Bitwarden"
+        logo: "https://vault.bitwarden.com/favicon.ico"
+        subtitle: "Password manager"
         tag: "app"
-        url: "#"
+        url: "https://vault.vijayakumar.xyz"
+        target: "_blank" # optional html a tag target attribute
+
+      - name: "Uptime kuma"
+        logo: "https://flytime.fly.dev/favicon.ico"
+        subtitle: "custom uptime monitor"
+        tag: "app"
+        url: "https://flytime.fly.dev"
+
+      - name: "Truenas"
+        logo: "https://nas.prod.local.vijayakumar.xyz/ui/assets/favicons/favicon-32x32.png"
+        subtitle: "Local storage server"
+        tag: "service"
+        url: "https://nas.prod.local.vijayakumar.xyz/"
+
+      - name: "Proxmox"
+        logo: "https://pve.prod.local.vijayakumar.xyz/favicon.ico"
+        subtitle: "local Virtualization dashboard"
+        tag: "app"
+        url: "https://pve.prod.local.vijayakumar.xyz/"
+
+  - name: "Local"
+    icon: "fas fa-server"
+    items:
+      - name: "Pihole"
+        logo: "http://10.0.0.3/admin/img/favicons/favicon.ico"
+        subtitle: "Dns ad blocker"
+        tag: "app"
+        url: "http://10.0.0.3/admin"
+
+      - name: "Niginx proxy manager"
+        logo: "http://10.0.1.200:81/images/favicons/favicon.ico"
+        subtitle: "Niginx reverse proxy"
+        tag: "app"
+        url: "http://10.0.1.200:81/"
