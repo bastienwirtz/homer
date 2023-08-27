@@ -129,13 +129,13 @@ services:
     icon: "fas fa-server"
     items:
       - name: "Pihole"
-        logo: "http://10.0.0.3/admin/img/favicons/favicon.ico"
+        logo: "https://docs.pi-hole.net/images/favicon.ico"
         subtitle: "Dns ad blocker"
         tag: "app"
         url: "http://10.0.0.3/admin"
 
       - name: "Niginx proxy manager"
-        logo: "http://10.0.1.200:81/images/favicons/favicon.ico"
+        logo: "https://nginxproxymanager.com/icon.png"
         subtitle: "Niginx reverse proxy"
         tag: "app"
         url: "http://10.0.1.200:81/"
