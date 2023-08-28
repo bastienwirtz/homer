@@ -283,9 +283,11 @@ export default {
 
       const searchResultItems = [];
       for (const group of this.config.services) {
-        for (const item of group.items) {
-          if (this.matchesFilter(item)) {
-            searchResultItems.push(item);
+        if (group.items !== null) {
+          for (const item of group.items) {
+            if (this.matchesFilter(item)) {
+              searchResultItems.push(item);
+            }
           }
         }
       }
