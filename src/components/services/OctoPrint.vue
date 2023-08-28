@@ -124,7 +124,7 @@ export default {
       } else if (hours > 0) {
         return `${formattedHrs}h ${formattedMins}m ${formattedSecs}s`;
       } else if (minutes > 0) {
-        return `${formattedMins}h ${formattedSecs}s`;
+        return `${formattedMins}m ${formattedSecs}s`;
       } else {
         return `${secs} seconds`;
       }
