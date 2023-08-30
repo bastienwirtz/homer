@@ -208,7 +208,7 @@ export default {
 
         if (this.currentPage !== "default") {
           let pageConfig = await this.getConfig(
-            `assets/${this.currentPage}.yml`
+            `${import.meta.env.BASE_URL}/assets/${this.currentPage}.yml`
           );
           config = Object.assign(config, pageConfig);
         }
@@ -230,7 +230,7 @@ export default {
         this.createStylesheet(stylesheet);
       }
     },
-    getConfig: function (path = "assets/config.yml") {
+    getConfig: function (path = `${import.meta.env.BASE_URL}/assets/config.yml`) {
       return fetch(path).then((response) => {
         if (response.status == 404 || response.redirected) {
           this.configNotFound = true;

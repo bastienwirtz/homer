@@ -4,3 +4,4 @@ dockerfile
 .git
 screenshot.png
 node_modules
+dummy-data

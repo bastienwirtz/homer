@@ -1,6 +1,8 @@
 # build stage
 FROM node:lts-alpine as build-stage
 
+ARG SUBFOLDER ""
+
 WORKDIR /app
 
 COPY package*.json ./
