@@ -144,13 +144,15 @@ services:
         subtitle: "self-hosted monitoring tool"
         tag: "app"
         url: "https://flytime.fly.dev"
+        slug: "vault" # Defaults to "default" if not provided.
+        type: "UptimeKuma"
         target: "_blank"
 
       - name: "Umami"
-        logo: "https://umami-pi-eight.vercel.app/favicon.ico"
-        subtitle: "Umami is a simple, fast, privacy-focused alternative to Google Analytics."
+        logo: "https://umami-vijay.vercel.app/favicon.ico"
+        subtitle: "Umami is a privacy-focused alternative to Google Analytics."
         tag: "app"
-        url: "https://umami-pi-eight.vercel.app/dashboard"
+        url: "https://umami-vijay.vercel.app/dashboard"
         target: "_blank"
 
       - name: "Onelink"
@@ -182,6 +184,8 @@ services:
         subtitle: "Dns ad blocker"
         tag: "app"
         url: "http://10.0.0.3/admin"
+        apikey: "3875b6b52bad0be6f8214321f867d149c05f6e9d55e35f303f350d55c12376f3"
+        type: "PiHole"
         target: "_blank"
 
       - name: "Niginx proxy manager"
