@@ -51,6 +51,9 @@ colors:
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
+  - name: "Bio"
+    icon: "fas fa-address-card"
+    url: "https://l.vijayakumar.xyz"
   - name: "Blog"
     icon: "fas fa-book"
     url: "https://vijayakumar.xyz"
