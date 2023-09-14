@@ -159,7 +159,7 @@ services:
         logo: "http://0.gravatar.com/avatar/7fe9c540c91d52fb69830fb0d77036dc"
         subtitle: "Link in bio tool"
         tag: "app"
-        url: "https://onelink-nine-delta.vercel.app"
+        url: "https://onelink-vijay.vercel.app"
         target: "_blank"
 
   - name: "Local"
