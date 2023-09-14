@@ -177,7 +177,7 @@ In order to use it, you must be using Portainer version 1.11 or later. Generate 
 it to the apikey field.
 By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
-See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
+See https://docs.portainer.io/api/access#creating-an-access-token
 
 ```yaml
 - name: "Portainer"
