@@ -364,7 +364,7 @@ Configuration example:
 ```yaml
 - name: "Speedtest Tracker"
   type: "SpeedtestTracker"
-  url: "http://192.168.0.1:8765"
+  url: "http://192.168.0.1:8080"
   target: "_blank"
 ```
 
