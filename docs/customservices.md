@@ -356,8 +356,8 @@ Configuration example:
 
 ## SpeedtestTracker
 
-This SpeedtestTracker service will show the download and upload speeds in Mbit/s and the ping in ms.
-To configure this service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
+This service will show the download and upload speeds in Mbit/s and the ping in ms.
+To configure the service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
 
 Configuration example:
 
