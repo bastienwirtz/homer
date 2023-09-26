@@ -1,6 +1,6 @@
 #!/bin/sh
 
 # Enable IPV6 if needed
-if test -z "$IPV6_DISABLE"; then
+if [[ "${IPV6_DISABLE}" == "1" ]]; then
 	echo '$SERVER["socket"] == "[::]:" + env.PORT {  }'
 fi
