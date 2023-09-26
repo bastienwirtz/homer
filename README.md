@@ -97,8 +97,8 @@ If you would like to host Homer in a subfolder, (ex: *http://my-domain/**homer**
 * **`PORT`** (default: `8080`)
 If you would like to change internal port of Homer from default `8080` to your port choice.
 
-* **`IPV6_DISABLE`** (default: null)
-Set to a non-empty value to disable listening on IPv6.
+* **`IPV6_DISABLE`** (default: 0)
+Set to `1` to disable listening on IPv6.
 
 #### With docker-compose
 
