@@ -35,6 +35,7 @@ within Homer:
   - [Tdarr](#tdarr)
   - [PiAlert](#pialert)
   - [Immich](#immich)
+  - [Gotify](#gotify)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -444,4 +445,17 @@ The Immich service displays stats from your Immich server.
   type: "Immich"
   apikey: "<--- Your api key --->" # administrator user
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Gotify
+
+The Gotify service will show the number of currently oustanding messages
+available as well as the overall health of the system.
+
+Note that `apikey` must be a client token, not an app token.
+
+```yaml
+- name: "Gotify"
+  type: "Gotify"
+  apikey: "<api_key>" # Client token to retrieve messages
 ```
