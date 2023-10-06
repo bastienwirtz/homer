@@ -72,6 +72,11 @@ export default {
       setInterval(() => this.fetchCount(), torrentInterval);
     }
 
+    // authenticate if username and password are provided
+    if (this.item.username != undefined && this.item.password != undefined) {
+      this.authenticate(this.item.username, this.item.password);
+    }
+
     this.getRate();
     this.fetchCount();
   },
@@ -92,6 +97,22 @@ export default {
         this.error = false;
         this.dl = body.dl_info_speed;
         this.ul = body.up_info_speed;
+      } catch (e) {
+        this.error = true;
+        console.error(e);
+      }
+    },
+    authenticate: async function (username, password) {
+      try {
+        const reqParams = {
+          username: username,
+          password: password,
+        };
+        const body = await this.fetch("/api/v2/auth/login", {
+          method: "POST",
+          body: new URLSearchParams(reqParams),
+        });
+        this.error = false;
       } catch (e) {
         this.error = true;
         console.error(e);
