@@ -245,7 +245,7 @@ export default {
         return response
           .text()
           .then((body) => {
-            return parse(body);
+            return parse(body, {merge: true});
           })
           .then(function (config) {
             if (config.externalConfig) {
