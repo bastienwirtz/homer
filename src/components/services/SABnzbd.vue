@@ -56,7 +56,7 @@ export default {
     fetchStatus: async function () {
       try {
         const response = await this.fetch(
-          `/api?output=json&apikey=${this.item.apikey}&mode=queue`
+          `/api?output=json&apikey=${this.item.apikey}&mode=queue`,
         );
         this.error = false;
         this.stats = response.queue;

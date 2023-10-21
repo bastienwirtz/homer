@@ -40,7 +40,7 @@ export default {
   },
   data: () => {
     return {
-      users: null,          
+      users: null,
       photos: null,
       videos: null,
       usage: null,
@@ -56,25 +56,27 @@ export default {
   },
   computed: {
     humanizeSize: function () {
-        let bytes = this.usage;
-        if (Math.abs(bytes) < 1024)
-                return bytes + ' B';
+      let bytes = this.usage;
+      if (Math.abs(bytes) < 1024) return bytes + " B";
 
-        const units = ['KiB', 'MiB', 'GiB', 'TiB'];
-        let u = -1;
-        do {
-                bytes /= 1024;
-                ++u;
-        } while (Math.round(Math.abs(bytes) * 100) / 100 >= 1024 && u < units.length - 1);
+      const units = ["KiB", "MiB", "GiB", "TiB"];
+      let u = -1;
+      do {
+        bytes /= 1024;
+        ++u;
+      } while (
+        Math.round(Math.abs(bytes) * 100) / 100 >= 1024 &&
+        u < units.length - 1
+      );
 
-        return bytes.toFixed(2) + ' ' + units[u];
+      return bytes.toFixed(2) + " " + units[u];
     },
   },
   methods: {
     fetchConfig: function () {
       const headers = {
         "x-api-key": this.item.apikey,
-      }; 
+      };
 
       this.fetch(`/api/server-info/stats`, { headers })
         .then((stats) => {
@@ -82,7 +84,7 @@ export default {
           this.videos = stats.videos;
           this.usage = stats.usage;
           this.users = stats.usageByUser.length;
-        })                  
+        })
         .catch((e) => {
           console.error(e);
           this.serverError = true;

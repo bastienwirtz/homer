@@ -1,6 +1,6 @@
 {
   "name": "homer",
-  "version": "23.09.1",
+  "version": "23.10.1",
   "scripts": {
     "dev": "vite",
     "mock": "http-server dummy-data/ --cors",

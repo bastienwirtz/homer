@@ -208,7 +208,7 @@ export default {
 
         if (this.currentPage !== "default") {
           let pageConfig = await this.getConfig(
-            `assets/${this.currentPage}.yml`
+            `assets/${this.currentPage}.yml`,
           );
           config = Object.assign(config, pageConfig);
         }
@@ -245,7 +245,7 @@ export default {
         return response
           .text()
           .then((body) => {
-            return parse(body, {merge: true});
+            return parse(body, { merge: true });
           })
           .then(function (config) {
             if (config.externalConfig) {

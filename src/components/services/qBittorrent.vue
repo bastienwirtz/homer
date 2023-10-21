@@ -43,7 +43,7 @@ const displayRate = (rate) => {
   }
   return (
     Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
-      rate || 0
+      rate || 0,
     ) + ` ${units[i]}/s`
   );
 };

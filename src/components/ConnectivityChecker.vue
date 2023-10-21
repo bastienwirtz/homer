@@ -30,21 +30,21 @@ export default {
           that.checkOffline();
         }
       },
-      false
+      false,
     );
     window.addEventListener(
       "online",
       function () {
         that.checkOffline();
       },
-      false
+      false,
     );
     window.addEventListener(
       "offline",
       function () {
         this.offline = true;
       },
-      false
+      false,
     );
   },
   methods: {
@@ -57,7 +57,9 @@ export default {
       // extra check to make sure we're not offline
       let that = this;
       const urlPath = window.location.pathname.replace(/\/+$/, "");
-      const aliveCheckUrl = `${window.location.origin}${urlPath}/index.html?t=${new Date().valueOf()}`;
+      const aliveCheckUrl = `${
+        window.location.origin
+      }${urlPath}/index.html?t=${new Date().valueOf()}`;
       return fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",

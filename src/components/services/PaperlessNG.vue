@@ -40,7 +40,7 @@ export default {
       const apikey = this.item.apikey;
       if (!apikey) {
         console.error(
-          "apikey is not present in config.yml for the paperless entry!"
+          "apikey is not present in config.yml for the paperless entry!",
         );
         return;
       }

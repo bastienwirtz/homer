@@ -84,10 +84,13 @@ export default {
     },
 
     watchIsDark: function () {
-      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-        this.isDark = this.getIsDark();
-        this.$emit("updated", this.isDark);
-      });
+      matchMedia("(prefers-color-scheme: dark)").addEventListener(
+        "change",
+        () => {
+          this.isDark = this.getIsDark();
+          this.$emit("updated", this.isDark);
+        },
+      );
     },
   },
 };

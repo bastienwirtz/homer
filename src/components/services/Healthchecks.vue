@@ -66,7 +66,7 @@ export default {
       const apikey = this.item.apikey;
       if (!apikey) {
         console.error(
-          "apikey is not present in config.yml for the Healthchecks entry!"
+          "apikey is not present in config.yml for the Healthchecks entry!",
         );
         return;
       }

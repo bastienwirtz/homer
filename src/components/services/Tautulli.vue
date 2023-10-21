@@ -51,7 +51,7 @@ export default {
     fetchStatus: async function () {
       try {
         const response = await this.fetch(
-          `/api/v2?apikey=${this.item.apikey}&cmd=get_activity`
+          `/api/v2?apikey=${this.item.apikey}&cmd=get_activity`,
         );
         this.error = false;
         this.stats = response.response.data;

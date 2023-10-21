@@ -41,7 +41,7 @@ const displayRate = (rate) => {
 
   return (
     Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
-      rate || 0
+      rate || 0,
     ) + ` ${units[i]}/s`
   );
 };
@@ -105,8 +105,8 @@ export default {
       return this.getXml(methodName).then((xml) =>
         parseInt(
           xml.getElementsByTagName("value")[0].firstChild.textContent,
-          10
-        )
+          10,
+        ),
       );
     },
     // Fetch the numer of torrents by requesting the download list
@@ -143,7 +143,7 @@ export default {
           return response.text();
         })
         .then((text) =>
-          Promise.resolve(new DOMParser().parseFromString(text, "text/xml"))
+          Promise.resolve(new DOMParser().parseFromString(text, "text/xml")),
         );
     },
   },
