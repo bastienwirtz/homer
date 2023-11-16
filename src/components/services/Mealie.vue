@@ -6,7 +6,7 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="meal"> Today: {{ meal.name }} </template>
+        <template v-else-if="meal"> Today: {{ meal[0].recipe.name }} </template>
         <template v-else-if="stats">
           happily keeping {{ stats.totalRecipes }} recipes organized
         </template>
@@ -44,10 +44,10 @@ export default {
 
       if (this.item.subtitle != null) return;
 
-      this.meal = await this.fetch("/api/meal-plans/today/", { headers }).catch(
+      this.meal = await this.fetch("/api/groups/mealplans/today", { headers }).catch(
         (e) => console.log(e),
       );
-      this.stats = await this.fetch("/api/debug/statistics/", {
+      this.stats = await this.fetch("/api/admin/about/statistics", {
         headers,
       }).catch((e) => console.log(e));
     },
