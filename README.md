@@ -153,3 +153,48 @@ npm run build
 ```
 
 Then your dashboard is ready to use in the `/dist` directory.
+
+### Alpine VM/Container
+Install homer on Alpine and serve with Nginx:
+```sh
+# update
+apk update
+
+# install nginx (webserver) + nano (editor)
+apk add nginx nano
+
+# create wwwserver user (make up a password when asked)
+adduser -g 'Nginx www user' -h /home/www/ wwwserver
+
+# replace default web server config with this content:
+nano /etc/nginx/http.d/default.conf
+
+# File contents (replace all of default.conf with this):
+    server {
+        # server ip/port 
+        listen 80 default_server;
+
+        # virtual server name i.e. domain name 
+        # server_name _;
+
+        # document root 
+        root        /var/www;
+
+        # log files
+        access_log  /var/log/nginx/default.access.log;
+        error_log   /var/log/nginx/default.access.error.log;
+    }
+
+# start nginx and enable on boot
+rc-service nginx start
+rc-update add nginx default
+
+# fetch homer source and unpack to /var/www/
+wget https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip
+unzip homer.zip -d /var/www
+cd /var/www
+
+# create initial config, then edit
+cp assets/config.yml.dist assets/config.yml
+nano assets/config.yml
+```
