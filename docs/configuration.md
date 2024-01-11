@@ -95,6 +95,7 @@ message:
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"
+  # The content also accepts HTML content, so you can add divs, images or whatever you want to make match your needs.
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 # Optional navbar
