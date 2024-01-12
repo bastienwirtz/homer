@@ -70,7 +70,7 @@ services:
     icon: "fas fa-cloud"
     items:
       - name: "Pi-hole"
-        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pi-hole.png"
         url: "https://pi-hole.net/"
         endpoint: "https://homer-demo-content.netlify.app/pihole"
         type: "PiHole"
