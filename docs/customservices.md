@@ -10,31 +10,31 @@ within Homer:
 
 - [Custom Services](#custom-services)
   - [Common options](#common-options)
-  - [PiHole](#pihole)
-  - [OpenWeatherMap](#openweathermap)
-  - [Medusa](#medusa)
-  - [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
-  - [PaperlessNG](#paperlessng)
-  - [Ping](#ping)
-  - [Prometheus](#prometheus)
   - [AdGuard Home](#adguard-home)
-  - [Portainer](#portainer)
-  - [Emby / Jellyfin](#emby--jellyfin)
-  - [Uptime Kuma](#uptime-kuma)
-  - [Tautulli](#tautulli)
-  - [Mealie](#mealie)
-  - [Healthchecks](#healthchecks)
-  - [Proxmox](#proxmox)
-  - [rTorrent](#rtorrent)
-  - [qBittorrent](#qbittorrent)
   - [CopyToClipboard](#copy-to-clipboard)
-  - [Speedtest Tracker](#SpeedtestTracker)
-  - [What's Up Docker](#whats-up-docker)
-  - [SABnzbd](#sabnzbd)
-  - [OctoPrint](#octoprint)
-  - [Tdarr](#tdarr)
-  - [PiAlert](#pialert)
+  - [Emby / Jellyfin](#emby--jellyfin)
+  - [Healthchecks](#healthchecks)
   - [Immich](#immich)
+  - [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
+  - [Mealie](#mealie)
+  - [Medusa](#medusa)
+  - [OctoPrint](#octoprint)
+  - [OpenWeatherMap](#openweathermap)
+  - [PaperlessNG](#paperlessng)
+  - [PiAlert](#pialert)
+  - [PiHole](#pihole)
+  - [Ping](#ping)
+  - [Portainer](#portainer)
+  - [Prometheus](#prometheus)
+  - [Proxmox](#proxmox)
+  - [qBittorrent](#qbittorrent)
+  - [rTorrent](#rtorrent)
+  - [SABnzbd](#sabnzbd)
+  - [Speedtest Tracker](#SpeedtestTracker)
+  - [Tautulli](#tautulli)
+  - [Tdarr](#tdarr)
+  - [Uptime Kuma](#uptime-kuma)
+  - [What's Up Docker](#whats-up-docker)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -49,54 +49,70 @@ If you experiencing any issue, please have a look to the [troubleshooting](troub
   type: "<type>"
 ```
 
-## PiHole
-
-Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
-
-The following configuration is available for the PiHole service.
+## AdGuard Home
+For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
 
 ```yaml
-- name: "Pi-hole"
+- name: "Adguard"
+  logo: "assets/tools/adguardhome.png"
+  url: "https://adguard.exemple.com"
+  target: "_blank"
+  type: "AdGuardHome"
+```
+
+## Copy to Clipboard
+
+This service displays the same information of a generic one, but shows an icon button on the indicator place (right side) you can click to get the content of the `clipboard` field copied to your clipboard.
+
+You can still provide an `url` that would be open when clicked anywhere but on the icon button.
+
+Configuration example:
+
+```yaml
+- name: "Copy me!"
   logo: "assets/tools/sample.png"
-  # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
-  url: "http://192.168.0.151/admin"
-  apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
-  type: "PiHole"
+  subtitle: "Subtitle text goes here"
+  url: "#"
+  type: "CopyToClipboard"
+  clipboard: "this text will be copied to your clipboard"
 ```
 
-**Remarks:**
-If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
+## Emby / Jellyfin
 
-## OpenWeatherMap
-
-Using the OpenWeatherMap service you can display weather information about a given location.
-The following configuration is available for the OpenWeatherMap service:
+You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
 
 ```yaml
-- name: "Weather"
-  location: "Amsterdam" # your location.
-  locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
-  apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
-  units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
-  background: "square" # choose which type of background you want behind the image. Can be one of: square, circle, none. Defaults to none.
-  type: "OpenWeather"
+- name: "Emby"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "Emby"
+  apikey: "<---insert-api-key-here--->"
+  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
 
-**Remarks:**
-If for some reason your city can't be found by entering the name in the `location` property, you could also try to configure the OWM city ID in the `locationId` property. To retrieve your specific City ID, go to the [OWM website](https://openweathermap.org), search for your city and retrieve the ID from the URL (for example, the City ID of Amsterdam is 2759794).
+## Healthchecks
 
-## Medusa
-
-This service displays News (grey), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
+This service displays information about the configured status checks from the Healthchecks application.
 Two lines are needed in the config.yml :
 
 ```yaml
-  type: "Medusa"
+  type: "Healthchecks"
   apikey: "<---insert-api-key-here--->"
 ```
 
-The url must be the root url of Medusa application.
-The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+The url must be the root url of the Healthchecks application.
+The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
+
+## Immich
+
+The Immich service displays stats from your Immich server.
+
+```yaml
+- name: "Immich"
+  type: "Immich"
+  apikey: "<--- Your api key --->" # administrator user
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
 
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
 
@@ -122,6 +138,59 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
   legacyApi: true
 ```
 
+## Mealie
+
+First off make sure to remove an existing `subtitle` as it will take precedence if set. 
+Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
+
+
+## Medusa
+
+This service displays News (grey), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
+Two lines are needed in the config.yml :
+
+```yaml
+  type: "Medusa"
+  apikey: "<---insert-api-key-here--->"
+```
+
+The url must be the root url of Medusa application.
+The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## OctoPrint/Moonraker
+
+The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
+
+Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation for details.
+
+```yaml
+- name: "Octoprint"
+  logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
+  apikey: "xxxxxxxxxxxx" # insert your own API key here.
+  endpoint: "http://192.168.0.151:8080"
+  display: "text" # 'text' or 'bar'. Default to `text`.
+  type: "OctoPrint"
+```
+
+## OpenWeatherMap
+
+Using the OpenWeatherMap service you can display weather information about a given location.
+The following configuration is available for the OpenWeatherMap service:
+
+```yaml
+- name: "Weather"
+  location: "Amsterdam" # your location.
+  locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
+  apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
+  units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
+  background: "square" # choose which type of background you want behind the image. Can be one of: square, circle, none. Defaults to none.
+  type: "OpenWeather"
+```
+
+**Remarks:**
+If for some reason your city can't be found by entering the name in the `location` property, you could also try to configure the OWM city ID in the `locationId` property. To retrieve your specific City ID, go to the [OWM website](https://openweathermap.org), search for your city and retrieve the ID from the URL (for example, the City ID of Amsterdam is 2759794).
+
+
 ## PaperlessNG
 
 This service displays total number of documents stored. Two lines are required:
@@ -132,6 +201,34 @@ This service displays total number of documents stored. Two lines are required:
 ```
 
 API key can be generated in Settings > Administration > Auth Tokens
+
+## PiAlert
+
+The PiAlert service displays stats from your PiAlert server.
+
+```yaml
+- name: "PiAlert"
+  type: "PiAlert"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## PiHole
+
+Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
+
+The following configuration is available for the PiHole service.
+
+```yaml
+- name: "Pi-hole"
+  logo: "assets/tools/sample.png"
+  # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
+  url: "http://192.168.0.151/admin"
+  apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
+  type: "PiHole"
+```
+
+**Remarks:**
+If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
 
 ## Ping
 
@@ -145,29 +242,6 @@ For Ping you need to set the type to Ping and provide a url. By default the HEAD
   tag: "app"
   url: "https://www.reddit.com/r/selfhosted/"
   method: "head"
-```
-
-## Prometheus
-
-For Prometheus you need to set the type to Prometheus and provide a url.
-
-```yaml
-- name: "Prometheus"
-  type: Prometheus
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151/"
-  # subtitle: "Monitor data server"
-```
-
-## AdGuard Home
-For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
-
-```yaml
-- name: "Adguard"
-  logo: "assets/tools/adguardhome.png"
-  url: "https://adguard.exemple.com"
-  target: "_blank"
-  type: "AdGuardHome"
 ```
 
 ## Portainer
@@ -190,100 +264,17 @@ See https://docs.portainer.io/api/access#creating-an-access-token
   #   - "local"
 ```
 
-## Emby / Jellyfin
+## Prometheus
 
-You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
+For Prometheus you need to set the type to Prometheus and provide a url.
 
 ```yaml
-- name: "Emby"
+- name: "Prometheus"
+  type: Prometheus
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
-  type: "Emby"
-  apikey: "<---insert-api-key-here--->"
-  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
+  # subtitle: "Monitor data server"
 ```
-
-## Uptime Kuma
-
-Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
-
-The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
-
-```yaml
-- name: "Uptime Kuma"
-  logo: "assets/tools/sample.png"
-  # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
-  url: "http://192.168.0.151:3001"
-  slug: "myCustomDashboard" # Defaults to "default" if not provided.
-  type: "UptimeKuma"
-```
-
-## Tautulli
-
-The Tautulli service can allow you to show the number of currently active
-streams on you Plex instance. An API key is required, and can be obtained from
-the "Web Interface" section of settings on the Tautulli web UI.
-
-```yaml
-- name: "Tautulli"
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151:8181"
-  type: "Tautulli"
-  apikey: "<---insert-api-key-here--->"
-```
-
-Because the service type and link don't necessarily have to match, you could
-even make the service type Tautulli on your Plex card and provide a separate
-endpoint pointing to Tautulli!
-
-```yaml
-- name: "Plex"
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151:32400/web" # Plex
-  endpoint: "http://192.168.0.151:8181" # Tautulli
-  type: "Tautulli"
-  apikey: "<---insert-api-key-here--->"
-```
-
-## Mealie
-
-First off make sure to remove an existing `subtitle` as it will take precedence if set. 
-Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
-
-## Healthchecks
-
-This service displays information about the configured status checks from the Healthchecks application.
-Two lines are needed in the config.yml :
-
-```yaml
-  type: "Healthchecks"
-  apikey: "<---insert-api-key-here--->"
-```
-
-The url must be the root url of the Healthchecks application.
-The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
-
-## rTorrent
-
-This service displays the global upload and download rates, as well as the number of torrents
-listed in rTorrent. The service communicates with the rTorrent XML-RPC interface which needs
-to be accessible from the browser. Please consult
-[the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
-for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
-servers can be found at https://enable-cors.org/server.html.
-
-```yaml
-- name: "rTorrent"
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151" # Your rTorrent web UI, f.e. ruTorrent or Flood.
-  xmlrpc: "http://192.168.0.151:8081" # Reverse proxy for rTorrent's XML-RPC.
-  type: "Rtorrent"
-  rateInterval: 5000 # Interval for updating the download and upload rates.
-  torrentInterval: 60000 # Interval for updating the torrent count.
-  username: "username" # Username for logging into rTorrent (if applicable).
-  password: "password" # Password for logging into rTorrent (if applicable).
-```
-
 
 ## Proxmox
 
@@ -337,49 +328,25 @@ servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
   target: "_blank" # optional html a tag target attribute
 ```
 
-## Copy to Clipboard
+## rTorrent
 
-This service displays the same information of a generic one, but shows an icon button on the indicator place (right side) you can click to get the content of the `clipboard` field copied to your clipboard.
-
-You can still provide an `url` that would be open when clicked anywhere but on the icon button.
-
-Configuration example:
+This service displays the global upload and download rates, as well as the number of torrents
+listed in rTorrent. The service communicates with the rTorrent XML-RPC interface which needs
+to be accessible from the browser. Please consult
+[the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
+for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
+servers can be found at https://enable-cors.org/server.html.
 
 ```yaml
-- name: "Copy me!"
+- name: "rTorrent"
   logo: "assets/tools/sample.png"
-  subtitle: "Subtitle text goes here"
-  url: "#"
-  type: "CopyToClipboard"
-  clipboard: "this text will be copied to your clipboard"
-```
-
-## SpeedtestTracker
-
-This service will show the download and upload speeds in Mbit/s and the ping in ms.
-To configure the service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
-
-Configuration example:
-
-```yaml
-- name: "Speedtest Tracker"
-  type: "SpeedtestTracker"
-  url: "http://192.168.0.1:8080"
-  target: "_blank"
-```
-
-## What's up Docker
-
-What's up Docker allow to display info about the number of container running and the number for which an update is available on your Homer dashboard.
-
-The following configuration is available for the WUD service.
-
-```yaml
-- name: "What's Up Docker"
-  logo: "assets/tools/sample.png"
-  subtitle: "Docker image update notifier"
-  url: "http://192.168.1.12:3001"
-  type: "WUD"
+  url: "http://192.168.0.151" # Your rTorrent web UI, f.e. ruTorrent or Flood.
+  xmlrpc: "http://192.168.0.151:8081" # Reverse proxy for rTorrent's XML-RPC.
+  type: "Rtorrent"
+  rateInterval: 5000 # Interval for updating the download and upload rates.
+  torrentInterval: 60000 # Interval for updating the torrent count.
+  username: "username" # Username for logging into rTorrent (if applicable).
+  password: "password" # Password for logging into rTorrent (if applicable).
 ```
 
 ## SABnzbd
@@ -397,20 +364,48 @@ the "Config" > "General" section of the SABnzbd config in the SABnzbd web UI.
   downloadInterval: 5000 # (Optional) Interval (in ms) for updating the download count
 ```
 
-## OctoPrint/Moonraker
+## SpeedtestTracker
 
-The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
+This service will show the download and upload speeds in Mbit/s and the ping in ms.
+To configure the service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
 
-Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation for details.
+Configuration example:
 
 ```yaml
-- name: "Octoprint"
-  logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
-  apikey: "xxxxxxxxxxxx" # insert your own API key here.
-  endpoint: "http://192.168.0.151:8080"
-  display: "text" # 'text' or 'bar'. Default to `text`.
-  type: "OctoPrint"
+- name: "Speedtest Tracker"
+  type: "SpeedtestTracker"
+  url: "http://192.168.0.1:8080"
+  target: "_blank"
 ```
+
+## Tautulli
+
+The Tautulli service can allow you to show the number of currently active
+streams on you Plex instance. An API key is required, and can be obtained from
+the "Web Interface" section of settings on the Tautulli web UI.
+
+```yaml
+- name: "Tautulli"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8181"
+  type: "Tautulli"
+  apikey: "<---insert-api-key-here--->"
+```
+
+Because the service type and link don't necessarily have to match, you could
+even make the service type Tautulli on your Plex card and provide a separate
+endpoint pointing to Tautulli!
+
+```yaml
+- name: "Plex"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:32400/web" # Plex
+  endpoint: "http://192.168.0.151:8181" # Tautulli
+  type: "Tautulli"
+  apikey: "<---insert-api-key-here--->"
+```
+
+
 
 ## Tdarr
 
@@ -425,23 +420,32 @@ for transcoding on your Tdarr instance as well as the number of errored items.
   checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
 
-## PiAlert
 
-The PiAlert service displays stats from your PiAlert server.
+## Uptime Kuma
+
+Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
+
+The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
 
 ```yaml
-- name: "PiAlert"
-  type: "PiAlert"
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+- name: "Uptime Kuma"
+  logo: "assets/tools/sample.png"
+  # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
+  url: "http://192.168.0.151:3001"
+  slug: "myCustomDashboard" # Defaults to "default" if not provided.
+  type: "UptimeKuma"
 ```
 
-## Immich
+## What's up Docker
 
-The Immich service displays stats from your Immich server.
+What's up Docker allow to display info about the number of container running and the number for which an update is available on your Homer dashboard.
+
+The following configuration is available for the WUD service.
 
 ```yaml
-- name: "Immich"
-  type: "Immich"
-  apikey: "<--- Your api key --->" # administrator user
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+- name: "What's Up Docker"
+  logo: "assets/tools/sample.png"
+  subtitle: "Docker image update notifier"
+  url: "http://192.168.1.12:3001"
+  type: "WUD"
 ```
