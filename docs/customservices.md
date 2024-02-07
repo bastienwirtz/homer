@@ -35,6 +35,7 @@ within Homer:
   - [Tdarr](#tdarr)
   - [PiAlert](#pialert)
   - [Immich](#immich)
+  - [OpenHAB](#openhab)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -446,3 +447,19 @@ The Immich server must be running at least version 1.85.0 for the correct api en
   apikey: "<--- Your api key --->" # administrator user
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
+
+## OpenHAB
+
+You need to set the type to OpenHAB, provide an api key and enable cors on OpenHAB.
+
+```yaml
+- name: "OpenHAB"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "OpenHAB"
+  apikey: "<---insert-api-key-here--->"
+  things: true # true will query the things API and report total and online things count. false will skip the call
+  items: true # true will query the items API and report total items count. false will skip the call
+```
+To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
+To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
