@@ -55,11 +55,11 @@ export default {
         return this.item.url;
       }
       return this.item.url
-        .replace('${origin}', location.origin)
-        .replace('${protocol}', location.protocol)
-        .replace('${host}', location.host)
-        .replace('${hostname}', location.hostname)
-        .replace('${port}', location.port);
+        .replace('${origin}', window.location.origin)
+        .replace('${protocol}', window.location.protocol)
+        .replace('${host}', window.location.host)
+        .replace('${hostname}', window.location.hostname)
+        .replace('${port}', window.location.port);
     }
   },
 };
