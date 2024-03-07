@@ -8,5 +8,3 @@ Once generated, download the ZIP and use android-* icons for pwa-*:
 - use `android-chrome-512x512.png` for `pwa-512x512.png`
 - `apple-touch-icon.png` is `apple-touch-icon.png`
 - `favicon.ico` is `favicon.ico`
-
-`
