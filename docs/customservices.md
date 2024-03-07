@@ -13,7 +13,7 @@ within Homer:
   - [PiHole](#pihole)
   - [OpenWeatherMap](#openweathermap)
   - [Medusa](#medusa)
-  - [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
+  - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
   - [PaperlessNG](#paperlessng)
   - [Ping](#ping)
   - [Prometheus](#prometheus)
