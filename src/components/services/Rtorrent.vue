@@ -125,9 +125,8 @@ export default {
       const headers = { "Content-Type": "text/xml" };
 
       if (this.item.username && this.item.password) {
-        headers[
-          "Authorization"
-        ] = `${this.item.username}:${this.item.password}`;
+        headers["Authorization"] =
+          `${this.item.username}:${this.item.password}`;
       }
 
       return fetch(`${this.item.xmlrpc.replace(/\/$/, "")}/RPC2`, {
