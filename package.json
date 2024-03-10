@@ -1,6 +1,6 @@
 {
   "name": "homer",
-  "version": "23.10.1",
+  "version": "24.02.1",
   "scripts": {
     "dev": "vite",
     "mock": "http-server dummy-data/ --cors",
@@ -9,23 +9,22 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/fontawesome-free": "^6.5.1",
     "bulma": "^0.9.4",
     "lodash.merge": "^4.6.2",
-    "vue": "^3.3.4",
-    "yaml": "^2.3.2"
+    "vue": "^3.4.15",
+    "yaml": "^2.4.1"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.4.0",
-    "@vitejs/plugin-vue": "^4.3.4",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "eslint": "^8.50.0",
-    "eslint-plugin-vue": "^9.17.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.22.0",
     "http-server": "^14.1.1",
-    "prettier": "^3.0.3",
-    "sass": "^1.68.0",
-    "vite": "^4.4.9",
-    "vite-plugin-pwa": "^0.16.5"
+    "prettier": "^3.2.5",
+    "sass": "^1.71.1",
+    "vite": "^5.0.11",
+    "vite-plugin-pwa": "^0.19.2"
   },
   "license": "Apache-2.0"
 }
