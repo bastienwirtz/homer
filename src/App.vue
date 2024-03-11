@@ -60,6 +60,11 @@
 
     <section id="main-section" class="section">
       <div v-cloak class="container">
+        <WebSearchInput
+          v-if="config.searchEngines"
+          :engines="config.searchEngines"
+        />
+
         <ConnectivityChecker
           v-if="config.connectivityCheck"
           @network-status-update="offline = $event"
@@ -153,6 +158,7 @@ import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
+import WebSearchInput from "./components/WebSearchInput.vue";
 
 import defaultConfig from "./assets/defaults.yml?raw";
 
@@ -168,6 +174,7 @@ export default {
     SettingToggle,
     DarkMode,
     DynamicTheme,
+    WebSearchInput,
   },
   data: function () {
     return {
