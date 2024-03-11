@@ -1,0 +1,9 @@
+[build]
+  command = "yarn run build && cp dist/assets/config-demo.yml.dist dist/assets/config.yml && cp -R dummy-data/ dist/"
+  publish = "dist/"
+
+[[headers]]
+  for = "/dummy-data/*"
+
+  [headers.values]
+  Content-Type = "application/json"
