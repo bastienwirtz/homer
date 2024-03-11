@@ -171,6 +171,37 @@ For AdGuard Home you need to set the type to AdGuard, if you have somes issues a
   type: "AdGuardHome"
 ```
 
+<details>
+<summary>NGINX proxy manager example (by <a href="https://github.com/jordyegnl" target="_blank">@jordyegnl</a>)</summary><br/>
+
+  Make a proxy host for AdGuard Home. The (sub-)domain needs to point to the IP of your AGH instance, with port 80.
+  Make sure that the Scheme is set to http. If you have set up https in AGH you can use https.
+  
+  Go to Custom locations and add 3 new locations. The IP and Port should be the same as before.
+  
+  location /
+  ``` 
+  add_header Access-Control-Allow-Origin *;
+  ```
+  
+  location /control/status
+  ``` 
+  add_header Access-Control-Allow-Origin *;
+  proxy_set_header Authorization "Basic (username:password in base64)"; 
+  ```
+  
+  location /control/stats
+  ``` 
+  add_header Access-Control-Allow-Origin *;
+  proxy_set_header Authorization "Basic (username:password in base64)"; 
+  ```
+  
+  Replace (username:password in base64) with your username and password encoded in base64. for example "username:password" encoded in base64 is dXNlcm5hbWU6cGFzc3dvcmQ=
+  In NGINX proxy manager it will look like this ``proxy_set_header Authorization "Basic dXNlcm5hbWU6cGFzc3dvcmQ=";``
+
+   If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
+</details>
+
 ## Portainer
 
 This service displays info about the total number of containers managed by your Portainer instance.
