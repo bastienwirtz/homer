@@ -27,6 +27,7 @@ within Homer:
   - [Proxmox](#proxmox)
   - [rTorrent](#rtorrent)
   - [qBittorrent](#qbittorrent)
+  - [Transmission](#transmission)
   - [CopyToClipboard](#copy-to-clipboard)
   - [Speedtest Tracker](#SpeedtestTracker)
   - [What's Up Docker](#whats-up-docker)
@@ -336,6 +337,30 @@ servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
   rateInterval: 2000 # Interval for updating the download and upload rates.
   torrentInterval: 5000 # Interval for updating the torrent count.
   target: "_blank" # optional html a tag target attribute
+```
+
+## Transmission
+
+This service displays the global upload and download rates, as well as the number of torrents
+listed.
+The service communicates with the Transmission RPC interface which needs
+to be accessible from the browser.
+Please
+consult [the instructions](https://github.com/transmission/transmission/blob/main/docs/Editing-Configuration-Files.md#rpc)
+for setting up Transmission RPC and make sure the correct CORS-settings are applied.
+Examples for various servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
+
+```yaml
+- name: "Transmission"
+  type: "Transmission"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.1.2:9090/transmission/web" # Your Transmission web UI
+  rpc: "http://192.168.1.2:9090/transmission/rpc" # (required, if your url not ends with /web or you use custom RPC URL) Url to Transmission RPC
+  updateInterval: 2000 # (optional) Interval for updating the download and upload rates and torrent count
+  username: "username" # Username for logging into Transmission (required if RPC/WebUI required login/password)
+  password: "password" # Password for logging into Transmission (required if RPC/WebUI required login/password)
+  sessionId: "sessionId" # (optional) X-Transmission-Session-Id for logging into Transmission (it set automatically)
+  target: "_blank" # (optional) html a tag target attribute
 ```
 
 ## Copy to Clipboard
