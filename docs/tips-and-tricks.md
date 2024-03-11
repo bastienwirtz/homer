@@ -190,3 +190,75 @@ So, using [Node-Red](https://nodered.org/docs/getting-started/) and a quick flow
 To get started, simply import [this flow](https://flows.nodered.org/flow/4b6406c9a684c26ace0430dd1826e95d) into your Node-Red instance and change the RSS feed in the "Get News RSS Feed" node to one of your choosing!
 
 So far, the flow has been tested with BBC News and Sky News, however it should be easy to modify the flow to work with other RSS feeds if they don't work out of the box!
+
+
+## Protecting Homer with nginx and oauth2-proxy
+
+#### `by @craiggenner`
+
+[oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) is "A reverse proxy and static file server that provides authentication using Providers (Google, GitHub, and others) to validate accounts by email, domain or group."
+
+Using oauth2-proxy with [nginx](https://nginx.org/en/) and the [auth_request](https://nginx.org/en/docs/http/ngx_http_auth_request_module.html) parameter it's possible to protect Homer behind an authentication proxy.
+
+Reasons for doing this vary, but include wanting to hide private interfaces from the general public, but a VPN is too heavy weight.
+
+nginx doesn't have to be used with oauth2-proxy, any of the authentication fatures of nginx can be used and there are plenty of guides for this.
+
+### Homer config
+
+Nothing special is required, but it's recomended that the `connectivityCheck` parameter is set to `true` so that when the authentication expires you are redirected to the login and don't get an error message in Homer:
+
+```yml
+connectivityCheck: true
+```
+
+### oauth2-proxy setup and config
+
+Nothing special is required. Setup as per your authentication requirements and test pointing to a local static file.
+
+### nginx config
+
+Within a nginx vhost the config looks like this:
+
+```
+server {
+
+    root /var/www/;
+    index index.html;
+    server_name homer.example.com;
+
+    listen 443 ssl;
+    ssl_certificate /etc/certs/fullchain.pem;
+    ssl_certificate_key /etc/certs/privkey.pem;
+
+    # OAuth2 Proxy
+    location /oauth2/ {
+      proxy_pass       http://127.0.0.1:8081;
+      proxy_set_header Host                    $host;
+      proxy_set_header X-Real-IP               $remote_addr;
+      proxy_set_header X-Scheme                $scheme;
+      proxy_set_header X-Auth-Request-Redirect $request_uri;
+    }
+    location = /oauth2/auth {
+      proxy_pass       http://127.0.0.1:8081;
+      proxy_set_header Host             $host;
+      proxy_set_header X-Real-IP        $remote_addr;
+      proxy_set_header X-Scheme         $scheme;
+      # nginx auth_request includes headers but not body
+      proxy_set_header Content-Length   "";
+      proxy_pass_request_body           off;
+    }
+
+    location @error401 {
+      return 302 $scheme://$host/oauth2/sign_in;
+    }
+
+    location / {
+        auth_request /oauth2/auth;
+        error_page 401 = @error401;
+
+        proxy_pass http://localhost:8080/;
+	allow all;
+    }
+}
+```
