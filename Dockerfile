@@ -1,16 +1,16 @@
 # build stage
-FROM node:lts-alpine3.19 as build-stage
+FROM node:lts-alpine3.18 as build-stage
 
 WORKDIR /app
 
 COPY package.json ./
-RUN yarn install --frozen-lockfile --non-interactive
+RUN yarn install --no-cache --frozen-lockfile --non-interactive
 
 COPY . .
 RUN yarn build
 
 # production stage
-FROM alpine:3.19
+FROM alpine:3.18
 
 ENV GID 1000
 ENV UID 1000
