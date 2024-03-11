@@ -150,7 +150,19 @@ services:
         target: "_blank" # optional html a tag target attribute
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
+      - name: "Relative URL"
+        subtitle: An example URL that routes to a service on the same machine as Homer, by port or relative URL
+        logo: fa-explosion
+        url: "//${hostname}:8080"
 ```
+
+All generic service URLs allow a small number of tokens to aid in dashboard configuration relative to where the Homer instance is hosted:
+
+- `${origin}` : The current window.location.origin as evaluated by Javascript, e.g. `https://mysite.com:81`
+- `${protocol}` : The current window.location.protocol as evaluated by Javascript, e.g. `https:`
+- `${host}` : The current window.location.host as evaluated by Javascript, e.g. `mysite.com:81`
+- `${hostname}` : The current window.location.hostname as evaluated by Javascript, e.g. `mysite.com`
+- `${port}` : The current window.location.port as evaluated by Javascript, e.g. `81`
 
 View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
 

@@ -5,7 +5,7 @@
       :style="`background-color:${item.background};`"
       :class="item.class"
     >
-      <a :href="item.url" :target="item.target" rel="noreferrer">
+      <a :href="url" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div :class="mediaClass">
             <slot name="icon">
@@ -49,6 +49,18 @@ export default {
     mediaClass: function () {
       return { media: true, "no-subtitle": !this.item.subtitle };
     },
+    url: function () {
+      const containsTemplates = this.item.url?.indexOf('${') > -1;
+      if(!containsTemplates) {
+        return this.item.url;
+      }
+      return this.item.url
+        .replace('${origin}', window.location.origin)
+        .replace('${protocol}', window.location.protocol)
+        .replace('${host}', window.location.host)
+        .replace('${hostname}', window.location.hostname)
+        .replace('${port}', window.location.port);
+    }
   },
 };
 </script>
