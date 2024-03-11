@@ -10,6 +10,10 @@ services:
       - /your/local/assets/:/www/assets
     ports:
       - 8080:8080
+    # homer doesn't accept PUID and PGID set in environment.
+    # to use global environment variables (e.g. like in omv-compose) 
+    # declare user like this:
+    # user: ${PUID}:${PGID}
     user: 1000:1000 # default
     environment:
       - INIT_ASSETS=1 # default
