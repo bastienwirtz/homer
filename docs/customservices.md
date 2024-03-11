@@ -33,6 +33,7 @@ within Homer:
   - [SABnzbd](#sabnzbd)
   - [OctoPrint](#octoprint)
   - [Tdarr](#tdarr)
+  - [Nextcloud](#nextcloud)
   - [PiAlert](#pialert)
   - [Immich](#immich)
   - [OpenHAB](#openhab)
@@ -425,6 +426,19 @@ for transcoding on your Tdarr instance as well as the number of errored items.
   type: "Tdarr"
   checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
+
+## Nextcloud
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Nextcloud is online, offline, or in [maintenance
+mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.html#maintenance-mode).
+Example configuration:
+
+```yaml
+- name: Nextcloud
+  type: Nextcloud
+  logo: assets/tools/sample.png
+  url: http://nextcloud.example.com
 
 ## PiAlert
 
