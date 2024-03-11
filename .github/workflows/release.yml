@@ -12,11 +12,11 @@ jobs:
     steps:
       - 
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - 
         name: Build project
         run: |
-          yarn install
+          yarn install --frozen-lockfile --non-interactive
           yarn build
       - 
         name: Create artifact
@@ -25,7 +25,7 @@ jobs:
       - 
         name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true

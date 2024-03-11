@@ -3,8 +3,8 @@ FROM node:lts-alpine3.19 as build-stage
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN yarn install --frozen-lockfile
+COPY package.json ./
+RUN yarn install --frozen-lockfile --non-interactive
 
 COPY . .
 RUN yarn build
