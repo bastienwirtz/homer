@@ -4,7 +4,7 @@ FROM node:lts-alpine3.19 as build-stage
 WORKDIR /app
 
 COPY package.json ./
-RUN yarn install --frozen-lockfile --non-interactive
+RUN yarn install --verbose --frozen-lockfile --non-interactive
 
 COPY . .
 RUN yarn build
