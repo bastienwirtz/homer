@@ -6,6 +6,7 @@
 
 // Themes import
 @import "./themes/sui.scss";
+@import "./themes/gradient.scss";
 
 @mixin ellipsis() {
   white-space: nowrap;
