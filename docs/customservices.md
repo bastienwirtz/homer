@@ -325,8 +325,7 @@ This service displays the global upload and download rates, as well as the numbe
 listed. The service communicates with the qBittorrent API interface which needs
 to be accessible from the browser. Please consult
 [the instructions](https://github.com/qbittorrent/qBittorrent/pull/12579)
-for setting up qBittorrent and make sure the correct CORS-settings are applied. Examples for various
-servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
+for setting up qBittorrent and make sure the correct CORS-settings are applied, for example by setting the header: "`Access-Control-Allow-Origin: *`. Examples for various servers can be found at [enable-cors.org](https://enable-cors.org/server.html). qBittorrent [doesn't support](https://github.com/qbittorrent/qBittorrent/issues/17598#issuecomment-1225538387) authenticating from other websites. Nevertheless if you know what you are doing you can disable CSRF protection and it will work.
 
 ```yaml
 - name: "qBittorrent"
@@ -336,6 +335,10 @@ servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
   rateInterval: 2000 # Interval for updating the download and upload rates.
   torrentInterval: 5000 # Interval for updating the torrent count.
   target: "_blank" # optional html a tag target attribute
+
+  # Optional authentication, requires disabling CSRF protection
+  username: "username"
+  password: "password"
 ```
 
 ## Copy to Clipboard
