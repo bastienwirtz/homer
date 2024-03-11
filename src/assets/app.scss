@@ -13,7 +13,10 @@
   text-overflow: ellipsis;
 }
 
-html, body, body #app-mount, body #app {
+html,
+body,
+body #app-mount,
+body #app {
   height: 100%;
   background-color: var(--background);
 }
@@ -32,6 +35,7 @@ body {
 
     a {
       color: var(--link);
+
       &:hover {
         color: var(--link-hover);
       }
@@ -40,6 +44,7 @@ body {
     .title {
       color: var(--text-title);
     }
+
     .subtitle {
       color: var(--text-subtitle);
     }
@@ -47,6 +52,7 @@ body {
     .card {
       background-color: var(--card-background);
       box-shadow: 0 2px 15px 0 var(--card-shadow);
+
       &:hover {
         background-color: var(--card-background);
       }
@@ -54,6 +60,7 @@ body {
 
     .message {
       background-color: var(--card-background);
+
       .message-body {
         color: var(--text);
       }
@@ -132,6 +139,7 @@ body {
 
       .logo {
         float: left;
+
         i {
           vertical-align: top;
           padding: 8px 15px;
@@ -145,22 +153,26 @@ body {
         }
       }
     }
+
     .navbar {
       background-color: var(--highlight-secondary);
 
       a {
         color: var(--text-header);
         padding: 8px 12px;
+
         &:hover,
         &:focus {
           color: var(--text-header);
           background-color: var(--highlight-hover);
         }
       }
-	.navbar-menu {
-      background-color: inherit;
+
+      .navbar-menu {
+        background-color: inherit;
       }
     }
+
     .navbar-end {
       text-align: right;
     }
@@ -251,6 +263,10 @@ body {
       .tag-text {
         display: block;
       }
+
+      &.is-warning {
+        color: var(--link-hover);
+      }
     }
   }
 
@@ -300,6 +316,7 @@ body {
   .search-bar {
     position: relative;
     display: inline-block;
+
     input {
       border: none;
       background-color: var(--highlight-hover);
