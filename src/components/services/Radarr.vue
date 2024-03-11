@@ -47,6 +47,11 @@ export default {
     };
   },
   created: function () {
+    const checkInterval = parseInt(this.item.checkInterval, 10) || 0;
+    if (checkInterval > 0) {
+      setInterval(() => this.fetchConfig(), checkInterval);
+    }
+
     this.fetchConfig();
   },
   computed: {
