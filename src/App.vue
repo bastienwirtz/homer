@@ -245,7 +245,24 @@ export default {
         return response
           .text()
           .then((body) => {
-            return parse(body, { merge: true });
+            return fetch("assets/secrets.yml")
+              .then((secretsResponse) => {
+                if (secretsResponse.status == 404 || secretsResponse.redirected) {
+                  return {};
+                }
+                if (!secretsResponse.ok) {
+                  throw Error(`${secretsResponse.statusText}: ${secretsResponse.body}`);
+                }
+                return secretsResponse.text();
+              })
+              .then((secretsText) => {
+                const secrets = parse(secretsText);
+                let replacedBody = body;
+                Object.entries(secrets).forEach(([key, token]) => {
+                  replacedBody = replacedBody.replace(new RegExp(`!secret ${key}`, "g"), token);
+                });
+                return parse(replacedBody, { merge: true });
+              });
           })
           .then(function (config) {
             if (config.externalConfig) {

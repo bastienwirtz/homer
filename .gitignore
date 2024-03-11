@@ -22,5 +22,6 @@ yarn-error.log*
 
 # App configuration
 config.yml
+secrets.yml
 
 .drone.yml

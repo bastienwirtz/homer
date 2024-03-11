@@ -83,7 +83,7 @@ services:
         node: "node1"
         warning_value: 50
         danger_value: 80
-        api_token: "xxxxxxxxxxxx"
+        api_token: !secret proxmox_api
       - name: "An awesome app"
         logo: "assets/tools/sample.png"
         subtitle: "Bookmark example"
@@ -95,7 +95,7 @@ services:
     items:
       - name: "Octoprint"
         logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
-        apikey: "xxxxxxxxxxxx"
+        apikey: !secret octoprint_api
         endpoint: "https://homer-demo-content.netlify.app/octoprint"
         type: "OctoPrint"
       - name: "Example item"
@@ -107,7 +107,7 @@ services:
         target: "_blank" 
       - name: "Weather"
         location: "Lyon"
-        apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
+        apikey: !secret weather_api # insert your own API key here. Request one from https://openweathermap.org/api.
         units: "metric"
         endpoint: "https://homer-demo-content.netlify.app/openweather/weather"
         type: "OpenWeather"
