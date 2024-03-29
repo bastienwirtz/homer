@@ -9,8 +9,9 @@ import "./assets/app.scss";
  
 const app = createApp(App);
 
-injectSpeedInsights();
 inject();
+
+injectSpeedInsights();
 
 app.component("DynamicStyle", (_props, context) => {
   return h("style", {}, context.slots);
