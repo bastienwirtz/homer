@@ -1,16 +1,12 @@
 ---
-# Homepage configuration
-# See https://fontawesome.com/v5/search for icons options
-
 title: "Vijay's dashboard"
 subtitle: "Homer"
 logo: "logo.png"
-# icon: "fas fa-skull-crossbones" # Optional icon
 
 header: true
-footer: false #'<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+footer: false 
 
-# Optional theme customization
+# theme customization
 theme: default
 colors:
   light:
@@ -60,24 +56,21 @@ links:
   - name: "Github"
     icon: "fab fa-github"
     url: "https://github.com/vijayakumarravi"
-    target: "_blank" # optional html a tag target attribute
+    target: "_blank" 
   - name: "Instagram"
     icon: "fab fa-instagram"
     url: "https://instagram.com/vijay.ig"
-    target: "_blank" # optional html a tag target attribute
+    target: "_blank" 
   - name: "Twitter"
     icon: "fab fa-twitter"
     url: "https://twitter.com/_vijayakumar_"
-    target: "_blank" # optional html a tag target attribute
+    target: "_blank" 
   # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
   # see url field and assets/additional-page.yml.dist used in this example:
   #- name: "another page!"
   #  icon: "fas fa-file-alt"
   #  url: "#additional-page"
 
-# Services
-# First level array represent a group.
-# Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "Dashboards"
     icon: "fas fa-cloud"
@@ -85,43 +78,36 @@ services:
       - name: "cloudflare dash"
         logo: "https://dash.cloudflare.com/favicon.ico"
         subtitle: "Cloudflare admin dashboard"
-        tag: "dash"
-        keywords: "Cloudflare admin dashboard"
         url: "https://dash.cloudflare.com/4fc118cc61e84408cd4335a7544714bd/vijayakumar.xyz"
-        target: "_blank" # optional html a tag target attribute
+        target: "_blank" 
 
       - name: "Cloudflare zero trust"
         logo: "https://dash.cloudflare.com/favicon.ico"
         subtitle: "Cloudflare zero trust"
-        tag: "dash"
         url: "https://one.dash.cloudflare.com/4fc118cc61e84408cd4335a7544714bd/"
         target: "_blank"
 
       - name: "Fly.io dash"
         logo: "https://fly.io/phx/ui/images/favicon/favicon-595d1312b35dfe32838befdf8505515e.ico?vsn=d"
         subtitle: "Fly.io Dashboard"
-        tag: "dash"
         url: "https://fly.io/dashboard/vijayakumar-ravi"
         target: "_blank"
 
       - name: "Render Dashboard"
         logo: "https://dashboard.render.com/favicon-dark.png"
         subtitle: "render.com vault dashboard"
-        tag: "dash"
         url: "https://dashboard.render.com/web/srv-cj9qb3hduelc73d91itg"
         target: "_blank"
 
       - name: "NextDNS Dashboard"
         logo: "https://my.nextdns.io/favicon.ico"
         subtitle: "NextDns setup dashboard"
-        tag: "dash"
         url: "https://my.nextdns.io/a28d42/setup"
         target: "_blank"
 
       - name: "Vercel Dashboard"
         logo: "https://vercel.com/favicon.ico"
         subtitle: "Vercel deployments dashboard"
-        tag: "dash"
         url: "https://vercel.com/dashboard"
         target: "_blank"
 
@@ -131,44 +117,41 @@ services:
       - name: "Bitwarden"
         logo: "https://vault.bitwarden.com/favicon.ico"
         subtitle: "Password manager"
-        tag: "app"
         url: "https://vault.vijayakumar.xyz"
-        target: "_blank" # optional html a tag target attribute
+        target: "_blank" 
 
       - name: "Uptime kuma"
         logo: "https://flytime.fly.dev/favicon.ico"
         subtitle: "self-hosted monitoring tool"
-        tag: "app"
         url: "https://flytime.fly.dev"
-        slug: "vault" # Defaults to "default" if not provided.
+        slug: "all"
         type: "UptimeKuma"
         target: "_blank"
 
       - name: "Immich"
         logo: "https://immich.app/img/favicon.png"
         subtitle: "Google photos alternative"
-        tag: "service"
-        url: "https://photos.vijayakumar.xyz/"
+        url: "https://photo.vijayakumar.xyz"
         target: "_blank"
 
       - name: "Jellyfin"
         logo: "https://jellyfin.org/images/favicon.ico"
         subtitle: "Self-hosted media streaming system"
-        tag: "service"
         url: "https://jellyfin.vijayakumar.xyz/"
+        type: "Emby"
+        apikey: "c3fa263cffb34a0fbef0dcf8e575961d"
+        libraryType: "series" #Choose which stats to show. Can be one of: music, series or movies.
         target: "_blank"
 
       - name: "Umami"
         logo: "https://umami-vijay.vercel.app/favicon.ico"
         subtitle: "Umami is a privacy-focused alternative to Google Analytics."
-        tag: "app"
         url: "https://umami-vijay.vercel.app/dashboard"
         target: "_blank"
 
       - name: "Onelink"
-        logo: "http://0.gravatar.com/avatar/7fe9c540c91d52fb69830fb0d77036dc"
+        logo: "https://dub.co/favicon-32x32.png"
         subtitle: "Link in bio tool"
-        tag: "app"
         url: "https://onelink-vijay.vercel.app"
         target: "_blank"
 
@@ -178,62 +161,60 @@ services:
       - name: "Dockge"
         logo: "https://dockge.kuma.pet/icon.svg"
         subtitle: "easy-to-use docker compose stack manager"
-        tag: "app"
         url: "http://10.0.0.3:5001/"
         target: "_blank"
       
       - name: "Jellyseerr"
         logo: "https://github.com/Fallenbagel/jellyseerr/blob/develop/public/android-chrome-512x512.png?raw=true"
         subtitle: "Media requesting system"
-        tag: "app"
         url: "http://10.0.0.3:5055/"
         target: "_blank"
       
       - name: "Pihole"
         logo: "https://docs.pi-hole.net/images/favicon.ico"
         subtitle: "Dns ad blocker"
-        tag: "app"
         url: "http://10.0.0.2/admin"
-        apikey: "3875b6b52bad0be6f8214321f867d149c05f6e9d55e35f303f350d55c12376f3"
         type: "PiHole"
         target: "_blank"
 
       - name: "Duplicati"
         logo: "https://www.duplicati.com/images/duplicati-fb-share-v1.png"
         subtitle: "Remote backup solution"
-        tag: "app"
         url: "http://10.0.0.3:8200/"
         target: "_blank"
 
       - name: "QBittorrent"
-        logo: "https://www.qbittorrent.org/favicon.svg"
+        logo: "https://www.qbittorrent.org/favicon.ico"
         subtitle: "Torrent downloader"
-        tag: "app"
         url: "http://10.0.0.3:8080/"
         target: "_blank"
       
-  - name: "Media"
-    icon: "fas fa-server"
+  - name: "Mediarr"
+    icon: "fas fa-compact-disc"
     items:      
-      - name: "Pihole"
-        logo: "https://docs.pi-hole.net/images/favicon.ico"
-        subtitle: "Dns ad blocker"
-        tag: "app"
-        url: "http://10.0.0.2/admin"
-        apikey: "3875b6b52bad0be6f8214321f867d149c05f6e9d55e35f303f350d55c12376f3"
-        type: "PiHole"
+      - name: "Prowlarr"
+        logo: "https://prowlarr.com/img/favicon.ico"
+        subtitle: "Index management"
+        url: "http://10.0.0.3:9696/"
         target: "_blank"
 
-      - name: "Duplicati"
-        logo: "https://www.duplicati.com/images/duplicati-fb-share-v1.png"
-        subtitle: "Remote backup solution"
-        tag: "app"
-        url: "http://10.0.0.3:8200/"
+      - name: "Lidarr"
+        logo: "https://lidarr.audio/img/favicon.ico"
+        subtitle: "Music management"
+        url: "http://10.0.0.3:8686/"
         target: "_blank"
 
-      - name: "QBittorrent"
-        logo: "https://www.qbittorrent.org/favicon.svg"
-        subtitle: "Torrent downloader"
-        tag: "app"
-        url: "http://10.0.0.3:8080/"
+  - name: "Video"
+    icon: "fas fa-video"
+    items:      
+      - name: "Sonarr"
+        logo: "https://sonarr.tv/img/favicon.ico"
+        subtitle: "Series management"
+        url: "http://10.0.0.3:8989/"
+        target: "_blank"
+
+      - name: "Radarr"
+        logo: "https://radarr.video/img/favicon.ico"
+        subtitle: "Movie management"
+        url: "http://10.0.0.3:7878/"
         target: "_blank"
