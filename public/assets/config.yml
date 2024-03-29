@@ -184,7 +184,7 @@ services:
         target: "_blank"
 
       - name: "QBittorrent"
-        logo: "https://www.qbittorrent.org/favicon.ico"
+        logo: "https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/icons/qbittorrent.ico"
         subtitle: "Torrent downloader"
         url: "http://10.0.0.3:8080/"
         target: "_blank"
