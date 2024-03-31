@@ -1,0 +1,96 @@
+---
+
+title: "Zoro's dashboard"
+subtitle: "Homer"
+
+# This overwrites message config. Setting it to empty to remove message from this page and keep it only in the main one:
+message: ~
+
+# as we want to include a differente link here (so we can get back to home page), we need to replicate all links or they will be revome when overwriting the links field:
+links:
+  - name: "Bio"
+    icon: "fas fa-address-card"
+    url: "https://l.vijayakumar.xyz"
+  - name: "Blog"
+    icon: "fas fa-book"
+    url: "https://vijayakumar.xyz"
+  - name: "Github"
+    icon: "fab fa-github"
+    url: "https://github.com/vijayakumarravi"
+    target: "_blank" 
+  - name: "Instagram"
+    icon: "fab fa-instagram"
+    url: "https://instagram.com/vijay.ig"
+    target: "_blank" 
+  - name: "Twitter"
+    icon: "fab fa-twitter"
+    url: "https://twitter.com/_vijayakumar_"
+    target: "_blank" 
+  - name: "Sanji"
+    icon: "fas fa-file-alt"
+    url: "#"
+
+services:
+  - name: "Services"
+    icon: "fas fa-server"
+    items:
+      - name: "Immich"
+        logo: "https://immich.app/img/favicon.png"
+        subtitle: "Google photos alternative"
+        url: "http://10.0.0.4:2283"
+        target: "_blank"
+
+      - name: "Jellyfin"
+        logo: "https://jellyfin.org/images/favicon.ico"
+        subtitle: "Self-hosted media streaming system"
+        url: "http://10.0.0.4:8096"
+        type: "Emby"
+        apikey: "c3fa263cffb34a0fbef0dcf8e575961d"
+        libraryType: "series" #Choose which stats to show. Can be one of: music, series or movies.
+        target: "_blank"
+
+  - name: "Local"
+    icon: "fas fa-server"
+    items:      
+      - name: "Restic (Backrest)"
+        logo: "https://github.com/restic/restic/blob/master/doc/logo/logo.png?raw=true"
+        subtitle: "Remote backup solution"
+        url: "http://10.0.0.4:8080/"
+        target: "_blank"
+
+      - name: "QBittorrent"
+        logo: "https://raw.githubusercontent.com/qbittorrent/qBittorrent/master/src/icons/qbittorrent.ico"
+        subtitle: "Torrent downloader"
+        url: "http://10.0.0.4:8000/"
+        target: "_blank"
+      
+  - name: "Mediarr"
+    icon: "fas fa-compact-disc"
+    items:      
+      - name: "Prowlarr"
+        logo: "https://prowlarr.com/img/favicon.ico"
+        subtitle: "Index management"
+        url: "http://10.0.0.4:9696/"
+        target: "_blank"
+
+      - name: "Lidarr"
+        logo: "https://lidarr.audio/img/favicon.ico"
+        subtitle: "Music management"
+        url: "http://10.0.0.4:8686/"
+        target: "_blank"
+
+  - name: "Video"
+    icon: "fas fa-video"
+    items:      
+      - name: "Sonarr"
+        logo: "https://sonarr.tv/img/favicon.ico"
+        subtitle: "Series management"
+        url: "http://10.0.0.4:8989/"
+        target: "_blank"
+
+      - name: "Radarr"
+        logo: "https://radarr.video/img/favicon.ico"
+        subtitle: "Movie management"
+        url: "http://10.0.0.4:7878/"
+        target: "_blank"
+

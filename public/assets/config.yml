@@ -1,5 +1,5 @@
 ---
-title: "Vijay's dashboard"
+title: "Sanji's dashboard"
 subtitle: "Homer"
 logo: "logo.png"
 
@@ -65,11 +65,9 @@ links:
     icon: "fab fa-twitter"
     url: "https://twitter.com/_vijayakumar_"
     target: "_blank" 
-  # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
-  # see url field and assets/additional-page.yml.dist used in this example:
-  #- name: "another page!"
-  #  icon: "fas fa-file-alt"
-  #  url: "#additional-page"
+  - name: "Zoro"
+    icon: "fas fa-file-alt"
+    url: "#zoro"
 
 services:
   - name: "Dashboards"
@@ -177,10 +175,10 @@ services:
         type: "PiHole"
         target: "_blank"
 
-      - name: "Duplicati"
-        logo: "https://www.duplicati.com/images/duplicati-fb-share-v1.png"
+      - name: "Restic (Backrest)"
+        logo: "https://github.com/restic/restic/blob/master/doc/logo/logo.png?raw=true"
         subtitle: "Remote backup solution"
-        url: "http://10.0.0.3:8200/"
+        url: "http://10.0.0.3:9898/"
         target: "_blank"
 
       - name: "QBittorrent"
