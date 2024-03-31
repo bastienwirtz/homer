@@ -136,9 +136,6 @@ services:
         logo: "https://jellyfin.org/images/favicon.ico"
         subtitle: "Self-hosted media streaming system"
         url: "https://jellyfin.vijayakumar.xyz/"
-        type: "Emby"
-        apikey: "c3fa263cffb34a0fbef0dcf8e575961d"
-        libraryType: "series" #Choose which stats to show. Can be one of: music, series or movies.
         target: "_blank"
 
       - name: "Umami"
