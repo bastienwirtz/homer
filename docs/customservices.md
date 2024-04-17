@@ -36,6 +36,7 @@ within Homer:
   - [PiAlert](#pialert)
   - [Immich](#immich)
   - [OpenHAB](#openhab)
+  - [Jellystat](#jellystat)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -463,3 +464,19 @@ You need to set the type to OpenHAB, provide an api key and enable cors on OpenH
 ```
 To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
 To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
+
+## Jellystat
+
+The Jellystat serice display the number of concurrent streams on your jellyfin server.
+The Jellystat server must be running behind a reverse proxy to add some cors headers:
+ - Access-Control-Allow-Origin: ${your_domain}
+ - Access-Control-Allow-Headers: Authorization
+
+```yaml
+- name: "Jellystat"
+  logo: "assets/tools/jellystat.png"
+  url: "http://192.168.1.154:3000"
+  type: "Jellystat"
+  apikey: "<---insert-api-key-here--->"
+```
+You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
