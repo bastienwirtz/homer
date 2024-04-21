@@ -1,28 +1,20 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres
 {
-  "name": "Node.js & PostgreSQL",
+  "name": "Node.js Development Container",
   "dockerComposeFile": "docker-compose.yml",
   "service": "vue-app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-  "initializeCommand": {},
   "onCreateCommand": {
     "customizeZsh": "zsh ./.devcontainer/scripts/customize_zsh.zsh",
     "installApp": "yarn install --verbose"
   },
-  "updateContentCommand": {},
-  "postCreateCommand": {
-    // "customizeCopilot": "zsh ./.devcontainer/scripts/customize_gh.zsh",
-    // "installCopilotCli": "gh extension install github/gh-copilot",
-  },
-  "postStartCommand": {},
-  "postAttachCommand": {},
   // "remoteEnv": {
   //    "PATH": "${containerEnv:PATH}:/some/other/path",
   // },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // This can be used to network with other containers or with the host. i.e. [3000, 5432, 6379]
   // "forwardPorts": [3000],
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  //"remoteUser": "root", // default user is non-root "node" with sudo privileges
   "features": {
     "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
@@ -36,7 +28,7 @@
       "userGid": "automatic"
     },
     "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
-      "plugins": "ssh-agent z git history github copyfile copypath docker-compose docker npm nvm themes dirhistory zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-256color",
+      "plugins": "git themes history dirhistory zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-256color",
       "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting https://github.com/zsh-users/zsh-history-substring-search https://github.com/chrissicool/zsh-256color"
     }
   },
@@ -65,46 +57,7 @@
         "workbench.iconTheme": "vscode-icons",
         "editor.renderWhitespace": "all",
         "terminal.integrated.defaultProfile.linux": "zsh",
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "nextjs.files.alias": "@", // The import alias for the files to be created. Example: "~", "@", "#", etc
-        "nextjs.files.extension": "tsx", // The extension of the files to be created. Example: "tsx"
-        "nextjs.files.showType": true, // Show the type of the file in the file name. Example: "home.component.tsx"
-        "nextjs.files.include": ["js", "jsx", "ts", "tsx"], // The file extensions to watch for changes. Example: "js", "jsx", "ts", "tsx"
-        "nextjs.files.exclude": [
-          "**/node_modules/**",
-          "**/dist/**",
-          "**/out/**",
-          "**/build/**",
-          "**/.*/**"
-        ], // The files to exclude from watching. Example: "**/node_modules/**", "**/dist/**", "**/out/**", "**/build/**", "**/.*/**"
-        "nextjs.files.watch": ["controllers", "components", "routers"], // The types of files to watch for changes. Example: "controllers", "components", "routers"
-        "nextjs.files.showPath": true, // Show the path of the file in the file name. Example: "home.component.tsx (pages/home)"
-        "nextjs.server.turbo": true, // Enable Turbo Mode for NextJS server (Only for NextJS 14 or later)
-        "nextjs.server.experimentalHttps": false, // Enable HTTPS for the NextJS server (Only for NextJS 14 or later)
-        "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[jsonc]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-        },
-        "[yaml]": {
-          "editor.insertSpaces": true,
-          "editor.tabSize": 2,
-          "editor.autoIndent": "advanced",
-          "diffEditor.ignoreTrimWhitespace": false
-        },
-        "[markdown]": {
-          "editor.formatOnSave": true,
-          "editor.wordWrap": "wordWrapColumn",
-          "editor.wordWrapColumn": 100,
-          "editor.wrappingIndent": "same",
-          "editor.insertSpaces": true,
-          "editor.tabSize": 4,
-          "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-        }
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
       },
       // Add the IDs of extensions you want installed when the container is created. Order matters if extension dependencies exist.
       // These can be added to the project's extensions.json file to avoid hardcoding here. That would speed up container start times.
@@ -160,6 +113,4 @@
       ]
     }
   }
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  //"remoteUser": "root" // default user is non-root "node" with sudo privileges
 }
