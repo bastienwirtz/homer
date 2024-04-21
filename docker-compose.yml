@@ -1,18 +1,15 @@
+---
+version: "2"
 services:
   homer:
-    #image: b4bz/homer
+    image: b4bz/homer
     #To build from source, comment previous line and uncomment below
-    build: .
-    container_name: homer_dev
+    #build: .
+    container_name: homer
     volumes:
-      - homer_dev:/www/assets
+      - /your/local/assets/:/www/assets
     ports:
-      - 8033:8080
-    # user: 1000:1000 # default
+      - 8080:8080
+    user: 1000:1000 # default
     environment:
-      UID: 1000
-      GID: 1000
-      INIT_ASSETS: 0
-
-volumes:
-  homer_dev:
+      - INIT_ASSETS=1 # default
