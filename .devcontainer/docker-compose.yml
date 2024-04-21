@@ -8,4 +8,3 @@ services:
     volumes:
       - ../..:/workspaces:cached
     command: sleep infinity
-    env_file: devcontainer.env
