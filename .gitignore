@@ -24,5 +24,3 @@ yarn-error.log*
 config.yml
 
 .drone.yml
-.devcontainer/devcontainer.env
-.devcontainer/triggerdotdev.env
