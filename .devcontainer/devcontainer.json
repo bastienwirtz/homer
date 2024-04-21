@@ -73,12 +73,6 @@
         "IBM.output-colorizer",
         "usernamehw.errorlens",
 
-        "Vue.volar",
-
-        // Git-related extensions
-        "eamodio.gitlens",
-        "GitHub.vscode-pull-request-github",
-
         // Code formatting and linting
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
@@ -86,30 +80,15 @@
         "streetsidesoftware.code-spell-checker",
         "steoates.autoimport",
 
-        // React and web development
+        // Web development
+        "Vue.volar",
         "wix.vscode-import-cost",
         "meganrogge.template-string-converter",
         "christian-kohler.path-intellisense",
         "codeandstuff.package-json-upgrade",
 
-        // Database and ORM
-        "mtxr.sqltools",
-        "Prisma.prisma",
-        "cweijan.vscode-redis-client",
-
         // Miscellaneous
-        "ms-azuretools.vscode-docker",
-        "vscode-icons-team.vscode-icons",
-
-        // AI-assisted coding
-        "GitHub.copilot",
-        "GitHub.copilot-chat",
-
-        // Remote development
-        "ms-vscode.remote-explorer",
-        "GitHub.codespaces",
-        "ms-vscode.remote-repositories"
-        // "GitHub.remotehub",
+        "vscode-icons-team.vscode-icons"
       ]
     }
   }
