@@ -1,16 +1,21 @@
 # build stage
-FROM node:lts-alpine3.18 as build-stage
+FROM node:lts-alpine3.19 as build-stage
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+RUN corepack use pnpm@8
 
 WORKDIR /app
 
-COPY package.json ./
-RUN yarn install --no-cache --frozen-lockfile --non-interactive
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN yarn build
+RUN pnpm build
 
 # production stage
-FROM alpine:3.18
+FROM alpine:3.19
 
 ENV GID 1000
 ENV UID 1000
