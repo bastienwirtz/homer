@@ -24,7 +24,7 @@
     "http-server": "^14.1.1",
     "prettier": "^3.2.5",
     "sass": "^1.71.1",
-    "vite": "^5.0.11",
+    "vite": "^5.0.13",
     "vite-plugin-pwa": "^0.19.2"
   },
   "license": "Apache-2.0"
