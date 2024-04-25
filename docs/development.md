@@ -1,24 +1,31 @@
 # Development
 
-If you want to contribute to Homer, please read the [contributing guidelines](https://github.com/bastienwirtz/homer/blob/main/CONTRIBUTING.md) first. 
+## Local Installation
+
+If you want to contribute to Homer, please read the [contributing guidelines](https://github.com/bastienwirtz/homer/blob/main/CONTRIBUTING.md) first.
 
 ```sh
 pnpm install
 pnpm dev
 ```
 
+## Devcontainer
+
+Opening the project in vscode will trigger a popup that will ask you to open the project in the devcontainer. You can also use the command pallet to search for "Reopen in container". The devcontainer has everything needed for development. Just start the debugger.
+
 ## Custom services
 
 Custom services are small VueJs component (see `src/components/services/`) that add little features to a classic, "static", dashboard item. It should be very simple.
-A dashboard can contain a lot of items, so performance is very important. 
+A dashboard can contain a lot of items, so performance is very important.
 
 The [`Generic`](https://github.com/bastienwirtz/homer/blob/main/src/components/services/Generic.vue) service provides a typical card layout which
-you can extend to add specific features. Unless you want a completely different design, extended the generic service is the recommended way. It gives you 3 [slots](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) to extend: `icon`, `content` and `indicator`. 
+you can extend to add specific features. Unless you want a completely different design, extended the generic service is the recommended way. It gives you 3 [slots](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) to extend: `icon`, `content` and `indicator`.
 Each one is **optional**, and will display the usual information if omitted.
 
 Each service must implement the `item` [property](https://vuejs.org/v2/guide/components-props.html) and bind it the Generic component if used.
 
 ### Skeleton
+
 ```Vue
 <template>
   <Generic :item="item">
@@ -48,7 +55,6 @@ export default {
 };
 </script>
 ```
-
 
 ## Themes
 
