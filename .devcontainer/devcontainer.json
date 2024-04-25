@@ -5,7 +5,7 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "onCreateCommand": {
     "customizeZsh": "zsh ./.devcontainer/scripts/customize_zsh.zsh",
-    "installApp": "yarn install --verbose"
+    "installApp": "pnpm install"
   },
   // "remoteEnv": {
   //    "PATH": "${containerEnv:PATH}:/some/other/path",
