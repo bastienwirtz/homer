@@ -14,10 +14,21 @@ jobs:
         name: Checkout
         uses: actions/checkout@v4
       - 
+        name: pnpm setup
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - 
+        name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - 
         name: Build project
         run: |
-          yarn install --frozen-lockfile --non-interactive
-          yarn build
+          pnpm install --frozen-lockfile
+          pnpm build
       - 
         name: Create artifact
         working-directory: "dist"

@@ -24,15 +24,19 @@ jobs:
       name: Checkout
       uses: actions/checkout@v4
     - 
+      name: pnpm setup
+      uses: pnpm/action-setup@v3
+      with:
+        version: 8
+    - 
       name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        cache: 'pnpm'
     - 
       name: install dependencies
-      run: yarn install --frozen-lockfile --non-interactive
+      run: pnpm install --frozen-lockfile
     - 
       name: Check code style & potentential issues
-      run: yarn lint
-
+      run: pnpm lint

@@ -3,13 +3,8 @@
 If you want to contribute to Homer, please read the [contributing guidelines](https://github.com/bastienwirtz/homer/blob/main/CONTRIBUTING.md) first. 
 
 ```sh
-# Using yarn (recommended)
-yarn install
-yarn dev
-
-# **OR** Using npm
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Custom services

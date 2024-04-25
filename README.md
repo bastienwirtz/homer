@@ -143,13 +143,8 @@ helm install homer djjudas21/homer -f values.yaml
 ### Build manually
 
 ```sh
-# Using yarn (recommended)
-yarn install
-yarn build
-
-# **OR** Using npm
-npm install
-npm run build
+pnpm install
+pnpm build
 ```
 
 Then your dashboard is ready to use in the `/dist` directory.
