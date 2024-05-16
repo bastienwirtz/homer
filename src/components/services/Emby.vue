@@ -48,6 +48,8 @@ export default {
         return `${this.movieCount} movies`;
       else if (this.item.libraryType === "series")
         return `${this.episodeCount} eps, ${this.seriesCount} series`;
+      else if (this.item.libraryType === "moviesandseries")
+        return `${this.movieCount} movies, ${this.seriesCount} series`;
       else return `wrong library type 💀`;
     },
   },
