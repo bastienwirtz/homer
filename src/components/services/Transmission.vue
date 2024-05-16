@@ -88,13 +88,13 @@ export default {
           auth.password = this.item.password;
         }
         const {
-          arguments: { activeTorrentCount, downloadSpeed, uploadSpeed },
+          arguments: { torrentCount, downloadSpeed, uploadSpeed },
         } = await this.transmissionFetch("session-stats", auth);
 
         this.error = false;
         this.ul = uploadSpeed;
         this.dl = downloadSpeed;
-        this.count = activeTorrentCount;
+        this.count = torrentCount;
       } catch (e) {
         this.error = true;
         console.error(e);
