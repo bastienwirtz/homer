@@ -191,4 +191,12 @@ export default {
   font-weight: 300;
   font-family: monospace;
 }
+
+.fa-download {
+    color: #00C853;
+}
+
+.fa-upload {
+    color: #D50000;
+}
 </style>
