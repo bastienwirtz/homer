@@ -17,11 +17,11 @@
       </p>
     </template>
     <template #indicator>
-      <span v-if="!error" class="count"
-        >{{ count }}
-        <template v-if="count === 1">torrent</template>
-        <template v-else>torrents</template>
-      </span>
+      <div class="notifs">
+        <strong v-if="count > 0" class="notif activity" title="Torrents">
+          {{ count }}
+        </strong>
+      </div>
     </template>
   </Generic>
 </template>
@@ -88,13 +88,13 @@ export default {
           auth.password = this.item.password;
         }
         const {
-          arguments: { activeTorrentCount, downloadSpeed, uploadSpeed },
+          arguments: { torrentCount, downloadSpeed, uploadSpeed },
         } = await this.transmissionFetch("session-stats", auth);
 
         this.error = false;
         this.ul = uploadSpeed;
         this.dl = downloadSpeed;
-        this.count = activeTorrentCount;
+        this.count = torrentCount;
       } catch (e) {
         this.error = true;
         console.error(e);
@@ -190,5 +190,32 @@ export default {
 .monospace {
   font-weight: 300;
   font-family: monospace;
+}
+
+.fa-download {
+    color: #00C853;
+}
+
+.fa-upload {
+    color: #D50000;
+}
+
+.notifs {
+  position: absolute;
+  color: white;
+  font-family: sans-serif;
+  top: 0.3em;
+  right: 0.5em;
+  .notif {
+    display: inline-block;
+    padding: 0.2em 0.35em;
+    border-radius: 0.25em;
+    position: relative;
+    margin-left: 0.3em;
+    font-size: 0.8em;
+    &.activity {
+      background-color: #4fb5d6;
+    }
+  }
 }
 </style>
