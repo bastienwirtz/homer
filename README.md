@@ -44,10 +44,19 @@
  <img src="https://raw.github.com/bastienwirtz/homer/main/docs/screenshot.png" width="100%">
 </p>
 
+/**
+ * @file README.md
+ * @brief Table of Contents for the Homer project.
+ *
+ * This file contains the table of contents for the Homer project's README.md file.
+ * It provides an overview of the different sections and links to the corresponding documentation files.
+ */
+
 ## Table of Contents
 
 - [Features](#features)
 - [Getting started](#getting-started)
+- [Kubernetes Installation](docs/kubernetes.md)
 - [Configuration](docs/configuration.md)
 - [Custom services](docs/customservices.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
@@ -121,23 +130,6 @@ unzip homer.zip
 cd homer
 cp assets/config.yml.dist assets/config.yml
 npx serve # or python -m http.server 8010 or apache, nginx ...
-```
-
-### Using Helm
-
-Thanks to [@djjudas21](https://github.com/djjudas21) [charts](https://github.com/djjudas21/charts/tree/main/charts/homer):
-
-```sh
-helm repo add djjudas21 https://djjudas21.github.io/charts/
-helm repo update djjudas21
-
-# install with all defaults
-helm install homer djjudas21/homer
-
-# install with customisations
-wget https://raw.githubusercontent.com/djjudas21/charts/main/charts/homer/values.yaml
-# edit values.yaml
-helm install homer djjudas21/homer -f values.yaml
 ```
 
 ### Build manually
