@@ -36,6 +36,7 @@ within Homer:
   - [PiAlert](#pialert)
   - [Immich](#immich)
   - [OpenHAB](#openhab)
+  - [Home Assistant](#home-assistant)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -463,3 +464,19 @@ You need to set the type to OpenHAB, provide an api key and enable cors on OpenH
 ```
 To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
 To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
+
+## Home Assistant
+
+You need to set the type to HomeAssistant, provide an api key and enable cors on Home Assistant.
+
+```yaml
+- name: "HomeAssistant"
+  logo: "assets/tools/sample.png" # optional, if none provided logo is taken from the home assistant instance
+  url: "http://192.168.0.151/"
+  type: "HomeAssistant"
+  apikey: "<---insert-api-key-here--->"
+  items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
+  separator: " " # optional, how to separate items
+```
+To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
+To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
