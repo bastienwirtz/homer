@@ -93,7 +93,7 @@ export default {
     fetchServerStatus: async function () {
       const headers = this.headers;
 
-      this.fetch("/api/", { headers })
+      return this.fetch("/api/", { headers })
         .then((response) => {
           if (response && response.message) this.status = "running";
           else throw new Error();
