@@ -36,6 +36,9 @@ export default {
     status: "",
     version: "",
     entities: 0,
+    location_name: "",
+    separator: " ",
+    items: ["name", "version"],
   }),
   computed: {
     headers: function () {
@@ -46,8 +49,8 @@ export default {
     },
     details: function () {
       const details = [];
-      const items = this.item.items;
-      const separator = this.item.separator;
+      const items = this.items;
+      const separator = this.separator;
 
       for (const i in items) {
         const key = items[i];
@@ -81,9 +84,9 @@ export default {
   created() {
     this.fetchServerStatus().then(() => {
       if (!this.item.subtitle && this.status !== "dead") {
-        if (!this.item.items) this.item.items = ["name", "version"];
-        if (!this.item.separator) this.item.separator = " ";
-        if (!this.item.logo) this.item.logo = `${this.item.url}/static/icons/favicon-192x192.png`;
+        if (this.item.items) this.items = this.item.items;
+        if (this.item.separator) this.separator = this.item.separator;
+
         this.fetchServerStats();
       }
     });
