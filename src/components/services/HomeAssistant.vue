@@ -80,14 +80,14 @@ export default {
     },
   },
   created() {
-    this.fetchServerStatus();
-
-    if (!this.item.subtitle && this.status !== "dead") {
-      if (!this.item.items) this.item.items = ["name", "version"];
-      if (!this.item.separator) this.item.separator = " ";
-      if (!this.item.logo) this.item.logo = `${this.item.url}/static/icons/favicon-192x192.png`;
-      this.fetchServerStats();
-    }
+    this.fetchServerStatus().then(() => {
+      if (!this.item.subtitle && this.status !== "dead") {
+        if (!this.item.items) this.item.items = ["name", "version"];
+        if (!this.item.separator) this.item.separator = " ";
+        if (!this.item.logo) this.item.logo = `${this.item.url}/static/icons/favicon-192x192.png`;
+        this.fetchServerStats();
+      }
+    });
   },
   methods: {
     fetchServerStatus: async function () {
