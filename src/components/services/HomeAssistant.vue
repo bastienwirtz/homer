@@ -34,7 +34,6 @@ export default {
   },
   data: () => ({
     status: "",
-    msg: "",
     version: "",
     entities: 0,
   }),
