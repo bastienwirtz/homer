@@ -471,7 +471,7 @@ You need to set the type to HomeAssistant, provide an api key and enable cors on
 
 ```yaml
 - name: "HomeAssistant"
-  logo: "assets/tools/sample.png" # optional, if none provided logo is taken from the home assistant instance
+  logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
   type: "HomeAssistant"
   apikey: "<---insert-api-key-here--->"
