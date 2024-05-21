@@ -17,10 +17,10 @@
     "yaml": "^2.4.2"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.10.2",
+    "@rushstack/eslint-patch": "^1.8.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",
-    "eslint": "^9.1.1",
+    "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.25.0",
     "http-server": "^14.1.1",
     "prettier": "^3.2.5",
@@ -29,5 +29,5 @@
     "vite-plugin-pwa": "^0.20.0"
   },
   "license": "Apache-2.0",
-  "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3"
+  "packageManager": "pnpm@9.1.2+sha256.19c17528f9ca20bd442e4ca42f00f1b9808a9cb419383cd04ba32ef19322aba7"
 }
