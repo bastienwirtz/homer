@@ -66,7 +66,7 @@ export default {
             break;
           case "entities":
             details.push(
-              `Entities: ${this.entities}`,
+              `${this.entities} entities`,
             );
             break;
           default:
