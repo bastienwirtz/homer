@@ -13,7 +13,7 @@
     </template>
     <template #indicator>
       <div v-if="status" class="status" :class="status">
-        {{ status }}
+        {{ status_msg }}
       </div>
     </template>
   </Generic>
@@ -34,6 +34,7 @@ export default {
   },
   data: () => ({
     status: "",
+    status_msg: "",
     items: ["ads_percentage_today"],
     results: [],
     format: "{0}% blocked",
@@ -65,6 +66,12 @@ export default {
           if (response) {
             this.status = response.status;
 
+            if (response.status == "enabled") {
+              this.status_msg = "enabled";
+            } else {
+              this.status_msg = "dns only";
+            }
+
             for (const i in this.items)
               this.results[i] = response[this.items[i]];
           } else throw new Error();
@@ -91,9 +98,9 @@ export default {
   }
 
   &.disabled:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
+    background-color: #e8bb7d;
+    border-color: #e8bb7d;
+    box-shadow: 0 0 5px 1px #e8bb7d;
   }
 
   &:before {
