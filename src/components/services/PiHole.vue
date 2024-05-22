@@ -6,8 +6,8 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="percentage">
-          {{ percentage }}&percnt; blocked
+        <template v-else>
+          {{ details }}
         </template>
       </p>
     </template>
@@ -34,17 +34,25 @@ export default {
   },
   data: () => ({
     status: "",
-    ads_percentage_today: 0,
+    items: ["ads_percentage_today"],
+    results: [],
+    format: "{0}% blocked",
   }),
   computed: {
-    percentage: function () {
-      if (this.ads_percentage_today) {
-        return this.ads_percentage_today.toFixed(1);
+    details: function () {
+      if (this.results) {
+        return this.format.replace(
+          /{(\d+)}/g,
+          (match, index) => this.results[index],
+        );
       }
       return "";
     },
   },
   created() {
+    if (this.item.items) this.items = this.item.items;
+    if (this.item.format) this.format = this.item.format;
+
     this.fetchStatus();
   },
   methods: {
@@ -52,12 +60,20 @@ export default {
       const authQueryParams = this.item.apikey
         ? `?summaryRaw&auth=${this.item.apikey}`
         : "";
-      const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
-        console.log(e),
-      );
+      return this.fetch(`/api.php${authQueryParams}`)
+        .then((response) => {
+          if (response) {
+            this.status = response.status;
 
-      this.status = result.status;
-      this.ads_percentage_today = result.ads_percentage_today;
+            for (const i in this.items)
+              this.results[i] = response[this.items[i]];
+          } else throw new Error();
+          1;
+        })
+        .catch((e) => {
+          console.log(e);
+          this.status = "dead";
+        });
     },
   },
 };
