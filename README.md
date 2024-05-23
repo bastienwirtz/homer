@@ -44,14 +44,6 @@
  <img src="https://raw.github.com/bastienwirtz/homer/main/docs/screenshot.png" width="100%">
 </p>
 
-/**
- * @file README.md
- * @brief Table of Contents for the Homer project.
- *
- * This file contains the table of contents for the Homer project's README.md file.
- * It provides an overview of the different sections and links to the corresponding documentation files.
- */
-
 ## Table of Contents
 
 - [Features](#features)
