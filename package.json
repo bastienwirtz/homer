@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.2",
-    "bulma": "^0.9.4",
+    "bulma": "^1.0.1",
     "lodash.merge": "^4.6.2",
     "vue": "^3.4.26",
-    "yaml": "^2.4.2"
+    "yaml": "^2.4.5"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
@@ -29,5 +29,5 @@
     "vite-plugin-pwa": "^0.20.0"
   },
   "license": "Apache-2.0",
-  "packageManager": "pnpm@9.1.4+sha512.9df9cf27c91715646c7d675d1c9c8e41f6fce88246f1318c1aa6a1ed1aeb3c4f032fcdf4ba63cc69c4fe6d634279176b5358727d8f2cc1e65b65f43ce2f8bfb0"
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
 }

@@ -43,10 +43,10 @@ export default {
   -webkit-animation: scale-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: scale-up 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-.is-light i {
+.light i {
   color: black;
 }
-.is-dark i {
+.dark i {
   color: white;
 }
 /**

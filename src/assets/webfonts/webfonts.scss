@@ -1,23 +1,11 @@
-/* raleway-regular - latin */
+/* latin */
 @font-face {
-  font-family: "Raleway";
+  font-family: 'Noto Sans';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
+  font-stretch: 100%;
   font-display: swap;
-  src: local("Raleway"), local("Raleway-Regular"),
-    url("./webfonts/raleway/raleway-v14-latin-regular.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("./webfonts/raleway/raleway-v14-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: url("./noto/noto-latin-normal.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/* lato-regular - latin */
-@font-face {
-  font-family: "Lato";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local("Lato Regular"), local("Lato-Regular"),
-    url("./webfonts/lato/lato-v16-latin-regular.woff2") format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("./webfonts/lato/lato-v16-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
