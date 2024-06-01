@@ -43,8 +43,8 @@ export default {
   computed: {
     headers: function () {
       return {
-        'Authorization': `Bearer ${this.item.apikey}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.item.apikey}`,
+        "Content-Type": "application/json",
       };
     },
     details: function () {
@@ -57,27 +57,19 @@ export default {
 
         switch (key) {
           case "version":
-            details.push(
-              `v${this.version}`,
-            );
+            details.push(`v${this.version}`);
             break;
           case "name":
-            details.push(
-              `${this.location_name}`,
-            );
+            details.push(`${this.location_name}`);
             break;
           case "entities":
-            details.push(
-              `${this.entities} entities`,
-            );
+            details.push(`${this.entities} entities`);
             break;
           default:
-            details.push(
-              `undefined key ${key} `,
-            );
+            details.push(`undefined key ${key} `);
         }
       }
-      
+
       return details.join(separator);
     },
   },
@@ -112,9 +104,9 @@ export default {
         .then((response) => {
           if (response) {
             if (response.version) this.version = response.version;
-            if (response.location_name) this.location_name = response.location_name;
-          }
-          else throw new Error();
+            if (response.location_name)
+              this.location_name = response.location_name;
+          } else throw new Error();
         })
         .catch((e) => {
           console.log(e);
@@ -125,8 +117,7 @@ export default {
         .then((response) => {
           if (response) {
             this.entities = response.length;
-          }
-          else throw new Error();
+          } else throw new Error();
         })
         .catch((e) => {
           console.log(e);
