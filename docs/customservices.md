@@ -37,6 +37,7 @@ within Homer:
   - [Immich](#immich)
   - [OpenHAB](#openhab)
   - [Jellystat](#jellystat)
+  - [Home Assistant](#home-assistant)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -480,3 +481,19 @@ The Jellystat server must be running behind a reverse proxy to add some cors hea
   apikey: "<---insert-api-key-here--->"
 ```
 You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
+
+## Home Assistant
+
+You need to set the type to HomeAssistant, provide an api key and enable cors on Home Assistant.
+
+```yaml
+- name: "HomeAssistant"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "HomeAssistant"
+  apikey: "<---insert-api-key-here--->"
+  items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
+  separator: " " # optional, how to separate items
+```
+To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
+To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
