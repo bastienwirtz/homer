@@ -19,57 +19,52 @@
   </Generic>
 </template>
 <script>
-import service from '@/mixins/service.js';
-import Generic from './Generic.vue';
+import service from "@/mixins/service.js";
+import Generic from "./Generic.vue";
 
 export default {
-	name: "Jellyfin",
-	mixins: [service],
-	props: {
-		item: Object,
-	},
-	components: {
-		Generic,
-	},
-	data: () => ({
-		stats: null,
-		error: false,
-	}),
-	computed: {
-		streams: function () {
-			if (!this.stats) {
-				return ""
-			}
-			let nb_streams = 0
-			// Since there is no proper endpoint to get the number of current
-			// streams, so we have to do a little bit of searching.
-			for (let stream of this.stats) {
-				console.log(stream);
-				if ('NowPlayingItem' in stream)
-					nb_streams++;
-			}
-			return nb_streams;
-		},
-	},
-	created() {
-		this.fetchStatus();
-	},
-	methods: {
-		fetchStatus: async function () {
-			const headers = {
-				'Authorization': `bearer ${this.item.apikey}`
-			};
-			try {
-				const response = await this.fetch(
-					`/proxy/getSessions`, { headers });
-				this.error = false;
-				this.stats = response;
-			} catch (e) {
-				this.error = true;
-				console.error(e);
-			}
-		}
-	}
+  name: "Jellyfin",
+  mixins: [service],
+  props: {
+    item: Object,
+  },
+  components: {
+    Generic,
+  },
+  data: () => ({
+    stats: null,
+    error: false,
+  }),
+  computed: {
+    streams: function () {
+      if (!this.stats) {
+        return "";
+      }
+      let nb_streams = 0;
+      for (let stream of this.stats) {
+        if ("NowPlayingItem" in stream) nb_streams++;
+      }
+      return nb_streams;
+    },
+  },
+  created() {
+    this.fetchStatus();
+  },
+  methods: {
+    fetchStatus: async function () {
+      const headers = {
+        Authorization: `bearer ${this.item.apikey}`,
+      };
+      try {
+        const response = await this.fetch("/proxy/getSessions", { headers });
+        this.error = false;
+        this.stats = response;
+      } catch (e) {
+        this.error = true;
+        console.error(e);
+      }
+    },
+  },
 };
 </script>
 
