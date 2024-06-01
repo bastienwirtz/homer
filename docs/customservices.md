@@ -203,7 +203,9 @@ You need to set the type to Emby, provide an api key and choose which stats to s
   url: "http://192.168.0.151/"
   type: "Emby"
   apikey: "<---insert-api-key-here--->"
-  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
+  libraryType:  #Choose which stats to show. Can be of value: "music", "series" or "movies".
+    - "music"  
+    - "movies"
 ```
 
 ## Uptime Kuma
