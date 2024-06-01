@@ -121,6 +121,7 @@ services:
     icon: "fas fa-code-branch"
     # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
     # logo: "path/to/logo"
+    # class: "highlight-purple" # Optional css class to add on the service group. 
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"

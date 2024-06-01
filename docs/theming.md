@@ -1,51 +1,76 @@
 # Theming
 
-## Customization from yaml configuration file
+## Change theme
 
-Some aspect of the theme can be customized using the yaml configuration file.
+the default theme can be changed using the yaml configuration file
+
+```yaml
+theme: default # 'default', 'walkxcode', or 'neon' see files in 'src/assets/themes'.
+```
+
+## Colors and background customization
+
+Default colors and background can be customized for each theme variant (light and dark), using either the yaml config file, or the css variables (cf "Additional stylesheets" below).
+
+### Available options
+
+| yaml | css | description |
+| --------------------- | ----------------------- | --- |
+| `highlight-primary`   | `--highlight-primary`   | header background, group title icons       |
+| `highlight-secondary` | `--highlight-secondary` | navbar background, default tag color |
+| `highlight-hover`     | `--highlight-hover`     | navbar links hover, search input background |
+| `background`          | `--background`          | page background color |
+| `card-background`     | `--card-background`     | service card background color |
+| `text`                | `--text`                | main text color |
+| `text-header`         | `--text-header`         | header text color |
+| `text-title`          | `--text-title`          | service card title color |
+| `text-subtitle`       | `--text-subtitle`       | service card subtitle color  |
+| `card-shadow`         | `--card-shadow`         | Service card `box-shadow` |
+| `link`                | `--link`                | Links color (footer & message), service card icon color  |
+| `link-hover`          | `--link-hover`          | Links hover color (footer & message), service card icon hover color |
+| `background-image`    | `--background-image`    | page background image url (when used in css, set `url(<image-url>)` insted of just the url. see exemple below)|
+
+
+yaml exemple
 
 ```yml
 colors:
   light:
     highlight-primary: "#3367d6"
-    highlight-secondary: "#4285f4"
-    highlight-hover: "#5a95f5"
-    background: "#f5f5f5"
-    card-background: "#ffffff"
-    text: "#363636"
-    text-header: "#424242"
-    text-title: "#303030"
-    text-subtitle: "#424242"
-    card-shadow: rgba(0, 0, 0, 0.1)
-    link: "#3273dc"
-    link-hover: "#363636"
-    background-image: "assets/your/light/bg.png"
+    background-image: "assets/your/light/bg.webp"
+    ...
   dark:
     highlight-primary: "#3367d6"
-    highlight-secondary: "#4285f4"
-    highlight-hover: "#5a95f5"
-    background: "#131313"
-    card-background: "#2b2b2b"
-    text: "#eaeaea"
-    text-header: "#ffffff"
-    text-title: "#fafafa"
-    text-subtitle: "#f5f5f5"
-    card-shadow: rgba(0, 0, 0, 0.4)
-    link: "#3273dc"
-    link-hover: "#ffdd57"
-    background-image: "assets/your/dark/bg.png"
+    background-image: "assets/your/dark/bg.webp"
+    ...
+```
+
+CSS exemple
+
+```css
+.light {
+    --highlight-primary: #3367d6;
+    --background-image: url("assets/your/light/bg.webp");
+    ...
+}
+
+.dark {
+    --highlight-primary: #3367d6;
+    --background-image: url("assets/your/dark/bg.webp");
+    ...
+}
 ```
 
 ## Additional stylesheets
 
-One or more additional stylesheets can be loaded to add or override style from the current theme. Use the 'stylesheet' option in the yaml configuration file to add CSS file to be used.
+One or more additional stylesheets can be loaded to add or override style from the current theme. Use the 'stylesheet' option in the yaml configuration file to load your own CSS file.
 
 ```yml
 stylesheet:
    - "assets/custom.css"
 ```
 
-### customization exemple
+### Customization exemple
 
 #### Max width modification
 
