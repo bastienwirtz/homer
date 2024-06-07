@@ -224,7 +224,11 @@ export default {
         `${this.config.title} | ${this.config.subtitle}`;
       if (this.config.stylesheet) {
         let stylesheet = "";
-        for (const file of this.config.stylesheet) {
+        let addtionnal_styles = this.config.stylesheet;
+        if (!Array.isArray(this.config.stylesheet)) {
+          addtionnal_styles = [addtionnal_styles];
+        }
+        for (const file of addtionnal_styles) {
           stylesheet += `@import "${file}";`;
         }
         this.createStylesheet(stylesheet);

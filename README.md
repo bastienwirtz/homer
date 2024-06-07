@@ -50,6 +50,7 @@
 - [Getting started](#getting-started)
 - [Kubernetes Installation](docs/kubernetes.md)
 - [Configuration](docs/configuration.md)
+- [Theming](docs/theming.md)
 - [Custom services](docs/customservices.md)
 - [Tips & tricks](docs/tips-and-tricks.md)
 - [Development](docs/development.md)
