@@ -111,6 +111,10 @@ services:
         units: "metric"
         endpoint: "https://homer-demo-content.netlify.app/openweather/weather"
         type: "OpenWeather"
+      - name: "Relative URL example"
+        icon: fa-explosion
+        subtitle: A link hosted on the same server as Homer, but with more than one possible hostname
+        url: "${protocol}//${hostname}:8080
   - name: "interesting links"
     icon: "fas fa-solid fa-arrow-up-right-from-square"
     items:
