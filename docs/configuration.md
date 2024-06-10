@@ -194,3 +194,29 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 ## PWA Icons
 
 See icons documentation [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).
+
+
+## Importing Secrets
+
+You can import sensitive information such as API keys or passwords into your `config.yml` file securely using the `!secret` keyword. The corresponding tokens are stored in the `secrets.yml` file. This approach allows you to keep confidential information separate, eliminating the need to expose sensitive information directly in your configuration.
+
+
+### Example:
+
+In your `secrets.yml` file:
+
+```yaml
+api_key: your_super_secret_api_key
+db_password: your_secure_database_password
+```
+
+In your `config.yml` file:
+
+```yaml
+services:
+  - name: "Example Service"
+    api_key: !secret api_key
+    database:
+      password: !secret db_password
+# ...
+```
