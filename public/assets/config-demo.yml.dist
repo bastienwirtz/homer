@@ -120,6 +120,7 @@ services:
         url: "https://www.buymeacoffee.com/bastien"
       - name: "r/selfhosted"
         icon: "fa-brands fa-reddit-alien"
+        color: "#ff4500"
         subtitle: "Bookmark example"
         tag: "reddit"
         url: "https://www.reddit.com/r/selfhosted/"
