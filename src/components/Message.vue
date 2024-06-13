@@ -67,12 +67,14 @@ export default {
     },
 
     downloadMessage: function (url) {
-      return fetch(url).then(function (response) {
-        if (response.status != 200) {
-          return;
+      return fetch(url, { headers: { Accept: "application/json" } }).then(
+        function (response) {
+          if (response.status != 200) {
+            return;
+          }
+          return response.json();
         }
-        return response.json();
-      });
+      );
     },
 
     mapRemoteMessage: function (message) {
