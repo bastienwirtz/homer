@@ -92,7 +92,7 @@
                 :key="`service-${groupIndex}-${index}`"
                 :item="item"
                 :proxy="config.proxy"
-                :class="['column', `is-${12 / config.columns}`]"
+                :class="['column', `is-${getSpan(group)}`]"
               />
             </template>
           </div>
@@ -103,7 +103,7 @@
             class="columns is-multiline layout-vertical"
           >
             <div
-              :class="['column', `is-${12 / config.columns}`]"
+              :class="['column', `is-${getSpan(group)}`]"
               v-for="(group, groupIndex) in services"
               :key="groupIndex"
             >
@@ -317,6 +317,9 @@ export default {
       let style = document.createElement("style");
       style.appendChild(document.createTextNode(css));
       document.head.appendChild(style);
+    },
+    getSpan: function (item) {
+      return item.span || 12 / this.config.columns;
     },
   },
 };
