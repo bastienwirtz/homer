@@ -12,7 +12,21 @@
         <i
           v-if="error"
           class="notif error fa-solid fa-triangle-exclamation"
-          title="Unable to fetch current status"
+          title="Unable to fetch current download count"
+        ></i>
+      </div>
+      <div class="notifs notifs-down">
+        <strong
+          v-if="!this.item.rateDisabled && downloads > 0"
+          class="notif downloading"
+          :title="`${downRate}B/s `"
+        >
+          {{ downRate }}B/s
+        </strong>
+        <i
+          v-if="error"
+          class="notif error fa-solid fa-triangle-exclamation"
+          title="Unable to fetch current download speed"
         ></i>
       </div>
     </template>
@@ -43,9 +57,24 @@ export default {
       }
       return this.stats.noofslots;
     },
+    downRate: function() {
+      if (!this.stats) {
+        return "";
+      }
+      return this.stats.speed;
+    },
   },
   created() {
     const downloadInterval = parseInt(this.item.downloadInterval, 10) || 0;
+    const apikey = this.item.apikey;
+
+    if (!apikey) {
+      console.error(
+      "apikey is not present in config.yml for the SABnzbd entry!"
+      );
+      return;
+    }
+
     if (downloadInterval > 0) {
       setInterval(() => this.fetchStatus(), downloadInterval);
     }
@@ -70,6 +99,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.notifs-down {
+  top: unset !important;
+  bottom: 0.3em;
+}
+
 .notifs {
   position: absolute;
   color: white;
