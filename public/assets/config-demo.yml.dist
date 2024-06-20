@@ -40,6 +40,11 @@ colors:
     link: "#3273dc"
     link-hover: "#ffdd57"
 
+columns: "3"
+
+defaults:
+  layout: list
+
 # Optional message
 message:
   style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
@@ -49,7 +54,7 @@ message:
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
-  - name: "Contribute"
+  - name: "Contribute!"
     icon: "fab fa-github"
     url: "https://github.com/bastienwirtz/homer"
     target: "_blank" # optional html a tag target attribute
@@ -66,9 +71,41 @@ links:
 # First level array represent a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
-  - name: "My apps"
-    icon: "fas fa-cloud"
+  - name: "Try Homer"
+    icon: "fa-solid fa-arrow-right"
     items:
+      - name: "Get started"
+        icon: "fa-solid fa-download"
+        subtitle: "Start using Homer in a few minutes"
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#getting-started"
+      - name: "Configuration"
+        icon: "fa-solid fa-sliders"
+        subtitle: "Configuration options documentation"
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md"
+      - name: "Theming"
+        icon: "fa-solid fa-palette"
+        subtitle: "Customize Homer appearance"
+        tag: "theming"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
+      - name: "Smart cards"
+        icon: "fa-solid fa-palette"
+        subtitle: "Displays dynamic information or actions."
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
+      - name: "Buy me a coffee!"
+        subtitle: "Sponsor this project"
+        icon: "fa-solid fa-mug-hot"
+        url: "https://www.buymeacoffee.com/bastien" 
+  - name: "Smart cards showcase"
+    icon: "fa-solid fa-brain"
+    items: 
+      - name: "Octoprint"
+        logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
+        apikey: "xxxxxxxxxxxx"
+        endpoint: "https://homer-demo-content.netlify.app/octoprint"
+        type: "OctoPrint"
       - name: "Pi-hole"
         logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pi-hole.png"
         url: "https://pi-hole.net/"
@@ -84,40 +121,15 @@ services:
         warning_value: 50
         danger_value: 80
         api_token: "xxxxxxxxxxxx"
-      - name: "An awesome app"
-        logo: "assets/tools/sample.png"
-        subtitle: "Bookmark example"
-        tag: "app"
-        keywords: "self hosted reddit"
-        url: "https://www.reddit.com/r/selfhosted/"
-  - name: "Tools"
-    icon: "fa-solid fa-screwdriver-wrench"
-    items:
-      - name: "Octoprint"
-        logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
-        apikey: "xxxxxxxxxxxx"
-        endpoint: "https://homer-demo-content.netlify.app/octoprint"
-        type: "OctoPrint"
-      - name: "Example item"
-        logo: "assets/tools/sample.png"
-        subtitle: "This another example"
-        tag: "app"
-        keywords: "demo"
-        url: "#"
-        target: "_blank" 
       - name: "Weather"
-        location: "Lyon"
+        location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
         units: "metric"
         endpoint: "https://homer-demo-content.netlify.app/openweather/weather"
         type: "OpenWeather"
-  - name: "interesting links"
-    icon: "fas fa-solid fa-arrow-up-right-from-square"
+  - name: "Ressources"
+    icon: "fa-regular fa-bookmark"
     items:
-      - name: "Buy me a coffee !"
-        subtitle: "If you want to support me, buy me a coffee "
-        logo: "https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-1.svg"
-        url: "https://www.buymeacoffee.com/bastien"
       - name: "r/selfhosted"
         icon: "fa-brands fa-reddit-alien"
         subtitle: "Bookmark example"
@@ -125,7 +137,7 @@ services:
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" 
       - name: "Awesome selfhosted"
-        icon: "fa-brands fa-github-alt"
+        icon: "fa-solid fa-star"
         subtitle: "Another application"
         tag: "awesome-list"
         url: "https://github.com/awesome-selfhosted/awesome-selfhosted"
