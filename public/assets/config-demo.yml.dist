@@ -48,8 +48,8 @@ defaults:
 # Optional message
 message:
   style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
-  title: "👋 Welcome !"
-  content: "This demo page shows an overview of Homer possibilities. Feel free to click anywhere!<br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+  title: "👋 Welcome!"
+  content: "Homer is a dead simple static HOMepage for your servER (or anything else) to keep your services and favorite links on hand, based on a simple yaml configuration file.<br /> Learn more at <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
 
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
