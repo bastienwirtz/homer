@@ -6,7 +6,7 @@ The principle is simple: save a sample output of the API used in the service in 
 ## Start the mock server to expose dummy data
 
 ```sh
-yarn mock
+pnpm mock
 ```
 
 ## How to add a new services sample

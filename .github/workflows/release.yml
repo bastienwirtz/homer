@@ -12,12 +12,23 @@ jobs:
     steps:
       - 
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+      - 
+        name: pnpm setup
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - 
+        name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
       - 
         name: Build project
         run: |
-          yarn install
-          yarn build
+          pnpm install --frozen-lockfile
+          pnpm build
       - 
         name: Create artifact
         working-directory: "dist"
@@ -25,7 +36,7 @@ jobs:
       - 
         name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           generate_release_notes: true
