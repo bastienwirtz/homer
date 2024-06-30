@@ -100,8 +100,6 @@ services:
         units: "metric"
         endpoint: "/dummy-data/openweather/weather"
         type: "OpenWeather"
-      - name: "Change Theme"
-        type: "ThemeChooser"
   - name: "Ressources"
     icon: "fa-regular fa-bookmark"
     items:

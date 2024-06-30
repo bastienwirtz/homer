@@ -172,9 +172,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.is-number {
-  font-family: "Lato";
-}
 .healthy {
   color: green;
 }
