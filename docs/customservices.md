@@ -10,6 +10,7 @@ within Homer:
 
 - [Custom Services](#custom-services)
   - [Common options](#common-options)
+  - [GenericWithPort](#gemericwithport)
   - [PiHole](#pihole)
   - [OpenWeatherMap](#openweathermap)
   - [Medusa](#medusa)
@@ -49,6 +50,17 @@ If you experiencing any issue, please have a look to the [troubleshooting](troub
   endpoint: "http://my-service-endpoint" # Optional: alternative base URL used to fetch service data is necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
   type: "<type>"
+```
+
+## GenericWithPort
+Is shown as a generic service, but you can specify an additional port where the service is running, in case there is no DNS for the domain or reverse proxy for this service.
+A link to access this service via port is added to which the browser is redirected based on the base url where the user accessed homer.
+```yaml
+- name: "My Service"
+  logo: "assets/tools/sample.png"
+  url: "http://my-service.domain"
+  port: <my-port>
+  type: "GenericWithPort"
 ```
 
 ## PiHole
