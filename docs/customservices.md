@@ -10,7 +10,7 @@ within Homer:
 
 - [Custom Services](#custom-services)
   - [Common options](#common-options)
-  - [GenericWithPort](#gemericwithport)
+  - [GenericWithPort](#genericwithport)
   - [PiHole](#pihole)
   - [OpenWeatherMap](#openweathermap)
   - [Medusa](#medusa)
