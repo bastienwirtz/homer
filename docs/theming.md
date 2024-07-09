@@ -2,7 +2,7 @@
 
 ## Change theme
 
-the default theme can be changed using the yaml configuration file
+The default theme can be changed using the yaml configuration file
 
 ```yaml
 theme: default # 'default', 'walkxcode', or 'neon' see files in 'src/assets/themes'.
@@ -10,7 +10,7 @@ theme: default # 'default', 'walkxcode', or 'neon' see files in 'src/assets/them
 
 ## Colors and background customization
 
-Default colors and background can be customized for each theme variant (light and dark), using either the yaml config file, or the css variables (cf "Additional stylesheets" below).
+Default colors and background can be customized for each theme variant (light and dark), using either the yaml config file, or the css variables (see "Additional stylesheets" below).
 
 ### Available options
 
@@ -31,7 +31,7 @@ Default colors and background can be customized for each theme variant (light an
 | `background-image`    | `--background-image`    | page background image url (when used in css, set `url(<image-url>)` insted of just the url. see exemple below)|
 
 
-yaml exemple
+YAML example
 
 ```yml
 colors:
@@ -45,7 +45,7 @@ colors:
     ...
 ```
 
-CSS exemple
+CSS example
 
 ```css
 .light {
