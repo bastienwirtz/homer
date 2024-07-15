@@ -49,7 +49,7 @@
           :hotkey="searchHotkey()"
           @input="filterServices($event)"
           @search-focus="showMenu = true"
-          @search-open="navigateToFirstService($event?.target?.value)"
+          @search-open="navigateToFirstService"
           @search-cancel="filterServices()"
         />
       </Navbar>
@@ -276,11 +276,10 @@ export default {
         const service = this.services[0].items[0];
         window.open(service.url, target || service.target || "_self");
       } catch (error) {
-        console.warning("fail to open service");
+        console.warn("fail to open service");
       }
     },
     filterServices: function (filter) {
-      console.log(filter);
       this.filter = filter;
 
       if (!filter) {

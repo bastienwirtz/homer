@@ -3,12 +3,14 @@
     <form role="search">
       <label for="search" class="search-label"></label>
       <input
+        id="search"
+        name="search"
         type="search"
         ref="search"
         :value="value"
         @input.stop="search($event.target.value)"
-        @keyup.enter.exact="open()"
-        @keyup.alt.enter="open('_blank')"
+        @keydown.enter.exact.prevent="open()"
+        @keydown.alt.enter.prevent="open('_blank')"
       />
     </form>
   </search>
