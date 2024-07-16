@@ -6,14 +6,14 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="percentage">
-          {{ percentage }}&percnt; blocked
+        <template v-else>
+          {{ details }}
         </template>
       </p>
     </template>
     <template #indicator>
       <div v-if="status" class="status" :class="status">
-        {{ status }}
+        {{ status_msg }}
       </div>
     </template>
   </Generic>
@@ -34,17 +34,26 @@ export default {
   },
   data: () => ({
     status: "",
-    ads_percentage_today: 0,
+    status_msg: "",
+    items: ["ads_percentage_today"],
+    results: [],
+    format: "{0}% blocked",
   }),
   computed: {
-    percentage: function () {
-      if (this.ads_percentage_today) {
-        return this.ads_percentage_today.toFixed(1);
+    details: function () {
+      if (this.results) {
+        return this.format.replace(
+          /{(\d+)}/g,
+          (match, index) => this.results[index],
+        );
       }
       return "";
     },
   },
   created() {
+    if (this.item.items) this.items = this.item.items;
+    if (this.item.format) this.format = this.item.format;
+
     this.fetchStatus();
   },
   methods: {
@@ -52,12 +61,26 @@ export default {
       const authQueryParams = this.item.apikey
         ? `?summaryRaw&auth=${this.item.apikey}`
         : "";
-      const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
-        console.log(e),
-      );
+      return this.fetch(`/api.php${authQueryParams}`)
+        .then((response) => {
+          if (response) {
+            this.status = response.status;
 
-      this.status = result.status;
-      this.ads_percentage_today = result.ads_percentage_today;
+            if (response.status == "enabled") {
+              this.status_msg = "enabled";
+            } else {
+              this.status_msg = "dns only";
+            }
+
+            for (const i in this.items)
+              this.results[i] = response[this.items[i]];
+          } else throw new Error();
+          1;
+        })
+        .catch((e) => {
+          console.log(e);
+          this.status = "dead";
+        });
     },
   },
 };
@@ -75,9 +98,9 @@ export default {
   }
 
   &.disabled:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
+    background-color: #e8bb7d;
+    border-color: #e8bb7d;
+    box-shadow: 0 0 5px 1px #e8bb7d;
   }
 
   &:before {
