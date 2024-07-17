@@ -40,15 +40,34 @@ export default {
     seriesCount: 0,
     episodeCount: 0,
   }),
-  computed: {
+  computed: {    
     embyCount: function () {
-      if (this.item.libraryType === "music")
-        return `${this.songCount} songs, ${this.albumCount} albums`;
-      else if (this.item.libraryType === "movies")
-        return `${this.movieCount} movies`;
-      else if (this.item.libraryType === "series")
-        return `${this.episodeCount} eps, ${this.seriesCount} series`;
-      else return `wrong library type 💀`;
+      const libraryType = this.item.libraryType;
+      const counts = [];
+
+      libraryType.forEach((type, index) => {
+        if (type === "music") {
+          counts.push(`${this.songCount} songs`);
+          counts.push(`${this.albumCount} albums`);
+        } else if (type === "movies") {
+          counts.push(`${this.movieCount} movies`);
+        } else if (type === "series") {
+          counts.push(`${this.episodeCount} episodes`);
+          counts.push(`${this.seriesCount} series`);
+        } else {
+          return `wrong library type 💀`;
+        }
+      });
+
+      const allowedParams = this.item.embyCountParams || "";
+      const params = allowedParams.split(",").map((param) => param.trim());
+
+      const filteredCounts = counts.filter((count, index) => {
+        const countType = count.split(" ")[1];
+        return params.some((param) => countType.includes(param));
+      });
+
+      return filteredCounts.join(", ");
     },
   },
   created() {
