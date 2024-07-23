@@ -62,7 +62,7 @@ The following configuration is available for the SecondaryLink service:
 - type: "SecondaryLink"
   SecondaryLinkUrl: "https://my-second-link" # url for the second link
   SecondaryLinkTarget: "_blank" # optional html tag target attribute.
-  SecondaryLinkHover: " " # optional text to show when the second link is hovered over.
+  SecondaryLinkHover: "More Info" # optional text to show when the second link is hovered over.
   SecondaryLinkIcon: "fas fa-circle-info" # icon to use as the visual indicator of the link
 ```
 Like the rest of Homer, FontAwesome icons can be used for the SecondaryLinkIcon.
