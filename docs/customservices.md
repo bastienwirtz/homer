@@ -52,6 +52,21 @@ If you experiencing any issue, please have a look to the [troubleshooting](troub
   type: "<type>"
 ```
 
+## SecondaryLink
+
+The SecondaryLink service allows generic cards to have a second link added to them in the format of an icon.
+
+The following configuration is available for the SecondaryLink service:
+
+```yaml
+- type: "SecondaryLink"
+  SecondaryLinkUrl: "https://my-second-link" # url for the second link
+  SecondaryLinkTarget: "_blank" # optional html tag target attribute.
+  SecondaryLinkHover: " " # optional text to show when the second link is hovered over.
+  SecondaryLinkIcon: "fas fa-circle-info" # icon to use as the visual indicator of the link
+```
+Like the rest of Homer, FontAwesome icons can be used for the SecondaryLinkIcon.
+
 ## PiHole
 
 Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
