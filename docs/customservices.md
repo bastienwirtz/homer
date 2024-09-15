@@ -149,6 +149,8 @@ For Ping you need to set the type to Ping and provide a url. By default the HEAD
   method: "head"
 ```
 
+You can also specify an optional field `mode` as `no-cors` to allow cross-origin requests from the browser. Setting this field will show the status of the service as `online` if the request is successful, irrespective of the response status code. Check the official [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/mode) for more information about this field.
+
 ## Prometheus
 
 For Prometheus you need to set the type to Prometheus and provide a url.

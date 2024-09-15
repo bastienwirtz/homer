@@ -39,7 +39,9 @@ export default {
         return;
       }
 
-      this.fetch("/", { method, cache: "no-cache" }, false)
+      const mode = typeof this.item.mode  === "string" ? this.item.mode : "cors";
+
+      this.fetch("/", { method, cache: "no-cache", mode }, false)
         .then(() => {
           this.status = "online";
         })
