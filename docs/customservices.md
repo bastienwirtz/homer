@@ -516,7 +516,7 @@ services:
     container_name: glances
     environment:
       - TZ=Europe/Rome
-      - GLANCES_OPT=-w --disable-webui
+      - GLANCES_OPT=-w
     ports:
       - 61208:61208
     restart: unless-stopped
@@ -533,9 +533,11 @@ services:
         url: http://192.168.1.2:61208
         type: Glances
         stat: cpu
+        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
       - name: Memory
         icon: fas fa-memory
         url: http://192.168.1.2:61208
         type: Glances
         stat: mem
+        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
