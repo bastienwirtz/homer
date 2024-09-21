@@ -16,6 +16,7 @@ within Homer:
 - [CopyToClipboard](#copy-to-clipboard)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
+- [Glances](#glances)
 - [Gotify](#gotify)
 - [Healthchecks](#healthchecks)
 - [Home Assistant](#home-assistant)
@@ -114,6 +115,46 @@ The FreshRSS service displays unread and subscriptions counts from your FreshRSS
   username: "<-- Your username -->"       
   password: "<-- Your password -->"
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Glances
+
+This is a basic widget for showing cpu and ram usage using a glances server
+
+You'll need a glances server up and running, this is a sample compose.yml
+
+```yml
+---
+services:
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    environment:
+      - TZ=Europe/Rome
+      - GLANCES_OPT=-w
+    ports:
+      - 61208:61208
+    restart: unless-stopped
+```
+
+And this is a sample homer configuration
+
+```yml
+services:
+  - name: Glances
+    items:
+      - name: CPU
+        icon: fas fa-microchip
+        url: http://192.168.1.2:61208
+        type: Glances
+        stat: cpu
+        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+      - name: Memory
+        icon: fas fa-memory
+        url: http://192.168.1.2:61208
+        type: Glances
+        stat: mem
+        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
 ## Gotify
