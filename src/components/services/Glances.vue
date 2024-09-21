@@ -24,6 +24,10 @@ export default {
     percentage: 0,
   }),
   created() {
+    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
+    if (updateInterval > 0) {
+      setInterval(() => this.fetchStat(), updateInterval);
+    }
     this.fetchStat();
   },
   methods: {
