@@ -4,8 +4,6 @@ name: Dockerhub
 on:
   push:
     tags: [v*]
-    branches: [ main ]
-
 
 jobs:
   dockerhub:
