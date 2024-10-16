@@ -49,10 +49,10 @@ const displayRate = (rate) => {
 };
 
 export default {
-  name: "qBittorrent",
+  name: "QBittorrent",
+  components: { Generic },
   mixins: [service],
   props: { item: Object },
-  components: { Generic },
   data: () => ({ dl: null, ul: null, count: null, error: null }),
   computed: {
     downRate: function () {

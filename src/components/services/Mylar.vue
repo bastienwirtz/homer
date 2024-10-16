@@ -26,12 +26,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Mylar",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {

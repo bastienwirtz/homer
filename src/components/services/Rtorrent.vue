@@ -47,9 +47,9 @@ const displayRate = (rate) => {
 };
 
 export default {
-  name: "rTorrent",
-  props: { item: Object },
+  name: "RTorrent",
   components: { Generic },
+  props: { item: Object },
   // Properties for download, upload, torrent count and errors.
   data: () => ({ dl: null, ul: null, count: null, error: null }),
   // Computed properties for the rate labels.

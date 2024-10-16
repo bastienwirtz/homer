@@ -19,12 +19,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "CopyToClipboard",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     animate: false,

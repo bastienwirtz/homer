@@ -29,12 +29,12 @@ const AlertsStatus = Object.freeze({
 
 export default {
   name: "Prometheus",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     api: {
