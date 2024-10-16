@@ -26,12 +26,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Portainer",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     endpoints: null,

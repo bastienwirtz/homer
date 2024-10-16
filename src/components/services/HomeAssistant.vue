@@ -25,12 +25,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "HomeAssistant",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     status: "",

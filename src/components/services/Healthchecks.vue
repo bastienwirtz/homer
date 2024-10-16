@@ -22,12 +22,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Healthchecks",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     api: null,

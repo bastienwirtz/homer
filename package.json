@@ -7,7 +7,7 @@
     "mock": "http-server dummy-data/ --cors",
     "build": "vite build",
     "preview": "vite preview --port 5050",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
@@ -17,10 +17,9 @@
     "yaml": "^2.6.0"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.10.2",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/eslint-config-prettier": "^10.0.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.12.0",
     "eslint-plugin-vue": "^9.29.0",
     "http-server": "^14.1.1",
     "prettier": "^3.3.3",
