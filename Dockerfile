@@ -1,10 +1,10 @@
 # build stage
-FROM node:18-alpine3.19 as build-stage
+FROM --platform=$BUILDPLATFORM node:22-alpine3.20 AS build-stage
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
-RUN corepack use pnpm@8
+RUN corepack use pnpm@9
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ COPY . .
 RUN pnpm build
 
 # production stage
-FROM alpine:3.19
+FROM alpine:3.20
 
 ENV GID 1000
 ENV UID 1000
