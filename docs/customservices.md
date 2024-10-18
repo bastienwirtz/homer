@@ -28,7 +28,7 @@ within Homer:
   - [rTorrent](#rtorrent)
   - [qBittorrent](#qbittorrent)
   - [CopyToClipboard](#copy-to-clipboard)
-  - [Speedtest Tracker](#SpeedtestTracker)
+  - [Speedtest Tracker](#speedtesttracker)
   - [What's Up Docker](#whats-up-docker)
   - [SABnzbd](#sabnzbd)
   - [OctoPrint](#octoprint)
@@ -38,6 +38,7 @@ within Homer:
   - [OpenHAB](#openhab)
   - [Jellystat](#jellystat)
   - [Home Assistant](#home-assistant)
+  - [Glances](#glances)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -94,8 +95,8 @@ This service displays News (grey), Warning (orange) or Error (red) notifications
 Two lines are needed in the config.yml :
 
 ```yaml
-  type: "Medusa"
-  apikey: "<---insert-api-key-here--->"
+type: "Medusa"
+apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of Medusa application.
@@ -129,8 +130,8 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
 This service displays total number of documents stored. Two lines are required:
 
 ```yaml
-  type: "PaperlessNG"
-  apikey: "<---insert-api-key-here--->"
+type: "PaperlessNG"
+apikey: "<---insert-api-key-here--->"
 ```
 
 API key can be generated in Settings > Administration > Auth Tokens
@@ -162,6 +163,7 @@ For Prometheus you need to set the type to Prometheus and provide a url.
 ```
 
 ## AdGuard Home
+
 For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
 
 ```yaml
@@ -179,7 +181,7 @@ In order to use it, you must be using Portainer version 1.11 or later. Generate 
 it to the apikey field.
 By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
-See https://docs.portainer.io/api/access#creating-an-access-token
+See <https://docs.portainer.io/api/access#creating-an-access-token>
 
 ```yaml
 - name: "Portainer"
@@ -249,7 +251,7 @@ endpoint pointing to Tautulli!
 
 ## Mealie
 
-First off make sure to remove an existing `subtitle` as it will take precedence if set. 
+First off make sure to remove an existing `subtitle` as it will take precedence if set.
 Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
 
 ## Healthchecks
@@ -258,8 +260,8 @@ This service displays information about the configured status checks from the He
 Two lines are needed in the config.yml :
 
 ```yaml
-  type: "Healthchecks"
-  apikey: "<---insert-api-key-here--->"
+type: "Healthchecks"
+apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of the Healthchecks application.
@@ -272,7 +274,7 @@ listed in rTorrent. The service communicates with the rTorrent XML-RPC interface
 to be accessible from the browser. Please consult
 [the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
 for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
-servers can be found at https://enable-cors.org/server.html.
+servers can be found at <https://enable-cors.org/server.html>.
 
 ```yaml
 - name: "rTorrent"
@@ -286,7 +288,6 @@ servers can be found at https://enable-cors.org/server.html.
   password: "password" # Password for logging into rTorrent (if applicable).
 ```
 
-
 ## Proxmox
 
 This service displays status information of a Proxmox node (VMs running and disk, memory and cpu used). It uses the proxmox API and [API Tokens](https://pve.proxmox.com/pve-docs/pveum-plain.html) for authorization so you need to generate one to set in the yaml config. You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
@@ -294,7 +295,7 @@ This service displays status information of a Proxmox node (VMs running and disk
 The API Token (or the user asigned to that token if not separated permissions is checked) are this:
 
 | Path               | Permission | Comments                                                          |
-|--------------------|------------|-------------------------------------------------------------------|
+| ------------------ | ---------- | ----------------------------------------------------------------- |
 | /nodes/<your-node> | Sys.Audit  |                                                                   |
 | /vms/<id-vm>       | VM.Audit   | You need to have this permission on any VM you want to be counted |
 
@@ -403,7 +404,7 @@ the "Config" > "General" section of the SABnzbd config in the SABnzbd web UI.
 
 The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
 
-Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation for details.
+Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See <https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation> for details.
 
 ```yaml
 - name: "Octoprint"
@@ -439,7 +440,7 @@ The PiAlert service displays stats from your PiAlert server.
 
 ## Immich
 
-The Immich service displays stats from your Immich server. 
+The Immich service displays stats from your Immich server.
 The Immich server must be running at least version 1.85.0 for the correct api endpoint to work.
 
 ```yaml
@@ -462,6 +463,7 @@ You need to set the type to OpenHAB, provide an api key and enable cors on OpenH
   things: true # true will query the things API and report total and online things count. false will skip the call
   items: true # true will query the items API and report total items count. false will skip the call
 ```
+
 To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
 To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
 
@@ -469,8 +471,9 @@ To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add t
 
 The Jellystat serice display the number of concurrent streams on your jellyfin server.
 The Jellystat server must be running behind a reverse proxy to add some cors headers:
- - Access-Control-Allow-Origin: ${your_domain}
- - Access-Control-Allow-Headers: Authorization
+
+- Access-Control-Allow-Origin: ${your_domain}
+- Access-Control-Allow-Headers: Authorization
 
 ```yaml
 - name: "Jellystat"
@@ -479,6 +482,7 @@ The Jellystat server must be running behind a reverse proxy to add some cors hea
   type: "Jellystat"
   apikey: "<---insert-api-key-here--->"
 ```
+
 You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
 
 ## Home Assistant
@@ -494,5 +498,46 @@ You need to set the type to HomeAssistant, provide an api key and enable cors on
   items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
   separator: " " # optional, how to separate items
 ```
+
 To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
 To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
+
+## Glances
+
+This is a basic widget for showing cpu and ram usage using a glances server
+
+You'll need a glances server up and running, this is a sample compose.yml
+
+```yml
+---
+services:
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    environment:
+      - TZ=Europe/Rome
+      - GLANCES_OPT=-w
+    ports:
+      - 61208:61208
+    restart: unless-stopped
+```
+
+And this is a sample homer configuration
+
+```yml
+services:
+  - name: Glances
+    items:
+      - name: CPU
+        icon: fas fa-microchip
+        url: http://192.168.1.2:61208
+        type: Glances
+        stat: cpu
+        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+      - name: Memory
+        icon: fas fa-memory
+        url: http://192.168.1.2:61208
+        type: Glances
+        stat: mem
+        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
