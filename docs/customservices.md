@@ -145,7 +145,7 @@ For Ping you need to set the type to Ping and provide a url. By default the HEAD
   logo: "assets/tools/sample.png"
   subtitle: "Bookmark example"
   tag: "app"
-  url: "https://www.reddit.com/r/selfhosted/"
+  url: "https://lemmy.world/c/selfhosted"
   method: "head"
 ```
 

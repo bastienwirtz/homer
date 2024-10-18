@@ -31,5 +31,5 @@ services:
         logo: "assets/tools/sample.png"
         subtitle: "Bookmark example"
         tag: "app"
-        url: "https://www.reddit.com/r/selfhosted/"
+        url: "https://lemmy.world/c/selfhosted"
         target: "_blank"
