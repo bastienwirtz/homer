@@ -1,7 +1,7 @@
 <template>
   <a
-    @click.prevent="toggleSetting()"
     class="navbar-item is-inline-block-mobile"
+    @click.prevent="toggleSetting()"
   >
     <span><i :class="['fas', 'fa-fw', value ? icon : secondaryIcon]"></i></span>
     <slot></slot>
@@ -17,6 +17,7 @@ export default {
     iconAlt: String,
     defaultValue: Boolean,
   },
+  emits: ["updated"],
   data: function () {
     return {
       secondaryIcon: null,

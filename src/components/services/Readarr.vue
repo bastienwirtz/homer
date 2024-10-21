@@ -33,12 +33,12 @@ const API = "/api/v1";
 
 export default {
   name: "Readarr",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {

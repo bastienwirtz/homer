@@ -37,12 +37,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Medusa",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {
