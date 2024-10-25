@@ -154,7 +154,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
+View **[smart cards](customservices.md)** for details about all available cards (like `PiHole`) and how to configure them.
 
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
@@ -183,7 +183,7 @@ You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers
 ## Theming & customization
 
 See `colors` settings in the configuration example above.
-Favicon et application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
+Favicon and application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
 The `/assets/manifest.json` can also be edited to change the app (pwa) name, description and other settings.
 
 ### Community theme
@@ -191,7 +191,6 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 - [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
 - [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
 - [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
-
 
 ## PWA Icons
 
