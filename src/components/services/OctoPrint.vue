@@ -6,7 +6,9 @@
         <template v-if="item.subtitle && !state">
           {{ item.subtitle }}
         </template>
-        <template v-if="!error && display == 'text' && statusClass == 'in-progress'">
+        <template
+          v-if="!error && display == 'text' && statusClass == 'in-progress'"
+        >
           <i class="fa-solid fa-gear mr-1"></i>
           <b v-if="completion">{{ completion.toFixed() }}%</b>
           <span class="separator mx-1"> | </span>
@@ -17,9 +19,13 @@
         </template>
         <template v-if="!error && display == 'text' && statusClass == 'ready'">
           <i class="fa-solid fa-temperature-half mr-1"></i>
-          <b v-if="printer.temperature.bed">{{ printer.temperature.bed.actual.toFixed() }} C</b>
+          <b v-if="printer.temperature.bed"
+            >{{ printer.temperature.bed.actual.toFixed() }} C</b
+          >
           <span class="separator mx-1"> | </span>
-          <b v-if="printer.temperature.tool0">{{ printer.temperature.tool0.actual.toFixed() }} C</b>
+          <b v-if="printer.temperature.tool0"
+            >{{ printer.temperature.tool0.actual.toFixed() }} C</b
+          >
         </template>
         <template v-if="!error && display == 'bar'">
           <progress
@@ -49,12 +55,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "OctoPrint",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     printTime: null,
@@ -99,7 +105,9 @@ export default {
     },
     fetchPrinterStatus: async function () {
       try {
-        const response = await this.fetch(`api/printer?apikey=${this.item.apikey}`);
+        const response = await this.fetch(
+          `api/printer?apikey=${this.item.apikey}`,
+        );
         this.printer = response;
         this.error = response.error;
       } catch (e) {

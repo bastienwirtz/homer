@@ -21,12 +21,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Mealie",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     stats: null,
@@ -45,7 +45,7 @@ export default {
       if (this.item.subtitle != null) return;
 
       this.meal = await this.fetch("/api/meal-plans/today/", { headers }).catch(
-        (e) => console.log(e)
+        (e) => console.log(e),
       );
       this.stats = await this.fetch("/api/debug/statistics/", {
         headers,

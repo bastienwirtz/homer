@@ -95,6 +95,7 @@ message:
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"
+  # The content also accepts HTML content, so you can add divs, images or whatever you want to make match your needs.
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 # Optional navbar
@@ -121,6 +122,7 @@ services:
     icon: "fas fa-code-branch"
     # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
     # logo: "path/to/logo"
+    # class: "highlight-purple" # Optional css class to add on the service group. 
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"

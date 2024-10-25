@@ -43,16 +43,16 @@ const displayRate = (rate) => {
   }
   return (
     Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
-      rate || 0
+      rate || 0,
     ) + ` ${units[i]}/s`
   );
 };
 
 export default {
-  name: "qBittorrent",
+  name: "QBittorrent",
+  components: { Generic },
   mixins: [service],
   props: { item: Object },
-  components: { Generic },
   data: () => ({ dl: null, ul: null, count: null, error: null }),
   computed: {
     downRate: function () {

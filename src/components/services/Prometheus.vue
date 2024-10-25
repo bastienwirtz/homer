@@ -29,12 +29,12 @@ const AlertsStatus = Object.freeze({
 
 export default {
   name: "Prometheus",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     api: {
@@ -72,7 +72,7 @@ export default {
     countFiring: function () {
       if (this.api) {
         return this.api.data?.alerts?.filter(
-          (alert) => alert.state === AlertsStatus.firing
+          (alert) => alert.state === AlertsStatus.firing,
         ).length;
       }
       return 0;
@@ -80,7 +80,7 @@ export default {
     countPending: function () {
       if (this.api) {
         return this.api.data?.alerts?.filter(
-          (alert) => alert.state === AlertsStatus.pending
+          (alert) => alert.state === AlertsStatus.pending,
         ).length;
       }
       return 0;
@@ -88,7 +88,7 @@ export default {
     countInactive: function () {
       if (this.api) {
         return this.api.data?.alerts?.filter(
-          (alert) => alert.state === AlertsStatus.pending
+          (alert) => alert.state === AlertsStatus.pending,
         ).length;
       }
       return 0;

@@ -13,7 +13,7 @@ within Homer:
   - [PiHole](#pihole)
   - [OpenWeatherMap](#openweathermap)
   - [Medusa](#medusa)
-  - [Lidarr, Prowlarr, Sonarr and Radarr](#lidarr-prowlarr-sonarr-and-radarr)
+  - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
   - [PaperlessNG](#paperlessng)
   - [Ping](#ping)
   - [Prometheus](#prometheus)
@@ -35,6 +35,9 @@ within Homer:
   - [Tdarr](#tdarr)
   - [PiAlert](#pialert)
   - [Immich](#immich)
+  - [OpenHAB](#openhab)
+  - [Jellystat](#jellystat)
+  - [Home Assistant](#home-assistant)
 
 If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
 
@@ -100,8 +103,7 @@ The Medusa API key can be found in General configuration > Interface. It is need
 
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
 
-This service displays Activity (blue), Warning (orange) or Error (red) notifications bubbles from the Lidarr, Readarr, Radarr or Sonarr application.
-Readarr display also a Missing (purple) notification bubbles.
+This service displays Activity (blue), Missing(purple) Warning (orange) or Error (red) notifications bubbles from the Lidarr, Readarr, Radarr or Sonarr application.
 Two lines are needed in the config.yml :
 
 ```yaml
@@ -177,7 +179,7 @@ In order to use it, you must be using Portainer version 1.11 or later. Generate 
 it to the apikey field.
 By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
-See https://docs.portainer.io/v/ce-2.11/user/account-settings#access-tokens
+See https://docs.portainer.io/api/access#creating-an-access-token
 
 ```yaml
 - name: "Portainer"
@@ -356,7 +358,17 @@ Configuration example:
 
 ## SpeedtestTracker
 
-For the SpeedtestTracker service you just need to define a entry with type `SpeedtestTracker`.
+This service will show the download and upload speeds in Mbit/s and the ping in ms.
+To configure the service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
+
+Configuration example:
+
+```yaml
+- name: "Speedtest Tracker"
+  type: "SpeedtestTracker"
+  url: "http://192.168.0.1:8080"
+  target: "_blank"
+```
 
 ## What's up Docker
 
@@ -427,7 +439,8 @@ The PiAlert service displays stats from your PiAlert server.
 
 ## Immich
 
-The Immich service displays stats from your Immich server.
+The Immich service displays stats from your Immich server. 
+The Immich server must be running at least version 1.85.0 for the correct api endpoint to work.
 
 ```yaml
 - name: "Immich"
@@ -435,3 +448,51 @@ The Immich service displays stats from your Immich server.
   apikey: "<--- Your api key --->" # administrator user
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
+
+## OpenHAB
+
+You need to set the type to OpenHAB, provide an api key and enable cors on OpenHAB.
+
+```yaml
+- name: "OpenHAB"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "OpenHAB"
+  apikey: "<---insert-api-key-here--->"
+  things: true # true will query the things API and report total and online things count. false will skip the call
+  items: true # true will query the items API and report total items count. false will skip the call
+```
+To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
+To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
+
+## Jellystat
+
+The Jellystat serice display the number of concurrent streams on your jellyfin server.
+The Jellystat server must be running behind a reverse proxy to add some cors headers:
+ - Access-Control-Allow-Origin: ${your_domain}
+ - Access-Control-Allow-Headers: Authorization
+
+```yaml
+- name: "Jellystat"
+  logo: "assets/tools/jellystat.png"
+  url: "http://192.168.1.154:3000"
+  type: "Jellystat"
+  apikey: "<---insert-api-key-here--->"
+```
+You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
+
+## Home Assistant
+
+You need to set the type to HomeAssistant, provide an api key and enable cors on Home Assistant.
+
+```yaml
+- name: "HomeAssistant"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "HomeAssistant"
+  apikey: "<---insert-api-key-here--->"
+  items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
+  separator: " " # optional, how to separate items
+```
+To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
+To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
