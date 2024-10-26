@@ -40,6 +40,7 @@ within Homer:
 - [OpenHAB](#openhab)
 - [Jellystat](#jellystat)
 - [Home Assistant](#home-assistant)
+- [FreshRSS](#freshrss)
 
 > [!IMPORTANT]  
 > Using smart cards will probably requires
@@ -500,3 +501,15 @@ You need to set the type to HomeAssistant, provide an api key and enable cors on
 ```
 To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
 To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
+  
+## FreshRSS
+
+The FreshRSS service displays unread and subscriptions counts from your FreshRSS server.
+
+```yaml
+- name: "FreshRSS"
+  type: "FreshRSS"
+  username: "<-- Your username -->"       
+  password: "<-- Your password -->"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
