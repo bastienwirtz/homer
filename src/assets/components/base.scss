@@ -1,0 +1,446 @@
+@import url("~/@fortawesome/fontawesome-free/css/all.css") layer(base);
+@import url("@/assets/components/status.scss") layer(base);
+@import url("@/assets/webfonts/webfonts.scss") layer(base);
+
+
+@mixin ellipsis() {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  @layer base {
+    html, body, body #app-mount, body #app {
+      height: 100%;
+      background-color: var(--background);
+    }
+  
+    body {
+      font-family: "Noto Sans", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings: "wdth" 100;
+  
+      #app {
+        height: auto;
+        min-height: 100%;
+        background-image: var(--background-image);
+        background-size: cover;
+        background-position: center;
+        color: var(--text);
+        transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
+  
+        a {
+          color: var(--link);
+          &:hover {
+            color: var(--link-hover);
+          }
+        }
+  
+        .title {
+          font-weight: 500;
+          color: var(--text-title);
+        }
+        .subtitle {
+          color: var(--text-subtitle);
+        }
+  
+        .card {
+          background-color: var(--card-background);
+          box-shadow: 0 2px 15px 0 var(--card-shadow);
+          &:hover {
+            background-color: var(--card-background);
+          }
+        }
+  
+        .message {
+          .message-body {
+            color: var(--text);
+            background-color: var(--card-background);
+          }
+        } 
+  
+        .footer {
+          background-color: var(--card-background);
+          box-shadow: 0 2px 15px 0 var(--card-shadow);
+        }
+      }
+  
+      h1 {
+        font-size: 2rem;
+      }
+  
+      h2 {
+        font-size: 1.3rem;
+        margin-top: 1.2rem;
+        margin-bottom: 0.5rem;
+  
+        .fas,
+        .fab,
+        .far {
+          font-size: 1.4rem;
+          margin-right: 10px;
+        }
+  
+        span {
+          font-weight: bold;
+          color: var(--highlight-secondary);
+        }
+      }
+  
+      [v-cloak] {
+        display: none;
+      }
+  
+      #bighead {
+        color: var(--text-header);
+  
+        .dashboard-title {
+          padding-top: 6px;
+        }
+  
+        .first-line {
+          min-height: 100px;
+          vertical-align: center;
+          background-color: var(--highlight-primary);
+  
+          h1 {
+            margin-top: -12px;
+            font-size: 2rem;
+          }
+  
+          .headline {
+            margin-top: 5px;
+            font-size: 0.9rem;
+          }
+  
+          .container {
+            min-height: 80px;
+            padding: 10px 0;
+          }
+  
+          .logo {
+            float: left;
+            i {
+              vertical-align: top;
+              padding: 8px 15px;
+              font-size: 50px;
+            }
+  
+            img {
+              padding: 10px;
+              max-height: 70px;
+              max-width: 70px;
+            }
+          }
+        }
+        .navbar {
+          background-color: var(--highlight-secondary);
+  
+          a {
+            color: var(--text-header);
+            padding: 8px 12px;
+            &:hover,
+            &:focus {
+              color: var(--text-header);
+              background-color: var(--highlight-hover);
+            }
+          }
+      .navbar-menu {
+          background-color: inherit;
+          }
+        }
+        .navbar-end {
+          text-align: right;
+        }
+      }
+  
+      #main-section {
+        padding: 0 0 2.5rem 0;
+  
+        h2 {
+          padding-bottom: 0px;
+          @include ellipsis();
+          i {
+            color: var(--highlight-primary);
+          }
+        }
+        .media.no-subtitle {
+        display: flex;
+        align-items: center;
+      }
+
+      .media-left {
+        margin-inline-end: 0.5rem;
+      }
+  
+      .media-content {
+        overflow: hidden;
+        text-overflow: inherit;
+      }
+  
+      .tag {
+        color: var(--highlight-secondary);
+        background-color: var(--highlight-secondary);
+        position: absolute;
+        bottom: 1rem;
+        right: -0.2rem;
+        width: 3px;
+        overflow: hidden;
+        transition: all 0.2s ease-out;
+        padding: 0;
+  
+        .tag-text {
+          display: none;
+        }
+      }
+  
+      .card {
+        border: 1px solid transparent;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
+        overflow: visible;
+  
+        a {
+          outline: none;
+        }
+      }
+  
+      .card:hover {
+        transform: translate(0, -3px);
+  
+        .tag {
+          width: auto;
+          color: #ffffff;
+          padding: 0 0.75em;
+  
+          .tag-text {
+            display: block;
+          }
+        }
+      }
+  
+      .card-content {
+        height: 84px;
+        padding: 1.1rem;
+      }
+  
+      .layout-vertical {
+        h2.group-title {
+          padding-bottom: 0.75rem;
+        }
+
+        .card {
+          border-radius: 0;
+        }
+  
+        .column div:first-of-type .card {
+          border-top-left-radius: 0.75rem;
+          border-top-right-radius: 0.75rem;
+        }
+  
+        .column div:last-child .card {
+          border-bottom-left-radius: 0.75rem;
+          border-bottom-right-radius: 0.75rem;
+        }
+      }
+  
+        .title {
+          font-size: 1.1em;
+          line-height: 1.2em;
+          font-weight: 500;
+          margin-bottom: 4px;
+          @include ellipsis();
+        }
+  
+        .subtitle {
+          font-size: 0.9em;
+          font-weight: 300;
+          @include ellipsis();
+        }
+  
+        .container {
+          padding: 1.2rem 0.75rem;
+        }
+  
+        .message {
+          margin-top: 45px;
+          box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+  
+          .message-header {
+            font-weight: bold;
+          }
+  
+          .message-body {
+            border: none;
+          }
+        }
+
+        .media.no-subtitle {
+          display: flex;
+          align-items: center;
+        }
+    
+        .media-content {
+          overflow: hidden;
+          text-overflow: inherit;
+        }
+    
+        .tag {
+          color: var(--highlight-secondary);
+          background-color: var(--highlight-secondary);
+          position: absolute;
+          bottom: 1rem;
+          right: -0.2rem;
+          width: 3px;
+          overflow: hidden;
+          transition: all 0.2s ease-out;
+          padding: 0;
+    
+          .tag-text {
+            display: none;
+          }
+        }
+    
+        .card {
+          border: none;
+          border-radius: 0.75rem;
+          box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+          transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
+          overflow: visible;
+    
+          a {
+            outline: none;
+          }
+        }
+    
+        .card:hover {
+          transform: translate(0, -3px);
+    
+          .tag {
+            width: auto;
+            color: #ffffff;
+            padding: 0 0.75em;
+    
+            .tag-text {
+              display: block;
+            }
+          }
+        }
+    
+        .card-content {
+          height: 85px;
+          padding: 1.3rem;
+        }
+    
+        .layout-vertical {
+          h2.group-title {
+            padding-bottom: 0.75rem;
+          }
+  
+          .card {
+            border-radius: 0;
+          }
+    
+          .column div:first-of-type .card {
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+          }
+    
+          .column div:last-child .card {
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+          }
+        }
+      }
+  
+  
+      .footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.5rem;
+        text-align: left;
+        color: #676767;
+        font-size: 0.85rem;
+        transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
+      }
+  
+      .no-footer {
+        #main-section {
+          padding-bottom: 0;
+        }
+  
+        .footer {
+          display: none;
+        }
+      }
+  
+      .search-bar {
+        position: relative;
+        display: inline-block;
+        input {
+          border: none;
+          background-color: var(--highlight-hover);
+          border-radius: 5px;
+          margin-top: 2px;
+          padding: 2px 12px 2px 30px;
+          transition: all 100ms linear;
+          color: #ffffff;
+          height: 30px;
+          width: 100px;
+  
+          &:focus {
+            color: #000000;
+            width: 250px;
+            background-color: #ffffff;
+          }
+        }
+  
+        .search-label::before {
+          font-family: "Font Awesome 6 Free";
+          position: absolute;
+          top: 14px;
+          left: 16px;
+          content: "\f002";
+          font-weight: 900;
+          width: 20px;
+          height: 20px;
+          color: #ffffff;
+        }
+  
+        &:focus-within .search-label::before {
+          color: #6e6e6e;
+        }
+      }
+  
+      .offline-message {
+        text-align: center;
+        margin: 35px 0;
+  
+        i {
+          font-size: 2rem;
+        }
+  
+        i.fa-redo-alt {
+          font-size: 1.3rem;
+          line-height: 1rem;
+          vertical-align: middle;
+          cursor: pointer;
+          color: #3273dc;
+        }
+      }
+    }
+  
+    .group-subtitle {
+
+    }
+
+    .group-logo {
+      float: left;
+    }
+  }
+  

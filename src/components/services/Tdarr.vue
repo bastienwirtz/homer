@@ -32,12 +32,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Tdarr",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     stats: null,
@@ -72,14 +72,20 @@ export default {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json",
+            Accept: "application/json",
           },
-          body: JSON.stringify({"headers":{"content-Type":"application/json"},"data":{"collection":"StatisticsJSONDB","mode":"getById","docID":"statistics","obj":{}},"timeout":1000}),
+          body: JSON.stringify({
+            headers: { "content-Type": "application/json" },
+            data: {
+              collection: "StatisticsJSONDB",
+              mode: "getById",
+              docID: "statistics",
+              obj: {},
+            },
+            timeout: 1000,
+          }),
         };
-        const response = await this.fetch(
-          `/api/v2/cruddb`,
-          options
-        );
+        const response = await this.fetch(`/api/v2/cruddb`, options);
         this.error = false;
         this.stats = response;
       } catch (e) {

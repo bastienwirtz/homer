@@ -11,28 +11,24 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    timeout-minutes: 20
     steps:
     - 
       name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - 
-      name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      name: pnpm setup
+      uses: pnpm/action-setup@v4
+    - 
+      name: Node.js setup
+      uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        node-version: 22
+        cache: 'pnpm'
     - 
       name: install dependencies
-      run: yarn install
+      run: pnpm install --frozen-lockfile
     - 
       name: Check code style & potentential issues
-      run: yarn lint
-
+      run: pnpm lint

@@ -26,12 +26,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Portainer",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     endpoints: null,
@@ -78,7 +78,7 @@ export default {
       this.endpoints = await this.fetch("/api/endpoints", { headers }).catch(
         (e) => {
           console.error(e);
-        }
+        },
       );
 
       let containers = [];
@@ -93,7 +93,7 @@ export default {
         const endpointContainers = await this.fetch(uri, { headers }).catch(
           (e) => {
             console.error(e);
-          }
+          },
         );
 
         if (endpointContainers) {

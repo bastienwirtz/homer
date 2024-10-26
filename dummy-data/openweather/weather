@@ -1,46 +1,43 @@
 {
-    "coord": {
-      "lon": 4.5833,
-      "lat": 45.75
-    },
-    "weather": [
+  "coord": {
+      "lon": 3.0586,
+      "lat": 50.633
+  },
+  "weather": [
       {
-        "id": 804,
-        "main": "Clouds",
-        "description": "overcast clouds",
-        "icon": "04d"
+          "id": 800,
+          "main": "Clear",
+          "description": "clear sky",
+          "icon": "01d"
       }
-    ],
-    "base": "stations",
-    "main": {
-      "temp": 23,
-      "feels_like": 22.3,
-      "temp_min": 21.75,
-      "temp_max": 25.03,
+  ],
+  "base": "stations",
+  "main": {
+      "temp": 287.38,
+      "feels_like": 286.76,
+      "temp_min": 286.38,
+      "temp_max": 287.71,
       "pressure": 1019,
-      "humidity": 36,
-      "sea_level": 1019,
-      "grnd_level": 957
-    },
-    "visibility": 10000,
-    "wind": {
-      "speed": 2.29,
-      "deg": 174,
-      "gust": 6.22
-    },
-    "clouds": {
-      "all": 97
-    },
-    "dt": 1667136939,
-    "sys": {
+      "humidity": 73
+  },
+  "visibility": 10000,
+  "wind": {
+      "speed": 3.09,
+      "deg": 30
+  },
+  "clouds": {
+      "all": 0
+  },
+  "dt": 1718867378,
+  "sys": {
       "type": 2,
-      "id": 2005747,
+      "id": 2011132,
       "country": "FR",
-      "sunrise": 1667110705,
-      "sunset": 1667147524
-    },
-    "timezone": 3600,
-    "id": 2996943,
-    "name": "Lyon",
-    "cod": 200
-  }
+      "sunrise": 1718854500,
+      "sunset": 1718913826
+  },
+  "timezone": 7200,
+  "id": 2998324,
+  "name": "Lille",
+  "cod": 200
+}

@@ -25,12 +25,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Emby",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     status: "",

@@ -9,7 +9,7 @@
             aria-expanded="false"
             class="navbar-burger"
             :class="{ 'is-active': showMenu }"
-            v-on:click="$emit('navbar-toggle')"
+            @click="$emit('navbar-toggle')"
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -19,10 +19,10 @@
         <div class="navbar-menu" :class="{ 'is-active': showMenu }">
           <div class="navbar-start">
             <a
-              class="navbar-item"
-              rel="noreferrer"
               v-for="(link, key) in links"
               :key="key"
+              class="navbar-item"
+              rel="noreferrer"
               :href="link.url"
               :target="link.target"
             >
@@ -52,6 +52,7 @@ export default {
     },
     links: Array,
   },
+  emits: ['navbar-toggle'],
   computed: {
     showMenu: function () {
       return this.open && this.isSmallScreen();

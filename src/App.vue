@@ -1,15 +1,15 @@
 <template>
   <div
-    id="app"
     v-if="config"
+    id="app"
     :class="[
       `theme-${config.theme}`,
       `page-${currentPage}`,
-      isDark ? 'is-dark' : 'is-light',
+      isDark ? 'dark' : 'light',
       !config.footer ? 'no-footer' : '',
     ]"
   >
-    <DynamicTheme :themes="config.colors" />
+    <DynamicTheme v-if="config.colors" :themes="config.colors" />
     <div id="bighead">
       <section v-if="config.header" class="first-line">
         <div v-cloak class="container">
@@ -19,10 +19,7 @@
             </a>
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
-          <div
-            class="dashboard-title"
-            :class="{ 'no-logo': !config.icon || !config.logo }"
-          >
+          <div class="dashboard-title">
             <span class="headline">{{ config.subtitle }}</span>
             <h1>{{ config.title }}</h1>
           </div>
@@ -35,24 +32,24 @@
         @navbar-toggle="showMenu = !showMenu"
       >
         <DarkMode
+          :default-value="config.defaults.colorTheme"
           @updated="isDark = $event"
-          :defaultValue="this.config.defaults.colorTheme"
         />
 
         <SettingToggle
-          @updated="vlayout = $event"
           name="vlayout"
           icon="fa-list"
-          iconAlt="fa-columns"
-          :defaultValue="this.config.defaults.layout == 'columns'"
+          icon-alt="fa-columns"
+          :default-value="config.defaults.layout == 'columns'"
+          @updated="vlayout = $event"
         />
 
         <SearchInput
           class="navbar-item is-inline-block-mobile"
           :hotkey="searchHotkey()"
-          @input="filterServices($event.target?.value)"
+          @input="filterServices($event)"
           @search-focus="showMenu = true"
-          @search-open="navigateToFirstService($event?.target?.value)"
+          @search-open="navigateToFirstService"
           @search-cancel="filterServices()"
         />
       </Navbar>
@@ -76,8 +73,9 @@
             <template v-for="(group, groupIndex) in services">
               <h2
                 v-if="group.name"
-                class="column is-full group-title"
                 :key="`header-${groupIndex}`"
+                class="column is-full group-title"
+                :class="group.class"
               >
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 <div v-else-if="group.logo" class="group-logo media-left">
@@ -92,7 +90,11 @@
                 :key="`service-${groupIndex}-${index}`"
                 :item="item"
                 :proxy="config.proxy"
-                :class="['column', `is-${12 / config.columns}`]"
+                :class="[
+                  'column',
+                  `is-${12 / config.columns}`,
+                  `${item.class || group.class || ''}`,
+                ]"
               />
             </template>
           </div>
@@ -103,11 +105,11 @@
             class="columns is-multiline layout-vertical"
           >
             <div
-              :class="['column', `is-${12 / config.columns}`]"
               v-for="(group, groupIndex) in services"
               :key="groupIndex"
+              :class="['column', `is-${12 / config.columns}`]"
             >
-              <h2 v-if="group.name" class="group-title">
+              <h2 v-if="group.name" class="group-title" :class="group.class">
                 <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
                 <div v-else-if="group.logo" class="group-logo media-left">
                   <figure class="image is-48x48">
@@ -121,6 +123,7 @@
                 :key="index"
                 :item="item"
                 :proxy="config.proxy"
+                :class="item.class || group.class"
               />
             </div>
           </div>
@@ -131,8 +134,8 @@
     <footer class="footer">
       <div class="container">
         <div
-          class="content has-text-centered"
           v-if="config.footer"
+          class="content has-text-centered"
           v-html="config.footer"
         ></div>
       </div>
@@ -208,7 +211,7 @@ export default {
 
         if (this.currentPage !== "default") {
           let pageConfig = await this.getConfig(
-            `assets/${this.currentPage}.yml`
+            `assets/${this.currentPage}.yml`,
           );
           config = Object.assign(config, pageConfig);
         }
@@ -224,7 +227,11 @@ export default {
         `${this.config.title} | ${this.config.subtitle}`;
       if (this.config.stylesheet) {
         let stylesheet = "";
-        for (const file of this.config.stylesheet) {
+        let addtionnal_styles = this.config.stylesheet;
+        if (!Array.isArray(this.config.stylesheet)) {
+          addtionnal_styles = [addtionnal_styles];
+        }
+        for (const file of addtionnal_styles) {
           stylesheet += `@import "${file}";`;
         }
         this.createStylesheet(stylesheet);
@@ -245,7 +252,7 @@ export default {
         return response
           .text()
           .then((body) => {
-            return parse(body);
+            return parse(body, { merge: true });
           })
           .then(function (config) {
             if (config.externalConfig) {
@@ -268,12 +275,11 @@ export default {
       try {
         const service = this.services[0].items[0];
         window.open(service.url, target || service.target || "_self");
-      } catch (error) {
-        console.warning("fail to open service");
+      } catch {
+        console.warn("fail to open service");
       }
     },
     filterServices: function (filter) {
-      console.log(filter);
       this.filter = filter;
 
       if (!filter) {
@@ -283,9 +289,11 @@ export default {
 
       const searchResultItems = [];
       for (const group of this.config.services) {
-        for (const item of group.items) {
-          if (this.matchesFilter(item)) {
-            searchResultItems.push(item);
+        if (group.items !== null) {
+          for (const item of group.items) {
+            if (this.matchesFilter(item)) {
+              searchResultItems.push(item);
+            }
           }
         }
       }

@@ -1,0 +1,18 @@
+{
+    "systemInfo": {
+        "configFolder": "/etc/openhab",
+        "userdataFolder": "/var/lib/openhab",
+        "logFolder": "/var/log/openhab",
+        "javaVersion": "17.0.9",
+        "javaVendor": "Azul Systems, Inc.",
+        "javaVendorVersion": "Zulu17.46+19-CA",
+        "osName": "Linux",
+        "osVersion": "6.5.11-4-pve",
+        "osArchitecture": "amd64",
+        "availableProcessors": 2,
+        "freeMemory": 75885968,
+        "totalMemory": 494927872,
+        "uptime": 2150186,
+        "startLevel": 100
+    }
+}
