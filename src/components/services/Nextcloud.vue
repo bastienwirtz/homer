@@ -22,15 +22,14 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Nextcloud",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
   },
-  components: {
-    Generic,
-  },
   data: () => ({
-    status: null,
     fetchOk: null,
     versionstring: null,
     maintenance: null,
