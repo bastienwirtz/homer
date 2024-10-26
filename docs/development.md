@@ -3,13 +3,8 @@
 If you want to contribute to Homer, please read the [contributing guidelines](https://github.com/bastienwirtz/homer/blob/main/CONTRIBUTING.md) first. 
 
 ```sh
-# Using yarn (recommended)
-yarn install
-yarn dev
-
-# **OR** Using npm
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Custom services
@@ -24,6 +19,7 @@ Each one is **optional**, and will display the usual information if omitted.
 Each service must implement the `item` [property](https://vuejs.org/v2/guide/components-props.html) and bind it the Generic component if used.
 
 ### Skeleton
+
 ```Vue
 <template>
   <Generic :item="item">
@@ -53,7 +49,6 @@ export default {
 };
 </script>
 ```
-
 
 ## Themes
 

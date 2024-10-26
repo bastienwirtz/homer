@@ -7,7 +7,7 @@ export default {
     // but sometimes the base url is different. An optional alternative URL can be provided with the "endpoint" key.
     this.endpoint = this.item.endpoint || this.item.url;
 
-    if (this.endpoint.endsWith("/")) {
+    if (this.endpoint && this.endpoint.endsWith("/")) {
       this.endpoint = this.endpoint.slice(0, -1);
     }
   },

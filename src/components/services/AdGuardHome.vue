@@ -25,12 +25,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "AdGuardHome",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {
@@ -63,12 +63,12 @@ export default {
   methods: {
     fetchStatus: async function () {
       this.status = await this.fetch("/control/status").catch((e) =>
-        console.log(e)
+        console.log(e),
       );
     },
     fetchStats: async function () {
       this.stats = await this.fetch("/control/stats").catch((e) =>
-        console.log(e)
+        console.log(e),
       );
     },
   },

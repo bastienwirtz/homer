@@ -1,11 +1,11 @@
 <template>
   <DynamicStyle>
-    :root, body #app.is-light {
+    :root, body #app.light {
     {{ getVars(themes.light) }}
     } @media (prefers-color-scheme: light), (prefers-color-scheme:
     no-preference) { :root, body #app {
     {{ getVars(themes.light) }}
-    } } body #app.is-dark {
+    } } body #app.dark {
     {{ getVars(themes.dark) }}
     } @media (prefers-color-scheme: dark) { :root, body #app {
     {{ getVars(themes.dark) }}
@@ -23,7 +23,7 @@ export default {
     getVars: function (theme) {
       let vars = [];
       for (const themeVars in theme) {
-        let value = `${theme[themeVars]}`;
+        let value = theme[themeVars];
         if (!value) {
           value = "initial";
         } else if (themeVars == "background-image") {

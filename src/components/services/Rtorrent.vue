@@ -41,15 +41,15 @@ const displayRate = (rate) => {
 
   return (
     Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
-      rate || 0
+      rate || 0,
     ) + ` ${units[i]}/s`
   );
 };
 
 export default {
-  name: "rTorrent",
-  props: { item: Object },
+  name: "RTorrent",
   components: { Generic },
+  props: { item: Object },
   // Properties for download, upload, torrent count and errors.
   data: () => ({ dl: null, ul: null, count: null, error: null }),
   // Computed properties for the rate labels.
@@ -105,8 +105,8 @@ export default {
       return this.getXml(methodName).then((xml) =>
         parseInt(
           xml.getElementsByTagName("value")[0].firstChild.textContent,
-          10
-        )
+          10,
+        ),
       );
     },
     // Fetch the numer of torrents by requesting the download list
@@ -125,9 +125,8 @@ export default {
       const headers = { "Content-Type": "text/xml" };
 
       if (this.item.username && this.item.password) {
-        headers[
-          "Authorization"
-        ] = `${this.item.username}:${this.item.password}`;
+        headers["Authorization"] =
+          `${this.item.username}:${this.item.password}`;
       }
 
       return fetch(`${this.item.xmlrpc.replace(/\/$/, "")}/RPC2`, {
@@ -143,7 +142,7 @@ export default {
           return response.text();
         })
         .then((text) =>
-          Promise.resolve(new DOMParser().parseFromString(text, "text/xml"))
+          Promise.resolve(new DOMParser().parseFromString(text, "text/xml")),
         );
     },
   },

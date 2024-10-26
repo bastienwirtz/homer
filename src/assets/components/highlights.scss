@@ -1,0 +1,37 @@
+.highlight-primary {
+    --highlight-color: var(--highlight-primary);
+}
+
+.highlight-green {
+    --highlight-color: var(--highlight-green);
+}
+
+.highlight-orange {
+    --highlight-color: var(--highlight-orange); 
+}
+
+.highlight-pink {
+    --highlight-color: var(--highlight-pink); 
+}
+
+.highlight-purple {
+    --highlight-color: var(--highlight-purple); 
+}
+
+.highlight-red {
+    --highlight-color: var(--highlight-red); 
+}
+
+.highlight-blue {
+    --highlight-color: var(--highlight-blue); 
+}
+
+.highlight-inverted {
+    --highlight-color: var(--highlight-variant-inverted); 
+}
+
+*[class^="highlight-"], *[class*=" highlight-"] {
+    i {
+        color: var(--highlight-color);
+    }
+}

@@ -1,8 +1,8 @@
 <template>
   <a
-    @click="toggleTheme()"
     aria-label="Toggle dark mode"
     class="navbar-item is-inline-block-mobile"
+    @click="toggleTheme()"
   >
     <i
       :class="`${faClasses[mode]}`"
@@ -18,6 +18,7 @@ export default {
   props: {
     defaultValue: String,
   },
+  emits: ['updated'],
   data: function () {
     return {
       isDark: null,
@@ -84,10 +85,13 @@ export default {
     },
 
     watchIsDark: function () {
-      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-        this.isDark = this.getIsDark();
-        this.$emit("updated", this.isDark);
-      });
+      matchMedia("(prefers-color-scheme: dark)").addEventListener(
+        "change",
+        () => {
+          this.isDark = this.getIsDark();
+          this.$emit("updated", this.isDark);
+        },
+      );
     },
   },
 };
