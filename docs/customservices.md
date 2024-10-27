@@ -55,6 +55,7 @@ within Homer:
   url: "http://my-service-link"
   endpoint: "http://my-service-endpoint" # Optional: alternative base URL used to fetch service data is necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
+  headers: # Optional: Override global proxy.headers configuration.
   type: "<type>"
 ```
 

@@ -19,7 +19,7 @@ export default {
         options.credentials = "include";
       }
 
-      if (this.proxy?.headers) {
+      if (this.proxy?.headers && !!this.proxy.headers) {
         options.headers = this.proxy.headers;
       }
 
@@ -30,7 +30,7 @@ export default {
       }
 
       // Each item can have their own headers
-      if (this.item.headers !== undefined) {
+      if (this.item.headers !== undefined && !!this.item.headers) {
         options.headers = this.item.headers;
       }
 
