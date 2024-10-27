@@ -38,7 +38,7 @@
 ## Table of Contents
 
 - [Features](#features)
-- [Getting started](#getting-started)
+- [Getting started](#get-started)
 - [Kubernetes Installation](docs/kubernetes.md)
 - [Configuration](docs/configuration.md)
 - [Theming](docs/theming.md)
