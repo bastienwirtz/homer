@@ -115,7 +115,7 @@ wget https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip
 unzip homer.zip -d homer
 cd homer
 cp assets/config.yml.dist assets/config.yml
-npx serve # or python -m http.server 8010 or any web server.
+pnpx http-server # or python -m http.server 8010 or any web server.
 ```
 
 ### Build manually
