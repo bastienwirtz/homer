@@ -42,6 +42,7 @@ within Homer:
 - [Jellystat](#jellystat)
 - [Home Assistant](#home-assistant)
 - [FreshRSS](#freshrss)
+- [Gotify](#gotify)
 
 > [!IMPORTANT]  
 > Using smart cards will probably requires
@@ -528,4 +529,17 @@ The FreshRSS service displays unread and subscriptions counts from your FreshRSS
   username: "<-- Your username -->"       
   password: "<-- Your password -->"
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Gotify
+
+The Gotify service will show the number of currently oustanding messages
+available as well as the overall health of the system.
+
+Note that `apikey` must be a client token, not an app token.
+
+```yaml
+- name: "Gotify"
+  type: "Gotify"
+  apikey: "<api_key>" # Client token to retrieve messages
 ```
