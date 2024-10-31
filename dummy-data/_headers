@@ -1,5 +1,2 @@
 /*
   Content-Type: application/json
-  Access-Control-Allow-Origin: https://homer-demo.netlify.app
-  Access-Control-Allow-Headers: Authorization
-  Access-Control-Allow-Methods: GET, OPTIONS

@@ -32,7 +32,7 @@
               </div>
             </div>
           </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
+          <div v-if="item.tag" class="tag" :class="item.tagstyle">
             <strong class="tag-text">#{{ item.tag }}</strong>
           </div>
         </div>

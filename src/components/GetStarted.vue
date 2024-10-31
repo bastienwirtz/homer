@@ -30,6 +30,5 @@ p {
 body #app a {
   font-weight: 900;
   color: #ffffff;
-  font-family: "Lato", sans-serif;
 }
 </style>

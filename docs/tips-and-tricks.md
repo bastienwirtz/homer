@@ -190,3 +190,35 @@ So, using [Node-Red](https://nodered.org/docs/getting-started/) and a quick flow
 To get started, simply import [this flow](https://flows.nodered.org/flow/4b6406c9a684c26ace0430dd1826e95d) into your Node-Red instance and change the RSS feed in the "Get News RSS Feed" node to one of your choosing!
 
 So far, the flow has been tested with BBC News and Sky News, however it should be easy to modify the flow to work with other RSS feeds if they don't work out of the box!
+
+## Write HTML into the dashboard
+
+### Show latest camera feed
+
+#### `by @matheusvellone`
+
+The `message.content` config entry accepts HTML code, so you can add images.
+If you use Frigate, or have any `latest.jpg` URL for your camera, you can add it to your dashboard. You can also style the `div`/`img` tags to look nicer on your dashboard.
+
+```yml
+message:
+  title: Cameras
+  content: >
+    <div>
+      <a href="http://frigate.local:5000/cameras/garage">
+        <img src="http://frigate.local:5000/api/garage/latest.jpg?h=220"/>
+      </a>
+      <a href="http://frigate.local:5000/cameras/backyard">
+        <img src="http://frigate.local:5000/api/backyard/latest.jpg?h=220"/>
+      </a>
+    </div>
+```
+
+When using Frigate you can even add a live feed to your dashboard, like this:
+
+```yml
+message:
+  title: Cameras
+  content: >
+    <img src="http://frigate.local:5000/api/piscina"/>
+```

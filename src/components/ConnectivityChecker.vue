@@ -2,7 +2,7 @@
   <div v-if="offline" class="offline-message">
     <i class="far fa-dizzy"></i>
     <h1>
-      You're offline friend.
+      You're offline, friend.
       <span @click="checkOffline"> <i class="fas fa-redo-alt"></i></span>
     </h1>
   </div>
@@ -30,21 +30,21 @@ export default {
           that.checkOffline();
         }
       },
-      false
+      false,
     );
     window.addEventListener(
       "online",
       function () {
         that.checkOffline();
       },
-      false
+      false,
     );
     window.addEventListener(
       "offline",
       function () {
         this.offline = true;
       },
-      false
+      false,
     );
   },
   methods: {
@@ -57,7 +57,9 @@ export default {
       // extra check to make sure we're not offline
       let that = this;
       const urlPath = window.location.pathname.replace(/\/+$/, "");
-      const aliveCheckUrl = `${window.location.origin}${urlPath}/index.html?t=${new Date().valueOf()}`;
+      const aliveCheckUrl = `${
+        window.location.origin
+      }${urlPath}/index.html?t=${new Date().valueOf()}`;
       return fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",

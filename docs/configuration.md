@@ -31,6 +31,10 @@ connectivityCheck: true # whether you want to display a message when the apps ar
 # Optional: Proxy / hosting option
 proxy:
   useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+  headers: # send custom headers when fetching service specific data. Can also be set on a service level.
+    Test: "Example"
+    Test1: "Example1"
+
 
 # Set the default layout and color scheme
 defaults:
@@ -95,6 +99,7 @@ message:
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"
+  # The content also accepts HTML content, so you can add divs, images or whatever you want to make match your needs.
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 # Optional navbar
@@ -121,6 +126,7 @@ services:
     icon: "fas fa-code-branch"
     # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
     # logo: "path/to/logo"
+    # class: "highlight-purple" # Optional css class to add on the service group. 
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
@@ -152,7 +158,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
+View **[smart cards](customservices.md)** for details about all available cards (like `PiHole`) and how to configure them.
 
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
@@ -181,7 +187,7 @@ You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers
 ## Theming & customization
 
 See `colors` settings in the configuration example above.
-Favicon et application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
+Favicon and application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
 The `/assets/manifest.json` can also be edited to change the app (pwa) name, description and other settings.
 
 ### Community theme
@@ -189,7 +195,6 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 - [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
 - [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
 - [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
-
 
 ## PWA Icons
 

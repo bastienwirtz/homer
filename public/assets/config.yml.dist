@@ -1,6 +1,6 @@
 ---
 # Homepage configuration
-# See https://fontawesome.com/v5/search for icons options
+# See https://fontawesome.com/v6/search for icons options
 
 title: "Demo dashboard"
 subtitle: "Homer"
@@ -12,6 +12,9 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 
 # Optional theme customization
 theme: default
+
+# Optional theme customization (color overrrides)
+# overrrides can also be done using CSS vars 
 colors:
   light:
     highlight-primary: "#3367d6"
