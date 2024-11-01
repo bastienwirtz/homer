@@ -77,17 +77,19 @@ export default {
           }
         })
         .catch(handleError);
-      this.fetch(`${this.apiPath}/queue/details?apikey=${this.item.apikey}`)
-        .then((queue) => {
-          for (var i = 0; i < queue.length; i++) {
-            if (queue[i].trackedDownloadStatus == "warning") {
-              this.warnings++;
-            } else if (queue[i].trackedDownloadStaus == "error") {
-              this.errors++;
+      if (!this.item.legacyApi) {
+        this.fetch(`${this.apiPath}/queue/details?apikey=${this.item.apikey}`)
+          .then((queue) => {
+            for (var i = 0; i < queue.length; i++) {
+              if (queue[i].trackedDownloadStatus == "warning") {
+                this.warnings++;
+              } else if (queue[i].trackedDownloadStaus == "error") {
+                this.errors++;
+              }
             }
-          }
-        })
-        .catch(handleError);
+          })
+          .catch(handleError);
+      }
       this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = 0;
