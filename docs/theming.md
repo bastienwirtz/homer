@@ -28,7 +28,7 @@ Default colors and background can be customized for each theme variant (light an
 | `card-shadow`         | `--card-shadow`         | Service card `box-shadow` |
 | `link`                | `--link`                | Links color (footer & message), service card icon color  |
 | `link-hover`          | `--link-hover`          | Links hover color (footer & message), service card icon hover color |
-| `background-image`    | `--background-image`    | page background image url (when used in css, set `url(<image-url>)` insted of just the url. see exemple below)|
+| `background-image`    | `--background-image`    | page background image url (when used in css, set `url(<image-url>)` instead of just the url. see example below)|
 
 
 YAML example
@@ -70,7 +70,7 @@ stylesheet:
    - "assets/custom.css"
 ```
 
-### Customization exemple
+### Customization example
 
 #### Max width modification
 
@@ -80,7 +80,7 @@ body #main-section .container {
 }
 ```
 
-#### Background gradiant
+#### Background gradient
 
 ```css
 #app {

@@ -1,45 +1,52 @@
-# Custom Services
+# Smart cards
 
-Some service can use a specific a component that provides some extra features by adding a `type` key to the service yaml
-configuration and, where applicable, an apikey. Note that config.yml is exposed at /assets/config.yml via HTTP and any
-apikey included in the configuration file is exposed to anyone who can access the homer instance. Only include an apikey
-if your homer instance is secured behind some form of authentication or access restriction.
+Some cards can use a specific a component that provides some extra features by adding a `type` key to the service yaml
+configuration and other parameters when needed.
 
-Available services are in `src/components/`. Here is an overview of all custom services that are available
+> [!WARNING]  
+> Note that `config.yml` is exposed at `/assets/config.yml` via HTTP and any sensitive information, like api keys,
+> included in the configuration file is exposed to anyone who can access the homer instance. Only include an api key
+> if your homer instance is secured behind some form of authentication or access restriction.
+
+Available services are in `src/components/`. Here is an overview of all smart cards that are available
 within Homer:
 
-- [Custom Services](#custom-services)
-  - [Common options](#common-options)
-  - [PiHole](#pihole)
-  - [OpenWeatherMap](#openweathermap)
-  - [Medusa](#medusa)
-  - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
-  - [PaperlessNG](#paperlessng)
-  - [Ping](#ping)
-  - [Prometheus](#prometheus)
-  - [AdGuard Home](#adguard-home)
-  - [Portainer](#portainer)
-  - [Emby / Jellyfin](#emby--jellyfin)
-  - [Uptime Kuma](#uptime-kuma)
-  - [Tautulli](#tautulli)
-  - [Mealie](#mealie)
-  - [Healthchecks](#healthchecks)
-  - [Proxmox](#proxmox)
-  - [rTorrent](#rtorrent)
-  - [qBittorrent](#qbittorrent)
-  - [CopyToClipboard](#copy-to-clipboard)
-  - [Speedtest Tracker](#SpeedtestTracker)
-  - [What's Up Docker](#whats-up-docker)
-  - [SABnzbd](#sabnzbd)
-  - [OctoPrint](#octoprint)
-  - [Tdarr](#tdarr)
-  - [PiAlert](#pialert)
-  - [Immich](#immich)
-  - [OpenHAB](#openhab)
-  - [Jellystat](#jellystat)
-  - [Home Assistant](#home-assistant)
+- [Common options](#common-options)
+- [PiHole](#pihole)
+- [OpenWeatherMap](#openweathermap)
+- [Medusa](#medusa)
+- [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [PaperlessNG](#paperlessng)
+- [Ping](#ping)
+- [Prometheus](#prometheus)
+- [AdGuard Home](#adguard-home)
+- [Portainer](#portainer)
+- [Emby / Jellyfin](#emby--jellyfin)
+- [Uptime Kuma](#uptime-kuma)
+- [Tautulli](#tautulli)
+- [Mealie](#mealie)
+- [Healthchecks](#healthchecks)
+- [Proxmox](#proxmox)
+- [rTorrent](#rtorrent)
+- [qBittorrent](#qbittorrent)
+- [CopyToClipboard](#copy-to-clipboard)
+- [Speedtest Tracker](#SpeedtestTracker)
+- [What's Up Docker](#whats-up-docker)
+- [SABnzbd](#sabnzbd)
+- [OctoPrint](#octoprint)
+- [Tdarr](#tdarr)
+- [PiAlert](#pialert)
+- [Nextcloud](#nextcloud)
+- [Immich](#immich)
+- [OpenHAB](#openhab)
+- [Jellystat](#jellystat)
+- [Home Assistant](#home-assistant)
+- [FreshRSS](#freshrss)
+- [Gotify](#gotify)
 
-If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md) page.
+> [!IMPORTANT]  
+> Using smart cards will probably requires
+> If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md#my-service-card-doesnt-work-nothing-appears-or-offline-status-is-displayed-pi-hole-sonarr-ping-) page.
 
 ## Common options
 
@@ -49,6 +56,7 @@ If you experiencing any issue, please have a look to the [troubleshooting](troub
   url: "http://my-service-link"
   endpoint: "http://my-service-endpoint" # Optional: alternative base URL used to fetch service data is necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
+  headers: # Optional: Override global proxy.headers configuration.
   type: "<type>"
 ```
 
@@ -162,7 +170,7 @@ For Prometheus you need to set the type to Prometheus and provide a url.
 ```
 
 ## AdGuard Home
-For AdGuard Home you need to set the type to AdGuard, if you have somes issues as 403 responses on requests you need to provide authentification in headers for locations needed as below.
+For AdGuard Home you need to set the type to AdGuard, if you have some issues as 403 responses on requests you need to provide authentication in headers for locations needed as below.
 
 ```yaml
 - name: "Adguard"
@@ -291,7 +299,7 @@ servers can be found at https://enable-cors.org/server.html.
 
 This service displays status information of a Proxmox node (VMs running and disk, memory and cpu used). It uses the proxmox API and [API Tokens](https://pve.proxmox.com/pve-docs/pveum-plain.html) for authorization so you need to generate one to set in the yaml config. You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
 
-The API Token (or the user asigned to that token if not separated permissions is checked) are this:
+The API Token (or the user assigned to that token if not separated permissions is checked) are this:
 
 | Path               | Permission | Comments                                                          |
 |--------------------|------------|-------------------------------------------------------------------|
@@ -427,6 +435,20 @@ for transcoding on your Tdarr instance as well as the number of errored items.
   checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
 
+## Nextcloud
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Nextcloud is online, offline, or in [maintenance
+mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.html#maintenance-mode).
+Example configuration:
+
+```yaml
+- name: Nextcloud
+  type: Nextcloud
+  logo: assets/tools/sample.png
+  url: http://nextcloud.example.com
+```
+
 ## PiAlert
 
 The PiAlert service displays stats from your PiAlert server.
@@ -467,7 +489,7 @@ To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add t
 
 ## Jellystat
 
-The Jellystat serice display the number of concurrent streams on your jellyfin server.
+The Jellystat service display the number of concurrent streams on your jellyfin server.
 The Jellystat server must be running behind a reverse proxy to add some cors headers:
  - Access-Control-Allow-Origin: ${your_domain}
  - Access-Control-Allow-Headers: Authorization
@@ -496,3 +518,28 @@ You need to set the type to HomeAssistant, provide an api key and enable cors on
 ```
 To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
 To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
+  
+## FreshRSS
+
+The FreshRSS service displays unread and subscriptions counts from your FreshRSS server.
+
+```yaml
+- name: "FreshRSS"
+  type: "FreshRSS"
+  username: "<-- Your username -->"       
+  password: "<-- Your password -->"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Gotify
+
+The Gotify service will show the number of currently oustanding messages
+available as well as the overall health of the system.
+
+Note that `apikey` must be a client token, not an app token.
+
+```yaml
+- name: "Gotify"
+  type: "Gotify"
+  apikey: "<api_key>" # Client token to retrieve messages
+```
