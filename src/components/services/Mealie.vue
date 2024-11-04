@@ -7,7 +7,7 @@
           {{ item.subtitle }}
         </template>
         <template v-else-if="meal">
-          Today: {{ (meal && meal.length > 0) ? meal[0].recipe.name : 'Nothing planned' }}
+          Today: {{ meal.length > 0 ? meal[0].recipe.name : 'Nothing planned' }}
         </template>
         <template v-else-if="stats">
           happily keeping {{ stats.totalRecipes }} recipes organized
