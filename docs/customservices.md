@@ -463,7 +463,7 @@ The PiAlert service displays stats from your PiAlert server.
 ## Immich
 
 The Immich service displays stats from your Immich server. 
-The Immich server must be running at least version 1.85.0 for the correct api endpoint to work.
+The Immich server must be running at least version 1.118.0 for the correct api endpoint to work.
 
 ```yaml
 - name: "Immich"

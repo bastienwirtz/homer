@@ -78,7 +78,7 @@ export default {
         "x-api-key": this.item.apikey,
       };
 
-      this.fetch(`/api/server-info/statistics`, { headers })
+      this.fetch(`/api/server/statistics`, { headers })
         .then((stats) => {
           this.photos = stats.photos;
           this.videos = stats.videos;
