@@ -6,9 +6,11 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="meal"> Today: {{ meal[0].recipe.name }} </template>
-        <template v-else-if="stats">
-          happily keeping {{ stats.totalRecipes }} recipes organized
+        <template v-else-if="mealtext">
+          {{ mealtext }}
+        </template>
+        <template v-else-if="statsText">
+          {{ statsText }}
         </template>
       </p>
     </template>
@@ -32,6 +34,20 @@ export default {
     stats: null,
     meal: null,
   }),
+  computed: {
+    mealtext: function () {
+      if (this.meal && this.meal.length > 0) {
+        return `Today: ${this.meal[0].recipe.name}`;
+      }
+      return null;
+    },
+    statsText: function () {
+      if (this.stats) {
+        return `Happily keeping ${this.stats.totalRecipes} recipes organized`;
+      }
+      return null;
+    }
+  },
   created() {
     this.fetchStatus();
   },
