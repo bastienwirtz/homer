@@ -11,6 +11,12 @@
       <template v-if="status === 'online' && item.showRtt">
         {{ rtt }} ms
       </template>
+      <template v-else-if="status === 'offline' && item.showRtt">
+        N/A
+      </template>
+      <template v-else-if="!item.showRtt && item.subtitle">
+          {{ item.subtitle }}
+      </template>
       </p>
     </template>
   </Generic>

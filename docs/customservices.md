@@ -137,7 +137,7 @@ API key can be generated in Settings > Administration > Auth Tokens
 
 ## Ping
 
-For Ping you need to set the type to Ping and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property. You can also choose to show the round trip time (RTT) by setting `showRtt` to true, default is false.
+For Ping you need to set the type to Ping and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property. You can also choose to show the round trip time (RTT) by setting `showRtt` to true, default is false. The RTT will be displayed in the subtitle section.
 
 ```yaml
 - name: "Awesome app"
@@ -146,7 +146,8 @@ For Ping you need to set the type to Ping and provide a url. By default the HEAD
   tag: "app"
   url: "https://www.reddit.com/r/selfhosted/"
   method: "head"
-  showRtt: false
+  subtitle: "Bookmark example"
+  # showRtt: true
 ```
 
 ## Prometheus
