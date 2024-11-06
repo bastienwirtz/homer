@@ -2,6 +2,12 @@
 
 Here is a collection of neat tips and tricks that Homer users have come up with!
 
+## Dashboard icons
+
+Great source to find service icons
+
+- <https://github.com/walkxcode/dashboard-icons>
+
 ## Use Homer as a custom "new tab" page
 
 #### `by @vosdev`

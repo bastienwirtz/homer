@@ -152,7 +152,7 @@ For Ping you need to set the type to Ping and provide a url. By default the HEAD
   type: Ping
   logo: "assets/tools/sample.png"
   tag: "app"
-  url: "https://www.reddit.com/r/selfhosted/"
+  url: "https://www.wikipedia.org/"
   method: "head"
   subtitle: "Bookmark example"
   # showRtt: true

@@ -17,9 +17,6 @@
  <a href="https://opensource.org/licenses/Apache-2.0"><img
   alt="License: Apache 2"
   src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
-  <a href="https://gitter.im/homer-dashboard/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img
-  alt="Gitter chat"
-  src="https://badges.gitter.im/homer-dashboard/community.svg"></a>
   <a href="https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip"><img
   alt="Download homer static build"
   src="https://img.shields.io/badge/Download-homer.zip-orange"></a>
@@ -58,10 +55,10 @@
 - 📂 Multi pages & item grouping
 - 🎨 Theme customization
 - ⌨️ keyboard shortcuts:
-  - `/` Start searching.
-  - `Escape` Stop searching.
-  - `Enter` Open the first matching result (respects the bookmark's `_target` property).
-  - `Alt`/`Option` + `Enter` Open the first matching result in a new tab.
+  - <kbd>/</kbd> Start searching.
+  - <kbd>Escape</kbd> Stop searching.
+  - <kbd>Enter</kbd> Open the first matching result (respects the bookmark's `_target` property).
+  - <kbd>Alt</kbd> (or <kbd>Option</kbd>) + <kbd>Enter</kbd> Open the first matching result in a new tab.
 
 ## Get started
 
