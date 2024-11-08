@@ -48,7 +48,7 @@ export default {
 
       return fetch(url, options).then((response) => {
         if (!response.ok) {
-          throw new Error("Not 2xx response");
+          throw new Error(`Ping: target not available (${response.status} error)`);
         }
 
         return json ? response.json() : response;

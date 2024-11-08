@@ -8,14 +8,11 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-      <template v-if="status === 'online' && item.showRtt">
-        {{ rtt }} ms
-      </template>
-      <template v-else-if="status === 'offline' && item.showRtt">
-        N/A
-      </template>
-      <template v-else-if="!item.showRtt && item.subtitle">
+      <template v-if="item.subtitle">
           {{ item.subtitle }}
+      </template>
+      <template v-else>
+        {{ rttLabel }}
       </template>
       </p>
     </template>
@@ -39,6 +36,14 @@ export default {
     status: null,
     rtt: null,
   }),
+  computed: {
+    rttLabel: function () {
+      if (this.status === 'online') {
+        return `${this.rtt}ms`;
+      }
+      return "unavailable";
+    }
+  },
   created() {
     this.fetchStatus();
   },

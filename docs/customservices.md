@@ -145,17 +145,15 @@ API key can be generated in Settings > Administration > Auth Tokens
 
 ## Ping
 
-For Ping you need to set the type to Ping and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property. You can also choose to show the round trip time (RTT) by setting `showRtt` to true, default is false. The RTT will be displayed in the subtitle section.
+This card checks if the target link is available. All you need is to set the `type` to `Ping` and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property. By default, the subtitle line shows the round trip time (RTT) of the request, unless you provide the `subtitle` property.
 
 ```yaml
 - name: "Awesome app"
   type: Ping
   logo: "assets/tools/sample.png"
-  tag: "app"
   url: "https://www.wikipedia.org/"
-  method: "head"
-  subtitle: "Bookmark example"
-  # showRtt: true
+  # method: "head"
+  # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set.
 ```
 
 ## Prometheus
