@@ -406,6 +406,18 @@ the "Config" > "General" section of the SABnzbd config in the SABnzbd web UI.
   downloadInterval: 5000 # (Optional) Interval (in ms) for updating the download count
 ```
 
+## Scrutiny
+
+This service displays info about the total number of disk passed and failed S.M.A.R.T and scrutiny checks
+
+```yaml
+- name: "Scrutiny"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8080"
+  type: "Scrutiny"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the status
+```
+
 ## OctoPrint/Moonraker
 
 The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
