@@ -3,8 +3,8 @@ FROM --platform=$BUILDPLATFORM node:22-alpine3.20 AS build-stage
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
-RUN corepack use pnpm@9
+
+RUN corepack enable && corepack use pnpm@9
 
 WORKDIR /app
 
@@ -17,12 +17,12 @@ RUN pnpm build
 # production stage
 FROM alpine:3.20
 
-ENV GID 1000
-ENV UID 1000
-ENV PORT 8080
-ENV SUBFOLDER "/_"
-ENV INIT_ASSETS 1
-ENV IPV6_DISABLE 0
+ENV GID=1000 \
+    UID=1000 \
+    PORT=8080 \
+    SUBFOLDER="/_" \
+    INIT_ASSETS=1 \
+    IPV6_DISABLE=0
 
 RUN addgroup -S lighttpd -g ${GID} && adduser -D -S -u ${UID} lighttpd lighttpd && \
     apk add -U --no-cache lighttpd
