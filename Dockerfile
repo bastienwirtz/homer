@@ -25,7 +25,7 @@ ENV GID=1000 \
     IPV6_DISABLE=0
 
 RUN addgroup -S lighttpd -g ${GID} && adduser -D -S -u ${UID} lighttpd lighttpd && \
-    apk add -U --no-cache lighttpd
+    apk add -U --no-cache tzdata lighttpd
 
 WORKDIR /www
 
