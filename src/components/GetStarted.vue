@@ -9,7 +9,7 @@
           href="https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md#configuration"
           target="_blank"
         >
-          Get started
+          Get started →
         </a>
       </p>
     </div>

@@ -8,7 +8,8 @@
         <strong v-if="unread > 0" class="notif unread" title="Unread">
           {{ unread }}
         </strong>
-        <strong v-if="serverError" class="notif errors"
+        <strong
+v-if="serverError" class="notif errors"
           title="Connection error to the FreshRSS API, check url username and password in config.yml">?</strong>
       </div>
     </template>
@@ -21,12 +22,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "FreshRSS",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {
