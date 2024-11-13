@@ -28,22 +28,6 @@
   src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"></a>
 </p>
 
-<p align="center">
- <img src="https://raw.github.com/bastienwirtz/homer/main/docs/screenshot.png" width="100%">
-</p>
-
-## Table of Contents
-
-- [Features](#features)
-- [Getting started](#get-started)
-- [Kubernetes Installation](docs/kubernetes.md)
-- [Configuration](docs/configuration.md)
-- [Theming](docs/theming.md)
-- [Smart cards](docs/customservices.md)
-- [Tips & tricks](docs/tips-and-tricks.md)
-- [Development](docs/development.md)
-- [Troubleshooting](docs/troubleshooting.md)
-
 ## Highlights
 
 - ⚡️ Lightweight & Fast
@@ -59,6 +43,17 @@
   - <kbd>Escape</kbd> Stop searching.
   - <kbd>Enter</kbd> Open the first matching result (respects the bookmark's `_target` property).
   - <kbd>Alt</kbd> (or <kbd>Option</kbd>) + <kbd>Enter</kbd> Open the first matching result in a new tab.
+
+## Table of Contents
+
+- [Getting started](#get-started)
+- [Kubernetes Installation](docs/kubernetes.md)
+- [Configuration](docs/configuration.md)
+- [Theming](docs/theming.md)
+- [Smart cards](docs/customservices.md)
+- [Tips & tricks](docs/tips-and-tricks.md)
+- [Development](docs/development.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 ## Get started
 
