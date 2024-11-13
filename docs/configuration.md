@@ -1,11 +1,18 @@
 # Configuration
 
-Title, icons, links, colors, and services can be configured in the `config.yml` file (located in `/assets` directory once built, or in the `public/assets` directory in development mode), using [yaml](http://yaml.org/) format.
+Homer rely on a single [yaml](http://yaml.org/) configuration file, located in the `/assets` directory.  
+`.dist` sample configuration files are available to help you get started. Alternatively, the example below can be
+copied into the config file.
+
+> [!NOTE]  
+> On docker installations, the sample configuration is automatically installed when no configuration is found **if**
+> the configuration directory is writable to the docker user. If no configuration has been installed, check your
+> container logs and your mounted configuration directory ownership & permissions  
 
 ```yaml
 ---
 # Homepage configuration
-# See https://fontawesome.com/v5/search for icons options
+# See https://fontawesome.com/search for icons options
 
 # Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
@@ -172,6 +179,13 @@ If you choose to fetch message information from an endpoint, the output format s
 
 `null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
 Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar).
+
+## Connectivity checks
+
+As a webapp (PWA) the dashboard can still be displayed when your homer server is offline.
+The connectivity checker periodically send a HEAD request bypassing the PWA cache to the dashbord page to make sure it's still reachable.
+
+It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know is your conection is up. It also helps when using an authentication proxy, it will reloads the page if the authentication expires (when a redirection is send in response to the HEAD request).
 
 ## Style Options
 
