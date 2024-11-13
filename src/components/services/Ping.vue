@@ -60,8 +60,14 @@ export default {
       }
 
       const startTime = performance.now();
+      const timeout = parseInt(this.item.timeout, 10) || 2000;
+      const params = { 
+        method, 
+        cache: "no-cache", 
+        signal: AbortSignal.timeout(timeout) 
+      };
 
-      this.fetch("/", { method, cache: "no-cache" }, false)
+      this.fetch("/", params, false)
         .then(() => {
           this.status = "online";
           const endTime = performance.now();
