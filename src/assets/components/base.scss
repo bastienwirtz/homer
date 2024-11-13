@@ -166,89 +166,7 @@
             color: var(--highlight-primary);
           }
         }
-        .media.no-subtitle {
-        display: flex;
-        align-items: center;
-      }
 
-      .media-left {
-        margin-inline-end: 0.5rem;
-      }
-  
-      .media-content {
-        overflow: hidden;
-        text-overflow: inherit;
-      }
-  
-      .tag {
-        position: absolute;
-        bottom: 1rem;
-        right: -0.2rem;
-        width: 3px;
-        overflow: hidden;
-        transition: all 0.2s ease-out;
-        padding: 0;
-
-        &:not([class*="is-"]) {
-          color: #ffffff;
-          background-color: var(--highlight-secondary);
-        }
-  
-        .tag-text {
-          display: none;
-        }
-      }
-  
-      .card {
-        border: 1px solid transparent;
-        border-radius: 0.75rem;
-        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
-        overflow: visible;
-  
-        a {
-          outline: none;
-        }
-      }
-  
-      .card:hover {
-        transform: translate(0, -3px);
-  
-        .tag {
-          width: auto;
-          padding: 0 0.75em;
-  
-          .tag-text {
-            display: block;
-          }
-        }
-      }
-  
-      .card-content {
-        height: 84px;
-        padding: 1.1rem;
-      }
-  
-      .layout-vertical {
-        h2.group-title {
-          padding-bottom: 0.75rem;
-        }
-
-        .card {
-          border-radius: 0;
-        }
-  
-        .column div:first-of-type .card {
-          border-top-left-radius: 0.75rem;
-          border-top-right-radius: 0.75rem;
-        }
-  
-        .column div:last-child .card {
-          border-bottom-left-radius: 0.75rem;
-          border-bottom-right-radius: 0.75rem;
-        }
-      }
-  
         .title {
           font-size: 1.1em;
           line-height: 1.2em;
@@ -284,6 +202,10 @@
           display: flex;
           align-items: center;
         }
+
+        .media-left {
+          margin-inline-end: 0.5rem;
+        }
     
         .media-content {
           overflow: hidden;
@@ -291,8 +213,7 @@
         }
     
         .tag {
-          color: var(--highlight-secondary);
-          background-color: var(--highlight-secondary);
+          color: #ffffff;
           position: absolute;
           bottom: 1rem;
           right: -0.2rem;
@@ -300,6 +221,10 @@
           overflow: hidden;
           transition: all 0.2s ease-out;
           padding: 0;
+
+          &:not([class*="is-"]) {
+            background-color: var(--highlight-secondary);
+          }
     
           .tag-text {
             display: none;
@@ -323,7 +248,6 @@
     
           .tag {
             width: auto;
-            color: #ffffff;
             padding: 0 0.75em;
     
             .tag-text {
@@ -437,10 +361,6 @@
       }
     }
   
-    .group-subtitle {
-
-    }
-
     .group-logo {
       float: left;
     }
