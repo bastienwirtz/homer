@@ -181,8 +181,6 @@
       }
   
       .tag {
-        color: var(--highlight-secondary);
-        background-color: var(--highlight-secondary);
         position: absolute;
         bottom: 1rem;
         right: -0.2rem;
@@ -190,6 +188,11 @@
         overflow: hidden;
         transition: all 0.2s ease-out;
         padding: 0;
+
+        &:not([class*="is-"]) {
+          color: #ffffff;
+          background-color: var(--highlight-secondary);
+        }
   
         .tag-text {
           display: none;
@@ -213,7 +216,6 @@
   
         .tag {
           width: auto;
-          color: #ffffff;
           padding: 0 0.75em;
   
           .tag-text {
