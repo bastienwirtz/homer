@@ -170,6 +170,18 @@ For Prometheus you need to set the type to Prometheus and provide a url.
   # subtitle: "Monitor data server"
 ```
 
+## PeaNUT
+
+This service show current status of the UPS device. By default, the subtitle line shows UPS load, unless you provide the `subtitle` property
+
+```yaml
+- name: "PeaNUT"
+  type: PeaNUT
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151"
+  # device: "ups" # The ID of the device
+```
+
 ## AdGuard Home
 For AdGuard Home you need to set the type to AdGuard, if you have some issues as 403 responses on requests you need to provide authentication in headers for locations needed as below.
 
