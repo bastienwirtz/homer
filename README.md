@@ -28,6 +28,16 @@
   src="https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg"></a>
 </p>
 
+<p align="center">
+ <strong>
+  <a href="https://homer-demo.netlify.app">Demo</a>
+  •
+  <a href="https://hub.docker.com/r/b4bz/homer">Docker Hub</a>
+  •
+  <a href="#getting-started">Get started</a>
+ </strong>
+</p>
+
 ## Highlights
 
 - ⚡️ Lightweight & Fast
