@@ -153,7 +153,7 @@ This card checks if the target link is available. All you need is to set the `ty
   logo: "assets/tools/sample.png"
   url: "https://www.wikipedia.org/"
   # method: "head"
-  # timeout: 500
+  # timeout: 500 # in ms. default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set.
 ```
 
