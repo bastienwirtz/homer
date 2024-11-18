@@ -12,37 +12,39 @@ Available services are in `src/components/`. Here is an overview of all smart ca
 within Homer:
 
 - [Common options](#common-options)
-- [PiHole](#pihole)
-- [OpenWeatherMap](#openweathermap)
-- [Medusa](#medusa)
-- [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
-- [PaperlessNG](#paperlessng)
-- [Ping](#ping)
-- [Prometheus](#prometheus)
 - [AdGuard Home](#adguard-home)
-- [Portainer](#portainer)
-- [Emby / Jellyfin](#emby--jellyfin)
-- [Uptime Kuma](#uptime-kuma)
-- [Tautulli](#tautulli)
-- [Mealie](#mealie)
-- [Healthchecks](#healthchecks)
-- [Proxmox](#proxmox)
-- [rTorrent](#rtorrent)
-- [qBittorrent](#qbittorrent)
 - [CopyToClipboard](#copy-to-clipboard)
-- [Speedtest Tracker](#SpeedtestTracker)
-- [What's Up Docker](#whats-up-docker)
-- [SABnzbd](#sabnzbd)
-- [OctoPrint](#octoprint)
-- [Tdarr](#tdarr)
-- [PiAlert](#pialert)
-- [Nextcloud](#nextcloud)
-- [Immich](#immich)
-- [OpenHAB](#openhab)
-- [Jellystat](#jellystat)
-- [Home Assistant](#home-assistant)
+- [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
 - [Gotify](#gotify)
+- [Healthchecks](#healthchecks)
+- [Home Assistant](#home-assistant)
+- [Immich](#immich)
+- [Jellystat](#jellystat)
+- [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [Mealie](#mealie)
+- [Medusa](#medusa)
+- [Nextcloud](#nextcloud)
+- [OctoPrint / Moonraker](#octoprintmoonraker)
+- [OpenHAB](#openhab)
+- [OpenWeatherMap](#openweathermap)
+- [PaperlessNG](#paperlessng)
+- [PeaNUT](#peanut)
+- [PiAlert](#pialert)
+- [PiHole](#pihole)
+- [Ping](#ping)
+- [Portainer](#portainer)
+- [Prometheus](#prometheus)
+- [Proxmox](#proxmox)
+- [qBittorrent](#qbittorrent)
+- [rTorrent](#rtorrent)
+- [SABnzbd](#sabnzbd)
+- [Scrutiny](#scrutiny)
+- [Speedtest Tracker](#speedtesttracker)
+- [Tautulli](#tautulli)
+- [Tdarr](#tdarr)
+- [Uptime Kuma](#uptime-kuma)
+- [What's Up Docker](#whats-up-docker)
 
 > [!IMPORTANT]  
 > Using smart cards will probably requires
@@ -60,54 +62,132 @@ within Homer:
   type: "<type>"
 ```
 
-## PiHole
+## AdGuard Home
 
-Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
-
-The following configuration is available for the PiHole service.
+For AdGuard Home you need to set the type to AdGuard, if you have some issues as 403 responses on requests you need to provide authentication in headers for locations needed as below.
 
 ```yaml
-- name: "Pi-hole"
+- name: "Adguard"
+  logo: "assets/tools/adguardhome.png"
+  url: "https://adguard.exemple.com"
+  target: "_blank"
+  type: "AdGuardHome"
+```
+
+## Copy to Clipboard
+
+This service displays the same information of a generic one, but shows an icon button on the indicator place (right side) you can click to get the content of the `clipboard` field copied to your clipboard.
+
+You can still provide an `url` that would be open when clicked anywhere but on the icon button.
+
+Configuration example:
+
+```yaml
+- name: "Copy me!"
   logo: "assets/tools/sample.png"
-  # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
-  url: "http://192.168.0.151/admin"
-  apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
-  type: "PiHole"
+  subtitle: "Subtitle text goes here"
+  url: "#"
+  type: "CopyToClipboard"
+  clipboard: "this text will be copied to your clipboard"
 ```
 
-**Remarks:**
-If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
+## Emby / Jellyfin
 
-## OpenWeatherMap
-
-Using the OpenWeatherMap service you can display weather information about a given location.
-The following configuration is available for the OpenWeatherMap service:
+You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
 
 ```yaml
-- name: "Weather"
-  location: "Amsterdam" # your location.
-  locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
-  apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
-  units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
-  background: "square" # choose which type of background you want behind the image. Can be one of: square, circle, none. Defaults to none.
-  type: "OpenWeather"
+- name: "Emby"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "Emby"
+  apikey: "<---insert-api-key-here--->"
+  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
 ```
 
-**Remarks:**
-If for some reason your city can't be found by entering the name in the `location` property, you could also try to configure the OWM city ID in the `locationId` property. To retrieve your specific City ID, go to the [OWM website](https://openweathermap.org), search for your city and retrieve the ID from the URL (for example, the City ID of Amsterdam is 2759794).
+## FreshRSS
 
-## Medusa
+The FreshRSS service displays unread and subscriptions counts from your FreshRSS server.
 
-This service displays News (grey), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
+```yaml
+- name: "FreshRSS"
+  type: "FreshRSS"
+  username: "<-- Your username -->"       
+  password: "<-- Your password -->"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Gotify
+
+The Gotify service will show the number of currently oustanding messages
+available as well as the overall health of the system.
+
+Note that `apikey` must be a client token, not an app token.
+
+```yaml
+- name: "Gotify"
+  type: "Gotify"
+  apikey: "<api_key>" # Client token to retrieve messages
+```
+
+## Healthchecks
+
+This service displays information about the configured status checks from the Healthchecks application.
 Two lines are needed in the config.yml :
 
 ```yaml
-  type: "Medusa"
+  type: "Healthchecks"
   apikey: "<---insert-api-key-here--->"
 ```
 
-The url must be the root url of Medusa application.
-The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+The url must be the root url of the Healthchecks application.
+The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
+
+## Home Assistant
+
+You need to set the type to HomeAssistant, provide an api key and enable cors on Home Assistant.
+
+```yaml
+- name: "HomeAssistant"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "HomeAssistant"
+  apikey: "<---insert-api-key-here--->"
+  items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
+  separator: " " # optional, how to separate items
+```
+
+To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
+To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
+
+## Immich
+
+The Immich service displays stats from your Immich server. 
+The Immich server must be running at least version 1.118.0 for the correct api endpoint to work.
+
+```yaml
+- name: "Immich"
+  type: "Immich"
+  apikey: "<--- Your api key --->" # administrator user
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Jellystat
+
+The Jellystat service display the number of concurrent streams on your jellyfin server.
+The Jellystat server must be running behind a reverse proxy to add some cors headers:
+
+- Access-Control-Allow-Origin: ${your_domain}
+- Access-Control-Allow-Headers: Authorization
+
+```yaml
+- name: "Jellystat"
+  logo: "assets/tools/jellystat.png"
+  url: "http://192.168.1.154:3000"
+  type: "Jellystat"
+  apikey: "<---insert-api-key-here--->"
+```
+
+You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
 
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
 
@@ -132,6 +212,88 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
   legacyApi: true
 ```
 
+## Mealie
+
+First off make sure to remove an existing `subtitle` as it will take precedence if set. 
+Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
+
+## Medusa
+
+This service displays News (grey), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
+Two lines are needed in the config.yml :
+
+```yaml
+  type: "Medusa"
+  apikey: "<---insert-api-key-here--->"
+```
+
+The url must be the root url of Medusa application.
+The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Nextcloud
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Nextcloud is online, offline, or in [maintenance
+mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.html#maintenance-mode).
+Example configuration:
+
+```yaml
+- name: Nextcloud
+  type: Nextcloud
+  logo: assets/tools/sample.png
+  url: http://nextcloud.example.com
+```
+
+## OctoPrint/Moonraker
+
+The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
+
+Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See <https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation> for details.
+
+```yaml
+- name: "Octoprint"
+  logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
+  apikey: "xxxxxxxxxxxx" # insert your own API key here.
+  endpoint: "http://192.168.0.151:8080"
+  display: "text" # 'text' or 'bar'. Default to `text`.
+  type: "OctoPrint"
+```
+
+## OpenHAB
+
+You need to set the type to OpenHAB, provide an api key and enable cors on OpenHAB.
+
+```yaml
+- name: "OpenHAB"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "OpenHAB"
+  apikey: "<---insert-api-key-here--->"
+  things: true # true will query the things API and report total and online things count. false will skip the call
+  items: true # true will query the items API and report total items count. false will skip the call
+```
+
+To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
+To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
+
+## OpenWeatherMap
+
+Using the OpenWeatherMap service you can display weather information about a given location.
+The following configuration is available for the OpenWeatherMap service:
+
+```yaml
+- name: "Weather"
+  location: "Amsterdam" # your location.
+  locationId: "2759794" # Optional: Specify OpenWeatherMap city ID for better accuracy
+  apikey: "<---insert-api-key-here--->" # insert your own API key here. Request one from https://openweathermap.org/api.
+  units: "metric" # units to display temperature. Can be one of: metric, imperial, kelvin. Defaults to kelvin.
+  background: "square" # choose which type of background you want behind the image. Can be one of: square, circle, none. Defaults to none.
+  type: "OpenWeather"
+```
+
+**Remarks:**
+If for some reason your city can't be found by entering the name in the `location` property, you could also try to configure the OWM city ID in the `locationId` property. To retrieve your specific City ID, go to the [OWM website](https://openweathermap.org), search for your city and retrieve the ID from the URL (for example, the City ID of Amsterdam is 2759794).
+
 ## PaperlessNG
 
 This service displays total number of documents stored. Two lines are required:
@@ -142,6 +304,46 @@ This service displays total number of documents stored. Two lines are required:
 ```
 
 API key can be generated in Settings > Administration > Auth Tokens
+
+## PeaNUT
+
+This service show current status of the UPS device. By default, the subtitle line shows UPS load, unless you provide the `subtitle` property
+
+```yaml
+- name: "PeaNUT"
+  type: PeaNUT
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151"
+  # device: "ups" # The ID of the device
+```
+
+## PiAlert
+
+The PiAlert service displays stats from your PiAlert server.
+
+```yaml
+- name: "PiAlert"
+  type: "PiAlert"
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## PiHole
+
+Using the PiHole service you can display info about your local PiHole instance right on your Homer dashboard.
+
+The following configuration is available for the PiHole service.
+
+```yaml
+- name: "Pi-hole"
+  logo: "assets/tools/sample.png"
+  # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
+  url: "http://192.168.0.151/admin"
+  apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
+  type: "PiHole"
+```
+
+**Remarks:**
+If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
 
 ## Ping
 
@@ -158,41 +360,6 @@ This card checks if the target link is available. All you need is to set the `ty
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set.
 ```
 
-## Prometheus
-
-For Prometheus you need to set the type to Prometheus and provide a url.
-
-```yaml
-- name: "Prometheus"
-  type: Prometheus
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151/"
-  # subtitle: "Monitor data server"
-```
-
-## PeaNUT
-
-This service show current status of the UPS device. By default, the subtitle line shows UPS load, unless you provide the `subtitle` property
-
-```yaml
-- name: "PeaNUT"
-  type: PeaNUT
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151"
-  # device: "ups" # The ID of the device
-```
-
-## AdGuard Home
-For AdGuard Home you need to set the type to AdGuard, if you have some issues as 403 responses on requests you need to provide authentication in headers for locations needed as below.
-
-```yaml
-- name: "Adguard"
-  logo: "assets/tools/adguardhome.png"
-  url: "https://adguard.exemple.com"
-  target: "_blank"
-  type: "AdGuardHome"
-```
-
 ## Portainer
 
 This service displays info about the total number of containers managed by your Portainer instance.
@@ -200,7 +367,7 @@ In order to use it, you must be using Portainer version 1.11 or later. Generate 
 it to the apikey field.
 By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
 
-See https://docs.portainer.io/api/access#creating-an-access-token
+See <https://docs.portainer.io/api/access#creating-an-access-token>
 
 ```yaml
 - name: "Portainer"
@@ -213,100 +380,17 @@ See https://docs.portainer.io/api/access#creating-an-access-token
   #   - "local"
 ```
 
-## Emby / Jellyfin
+## Prometheus
 
-You need to set the type to Emby, provide an api key and choose which stats to show if the subtitle is disabled.
+For Prometheus you need to set the type to Prometheus and provide a url.
 
 ```yaml
-- name: "Emby"
+- name: "Prometheus"
+  type: Prometheus
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
-  type: "Emby"
-  apikey: "<---insert-api-key-here--->"
-  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
+  # subtitle: "Monitor data server"
 ```
-
-## Uptime Kuma
-
-Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
-
-The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
-
-```yaml
-- name: "Uptime Kuma"
-  logo: "assets/tools/sample.png"
-  # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
-  url: "http://192.168.0.151:3001"
-  slug: "myCustomDashboard" # Defaults to "default" if not provided.
-  type: "UptimeKuma"
-```
-
-## Tautulli
-
-The Tautulli service can allow you to show the number of currently active
-streams on you Plex instance. An API key is required, and can be obtained from
-the "Web Interface" section of settings on the Tautulli web UI.
-
-```yaml
-- name: "Tautulli"
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151:8181"
-  type: "Tautulli"
-  apikey: "<---insert-api-key-here--->"
-```
-
-Because the service type and link don't necessarily have to match, you could
-even make the service type Tautulli on your Plex card and provide a separate
-endpoint pointing to Tautulli!
-
-```yaml
-- name: "Plex"
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151:32400/web" # Plex
-  endpoint: "http://192.168.0.151:8181" # Tautulli
-  type: "Tautulli"
-  apikey: "<---insert-api-key-here--->"
-```
-
-## Mealie
-
-First off make sure to remove an existing `subtitle` as it will take precedence if set. 
-Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
-
-## Healthchecks
-
-This service displays information about the configured status checks from the Healthchecks application.
-Two lines are needed in the config.yml :
-
-```yaml
-  type: "Healthchecks"
-  apikey: "<---insert-api-key-here--->"
-```
-
-The url must be the root url of the Healthchecks application.
-The Healthchecks API key can be found in Settings > API Access > API key (read-only). The key is needed to access Healthchecks API.
-
-## rTorrent
-
-This service displays the global upload and download rates, as well as the number of torrents
-listed in rTorrent. The service communicates with the rTorrent XML-RPC interface which needs
-to be accessible from the browser. Please consult
-[the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
-for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
-servers can be found at https://enable-cors.org/server.html.
-
-```yaml
-- name: "rTorrent"
-  logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151" # Your rTorrent web UI, f.e. ruTorrent or Flood.
-  xmlrpc: "http://192.168.0.151:8081" # Reverse proxy for rTorrent's XML-RPC.
-  type: "Rtorrent"
-  rateInterval: 5000 # Interval for updating the download and upload rates.
-  torrentInterval: 60000 # Interval for updating the torrent count.
-  username: "username" # Username for logging into rTorrent (if applicable).
-  password: "password" # Password for logging into rTorrent (if applicable).
-```
-
 
 ## Proxmox
 
@@ -360,49 +444,25 @@ servers can be found at [enable-cors.org](https://enable-cors.org/server.html).
   target: "_blank" # optional html a tag target attribute
 ```
 
-## Copy to Clipboard
+## rTorrent
 
-This service displays the same information of a generic one, but shows an icon button on the indicator place (right side) you can click to get the content of the `clipboard` field copied to your clipboard.
-
-You can still provide an `url` that would be open when clicked anywhere but on the icon button.
-
-Configuration example:
+This service displays the global upload and download rates, as well as the number of torrents
+listed in rTorrent. The service communicates with the rTorrent XML-RPC interface which needs
+to be accessible from the browser. Please consult
+[the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
+for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
+servers can be found at https://enable-cors.org/server.html.
 
 ```yaml
-- name: "Copy me!"
+- name: "rTorrent"
   logo: "assets/tools/sample.png"
-  subtitle: "Subtitle text goes here"
-  url: "#"
-  type: "CopyToClipboard"
-  clipboard: "this text will be copied to your clipboard"
-```
-
-## SpeedtestTracker
-
-This service will show the download and upload speeds in Mbit/s and the ping in ms.
-To configure the service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
-
-Configuration example:
-
-```yaml
-- name: "Speedtest Tracker"
-  type: "SpeedtestTracker"
-  url: "http://192.168.0.1:8080"
-  target: "_blank"
-```
-
-## What's up Docker
-
-What's up Docker allow to display info about the number of container running and the number for which an update is available on your Homer dashboard.
-
-The following configuration is available for the WUD service.
-
-```yaml
-- name: "What's Up Docker"
-  logo: "assets/tools/sample.png"
-  subtitle: "Docker image update notifier"
-  url: "http://192.168.1.12:3001"
-  type: "WUD"
+  url: "http://192.168.0.151" # Your rTorrent web UI, f.e. ruTorrent or Flood.
+  xmlrpc: "http://192.168.0.151:8081" # Reverse proxy for rTorrent's XML-RPC.
+  type: "Rtorrent"
+  rateInterval: 5000 # Interval for updating the download and upload rates.
+  torrentInterval: 60000 # Interval for updating the torrent count.
+  username: "username" # Username for logging into rTorrent (if applicable).
+  password: "password" # Password for logging into rTorrent (if applicable).
 ```
 
 ## SABnzbd
@@ -432,19 +492,45 @@ This service displays info about the total number of disk passed and failed S.M.
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the status
 ```
 
-## OctoPrint/Moonraker
+## SpeedtestTracker
 
-The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
+This service will show the download and upload speeds in Mbit/s and the ping in ms.
+To configure the service, you need to define the url of SpeedtestTracker running and an entry with type `SpeedtestTracker`.
 
-Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation for details.
+Configuration example:
 
 ```yaml
-- name: "Octoprint"
-  logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
-  apikey: "xxxxxxxxxxxx" # insert your own API key here.
-  endpoint: "http://192.168.0.151:8080"
-  display: "text" # 'text' or 'bar'. Default to `text`.
-  type: "OctoPrint"
+- name: "Speedtest Tracker"
+  type: "SpeedtestTracker"
+  url: "http://192.168.0.1:8080"
+  target: "_blank"
+```
+
+## Tautulli
+
+The Tautulli service can allow you to show the number of currently active
+streams on you Plex instance. An API key is required, and can be obtained from
+the "Web Interface" section of settings on the Tautulli web UI.
+
+```yaml
+- name: "Tautulli"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:8181"
+  type: "Tautulli"
+  apikey: "<---insert-api-key-here--->"
+```
+
+Because the service type and link don't necessarily have to match, you could
+even make the service type Tautulli on your Plex card and provide a separate
+endpoint pointing to Tautulli!
+
+```yaml
+- name: "Plex"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151:32400/web" # Plex
+  endpoint: "http://192.168.0.151:8181" # Tautulli
+  type: "Tautulli"
+  apikey: "<---insert-api-key-here--->"
 ```
 
 ## Tdarr
@@ -460,111 +546,31 @@ for transcoding on your Tdarr instance as well as the number of errored items.
   checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
 
-## Nextcloud
+## Uptime Kuma
 
-This service displays a version string instead of a subtitle. The indicator
-shows if Nextcloud is online, offline, or in [maintenance
-mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.html#maintenance-mode).
-Example configuration:
+Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
 
-```yaml
-- name: Nextcloud
-  type: Nextcloud
-  logo: assets/tools/sample.png
-  url: http://nextcloud.example.com
-```
-
-## PiAlert
-
-The PiAlert service displays stats from your PiAlert server.
+The following configuration is available for the UptimeKuma service. Needs v1.13.1 or later because of the change in APIs due to [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1).
 
 ```yaml
-- name: "PiAlert"
-  type: "PiAlert"
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
-```
-
-## Immich
-
-The Immich service displays stats from your Immich server. 
-The Immich server must be running at least version 1.118.0 for the correct api endpoint to work.
-
-```yaml
-- name: "Immich"
-  type: "Immich"
-  apikey: "<--- Your api key --->" # administrator user
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
-```
-
-## OpenHAB
-
-You need to set the type to OpenHAB, provide an api key and enable cors on OpenHAB.
-
-```yaml
-- name: "OpenHAB"
+- name: "Uptime Kuma"
   logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151/"
-  type: "OpenHAB"
-  apikey: "<---insert-api-key-here--->"
-  things: true # true will query the things API and report total and online things count. false will skip the call
-  items: true # true will query the items API and report total items count. false will skip the call
+  # subtitle: "A fancy self-hosted monitoring tool" # optional, if no subtitle is defined, Uptime Kuma incidents, if any, will be shown
+  url: "http://192.168.0.151:3001"
+  slug: "myCustomDashboard" # Defaults to "default" if not provided.
+  type: "UptimeKuma"
 ```
-To create an API token on OpenHAB, follow the [official documentation here](https://www.openhab.org/docs/configuration/apitokens.html).  
-To enable cors on OpenHAB, edit your services/runtime.cfg and uncomment or add this line: `org.openhab.cors:enable=true`
 
-## Jellystat
+## What's up Docker
 
-The Jellystat service display the number of concurrent streams on your jellyfin server.
-The Jellystat server must be running behind a reverse proxy to add some cors headers:
- - Access-Control-Allow-Origin: ${your_domain}
- - Access-Control-Allow-Headers: Authorization
+What's up Docker allow to display info about the number of container running and the number for which an update is available on your Homer dashboard.
+
+The following configuration is available for the WUD service.
 
 ```yaml
-- name: "Jellystat"
-  logo: "assets/tools/jellystat.png"
-  url: "http://192.168.1.154:3000"
-  type: "Jellystat"
-  apikey: "<---insert-api-key-here--->"
-```
-You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
-
-## Home Assistant
-
-You need to set the type to HomeAssistant, provide an api key and enable cors on Home Assistant.
-
-```yaml
-- name: "HomeAssistant"
+- name: "What's Up Docker"
   logo: "assets/tools/sample.png"
-  url: "http://192.168.0.151/"
-  type: "HomeAssistant"
-  apikey: "<---insert-api-key-here--->"
-  items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
-  separator: " " # optional, how to separate items
-```
-To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
-To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
-  
-## FreshRSS
-
-The FreshRSS service displays unread and subscriptions counts from your FreshRSS server.
-
-```yaml
-- name: "FreshRSS"
-  type: "FreshRSS"
-  username: "<-- Your username -->"       
-  password: "<-- Your password -->"
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
-```
-
-## Gotify
-
-The Gotify service will show the number of currently oustanding messages
-available as well as the overall health of the system.
-
-Note that `apikey` must be a client token, not an app token.
-
-```yaml
-- name: "Gotify"
-  type: "Gotify"
-  apikey: "<api_key>" # Client token to retrieve messages
+  subtitle: "Docker image update notifier"
+  url: "http://192.168.1.12:3001"
+  type: "WUD"
 ```
