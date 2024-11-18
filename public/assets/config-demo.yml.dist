@@ -100,6 +100,11 @@ services:
         warning_value: 50
         danger_value: 80
         api_token: "xxxxxxxxxxxx"
+      - name: "PeaNUT"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/png/peanut.png"
+        url: "https://github.com/Brandawg93/PeaNUT"
+        endpoint: "/dummy-data/peanut"
+        type: "PeaNUT"
       - name: "Weather"
         location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
