@@ -145,7 +145,7 @@ API key can be generated in Settings > Administration > Auth Tokens
 
 ## Ping
 
-This card checks if the target link is available. All you need is to set the `type` to `Ping` and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property. By default, the subtitle line shows the round trip time (RTT) of the request, unless you provide the `subtitle` property.
+This card checks if the target link is available. All you need is to set the `type` to `Ping` and provide a url. By default the HEAD method is used but it can be configured to use GET using the optional `method` property. By default, the subtitle line shows the round trip time (RTT) of the request, unless you provide the `subtitle` property. Optionnaly, use `successCodes` to define which HTTP response status codes should be considered as available status.
 
 ```yaml
 - name: "Awesome app"
@@ -153,6 +153,7 @@ This card checks if the target link is available. All you need is to set the `ty
   logo: "assets/tools/sample.png"
   url: "https://www.wikipedia.org/"
   # method: "head"
+  # successCodes: [200, 418] # optional, default to all 2xx HTTP response status codes
   # timeout: 500 # in ms. default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set.
 ```
