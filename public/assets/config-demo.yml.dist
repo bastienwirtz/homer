@@ -105,6 +105,7 @@ services:
         url: "https://github.com/Brandawg93/PeaNUT"
         endpoint: "/dummy-data/peanut"
         type: "PeaNUT"
+        device: "ups"
       - name: "Weather"
         location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
