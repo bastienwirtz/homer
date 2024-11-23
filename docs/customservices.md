@@ -17,6 +17,7 @@ within Homer:
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
 - [Gitea / Forgejo](#gitea--forgejo)
+- [Glances](#glances)
 - [Gotify](#gotify)
 - [Healthchecks](#healthchecks)
 - [Home Assistant](#home-assistant)
@@ -126,6 +127,37 @@ This service displays a version string instead of a subtitle. Example configurat
   type: Gitea
   logo: assets/tools/sample.png
   url: http://git.example.com
+```
+
+## Glances
+
+This is a basic widget for showing cpu and ram usage using a glances server
+
+You'll need a glances server up and running, this is a sample compose.yml
+
+```yml
+---
+services:
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    environment:
+      - TZ=Europe/Rome
+      - GLANCES_OPT=-w
+    ports:
+      - 61208:61208
+    restart: unless-stopped
+```
+
+And this is a sample homer configuration
+
+```yml
+- name: System
+  icon: "fa-solid fa-heart-pulse"
+  url: http://192.168.1.2:61208
+  type: Glances
+  stats: [cpu, mem] # Metric to display. Possible values are: load, cpu, mem, swap.
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats   
 ```
 
 ## Gotify
