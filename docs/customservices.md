@@ -152,16 +152,12 @@ services:
 And this is a sample homer configuration
 
 ```yml
-services:
-  - name: Glances
-    items:
-      - name: CPU
-        icon: fas fa-microchip
-        url: http://192.168.1.2:61208
-        type: Glances
-        stat: [cpu, mem] 
-        updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
-      
+- name: System
+  icon: "fa-solid fa-heart-pulse"
+  url: http://192.168.1.2:61208
+  type: Glances
+  stats: [cpu, mem] # Metric to display. Possible values are: load, cpu, mem, swap.
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats   
 ```
 
 ## Gotify
