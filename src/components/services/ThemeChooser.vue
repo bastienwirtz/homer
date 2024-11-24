@@ -27,11 +27,11 @@ const app = document.getElementById("app");
 
 export default {
   name: "ThemeChooser",
-  props: {
-    item: Object,
-  },
   components: {
     Generic,
+  },
+  props: {
+    item: Object,
   },
   data: () => {
     return {

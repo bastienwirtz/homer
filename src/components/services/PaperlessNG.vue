@@ -20,12 +20,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Paperless",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     api: null,

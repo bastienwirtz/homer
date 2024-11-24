@@ -31,12 +31,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "PiAlert",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {

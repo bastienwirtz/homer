@@ -9,20 +9,19 @@ jobs:
   build:
     name: Upload Release Asset
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - 
         name: Checkout
         uses: actions/checkout@v4
       - 
         name: pnpm setup
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
+        uses: pnpm/action-setup@v4
       - 
-        name: Use Node.js 20
+        name: Node.js setup
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
       - 
         name: Build project

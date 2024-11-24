@@ -2,7 +2,6 @@
 
 We have different solution to install Homer on Kubernetes Cluster, each solution responds to a specific need. 
 
-
 ## Table of Contents
 
 - [Helm Chart](#helm-chart)
@@ -58,7 +57,7 @@ helm install homer bananaops/homer-k8s -f values.yaml
 
 ## Controller Annotations
 
-To deploy Homer in Kubernetes with controller to check ingress annoation and modify homer configuration 
+To deploy Homer in Kubernetes with controller to check ingress annotation and modify homer configuration 
 
 Thanks to [@paulfantom](https://github.com/paulfantom) [homer-reloader](https://github.com/paulfantom/homer-reloader/tree/main/):
 
@@ -82,7 +81,3 @@ kubectl apply -f operator.yaml
 ### Usage
 
 - [usage](https://github.com/rajsinghtech/homer-operator?tab=readme-ov-file#usage)
-
-
-
-

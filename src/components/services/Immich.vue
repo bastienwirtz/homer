@@ -31,12 +31,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Immich",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {
@@ -46,13 +46,6 @@ export default {
       usage: null,
       serverError: false,
     };
-  },
-  created: function () {
-    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
-    if (updateInterval > 0) {
-      setInterval(() => this.fetchConfig(), updateInterval);
-    }
-    this.fetchConfig();
   },
   computed: {
     humanizeSize: function () {
@@ -72,13 +65,20 @@ export default {
       return bytes.toFixed(2) + " " + units[u];
     },
   },
+  created: function () {
+    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
+    if (updateInterval > 0) {
+      setInterval(() => this.fetchConfig(), updateInterval);
+    }
+    this.fetchConfig();
+  },
   methods: {
     fetchConfig: function () {
       const headers = {
         "x-api-key": this.item.apikey,
       };
 
-      this.fetch(`/api/server-info/statistics`, { headers })
+      this.fetch(`/api/server/statistics`, { headers })
         .then((stats) => {
           this.photos = stats.photos;
           this.videos = stats.videos;

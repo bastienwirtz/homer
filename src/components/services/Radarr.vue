@@ -34,12 +34,12 @@ const LEGACY_API = "/api";
 
 export default {
   name: "Radarr",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => {
     return {
@@ -50,13 +50,13 @@ export default {
       serverError: false,
     };
   },
-  created: function () {
-    this.fetchConfig();
-  },
   computed: {
     apiPath() {
       return this.item.legacyApi ? LEGACY_API : V3_API;
     },
+  },
+  created: function () {
+    this.fetchConfig();
   },
   methods: {
     fetchConfig: function () {
@@ -77,6 +77,19 @@ export default {
           }
         })
         .catch(handleError);
+      if (!this.item.legacyApi) {
+        this.fetch(`${this.apiPath}/queue/details?apikey=${this.item.apikey}`)
+          .then((queue) => {
+            for (var i = 0; i < queue.length; i++) {
+              if (queue[i].trackedDownloadStatus == "warning") {
+                this.warnings++;
+              } else if (queue[i].trackedDownloadStaus == "error") {
+                this.errors++;
+              }
+            }
+          })
+          .catch(handleError);
+      }
       this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = 0;
@@ -93,11 +106,14 @@ export default {
         })
         .catch(handleError);
       if (!this.item.legacyApi) {
-        this.fetch(`${this.apiPath}/movie?apikey=${this.item.apikey}`)
-          .then((movies) => {
-            this.missing = movies.filter(
-              (m) => m.monitored && !m.hasFile
-            ).length;
+        this.fetch(`${this.apiPath}/wanted/missing?pageSize=1&apikey=${this.item.apikey}`)
+          .then((overview) => {
+            this.fetch(`${this.apiPath}/wanted/missing?pageSize=${overview.totalRecords}&apikey=${this.item.apikey}`)
+              .then((movies) => {
+                this.missing = movies.records.filter(
+                  (m) => m.monitored && m.isAvailable && !m.hasFile
+                ).length;
+            })
           })
           .catch(handleError);
       }

@@ -80,12 +80,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Proxmox",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     vms: {

@@ -19,6 +19,7 @@ Each one is **optional**, and will display the usual information if omitted.
 Each service must implement the `item` [property](https://vuejs.org/v2/guide/components-props.html) and bind it the Generic component if used.
 
 ### Skeleton
+
 ```Vue
 <template>
   <Generic :item="item">
@@ -48,7 +49,6 @@ export default {
 };
 </script>
 ```
-
 
 ## Themes
 

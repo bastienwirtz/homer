@@ -24,12 +24,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Jellyfin",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     stats: null,

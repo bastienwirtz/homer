@@ -1,11 +1,18 @@
 # Configuration
 
-Title, icons, links, colors, and services can be configured in the `config.yml` file (located in `/assets` directory once built, or in the `public/assets` directory in development mode), using [yaml](http://yaml.org/) format.
+Homer rely on a single [yaml](http://yaml.org/) configuration file, located in the `/assets` directory.  
+`.dist` sample configuration files are available to help you get started. Alternatively, the example below can be
+copied into the config file.
+
+> [!NOTE]  
+> On docker installations, the sample configuration is automatically installed when no configuration is found **if**
+> the configuration directory is writable to the docker user. If no configuration has been installed, check your
+> container logs and your mounted configuration directory ownership & permissions  
 
 ```yaml
 ---
 # Homepage configuration
-# See https://fontawesome.com/v5/search for icons options
+# See https://fontawesome.com/search for icons options
 
 # Optional: Use external configuration file.
 # Using this will ignore remaining config in this file
@@ -31,6 +38,10 @@ connectivityCheck: true # whether you want to display a message when the apps ar
 # Optional: Proxy / hosting option
 proxy:
   useCredentials: false # send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. 
+  headers: # send custom headers when fetching service specific data. Can also be set on a service level.
+    Test: "Example"
+    Test1: "Example1"
+
 
 # Set the default layout and color scheme
 defaults:
@@ -62,7 +73,7 @@ colors:
     card-shadow: rgba(0, 0, 0, 0.1)
     link: "#3273dc"
     link-hover: "#363636"
-    background-image: "assets/your/light/bg.png"
+    background-image: "/assets/your/light/bg.png" # prefix with your sub subpath if any (ex: /homer/assets/...)
   dark:
     highlight-primary: "#3367d6"
     highlight-secondary: "#4285f4"
@@ -76,7 +87,7 @@ colors:
     card-shadow: rgba(0, 0, 0, 0.4)
     link: "#3273dc"
     link-hover: "#ffdd57"
-    background-image: "assets/your/dark/bg.png"
+    background-image: "/assets/your/dark/bg.png" # prefix with your sub subpath if any (ex: /homer/assets/...)
 
 # Optional message
 message:
@@ -95,6 +106,7 @@ message:
   style: "is-warning"
   title: "Optional message!"
   icon: "fa fa-exclamation-triangle"
+  # The content also accepts HTML content, so you can add divs, images or whatever you want to make match your needs.
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 
 # Optional navbar
@@ -153,7 +165,7 @@ services:
         # background: red # optional color for card to set color directly without custom stylesheet
 ```
 
-View **[Custom Services](customservices.md)** for details about all available custom services (like `PiHole`) and how to configure them.
+View **[smart cards](customservices.md)** for details about all available cards (like `PiHole`) and how to configure them.
 
 If you choose to fetch message information from an endpoint, the output format should be as follows (or you can [custom map fields as shown in tips-and-tricks](./tips-and-tricks.md#mapping-fields)):
 
@@ -168,21 +180,28 @@ If you choose to fetch message information from an endpoint, the output format s
 `null` value or missing keys will be ignored and value from the `config.yml` will be used if available.
 Empty values (either in `config.yml` or the endpoint data) will hide the element (ex: set `"title": ""` to hide the title bar).
 
+## Connectivity checks
+
+As a webapp (PWA) the dashboard can still be displayed when your homer server is offline.
+The connectivity checker periodically send a HEAD request bypassing the PWA cache to the dashbord page to make sure it's still reachable.
+
+It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know is your conection is up. It also helps when using an authentication proxy, it will reloads the page if the authentication expires (when a redirection is send in response to the HEAD request).
+
 ## Style Options
 
-Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](https://bulma.io/documentation/modifiers/syntax/). You'll notice in the config there is a `tagstyle` option. It can be set to any of the bulma modifiers. You'll probably want to use one of these 4 main colors:
+Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](https://bulma.io/documentation/start/syntax/). You'll notice in the config there is a `tagstyle` option. It can be set to any of the bulma modifiers. You'll probably want to use one of these 4 main colors:
 
 - `is-info` (blue)
 - `is-success` (green)
 - `is-warning` (yellow)
 - `is-danger` (red)
 
-You can read the [bulma modifiers page](https://bulma.io/documentation/modifiers/syntax/) for other options regarding size, style, or state.
+You can read the [bulma modifiers page](https://bulma.io/documentation/start/syntax/) for other options regarding size, style, or state.
 
 ## Theming & customization
 
 See `colors` settings in the configuration example above.
-Favicon et application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
+Favicon and application icon (pwa) are located in the `assets/icons` directory and can be replaced by any image you want (just keep the same name & size).
 The `/assets/manifest.json` can also be edited to change the app (pwa) name, description and other settings.
 
 ### Community theme
@@ -190,7 +209,6 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 - [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
 - [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
 - [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
-
 
 ## PWA Icons
 

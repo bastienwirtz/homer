@@ -5,6 +5,17 @@
         {{ status }}
       </div>
     </template>
+    <template #content>
+      <p class="title is-4">{{ item.name }}</p>
+      <p class="subtitle is-6">
+      <template v-if="item.subtitle">
+          {{ item.subtitle }}
+      </template>
+      <template v-else>
+        {{ rttLabel }}
+      </template>
+      </p>
+    </template>
   </Generic>
 </template>
 
@@ -14,16 +25,25 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Ping",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
   },
-  components: {
-    Generic,
-  },
   data: () => ({
     status: null,
+    rtt: null,
   }),
+  computed: {
+    rttLabel: function () {
+      if (this.status === 'online') {
+        return `${this.rtt}ms`;
+      }
+      return "unavailable";
+    }
+  },
   created() {
     this.fetchStatus();
   },
@@ -39,12 +59,23 @@ export default {
         return;
       }
 
-      this.fetch("/", { method, cache: "no-cache" }, false)
+      const startTime = performance.now();
+      const timeout = parseInt(this.item.timeout, 10) || 2000;
+      const params = { 
+        method, 
+        cache: "no-cache", 
+        signal: AbortSignal.timeout(timeout) 
+      };
+
+      this.fetch("/", params, false)
         .then(() => {
           this.status = "online";
+          const endTime = performance.now();
+          this.rtt = Math.round(endTime - startTime);
         })
         .catch(() => {
           this.status = "offline";
+          this.rtt = null; // Reset rtt on failure
         });
     },
   },
@@ -81,3 +112,4 @@ export default {
   }
 }
 </style>
+
