@@ -121,17 +121,6 @@ If you would like to change internal port of Homer from default `8080` to your p
 - **`IPV6_DISABLE`** (default: 0)
 Set to `1` to disable listening on IPv6.
 
-#### With docker-compose
-
-A [`docker-compose.yml`](docker-compose.yml) file is available as an example. It must be edited to match your needs. You probably want to adjust the port mapping and volume binding (equivalent to `-p` and `-v` arguments).
-
-Then launch the container:
-
-```sh
-cd /path/to/docker-compose.yml/
-docker-compose up -d
-```
-
 ### Using the release tarball (prebuilt, ready to use)
 
 Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a web server.
