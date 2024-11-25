@@ -3,7 +3,10 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-        <template v-if="versionstring">
+        <template v-if="item.subtitle">
+          {{ item.subtitle }}
+        </template>
+        <template v-else-if="versionstring">
           Version {{ versionstring }}
         </template>
       </p>
