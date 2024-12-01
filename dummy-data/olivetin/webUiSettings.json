@@ -1,0 +1,18 @@
+{
+    "Rest": "./api/",
+    "ShowFooter": true,
+    "ShowNavigation": true,
+    "ShowNewVersions": true,
+    "AvailableVersion": "none",
+    "CurrentVersion": "2024.11.24",
+    "PageTitle": "OliveTin",
+    "SectionNavigationStyle": "sidebar",
+    "DefaultIconForBack": "&laquo;",
+    "SshFoundKey": "not found at /home/user/.ssh/id_rsa",
+    "SshFoundConfig": "not found at /home/user/.ssh/config",
+    "EnableCustomJs": false,
+    "AuthLoginUrl": "",
+    "AuthLocalLogin": false,
+    "AuthOAuth2Providers": null,
+    "AdditionalLinks": null
+}
