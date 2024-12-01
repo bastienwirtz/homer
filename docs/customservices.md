@@ -54,8 +54,8 @@ within Homer:
 > [!IMPORTANT]  
 > Using smart cards, which interact with other services, will require either that:
 >
-> - All services are exposed on the **same domain** as homer (mydomain,tld/pihole, mydomain,tld/proxmox), avoiding any cross domain request issues (CORS).
-> - All services **accecpt cross site requests** (= send the necessary CORS headers, either set directly in the service configuration if possible, or using a proxy to set the headers)
+> - All services are exposed on the **same domain** as homer (mydomain.tld/pihole, mydomain.tld/proxmox), avoiding any cross domain request issues (CORS).
+> - All services **accept cross site requests** (= send the necessary CORS headers, either set directly in the service configuration if possible, or using a proxy to set the headers)
 >
 > If you experiencing any issue, please have a look to the [troubleshooting](troubleshooting.md#my-service-card-doesnt-work-nothing-appears-or-offline-status-is-displayed-pi-hole-sonarr-ping-) page.
 
