@@ -1,0 +1,95 @@
+{
+  "name": "Node.js Development Container",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "vue-app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "onCreateCommand": {
+    "customizeZsh": "zsh ./.devcontainer/scripts/customize_zsh.zsh",
+    "installApp": "pnpm install"
+  },
+  // "remoteEnv": {
+  //    "PATH": "${containerEnv:PATH}:/some/other/path",
+  // },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // This can be used to network with other containers or with the host. i.e. [3000, 5432, 6379]
+  // "forwardPorts": [3000],
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  //"remoteUser": "root", // default user is non-root "node" with sudo privileges
+  "features": {
+    "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true,
+      "installZsh": false,
+      "installOhMyZsh": false,
+      "installOhMyZshConfig": true,
+      "upgradePackages": true,
+      "username": "automatic",
+      "userUid": "automatic",
+      "userGid": "automatic"
+    },
+    "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+      "plugins": "git themes history dirhistory zsh-interactive-cd zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-256color",
+      "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting https://github.com/zsh-users/zsh-history-substring-search https://github.com/chrissicool/zsh-256color"
+    }
+  },
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "files.insertFinalNewline": true,
+        "terminal.integrated.fontFamily": "MesloLGS NF, Cascadia Mono PL, JetBrainsMono Nerd Font",
+        "editor.fontFamily": "Cascadia Mono PL, JetBrainsMono Nerd Font",
+        "editor.fontLigatures": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "files.trimTrailingWhitespace": true,
+        "trailing-spaces.trimOnSave": true,
+        "editor.wordWrap": "on",
+        "editor.detectIndentation": true,
+        "git.enableSmartCommit": true,
+        "git.autofetch": true,
+        "git.confirmSync": false,
+        "gitlens.ai.experimental.provider": "openai",
+        "gitlens.ai.experimental.openai.model": "gpt-4-turbo-preview",
+        "workbench.iconTheme": "vscode-icons",
+        "editor.renderWhitespace": "all",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      // Add the IDs of extensions you want installed when the container is created. Order matters if extension dependencies exist.
+      // These can be added to the project's extensions.json file to avoid hardcoding here. That would speed up container start times.
+      "extensions": [
+        // Base extensions
+        "EditorConfig.EditorConfig",
+        "aaron-bond.better-comments",
+        "mikestead.dotenv",
+        "shardulm94.trailing-spaces",
+        "oderwat.indent-rainbow",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "IBM.output-colorizer",
+        "usernamehw.errorlens",
+
+        // Code formatting and linting
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "YoavBls.pretty-ts-errors",
+        "streetsidesoftware.code-spell-checker",
+        "steoates.autoimport",
+
+        // Web development
+        "Vue.volar",
+        "wix.vscode-import-cost",
+        "meganrogge.template-string-converter",
+        "christian-kohler.path-intellisense",
+        "codeandstuff.package-json-upgrade",
+
+        // Miscellaneous
+        "vscode-icons-team.vscode-icons"
+      ]
+    }
+  }
+}

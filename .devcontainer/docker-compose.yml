@@ -1,0 +1,10 @@
+services:
+  # App - Node.js application
+  vue-app:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
