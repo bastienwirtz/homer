@@ -266,7 +266,13 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
 ## Mealie
 
 First off make sure to remove an existing `subtitle` as it will take precedence if set. 
-Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
+Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will 
+have to set an API key in the field `apikey` which can be created in your Mealie installation. The API page can be found: Click on hamburger menu -> Click on your profile -> Click on "Manage your API Tokens"
+
+```yaml
+  type: "Mealie"
+  apikey: "<---insert-api-key-here--->"
+```
 
 ## Medusa
 
