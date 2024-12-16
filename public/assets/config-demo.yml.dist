@@ -66,7 +66,7 @@ services:
         icon: "fa-solid fa-palette"
         subtitle: "Displays dynamic information or actions."
         tag: "setup"
-        url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/customservices.md"
       - name: "Dashboard icons"
         icon: "fa-solid fa-icons"
         subtitle: "Dashboard icons"
