@@ -14,6 +14,7 @@ within Homer:
 - [Common options](#common-options)
 - [AdGuard Home](#adguard-home)
 - [CopyToClipboard](#copy-to-clipboard)
+- [Docuseal](#docuseal)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
 - [Gitea / Forgejo](#gitea--forgejo)
@@ -98,6 +99,17 @@ Configuration example:
   url: "#"
   type: "CopyToClipboard"
   clipboard: "this text will be copied to your clipboard"
+```
+
+## Docuseal
+
+This service displays a version string instead of a subtitle. Example configuration:
+
+```yaml
+- name: Docuseal
+  type: Docuseal
+  logo: assets/tools/sample.png
+  url: http://docuseal.example.com
 ```
 
 ## Emby / Jellyfin
