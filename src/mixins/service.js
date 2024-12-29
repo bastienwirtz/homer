@@ -56,7 +56,7 @@ export default {
           throw new Error(`Ping: target not available (${response.status} error)`);
         }
 
-        return json ? response.json() : response;
+        return json ? response.json() : response.text();
       });
     },
   },
