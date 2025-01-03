@@ -78,7 +78,7 @@ services:
         icon: "fa-solid fa-download"
         subtitle: "Start using Homer in a few minutes"
         tag: "setup"
-        url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#getting-started"
+        url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#get-started"
       - name: "Configuration"
         icon: "fa-solid fa-sliders"
         subtitle: "Configuration options documentation"
