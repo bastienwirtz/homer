@@ -34,7 +34,7 @@
   •
   <a href="https://hub.docker.com/r/b4bz/homer">Docker Hub</a>
   •
-  <a href="#getting-started">Get started</a>
+  <a href="#get-started">Get started</a>
  </strong>
 </p>
 
