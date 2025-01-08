@@ -17,6 +17,17 @@ RUN pnpm build
 # production stage
 FROM alpine:3.20
 
+LABEL \
+    org.label-schema.schema-version="1.0" \
+    org.label-schema.version="$VERSION_TAG" \
+    org.opencontainers.image.title="Homer Image" \
+    org.opencontainers.image.description="A dead simple static HOMepage for your servER to keep your services on hand, from a simple yaml configuration file." \
+    org.opencontainers.image.ref.name="b4bz/homer:22-alpine3.20" \
+    org.opencontainers.image.version="$VERSION_TAG" \
+    org.opencontainers.image.licenses="Apache-2.0 license" \
+    org.opencontainers.image.source="https://github.com/bastienwirtz/homer" \
+    org.opencontainers.image.url="https://homer-demo.netlify.app/"
+
 ENV GID=1000 \
     UID=1000 \
     PORT=8080 \
