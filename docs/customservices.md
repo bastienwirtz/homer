@@ -435,9 +435,10 @@ This card checks if the target link is available. All you need is to set the `ty
   logo: "assets/tools/sample.png"
   url: "https://www.wikipedia.org/"
   # method: "head"
-  # successCodes: [200, 418] # optional, default to all 2xx HTTP response status codes
-  # timeout: 500 # in ms. default 2000
-  # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set.
+  # successCodes: [200, 418] # Optional, default to all 2xx HTTP response status codes
+  # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
+  # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
+  # updateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
 ```
 
 ## Portainer
