@@ -19,6 +19,19 @@
             <div class="media-content">
               <slot name="content">
                 <p class="title">{{ item.name }}</p>
+                <p v-if="item.quick" class="quicklinks">
+                  <a 
+                    v-for="(link, linkIndex) in item.quick" 
+                    :key="linkIndex" 
+                    :style="`background-color:${link.color};`" 
+                    :href="link.url" 
+                    :target="link.target" 
+                    rel="noreferrer"
+                  > 
+                      <span v-if="item.icon"><i style="font-size: 12px" :class="['fa-fw', link.icon]"></i></span> 
+                      {{ link.name }}
+                  </a>
+                </p>
                 <p v-if="item.subtitle" class="subtitle">
                   {{ item.subtitle }}
                 </p>
@@ -61,4 +74,23 @@ export default {
     object-fit: contain;
   }
 }
+
+a[href=""] {
+  pointer-events: none;
+  cursor: default;
+}
+
+.quicklinks {
+  float: right;
+  a {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    margin-left: 6px;
+    border-radius: 100px;
+    background-color: var(--background);
+    z-index: 9999;
+    pointer-events: all;
+  }
+}
+
 </style>
