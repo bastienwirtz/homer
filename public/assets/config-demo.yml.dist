@@ -1,6 +1,6 @@
 ---
 # Homepage configuration
-# See https://fontawesome.com/v5/search for icons options
+# See https://fontawesome.com/search for icons options
 
 title: "Demo dashboard"
 subtitle: "Homer"
@@ -12,44 +12,22 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 
 # Optional theme customization
 theme: default
-colors:
-  light:
-    highlight-primary: "#3367d6"
-    highlight-secondary: "#4285f4"
-    highlight-hover: "#5a95f5"
-    background: "#f5f5f5"
-    card-background: "#ffffff"
-    text: "#363636"
-    text-header: "#ffffff"
-    text-title: "#303030"
-    text-subtitle: "#424242"
-    card-shadow: rgba(0, 0, 0, 0.1)
-    link: "#3273dc"
-    link-hover: "#363636"
-  dark:
-    highlight-primary: "#3367d6"
-    highlight-secondary: "#4285f4"
-    highlight-hover: "#5a95f5"
-    background: "#131313"
-    card-background: "#2b2b2b"
-    text: "#eaeaea"
-    text-header: "#ffffff"
-    text-title: "#fafafa"
-    text-subtitle: "#f5f5f5"
-    card-shadow: rgba(0, 0, 0, 0.4)
-    link: "#3273dc"
-    link-hover: "#ffdd57"
+
+columns: "3"
+
+defaults:
+  layout: list
 
 # Optional message
 message:
   style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
-  title: "👋 Welcome !"
-  content: "This demo page shows an overview of Homer possibilities. Feel free to click anywhere!<br /> Find more information on <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+  title: "👋 Welcome!"
+  content: "Homer is a dead simple static HOMepage for your servER (or anything else) to keep your services and favorite links on hand, based on a simple yaml configuration file.<br /> Learn more at <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
 
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
-  - name: "Contribute"
+  - name: "Contribute!"
     icon: "fab fa-github"
     url: "https://github.com/bastienwirtz/homer"
     target: "_blank" # optional html a tag target attribute
@@ -66,67 +44,93 @@ links:
 # First level array represent a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
-  - name: "My apps"
-    icon: "fas fa-cloud"
+  - name: "Try Homer"
+    icon: "fa-solid fa-arrow-right"
     items:
+      - name: "Get started"
+        icon: "fa-solid fa-download"
+        subtitle: "Start using Homer in a few minutes"
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#get-started"
+      - name: "Configuration"
+        icon: "fa-solid fa-sliders"
+        subtitle: "Configuration options documentation"
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md"
+      - name: "Theming"
+        icon: "fa-solid fa-palette"
+        subtitle: "Customize Homer appearance"
+        tag: "theming"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
+      - name: "Smart cards"
+        icon: "fa-solid fa-palette"
+        subtitle: "Displays dynamic information or actions."
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/customservices.md"
+      - name: "Dashboard icons"
+        icon: "fa-solid fa-icons"
+        subtitle: "Dashboard icons"
+        tag: "setup"
+        url: "https://github.com/walkxcode/dashboard-icons"
+      - name: "Buy me a coffee!"
+        subtitle: "Sponsor this project"
+        icon: "fa-solid fa-mug-hot"
+        url: "https://www.buymeacoffee.com/bastien"
+  - name: "Smart cards showcase"
+    icon: "fa-solid fa-brain"
+    class: "highlight-purple"
+    items: 
+      - name: "Octoprint"
+        logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
+        apikey: "xxxxxxxxxxxx"
+        endpoint: "/dummy-data/octoprint"
+        type: "OctoPrint"
       - name: "Pi-hole"
-        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pihole.png"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/pi-hole.png"
         url: "https://pi-hole.net/"
-        endpoint: "https://homer-demo-content.netlify.app/pihole"
+        endpoint: "/dummy-data/pihole"
         type: "PiHole"
       - name: "Proxmox - Node1"
         logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/proxmox.png"
         type: "Proxmox"
         tag: "sys"
         url: "https://www.proxmox.com/en/"
-        endpoint: "https://homer-demo-content.netlify.app/proxmox"
+        endpoint: "/dummy-data/proxmox"
         node: "node1"
         warning_value: 50
         danger_value: 80
         api_token: "xxxxxxxxxxxx"
-      - name: "An awesome app"
-        logo: "assets/tools/sample.png"
-        subtitle: "Bookmark example"
-        tag: "app"
-        keywords: "self hosted reddit"
-        url: "https://www.reddit.com/r/selfhosted/"
-  - name: "Tools"
-    icon: "fa-solid fa-screwdriver-wrench"
-    items:
-      - name: "Octoprint"
-        logo: "https://cdn-icons-png.flaticon.com/512/3112/3112529.png"
-        apikey: "xxxxxxxxxxxx"
-        endpoint: "https://homer-demo-content.netlify.app/octoprint"
-        type: "OctoPrint"
-      - name: "Example item"
-        logo: "assets/tools/sample.png"
-        subtitle: "This another example"
-        tag: "app"
-        keywords: "demo"
-        url: "#"
-        target: "_blank" 
+      - name: "PeaNUT"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/png/peanut.png"
+        url: "https://github.com/Brandawg93/PeaNUT"
+        endpoint: "/dummy-data/peanut"
+        type: "PeaNUT"
+        device: "ups"
       - name: "Weather"
-        location: "Lyon"
+        location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
         units: "metric"
-        endpoint: "https://homer-demo-content.netlify.app/openweather/weather"
+        endpoint: "/dummy-data/openweather/weather"
         type: "OpenWeather"
-  - name: "interesting links"
-    icon: "fas fa-solid fa-arrow-up-right-from-square"
+  - name: "Ressources"
+    icon: "fa-regular fa-bookmark"
+    class: highlight-inverted
     items:
-      - name: "Buy me a coffee !"
-        subtitle: "If you want to support me, buy me a coffee "
-        logo: "https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-1.svg"
-        url: "https://www.buymeacoffee.com/bastien"
       - name: "r/selfhosted"
         icon: "fa-brands fa-reddit-alien"
         color: "#ff4500"
-        subtitle: "Bookmark example"
-        tag: "reddit"
+        subtitle: "selfhosted community on Reddit"
+        tag: "community"
         url: "https://www.reddit.com/r/selfhosted/"
+        target: "_blank"
+      - name: "c/selfhosted"
+        logo: "https://icons.iconarchive.com/icons/simpleicons-team/simple/256/lemmy-icon.png"
+        subtitle: "selfhosted community on Lemmy"
+        tag: "community"
+        url: "https://lemmy.world/c/selfhosted"
         target: "_blank" 
       - name: "Awesome selfhosted"
-        icon: "fa-brands fa-github-alt"
+        icon: "fa-solid fa-star"
         subtitle: "Another application"
         tag: "awesome-list"
         url: "https://github.com/awesome-selfhosted/awesome-selfhosted"

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div
-      class="card"
-      :style="`background-color:${item.background};`"
-      :class="item.class"
-    >
+    <div class="card" :style="`background-color:${item.background};`">
       <a :href="item.url" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div :class="mediaClass">
@@ -16,25 +12,21 @@
               </div>
               <div v-if="item.icon" class="media-left">
                 <figure class="image is-48x48">
-                  <i
-                    style="font-size: 35px"
-                    :class="['fa-fw', item.icon]"
-                    :style="{ color: item.color }"
-                  ></i>
+                  <i style="font-size: 32px" :class="['fa-fw', item.icon]" :style="{ color: item.color }"></i>
                 </figure>
               </div>
             </slot>
             <div class="media-content">
               <slot name="content">
-                <p class="title is-4">{{ item.name }}</p>
-                <p class="subtitle is-6" v-if="item.subtitle">
+                <p class="title">{{ item.name }}</p>
+                <p v-if="item.subtitle" class="subtitle">
                   {{ item.subtitle }}
                 </p>
               </slot>
             </div>
             <slot name="indicator" class="indicator"></slot>
           </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
+          <div v-if="item.tag" class="tag" :class="item.tagstyle">
             <strong class="tag-text">#{{ item.tag }}</strong>
           </div>
         </div>

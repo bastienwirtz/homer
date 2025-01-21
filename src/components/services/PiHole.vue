@@ -25,12 +25,12 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "PiHole",
+  components: {
+    Generic,
+  },
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     status: "",
@@ -52,8 +52,9 @@ export default {
       const authQueryParams = this.item.apikey
         ? `?summaryRaw&auth=${this.item.apikey}`
         : "";
-      const result = await this.fetch(`/api.php${authQueryParams}`)
-        .catch((e) => console.log(e));
+      const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
+        console.log(e),
+      );
 
       this.status = result.status;
       this.ads_percentage_today = result.ads_percentage_today;
