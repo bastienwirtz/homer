@@ -12,7 +12,7 @@
               </div>
               <div v-if="item.icon" class="media-left">
                 <figure class="image is-48x48">
-                  <i style="font-size: 32px" :class="['fa-fw', item.icon]"></i>
+                  <i style="font-size: 32px" :class="['fa-fw', item.icon]" :style="{ color: item.color }"></i>
                 </figure>
               </div>
             </slot>

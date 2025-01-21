@@ -118,6 +118,7 @@ services:
     items:
       - name: "r/selfhosted"
         icon: "fa-brands fa-reddit-alien"
+        color: "#ff4500"
         subtitle: "selfhosted community on Reddit"
         tag: "community"
         url: "https://www.reddit.com/r/selfhosted/"
