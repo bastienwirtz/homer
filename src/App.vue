@@ -1,25 +1,33 @@
 <template>
   <div
-    v-if="config"
     id="app"
+    v-if="config"
     :class="[
-      `theme-${config.theme}`,
-      `page-${currentPage}`,
-      isDark ? 'dark' : 'light',
+      'theme-' + config.theme,
+      'page-' + currentPage,
+      isDark ? 'is-dark' : 'is-light',
       !config.footer ? 'no-footer' : '',
     ]"
   >
-    <DynamicTheme v-if="config.colors" :themes="config.colors" />
+    <DynamicTheme :themes="config.colors" />
+
     <div id="bighead">
       <section v-if="config.header" class="first-line">
         <div v-cloak class="container">
           <div class="logo">
             <a href="#">
-              <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
+              <img
+                v-if="config.logo"
+                :src="config.logo"
+                alt="dashboard logo"
+              />
             </a>
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
-          <div class="dashboard-title">
+          <div
+            class="dashboard-title"
+            :class="{ 'no-logo': !config.icon || !config.logo }"
+          >
             <span class="headline">{{ config.subtitle }}</span>
             <h1>{{ config.title }}</h1>
           </div>
@@ -32,16 +40,16 @@
         @navbar-toggle="showMenu = !showMenu"
       >
         <DarkMode
-          :default-value="config.defaults.colorTheme"
           @updated="isDark = $event"
+          :defaultValue="config.defaults.colorTheme"
         />
 
         <SettingToggle
+          @updated="vlayout = $event"
           name="vlayout"
           icon="fa-list"
-          icon-alt="fa-columns"
-          :default-value="config.defaults.layout == 'columns'"
-          @updated="vlayout = $event"
+          iconAlt="fa-columns"
+          :defaultValue="config.defaults.layout === 'columns'"
         />
 
         <SearchInput
@@ -49,8 +57,8 @@
           :hotkey="searchHotkey()"
           @input="filterServices($event)"
           @search-focus="showMenu = true"
-          @search-open="navigateToFirstService"
-          @search-cancel="filterServices()"
+          @search-open="navigateToFirstService($event?.target?.value)"
+          @search-cancel="resetFilter()"
         />
       </Navbar>
     </div>
@@ -65,65 +73,115 @@
         <GetStarted v-if="configurationNeeded" />
 
         <div v-if="!offline">
-          <!-- Optional messages -->
           <Message :item="config.message" />
 
-          <!-- Horizontal layout -->
+          <div
+            v-if="services.some(g => g.name)"
+            class="mb-3"
+            style="text-align: right;"
+          >
+            <button
+              class="button is-info is-small"
+              @click="toggleAllGroups"
+            >
+              {{ allCollapsed ? 'Expand All' : 'Collapse All' }}
+            </button>
+          </div>
+
           <div v-if="!vlayout || filter" class="columns is-multiline">
-            <template v-for="(group, groupIndex) in services">
-              <h2
-                v-if="group.name"
-                :key="`header-${groupIndex}`"
-                class="column is-full group-title"
-                :class="group.class"
-              >
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
+            <template v-for="(group, groupIndex) in filteredServices" :key="groupIndex + '-horizontal'">
+              <h2 v-if="group.name" class="column is-full group-title">
+                <span
+                  style="cursor: pointer;"
+                  @click="group.collapsed = !group.collapsed"
+                >
+                  <i
+                    :class="[
+                      'fa-fw',
+                      group.icon ? group.icon : 'fas',
+                      group.collapsed ? 'fa-chevron-down' : 'fa-chevron-up',
+                    ]"
+                    style="margin-right:6px;"
+                  ></i>
+                </span>
+
+                <i
+                  v-if="group.icon && !group.logo"
+                  :class="['fa-fw', group.icon]"
+                ></i>
+                <div
+                  v-else-if="group.logo"
+                  class="group-logo media-left"
+                >
                   <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
+                    <img
+                      :src="group.logo"
+                      :alt="group.name + ' logo'"
+                    />
                   </figure>
                 </div>
                 {{ group.name }}
               </h2>
+
               <Service
                 v-for="(item, index) in group.items"
-                :key="`service-${groupIndex}-${index}`"
+                :key="'service-' + groupIndex + '-' + index"
                 :item="item"
                 :proxy="config.proxy"
-                :class="[
-                  'column',
-                  `is-${12 / config.columns}`,
-                  `${item.class || group.class || ''}`,
-                ]"
+                :class="['column', 'is-' + (12 / config.columns)]"
+                v-show="!group.collapsed"
               />
             </template>
           </div>
 
-          <!-- Vertical layout -->
           <div
             v-if="!filter && vlayout"
             class="columns is-multiline layout-vertical"
           >
             <div
-              v-for="(group, groupIndex) in services"
-              :key="groupIndex"
-              :class="['column', `is-${12 / config.columns}`]"
+              v-for="(group, groupIndex) in filteredServices"
+              :key="groupIndex + '-vertical'"
+              :class="['column', 'is-' + (12 / config.columns)]"
             >
-              <h2 v-if="group.name" class="group-title" :class="group.class">
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
+              <h2 v-if="group.name" class="group-title">
+                <span
+                  style="cursor: pointer;"
+                  @click="group.collapsed = !group.collapsed"
+                >
+                  <i
+                    :class="[
+                      'fa-fw',
+                      group.icon ? group.icon : 'fas',
+                      group.collapsed ? 'fa-chevron-down' : 'fa-chevron-up',
+                    ]"
+                    style="margin-right:6px;"
+                  ></i>
+                </span>
+
+                <i
+                  v-if="group.icon && !group.logo"
+                  :class="['fa-fw', group.icon]"
+                ></i>
+                <div
+                  v-else-if="group.logo"
+                  class="group-logo media-left"
+                >
                   <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
+                    <img
+                      :src="group.logo"
+                      :alt="group.name + ' logo'"
+                    />
                   </figure>
                 </div>
                 {{ group.name }}
               </h2>
+
               <Service
                 v-for="(item, index) in group.items"
                 :key="index"
                 :item="item"
                 :proxy="config.proxy"
-                :class="item.class || group.class"
+                v-show="!group.collapsed"
               />
             </div>
           </div>
@@ -134,8 +192,8 @@
     <footer class="footer">
       <div class="container">
         <div
-          v-if="config.footer"
           class="content has-text-centered"
+          v-if="config.footer"
           v-html="config.footer"
         ></div>
       </div>
@@ -172,35 +230,35 @@ export default {
     DarkMode,
     DynamicTheme,
   },
-  data: function () {
+  data() {
     return {
       loaded: false,
       currentPage: null,
       configNotFound: false,
       config: null,
       services: null,
+      filteredServices: null,
       offline: false,
       filter: "",
       vlayout: true,
       isDark: null,
       showMenu: false,
+      allCollapsed: false,
     };
   },
   computed: {
-    configurationNeeded: function () {
+    configurationNeeded() {
       return (this.loaded && !this.services) || this.configNotFound;
     },
   },
-  created: async function () {
+  created() {
     this.buildDashboard();
     window.onhashchange = this.buildDashboard;
     this.loaded = true;
   },
   methods: {
     searchHotkey() {
-      if (this.config.hotkey && this.config.hotkey.search) {
-        return this.config.hotkey.search;
-      }
+      return this.config?.hotkey?.search || "/";
     },
     buildDashboard: async function () {
       const defaults = parse(defaultConfig);
@@ -210,116 +268,98 @@ export default {
         this.currentPage = window.location.hash.substring(1) || "default";
 
         if (this.currentPage !== "default") {
-          let pageConfig = await this.getConfig(
-            `assets/${this.currentPage}.yml`,
-          );
+          const pageConfig = await this.getConfig(`assets/${this.currentPage}.yml`);
           config = Object.assign(config, pageConfig);
         }
       } catch (error) {
         console.log(error);
         config = this.handleErrors("⚠️ Error loading configuration", error);
       }
-      this.config = merge(defaults, config);
-      this.services = this.config.services;
 
-      document.title =
-        this.config.documentTitle ||
-        `${this.config.title} | ${this.config.subtitle}`;
+      this.config = merge(defaults, config);
+      this.services = this.config.services.map((group) => ({
+        ...group,
+        collapsed: false,
+      }));
+      this.filteredServices = this.services;
+
+      document.title = this.config.documentTitle || `${this.config.title} | ${this.config.subtitle}`;
+
       if (this.config.stylesheet) {
         let stylesheet = "";
-        let addtionnal_styles = this.config.stylesheet;
-        if (!Array.isArray(this.config.stylesheet)) {
-          addtionnal_styles = [addtionnal_styles];
-        }
-        for (const file of addtionnal_styles) {
+        for (const file of this.config.stylesheet) {
           stylesheet += `@import "${file}";`;
         }
         this.createStylesheet(stylesheet);
       }
     },
-    getConfig: function (path = "assets/config.yml") {
+    getConfig(path = "assets/config.yml") {
       return fetch(path).then((response) => {
         if (response.status == 404 || response.redirected) {
           this.configNotFound = true;
           return {};
         }
-
         if (!response.ok) {
           throw Error(`${response.statusText}: ${response.body}`);
         }
 
-        const that = this;
-        return response
-          .text()
-          .then((body) => {
-            return parse(body, { merge: true });
-          })
-          .then(function (config) {
-            if (config.externalConfig) {
-              return that.getConfig(config.externalConfig);
-            }
-            return config;
-          });
+        return response.text().then((body) => parse(body, { merge: true }));
       });
     },
-    matchesFilter: function (item) {
-      const needle = this.filter?.toLowerCase();
-      return (
-        item.name.toLowerCase().includes(needle) ||
-        (item.subtitle && item.subtitle.toLowerCase().includes(needle)) ||
-        (item.tag && item.tag.toLowerCase().includes(needle)) ||
-        (item.keywords && item.keywords.toLowerCase().includes(needle))
-      );
-    },
-    navigateToFirstService: function (target) {
-      try {
-        const service = this.services[0].items[0];
-        window.open(service.url, target || service.target || "_self");
-      } catch {
-        console.warn("fail to open service");
-      }
-    },
-    filterServices: function (filter) {
-      this.filter = filter;
-
-      if (!filter) {
-        this.services = this.config.services;
+    filterServices(filter) {
+      this.filter = filter?.toLowerCase() || "";
+      if (!this.filter) {
+        this.filteredServices = this.services;
         return;
       }
 
-      const searchResultItems = [];
-      for (const group of this.config.services) {
-        if (group.items !== null) {
-          for (const item of group.items) {
-            if (this.matchesFilter(item)) {
-              searchResultItems.push(item);
-            }
-          }
-        }
-      }
+      this.filteredServices = this.services
+        .map((group) => {
+          const items = group.items.filter((item) =>
+            [item.name, item.subtitle, item.tag, item.keywords]
+              .filter(Boolean)
+              .some((text) => text.toLowerCase().includes(this.filter))
+          );
 
-      this.services = [
-        {
-          name: filter,
-          icon: "fas fa-search",
-          items: searchResultItems,
-        },
-      ];
+          return items.length > 0 ? { ...group, items, collapsed: false } : null;
+        })
+        .filter(Boolean);
     },
-    handleErrors: function (title, content) {
+    resetFilter() {
+      this.filter = "";
+      this.filteredServices = this.services;
+    },
+    toggleAllGroups() {
+      this.allCollapsed = !this.allCollapsed;
+      this.filteredServices.forEach((group) => {
+        group.collapsed = this.allCollapsed;
+      });
+    },
+    handleErrors(title, content) {
       return {
         message: {
-          title: title,
+          title,
           style: "is-danger",
-          content: content,
+          content,
         },
       };
     },
-    createStylesheet: function (css) {
-      let style = document.createElement("style");
+    createStylesheet(css) {
+      const style = document.createElement("style");
       style.appendChild(document.createTextNode(css));
       document.head.appendChild(style);
     },
   },
 };
 </script>
+
+<style>
+.group-title {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+.group-logo {
+  margin-right: 0.5rem;
+}
+</style>
