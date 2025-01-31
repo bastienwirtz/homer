@@ -41,7 +41,10 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.fetch("/version", null, false)
+      const params = {
+        cache: "no-cache",
+      };
+      this.fetch("/version", params, false)
         .then((response) => {
           this.status = "online";
           this.versionstring = response;
