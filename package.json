@@ -1,6 +1,6 @@
 {
   "name": "homer",
-  "version": "24.12.1",
+  "version": "25.02.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,22 +11,22 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "bulma": "^1.0.2",
+    "bulma": "^1.0.3",
     "lodash.merge": "^4.6.2",
     "vue": "^3.5.13",
-    "yaml": "^2.6.1"
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/eslint-config-prettier": "^10.1.0",
-    "eslint": "^9.17.0",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "eslint": "^9.19.0",
     "eslint-plugin-vue": "^9.32.0",
     "http-server": "^14.1.1",
     "prettier": "^3.4.2",
-    "sass-embedded": "^1.83.0",
-    "vite": "^6.0.9",
+    "sass-embedded": "^1.83.4",
+    "vite": "^6.0.11",
     "vite-plugin-pwa": "^0.21.1"
   },
   "license": "Apache-2.0",
-  "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf"
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }
