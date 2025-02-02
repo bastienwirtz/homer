@@ -22,7 +22,8 @@ ENV GID=1000 \
     PORT=8080 \
     SUBFOLDER="/_" \
     INIT_ASSETS=1 \
-    IPV6_DISABLE=0
+    IPV6_DISABLE=0 \
+    SSL_ENABLE=0
 
 RUN addgroup -S lighttpd -g ${GID} && adduser -D -S -u ${UID} lighttpd lighttpd && \
     apk add -U --no-cache tzdata lighttpd
@@ -38,7 +39,7 @@ COPY --from=build-stage --chown=${UID}:${GID} /app/dist/assets /www/default-asse
 USER ${UID}:${GID}
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:${PORT}/ || exit 1
+    CMD /bin/sh -c 'if [ "${SSL_ENABLE}" = "1" ]; then URL="https://127.0.0.1:${PORT}/"; else URL="http://127.0.0.1:${PORT}/"; fi && wget --no-verbose --tries=1 --spider --no-check-certificate $URL || exit 1'
 
 EXPOSE ${PORT}
 

@@ -99,11 +99,13 @@ services:
     container_name: homer
     volumes:
       - /path/to/config/dir:/www/assets # Make sure your local config directory exists
+      - /path/to/certificate.pem:/www/certificate.pem # Optional. If you need to use HTTPS, don't forget to map /www/certificate.pem
     ports:
       - 8080:8080
     user: 1000:1000 # default
     environment:
       - INIT_ASSETS=1 # default, requires the config directory to be writable for the container user (see user option)
+      - SSL_ENABLE=1 # Optional. default is 0. If you need to use HTTPS, 
     restart: unless-stopped
 ```
 
@@ -120,6 +122,9 @@ If you would like to change internal port of Homer from default `8080` to your p
 
 - **`IPV6_DISABLE`** (default: 0)
 Set to `1` to disable listening on IPv6.
+
+- **`SSL_ENABLE`** (default: 0)
+Set to 1 to use HTTPS for communication. You need to map the SSL certificate file to `/www/certificate.pem` inside the container. Note that `certificate.pem` must include both the public key and the private key, and the user inside the container must have read permissions for the certificate.
 
 ### Using the release tarball (prebuilt, ready to use)
 
