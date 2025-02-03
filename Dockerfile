@@ -37,7 +37,7 @@ COPY --from=build-stage --chown=${UID}:${GID} /app/dist/assets /www/default-asse
 
 USER ${UID}:${GID}
 
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+HEALTHCHECK --start-period=10s --start-interval=1s --interval=30s --timeout=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:${PORT}/ || exit 1
 
 EXPOSE ${PORT}
