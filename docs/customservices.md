@@ -72,7 +72,26 @@ within Homer:
   type: "<type>"
 ```
 
+
+## SecondaryLink
+
+The SecondaryLink service allows generic cards to have a second link added to them in the format of an icon.
+
+The following configuration is available for the SecondaryLink service:
+
+```yaml
+- type: "SecondaryLink"
+  SecondaryLinkUrl: "https://my-second-link" # url for the second link
+  SecondaryLinkTarget: "_blank" # optional html tag target attribute.
+  SecondaryLinkHover: "More Info" # optional text to show when the second link is hovered over.
+  SecondaryLinkIcon: "fas fa-circle-info" # icon to use as the visual indicator of the link
+```
+Like the rest of Homer, FontAwesome icons can be used for the SecondaryLinkIcon.
+
+## PiHole
+
 ## AdGuard Home
+
 
 For AdGuard Home you need to set the type to AdGuard, if you have some issues as 403 responses on requests you need to provide authentication in headers for locations needed as below.
 
