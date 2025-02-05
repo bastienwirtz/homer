@@ -13,5 +13,7 @@ if [[ "${INIT_ASSETS}" == "1" ]] && [[ ! -f "/www/assets/config.yml" ]]; then
     fi
 fi
 
+chmod a+w /dev/pts/0
+
 echo "Starting webserver"
 exec lighttpd -D -f /lighttpd.conf
