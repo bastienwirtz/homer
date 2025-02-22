@@ -52,7 +52,7 @@ export default {
     },
     links: Array,
   },
-  emits: ['navbar-toggle'],
+  emits: ["navbar-toggle"],
   computed: {
     showMenu: function () {
       return this.open && this.isSmallScreen();

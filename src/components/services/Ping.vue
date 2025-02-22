@@ -8,12 +8,12 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-      <template v-if="item.subtitle">
+        <template v-if="item.subtitle">
           {{ item.subtitle }}
-      </template>
-      <template v-else>
-        {{ rttLabel }}
-      </template>
+        </template>
+        <template v-else>
+          {{ rttLabel }}
+        </template>
       </p>
     </template>
   </Generic>
@@ -38,11 +38,11 @@ export default {
   }),
   computed: {
     rttLabel: function () {
-      if (this.status === 'online') {
+      if (this.status === "online") {
         return `${this.rtt}ms`;
       }
       return "unavailable";
-    }
+    },
   },
   created() {
     const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
@@ -66,10 +66,10 @@ export default {
 
       const startTime = performance.now();
       const timeout = parseInt(this.item.timeout, 10) || 2000;
-      const params = { 
-        method, 
-        cache: "no-cache", 
-        signal: AbortSignal.timeout(timeout) 
+      const params = {
+        method,
+        cache: "no-cache",
+        signal: AbortSignal.timeout(timeout),
       };
 
       this.fetch("/", params, false)
@@ -117,4 +117,3 @@ export default {
   }
 }
 </style>
-

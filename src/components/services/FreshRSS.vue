@@ -2,20 +2,27 @@
   <Generic :item="item">
     <template #indicator>
       <div class="notifs">
-        <strong v-if="subscriptions > 0" class="notif subscriptions" title="Subscriptions">
+        <strong
+          v-if="subscriptions > 0"
+          class="notif subscriptions"
+          title="Subscriptions"
+        >
           {{ subscriptions }}
         </strong>
         <strong v-if="unread > 0" class="notif unread" title="Unread">
           {{ unread }}
         </strong>
         <strong
-v-if="serverError" class="notif errors"
-          title="Connection error to the FreshRSS API, check url username and password in config.yml">?</strong>
+          v-if="serverError"
+          class="notif errors"
+          title="Connection error to the FreshRSS API, check url username and password in config.yml"
+          >?</strong
+        >
       </div>
     </template>
   </Generic>
 </template>
-  
+
 <script>
 import service from "@/mixins/service.js";
 import Generic from "./Generic.vue";
@@ -45,20 +52,29 @@ export default {
   },
   methods: {
     fetchConfig: async function () {
-
       if (!this.auth) {
-        const match = await this.fetch(`/api/greader.php/accounts/ClientLogin?Email=${this.item.username}&Passwd=${this.item.password}`, { method: 'GET', cache: "no-cache" }, false)
-          .then(response => { return response.text(); })
-          .then(body => { return body.match(/Auth=(([([a-z0-9]+)\/([([a-z0-9]+))/i); });
-        if (match !== null)
-          this.auth = match[1];
+        const match = await this.fetch(
+          `/api/greader.php/accounts/ClientLogin?Email=${this.item.username}&Passwd=${this.item.password}`,
+          { method: "GET", cache: "no-cache" },
+          false,
+        )
+          .then((response) => {
+            return response.text();
+          })
+          .then((body) => {
+            return body.match(/Auth=(([([a-z0-9]+)\/([([a-z0-9]+))/i);
+          });
+        if (match !== null) this.auth = match[1];
       }
 
       const headers = {
-        "Authorization": `GoogleLogin auth=${this.auth}`,
+        Authorization: `GoogleLogin auth=${this.auth}`,
       };
 
-      this.fetch(`/api/greader.php/reader/api/0/subscription/list?output=json`, { headers })
+      this.fetch(
+        `/api/greader.php/reader/api/0/subscription/list?output=json`,
+        { headers },
+      )
         .then((subscription) => {
           this.subscriptions = subscription.subscriptions.length;
         })
@@ -66,7 +82,9 @@ export default {
           console.error(e);
           this.serverError = true;
         });
-      this.fetch(`/api/greader.php/reader/api/0/unread-count?output=json`, { headers })
+      this.fetch(`/api/greader.php/reader/api/0/unread-count?output=json`, {
+        headers,
+      })
         .then((unreadcount) => {
           this.unread = unreadcount.max;
         })
@@ -78,7 +96,7 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped lang="scss">
 .notifs {
   position: absolute;

@@ -46,7 +46,7 @@ export default {
         return `Happily keeping ${this.stats.totalRecipes} recipes organized`;
       }
       return null;
-    }
+    },
   },
   created() {
     this.fetchStatus();
@@ -60,9 +60,9 @@ export default {
 
       if (this.item.subtitle != null) return;
 
-      this.meal = await this.fetch("/api/groups/mealplans/today", { headers }).catch(
-        (e) => console.log(e),
-      );
+      this.meal = await this.fetch("/api/groups/mealplans/today", {
+        headers,
+      }).catch((e) => console.log(e));
       this.stats = await this.fetch("/api/admin/about/statistics", {
         headers,
       }).catch((e) => console.log(e));

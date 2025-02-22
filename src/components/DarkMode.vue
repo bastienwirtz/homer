@@ -18,7 +18,7 @@ export default {
   props: {
     defaultValue: String,
   },
-  emits: ['updated'],
+  emits: ["updated"],
   data: function () {
     return {
       isDark: null,

@@ -73,7 +73,7 @@ export default {
             return;
           }
           return response.json();
-        }
+        },
       );
     },
 

@@ -3,9 +3,7 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-        <template v-if="versionstring">
-          Version {{ versionstring }}
-        </template>
+        <template v-if="versionstring"> Version {{ versionstring }} </template>
       </p>
     </template>
     <template #indicator>

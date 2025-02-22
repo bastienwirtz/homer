@@ -2,11 +2,14 @@
   <div v-if="offline" class="offline-message mb-4">
     <i class="fa-solid fa-triangle-exclamation"></i>
     <h1>
-      Network unreachable 
+      Network unreachable
       <span @click="checkOffline"> <i class="fas fa-redo-alt"></i></span>
     </h1>
     <p>
-      <a href="https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md#connectivity-checks">More information →</a>
+      <a
+        href="https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md#connectivity-checks"
+        >More information →</a
+      >
     </p>
   </div>
 </template>

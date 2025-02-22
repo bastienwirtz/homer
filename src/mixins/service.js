@@ -53,7 +53,9 @@ export default {
         }
 
         if (!success) {
-          throw new Error(`Ping: target not available (${response.status} error)`);
+          throw new Error(
+            `Ping: target not available (${response.status} error)`,
+          );
         }
 
         return json ? response.json() : response.text();

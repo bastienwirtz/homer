@@ -20,16 +20,21 @@
               <slot name="content">
                 <p class="title">{{ item.name }}</p>
                 <p v-if="item.quick" class="quicklinks">
-                  <a 
-                    v-for="(link, linkIndex) in item.quick" 
-                    :key="linkIndex" 
-                    :style="`background-color:${link.color};`" 
-                    :href="link.url" 
-                    :target="link.target" 
+                  <a
+                    v-for="(link, linkIndex) in item.quick"
+                    :key="linkIndex"
+                    :style="`background-color:${link.color};`"
+                    :href="link.url"
+                    :target="link.target"
                     rel="noreferrer"
-                  > 
-                      <span v-if="item.icon"><i style="font-size: 12px" :class="['fa-fw', link.icon]"></i></span> 
-                      {{ link.name }}
+                  >
+                    <span v-if="item.icon"
+                      ><i
+                        style="font-size: 12px"
+                        :class="['fa-fw', link.icon]"
+                      ></i
+                    ></span>
+                    {{ link.name }}
                   </a>
                 </p>
                 <p v-if="item.subtitle" class="subtitle">
@@ -92,5 +97,4 @@ a[href=""] {
     pointer-events: all;
   }
 }
-
 </style>

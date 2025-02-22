@@ -106,14 +106,17 @@ export default {
         })
         .catch(handleError);
       if (!this.item.legacyApi) {
-        this.fetch(`${this.apiPath}/wanted/missing?pageSize=1&apikey=${this.item.apikey}`)
+        this.fetch(
+          `${this.apiPath}/wanted/missing?pageSize=1&apikey=${this.item.apikey}`,
+        )
           .then((overview) => {
-            this.fetch(`${this.apiPath}/wanted/missing?pageSize=${overview.totalRecords}&apikey=${this.item.apikey}`)
-              .then((movies) => {
-                this.missing = movies.records.filter(
-                  (m) => m.monitored && m.isAvailable && !m.hasFile
-                ).length;
-            })
+            this.fetch(
+              `${this.apiPath}/wanted/missing?pageSize=${overview.totalRecords}&apikey=${this.item.apikey}`,
+            ).then((movies) => {
+              this.missing = movies.records.filter(
+                (m) => m.monitored && m.isAvailable && !m.hasFile,
+              ).length;
+            });
           })
           .catch(handleError);
       }

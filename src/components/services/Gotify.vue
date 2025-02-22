@@ -31,7 +31,7 @@ export default {
     item: Object,
   },
   data: () => ({
-    health:   {},
+    health: {},
     messages: 0,
   }),
   computed: {
@@ -45,7 +45,7 @@ export default {
       }
 
       return "green";
-    }
+    },
   },
   created() {
     this.fetchStatus();
@@ -55,7 +55,7 @@ export default {
     fetchStatus: async function () {
       await this.fetch(`/health`)
         .catch((e) => console.log(e))
-        .then((resp) => this.health = resp);
+        .then((resp) => (this.health = resp));
     },
     fetchMessages: async function () {
       const headers = {
@@ -63,7 +63,7 @@ export default {
       };
       await this.fetch(`/message?limit=100`, { headers })
         .catch((e) => console.log(e))
-        .then((resp) => this.messages = resp.messages.length);
+        .then((resp) => (this.messages = resp.messages.length));
     },
   },
 };

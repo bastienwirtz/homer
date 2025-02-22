@@ -34,7 +34,7 @@
             :value="completion"
             max="100"
             :title="`${state} - ${completion.toFixed()}%, ${formatTime(
-              printTimeLeft
+              printTimeLeft,
             )} left`"
           >
             {{ completion }}%
@@ -123,9 +123,9 @@ export default {
       const minutes = Math.floor(remainingSeconds / 60);
       const secs = remainingSeconds % 60;
 
-      const formattedHrs = hours.toString().padStart(2, '0')
-      const formattedMins = minutes.toString().padStart(2, '0')
-      const formattedSecs = secs.toString().padStart(2, '0')
+      const formattedHrs = hours.toString().padStart(2, "0");
+      const formattedMins = minutes.toString().padStart(2, "0");
+      const formattedSecs = secs.toString().padStart(2, "0");
 
       if (days > 0) {
         return `${days}d ${formattedHrs}h ${formattedMins}m`;
@@ -136,7 +136,7 @@ export default {
       } else {
         return `${secs} seconds`;
       }
-    }
+    },
   },
 };
 </script>

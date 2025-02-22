@@ -6,9 +6,7 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="load">
-          {{ load }}&percnt; UPS Load
-        </template>
+        <template v-else-if="load"> {{ load }}&percnt; UPS Load </template>
       </p>
     </template>
     <template #indicator>
@@ -42,7 +40,7 @@ export default {
         case "OL":
           return "online";
         case "OB":
-          return "on battery"
+          return "on battery";
         case "LB":
           return "low battery";
         default:
@@ -54,7 +52,7 @@ export default {
         case "OL":
           return "online";
         case "OB": // On battery
-          return "pending"
+          return "pending";
         case "LB": // Low battery
           return "offline";
         default:
@@ -73,7 +71,7 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      const device = this.item.device || '';
+      const device = this.item.device || "";
 
       const result = await this.fetch(`/api/v1/devices/${device}`).catch((e) =>
         console.log(e),

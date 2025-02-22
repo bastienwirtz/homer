@@ -55,8 +55,15 @@ export default {
       this.fetch(`/api/summary`)
         .then((scrutinyData) => {
           const devices = Object.values(scrutinyData.data.summary);
-          this.passed = devices.filter(device => device.device.device_status === 0)?.length || 0;
-          this.failed = devices.filter(device => device.device.device_status > 0 && device.device.device_status <= 3)?.length || 0;
+          this.passed =
+            devices.filter((device) => device.device.device_status === 0)
+              ?.length || 0;
+          this.failed =
+            devices.filter(
+              (device) =>
+                device.device.device_status > 0 &&
+                device.device.device_status <= 3,
+            )?.length || 0;
           this.unknown = devices.length - (this.passed + this.failed) || 0;
         })
         .catch((e) => {
