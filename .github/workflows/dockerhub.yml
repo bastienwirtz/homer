@@ -44,3 +44,5 @@ jobs:
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.ref_name }}
           platforms: linux/amd64,linux/arm/v7,linux/arm/v6,linux/arm64
+          build-args: |
+            VERSION_TAG=${{ github.ref_name }}
