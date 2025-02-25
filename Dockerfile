@@ -22,11 +22,11 @@ LABEL \
     org.label-schema.version="$VERSION_TAG" \
     org.opencontainers.image.title="Homer Image" \
     org.opencontainers.image.description="A dead simple static Home-Page for your server to keep your services on hand, from a simple yaml configuration file." \
-    org.opencontainers.image.ref.name="b4bz/homer:22-alpine3.20" \
+    org.opencontainers.image.ref.name="b4bz/homer:${VERSION_TAG}" \
     org.opencontainers.image.version="$VERSION_TAG" \
     org.opencontainers.image.licenses="Apache-2.0 license" \
     org.opencontainers.image.source="https://github.com/bastienwirtz/homer" \
-    org.opencontainers.image.url="https://homer-demo.netlify.app/"
+    org.opencontainers.image.url="https://hub.docker.com/r/b4bz/homer"
 
 ENV GID=1000 \
     UID=1000 \
