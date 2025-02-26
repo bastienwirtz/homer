@@ -28,7 +28,7 @@
                     :target="link.target"
                     rel="noreferrer"
                   >
-                    <span v-if="item.icon"
+                    <span v-if="link.icon"
                       ><i
                         style="font-size: 12px"
                         :class="['fa-fw', link.icon]"
