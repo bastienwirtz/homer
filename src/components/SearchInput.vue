@@ -29,7 +29,7 @@ export default {
   emits: ["search-open", "search-focus", "search-cancel", "input"],
   mounted() {
     this._keyListener = function (event) {
-      if (event.key === this.hotkey) {
+      if (!this.hasFocus() && event.key === this.hotkey) {
         event.preventDefault();
         this.focus();
       }
@@ -62,6 +62,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.search.focus();
       });
+    },
+    hasFocus: function () {
+      return document.activeElement == this.$refs.search
     },
     setSearchURL: function (value) {
       const url = new URL(window.location);
