@@ -17,7 +17,7 @@ RUN pnpm build
 # production stage
 FROM alpine:3.21
 
-ARG VERSION_TAG
+ARG VERSION_TAG=latest
 
 LABEL \
     org.label-schema.schema-version="1.0" \
