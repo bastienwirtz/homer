@@ -26,10 +26,7 @@
               :href="link.url"
               :target="link.target"
             >
-              <i
-                v-if="link.icon"
-                :class="['fa-fw', link.icon, { 'mr-2': link.name }]"
-              ></i>
+              <i v-if="link.icon" :class="['fa-fw', link.icon]"></i>
               {{ link.name }}
             </a>
           </div>
@@ -65,3 +62,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@media (min-width: 1023px) {
+  i.fa-fw {
+    width: 0.8em;
+  }
+}
+</style>
