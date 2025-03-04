@@ -78,6 +78,21 @@ Then when Homer reads your config, it will substitute your anchors automatically
 The end result is that if you want to update the name or style of any particular tag, just update it once, in the tags section!
 Great if you have a lot of services or a lot of tags!  
 
+## YAML auto complete with a YAML schema 
+
+A lot of editor support auto completion, see <https://www.schemastore.org/json/>   
+The homer schema is available here: <https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json>
+
+For example with IntelliJ you can define:
+
+```yaml
+# $schema: https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json
+```
+With VSCode you can define it like this:
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json
+```
+
 ## Remotely edit your config with Code Server
 
 #### `by @JamiePhonic`
