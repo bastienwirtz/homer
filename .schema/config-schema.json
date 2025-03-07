@@ -105,7 +105,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name as soon in the navbar"
+          "description": "Name as seen in the navbar"
         },
         "icon": {
           "type": "string",
@@ -121,7 +121,6 @@
         }
       },
       "required": [
-        "name",
         "url"
       ],
       "title": "Link"
@@ -298,8 +297,15 @@
       "description": "Define hotkeys, for example for search"
     },
     "footer": {
-      "type": "string",
-      "description": "HTML shown as footer"
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "description": "footer Line content. HTML is supported. Set false if you want to hide it."
     },
     "columns": {
       "type": "string",
