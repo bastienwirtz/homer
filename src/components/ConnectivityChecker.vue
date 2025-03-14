@@ -8,6 +8,8 @@
     <p>
       <a
         href="https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md#connectivity-checks"
+        target="_blank"
+        rel="noopener noreferrer"
         >More information →</a
       >
     </p>
@@ -17,76 +19,82 @@
 <script>
 export default {
   name: "ConnectivityChecker",
-  data: function () {
+  data() {
     return {
       offline: false,
     };
   },
-  created: function () {
-    if (/t=\d+/.test(window.location.href)) {
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-    let that = this;
-    this.checkOffline();
-
-    document.addEventListener(
-      "visibilitychange",
-      function () {
-        if (document.visibilityState == "visible") {
-          that.checkOffline();
-        }
-      },
-      false,
-    );
-    window.addEventListener(
-      "online",
-      function () {
-        that.checkOffline();
-      },
-      false,
-    );
-    window.addEventListener(
-      "offline",
-      function () {
-        this.offline = true;
-      },
-      false,
-    );
+  mounted() {
+    this.removeTimestampFromUrl();
+    this.checkOfflineStatus();
+    this.setupEventListeners();
+  },
+  beforeUnmount() {
+    this.removeEventListeners();
   },
   methods: {
-    checkOffline: function () {
+    removeTimestampFromUrl() {
+      if (/t=\d+/.test(window.location.href)) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    },
+    checkOfflineStatus() {
       if (!navigator.onLine) {
         this.offline = true;
+        this.$emit("network-status-update", this.offline);
         return;
       }
 
-      // extra check to make sure we're not offline
-      let that = this;
+      this.performConnectivityCheck();
+    },
+    performConnectivityCheck() {
       const urlPath = window.location.pathname.replace(/\/+$/, "");
-      const aliveCheckUrl = `${
-        window.location.origin
-      }${urlPath}/index.html?t=${new Date().valueOf()}`;
-      return fetch(aliveCheckUrl, {
+      const aliveCheckUrl = `${window.location.origin}${urlPath}/index.html?t=${new Date().valueOf()}`;
+
+      fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",
         redirect: "manual",
       })
-        .then(function (response) {
-          // opaqueredirect means request has been redirected, to auth provider probably
-          if (
-            (response.type === "opaqueredirect" && !response.ok) ||
-            [401, 403].indexOf(response.status) != -1
-          ) {
+        .then((response) => {
+          if (response.type === "opaqueredirect" && !response.ok || [401, 403].includes(response.status)) {
             window.location.href = aliveCheckUrl;
+            return; // Exit the function to prevent further execution
           }
-          that.offline = !response.ok;
+          this.offline = !response.ok;
         })
-        .catch(function () {
-          that.offline = true;
+        .catch(() => {
+          this.offline = true;
         })
-        .finally(function () {
-          that.$emit("network-status-update", that.offline);
+        .finally(() => {
+          this.$emit("network-status-update", this.offline);
         });
+    },
+    setupEventListeners() {
+      this.visibilityChangeListener = () => {
+        if (document.visibilityState === "visible") {
+          this.checkOfflineStatus();
+        }
+      };
+      this.onlineListener = () => {
+        this.checkOfflineStatus();
+      };
+      this.offlineListener = () => {
+        this.offline = true;
+        this.$emit("network-status-update", this.offline);
+      };
+
+      document.addEventListener("visibilitychange", this.visibilityChangeListener, false);
+      window.addEventListener("online", this.onlineListener, false);
+      window.addEventListener("offline", this.offlineListener, false);
+    },
+    removeEventListeners() {
+      document.removeEventListener("visibilitychange", this.visibilityChangeListener);
+      window.removeEventListener("online", this.onlineListener);
+      window.removeEventListener("offline", this.offlineListener);
+    },
+    checkOffline() {
+      this.checkOfflineStatus();
     },
   },
 };
