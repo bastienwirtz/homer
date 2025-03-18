@@ -32,7 +32,7 @@ within Homer:
 - [Olivetin](#olivetin)
 - [OpenHAB](#openhab)
 - [OpenWeatherMap](#openweathermap)
-- [PaperlessNG](#paperlessng)
+- [Paperless-NGX](#paperlessng)
 - [PeaNUT](#peanut)
 - [PiAlert](#pialert)
 - [PiHole](#pihole)
@@ -375,9 +375,9 @@ The following configuration is available for the OpenWeatherMap service:
 **Remarks:**
 If for some reason your city can't be found by entering the name in the `location` property, you could also try to configure the OWM city ID in the `locationId` property. To retrieve your specific City ID, go to the [OWM website](https://openweathermap.org), search for your city and retrieve the ID from the URL (for example, the City ID of Amsterdam is 2759794).
 
-## PaperlessNG
+## Paperless-NGX
 
-This service displays total number of documents stored. Two lines are required:
+This service displays total number of documents stored. Two lines are required (so subtitles should not be used for this service):
 
 ```yaml
   type: "PaperlessNG"
