@@ -638,8 +638,10 @@ This service displays a version string instead of a subtitle. Example configurat
   type: Traefik
   logo: assets/tools/sample.png
   url: http://traefik.example.com
+  basic_auth: "admin:password"
 ```
-
+- Authentication: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (Basic <encoded_value>).
+- Format: The value must be formatted as "admin:password".
 ## Uptime Kuma
 
 Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
