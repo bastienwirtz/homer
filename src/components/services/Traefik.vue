@@ -46,7 +46,12 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.fetch("/api/version")
+      let headers = {};
+      if (this.item.basic_auth) {
+        const encodedCredentials = btoa(this.item.basic_auth);
+        headers["Authorization"] = `Basic ${encodedCredentials}`;
+      }
+      this.fetch("/api/version", { headers })
         .then((response) => {
           this.fetchOk = true;
           this.versionstring = response.Version;
