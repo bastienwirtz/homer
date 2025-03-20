@@ -1,5 +1,5 @@
 <template>
-  <template v-for="bookmark in bookmarks">
+  <template v-for="bookmark in bookmarks" :key="bookmark.name">
       <Generic :item="bookmark">
     </Generic>
   </template>
@@ -23,7 +23,7 @@ export default {
   }),
   computed: {
     calculatedLimit: function () {
-      let limit = this.item.hasOwnProperty('limit') ? this.item['limit'] : 5;
+      let limit = this.item.limit ? this.item.limit : 5;
       return Math.min(Math.max(limit,1),15);
     }
   },
