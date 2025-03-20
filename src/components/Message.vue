@@ -1,5 +1,5 @@
 <template>
-  <article v-if="show" class="message" :class="message.style">
+  <article v-if="shouldShowMessage" class="message" :class="message.style">
     <div v-if="message.title || message.icon" class="message-header">
       <p>
         <i v-if="message.icon" :class="`fa-fw ${message.icon}`"></i>
@@ -10,80 +10,115 @@
       v-if="message.content"
       class="message-body"
       v-html="message.content"
+      :style="contentStyle"
     ></div>
   </article>
 </template>
 
 <script>
+import DOMPurify from 'dompurify';
+
 export default {
-  name: "Message",
+  name: 'Message',
   props: {
-    item: Object,
+    item: {
+      type: Object,
+      required: true,
+    },
   },
-  data: function () {
+  data() {
     return {
-      message: {},
+      message: {
+        title: '',
+        style: '',
+        content: '',
+        icon: '',
+      },
     };
   },
   computed: {
-    show: function () {
-      return this.message.title || this.message.content;
+    shouldShowMessage() {
+      return !!(this.message.title || this.message.content);
+    },
+    contentStyle() {
+      return {
+        wordBreak: 'break-word', // Prevent long words from overflowing
+      };
     },
   },
   watch: {
-    item: function (item) {
-      this.message = Object.assign({}, item);
+    item: {
+      handler(newItem) {
+        this.initializeMessage(newItem);
+      },
+      immediate: true, // Trigger the watcher on component creation
     },
   },
-  created: async function () {
-    // Look for a new message if an endpoint is provided.
-    this.message = Object.assign({}, this.item);
-    await this.getMessage();
-  },
   methods: {
-    getMessage: async function () {
-      if (!this.item) {
+    async initializeMessage(item) {
+      this.message = {
+        title: item.title || '',
+        style: item.style || '',
+        content: item.content || '',
+        icon: item.icon || '',
+      };
+
+      await this.fetchRemoteMessage();
+
+      if (item.refreshInterval) {
+        setTimeout(this.fetchRemoteMessage, item.refreshInterval);
+      }
+    },
+
+    async fetchRemoteMessage() {
+      if (!this.item.url) {
         return;
       }
-      if (this.item.url) {
+
+      try {
         let fetchedMessage = await this.downloadMessage(this.item.url);
+
         if (this.item.mapping) {
           fetchedMessage = this.mapRemoteMessage(fetchedMessage);
         }
 
-        // keep the original config value if no value is provided by the endpoint
-        const message = this.message;
-        for (const prop of ["title", "style", "content", "icon"]) {
-          if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
-            message[prop] = fetchedMessage[prop];
-          }
+        // Update the message object with fetched values, preserving defaults if not provided
+        this.message = {
+          title: fetchedMessage.title !== undefined ? fetchedMessage.title : this.message.title,
+          style: fetchedMessage.style !== undefined ? fetchedMessage.style : this.message.style,
+          content: fetchedMessage.content !== undefined ? fetchedMessage.content : this.message.content,
+          icon: fetchedMessage.icon !== undefined ? fetchedMessage.icon : this.message.icon,
+        };
+        // this.$forceUpdate(); // Force component to re-render
+      } catch (error) {
+        console.error('Failed to fetch message:', error);
+      }
+    },
+
+    async downloadMessage(url) {
+      const response = await fetch(url, {
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return response.json();
+    },
+
+    mapRemoteMessage(remoteMessage) {
+      const mapped = {};
+      for (const prop in this.item.mapping) {
+        const remoteKey = this.item.mapping[prop];
+        if (remoteKey && remoteMessage[remoteKey] !== undefined) {
+          mapped[prop] = remoteMessage[remoteKey];
         }
-        this.message = { ...message }; // Force computed property to re-evaluate
       }
-
-      if (this.item.refreshInterval) {
-        setTimeout(this.getMessage, this.item.refreshInterval);
-      }
-    },
-
-    downloadMessage: function (url) {
-      return fetch(url, { headers: { Accept: "application/json" } }).then(
-        function (response) {
-          if (response.status != 200) {
-            return;
-          }
-          return response.json();
-        },
-      );
-    },
-
-    mapRemoteMessage: function (message) {
-      let mapped = {};
-      // map property from message into mapped according to mapping config (only if field has a value):
-      for (const prop in this.item.mapping)
-        if (message[this.item.mapping[prop]])
-          mapped[prop] = message[this.item.mapping[prop]];
       return mapped;
+    },
+    sanitizeHTML(html) {
+      return DOMPurify.sanitize(html);
     },
   },
 };
