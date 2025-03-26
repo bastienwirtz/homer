@@ -48,6 +48,7 @@ within Homer:
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
 - [Traefik](#traefik)
+- [TrueNas Scale](#truenas-scale)
 - [Uptime Kuma](#uptime-kuma)
 - [Wallabag](#wallabag)
 - [What's Up Docker](#whats-up-docker)
@@ -638,6 +639,18 @@ This service displays a version string instead of a subtitle. Example configurat
   type: Traefik
   logo: assets/tools/sample.png
   url: http://traefik.example.com
+```
+
+## Truenas Scale
+
+This service displays a version string instead of a subtitle. Example configuration:
+
+```yaml
+- name: "Truenas"
+  type: "TruenasScale"
+  logo: "assets/tools/sample.png"
+  url: "http://truenas.example.com"
+  api_token: "your_api_token"
 ```
 
 ## Uptime Kuma
