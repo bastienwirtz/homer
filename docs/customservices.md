@@ -25,6 +25,7 @@ within Homer:
 - [Immich](#immich)
 - [Jellystat](#jellystat)
 - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
 - [Nextcloud](#nextcloud)
@@ -274,6 +275,18 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
   apikey: "<---insert-api-key-here--->"
   target: "_blank"
   legacyApi: true
+```
+
+## Matrix
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Matrix Server is online, offline
+
+```yaml
+- name: "Matrix - Server"
+  type: "Matrix"
+  logo: "assets/tools/sample.png"
+  url: "http://matrix.example.com"
 ```
 
 ## Mealie
