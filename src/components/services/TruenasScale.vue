@@ -7,7 +7,10 @@
           {{ item.subtitle }}
         </template>
         <template v-else-if="versionstring">
-          Version {{ versionstring }}
+          <span class="is-hidden-touch">Version {{ versionstring }}</span>
+          <span class="is-hidden-desktop"
+            >Version {{ versionstring.split("-").pop() }}</span
+          >
         </template>
       </p>
     </template>
@@ -23,30 +26,36 @@
 import service from "@/mixins/service.js";
 
 export default {
-  name: "Docuseal",
+  name: "TruenasScale",
   mixins: [service],
   props: {
     item: Object,
   },
   data: () => ({
-    status: null,
+    fetchOk: null,
     versionstring: null,
   }),
+  computed: {
+    status: function () {
+      return this.fetchOk ? "online" : "offline";
+    },
+  },
   created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      const params = {
-        cache: "no-cache",
-      };
-      this.fetch("/version", params, false)
+      let headers = {};
+      if (this.item.api_token) {
+        headers["Authorization"] = `Bearer ${this.item.api_token}`;
+      }
+      this.fetch("/api/v2.0/system/version", { headers })
         .then((response) => {
-          this.status = "online";
+          this.fetchOk = true;
           this.versionstring = response;
         })
         .catch((e) => {
-          this.status = "offline";
+          this.fetchOk = false;
           console.log(e);
         });
     },

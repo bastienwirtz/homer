@@ -25,6 +25,7 @@ within Homer:
 - [Immich](#immich)
 - [Jellystat](#jellystat)
 - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
 - [Nextcloud](#nextcloud)
@@ -48,7 +49,9 @@ within Homer:
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
 - [Traefik](#traefik)
+- [TrueNas Scale](#truenas-scale)
 - [Uptime Kuma](#uptime-kuma)
+- [Vaultwarden](#vaultwarden)
 - [Wallabag](#wallabag)
 - [What's Up Docker](#whats-up-docker)
 
@@ -288,6 +291,18 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
   legacyApi: true
 ```
 
+## Matrix
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Matrix Server is online, offline
+
+```yaml
+- name: "Matrix - Server"
+  type: "Matrix"
+  logo: "assets/tools/sample.png"
+  url: "http://matrix.example.com"
+```
+
 ## Mealie
 
 First off make sure to remove an existing `subtitle` as it will take precedence if set. 
@@ -473,8 +488,11 @@ This service displays info about the total number of containers managed by your 
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
 By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
+### New features:
+Displays the Portainer version from /api/status  
+Shows online/offline status depending on API reachability  
 
-See <https://docs.portainer.io/api/access#creating-an-access-token>
+See <https://docs.portainer.io/api/access#creating-an-access-token>  
 
 ```yaml
 - name: "Portainer"
@@ -665,6 +683,18 @@ This service displays a version string instead of a subtitle. Example configurat
   url: http://traefik.example.com
 ```
 
+## Truenas Scale
+
+This service displays a version string instead of a subtitle. Example configuration:
+
+```yaml
+- name: "Truenas"
+  type: "TruenasScale"
+  logo: "assets/tools/sample.png"
+  url: "http://truenas.example.com"
+  api_token: "your_api_token"
+```
+
 ## Uptime Kuma
 
 Using the Uptime Kuma service you can display info about your instance uptime right on your Homer dashboard.
@@ -678,6 +708,17 @@ The following configuration is available for the UptimeKuma service. Needs v1.13
   url: "http://192.168.0.151:3001"
   slug: "myCustomDashboard" # Defaults to "default" if not provided.
   type: "UptimeKuma"
+```
+## Vaultwarden
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Vaultwarden is online, offline
+
+```yaml
+- name: "Vaultwarden - Server"
+  type: "Vaultwarden"
+  logo: "assets/tools/sample.png"
+  url: "http://vaultwarden.example.com"
 ```
 
 ## Wallabag

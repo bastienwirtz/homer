@@ -27,15 +27,11 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 const API = "/api/v1";
 
 export default {
   name: "Readarr",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,

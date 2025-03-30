@@ -20,16 +20,11 @@
 </template>
 
 <script>
-import Generic from "./Generic.vue";
-
 let currentTheme;
 const app = document.getElementById("app");
 
 export default {
   name: "ThemeChooser",
-  components: {
-    Generic,
-  },
   props: {
     item: Object,
   },
