@@ -38,7 +38,7 @@
 <script>
 import service from "@/mixins/service.js";
 
-const units = ["B", "KB", "MB", "GB"];
+const units = ["KB", "MB", "GB"];
 
 // Function to convert rate into a human-readable format
 const displayRate = (rate) => {
@@ -98,9 +98,16 @@ export default {
         this.error = false;
         this.stats = response.queue;
 
-        // Assuming the response provides download/upload speeds
-        this.dlSpeed = response.queue.dl_speed; // Adjust this based on your API response
-        this.ulSpeed = response.queue.up_speed; // Adjust this based on your API response
+        // Fetching download speed from "speed" (convert to KB/s if needed)
+        this.dlSpeed = parseFloat(response.queue.speed) * 1024; // Convert MB to KB
+
+        // Alternatively, you can also use kbpersec directly
+        // this.dlSpeed = parseFloat(response.queue.kbpersec);
+        
+        // For upload speed, you would need a corresponding field in the API response.
+        // Assuming there's no direct upload speed in the response, you can modify as needed.
+        this.ulSpeed = 0; // Placeholder for upload speed (API might need to provide this)
+
       } catch (e) {
         this.error = true;
         console.error(e);
