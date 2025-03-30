@@ -33,13 +33,9 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "Medusa",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,
