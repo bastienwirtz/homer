@@ -101,6 +101,18 @@ Configuration example:
   clipboard: "this text will be copied to your clipboard"
 ```
 
+## Docker Socker Proxy
+
+This service display the number of running, stopped and containers that have errors.
+It calls the API of DOcker Socket Proxy
+
+```yaml
+- name: Docker
+  type: "DockerSocketProxy"
+  endpoint: "http://192.168.0.151:2375"
+
+```
+
 ## Docuseal
 
 This service displays a version string instead of a subtitle. Example configuration:
@@ -440,6 +452,19 @@ This card checks if the target link is available. All you need is to set the `ty
   # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
   # updateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
+```
+
+## Plex
+
+This card shows the current active streams and the number of movies and series that this Plex instance has.
+
+```yaml
+- name: Plex
+  type: "Plex"
+  logo: "assets/tools/sample.png"
+  token: "<---insert-plex-token-here--->" # see here how to get the plex token: https://www.plexopedia.com/plex-media-server/general/plex-token/
+  url: "http://192.168.0.151:32400/web"
+  endpoint: "http://192.168.0.151:32400"
 ```
 
 ## Portainer
