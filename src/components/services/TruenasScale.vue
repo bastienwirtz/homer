@@ -8,7 +8,9 @@
         </template>
         <template v-else-if="versionstring">
           <span class="is-hidden-touch">Version {{ versionstring }}</span>
-          <span class="is-hidden-desktop">Version {{ versionstring.split('-').pop() }}</span>
+          <span class="is-hidden-desktop"
+            >Version {{ versionstring.split("-").pop() }}</span
+          >
         </template>
       </p>
     </template>
@@ -22,13 +24,9 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "TruenasScale",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,

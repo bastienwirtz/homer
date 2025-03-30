@@ -19,7 +19,11 @@
         <strong v-if="dead > 0" class="notif dead" title="Dead">
           {{ dead }}
         </strong>
-        <strong v-if="misc > 0" class="notif misc" title="Other (creating, paused, exited, etc.)">
+        <strong
+          v-if="misc > 0"
+          class="notif misc"
+          title="Other (creating, paused, exited, etc.)"
+        >
           {{ misc }}
         </strong>
       </div>
