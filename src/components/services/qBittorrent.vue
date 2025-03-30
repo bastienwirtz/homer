@@ -28,7 +28,6 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 const units = ["B", "KB", "MB", "GB"];
 
 // Take the rate in bytes and keep dividing it by 1k until the lowest
@@ -50,7 +49,6 @@ const displayRate = (rate) => {
 
 export default {
   name: "QBittorrent",
-  components: { Generic },
   mixins: [service],
   props: { item: Object },
   data: () => ({ dl: null, ul: null, count: null, error: null }),
