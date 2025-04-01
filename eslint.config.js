@@ -18,6 +18,6 @@ export default [
     },
   },
   {
-    ignores: ["*.d.ts", "**/coverage", "**/dist"],
+    ignores: ["**/dist/**", "**/dist-ssr/**", "**/coverage/**"],
   },
 ];

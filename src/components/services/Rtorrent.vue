@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import Generic from "./Generic.vue";
-
 // Units to add to download and upload rates.
 const units = ["B", "kiB", "MiB", "GiB"];
 
@@ -48,7 +46,6 @@ const displayRate = (rate) => {
 
 export default {
   name: "RTorrent",
-  components: { Generic },
   props: { item: Object },
   // Properties for download, upload, torrent count and errors.
   data: () => ({ dl: null, ul: null, count: null, error: null }),

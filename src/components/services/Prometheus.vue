@@ -19,7 +19,6 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 const AlertsStatus = Object.freeze({
   firing: "firing",
@@ -29,9 +28,6 @@ const AlertsStatus = Object.freeze({
 
 export default {
   name: "Prometheus",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,

@@ -28,13 +28,9 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "Tdarr",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,

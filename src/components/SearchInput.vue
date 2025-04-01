@@ -64,7 +64,7 @@ export default {
       });
     },
     hasFocus: function () {
-      return document.activeElement == this.$refs.search
+      return document.activeElement == this.$refs.search;
     },
     setSearchURL: function (value) {
       const url = new URL(window.location);

@@ -16,13 +16,9 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "Paperless",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,
