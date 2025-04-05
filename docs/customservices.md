@@ -115,7 +115,6 @@ It calls the API of DOcker Socket Proxy
 - name: Docker
   type: "DockerSocketProxy"
   endpoint: "http://192.168.0.151:2375"
-
 ```
 
 ## Docuseal

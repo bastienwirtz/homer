@@ -27,12 +27,8 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 export default {
   name: "Plex",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,
@@ -61,8 +57,7 @@ export default {
         this.serverError = true;
       };
       
-      fetch(`${this.endpoint}/status/sessions?X-Plex-Token=${this.item.token}`)
-        .then((response) => response.text())
+      this.fetch(`/status/sessions?X-Plex-Token=${this.item.token}`, {}, false)
         .then((str) => {
           const parser = new DOMParser();
           const xml = parser.parseFromString(str, "application/xml");
@@ -71,14 +66,13 @@ export default {
         })
         .catch(handleError);
       
-      fetch(`${this.endpoint}/library/sections?X-Plex-Token=${this.item.token}`)
-        .then((response) => response.text())
+      this.fetch(`/library/sections?X-Plex-Token=${this.item.token}`, {}, false)
         .then((str) => {
           const parser = new DOMParser();
           const xml = parser.parseFromString(str, "application/xml");
           const directories = xml.getElementsByTagName("Directory");
-          let seriesDirIds = [];
-          let movieDirIds = [];
+          const seriesDirIds = [];
+          const movieDirIds = [];
           
           for (let dir of directories) {
             if (dir.getAttribute("type") === "show") {
