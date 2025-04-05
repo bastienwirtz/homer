@@ -12,7 +12,7 @@
           {{ errors }}
         </strong>
         <strong v-if="serverError" class="notif errors" title="Connection error to Docker Socket Proxy API">
-          ?
+          Unavailable
         </strong>
       </div>
     </template>
@@ -21,12 +21,8 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 export default {
   name: "DockerSocketProxy",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,
@@ -54,8 +50,7 @@ export default {
       };
 
       // Fetch all containers (including stopped) from Docker Socket Proxy
-      fetch(`${this.endpoint}/containers/json?all=true`) // Docker endpoint for container statuses
-        .then((response) => response.json())
+      this.fetch('/containers/json?all=true') // Docker endpoint for container statuses
         .then((containers) => {
           this.running = containers.filter(container => container.State === "running").length;
           this.stopped = containers.filter(container => container.State === "exited").length;
