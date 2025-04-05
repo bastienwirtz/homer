@@ -15,6 +15,7 @@ within Homer:
 - [AdGuard Home](#adguard-home)
 - [CopyToClipboard](#copy-to-clipboard)
 - [Docuseal](#docuseal)
+- [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
 - [Gitea / Forgejo](#gitea--forgejo)
@@ -39,6 +40,7 @@ within Homer:
 - [PiAlert](#pialert)
 - [PiHole](#pihole)
 - [Ping](#ping)
+- [Plex](#plex)
 - [Portainer](#portainer)
 - [Prometheus](#prometheus)
 - [Proxmox](#proxmox)
@@ -103,6 +105,17 @@ Configuration example:
   url: "#"
   type: "CopyToClipboard"
   clipboard: "this text will be copied to your clipboard"
+```
+
+## Docker Socker Proxy
+
+This service display the number of running, stopped and containers that have errors.
+It calls the API of DOcker Socket Proxy
+
+```yaml
+- name: Docker
+  type: "DockerSocketProxy"
+  endpoint: "http://192.168.0.151:2375"
 ```
 
 ## Docuseal
@@ -477,6 +490,19 @@ This card checks if the target link is available. All you need is to set the `ty
   # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
   # updateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
+```
+
+## Plex
+
+This card shows the current active streams and the number of movies and series that this Plex instance has.
+
+```yaml
+- name: Plex
+  type: "Plex"
+  logo: "assets/tools/sample.png"
+  token: "<---insert-plex-token-here--->" # see here how to get the plex token: https://www.plexopedia.com/plex-media-server/general/plex-token/
+  url: "http://192.168.0.151:32400/web"
+  endpoint: "http://192.168.0.151:32400"
 ```
 
 ## Portainer
