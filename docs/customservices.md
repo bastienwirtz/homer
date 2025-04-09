@@ -522,10 +522,10 @@ This service displays status information of a Proxmox node (VMs running and disk
 
 The API Token (or the user assigned to that token if not separated permissions is checked) are this:
 
-| Path               | Permission | Comments                                                          |
-|--------------------|------------|-------------------------------------------------------------------|
-| /nodes/<your-node> | Sys.Audit  |                                                                   |
-| /vms/<id-vm>       | VM.Audit   | You need to have this permission on any VM you want to be counted |
+| Path                | Permission | Comments                                                          |
+|---------------------|------------|-------------------------------------------------------------------|
+| /nodes/\<your-node> | Sys.Audit  |                                                                   |
+| /vms/\<id-vm>       | VM.Audit   | You need to have this permission on any VM you want to be counted |
 
 It is highly recommended that you create and API Token with only these permissions on a read-only mode.
 
