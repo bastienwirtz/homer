@@ -706,6 +706,7 @@ The following configuration is available for the UptimeKuma service. Needs v1.13
   slug: "myCustomDashboard" # Defaults to "default" if not provided.
   type: "UptimeKuma"
 ```
+
 ## Vaultwarden
 
 This service displays a version string instead of a subtitle. The indicator
