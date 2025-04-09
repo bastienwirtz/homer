@@ -284,8 +284,8 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
 
 This integration makes it possible to query Linkding and list multiple results from Linkding.
 Linkding has to be configured with CORS enabled. Linkding does not support that, but a reverse proxy in front can fix that.
-For example if you use Traefik, documentation about that is here: https://doc.traefik.io/traefik/middlewares/http/headers/#cors-headers
-Examples for various servers can be found at https://enable-cors.org/server.html.
+For example if you use Traefik, documentation about that is here: <https://doc.traefik.io/traefik/middlewares/http/headers/#cors-headers>
+Examples for various servers can be found at <https://enable-cors.org/server.html>.
 
 This integration supports at max 15 results from Linkding. But you can add it multiple times to you dashboard with different queries to retrieve what you need.
 
@@ -573,7 +573,7 @@ listed in rTorrent. The service communicates with the rTorrent XML-RPC interface
 to be accessible from the browser. Please consult
 [the instructions](https://github.com/rakshasa/rtorrent-doc/blob/master/RPC-Setup-XMLRPC.md)
 for setting up rTorrent and make sure the correct CORS-settings are applied. Examples for various
-servers can be found at https://enable-cors.org/server.html.
+servers can be found at <https://enable-cors.org/server.html>.
 
 ```yaml
 - name: "rTorrent"
