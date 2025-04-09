@@ -297,7 +297,7 @@ This integration supports at max 15 results from Linkding. But you can add it mu
         type: "Linkding"
         # Maximum number of items returned by Linkding, minimal 1 and max 15
         limit: 10 
-        # query to do on Linkding. User #tagname to search for tags
+        # query to do on Linkding. Use #tagname to search for tags
         query: "#ToDo #Homer" 
 ```
 
