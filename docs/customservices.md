@@ -485,7 +485,9 @@ This service displays info about the total number of containers managed by your 
 In order to use it, you must be using Portainer version 1.11 or later. Generate an access token from the UI and pass
 it to the apikey field.
 By default, every connected environments will be checked. To select specific ones, add an "environments" entry which can be a simple string or an array containing all the selected environments name.
-### New features:
+
+### New features
+
 Displays the Portainer version from /api/status  
 Shows online/offline status depending on API reachability  
 
