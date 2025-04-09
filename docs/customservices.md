@@ -228,7 +228,7 @@ To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of
 
 ## Immich
 
-The Immich service displays stats from your Immich server. 
+The Immich service displays stats from your Immich server.
 The Immich server must be running at least version 1.118.0 for the correct api endpoint to work.
 
 ```yaml
@@ -282,10 +282,10 @@ If you are using an older version of Radarr or Sonarr which don't support the ne
 
 ## Linkding
 
-This integration makes it possible to query Linkding and list multiple results from Linkding.   
-Linkding has to be configured with CORS enabled. Linkding does not support that, but a reverse proxy in front can fix that.   
-For example if you use Traefik, documentation about that is here: https://doc.traefik.io/traefik/middlewares/http/headers/#cors-headers   
-Examples for various servers can be found at https://enable-cors.org/server.html.   
+This integration makes it possible to query Linkding and list multiple results from Linkding.
+Linkding has to be configured with CORS enabled. Linkding does not support that, but a reverse proxy in front can fix that.
+For example if you use Traefik, documentation about that is here: https://doc.traefik.io/traefik/middlewares/http/headers/#cors-headers
+Examples for various servers can be found at https://enable-cors.org/server.html.
 
 This integration supports at max 15 results from Linkding. But you can add it multiple times to you dashboard with different queries to retrieve what you need.
 
@@ -315,8 +315,8 @@ shows if Matrix Server is online, offline
 
 ## Mealie
 
-First off make sure to remove an existing `subtitle` as it will take precedence if set. 
-Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will 
+First off make sure to remove an existing `subtitle` as it will take precedence if set.
+Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping organized or the planned meal for today if one is planned. You will
 have to set an API key in the field `apikey` which can be created in your Mealie installation. The API page can be found: Click on hamburger menu -> Click on your profile -> Click on "Manage your API Tokens"
 
 ```yaml
