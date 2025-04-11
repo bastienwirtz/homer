@@ -18,19 +18,24 @@
     </template>
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <span v-if="error" class="error">An error has occurred.</span>
-        <template v-else>
-          <span class="down monospace">
-            <p class="fas fa-download"></p>
-            {{ downRate }}
-          </span>
-          <span class="up monospace">
-            <p class="fas fa-upload"></p>
-            {{ upRate }}
-          </span>
-        </template>
+      <p v-if="item.subtitle" class="subtitle">
+        {{ item.subtitle }}
       </p>
+      <template v-else>
+        <p class="subtitle is-6">
+          <span v-if="error" class="error">An error has occurred.</span>
+          <template v-else>
+            <span class="down monospace">
+              <p class="fas fa-download"></p>
+              {{ downRate }}
+            </span>
+            <span class="up monospace">
+              <p class="fas fa-upload"></p>
+              {{ upRate }}
+            </span>
+          </template>
+        </p>
+      </template>
     </template>
   </Generic>
 </template>
