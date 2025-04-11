@@ -29,10 +29,6 @@
               <p class="fas fa-download"></p>
               {{ downRate }}
             </span>
-            <span class="up monospace">
-              <p class="fas fa-upload"></p>
-              {{ upRate }}
-            </span>
           </template>
         </p>
       </template>
@@ -82,9 +78,6 @@ export default {
     downRate() {
       return displayRate(this.dlSpeed);
     },
-    upRate() {
-      return displayRate(this.ulSpeed);
-    },
   },
   created() {
     const downloadInterval = parseInt(this.item.downloadInterval, 10) || 0;
@@ -105,13 +98,6 @@ export default {
 
         // Fetching download speed from "speed" (convert to KB/s if needed)
         this.dlSpeed = parseFloat(response.queue.speed) * 1024; // Convert MB to KB
-
-        // Alternatively, you can also use kbpersec directly
-        // this.dlSpeed = parseFloat(response.queue.kbpersec);
-        
-        // For upload speed, you would need a corresponding field in the API response.
-        // Assuming there's no direct upload speed in the response, you can modify as needed.
-        this.ulSpeed = 0; // Placeholder for upload speed (API might need to provide this)
 
       } catch (e) {
         this.error = true;
