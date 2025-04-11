@@ -29,7 +29,7 @@ importers:
         version: 9.21.0
       '@vitejs/plugin-vue':
         specifier: ^5.2.1
-        version: 5.2.1(vite@6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13)
+        version: 5.2.1(vite@6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13)
       '@vue/eslint-config-prettier':
         specifier: ^10.2.0
         version: 10.2.0(eslint@9.21.0)(prettier@3.5.2)
@@ -52,11 +52,11 @@ importers:
         specifier: ^1.85.0
         version: 1.85.0
       vite:
-        specifier: ^6.1.4
-        version: 6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0)
+        specifier: ^6.1.5
+        version: 6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0)
       vite-plugin-pwa:
         specifier: ^0.21.1
-        version: 0.21.1(vite@6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(workbox-build@7.3.0)(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(workbox-build@7.3.0)(workbox-window@7.3.0)
 
 packages:
 
@@ -1131,8 +1131,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001710:
-    resolution: {integrity: sha512-B5C0I0UmaGqHgo5FuqJ7hBd4L57A4dDD+Xi+XX1nXOoxGeDdY4Ko38qJYOyqznBVJEqON5p8P1x5zRR3+rsnxA==}
+  caniuse-lite@1.0.30001713:
+    resolution: {integrity: sha512-wCIWIg+A4Xr7NfhTuHdX+/FKh3+Op3LBbSp2N5Pfx6T/LhdQy3GTyoTg48BReaW/MyMNZAkTadsBtai3ldWK0Q==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -1237,8 +1237,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.132:
-    resolution: {integrity: sha512-QgX9EBvWGmvSRa74zqfnG7+Eno0Ak0vftBll0Pt2/z5b3bEGYL6OUXLgKPtvx73dn3dvwrlyVkjPKRRlhLYTEg==}
+  electron-to-chromium@1.5.136:
+    resolution: {integrity: sha512-kL4+wUTD7RSA5FHx5YwWtjDnEEkIIikFgWHR4P6fqjw1PPLlqYkxeOb++wAauAssat0YClCy8Y3C5SxgSkjibQ==}
 
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
@@ -2373,8 +2373,8 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
 
-  vite@6.1.4:
-    resolution: {integrity: sha512-VzONrF/qqEg/JBwHXBJdVSmBZBhwiPGinyUb0SQLByqQwi6o8UvX5TWLkpvkq3tvN8Cr273ieZDt36CGwWRMvA==}
+  vite@6.1.5:
+    resolution: {integrity: sha512-H/gAFpW5I4ow/8Bz4t4i8k2St5JThMlqUT8gsH5v0rkqbqpf4qLrFozjq/V2KG1iOXF+3Ko9mlG0kmGerktWJw==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -3477,9 +3477,9 @@ snapshots:
 
   '@types/trusted-types@2.0.7': {}
 
-  '@vitejs/plugin-vue@5.2.1(vite@6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13)':
+  '@vitejs/plugin-vue@5.2.1(vite@6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13)':
     dependencies:
-      vite: 6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0)
+      vite: 6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0)
       vue: 3.5.13
 
   '@vue/compiler-core@3.5.13':
@@ -3645,8 +3645,8 @@ snapshots:
 
   browserslist@4.24.4:
     dependencies:
-      caniuse-lite: 1.0.30001710
-      electron-to-chromium: 1.5.132
+      caniuse-lite: 1.0.30001713
+      electron-to-chromium: 1.5.136
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -3680,7 +3680,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001710: {}
+  caniuse-lite@1.0.30001713: {}
 
   chalk@4.1.2:
     dependencies:
@@ -3773,7 +3773,7 @@ snapshots:
     dependencies:
       jake: 10.9.2
 
-  electron-to-chromium@1.5.132: {}
+  electron-to-chromium@1.5.136: {}
 
   entities@4.5.0: {}
 
@@ -5001,18 +5001,18 @@ snapshots:
 
   varint@6.0.0: {}
 
-  vite-plugin-pwa@0.21.1(vite@6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(workbox-build@7.3.0)(workbox-window@7.3.0):
+  vite-plugin-pwa@0.21.1(vite@6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0))(workbox-build@7.3.0)(workbox-window@7.3.0):
     dependencies:
       debug: 4.4.0
       pretty-bytes: 6.1.1
       tinyglobby: 0.2.12
-      vite: 6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0)
+      vite: 6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0)
       workbox-build: 7.3.0
       workbox-window: 7.3.0
     transitivePeerDependencies:
       - supports-color
 
-  vite@6.1.4(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0):
+  vite@6.1.5(sass-embedded@1.85.0)(terser@5.39.0)(yaml@2.7.0):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.3
