@@ -471,10 +471,12 @@ The following configuration is available for the PiHole service.
   url: "http://192.168.0.151/admin"
   apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
   type: "PiHole"
+  apiVersion: 5 # optional, defaults to 5. Use 6 if your PiHole instance uses API v6
 ```
 
 **Remarks:**
-If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
+- If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
+- For PiHole instances using API v6, set `apiVersion: 6` in your configuration. This enables session management and proper authentication handling.
 
 ## Ping
 
