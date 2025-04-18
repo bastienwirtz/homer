@@ -6,8 +6,8 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="percentage">
-          {{ percentage }}&percnt; blocked
+        <template v-else-if="queries">
+          Requests: {{ queries.total }}: {{ queries.percent_blocked.toFixed(2) }}&percnt; blocked
         </template>
       </p>
     </template>
@@ -29,31 +29,54 @@ export default {
     item: Object,
   },
   data: () => ({
-    status: "",
-    ads_percentage_today: 0,
+    status: "disabled",
+    sid: "",
+    queries: null,
   }),
-  computed: {
-    percentage: function () {
-      if (this.ads_percentage_today) {
-        return this.ads_percentage_today.toFixed(1);
-      }
-      return "";
-    },
-  },
   created() {
-    this.fetchStatus();
+    const checkInterval = parseInt(this.item.checkInterval, 10) || 0;
+    if (checkInterval > 0) {
+      setInterval(() => this.fetchData(), checkInterval);
+    }
+    this.fetchData();
   },
   methods: {
-    fetchStatus: async function () {
-      const authQueryParams = this.item.apikey
-        ? `?summaryRaw&auth=${this.item.apikey}`
-        : "";
-      const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
-        console.log(e),
+    handleError: function(e) {
+        console.error(e);
+        this.subtitle = e;
+        this.status = "disabled";
+    },
+    authenticate: async function () {
+      const result = await this.fetch("/api/auth", {
+        method: "POST",
+        body: JSON.stringify({
+          password: this.item.apikey,
+        }),
+      }).catch((e) =>
+        this.handleError(e),
       );
 
-      this.status = result.status;
-      this.ads_percentage_today = result.ads_percentage_today;
+      if (result && result.session.sid) {
+        this.sid = result.session.sid;
+      } else {
+        handleError("Failed to authenticate");
+        return;
+      }
+    },
+    fetchData: async function () {
+      if (!this.sid) {
+        await this.authenticate();
+      }
+      const result = await this.fetch(`/api/stats/summary?sid=`+this.sid).catch((e) =>
+        this.handleError(e),
+      );
+      if (!result) {
+        this.sid = "";
+        this.handleError("Failed to fetch data");
+        return;
+      }
+      this.status = "enabled";
+      this.queries = result.queries;
     },
   },
 };
