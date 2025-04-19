@@ -169,10 +169,14 @@ export default {
           const authenticated = await this.authenticate();
           if (!authenticated) return;
         }
+        const options = {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        };
+        const response = await this.fetch(`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`, options, false, true);
 
-        const url = `${this.endpoint}/${`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`.replace(/^\/+/, '')}`;
-        const response = await fetch(url);
-        
         if (response.ok) {
           const result = await response.json();
           if (result?.queries?.percent_blocked !== undefined) {
