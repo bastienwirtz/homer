@@ -68,8 +68,12 @@ export default {
   methods: {
     startStatusPolling: function () {
       this.fetchStatus();
-      // Poll every 5 minutes
-      this.pollInterval = setInterval(this.fetchStatus, 300000);
+      // Set the interval to the checkInterval or default to 5 minutes
+      const interval = parseInt(this.item.checkInterval, 10) || 300000;
+      if (this.item.checkInterval < 1000) {
+        this.item.checkInterval = 1000;
+      }
+      this.pollInterval = setInterval(this.fetchStatus, interval);
     },
     stopStatusPolling: function () {
       if (this.pollInterval) {
