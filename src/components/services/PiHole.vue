@@ -42,7 +42,7 @@ export default {
   }),
   computed: {
     percentage: function () {
-      if (typeof this.percent_blocked === 'number' && this.percent_blocked >= 0) {
+      if (this.percent_blocked) {
         return this.percent_blocked.toFixed(1);
       }
       return "";
@@ -187,37 +187,24 @@ export default {
           throw new Error(`HTTP error: ${response.status}`);
         }
       } catch (e) {
-        if (e.includes("HTTP error: 401") || e.includes("HTTP error: 403")) {
+        if (e.message.includes("HTTP error: 401") || e.message.includes("HTTP error: 403")) {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
-        this.handleError(`Failed to fetch status: ${e}`, "disabled");
+        this.handleError(`Failed to fetch status: ${e.message || e}`, "disabled");
         this.removeCacheSession();
       }
     },
     async fetchStatus_v5() {
-      try {
-        const params = {};
-        if (this.item.apikey) {
-          params.auth = this.item.apikey;
-        }
-        const url = new URL(`${this.endpoint}/api.php`);
-        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-        
-        const response = await fetch(url);
-        this.status = response.status.toString();
-        
-        if (response.ok) {
-          const result = await response.json();
-          if (result?.ads_percentage_today !== undefined) {
-            this.percent_blocked = result.ads_percentage_today;
-          }
-        } else {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-      } catch (e) {
-        this.handleError(`Failed to fetch v5 status: ${e}`, "error");
-      }
+      const authQueryParams = this.item.apikey
+        ? `?summaryRaw&auth=${this.item.apikey}`
+        : "";
+      const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
+        this.handleError(`Failed to fetch status: ${e}`, "disabled"),
+      );
+
+      this.status = result.status;
+      this.percent_blocked = result.ads_percentage_today;
     },
   }
 };
