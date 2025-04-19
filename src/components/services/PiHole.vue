@@ -170,12 +170,6 @@ export default {
           const authenticated = await this.authenticate();
           if (!authenticated) return;
         }
-        const options = {
-          method: "GET",
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        };
         const response = await this.fetch(`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`);
 
         if (response?.queries?.percent_blocked === undefined) {
