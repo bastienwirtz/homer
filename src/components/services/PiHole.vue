@@ -39,6 +39,8 @@ export default {
     retryCount: 0,
     maxRetries: 3,
     retryDelay: 5000,
+    localCheckInterval: 1000, // Default value or a fallback
+    pollInterval: null,
   }),
   computed: {
     percentage: function () {
@@ -53,6 +55,8 @@ export default {
   },
   created() {
     if (parseInt(this.item.apiVersion, 10) === 6) {
+      // Set the interval to the checkInterval or default to 5 minutes
+      this.localCheckInterval = parseInt(this.item.checkInterval, 10) || 300000;
       this.loadCachedSession();
       this.startStatusPolling();
     } else {
@@ -73,12 +77,10 @@ export default {
     },
     startStatusPolling: function () {
       this.fetchStatus();
-      // Set the interval to the checkInterval or default to 5 minutes
-      const interval = parseInt(this.item.checkInterval, 10) || 300000;
-      if (this.item.checkInterval < 1000) {
-        this.item.checkInterval = 1000;
+      if (this.localCheckInterval < 1000) {
+        this.localCheckInterval = 1000;
       }
-      this.pollInterval = setInterval(this.fetchStatus, interval);
+      this.pollInterval = setInterval(this.fetchStatus, this.localCheckInterval);
     },
     stopStatusPolling: function () {
       if (this.pollInterval) {
