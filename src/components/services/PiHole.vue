@@ -170,11 +170,11 @@ export default {
 
         const url = `${this.endpoint}/${`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`.replace(/^\/+/, '')}`;
         const response = await fetch(url);
-        this.status = "enabled";
         
         if (response.ok) {
           const result = await response.json();
           if (result?.queries?.percent_blocked !== undefined) {
+            this.status = "enabled";
             this.percent_blocked = result.queries.percent_blocked;
             this.retryCount = 0;
           } else {
