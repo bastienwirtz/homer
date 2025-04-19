@@ -12,7 +12,7 @@ export default {
     }
   },
   methods: {
-    fetch: function (path, init, json = true, returnFullResponse = false) {
+    fetch: function (path, init, json = true) {
       let options = {};
 
       if (this.proxy?.useCredentials) {
@@ -56,10 +56,6 @@ export default {
           throw new Error(
             `Ping: target not available (${response.status} error)`,
           );
-        }
-
-        if (returnFullResponse) {
-          return response;
         }
 
         return json ? response.json() : response.text();

@@ -44,7 +44,7 @@ export default {
   }),
   computed: {
     percentage: function () {
-      if (this.percent_blocked) {
+      if (this.percent_blocked >= 0) {
         return this.percent_blocked.toFixed(1);
       }
       return "";
@@ -156,6 +156,7 @@ export default {
       }
     },
     retryWithDelay: async function () {
+      console.log("Retrying authentication...");
       if (this.retryCount < this.maxRetries) {
         this.retryCount++;
         await new Promise(resolve => setTimeout(resolve, this.retryDelay));
@@ -175,25 +176,17 @@ export default {
             'Content-Type': 'application/json'
           }
         };
-        const response = await this.fetch(`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`, options, false, true);
+        const response = await this.fetch(`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`);
 
-        if (response.ok) {
-          const result = await response.json();
-          if (result?.queries?.percent_blocked !== undefined) {
-            this.status = "enabled";
-            this.percent_blocked = result.queries.percent_blocked;
-            this.retryCount = 0;
-          } else {
-            throw new Error("Invalid response format");
-          }
-        } else if (response.status === 401) {
-          this.removeCacheSession();
-          return this.retryWithDelay();
-        } else {
-          throw new Error(`HTTP error: ${response.status}`);
+        if (response?.queries?.percent_blocked === undefined) {
+          throw new Error("Invalid response format");
         }
+
+        this.status = "enabled";
+        this.percent_blocked = response.queries.percent_blocked;
+        this.retryCount = 0;
       } catch (e) {
-        if (e.message.includes("HTTP error: 401") || e.message.includes("HTTP error: 403")) {
+        if (e.message.includes("401 error") || e.message.includes("403 error")) {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
