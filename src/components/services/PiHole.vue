@@ -42,7 +42,7 @@ export default {
   }),
   computed: {
     percentage: function () {
-      if (this.percent_blocked) {
+      if (typeof this.percent_blocked === 'number' && this.percent_blocked >= 0) {
         return this.percent_blocked.toFixed(1);
       }
       return "";
@@ -66,6 +66,11 @@ export default {
     }
   },
   methods: {
+    handleError: function (error, status) {
+        console.error(error);
+        this.subtitle = error;
+        this.status = status;
+    },
     startStatusPolling: function () {
       this.fetchStatus();
       // Set the interval to the checkInterval or default to 5 minutes
@@ -93,7 +98,7 @@ export default {
           }
         }
       } catch (e) {
-        console.error("Failed to load cached session:", e);
+        this.handleError(`Failed to load cached session: ${e}`, "error");
         this.removeCacheSession();
       }
     },
@@ -110,15 +115,14 @@ export default {
           method: 'DELETE'
         });
       } catch (e) {
-        console.error("Failed to delete session:", e);
+        this.handleError(`Failed to delete session: ${e}`, "error");
       } finally {
         this.removeCacheSession();
       }
     },
     authenticate: async function () {
       if (!this.item.apikey) {
-        console.error("API key is required for PiHole authentication");
-        this.status = "disabled";
+        this.handleError("API key is required for PiHole authentication", "disabled");
         return false;
       }
 
@@ -145,8 +149,7 @@ export default {
         }
         throw new Error("Invalid authentication response");
       } catch (e) {
-        console.error("Authentication failed:", e);
-        this.status = "disabled";
+        this.handleError(`Authentication failed: ${e}`, "disabled");
         return false;
       }
     },
@@ -184,12 +187,11 @@ export default {
           throw new Error(`HTTP error: ${response.status}`);
         }
       } catch (e) {
-        console.error("Failed to fetch status:", e);
-        if (e.message.includes("HTTP error: 401") || e.message.includes("HTTP error: 403")) {
+        if (e.includes("HTTP error: 401") || e.includes("HTTP error: 403")) {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
-        this.status = "disabled";
+        this.handleError(`Failed to fetch status: ${e}`, "disabled");
         this.removeCacheSession();
       }
     },
@@ -214,8 +216,7 @@ export default {
           throw new Error(`HTTP error: ${response.status}`);
         }
       } catch (e) {
-        console.error("Failed to fetch v5 status:", e);
-        this.status = "error";
+        this.handleError(`Failed to fetch v5 status: ${e}`, "error");
       }
     },
   }
