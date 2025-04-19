@@ -45,7 +45,7 @@ proxy:
 
 # Set the default layout and color scheme
 defaults:
-  layout: columns # Either 'columns', or 'list'
+  layout: column # Either 'column', or 'list'
   colorTheme: auto # One of 'auto', 'light', or 'dark'
 
 # Optional theming
