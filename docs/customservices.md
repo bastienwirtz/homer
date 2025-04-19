@@ -468,13 +468,16 @@ The following configuration is available for the PiHole service.
 - name: "Pi-hole"
   logo: "assets/tools/sample.png"
   # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
-  url: "http://192.168.0.151/admin"
+  url: "http://192.168.0.151/admin" # For v6 API, do not include /admin in the URL
   apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
   type: "PiHole"
+  apiVersion: 5 # optional, defaults to 5. Use 6 if your PiHole instance uses API v6
+  checkInterval: 3000 # optional, defaults to 300000. interval in ms to check Pi-hole status
 ```
 
 **Remarks:**
-If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
+- If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
+- For PiHole instances using API v6, set `apiVersion: 6` in your configuration. This enables session management and proper authentication handling.
 
 ## Ping
 
