@@ -107,7 +107,7 @@ Configuration example:
   clipboard: "this text will be copied to your clipboard"
 ```
 
-## Docker Socker Proxy
+## Docker Socket Proxy
 
 This service display the number of running, stopped and containers that have errors.
 It calls the API of DOcker Socket Proxy
