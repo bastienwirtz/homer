@@ -6,7 +6,7 @@ First off, thank you for considering contributing to Homer!
 
 ### Project philosophy
 
-Homer is meant to be a light and very simple dashboard that keeps all your useful utilities at hands. The few features implemented in Homer focus on
+Homer is meant to be a light and very simple dashboard that keeps all your useful utilities at hand. The few features implemented in Homer focus on
 UX and usability. If you are looking for a full featured dashboard, there is tons of great stuff out there like https://heimdall.site/, https://github.com/rmountjoy92/DashMachine or https://organizr.app/.
 
 - Configuration is stored in a simple config file, avoiding the need for a backend/database while making possible to use versioning or [config template](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html).
