@@ -66,7 +66,6 @@ export default {
   beforeDestroy() {
     if (parseInt(this.item.apiVersion, 10) === 6) {
       this.stopStatusPolling();
-      this.deleteSession();
     }
   },
   methods: {
@@ -108,19 +107,6 @@ export default {
       localStorage.removeItem(`pihole_session_${this.item.url}`);
       this.sessionId = null;
       this.sessionExpiry = null;
-    },
-    deleteSession: async function () {
-      if (!this.sessionId) return;
-      
-      try {
-        await this.fetch(`/api/auth/session/${encodeURIComponent(this.sessionId)}`, {
-          method: 'DELETE'
-        });
-      } catch (e) {
-        this.handleError(`Failed to delete session: ${e}`, "error");
-      } finally {
-        this.removeCacheSession();
-      }
     },
     authenticate: async function () {
       if (!this.item.apikey) {
