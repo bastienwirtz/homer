@@ -1,6 +1,6 @@
 {
   "name": "homer",
-  "version": "25.04.1",
+  "version": "25.05.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "bulma": "^1.0.3",
+    "bulma": "^1.0.4",
     "lodash.merge": "^4.6.2",
     "vue": "^3.5.13",
-    "yaml": "^2.7.0"
+    "yaml": "^2.7.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -30,7 +30,7 @@
     "vite-plugin-pwa": "^0.21.1"
   },
   "license": "Apache-2.0",
-  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39",
   "pnpm": {
     "neverBuiltDependencies": []
   }
