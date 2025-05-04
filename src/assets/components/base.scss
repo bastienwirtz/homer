@@ -55,6 +55,10 @@
           background-color: var(--card-background);
         }
       }
+      .component-error .card {
+        border: 1px solid rgba(255, 33, 33, 0.664);
+        background-color: rgba(255, 58, 58, 0.24);
+      }
 
       .message {
         .message-body {

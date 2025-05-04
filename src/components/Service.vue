@@ -5,7 +5,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-
+import errorComponent from "./services/_error.vue";
 const defaultService = "Generic";
 
 export default {
@@ -19,9 +19,11 @@ export default {
       return defaultService === (this.item.type || defaultService);
     },
     component() {
-      return defineAsyncComponent(
-        () => import(`./services/${this.item.type}.vue`),
-      );
+      return defineAsyncComponent({
+        loader: () => import(`./services/${this.item.type}.vue`),
+        errorComponent: errorComponent,
+        timeout: 3000,
+      });
     },
   },
 };
