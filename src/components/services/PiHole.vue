@@ -28,7 +28,7 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
   },
   data: () => ({
@@ -50,8 +50,10 @@ export default {
       return "";
     },
     isAuthenticated() {
-      return this.sessionId && this.sessionExpiry && Date.now() < this.sessionExpiry;
-    }
+      return (
+        this.sessionId && this.sessionExpiry && Date.now() < this.sessionExpiry
+      );
+    },
   },
   created() {
     if (parseInt(this.item.apiVersion, 10) === 6) {
@@ -63,23 +65,26 @@ export default {
       this.fetchStatus_v5();
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (parseInt(this.item.apiVersion, 10) === 6) {
       this.stopStatusPolling();
     }
   },
   methods: {
     handleError: function (error, status) {
-        console.error(error);
-        this.subtitle = error;
-        this.status = status;
+      console.error(error);
+      this.subtitle = error;
+      this.status = status;
     },
     startStatusPolling: function () {
       this.fetchStatus();
       if (this.localCheckInterval < 1000) {
         this.localCheckInterval = 1000;
       }
-      this.pollInterval = setInterval(this.fetchStatus, this.localCheckInterval);
+      this.pollInterval = setInterval(
+        this.fetchStatus,
+        this.localCheckInterval,
+      );
     },
     stopStatusPolling: function () {
       if (this.pollInterval) {
@@ -88,7 +93,9 @@ export default {
     },
     loadCachedSession: function () {
       try {
-        const cachedSession = localStorage.getItem(`pihole_session_${this.item.url}`);
+        const cachedSession = localStorage.getItem(
+          `pihole_session_${this.item.url}`,
+        );
         if (cachedSession) {
           const session = JSON.parse(cachedSession);
           if (session.expiry > Date.now()) {
@@ -110,7 +117,10 @@ export default {
     },
     authenticate: async function () {
       if (!this.item.apikey) {
-        this.handleError("API key is required for PiHole authentication", "disabled");
+        this.handleError(
+          "API key is required for PiHole authentication",
+          "disabled",
+        );
         return false;
       }
 
@@ -118,20 +128,24 @@ export default {
         const authResponse = await this.fetch("/api/auth", {
           method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ password: this.item.apikey }),
         });
 
         if (authResponse?.session?.sid) {
           this.sessionId = authResponse.session.sid;
-          this.sessionExpiry = Date.now() + (authResponse.session.validity * 1000);
-          
-          localStorage.setItem(`pihole_session_${this.item.url}`, JSON.stringify({
-            sid: this.sessionId,
-            expiry: this.sessionExpiry
-          }));
-          
+          this.sessionExpiry =
+            Date.now() + authResponse.session.validity * 1000;
+
+          localStorage.setItem(
+            `pihole_session_${this.item.url}`,
+            JSON.stringify({
+              sid: this.sessionId,
+              expiry: this.sessionExpiry,
+            }),
+          );
+
           this.retryCount = 0;
           return true;
         }
@@ -145,7 +159,7 @@ export default {
       console.log("Retrying authentication...");
       if (this.retryCount < this.maxRetries) {
         this.retryCount++;
-        await new Promise(resolve => setTimeout(resolve, this.retryDelay));
+        await new Promise((resolve) => setTimeout(resolve, this.retryDelay));
         return this.fetchStatus();
       }
       return false;
@@ -156,7 +170,9 @@ export default {
           const authenticated = await this.authenticate();
           if (!authenticated) return;
         }
-        const response = await this.fetch(`api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`);
+        const response = await this.fetch(
+          `api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`,
+        );
 
         if (response?.queries?.percent_blocked === undefined) {
           throw new Error("Invalid response format");
@@ -166,11 +182,17 @@ export default {
         this.percent_blocked = response.queries.percent_blocked;
         this.retryCount = 0;
       } catch (e) {
-        if (e.message.includes("401 error") || e.message.includes("403 error")) {
+        if (
+          e.message.includes("401 error") ||
+          e.message.includes("403 error")
+        ) {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
-        this.handleError(`Failed to fetch status: ${e.message || e}`, "disabled");
+        this.handleError(
+          `Failed to fetch status: ${e.message || e}`,
+          "disabled",
+        );
         this.removeCacheSession();
       }
     },
@@ -185,7 +207,7 @@ export default {
       this.status = result.status;
       this.percent_blocked = result.ads_percentage_today;
     },
-  }
+  },
 };
 </script>
 

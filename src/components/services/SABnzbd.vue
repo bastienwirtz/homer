@@ -91,14 +91,13 @@ export default {
     fetchStatus: async function () {
       try {
         const response = await this.fetch(
-          `/api?output=json&apikey=${this.item.apikey}&mode=queue`
+          `/api?output=json&apikey=${this.item.apikey}&mode=queue`,
         );
         this.error = false;
         this.stats = response.queue;
 
         // Fetching download speed from "speed" (convert to KB/s if needed)
         this.dlSpeed = parseFloat(response.queue.speed) * 1024; // Convert MB to KB
-
       } catch (e) {
         this.error = true;
         console.error(e);

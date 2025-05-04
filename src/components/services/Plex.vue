@@ -2,7 +2,11 @@
   <Generic :item="item">
     <template #indicator>
       <div class="notifs">
-        <strong v-if="streams > 0" class="notif activity" title="Active Streams">
+        <strong
+          v-if="streams > 0"
+          class="notif activity"
+          title="Active Streams"
+        >
           {{ streams }}
         </strong>
         <strong v-if="series > 0" class="notif series" title="Total Series">
@@ -17,7 +21,11 @@
         <strong v-if="errors > 0" class="notif errors" title="Error">
           {{ errors }}
         </strong>
-        <strong v-if="serverError" class="notif errors" title="Connection error to Plex API, check url and token in config.yml">
+        <strong
+          v-if="serverError"
+          class="notif errors"
+          title="Connection error to Plex API, check url and token in config.yml"
+        >
           ?
         </strong>
       </div>
@@ -56,7 +64,6 @@ export default {
         console.error(e);
         this.serverError = true;
       };
-      
       this.fetch(`/status/sessions?X-Plex-Token=${this.item.token}`, {}, false)
         .then((str) => {
           const parser = new DOMParser();
@@ -65,7 +72,6 @@ export default {
           this.streams = metadata ? metadata.getAttribute("size") || 0 : 0;
         })
         .catch(handleError);
-      
       this.fetch(`/library/sections?X-Plex-Token=${this.item.token}`, {}, false)
         .then((str) => {
           const parser = new DOMParser();
@@ -73,7 +79,6 @@ export default {
           const directories = xml.getElementsByTagName("Directory");
           const seriesDirIds = [];
           const movieDirIds = [];
-          
           for (let dir of directories) {
             if (dir.getAttribute("type") === "show") {
               seriesDirIds.push(dir.getAttribute("key"));
@@ -81,32 +86,39 @@ export default {
               movieDirIds.push(dir.getAttribute("key"));
             }
           }
-          
           let seriesCount = 0;
-           Promise.all(seriesDirIds.map(seriesDirId => 
-            fetch(`${this.endpoint}/library/sections/${seriesDirId}/all?X-Plex-Token=${this.item.token}`)
-              .then(response => response.text())
-              .then(str => {
-                const xml = parser.parseFromString(str, "application/xml");
-                seriesCount += xml.getElementsByTagName("Directory").length;
-              })
-              .catch(handleError)
-          )).then(() => {
-            this.series = seriesCount;
-          })
-        .catch(handleError);
-          
-          
+          Promise.all(
+            seriesDirIds.map((seriesDirId) =>
+              fetch(
+                `${this.endpoint}/library/sections/${seriesDirId}/all?X-Plex-Token=${this.item.token}`,
+              )
+                .then((response) => response.text())
+                .then((str) => {
+                  const xml = parser.parseFromString(str, "application/xml");
+                  seriesCount += xml.getElementsByTagName("Directory").length;
+                })
+                .catch(handleError),
+            ),
+          )
+            .then(() => {
+              this.series = seriesCount;
+            })
+            .catch(handleError);
+
           let movieCount = 0;
-          Promise.all(movieDirIds.map(movieDirId => 
-            fetch(`${this.endpoint}/library/sections/${movieDirId}/all?X-Plex-Token=${this.item.token}`)
-              .then(response => response.text())
-              .then(str => {
-                const xml = parser.parseFromString(str, "application/xml");
-                movieCount += xml.getElementsByTagName("Video").length;
-              })
-              .catch(handleError)
-          )).then(() => {
+          Promise.all(
+            movieDirIds.map((movieDirId) =>
+              fetch(
+                `${this.endpoint}/library/sections/${movieDirId}/all?X-Plex-Token=${this.item.token}`,
+              )
+                .then((response) => response.text())
+                .then((str) => {
+                  const xml = parser.parseFromString(str, "application/xml");
+                  movieCount += xml.getElementsByTagName("Video").length;
+                })
+                .catch(handleError),
+            ),
+          ).then(() => {
             this.movies = movieCount;
           });
         })

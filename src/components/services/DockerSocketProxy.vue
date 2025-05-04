@@ -2,16 +2,28 @@
   <Generic :item="item">
     <template #indicator>
       <div class="notifs">
-        <strong v-if="running > 0" class="notif running" title="Running Containers">
+        <strong
+          v-if="running > 0"
+          class="notif running"
+          title="Running Containers"
+        >
           {{ running }}
         </strong>
-        <strong v-if="stopped > 0" class="notif stopped" title="Stopped Containers">
+        <strong
+          v-if="stopped > 0"
+          class="notif stopped"
+          title="Stopped Containers"
+        >
           {{ stopped }}
         </strong>
         <strong v-if="errors > 0" class="notif errors" title="Error">
           {{ errors }}
         </strong>
-        <strong v-if="serverError" class="notif errors" title="Connection error to Docker Socket Proxy API">
+        <strong
+          v-if="serverError"
+          class="notif errors"
+          title="Connection error to Docker Socket Proxy API"
+        >
           Unavailable
         </strong>
       </div>
@@ -50,10 +62,14 @@ export default {
       };
 
       // Fetch all containers (including stopped) from Docker Socket Proxy
-      this.fetch('/containers/json?all=true') // Docker endpoint for container statuses
+      this.fetch("/containers/json?all=true") // Docker endpoint for container statuses
         .then((containers) => {
-          this.running = containers.filter(container => container.State === "running").length;
-          this.stopped = containers.filter(container => container.State === "exited").length;
+          this.running = containers.filter(
+            (container) => container.State === "running",
+          ).length;
+          this.stopped = containers.filter(
+            (container) => container.State === "exited",
+          ).length;
         })
         .catch(handleError);
     },
