@@ -230,6 +230,12 @@ export default {
   }
 
   &.disabled:before {
+    background-color: #f5a623;
+    border-color: #e59400;
+    box-shadow: 0 0 5px 1px #f5a623;
+  }
+
+  &.error:before {
     background-color: #c9404d;
     border-color: #c42c3b;
     box-shadow: 0 0 5px 1px #c9404d;
