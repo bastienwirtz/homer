@@ -170,16 +170,23 @@ export default {
           const authenticated = await this.authenticate();
           if (!authenticated) return;
         }
-        const response = await this.fetch(
+        const summary_response = await this.fetch(
           `api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`,
         );
 
-        if (response?.queries?.percent_blocked === undefined) {
+        const status_response = await this.fetch(
+          `api/dns/blocking?sid=${encodeURIComponent(this.sessionId)}`,
+        );
+
+        if (
+          summary_response?.queries?.percent_blocked === undefined ||
+          status_response?.blocking === undefined
+        ) {
           throw new Error("Invalid response format");
         }
 
-        this.status = "enabled";
-        this.percent_blocked = response.queries.percent_blocked;
+        this.status = status_response.blocking;
+        this.percent_blocked = summary_response.queries.percent_blocked;
         this.retryCount = 0;
       } catch (e) {
         if (
@@ -191,7 +198,7 @@ export default {
         }
         this.handleError(
           `Failed to fetch status: ${e.message || e}`,
-          "disabled",
+          "error",
         );
         this.removeCacheSession();
       }
@@ -201,7 +208,7 @@ export default {
         ? `?summaryRaw&auth=${this.item.apikey}`
         : "";
       const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
-        this.handleError(`Failed to fetch status: ${e}`, "disabled"),
+        this.handleError(`Failed to fetch status: ${e}`, "error"),
       );
 
       this.status = result.status;
