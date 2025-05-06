@@ -116,14 +116,6 @@ export default {
       this.sessionExpiry = null;
     },
     authenticate: async function () {
-      if (!this.item.apikey) {
-        this.handleError(
-          "API key is required for PiHole authentication",
-          "disabled",
-        );
-        return false;
-      }
-
       try {
         const authResponse = await this.fetch("/api/auth", {
           method: "POST",
@@ -166,7 +158,7 @@ export default {
     },
     fetchStatus: async function () {
       try {
-        if (!this.isAuthenticated) {
+        if (!this.isAuthenticated && this.item.apikey) {
           const authenticated = await this.authenticate();
           if (!authenticated) return;
         }
@@ -182,10 +174,8 @@ export default {
         this.percent_blocked = response.queries.percent_blocked;
         this.retryCount = 0;
       } catch (e) {
-        if (
-          e.message.includes("401 error") ||
-          e.message.includes("403 error")
-        ) {
+        const isAuthError = e.message.includes("401 error") || e.message.includes("403 error");
+        if (isAuthError && this.item.apikey) {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
