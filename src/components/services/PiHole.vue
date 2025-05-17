@@ -162,13 +162,15 @@ export default {
           const authenticated = await this.authenticate();
           if (!authenticated) return;
         }
-        const summary_response = await this.fetch(
-          `api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`,
-        );
 
-        const status_response = await this.fetch(
-          `api/dns/blocking?sid=${encodeURIComponent(this.sessionId)}`,
-        );
+        const [summary_response, status_response] = await Promise.all([
+          this.fetch(
+            `api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`
+          ),
+          this.fetch(
+            `api/dns/blocking?sid=${encodeURIComponent(this.sessionId)}`
+          )
+        ]);
 
         if (
           summary_response?.queries?.percent_blocked === undefined ||
