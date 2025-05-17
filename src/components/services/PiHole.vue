@@ -174,7 +174,8 @@ export default {
         this.percent_blocked = response.queries.percent_blocked;
         this.retryCount = 0;
       } catch (e) {
-        const isAuthError = e.message.includes("401 error") || e.message.includes("403 error");
+        const isAuthError =
+          e.message.includes("401 error") || e.message.includes("403 error");
         if (isAuthError && this.item.apikey) {
           this.removeCacheSession();
           return this.retryWithDelay();
