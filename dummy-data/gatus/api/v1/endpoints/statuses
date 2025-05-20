@@ -1,0 +1,59 @@
+[
+    {
+        "name": "name",
+        "key": "_name",
+        "results": [
+            {
+                "status": 200,
+                "hostname": "name.containers.lan",
+                "duration": 13304419,
+                "conditionResults": [
+                    {
+                        "condition": "[STATUS] == 200",
+                        "success": true
+                    }
+                ],
+                "success": true,
+                "timestamp": "2025-05-19T22:30:46.452985182Z"
+            }
+        ]
+    },
+    {
+        "name": "name",
+        "key": "_name",
+        "results": [
+            {
+                "status": 200,
+                "hostname": "name.containers.lan",
+                "duration": 13304419,
+                "conditionResults": [
+                    {
+                        "condition": "[STATUS] == 200",
+                        "success": true
+                    }
+                ],
+                "success": true,
+                "timestamp": "2025-05-19T22:30:46.452985182Z"
+            }
+        ]
+    },
+    {
+        "name": "name",
+        "key": "_name",
+        "results": [
+            {
+                "status": 403,
+                "hostname": "name.containers.lan",
+                "duration": 13304419,
+                "conditionResults": [
+                    {
+                        "condition": "[STATUS] == 200",
+                        "success": true
+                    }
+                ],
+                "success": false,
+                "timestamp": "2025-05-19T22:30:46.452985182Z"
+            }
+        ]
+    }
+]

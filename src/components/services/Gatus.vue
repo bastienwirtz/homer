@@ -75,7 +75,6 @@ export default {
             if (latestResult.success) {
               this.up++;
               const duration = latestResult.duration / 1000000; // convert to ms
-              console.log(`${endpoints[i].name}: ${duration}ms`);
               this.avgRespTime = (this.avgRespTime + duration) / this.up;
             } else {
               this.down++;
