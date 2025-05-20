@@ -6,13 +6,15 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="status">
-          {{ statusMessage }}
+        <template v-else-if="statusMessage.up !== false">
+          <i class="fa-solid fa-signal mr-1"></i> {{ statusMessage.up }}
+          <span class="separator mx-1"> | </span>
+          <i class="fa-solid fa-stopwatch mr-1"></i> {{ statusMessage.avgRes }}
         </template>
       </p>
     </template>
     <template #indicator>
-      <div v-if="status" class="status" :class="status">
+      <div v-if="status !== false" class="status" :class="status">
         {{ percentageGood }}&percnt;
       </div>
     </template>
@@ -32,6 +34,7 @@ export default {
     return {
       up: 0,
       down: 0,
+      avgRespTime: 0,
     };
   },
   computed: {
@@ -39,24 +42,21 @@ export default {
       return this.up + this.down;
     },
     percentageGood: function () {
-      if (this.up == 0) {
-        return 0;
-      }
+      if (this.up == 0) return 0;
       return Math.round((this.up / this.total) * 100);
     },
     status: function () {
-      if (this.up == 0 && this.down == 0) {
-        return "";
-      }
+      if (this.up == 0 && this.down == 0) return false;
       if (this.down == this.total) return "bad";
       if (this.up == this.total) return "good";
       return "warn";
     },
     statusMessage: function () {
-      if (this.up == 0 && this.down == 0) {
-        return "";
-      }
-      return `${this.up}/${this.total} endpoints are up`;
+      if (this.up == 0 && this.down == 0) return false;
+      return {
+        up: `${this.up}/${this.total} up`,
+        avgRes: `${Math.round(this.avgRespTime * 100) / 100} ms avg.`,
+      };
     },
   },
   created() {
@@ -74,6 +74,9 @@ export default {
               endpoints[i].results[endpoints[i].results.length - 1];
             if (latestResult.success) {
               this.up++;
+              const duration = latestResult.duration / 1000000; // convert to ms
+              console.log(`${endpoints[i].name}: ${duration}ms`);
+              this.avgRespTime = (this.avgRespTime + duration) / this.up;
             } else {
               this.down++;
             }
