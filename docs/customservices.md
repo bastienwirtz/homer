@@ -18,6 +18,7 @@ within Homer:
 - [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
+- [Gatus](#gatus)
 - [Gitea / Forgejo](#gitea--forgejo)
 - [Glances](#glances)
 - [Gotify](#gotify)
@@ -149,9 +150,19 @@ The FreshRSS service displays unread and subscriptions counts from your FreshRSS
 ```yaml
 - name: "FreshRSS"
   type: "FreshRSS"
-  username: "<-- Your username -->"       
+  username: "<-- Your username -->"
   password: "<-- Your password -->"
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
+```
+
+## Gatus
+
+This service displays a count of the monitors and the average response time.
+
+```yaml
+- name: Gatus
+  type: Gatus
+  url: http://gatus.containers.lan
 ```
 
 ## Gitea / Forgejo
@@ -193,7 +204,7 @@ And this is a sample homer configuration
   url: http://192.168.1.2:61208
   type: Glances
   stats: [cpu, mem] # Metric to display. Possible values are: load, cpu, mem, swap.
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats   
+  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
 ## Gotify
@@ -215,8 +226,8 @@ This service displays information about the configured status checks from the He
 Two lines are needed in the config.yml :
 
 ```yaml
-  type: "Healthchecks"
-  apikey: "<---insert-api-key-here--->"
+type: "Healthchecks"
+apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of the Healthchecks application.
@@ -303,15 +314,15 @@ Examples for various servers can be found at <https://enable-cors.org/server.htm
 This integration supports at max 15 results from Linkding. But you can add it multiple times to you dashboard with different queries to retrieve what you need.
 
 ```yaml
-      - name: "Linkding"
-        # Url to Linkding instance
-        url: https://ld.ceesbos.nl
-        token: "<add your secret token here>"
-        type: "Linkding"
-        # Maximum number of items returned by Linkding, minimal 1 and max 15
-        limit: 10 
-        # query to do on Linkding. Use #tagname to search for tags
-        query: "#ToDo #Homer" 
+- name: "Linkding"
+  # Url to Linkding instance
+  url: https://ld.ceesbos.nl
+  token: "<add your secret token here>"
+  type: "Linkding"
+  # Maximum number of items returned by Linkding, minimal 1 and max 15
+  limit: 10
+  # query to do on Linkding. Use #tagname to search for tags
+  query: "#ToDo #Homer"
 ```
 
 ## Matrix
@@ -333,8 +344,8 @@ Setting `type: "Mealie"` will then show the number of recipes Mealie is keeping 
 have to set an API key in the field `apikey` which can be created in your Mealie installation. The API page can be found: Click on hamburger menu -> Click on your profile -> Click on "Manage your API Tokens"
 
 ```yaml
-  type: "Mealie"
-  apikey: "<---insert-api-key-here--->"
+type: "Mealie"
+apikey: "<---insert-api-key-here--->"
 ```
 
 ## Medusa
@@ -343,8 +354,8 @@ This service displays News (grey), Warning (orange) or Error (red) notifications
 Two lines are needed in the config.yml :
 
 ```yaml
-  type: "Medusa"
-  apikey: "<---insert-api-key-here--->"
+type: "Medusa"
+apikey: "<---insert-api-key-here--->"
 ```
 
 The url must be the root url of Medusa application.
@@ -430,8 +441,8 @@ If for some reason your city can't be found by entering the name in the `locatio
 This service displays total number of documents stored. Two lines are required:
 
 ```yaml
-  type: "PaperlessNG"
-  apikey: "<---insert-api-key-here--->"
+type: "PaperlessNG"
+apikey: "<---insert-api-key-here--->"
 ```
 
 API key can be generated in Settings > Administration > Auth Tokens
@@ -477,6 +488,7 @@ The following configuration is available for the PiHole service.
 ```
 
 **Remarks:**
+
 - If PiHole web interface is password protected, obtain the `apikey` from Settings > API/Web interface > Show API token.
 - For PiHole instances using API v6, set `apiVersion: 6` in your configuration. This enables session management and proper authentication handling.
 
@@ -519,9 +531,9 @@ By default, every connected environments will be checked. To select specific one
 ### New features
 
 Displays the Portainer version from /api/status  
-Shows online/offline status depending on API reachability  
+Shows online/offline status depending on API reachability
 
-See <https://docs.portainer.io/api/access#creating-an-access-token>  
+See <https://docs.portainer.io/api/access#creating-an-access-token>
 
 ```yaml
 - name: "Portainer"
@@ -553,7 +565,7 @@ This service displays status information of a Proxmox node (VMs running and disk
 The API Token (or the user assigned to that token if not separated permissions is checked) are this:
 
 | Path                | Permission | Comments                                                          |
-|---------------------|------------|-------------------------------------------------------------------|
+| ------------------- | ---------- | ----------------------------------------------------------------- |
 | /nodes/\<your-node> | Sys.Audit  |                                                                   |
 | /vms/\<id-vm>       | VM.Audit   | You need to have this permission on any VM you want to be counted |
 
