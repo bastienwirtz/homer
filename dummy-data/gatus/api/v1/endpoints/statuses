@@ -1,11 +1,11 @@
 [
     {
-        "name": "name",
-        "key": "_name",
+        "name": "name1",
+        "key": "_name1",
         "results": [
             {
                 "status": 200,
-                "hostname": "name.containers.lan",
+                "hostname": "name1.containers.lan",
                 "duration": 13304419,
                 "conditionResults": [
                     {
@@ -19,13 +19,13 @@
         ]
     },
     {
-        "name": "name",
-        "key": "_name",
+        "name": "name2",
+        "key": "_name2",
         "results": [
             {
                 "status": 200,
-                "hostname": "name.containers.lan",
-                "duration": 13304419,
+                "hostname": "name2.containers.lan",
+                "duration": 23304419,
                 "conditionResults": [
                     {
                         "condition": "[STATUS] == 200",
@@ -38,12 +38,12 @@
         ]
     },
     {
-        "name": "name",
-        "key": "_name",
+        "name": "name3",
+        "key": "_name3",
         "results": [
             {
                 "status": 403,
-                "hostname": "name.containers.lan",
+                "hostname": "name3.containers.lan",
                 "duration": 13304419,
                 "conditionResults": [
                     {

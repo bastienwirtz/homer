@@ -6,10 +6,12 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="statusMessage.up !== false">
+        <template v-else-if="statusMessage !== false">
           <i class="fa-solid fa-signal"></i> {{ statusMessage.up }}
-          <span class="separator"> | </span>
-          <i class="fa-solid fa-stopwatch"></i> {{ statusMessage.avgRes }}
+          <template v-if="avgRespTime > 0">
+            <span class="separator"> | </span>
+            <i class="fa-solid fa-stopwatch"></i> {{ statusMessage.avgRes }}
+          </template>
         </template>
       </p>
     </template>
@@ -42,7 +44,7 @@ export default {
       return this.up + this.down;
     },
     percentageGood: function () {
-      if (this.up == 0) return 0;
+      if (this.up == 0 || this.total == 0) return 0;
       return Math.round((this.up / this.total) * 100);
     },
     status: function () {
@@ -52,7 +54,6 @@ export default {
       return "warn";
     },
     statusMessage: function () {
-      if (this.up == 0 && this.down == 0) return false;
       return {
         up: `${this.up}/${this.total}`,
         avgRes: `${Math.round(this.avgRespTime * 100) / 100} ms avg.`,
