@@ -7,9 +7,9 @@
           {{ item.subtitle }}
         </template>
         <template v-else-if="statusMessage.up !== false">
-          <i class="fa-solid fa-signal mr-1"></i> {{ statusMessage.up }}
-          <span class="separator mx-1"> | </span>
-          <i class="fa-solid fa-stopwatch mr-1"></i> {{ statusMessage.avgRes }}
+          <i class="fa-solid fa-signal"></i> {{ statusMessage.up }}
+          <span class="separator"> | </span>
+          <i class="fa-solid fa-stopwatch"></i> {{ statusMessage.avgRes }}
         </template>
       </p>
     </template>
@@ -54,7 +54,7 @@ export default {
     statusMessage: function () {
       if (this.up == 0 && this.down == 0) return false;
       return {
-        up: `${this.up}/${this.total} up`,
+        up: `${this.up}/${this.total}`,
         avgRes: `${Math.round(this.avgRespTime * 100) / 100} ms avg.`,
       };
     },
