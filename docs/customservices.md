@@ -706,11 +706,14 @@ for transcoding on your Tdarr instance as well as the number of errored items.
 This service displays a version string instead of a subtitle. Example configuration:
 
 ```yaml
-- name: Traefik
-  type: Traefik
-  logo: assets/tools/sample.png
-  url: http://traefik.example.com
+- name: "Traefik"
+  type: "Traefik"
+  logo: "assets/tools/sample.png"
+  url: "http://traefik.example.com"
+  basic_auth: "admin:password"
 ```
+- Authentication: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (Basic <encoded_value>).
+- Format: The value must be formatted as "admin:password".
 
 ## Truenas Scale
 
