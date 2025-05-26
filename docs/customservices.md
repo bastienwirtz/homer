@@ -164,6 +164,12 @@ Two lines are needed in the config.yml :
   url: "http://192.168.0.151/gatus"
 
 ```
+
+Optionally, the results can be filtered to only include jobs in the defined groups:
+```yaml
+  groups: [Services, External]
+```
+
 ## Gitea / Forgejo
 
 This service displays a version string instead of a subtitle. Example configuration:
