@@ -52,7 +52,6 @@ export default {
       .then((response) => {
         // Apply filtering by groups, if defined
         if (this.item.groups) {
-          console.log("Applying filters");
           response = response?.filter((job) => {
             return this.item.groups.includes(job.group) === true;
           })
@@ -70,8 +69,6 @@ export default {
           };
 
           // Update array of average times
-          console.log("Total before: " + totalrestime);
-
           let totalduration = 0;
           let rescounter = 0;
           job.results.forEach((res) => {
@@ -79,23 +76,15 @@ export default {
             rescounter++;
           })
 
-          console.log("Job duration: " + totalduration);
-
           totalrestime += totalduration;
           totalresults += rescounter;
-
-          console.log("Total after: " + totalrestime);
-          console.log("Total counter: " + totalresults);
         })
 
         // Rest are down
         this.down = this.total - this.up;
 
-        console.log("Total jobs UP: " + this.up + " DOWN: " + this.down + " TOTAL: " + this.total);
-
         // Calculate overall average response time
         this.avgRespTime = (totalrestime / totalresults).toFixed(2);
-        console.log("Average: " + this.avgRespTime);
 
         // Update representations
         if (this.up == 0 || this.total == 0) {
