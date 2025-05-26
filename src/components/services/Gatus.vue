@@ -42,6 +42,11 @@ export default {
       this.api = await this.fetch("/api/v1/endpoints/statuses", { method: "GET", cache: "no-cache" }).catch((e) => {
         console.error(e);
       });
+      if (this.item.groups) {
+        this.api = this.api?.filter((job) => {
+          return this.item.groups.includes(job.group) === true;
+        })
+      }
     },
     countUp: function() {
       if (!this.api) {
