@@ -18,6 +18,7 @@ within Homer:
 - [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
+- [Gatus](#gatus)
 - [Gitea / Forgejo](#gitea--forgejo)
 - [Glances](#glances)
 - [Gotify](#gotify)
