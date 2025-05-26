@@ -176,6 +176,11 @@ The status can be checked regularly by defining an update Interval in ms:
   updateInterval: 5000
 ```
 
+The average times can be hidden (saves their calculation also) by setting the following:
+```yaml
+  hideaverages: true
+```
+
 ## Gitea / Forgejo
 
 This service displays a version string instead of a subtitle. Example configuration:
