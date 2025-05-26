@@ -60,6 +60,7 @@ export default {
         // Initialise counts, avg times
         this.total = response.length;
         this.up = 0;
+
         let totalrestime = 0;
         let totalresults = 0;
 
@@ -68,16 +69,22 @@ export default {
             this.up++;
           };
 
-          // Update array of average times
-          let totalduration = 0;
-          let rescounter = 0;
-          job.results.forEach((res) => {
-            totalduration += parseInt(res.duration, 10) / 1000;
-            rescounter++;
-          })
+          if (!this.item.hideaverages) {
+            // Update array of average times
+            let totalduration = 0;
+            let rescounter = 0;
+            job.results.forEach((res) => {
+              totalduration += parseInt(res.duration, 10) / 1000;
+              rescounter++;
+            })
 
-          totalrestime += totalduration;
-          totalresults += rescounter;
+            totalrestime += totalduration;
+            totalresults += rescounter;
+          } else {
+            totalrestime = 0;
+            totalresults = 1;
+          }
+
         })
 
         // Rest are down
