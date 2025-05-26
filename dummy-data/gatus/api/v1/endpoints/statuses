@@ -76,8 +76,8 @@
   },
   {
     "name": "Website",
-    "group": "Services",
-    "key": "services_website",
+    "group": "External",
+    "key": "external_website",
     "results": [
       {
         "status": 200,
@@ -108,7 +108,7 @@
           {
             "condition": "[RESPONSE_TIME] < 500",
             "success": true
-          },
+          }
         ],
         "success": false,
         "timestamp": "2025-05-26T07:40:41.804489793Z"
