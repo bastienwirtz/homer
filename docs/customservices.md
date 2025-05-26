@@ -154,6 +154,16 @@ The FreshRSS service displays unread and subscriptions counts from your FreshRSS
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
+## Gatus
+
+The Gatus service displays information about the configured services from the defined Gatus server.
+Two lines are needed in the config.yml :
+
+```yaml
+  type: "Gatus"
+  url: "http://192.168.0.151/gatus"
+
+```
 ## Gitea / Forgejo
 
 This service displays a version string instead of a subtitle. Example configuration:
