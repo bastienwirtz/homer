@@ -171,6 +171,11 @@ Optionally, the results can be filtered to only include jobs in the defined grou
   groups: [Services, External]
 ```
 
+The status can be checked regularly by defining an update Interval in ms:
+```yaml
+  updateInterval: 5000
+```
+
 ## Gitea / Forgejo
 
 This service displays a version string instead of a subtitle. Example configuration:
