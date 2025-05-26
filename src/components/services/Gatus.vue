@@ -1,13 +1,21 @@
 <template>
   <Generic :item="item">
+    <template #content>
+      <p class="title is-4">{{ item.name }}</p>
+      <p class="subtitle is-6">
+        <template v-if="item.subtitle">
+          {{ item.subtitle }}
+        </template>
+          <i class="fa-solid fa-signal"></i> {{ up }}/{{ total }}
+          <template v-if="avgRespTime > 0">
+            <span class="separator"> | </span>
+            <i class="fa-solid fa-stopwatch"></i> {{ avgRespTime }} ms avg.
+          </template>
+      </p>
+    </template>
     <template #indicator>
-      <div class="notifs">
-        <div v-if="up > 0" class="notif up" title="Up">
-          {{ up }}
-        </div>
-        <div v-if="down > 0" class="notif down" title="Down">
-          {{ down }}
-        </div>
+      <div v-if="status !== false" class="status" :class="status">
+        {{ percentageGood }}&percnt;
       </div>
     </template>
   </Generic>
@@ -22,50 +30,95 @@ export default {
   props: {
     item: Object,
   },
-
   data: () => ({
-    api: null,
+    up: 0,
+    down: 0,
+    total: 0,
+    avgRespTime: NaN,
+    percentageGood: NaN,
+    status: false,
+    statusMessage: false
   }),
-  computed: {
-    up: function() {
-      return this.countUp();
-    },
-    down: function() {
-      return this.countDown();
-    },
-  },
   created() {
+    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
+    if (updateInterval > 0) {
+      setInterval(() => this.fetchStatus(), updateInterval);
+    }
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      this.api = await this.fetch("/api/v1/endpoints/statuses", { method: "GET", cache: "no-cache" }).catch((e) => {
+      this.fetch("/api/v1/endpoints/statuses", { method: "GET", cache: "no-cache" })
+      .then((response) => {
+        // Apply filtering by groups, if defined
+        if (this.item.groups) {
+          console.log("Applying filters");
+          response = response?.filter((job) => {
+            return this.item.groups.includes(job.group) === true;
+          })
+        }
+
+        // Initialise counts, avg times
+        this.total = response.length;
+        this.up = 0;
+        let totalrestime = 0;
+        let totalresults = 0;
+
+        response.forEach((job) => {
+          if (job.results[job.results.length - 1].success === true) {
+            this.up++;
+          };
+
+          // Update array of average times
+          console.log("Total before: " + totalrestime);
+
+          let totalduration = 0;
+          let rescounter = 0;
+          job.results.forEach((res) => {
+            totalduration += parseInt(res.duration, 10) / 1000;
+            rescounter++;
+          })
+
+          console.log("Job duration: " + totalduration);
+
+          totalrestime += totalduration;
+          totalresults += rescounter;
+
+          console.log("Total after: " + totalrestime);
+          console.log("Total counter: " + totalresults);
+        })
+
+        // Rest are down
+        this.down = this.total - this.up;
+
+        console.log("Total jobs UP: " + this.up + " DOWN: " + this.down + " TOTAL: " + this.total);
+
+        // Calculate overall average response time
+        this.avgRespTime = (totalrestime / totalresults).toFixed(2);
+        console.log("Average: " + this.avgRespTime);
+
+        // Update representations
+        if (this.up == 0 || this.total == 0) {
+          this.percentageGood = 0;
+        } else {
+          this.percentageGood = Math.round((this.up / this.total) * 100);
+        }
+
+        // Status flag
+        if (this.up == 0 && this.down == 0) {
+          this.status = false;
+        } else if (this.down == this.total) {
+          this.status = "bad";
+        } else if (this.up == this.total) {
+          this.status = "good";
+        } else {
+          this.status = "warn";
+        }
+      })
+      .catch((e) => {
         console.error(e);
       });
-      if (this.item.groups) {
-        this.api = this.api?.filter((job) => {
-          return this.item.groups.includes(job.group) === true;
-        })
-      }
-    },
-    countUp: function() {
-      if (!this.api) {
-        return -1;
-      }
-      var count = 0;
-      this.api.forEach((job) => {
-        if (job.results[job.results.length - 1].success === true) {
-          count++;
-        };
-      }
-      );
-      return count;
-    },
-    countDown: function() {
-      if (!this.api) {
-        return -1;
-      }
-      return this.api.length - this.countUp();
+
     },
   },
 
@@ -73,29 +126,32 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-
-  .notif {
+.status {
+  font-size: 0.8rem;
+  color: var(--text-title);
+  &.good:before {
+    background-color: #94e185;
+    border-color: #78d965;
+    box-shadow: 0 0 5px 1px #94e185;
+  }
+  &.warn:before {
+    background-color: #f8a306;
+    border-color: #e1b35e;
+    box-shadow: 0 0 5px 1px #f8a306;
+  }
+  &.bad:before {
+    background-color: #c9404d;
+    border-color: #c42c3b;
+    box-shadow: 0 0 5px 1px #c9404d;
+  }
+  &:before {
+    content: " ";
     display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-
-    &.up {
-      background-color: #4fd671;
-    }
-
-    &.down {
-      background-color: #e51111;
-    }
-
+    width: 7px;
+    height: 7px;
+    margin-right: 10px;
+    border: 1px solid #000;
+    border-radius: 7px;
   }
 }
 </style>
