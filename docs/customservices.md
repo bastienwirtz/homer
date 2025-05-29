@@ -110,7 +110,7 @@ Configuration example:
 ## Docker Socket Proxy
 
 This service display the number of running, stopped and containers that have errors.
-It calls the API of DOcker Socket Proxy
+It calls the API of Docker Socket Proxy
 
 ```yaml
 - name: Docker
