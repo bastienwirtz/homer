@@ -30,6 +30,7 @@ within Homer:
 - [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
+- [Miniflux](#miniflux)
 - [Nextcloud](#nextcloud)
 - [OctoPrint / Moonraker](#octoprintmoonraker)
 - [Olivetin](#olivetin)
@@ -349,6 +350,21 @@ Two lines are needed in the config.yml :
 
 The url must be the root url of Medusa application.
 The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Miniflux
+
+This service displays a version string instead of a subtitle. The indicator
+shows if Miniflux is online or offline. 
+
+Example configuration:
+
+```yaml
+- name: "Miniflux"
+  type: "Miniflux"
+  logo: "assets/tools/sample.png"
+  url: "http://miniflux.example.com"
+  apikey: "<---insert-api-key-here--->"
+```
 
 ## Nextcloud
 
