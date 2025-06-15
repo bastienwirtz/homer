@@ -7,7 +7,7 @@
           {{ item.subtitle }}
         </template>
         <template v-else-if="versionstring">
-          Version {{ versionstring  }}
+          Unreads {{ versionstring  }}
         </template>
       </p>
     </template>
@@ -34,24 +34,39 @@ export default {
     }),
     created() {
 	this.fetchStatus();
+	this.fetchUnreads();
     },
     methods: {	
-      fetchStatus: async function () {
-	  const headers = {
-	      'X-Auth-Token': this.item.apikey,
-	  };	  
-	  this.fetch("/v1/version", { headers })
-              .then((response) => {
-		  
-		  
-		  this.status = "online";
-		  this.versionstring = response.version;
-              })
-              .catch((e) => {
-		  this.status = "offline";
-		  console.log(e);
-              });
-      },
+	fetchStatus: async function () {
+	    const headers = {
+		'X-Auth-Token': this.item.apikey,
+	    };	  
+	    this.fetch("/v1/version", { headers })
+		.then((response) => {
+		    this.status = "online";
+		    // this.versionstring = response.version;
+		})
+		.catch((e) => {
+		    this.status = "offline";
+		    console.log(e);
+		});
+	},
+	fetchUnreads: async function() {
+	    const headers = {
+		'X-Auth-Token': this.item.apikey,
+	    };	  
+	    this.fetch("/v1/feeds/counters", { headers })
+		.then((response) => {
+		    this.versionstring = this.countUnreads(response.unreads);
+		})
+		.catch((e) => {
+		    console.log(e);
+		});	    
+	},
+	countUnreads: function (unreads) {
+	    // count all values on the array
+	    return Object.values(unreads).reduce((a, b) => a + b, 0);
+	},
     },
 };
 </script>
