@@ -48,6 +48,7 @@ within Homer:
 - [rTorrent](#rtorrent)
 - [SABnzbd](#sabnzbd)
 - [Scrutiny](#scrutiny)
+- [SFTPGo](#sftpgo)
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
@@ -644,6 +645,20 @@ This service displays info about the total number of disk passed and failed S.M.
   url: "http://192.168.0.151:8080"
   type: "Scrutiny"
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the status
+```
+
+## SFTPGo
+
+This service displays a version string instead of a subtitle.  
+And this service display the number of active connections    
+The indicator shows SFTPGo is online, offline. Example configuration:
+
+```yaml
+- name: "SFTPGO container"
+  type: "SFTPGo"
+  logo: assets/tools/sample.png
+  url:  http://sftp-go.example.com
+  sftpgo_api_key: 'hYdn26pTteWZNzbAXoiqgR.jG7TKwtoMRAMrJAGgdr3Ha'
 ```
 
 ## SpeedtestTracker
