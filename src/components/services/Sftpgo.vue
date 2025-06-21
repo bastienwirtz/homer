@@ -6,8 +6,11 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="versionstring">
-          Version {{ versionstring }}
+        <template v-else>
+          <span v-if="versionstring">Version {{ versionstring }}</span>
+          <span v-if="activeConnections !== null">
+            – Active connections: {{ activeConnections }}
+          </span>
         </template>
       </p>
     </template>
@@ -23,7 +26,7 @@
 import service from "@/mixins/service.js";
 
 export default {
-  name: "Sftgo",
+  name: "SFTPGo",
   mixins: [service],
   props: {
     item: Object,
@@ -31,6 +34,7 @@ export default {
   data: () => ({
     fetchOk: null,
     versionstring: null,
+    activeConnections: null,
   }),
   computed: {
     status: function () {
@@ -43,13 +47,17 @@ export default {
   methods: {
     fetchStatus: async function () {
       let headers = {};
-      if (this.item.sftpgo_api_key) {
-        headers["X-SFTPGO-API-KEY"] = `${this.item.sftpgo_api_key}`;
+      if (this.item.sftpgoApiKey) {
+        headers["X-SFTPGO-API-KEY"] = `${this.item.sftpgoApiKey}`;
       }
       try {
         const response = await this.fetch("/api/v2/version", { headers });
-        this.fetchOk = true;
         this.versionstring = response.version || "inconnue";
+
+        const connResponse = await this.fetch("/api/v2/connections", { headers });
+        this.activeConnections = Array.isArray(connResponse) ? connResponse.length : null;
+
+        this.fetchOk = true;
       } catch (e) {
         this.fetchOk = false;
         console.log(e);
