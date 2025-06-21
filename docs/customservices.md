@@ -658,7 +658,7 @@ The indicator shows SFTPGo is online, offline. Example configuration:
   type: "SFTPGo"
   logo: assets/tools/sample.png
   url:  http://sftp-go.example.com
-  sftpgoApiKey: 'hYdn26pTteWZNzbAXoiqgR.jG7TKwtoMRAMrJAGgdr3Ha'
+  sftpgo_api_key: "hYdn26pTteWZNzbAXoiqgR.jG7TKwtoMRAMrJAGgdr3Ha"
 ```
 
 ## SpeedtestTracker

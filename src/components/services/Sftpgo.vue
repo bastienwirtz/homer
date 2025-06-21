@@ -47,8 +47,8 @@ export default {
   methods: {
     fetchStatus: async function () {
       let headers = {};
-      if (this.item.sftpgoApiKey) {
-        headers["X-SFTPGO-API-KEY"] = `${this.item.sftpgoApiKey}`;
+      if (this.item.sftpgo_api_key) {
+        headers["X-SFTPGO-API-KEY"] = `${this.item.sftpgo_api_key}`;
       }
       try {
         const response = await this.fetch("/api/v2/version", { headers });
