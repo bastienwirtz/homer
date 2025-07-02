@@ -52,7 +52,7 @@ export default {
       }
       try {
         const response = await this.fetch("/api/v2/version", { headers });
-        this.versionstring = response.version || "inconnue";
+        this.versionstring = response.version || "unknown";
 
         const connResponse = await this.fetch("/api/v2/connections", { headers });
         this.activeConnections = Array.isArray(connResponse) ? connResponse.length : null;
