@@ -67,6 +67,7 @@ export default {
 
         this.fetchOk = true;
       } catch (e) {
+        console.error(e);
         this.fetchOk = false;
       }
     },
