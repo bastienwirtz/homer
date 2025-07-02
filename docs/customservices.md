@@ -650,7 +650,7 @@ This service displays info about the total number of disk passed and failed S.M.
 ## SFTPGo
 
 This service displays a version string instead of a subtitle.  
-And this service display the number of active connections    
+And this service display the number of active connections is hidden on small screen.  
 The indicator shows SFTPGo is online, offline. Example configuration:
 
 ```yaml

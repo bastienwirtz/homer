@@ -8,7 +8,7 @@
         </template>
         <template v-else>
           <span v-if="versionstring">Version {{ versionstring }}</span>
-          <span v-if="activeConnections !== null">
+          <span v-if="activeConnections !== null && !this.showUpdateAvailable">
             – Active connections: {{ activeConnections }}
           </span>
         </template>
@@ -40,11 +40,17 @@ export default {
     status: function () {
       return this.fetchOk ? "online" : "offline";
     },
+    showUpdateAvailable: function () {
+      return this.isSmallScreenMethod();
+    },
   },
   created() {
     this.fetchStatus();
   },
   methods: {
+    isSmallScreenMethod: function () {
+      return window.matchMedia("screen and (max-width: 1023px)").matches;
+    },
     fetchStatus: async function () {
       let headers = {};
       if (this.item.sftpgo_api_key) {
