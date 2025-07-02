@@ -766,7 +766,7 @@ This service displays a version string instead of a subtitle. Example configurat
 ## Wg-easy
 
 This service displays a version string instead of a subtitle.  
-If a new version is available, it will also be shown alongside the current one.  
+If a new version is available, it will also be shown alongside the current one. Except on small screens.  
 The indicator shows if Wg-easy is online, offline. Example configuration:
 
 ```yaml
