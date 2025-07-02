@@ -51,16 +51,17 @@ export default {
         headers["X-SFTPGO-API-KEY"] = `${this.item.sftpgo_api_key}`;
       }
       try {
-        const response = await this.fetch("/api/v2/version", { headers });
-        this.versionstring = response.version || "unknown";
+        const [versionRes, connRes] = await Promise.all([
+          this.fetch("/api/v2/version", { headers }),
+          this.fetch("/api/v2/connections", { headers }),
+        ]);
 
-        const connResponse = await this.fetch("/api/v2/connections", { headers });
-        this.activeConnections = Array.isArray(connResponse) ? connResponse.length : null;
+        this.versionstring = versionRes.version || "unknown";
+        this.activeConnections = connRes.length;
 
         this.fetchOk = true;
       } catch (e) {
         this.fetchOk = false;
-        console.log(e);
       }
     },
   },
