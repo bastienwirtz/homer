@@ -63,7 +63,7 @@ export default {
       try {
         const response = await this.fetch("/api/information", { headers });
         this.fetchOk = true;
-        this.versionstring = response.currentRelease || "inconnue";
+        this.versionstring = response.currentRelease || "unknown";
         this.updateAvailable = response.updateAvailable;
         this.latestVersion = response.latestRelease?.version || null;
       } catch (e) {
