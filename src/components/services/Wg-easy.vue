@@ -8,8 +8,8 @@
         </template>
         <template v-else-if="versionstring">
           Version {{ versionstring }}
-          <span v-if="updateAvailable"> –</span>
-          <span v-if="updateAvailable" style="color: orange; font-weight: 500;">
+          <span v-if="updateAvailable && !this.showUpdateAvailable"> –</span>
+          <span v-if="updateAvailable && !this.showUpdateAvailable" :class="{ 'is-active': showMenu }" style="color: orange; font-weight: 500;">
             Update available {{ latestVersion }}
           </span>
         </template>
@@ -43,11 +43,17 @@ export default {
     status: function () {
       return this.fetchOk ? "online" : "offline";
     },
+    showUpdateAvailable: function () {
+      return this.isSmallScreenMethod();
+    },
   },
   created() {
     this.fetchStatus();
   },
   methods: {
+    isSmallScreenMethod: function () {
+      return window.matchMedia("screen and (max-width: 1023px)").matches;
+    },
     fetchStatus: async function () {
       let headers = {};
       if (this.item.basic_auth) {
