@@ -10,8 +10,8 @@
 				"annotations": {
 					"summary": "Demo Alert"
 				},
-				"state": "firing",
-				"activeAt": "2025-07-04T23:09:29.244509801Z",
+				"state": "pending",
+				"activeAt": "2025-07-04T23:41:29.244509801Z",
 				"value": "1e+00"
 			},
 			{
@@ -23,7 +23,7 @@
 					"summary": "Critical Test Alert"
 				},
 				"state": "firing",
-				"activeAt": "2025-07-04T23:09:29.244509801Z",
+				"activeAt": "2025-07-04T23:41:29.244509801Z",
 				"value": "1e+00"
 			}
 		]

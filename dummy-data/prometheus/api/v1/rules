@@ -7,7 +7,7 @@
 				"file": "/etc/prometheus/alert.rules.yml",
 				"rules": [
 					{
-						"state": "firing",
+						"state": "pending",
 						"name": "DemoPendingThenFiring",
 						"query": "vector(1)",
 						"duration": 120,
@@ -27,14 +27,14 @@
 								"annotations": {
 									"summary": "Demo Alert"
 								},
-								"state": "firing",
-								"activeAt": "2025-07-04T23:09:29.244509801Z",
+								"state": "pending",
+								"activeAt": "2025-07-04T23:41:29.244509801Z",
 								"value": "1e+00"
 							}
 						],
 						"health": "ok",
-						"evaluationTime": 0.000211901,
-						"lastEvaluation": "2025-07-05T01:33:29.245332571+02:00",
+						"evaluationTime": 0.00031672,
+						"lastEvaluation": "2025-07-05T01:41:29.244670258+02:00",
 						"type": "alerting"
 					},
 					{
@@ -59,20 +59,20 @@
 									"summary": "Critical Test Alert"
 								},
 								"state": "firing",
-								"activeAt": "2025-07-04T23:09:29.244509801Z",
+								"activeAt": "2025-07-04T23:41:29.244509801Z",
 								"value": "1e+00"
 							}
 						],
 						"health": "ok",
-						"evaluationTime": 0.000074511,
-						"lastEvaluation": "2025-07-05T01:33:29.245547238+02:00",
+						"evaluationTime": 0.000093386,
+						"lastEvaluation": "2025-07-05T01:41:29.244989354+02:00",
 						"type": "alerting"
 					}
 				],
 				"interval": 60,
 				"limit": 0,
-				"evaluationTime": 0.000303826,
-				"lastEvaluation": "2025-07-05T01:33:29.245319516+02:00"
+				"evaluationTime": 0.000432731,
+				"lastEvaluation": "2025-07-05T01:41:29.244651703+02:00"
 			},
 			{
 				"name": "wireguard",
@@ -93,8 +93,8 @@
 						},
 						"alerts": [],
 						"health": "ok",
-						"evaluationTime": 0.000193607,
-						"lastEvaluation": "2025-07-05T01:34:02.853540745+02:00",
+						"evaluationTime": 0.00037991,
+						"lastEvaluation": "2025-07-05T01:41:02.847097789+02:00",
 						"type": "alerting"
 					},
 					{
@@ -112,15 +112,15 @@
 						},
 						"alerts": [],
 						"health": "ok",
-						"evaluationTime": 0.000102034,
-						"lastEvaluation": "2025-07-05T01:34:02.853736466+02:00",
+						"evaluationTime": 0.000122432,
+						"lastEvaluation": "2025-07-05T01:41:02.847481226+02:00",
 						"type": "alerting"
 					}
 				],
 				"interval": 60,
 				"limit": 0,
-				"evaluationTime": 0.000306811,
-				"lastEvaluation": "2025-07-05T01:34:02.853533091+02:00"
+				"evaluationTime": 0.000533061,
+				"lastEvaluation": "2025-07-05T01:41:02.8470724+02:00"
 			}
 		]
 	}
