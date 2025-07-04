@@ -536,14 +536,13 @@ See <https://docs.portainer.io/api/access#creating-an-access-token>
 
 ## Prometheus
 
-For Prometheus you need to set the type to Prometheus and provide a url.
+For Prometheus you need to set the type to Prometheus and provide a url. This will display the version on desktops.  
 
 ```yaml
 - name: "Prometheus"
-  type: Prometheus
+  type: "Prometheus"
   logo: "assets/tools/sample.png"
   url: "http://192.168.0.151/"
-  # subtitle: "Monitor data server"
 ```
 
 ## Proxmox
