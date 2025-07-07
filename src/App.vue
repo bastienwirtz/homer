@@ -86,7 +86,7 @@
                 {{ group.name }}
               </h2>
               <Service
-                v-for="(item, index) in group.items"
+                v-for="(item) in group.items"
                 :key="`${currentPage}-${group.name}-${item.name}`"
                 :item="item"
                 :proxy="config.proxy"
@@ -119,7 +119,7 @@
                 {{ group.name }}
               </h2>
               <Service
-                v-for="(item, index) in group.items"
+                v-for="(item) in group.items"
                 :key="`${currentPage}-${group.name}-${item.name}`"
                 :item="item"
                 :proxy="config.proxy"
