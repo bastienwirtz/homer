@@ -1,6 +1,6 @@
 # Configuration
 
-Homer rely on a single [yaml](http://yaml.org/) configuration file, located in the `/assets` directory.  
+Homer relies on a single [yaml](http://yaml.org/) configuration file, located in the `/assets` directory.  
 `.dist` sample configuration files are available to help you get started. Alternatively, the example below can be
 copied into the config file.
 
