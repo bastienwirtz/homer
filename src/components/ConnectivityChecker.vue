@@ -1,9 +1,20 @@
 <template>
-  <div v-if="offline" class="offline-message mb-4">
+  <div
+    v-if="offline"
+    class="offline-message mb-4"
+    role="alert"
+    aria-live="polite"
+  >
     <i class="fa-solid fa-triangle-exclamation"></i>
     <h1>
       Network unreachable
-      <span @click="checkOffline"> <i class="fas fa-redo-alt"></i></span>
+      <button
+        aria-label="Retry connection check"
+        class="retry-button"
+        @click="checkOffline"
+      >
+        <i class="fas fa-redo-alt"></i>
+      </button>
     </h1>
     <p>
       <a
@@ -26,46 +37,49 @@ export default {
     if (/t=\d+/.test(window.location.href)) {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-    let that = this;
     this.checkOffline();
 
     document.addEventListener(
       "visibilitychange",
-      function () {
-        if (document.visibilityState == "visible") {
-          that.checkOffline();
-        }
-      },
+      this.handleVisibilityChange,
       false,
     );
-    window.addEventListener(
-      "online",
-      function () {
-        that.checkOffline();
-      },
-      false,
+    window.addEventListener("online", this.handleOnline, false);
+    window.addEventListener("offline", this.handleOffline, false);
+  },
+  beforeUnmount: function () {
+    document.removeEventListener(
+      "visibilitychange",
+      this.handleVisibilityChange,
     );
-    window.addEventListener(
-      "offline",
-      function () {
-        this.offline = true;
-      },
-      false,
-    );
+    window.removeEventListener("online", this.handleOnline);
+    window.removeEventListener("offline", this.handleOffline);
   },
   methods: {
+    handleVisibilityChange: function () {
+      if (document.visibilityState === "visible") {
+        this.checkOffline();
+      }
+    },
+    handleOnline: function () {
+      this.checkOffline();
+    },
+    handleOffline: function () {
+      this.offline = true;
+    },
     checkOffline: function () {
+      // Global online check
       if (!navigator.onLine) {
         this.offline = true;
         return;
       }
 
-      // extra check to make sure we're not offline
+      // Check if the current URL is reachable
       let that = this;
-      const urlPath = window.location.pathname.replace(/\/+$/, "");
-      const aliveCheckUrl = `${
-        window.location.origin
-      }${urlPath}/index.html?t=${new Date().valueOf()}`;
+
+      const aliveCheckUrl = new URL(window.location);
+      aliveCheckUrl.searchParams.set("t", new Date().valueOf());
+
       return fetch(aliveCheckUrl, {
         method: "HEAD",
         cache: "no-store",
