@@ -14,6 +14,7 @@ within Homer:
 - [Common options](#common-options)
 - [AdGuard Home](#adguard-home)
 - [CopyToClipboard](#copy-to-clipboard)
+- [Calendar](#calendar)
 - [Docuseal](#docuseal)
 - [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
@@ -105,6 +106,36 @@ Configuration example:
   url: "#"
   type: "CopyToClipboard"
   clipboard: "this text will be copied to your clipboard"
+```
+
+## Calendar
+
+This service displays a calendar with events from either a Nextcloud calendar or an iCal feed.
+
+You can retrieve a token for Nextcloud by going to your Nextcloud settings, then "Security" and generating a new app password.
+
+To get the calendar URL, you can go to your Nextcloud calendar, click on the pen next to the calendar name, and select "Copy internal link".
+
+### Nextcloud Calendar
+
+```yaml
+- name: "Nextcloud Calendar"
+  type: "NextcloudCalendar"
+  url: "https://cloud.example.com/remote.php/dav/calendars/username/calendarname"
+  user: "<---insert-username-here--->"
+  token: "<---insert-token-here--->"
+```
+
+### iCal Calendar
+
+In case of iCal calendar, you do not need to provide a user or token, if the calendar has no basic authentication enabled.
+
+```yaml
+- name: "iCal Calendar"
+  type: "ICalendar"
+  url: "https://calendar.example.com/calendarname"
+  user: "<---insert-optional-username-here--->"
+  token: "<---insert-optional-token-here--->"
 ```
 
 ## Docker Socket Proxy
