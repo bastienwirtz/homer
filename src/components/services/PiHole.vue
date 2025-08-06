@@ -165,11 +165,11 @@ export default {
 
         const [summary_response, status_response] = await Promise.all([
           this.fetch(
-            `api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`
+            `api/stats/summary?sid=${encodeURIComponent(this.sessionId)}`,
           ),
           this.fetch(
-            `api/dns/blocking?sid=${encodeURIComponent(this.sessionId)}`
-          )
+            `api/dns/blocking?sid=${encodeURIComponent(this.sessionId)}`,
+          ),
         ]);
 
         if (
@@ -189,10 +189,7 @@ export default {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
-        this.handleError(
-          `Failed to fetch status: ${e.message || e}`,
-          "error",
-        );
+        this.handleError(`Failed to fetch status: ${e.message || e}`, "error");
         this.removeCacheSession();
       }
     },
