@@ -40,10 +40,10 @@ export default {
     };
   },
   created: function () {
-    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
-    if (updateInterval > 0) {
-      setInterval(() => this.fetchSummary(), updateInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchSummary;
+
+    // Initial data fetch
     this.fetchSummary();
   },
   methods: {

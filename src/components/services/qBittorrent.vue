@@ -61,19 +61,18 @@ export default {
     },
   },
   created() {
-    const rateInterval = parseInt(this.item.rateInterval, 10) || 0;
-    const torrentInterval = parseInt(this.item.torrentInterval, 10) || 0;
-    if (rateInterval > 0) {
-      setInterval(() => this.getRate(), rateInterval);
-    }
-    if (torrentInterval > 0) {
-      setInterval(() => this.fetchCount(), torrentInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchAllData;
 
-    this.getRate();
-    this.fetchCount();
+    // Fetch initial values
+    this.fetchAllData();
   },
   methods: {
+    // Combined method for scheduler - fetches both rates and count
+    fetchAllData: async function () {
+      this.getRate();
+      this.fetchCount();
+    },
     fetchCount: async function () {
       try {
         const body = await this.fetch("/api/v2/torrents/info");
