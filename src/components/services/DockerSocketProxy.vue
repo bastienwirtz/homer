@@ -48,10 +48,10 @@ export default {
     };
   },
   created: function () {
-    const checkInterval = parseInt(this.item.checkInterval, 10) || 0;
-    if (checkInterval > 0) {
-      setInterval(() => this.fetchData(), checkInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchData;
+
+    // Initial data fetch
     this.fetchData();
   },
   methods: {
