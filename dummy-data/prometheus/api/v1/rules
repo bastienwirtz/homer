@@ -1,0 +1,127 @@
+{
+	"status": "success",
+	"data": {
+		"groups": [
+			{
+				"name": "demo",
+				"file": "/etc/prometheus/alert.rules.yml",
+				"rules": [
+					{
+						"state": "pending",
+						"name": "DemoPendingThenFiring",
+						"query": "vector(1)",
+						"duration": 120,
+						"keepFiringFor": 0,
+						"labels": {
+							"severity": "warning"
+						},
+						"annotations": {
+							"summary": "Demo Alert"
+						},
+						"alerts": [
+							{
+								"labels": {
+									"alertname": "DemoPendingThenFiring",
+									"severity": "warning"
+								},
+								"annotations": {
+									"summary": "Demo Alert"
+								},
+								"state": "pending",
+								"activeAt": "2025-07-04T23:41:29.244509801Z",
+								"value": "1e+00"
+							}
+						],
+						"health": "ok",
+						"evaluationTime": 0.00031672,
+						"lastEvaluation": "2025-07-05T01:41:29.244670258+02:00",
+						"type": "alerting"
+					},
+					{
+						"state": "firing",
+						"name": "DemoAlwaysFiring",
+						"query": "vector(1)",
+						"duration": 0,
+						"keepFiringFor": 0,
+						"labels": {
+							"severity": "critical"
+						},
+						"annotations": {
+							"summary": "Critical Test Alert"
+						},
+						"alerts": [
+							{
+								"labels": {
+									"alertname": "DemoAlwaysFiring",
+									"severity": "critical"
+								},
+								"annotations": {
+									"summary": "Critical Test Alert"
+								},
+								"state": "firing",
+								"activeAt": "2025-07-04T23:41:29.244509801Z",
+								"value": "1e+00"
+							}
+						],
+						"health": "ok",
+						"evaluationTime": 0.000093386,
+						"lastEvaluation": "2025-07-05T01:41:29.244989354+02:00",
+						"type": "alerting"
+					}
+				],
+				"interval": 60,
+				"limit": 0,
+				"evaluationTime": 0.000432731,
+				"lastEvaluation": "2025-07-05T01:41:29.244651703+02:00"
+			},
+			{
+				"name": "wireguard",
+				"file": "/etc/prometheus/alert.rules.yml",
+				"rules": [
+					{
+						"state": "inactive",
+						"name": "WireGuardClientConnected",
+						"query": "(time() - wireguard_latest_handshake_seconds) \u003c 30 and absent(wireguard_latest_handshake_seconds offset 10m)",
+						"duration": 30,
+						"keepFiringFor": 0,
+						"labels": {
+							"severity": "info"
+						},
+						"annotations": {
+							"description": "🔌 Peer : {{ $labels.name }} ({{ $labels.ipv4Address }}) connected to WireGuard",
+							"summary": "🔌 Login : {{ $labels.name }}"
+						},
+						"alerts": [],
+						"health": "ok",
+						"evaluationTime": 0.00037991,
+						"lastEvaluation": "2025-07-05T01:41:02.847097789+02:00",
+						"type": "alerting"
+					},
+					{
+						"state": "inactive",
+						"name": "WireGuardClientDisconnected",
+						"query": "(time() - wireguard_latest_handshake_seconds) \u003e 300 and (time() - wireguard_latest_handshake_seconds offset 10m) \u003c 600",
+						"duration": 120,
+						"keepFiringFor": 0,
+						"labels": {
+							"severity": "warning"
+						},
+						"annotations": {
+							"description": "📴 No more WireGuard activity for {{ $labels.name }} ({{ $labels.ipv4Address }}) since >5 min",
+							"summary": "📴 Logout : {{ $labels.name }}"
+						},
+						"alerts": [],
+						"health": "ok",
+						"evaluationTime": 0.000122432,
+						"lastEvaluation": "2025-07-05T01:41:02.847481226+02:00",
+						"type": "alerting"
+					}
+				],
+				"interval": 60,
+				"limit": 0,
+				"evaluationTime": 0.000533061,
+				"lastEvaluation": "2025-07-05T01:41:02.8470724+02:00"
+			}
+		]
+	}
+}

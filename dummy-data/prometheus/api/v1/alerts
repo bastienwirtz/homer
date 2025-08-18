@@ -1,0 +1,31 @@
+{
+	"status": "success",
+	"data": {
+		"alerts": [
+			{
+				"labels": {
+					"alertname": "DemoPendingThenFiring",
+					"severity": "warning"
+				},
+				"annotations": {
+					"summary": "Demo Alert"
+				},
+				"state": "pending",
+				"activeAt": "2025-07-04T23:41:29.244509801Z",
+				"value": "1e+00"
+			},
+			{
+				"labels": {
+					"alertname": "DemoAlwaysFiring",
+					"severity": "critical"
+				},
+				"annotations": {
+					"summary": "Critical Test Alert"
+				},
+				"state": "firing",
+				"activeAt": "2025-07-04T23:41:29.244509801Z",
+				"value": "1e+00"
+			}
+		]
+	}
+}

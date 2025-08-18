@@ -6,7 +6,10 @@
         <template v-if="item.subtitle">
           {{ item.subtitle }}
         </template>
-        <template v-else-if="api"> {{ count }} {{ level }} alerts </template>
+        <template v-else>
+          <span v-if="version && !this.showVersionMobile">Version {{ version }} - </span>
+          <span v-if="api">{{ count }} {{ level }} alerts</span>
+        </template>
       </p>
     </template>
     <template #indicator>
@@ -33,17 +36,26 @@ export default {
     item: Object,
   },
   data: () => ({
-    api: {
-      status: "",
-      count: 0,
-      alerts: {
-        firing: 0,
-        inactive: 0,
-        pending: 0,
-      },
-    },
+    api: null,      // /api/v1/alerts
+    //  {
+    //   status: "",
+    //   count: 0,
+    //   alerts: {
+    //     firing: 0,
+    //     inactive: 0,
+    //     pending: 0,
+    //   },
+    // },
+    rules : null,   // /api/v1/rules
+    build : null,   // /api/v1/status/buildinfo
   }),
   computed: {
+    version() {
+      return this.build?.data?.version || null;
+    },
+    showVersionMobile: function () {
+      return this.isSmallScreenMethod();
+    },
     count: function () {
       return (
         this.countFiring() || this.countPending() || this.countInactive() || 0
@@ -62,8 +74,28 @@ export default {
     this.fetchStatus();
   },
   methods: {
+    isSmallScreenMethod: function () {
+      return window.matchMedia("screen and (max-width: 1023px)").matches;
+    },
     fetchStatus: async function () {
-      this.api = await this.fetch("api/v1/alerts").catch((e) => console.log(e));
+      const promises = [
+        this.fetch("/api/v1/alerts"),
+        this.fetch("/api/v1/rules"),
+      ];
+
+      /* buildinfo only on desktop */
+      if (!this.isSmallScreenMethod()) {
+        promises.push(this.fetch("/api/v1/status/buildinfo"));
+      }
+      
+      try {
+        const [alertsResp, rulesResp, buildResp = null] = await Promise.all(promises);
+        this.api   = alertsResp;
+        this.rules = rulesResp;
+        this.build = buildResp;
+      } catch (e) {
+        console.error(e)
+      }
     },
     countFiring: function () {
       if (this.api) {
@@ -82,12 +114,11 @@ export default {
       return 0;
     },
     countInactive: function () {
-      if (this.api) {
-        return this.api.data?.alerts?.filter(
-          (alert) => alert.state === AlertsStatus.pending,
-        ).length;
-      }
-      return 0;
+        return (this.rules?.data?.groups
+        ?.flatMap(g => g.rules ?? [])
+        ?.filter((r) => r.state === AlertsStatus.inactive)
+        ?.length || 0
+      );
     },
   },
 };
