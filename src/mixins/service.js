@@ -1,4 +1,7 @@
+import fetchOptions from "@/mixins/fetchOptions.js";
+
 export default {
+  mixins: [fetchOptions],
   props: {
     proxy: Object,
   },
@@ -13,29 +16,6 @@ export default {
   },
   methods: {
     fetch: function (path, init, json = true) {
-      let options = {};
-
-      if (this.proxy?.useCredentials) {
-        options.credentials = "include";
-      }
-
-      if (this.proxy?.headers && !!this.proxy.headers) {
-        options.headers = this.proxy.headers;
-      }
-
-      // Each item can override the credential settings
-      if (this.item.useCredentials !== undefined) {
-        options.credentials =
-          this.item.useCredentials === true ? "include" : "omit";
-      }
-
-      // Each item can have their own headers
-      if (this.item.headers !== undefined && !!this.item.headers) {
-        options.headers = this.item.headers;
-      }
-
-      options = Object.assign(options, init);
-
       if (path.startsWith("/")) {
         path = path.slice(1);
       }
@@ -45,6 +25,8 @@ export default {
       if (path) {
         url = `${this.endpoint}/${path}`;
       }
+
+      const options = this.buildFetchOptions(init);
 
       return fetch(url, options).then((response) => {
         let success = response.ok;
