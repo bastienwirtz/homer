@@ -226,6 +226,7 @@ The Healthchecks API key can be found in Settings > API Access > API key (read-o
 
 You need to set the type to HomeAssistant, provide an api key and enable cors on Home Assistant.
 
+**Basic configuration:**
 ```yaml
 - name: "HomeAssistant"
   logo: "assets/tools/sample.png"
@@ -235,6 +236,35 @@ You need to set the type to HomeAssistant, provide an api key and enable cors on
   items: [] # optional, which items to show (and in which order) in the subtitle. Possible values are "name", "version", "entities"
   separator: " " # optional, how to separate items
 ```
+
+**Custom sensors configuration:**
+```yaml
+- name: "Home Assistant"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  type: "HomeAssistant"
+  apikey: "<---insert-api-key-here--->"
+  showUnits: true # Optional: Show units from Home Assistant (default: true)
+  updateInterval: 30000 # Optional: Sensor refresh interval in ms (default: 30000)
+  sensors: # Optional: Display custom sensors instead of default stats
+    - id: "sensor.living_room_temperature"
+      icon: "fas fa-home"
+    - id: "sensor.bedroom_humidity"
+      icon: "fas fa-bed"
+    - id: "sensor.power_consumption"
+      icon: "fas fa-bolt"
+    - id: "sensor.outdoor_air_quality"
+      icon: "fas fa-cloud-sun"
+```
+
+**Configuration Options:**
+
+- When `sensors` is provided, the service displays sensor readings with custom icons instead of the default version/entity information
+- `showUnits`: Controls whether to display units from Home Assistant (default: `true`)
+- `updateInterval`: How often to refresh sensor data in milliseconds (default: `30000`)
+- Sensor values are automatically formatted to 1 decimal place with units (when enabled)
+- Supports any numeric sensor type (temperature, humidity, power, etc.)
+- Falls back to original behavior if `sensors` is not configured
 
 To create an API token on HomeAssistant, follow the [official documentation here](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token).  
 To enable cors on HomeAssistant, edit your `configuration.yml` and add the IP of Homer to `https: cors_allowed_origins`
