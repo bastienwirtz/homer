@@ -53,6 +53,7 @@ Available services are located in `src/components/`:
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
 - [Traefik](#traefik)
+- [Transmission](#transmission)
 - [TrueNas Scale](#truenas-scale)
 - [Uptime Kuma](#uptime-kuma)
 - [Vaultwarden](#vaultwarden)
@@ -721,6 +722,31 @@ Displays Traefik.
 
 **Authentication**: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (`Basic <encoded_value>`). The value must be formatted as "admin:password".
 
+## Transmission
+
+This service displays the global upload and download rates, as well as the number of active torrents from your Transmission daemon. The service communicates with the Transmission RPC interface which needs to be accessible from the browser. Make sure to configure appropriate CORS headers if accessing from a different domain.
+
+```yaml
+- name: "Transmission"
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.1.2:9091" # Your Transmission web interface URL
+  type: "Transmission"
+  username: "your_username" # Optional: HTTP Basic Auth username
+  password: "your_password" # Optional: HTTP Basic Auth password
+  showWhenEmpty: true # Optional: Show data even when no torrents (default: true)
+  rateInterval: 5000 # Optional: Interval for updating download/upload rates (ms)
+  torrentInterval: 30000 # Optional: Interval for updating torrent count (ms)
+  target: "_blank" # Optional: HTML a tag target attribute
+```
+
+**Configuration Options:**
+
+- `username/password`: Optional HTTP Basic Authentication credentials
+- `showWhenEmpty`: Controls whether to display rates and count when no torrents are active (default: true)
+- `rateInterval`: How often to refresh transfer rates in milliseconds
+- `torrentInterval`: How often to refresh torrent count in milliseconds
+
+The service automatically handles Transmission's session management and CSRF protection.
 ## Truenas Scale
 
 Displays TrueNAS version.
