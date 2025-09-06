@@ -139,7 +139,7 @@ You need to set the type to Emby, provide an api key and choose which stats to s
   url: "http://192.168.0.151/"
   type: "Emby"
   apikey: "<---insert-api-key-here--->"
-  libraryType: "music" #Choose which stats to show. Can be one of: music, series or movies.
+  libraryType: "music" # Choose which stats to show. Can be: music, movies, series, or multiple types separated by | (e.g., "music|movies")
 ```
 
 ## FreshRSS
