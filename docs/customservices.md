@@ -19,6 +19,7 @@ Available services are located in `src/components/`:
 - [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
 - [FreshRSS](#freshrss)
+- [Gatus](#gatus)
 - [Gitea / Forgejo](#gitea--forgejo)
 - [Glances](#glances)
 - [Gotify](#gotify)
@@ -160,6 +161,32 @@ Displays unread article count and total subscriptions from your FreshRSS server.
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
   username: "<---your-username--->"
   password: "<---your-password--->"
+```
+
+## Gatus
+
+The Gatus service displays information about the configured services from the defined Gatus server.
+Two lines are needed in the config.yml :
+
+```yaml
+  type: "Gatus"
+  url: "http://192.168.0.151/gatus"
+
+```
+
+Optionally, the results can be filtered to only include jobs in the defined groups:
+```yaml
+  groups: [Services, External]
+```
+
+The status can be checked regularly by defining an update Interval in ms:
+```yaml
+  updateInterval: 5000
+```
+
+The average times can be hidden (saves their calculation also) by setting the following:
+```yaml
+  hideaverages: true
 ```
 
 ## Gitea / Forgejo
