@@ -731,20 +731,15 @@ This service displays the global upload and download rates, as well as the numbe
   logo: "assets/tools/sample.png"
   url: "http://192.168.1.2:9091" # Your Transmission web interface URL
   type: "Transmission"
-  username: "your_username" # Optional: HTTP Basic Auth username
-  password: "your_password" # Optional: HTTP Basic Auth password
-  showWhenEmpty: true # Optional: Show data even when no torrents (default: true)
-  rateInterval: 5000 # Optional: Interval for updating download/upload rates (ms)
-  torrentInterval: 30000 # Optional: Interval for updating torrent count (ms)
+  auth: "username:password" # Optional: HTTP Basic Auth
+  interval: 5000 # Optional: Interval for updating data (ms)
   target: "_blank" # Optional: HTML a tag target attribute
 ```
 
 **Configuration Options:**
 
-- `username/password`: Optional HTTP Basic Authentication credentials
-- `showWhenEmpty`: Controls whether to display rates and count when no torrents are active (default: true)
-- `rateInterval`: How often to refresh transfer rates in milliseconds
-- `torrentInterval`: How often to refresh torrent count in milliseconds
+- `auth`: Optional HTTP Basic Authentication in "username:password" format
+- `interval`: How often to refresh data in milliseconds
 
 The service automatically handles Transmission's session management and CSRF protection.
 ## Truenas Scale
