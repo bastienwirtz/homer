@@ -23,30 +23,32 @@
 import service from "@/mixins/service.js";
 
 export default {
-  name: "Docuseal",
+  name: "Vaultwarden",
   mixins: [service],
   props: {
     item: Object,
   },
   data: () => ({
-    status: null,
+    fetchOk: null,
     versionstring: null,
   }),
+  computed: {
+    status: function () {
+      return this.fetchOk ? "online" : "offline";
+    },
+  },
   created() {
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
-      const params = {
-        cache: "no-cache",
-      };
-      this.fetch("/version", params, false)
+      this.fetch("api/version")
         .then((response) => {
-          this.status = "online";
+          this.fetchOk = true;
           this.versionstring = response;
         })
         .catch((e) => {
-          this.status = "offline";
+          this.fetchOk = false;
           console.log(e);
         });
     },

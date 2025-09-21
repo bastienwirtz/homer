@@ -1,10 +1,12 @@
 <template>
-  <component :is="component" :item="item" :proxy="proxy"></component>
+  <Generic v-if="isGeneric" :item="item"></Generic>
+  <component :is="component" v-else :item="item" :proxy="proxy"></component>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
-import Generic from "./services/Generic.vue";
+import errorComponent from "./services/_error.vue";
+const defaultService = "Generic";
 
 export default {
   name: "Service",
@@ -13,12 +15,15 @@ export default {
     proxy: Object,
   },
   computed: {
+    isGeneric() {
+      return defaultService === (this.item.type || defaultService);
+    },
     component() {
-      const type = this.item.type || "Generic";
-      if (type === "Generic") {
-        return Generic;
-      }
-      return defineAsyncComponent(() => import(`./services/${type}.vue`));
+      return defineAsyncComponent({
+        loader: () => import(`./services/${this.item.type}.vue`),
+        errorComponent: errorComponent,
+        timeout: 3000,
+      });
     },
   },
 };

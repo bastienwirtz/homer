@@ -25,13 +25,9 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "FreshRSS",
-  components: {
-    Generic,
-  },
   mixins: [service],
   props: {
     item: Object,
@@ -57,13 +53,9 @@ export default {
           `/api/greader.php/accounts/ClientLogin?Email=${this.item.username}&Passwd=${this.item.password}`,
           { method: "GET", cache: "no-cache" },
           false,
-        )
-          .then((response) => {
-            return response.text();
-          })
-          .then((body) => {
-            return body.match(/Auth=(([([a-z0-9]+)\/([([a-z0-9]+))/i);
-          });
+        ).then((body) => {
+          return body.match(/Auth=(([([a-z0-9]+)\/([([a-z0-9]+))/i);
+        });
         if (match !== null) this.auth = match[1];
       }
 

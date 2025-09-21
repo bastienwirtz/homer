@@ -6,10 +6,10 @@ First off, thank you for considering contributing to Homer!
 
 ### Project philosophy
 
-Homer is meant to be a light and very simple dashboard that keeps all your useful utilities at hands. The few features implemented in Homer focus on
-UX and usability. If you are looking for a full featured dashboard, there is tons of great stuff out there like https://heimdall.site/, https://github.com/rmountjoy92/DashMachine or https://organizr.app/.
+Homer is meant to be a light and very simple dashboard that keeps all your useful utilities at hand. The few features implemented in Homer focus on
+UX and usability. If you are looking for a full featured dashboard, there are tons of great stuff out there like https://heimdall.site/, https://github.com/rmountjoy92/DashMachine or https://organizr.app/.
 
-- Configuration is stored in a simple config file, avoiding the need for a backend/database while making possible to use versioning or [config template](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html).
+- Configuration is stored in a simple config file, avoiding the need for a backend/database while making it possible to use versioning or [config template](https://docs.ansible.com/ansible/latest/user_guide/playbooks_templating.html).
 - Only modern browsers are supported, feel free to use any JS features without any polyfill as soon as the latest version of the major browsers supports them.
 
 
@@ -36,7 +36,7 @@ feel free to open an issue to present your idea.
 ### How to submit a contribution
 
 The general process to submit a contribution is as follow:
-1. Take a look to the [development guideline](https://github.com/bastienwirtz/homer/blob/main/docs/development.md).
+1. Take a look at the [development guideline](https://github.com/bastienwirtz/homer/blob/main/docs/development.md).
 2. Create your own fork of the code
 3. Do the changes in your fork
 4. Make sure to fill the [pull request description](https://github.com/bastienwirtz/homer/blob/main/.github/PULL_REQUEST_TEMPLATE.md) properly.

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'component-error': error }">
     <div class="card" :class="item.class">
       <a
         :href="`https://openweathermap.org/city/${id}`"
@@ -18,10 +18,12 @@
               </figure>
             </div>
             <div class="media-content">
-              <p v-if="error" class="error">Data could not be retrieved</p>
-              <div v-else>
+              <div>
                 <p class="title is-4">{{ name }}</p>
-                <p class="subtitle is-6">
+                <p v-if="error" class="subtitle is-6">
+                  Fail to load weather information
+                </p>
+                <p v-else class="subtitle is-6">
                   <span>
                     {{ temperature }}
                   </span>
@@ -31,6 +33,7 @@
                 </p>
               </div>
             </div>
+            <div v-if="error" name="indicator" class="indicator">⚠️</div>
           </div>
           <div v-if="item.tag" class="tag" :class="item.tagstyle">
             <strong class="tag-text">#{{ item.tag }}</strong>
@@ -109,6 +112,7 @@ export default {
         })
         .catch((e) => {
           console.log(e);
+          this.name = this.item.name;
           this.error = true;
         });
     },

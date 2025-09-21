@@ -18,6 +18,6 @@ export default [
     },
   },
   {
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
+    ignores: ["**/dist/**", "**/dist-ssr/**", "**/coverage/**"],
   },
 ];

@@ -68,64 +68,23 @@
           <!-- Optional messages -->
           <Message :item="config.message" />
 
-          <!-- Horizontal layout -->
-          <div v-if="!vlayout || filter" class="columns is-multiline">
-            <template v-for="(group, groupIndex) in services">
-              <h2
-                v-if="group.name"
-                :key="`header-${groupIndex}`"
-                class="column is-full group-title"
-                :class="group.class"
-              >
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
-                  <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
-                  </figure>
-                </div>
-                {{ group.name }}
-              </h2>
-              <Service
-                v-for="(item, index) in group.items"
-                :key="`service-${groupIndex}-${index}`"
-                :item="item"
-                :proxy="config.proxy"
-                :class="[
-                  'column',
-                  `is-${12 / config.columns}`,
-                  `${item.class || group.class || ''}`,
-                ]"
-              />
-            </template>
-          </div>
-
-          <!-- Vertical layout -->
+          <!-- Unified layout -->
           <div
-            v-if="!filter && vlayout"
-            class="columns is-multiline layout-vertical"
+            :class="[
+              'columns',
+              'is-multiline',
+              { 'layout-vertical': vlayout && !filter },
+            ]"
           >
-            <div
+            <ServiceGroup
               v-for="(group, groupIndex) in services"
               :key="groupIndex"
-              :class="['column', `is-${12 / config.columns}`]"
-            >
-              <h2 v-if="group.name" class="group-title" :class="group.class">
-                <i v-if="group.icon" :class="['fa-fw', group.icon]"></i>
-                <div v-else-if="group.logo" class="group-logo media-left">
-                  <figure class="image is-48x48">
-                    <img :src="group.logo" :alt="`${group.name} logo`" />
-                  </figure>
-                </div>
-                {{ group.name }}
-              </h2>
-              <Service
-                v-for="(item, index) in group.items"
-                :key="index"
-                :item="item"
-                :proxy="config.proxy"
-                :class="item.class || group.class"
-              />
-            </div>
+              :group="group"
+              :is-vertical="vlayout && !filter"
+              :proxy="config.proxy"
+              :columns="config.columns"
+              :group-index="groupIndex"
+            />
           </div>
         </div>
       </div>
@@ -150,7 +109,7 @@ import merge from "lodash.merge";
 import Navbar from "./components/Navbar.vue";
 import GetStarted from "./components/GetStarted.vue";
 import ConnectivityChecker from "./components/ConnectivityChecker.vue";
-import Service from "./components/Service.vue";
+import ServiceGroup from "./components/ServiceGroup.vue";
 import Message from "./components/Message.vue";
 import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
@@ -165,7 +124,7 @@ export default {
     Navbar,
     GetStarted,
     ConnectivityChecker,
-    Service,
+    ServiceGroup,
     Message,
     SearchInput,
     SettingToggle,
@@ -195,6 +154,9 @@ export default {
     this.buildDashboard();
     window.onhashchange = this.buildDashboard;
     this.loaded = true;
+  },
+  beforeUnmount() {
+    window.onhashchange = null;
   },
   methods: {
     searchHotkey() {

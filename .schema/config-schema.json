@@ -70,10 +70,10 @@
       "properties": {
         "layout": {
           "enum": [
-            "colums",
+            "columns",
             "list"
           ],
-          "description": "Layout of the dashboard, either 'column' or 'list'"
+          "description": "Layout of the dashboard, either 'columns' or 'list'"
         },
         "colorTheme": {
           "enum": [

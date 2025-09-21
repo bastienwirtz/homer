@@ -1,6 +1,6 @@
 # Configuration
 
-Homer rely on a single [yaml](http://yaml.org/) configuration file, located in the `/assets` directory.  
+Homer relies on a single [yaml](http://yaml.org/) configuration file, located in the `/assets` directory.  
 `.dist` sample configuration files are available to help you get started. Alternatively, the example below can be
 copied into the config file.
 
@@ -206,9 +206,10 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 
 ### Community theme
 
-- [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
-- [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [walkxcode](https://github.com/walkxcode)
 - [Catppuccin theme](https://github.com/mrpbennett/catppucin-homer) by [@mrpbenett](https://github.com/mrpbennett)
+- [DietPi theme](https://codeberg.org/Cs137/homer-theme-dietpi) by [@Cs137](https://codeberg.org/Cs137)
+- [Dracula theme](https://draculatheme.com/homer) by [@Tuetenk0pp](https://github.com/Tuetenk0pp)
+- [Homer Theme v2](https://github.com/walkxcode/homer-theme) by [@walkxcode](https://github.com/walkxcode)
 
 ## PWA Icons
 
