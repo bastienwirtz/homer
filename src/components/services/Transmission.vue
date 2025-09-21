@@ -35,16 +35,16 @@ const units = ["B", "KB", "MB", "GB"];
 // value for which we have a unit is determined. Return the value with
 // up to two decimals as a string and unit/s appended.
 const displayRate = (rate) => {
-  let i = 0;
+  let unitIndex = 0;
 
-  while (rate > 1000 && i < units.length) {
+  while (rate > 1000 && unitIndex < units.length - 1) {
     rate /= 1000;
-    i++;
+    unitIndex++;
   }
   return (
     Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
       rate || 0,
-    ) + ` ${units[i]}/s`
+    ) + ` ${units[unitIndex]}/s`
   );
 };
 
