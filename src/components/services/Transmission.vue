@@ -2,7 +2,8 @@
   <Generic :item="item">
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
+      <p v-if="item.subtitle" class="subtitle is-6">{{ item.subtitle }}</p>
+      <p v-else class="subtitle is-6">
         <span v-if="error" class="error">An error has occurred.</span>
         <template v-else>
           <span class="down monospace">
