@@ -78,15 +78,11 @@ export default {
       return;
     }
 
-    const rateInterval = parseInt(this.item.rateInterval, 10) || 0;
-    const torrentInterval = parseInt(this.item.torrentInterval, 10) || 0;
+    const interval = parseInt(this.item.interval, 10) || 0;
 
-    // Set up intervals if configured (rate and torrent intervals can be different)
-    if (rateInterval > 0) {
-      setInterval(() => this.getStats(), rateInterval);
-    }
-    if (torrentInterval > 0) {
-      setInterval(() => this.getStats(), torrentInterval);
+    // Set up interval if configured
+    if (interval > 0) {
+      setInterval(() => this.getStats(), interval);
     }
 
     // Initial fetch
