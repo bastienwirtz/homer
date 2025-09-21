@@ -78,7 +78,7 @@
           >
             <ServiceGroup
               v-for="(group, groupIndex) in services"
-              :key="groupIndex"
+              :key="`${currentPage}-${groupIndex}`"
               :group="group"
               :is-vertical="vlayout && !filter"
               :proxy="config.proxy"
@@ -187,6 +187,7 @@ export default {
       document.title =
         this.config.documentTitle ||
         [this.config.title, this.config.subtitle].filter(Boolean).join(" | ");
+
       if (this.config.stylesheet) {
         let stylesheet = "";
         let addtionnal_styles = this.config.stylesheet;

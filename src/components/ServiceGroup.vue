@@ -4,7 +4,7 @@
     <GroupHeader v-if="group.name" :group="group" class="group-title" />
     <Service
       v-for="(item, index) in group.items"
-      :key="index"
+      :key="`srv-${index}`"
       :item="item"
       :proxy="proxy"
       :class="item.class || group.class"
@@ -21,7 +21,7 @@
     />
     <Service
       v-for="(item, index) in group.items"
-      :key="`service-${groupIndex}-${index}`"
+      :key="`srv-${index}`"
       :item="item"
       :proxy="proxy"
       :class="[
