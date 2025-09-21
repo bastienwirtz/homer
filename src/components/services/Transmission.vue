@@ -68,13 +68,6 @@ export default {
     },
   },
   created() {
-    // Validate that endpoint is configured
-    if (!this.endpoint) {
-      this.error = true;
-      console.error("Transmission service: No endpoint configured");
-      return;
-    }
-
     const interval = parseInt(this.item.interval, 10) || 0;
 
     // Set up interval if configured
