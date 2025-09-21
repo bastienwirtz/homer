@@ -111,30 +111,31 @@ export default {
       }
 
       try {
-        const response = await fetch(
-          this.endpoint + "/transmission/rpc",
-          options,
-        );
+        return await this.fetch("transmission/rpc", options);
+      } catch (error) {
+        // Handle Transmission's 409 session requirement
+        if (error.message.includes("409")) {
+          // Make a direct request to get session ID
+          let url = this.endpoint;
+          if (url && !url.endsWith("/")) {
+            url += "/";
+          }
+          url += "transmission/rpc";
 
-        // Handle session ID requirement
-        if (response.status === 409) {
-          this.sessionId = response.headers.get("X-Transmission-Session-Id");
-          if (this.sessionId) {
-            options.headers["X-Transmission-Session-Id"] = this.sessionId;
-            const retryResponse = await fetch(
-              this.endpoint + "/transmission/rpc",
-              options,
-            );
-            return await retryResponse.json();
+          const sessionResponse = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ method: "session-get" }),
+          });
+
+          if (sessionResponse.status === 409) {
+            this.sessionId = sessionResponse.headers.get("X-Transmission-Session-Id");
+            if (this.sessionId) {
+              options.headers["X-Transmission-Session-Id"] = this.sessionId;
+              return await this.fetch("transmission/rpc", options);
+            }
           }
         }
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return await response.json();
-      } catch (error) {
         console.error("Transmission RPC error:", error);
         throw error;
       }
