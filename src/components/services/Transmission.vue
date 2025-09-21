@@ -4,7 +4,7 @@
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
         <span v-if="error" class="error">An error has occurred.</span>
-        <template v-else-if="count > 0 || shouldShowWhenEmpty">
+        <template v-else>
           <span class="down monospace">
             <p class="fas fa-download"></p>
             {{ downRate }}
@@ -17,7 +17,7 @@
       </p>
     </template>
     <template #indicator>
-      <span v-if="!error && (count > 0 || shouldShowWhenEmpty)" class="count"
+      <span v-if="!error" class="count"
         >{{ count || 0 }}
         <template v-if="(count || 0) === 1">torrent</template>
         <template v-else>torrents</template>
@@ -64,10 +64,6 @@ export default {
     },
     upRate: function () {
       return displayRate(this.ul);
-    },
-    shouldShowWhenEmpty: function () {
-      // Default to true (show when empty) unless explicitly set to false
-      return this.item.showWhenEmpty !== false;
     },
   },
   created() {
