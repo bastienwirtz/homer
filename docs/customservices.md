@@ -716,10 +716,10 @@ Displays Traefik.
   type: "Traefik"
   logo: "assets/tools/sample.png"
   url: "http://traefik.example.com"
-  basic_auth: "admin:password"
+  # basic_auth: "admin:password"  # (Optional) Send Authorization header. 
 ```
-- Authentication: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (Basic <encoded_value>).
-- Format: The value must be formatted as "admin:password".
+
+**Authentication**: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (`Basic <encoded_value>`). The value must be formatted as "admin:password".
 
 ## Truenas Scale
 
