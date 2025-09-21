@@ -100,8 +100,8 @@ export default {
       };
 
       // Add HTTP Basic Auth if credentials are provided
-      if (this.item.username && this.item.password) {
-        const credentials = btoa(`${this.item.username}:${this.item.password}`);
+      if (this.item.auth) {
+        const credentials = btoa(this.item.auth);
         options.headers["Authorization"] = `Basic ${credentials}`;
       }
 
