@@ -1,0 +1,215 @@
+[
+  {
+    "Id": "8dfafdbc3a40",
+    "Names": ["/boring_feynman"],
+    "Image": "nginx:latest",
+    "ImageID": "sha256:f6d0b4767a6c",
+    "Command": "/docker-entrypoint.sh nginx -g 'daemon off;'",
+    "Created": 1640995200,
+    "Ports": [
+      {
+        "IP": "0.0.0.0",
+        "PrivatePort": 80,
+        "PublicPort": 8080,
+        "Type": "tcp"
+      }
+    ],
+    "Labels": {
+      "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+    },
+    "State": "running",
+    "Status": "Up 2 hours",
+    "HostConfig": {
+      "NetworkMode": "default"
+    },
+    "NetworkSettings": {
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "NetworkID": "f2de39df4171",
+          "EndpointID": "2cdc4edb1ded",
+          "Gateway": "172.17.0.1",
+          "IPAddress": "172.17.0.2",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "MacAddress": "02:42:ac:11:00:02"
+        }
+      }
+    },
+    "Mounts": []
+  },
+  {
+    "Id": "9e87a2b84b8e",
+    "Names": ["/web-app"],
+    "Image": "node:16-alpine",
+    "ImageID": "sha256:c85b8f829d1f",
+    "Command": "npm start",
+    "Created": 1640991600,
+    "Ports": [
+      {
+        "IP": "0.0.0.0", 
+        "PrivatePort": 3000,
+        "PublicPort": 3000,
+        "Type": "tcp"
+      }
+    ],
+    "Labels": {},
+    "State": "running",
+    "Status": "Up 3 hours",
+    "HostConfig": {
+      "NetworkMode": "default"
+    },
+    "NetworkSettings": {
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "NetworkID": "f2de39df4171",
+          "EndpointID": "3edc5fdb2efe",
+          "Gateway": "172.17.0.1",
+          "IPAddress": "172.17.0.3",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "MacAddress": "02:42:ac:11:00:03"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/home/user/app",
+        "Destination": "/app",
+        "Mode": "",
+        "RW": true,
+        "Propagation": "rprivate"
+      }
+    ]
+  },
+  {
+    "Id": "7b9a3c6d2e1f",
+    "Names": ["/database"],
+    "Image": "postgres:13",
+    "ImageID": "sha256:b4ed8d5b4f3a",
+    "Command": "docker-entrypoint.sh postgres",
+    "Created": 1640988000,
+    "Ports": [
+      {
+        "IP": "127.0.0.1",
+        "PrivatePort": 5432,
+        "PublicPort": 5432,
+        "Type": "tcp"
+      }
+    ],
+    "Labels": {},
+    "State": "dead",
+    "Status": "Up 4 hours",
+    "HostConfig": {
+      "NetworkMode": "default"
+    },
+    "NetworkSettings": {
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "NetworkID": "f2de39df4171",
+          "EndpointID": "4fdc6gdb3gfg",
+          "Gateway": "172.17.0.1",
+          "IPAddress": "172.17.0.4",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "MacAddress": "02:42:ac:11:00:04"
+        }
+      }
+    },
+    "Mounts": [
+      {
+        "Type": "volume",
+        "Name": "postgres_data",
+        "Source": "/var/lib/docker/volumes/postgres_data/_data",
+        "Destination": "/var/lib/postgresql/data",
+        "Driver": "local",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": ""
+      }
+    ]
+  },
+  {
+    "Id": "5c8d1f4e9a2b",
+    "Names": ["/old-service"],
+    "Image": "ubuntu:20.04",
+    "ImageID": "sha256:f643c72bc252",
+    "Command": "/bin/bash",
+    "Created": 1640984400,
+    "Ports": [],
+    "Labels": {},
+    "State": "exited",
+    "Status": "Exited (0) 2 hours ago",
+    "HostConfig": {
+      "NetworkMode": "default"
+    },
+    "NetworkSettings": {
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "NetworkID": "",
+          "EndpointID": "",
+          "Gateway": "",
+          "IPAddress": "",
+          "IPPrefixLen": 0,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "MacAddress": ""
+        }
+      }
+    },
+    "Mounts": []
+  },
+  {
+    "Id": "1a2b3c4d5e6f",
+    "Names": ["/backup-job"],
+    "Image": "alpine:latest",
+    "ImageID": "sha256:c059bfaa849c",
+    "Command": "sh -c 'sleep 3600'",
+    "Created": 1640980800,
+    "Ports": [],
+    "Labels": {},
+    "State": "exited",
+    "Status": "Exited (0) 30 minutes ago",
+    "HostConfig": {
+      "NetworkMode": "default"
+    },
+    "NetworkSettings": {
+      "Networks": {
+        "bridge": {
+          "IPAMConfig": null,
+          "Links": null,
+          "Aliases": null,
+          "NetworkID": "",
+          "EndpointID": "",
+          "Gateway": "",
+          "IPAddress": "",
+          "IPPrefixLen": 0,
+          "IPv6Gateway": "",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "MacAddress": ""
+        }
+      }
+    },
+    "Mounts": []
+  }
+]

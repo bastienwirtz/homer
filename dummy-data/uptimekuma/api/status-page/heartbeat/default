@@ -1,0 +1,114 @@
+{
+  "heartbeatList": {
+    "1": [
+      {
+        "status": 1,
+        "time": "2024-01-15 10:00:00",
+        "msg": "200 - OK",
+        "ping": 45,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:01:00", 
+        "msg": "200 - OK",
+        "ping": 52,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:02:00",
+        "msg": "200 - OK", 
+        "ping": 38,
+        "important": false,
+        "duration": 0
+      }
+    ],
+    "2": [
+      {
+        "status": 1,
+        "time": "2024-01-15 10:00:00",
+        "msg": "200 - OK",
+        "ping": 67,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:01:00",
+        "msg": "200 - OK", 
+        "ping": 71,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:02:00",
+        "msg": "200 - OK",
+        "ping": 63,
+        "important": false,
+        "duration": 0
+      }
+    ],
+    "3": [
+      {
+        "status": 1,
+        "time": "2024-01-15 10:00:00",
+        "msg": "Connected successfully",
+        "ping": 12,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 0,
+        "time": "2024-01-15 10:02:00",
+        "msg": "Connection timeout",
+        "ping": null,
+        "important": true,
+        "duration": 5000
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:04:00",
+        "msg": "Connected successfully", 
+        "ping": 15,
+        "important": false,
+        "duration": 0
+      }
+    ],
+    "4": [
+      {
+        "status": 1,
+        "time": "2024-01-15 10:00:00",
+        "msg": "PONG received",
+        "ping": 3,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:01:00",
+        "msg": "PONG received",
+        "ping": 2,
+        "important": false,
+        "duration": 0
+      },
+      {
+        "status": 1,
+        "time": "2024-01-15 10:02:00",
+        "msg": "PONG received",
+        "ping": 4,
+        "important": false,
+        "duration": 0
+      }
+    ]
+  },
+  "uptimeList": {
+    "1": 1.0,
+    "2": 1.0,
+    "3": 0.95,
+    "4": 1.0
+  }
+}
