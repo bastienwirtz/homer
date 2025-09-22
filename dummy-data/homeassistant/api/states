@@ -1,0 +1,141 @@
+[
+  {
+    "entity_id": "sensor.living_room_temperature",
+    "state": "22.5",
+    "attributes": {
+      "unit_of_measurement": "°C",
+      "device_class": "temperature",
+      "friendly_name": "Living Room Temperature"
+    },
+    "last_changed": "2024-01-15T10:30:00+00:00",
+    "last_updated": "2024-01-15T10:30:00+00:00",
+    "context": {
+      "id": "01HMV123456789",
+      "parent_id": null,
+      "user_id": null
+    }
+  },
+  {
+    "entity_id": "light.bedroom_ceiling",
+    "state": "on",
+    "attributes": {
+      "brightness": 180,
+      "color_mode": "brightness",
+      "supported_color_modes": ["brightness"],
+      "friendly_name": "Bedroom Ceiling Light"
+    },
+    "last_changed": "2024-01-15T09:15:00+00:00",
+    "last_updated": "2024-01-15T09:15:00+00:00",
+    "context": {
+      "id": "01HMV234567890",
+      "parent_id": null,
+      "user_id": "user123"
+    }
+  },
+  {
+    "entity_id": "switch.coffee_maker",
+    "state": "off",
+    "attributes": {
+      "friendly_name": "Coffee Maker"
+    },
+    "last_changed": "2024-01-14T22:00:00+00:00",
+    "last_updated": "2024-01-14T22:00:00+00:00",
+    "context": {
+      "id": "01HMV345678901",
+      "parent_id": null,
+      "user_id": null
+    }
+  },
+  {
+    "entity_id": "climate.living_room",
+    "state": "heat",
+    "attributes": {
+      "temperature": 21.0,
+      "current_temperature": 20.5,
+      "hvac_modes": ["off", "heat", "cool", "auto"],
+      "min_temp": 7.0,
+      "max_temp": 35.0,
+      "target_temp_step": 0.5,
+      "friendly_name": "Living Room Thermostat"
+    },
+    "last_changed": "2024-01-15T08:00:00+00:00",
+    "last_updated": "2024-01-15T10:25:00+00:00",
+    "context": {
+      "id": "01HMV456789012",
+      "parent_id": null,
+      "user_id": "user123"
+    }
+  },
+  {
+    "entity_id": "sensor.front_door",
+    "state": "closed",
+    "attributes": {
+      "device_class": "door",
+      "friendly_name": "Front Door"
+    },
+    "last_changed": "2024-01-15T07:30:00+00:00",
+    "last_updated": "2024-01-15T07:30:00+00:00",
+    "context": {
+      "id": "01HMV567890123",
+      "parent_id": null,
+      "user_id": null
+    }
+  },
+  {
+    "entity_id": "media_player.living_room_tv",
+    "state": "playing",
+    "attributes": {
+      "volume_level": 0.4,
+      "is_volume_muted": false,
+      "media_content_type": "tvshow",
+      "media_title": "The Office",
+      "app_name": "Netflix",
+      "friendly_name": "Living Room TV"
+    },
+    "last_changed": "2024-01-15T10:00:00+00:00",
+    "last_updated": "2024-01-15T10:20:00+00:00",
+    "context": {
+      "id": "01HMV678901234",
+      "parent_id": null,
+      "user_id": "user123"
+    }
+  },
+  {
+    "entity_id": "automation.morning_routine",
+    "state": "on",
+    "attributes": {
+      "last_triggered": "2024-01-15T07:00:00+00:00",
+      "mode": "single",
+      "current": 0,
+      "friendly_name": "Morning Routine"
+    },
+    "last_changed": "2024-01-14T07:00:00+00:00",
+    "last_updated": "2024-01-15T07:00:00+00:00",
+    "context": {
+      "id": "01HMV789012345",
+      "parent_id": null,
+      "user_id": null
+    }
+  },
+  {
+    "entity_id": "weather.home",
+    "state": "partly-cloudy",
+    "attributes": {
+      "temperature": 18.0,
+      "humidity": 65,
+      "pressure": 1013.2,
+      "wind_speed": 12.5,
+      "wind_bearing": 225,
+      "visibility": 16.0,
+      "forecast": [],
+      "friendly_name": "Home Weather"
+    },
+    "last_changed": "2024-01-15T10:00:00+00:00",
+    "last_updated": "2024-01-15T10:30:00+00:00",
+    "context": {
+      "id": "01HMV890123456",
+      "parent_id": null,
+      "user_id": null
+    }
+  }
+]

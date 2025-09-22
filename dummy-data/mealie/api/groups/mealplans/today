@@ -1,0 +1,64 @@
+[
+  {
+    "id": "meal-123-abc",
+    "date": "2024-01-15",
+    "entryType": "dinner",
+    "title": "Dinner",
+    "text": "",
+    "recipe": {
+      "id": "recipe-456-def",
+      "name": "Chicken Tikka Masala",
+      "slug": "chicken-tikka-masala",
+      "image": "recipe-456-def.webp",
+      "description": "Creamy tomato-based curry with tender chicken pieces and aromatic spices",
+      "recipeCategory": [
+        {
+          "id": "cat-1",
+          "name": "Indian",
+          "slug": "indian"
+        },
+        {
+          "id": "cat-2", 
+          "name": "Main Course",
+          "slug": "main-course"
+        }
+      ],
+      "tags": [
+        {
+          "id": "tag-1",
+          "name": "Curry",
+          "slug": "curry"
+        },
+        {
+          "id": "tag-2",
+          "name": "Chicken", 
+          "slug": "chicken"
+        },
+        {
+          "id": "tag-3",
+          "name": "Spicy",
+          "slug": "spicy"
+        }
+      ],
+      "rating": 4.5,
+      "totalTime": "45 minutes",
+      "prepTime": "15 minutes",
+      "cookTime": "30 minutes",
+      "performTime": null,
+      "servings": 4,
+      "dateAdded": "2024-01-10T00:00:00Z",
+      "dateUpdated": "2024-01-14T12:30:00Z",
+      "createdBy": {
+        "id": "user-789",
+        "username": "chef_sarah",
+        "fullName": "Sarah Mitchell"
+      },
+      "updateBy": {
+        "id": "user-789",
+        "username": "chef_sarah", 
+        "fullName": "Sarah Mitchell"
+      }
+    },
+    "groupId": "group-default-123"
+  }
+]

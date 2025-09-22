@@ -1,0 +1,179 @@
+{
+  "page": 1,
+  "pageSize": 20,
+  "sortKey": "releaseDate",
+  "sortDirection": "descending",
+  "totalRecords": 7,
+  "records": [
+    {
+      "artistId": 1,
+      "albumId": 12345,
+      "foreignAlbumId": "mbid-123-456-789",
+      "title": "Dark Side of the Moon",
+      "disambiguation": "",
+      "overview": "The eighth studio album by Pink Floyd, released in 1973.",
+      "artistName": "Pink Floyd",
+      "foreignArtistId": "mbid-artist-123",
+      "monitored": true,
+      "anyReleaseOk": true,
+      "profileId": 1,
+      "duration": 2580000,
+      "albumType": "Album",
+      "secondaryTypes": [],
+      "mediumCount": 1,
+      "releaseDate": "1973-03-01T00:00:00Z",
+      "releases": [
+        {
+          "id": 67890,
+          "albumId": 12345,
+          "foreignReleaseId": "mbid-release-123",
+          "title": "Dark Side of the Moon",
+          "status": "Official",
+          "duration": 2580000,
+          "trackCount": 10,
+          "mediumCount": 1,
+          "disambiguation": "",
+          "country": ["US"],
+          "label": ["Harvest", "Capitol"],
+          "monitored": true
+        }
+      ],
+      "genres": ["Progressive Rock", "Psychedelic Rock"],
+      "media": [
+        {
+          "mediumNumber": 1,
+          "mediumName": "",
+          "mediumFormat": "CD"
+        }
+      ],
+      "artist": {
+        "artistName": "Pink Floyd",
+        "foreignArtistId": "mbid-artist-123",
+        "nameSlug": "pink-floyd",
+        "overview": "English rock band formed in London in 1965.",
+        "disambiguation": "",
+        "links": [],
+        "images": [],
+        "path": "/music/Pink Floyd",
+        "qualityProfileId": 1,
+        "metadataProfileId": 1,
+        "monitored": true,
+        "monitorNewItems": "all",
+        "genres": ["Progressive Rock", "Psychedelic Rock", "Art Rock"],
+        "cleanName": "pinkfloyd",
+        "sortName": "Pink Floyd",
+        "tags": [],
+        "added": "2024-01-01T00:00:00Z",
+        "ratings": {
+          "votes": 54321,
+          "value": 9.2
+        },
+        "statistics": {
+          "albumCount": 15,
+          "trackFileCount": 142,
+          "trackCount": 149,
+          "totalTrackCount": 149,
+          "sizeOnDisk": 7516192768,
+          "percentOfTracks": 95.3
+        },
+        "id": 1
+      },
+      "images": [],
+      "links": [],
+      "statistics": {
+        "trackFileCount": 0,
+        "trackCount": 10,
+        "totalTrackCount": 10,
+        "sizeOnDisk": 0,
+        "percentOfTracks": 0.0
+      },
+      "grabbed": false,
+      "id": 12345
+    },
+    {
+      "artistId": 2,
+      "albumId": 23456,
+      "foreignAlbumId": "mbid-234-567-890",
+      "title": "OK Computer",
+      "disambiguation": "",
+      "overview": "The third studio album by Radiohead, released in 1997.",
+      "artistName": "Radiohead",
+      "foreignArtistId": "mbid-artist-234",
+      "monitored": true,
+      "anyReleaseOk": true,
+      "profileId": 1,
+      "duration": 3230000,
+      "albumType": "Album",
+      "secondaryTypes": [],
+      "mediumCount": 1,
+      "releaseDate": "1997-06-16T00:00:00Z",
+      "releases": [
+        {
+          "id": 78901,
+          "albumId": 23456,
+          "foreignReleaseId": "mbid-release-234",
+          "title": "OK Computer",
+          "status": "Official",
+          "duration": 3230000,
+          "trackCount": 12,
+          "mediumCount": 1,
+          "disambiguation": "",
+          "country": ["GB"],
+          "label": ["Parlophone", "Capitol"],
+          "monitored": true
+        }
+      ],
+      "genres": ["Alternative Rock", "Art Rock"],
+      "media": [
+        {
+          "mediumNumber": 1,
+          "mediumName": "",
+          "mediumFormat": "CD"
+        }
+      ],
+      "artist": {
+        "artistName": "Radiohead",
+        "foreignArtistId": "mbid-artist-234",
+        "nameSlug": "radiohead",
+        "overview": "English rock band formed in Abingdon, Oxfordshire, in 1985.",
+        "disambiguation": "",
+        "links": [],
+        "images": [],
+        "path": "/music/Radiohead",
+        "qualityProfileId": 1,
+        "metadataProfileId": 1,
+        "monitored": true,
+        "monitorNewItems": "all",
+        "genres": ["Alternative Rock", "Art Rock", "Electronic"],
+        "cleanName": "radiohead",
+        "sortName": "Radiohead",
+        "tags": [],
+        "added": "2024-01-01T00:00:00Z",
+        "ratings": {
+          "votes": 45678,
+          "value": 8.9
+        },
+        "statistics": {
+          "albumCount": 9,
+          "trackFileCount": 89,
+          "trackCount": 95,
+          "totalTrackCount": 95,
+          "sizeOnDisk": 4831838208,
+          "percentOfTracks": 93.7
+        },
+        "id": 2
+      },
+      "images": [],
+      "links": [],
+      "statistics": {
+        "trackFileCount": 0,
+        "trackCount": 12,
+        "totalTrackCount": 12,
+        "sizeOnDisk": 0,
+        "percentOfTracks": 0.0
+      },
+      "grabbed": false,
+      "id": 23456
+    }
+  ]
+}

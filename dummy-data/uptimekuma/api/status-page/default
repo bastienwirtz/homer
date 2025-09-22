@@ -1,0 +1,64 @@
+{
+  "config": {
+    "title": "Homer Dashboard Status",
+    "description": "Status page for all monitored services",
+    "icon": "/icon.svg",
+    "theme": "light",
+    "published": true,
+    "showTags": true,
+    "domainNames": [
+      "status.homer.local"
+    ],
+    "customCSS": "",
+    "footerText": null,
+    "showPoweredBy": true,
+    "googleAnalyticsId": null,
+    "showCertificateExpiry": false,
+    "certExpiryDays": 14
+  },
+  "incident": null,
+  "publicGroupList": [
+    {
+      "id": 1,
+      "name": "Web Services",
+      "weight": 1,
+      "monitorList": [
+        {
+          "id": 1,
+          "name": "Main Website",
+          "url": "https://example.com",
+          "type": "http",
+          "interval": 60
+        },
+        {
+          "id": 2,
+          "name": "API Server",
+          "url": "https://api.example.com",
+          "type": "http", 
+          "interval": 60
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Infrastructure",
+      "weight": 2,
+      "monitorList": [
+        {
+          "id": 3,
+          "name": "Database Server",
+          "url": "postgresql://db.example.com:5432",
+          "type": "postgres",
+          "interval": 120
+        },
+        {
+          "id": 4,
+          "name": "Redis Cache",
+          "url": "redis://cache.example.com:6379",
+          "type": "redis",
+          "interval": 60
+        }
+      ]
+    }
+  ]
+}

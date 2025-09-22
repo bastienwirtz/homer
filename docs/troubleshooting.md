@@ -41,7 +41,7 @@ To resolve this, you can either:
 
 - Host all your target service under the same domain & port.
 - Modify the target server configuration so that the response of the server included following header- `Access-Control-Allow-Origin: *` (<https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests>). It might be an option in the targeted service, otherwise depending on how the service is hosted, the proxy or web server can seamlessly add it.
-- Use a cors proxy server like [`cors-container`](https://github.com/imjacobclark/cors-container), [`cors-anywhere`](https://github.com/Rob--W/cors-anywhere) or many others.
+- **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/bastienwirtz/corsair), a light and simple solution)
 
 ## I am using an authentication proxy and homer says I am offline
 

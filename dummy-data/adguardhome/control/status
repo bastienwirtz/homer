@@ -1,0 +1,16 @@
+{
+  "protection_enabled": true,
+  "version": "v0.107.48",
+  "language": "en",
+  "dns_address": "127.0.0.1:53",
+  "dns_port": 53,
+  "protection_disabled_duration": null,
+  "http_port": 80,
+  "https_port": 443,
+  "querylog_enabled": true,
+  "querylog_size": 5000,
+  "querylog_size_memory": 1000,
+  "querylog_interval": 2160,
+  "dhcp_available": true,
+  "running": true
+}
