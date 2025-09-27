@@ -51,10 +51,10 @@ import Generic from "./Generic.vue";
 
 export default {
   name: "Unifi",
-  mixins: [service],
   components: {
     Generic,
   },
+  mixins: [service],
   props: {
     item: Object,
   },
@@ -108,7 +108,9 @@ export default {
         // Parse auth field in format "username:password"
         const [username, password] = this.item.auth.split(":");
         if (!username || !password) {
-          throw new Error("Authentication format should be 'username:password'");
+          throw new Error(
+            "Authentication format should be 'username:password'",
+          );
         }
 
         const credentials = {
@@ -116,7 +118,7 @@ export default {
           password: password,
         };
 
-        const response = await this.fetch(this.loginEndpoint, {
+        await this.fetch(this.loginEndpoint, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -141,7 +143,9 @@ export default {
         }
 
         // Fetch devices data only
-        const devicesData = await this.fetch(`${this.prefix}/api/s/${this.site}/stat/device`);
+        const devicesData = await this.fetch(
+          `${this.prefix}/api/s/${this.site}/stat/device`,
+        );
 
         // Count access points (devices with type 'uap')
         this.accessPoints =
@@ -153,9 +157,10 @@ export default {
 
         // For clients, we can use the total connected clients from devices that report client counts
         // or set to null if we don't have this data from devices endpoint
-        this.clients = devicesData.data?.reduce((total, device) => {
-          return total + (device.num_sta || 0);
-        }, 0) || null;
+        this.clients =
+          devicesData.data?.reduce((total, device) => {
+            return total + (device.num_sta || 0);
+          }, 0) || null;
 
         this.serverError = false;
       } catch (e) {
