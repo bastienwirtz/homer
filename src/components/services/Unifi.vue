@@ -101,9 +101,19 @@ export default {
   methods: {
     async authenticateUnifi() {
       try {
+        if (!this.item.auth) {
+          throw new Error("Authentication credentials not provided");
+        }
+
+        // Parse auth field in format "username:password"
+        const [username, password] = this.item.auth.split(":");
+        if (!username || !password) {
+          throw new Error("Authentication format should be 'username:password'");
+        }
+
         const credentials = {
-          username: this.item.username,
-          password: this.item.password,
+          username: username,
+          password: password,
         };
 
         const response = await this.fetch(this.loginEndpoint, {
