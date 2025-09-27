@@ -82,27 +82,14 @@ export default {
     /**
      * Makes a request to Transmission RPC API with proper session handling
      * @param {string} method - The RPC method to call
-     * @param {Object} requestArgs - Arguments for the RPC method
      * @returns {Promise<Object>} RPC response
      */
-    transmissionRequest: async function (method, requestArgs = {}) {
-      const requestData = {
-        method: method,
-        arguments: requestArgs,
-      };
-
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
-      };
+    transmissionRequest: async function (method) {
+      const options = this.getRequestHeaders(method);
 
       // Add HTTP Basic Auth if credentials are provided
       if (this.item.auth) {
-        const credentials = btoa(this.item.auth);
-        options.headers["Authorization"] = `Basic ${credentials}`;
+        options.headers["Authorization"] = `Basic ${btoa(this.item.auth)}`;
       }
 
       // Add session ID header if we have one
@@ -115,21 +102,16 @@ export default {
       } catch (error) {
         // Handle Transmission's 409 session requirement
         if (error.message.includes("409")) {
-          // Make a direct request to get session ID
-          let url = this.endpoint;
-          if (url && !url.endsWith("/")) {
-            url += "/";
-          }
-          url += "transmission/rpc";
+          const sessionOptions = this.getRequestHeaders("session-get");
 
-          const sessionResponse = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ method: "session-get" }),
-          });
-
-          if (sessionResponse.status === 409) {
-            this.sessionId = sessionResponse.headers.get("X-Transmission-Session-Id");
+          const sessionResponse = this.fetch(
+            "transmission/rpc",
+            sessionOptions,
+          );
+          if (error.message.includes("409")) {
+            this.sessionId = sessionResponse.headers.get(
+              "X-Transmission-Session-Id",
+            );
             if (this.sessionId) {
               options.headers["X-Transmission-Session-Id"] = this.sessionId;
               return await this.fetch("transmission/rpc", options);
@@ -140,22 +122,30 @@ export default {
         throw error;
       }
     },
+    getRequestHeaders: function (method) {
+      return {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ method }),
+      };
+    },
     getStats: async function () {
       try {
         // Get session stats for transfer rates and torrent count
         const statsResponse = await this.transmissionRequest("session-stats");
-
-        if (statsResponse && statsResponse.result === "success") {
-          const stats = statsResponse.arguments;
-          this.dl = stats.downloadSpeed ?? 0;
-          this.ul = stats.uploadSpeed ?? 0;
-          this.count = stats.activeTorrentCount ?? 0;
-          this.error = false;
-        } else {
+        if (statsResponse?.result !== "success") {
           throw new Error(
             `Transmission RPC failed: ${statsResponse?.result || "Unknown error"}`,
           );
         }
+
+        const stats = statsResponse.arguments;
+        this.dl = stats.downloadSpeed ?? 0;
+        this.ul = stats.uploadSpeed ?? 0;
+        this.count = stats.activeTorrentCount ?? 0;
+        this.error = false;
       } catch (e) {
         this.error = true;
         console.error("Transmission service error:", e);

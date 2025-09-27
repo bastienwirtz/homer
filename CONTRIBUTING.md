@@ -42,7 +42,6 @@ ln -s AGENTS.md CLAUDE.md
 ln -s AGENTS.md GEMINI.md
 ```
 
-
 ### How to submit a contribution
 
 The general process to submit a contribution is as follow:
