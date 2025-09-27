@@ -55,6 +55,7 @@ Available services are located in `src/components/`:
 - [Traefik](#traefik)
 - [Transmission](#transmission)
 - [TrueNas Scale](#truenas-scale)
+- [UniFi](#unifi)
 - [Uptime Kuma](#uptime-kuma)
 - [Vaultwarden](#vaultwarden)
 - [Wallabag](#wallabag)
@@ -753,6 +754,43 @@ Displays TrueNAS version.
   url: https://my-service.url
   api_token: "<---insert-api-key-here--->"
 ```
+
+## UniFi
+
+Displays information from your UniFi Network Controller including connected clients, access points, and other network devices. The service automatically handles UniFi's session-based authentication and CSRF protection.
+
+```yaml
+- name: "UniFi Controller"
+  logo: "assets/tools/sample.png"
+  url: "https://unifi.local:8443" # Your UniFi Controller URL
+  type: "Unifi"
+  auth: "username:password" # UniFi Controller credentials
+  site: "default" # Optional: UniFi site name (default: "default")
+  legacy: true # Optional: Use legacy /api/login endpoint (default: true)
+  updateInterval: 30000 # Optional: Refresh interval in milliseconds
+  target: "_blank" # Optional: HTML a tag target attribute
+```
+
+**Configuration Options:**
+
+- `auth`: Required. UniFi Controller credentials in "username:password" format
+- `site`: Optional. UniFi site name to monitor (default: "default")
+- `legacy`: Optional. Set to `false` to use modern `/api/auth/login` endpoint instead of legacy `/api/login` (default: true)
+- `updateInterval`: Optional. How often to refresh data in milliseconds (default: 30000)
+
+**Supported UniFi Controllers:**
+
+- UniFi Network Controller (self-hosted)
+- UniFi Dream Machine (UDM/UDM Pro)
+- UniFi Cloud Key
+
+**Displayed Information:**
+
+- **Connected Clients**: Total number of wireless and wired clients connected to the network
+- **Access Points**: Number of UniFi access points (UAP devices)
+- **Network Devices**: Number of other UniFi network devices (switches, gateways, etc.)
+
+The service uses UniFi's standard API endpoints and maintains session cookies automatically. For UDM/UDM Pro devices, the service will automatically use the `/proxy/network` prefix when `udm: true` is configured.
 
 ## Uptime Kuma
 
