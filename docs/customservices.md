@@ -724,7 +724,8 @@ Displays Traefik.
 
 ## Transmission
 
-This service displays the global upload and download rates, as well as the number of active torrents from your Transmission daemon. The service communicates with the Transmission RPC interface which needs to be accessible from the browser. Make sure to configure appropriate CORS headers if accessing from a different domain.
+Displays the global upload and download rates, as well as the number of active torrents from your Transmission daemon. 
+The service communicates with the Transmission RPC interface which needs to be accessible from the browser.
 
 ```yaml
 - name: "Transmission"
@@ -732,16 +733,12 @@ This service displays the global upload and download rates, as well as the numbe
   url: "http://192.168.1.2:9091" # Your Transmission web interface URL
   type: "Transmission"
   auth: "username:password" # Optional: HTTP Basic Auth
-  interval: 5000 # Optional: Interval for updating data (ms)
+  interval: 5000 # Optional: Interval for refreshing data (ms)
   target: "_blank" # Optional: HTML a tag target attribute
 ```
 
-**Configuration Options:**
-
-- `auth`: Optional HTTP Basic Authentication in "username:password" format
-- `interval`: How often to refresh data in milliseconds
-
 The service automatically handles Transmission's session management and CSRF protection.
+
 ## Truenas Scale
 
 Displays TrueNAS version.

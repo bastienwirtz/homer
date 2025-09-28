@@ -55,6 +55,7 @@ export default {
         if (!success) {
           throw new Error(
             `Fail to fetch ressource: (${response.status} error)`,
+            { cause: response },
           );
         }
 

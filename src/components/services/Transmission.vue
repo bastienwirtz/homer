@@ -58,6 +58,7 @@ export default {
     count: null,
     error: null,
     sessionId: null,
+    retry: 0,
   }),
   computed: {
     downRate: function () {
@@ -87,11 +88,6 @@ export default {
     transmissionRequest: async function (method) {
       const options = this.getRequestHeaders(method);
 
-      // Add HTTP Basic Auth if credentials are provided
-      if (this.item.auth) {
-        options.headers["Authorization"] = `Basic ${btoa(this.item.auth)}`;
-      }
-
       // Add session ID header if we have one
       if (this.sessionId) {
         options.headers["X-Transmission-Session-Id"] = this.sessionId;
@@ -101,21 +97,12 @@ export default {
         return await this.fetch("transmission/rpc", options);
       } catch (error) {
         // Handle Transmission's 409 session requirement
-        if (error.message.includes("409")) {
-          const sessionOptions = this.getRequestHeaders("session-get");
-
-          const sessionResponse = this.fetch(
-            "transmission/rpc",
-            sessionOptions,
-          );
-          if (error.message.includes("409")) {
-            this.sessionId = sessionResponse.headers.get(
-              "X-Transmission-Session-Id",
-            );
-            if (this.sessionId) {
-              options.headers["X-Transmission-Session-Id"] = this.sessionId;
-              return await this.fetch("transmission/rpc", options);
-            }
+        if (error.cause.status == 409 && this.retry <= 1) {
+          const sessionId = await this.getSession();
+          if (sessionId) {
+            this.sessionId = sessionId;
+            this.retry++;
+            return this.transmissionRequest(method);
           }
         }
         console.error("Transmission RPC error:", error);
@@ -123,13 +110,31 @@ export default {
       }
     },
     getRequestHeaders: function (method) {
-      return {
+      const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ method }),
       };
+
+      if (this.item.auth) {
+        options.headers["Authorization"] = `Basic ${btoa(this.item.auth)}`;
+      }
+
+      return options;
+    },
+    getSession: async function () {
+      try {
+        await this.fetch(
+          "transmission/rpc",
+          this.getRequestHeaders("session-get"),
+        );
+      } catch (error) {
+        if (error.cause.status == 409) {
+          return error.cause.headers.get("X-Transmission-Session-Id");
+        }
+      }
     },
     getStats: async function () {
       try {
