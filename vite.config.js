@@ -7,13 +7,28 @@ import process from "process";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
+import { version } from "./package.json";
+
+function writeVersionPlugin() {
+  return {
+    name: "write-version",
+    closeBundle() {
+      fs.writeFileSync("dist/VERSION", version);
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "",
   build: {
     assetsDir: "resources",
   },
+  define: {
+    __APP_VERSION__: JSON.stringify(version),
+  },
   plugins: [
+    writeVersionPlugin(),
     // Custom plugin to serve dummy-data JSON files without sourcemap injection
     {
       name: "dummy-data-json-handler",

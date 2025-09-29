@@ -54,7 +54,6 @@
         />
       </Navbar>
     </div>
-
     <section id="main-section" class="section">
       <div v-cloak class="container">
         <ConnectivityChecker
@@ -154,6 +153,7 @@ export default {
     this.buildDashboard();
     window.onhashchange = this.buildDashboard;
     this.loaded = true;
+    console.info(`Homer v${__APP_VERSION__}`);
   },
   beforeUnmount() {
     window.onhashchange = null;
