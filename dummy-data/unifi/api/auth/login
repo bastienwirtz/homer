@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "rc": "ok"
+  },
+  "data": [
+    {
+      "unique_id": "admin",
+      "first_name": "Administrator",
+      "last_name": "",
+      "full_name": "Administrator",
+      "email": "admin@example.com",
+      "email_alert_enabled": false,
+      "email_alert_grouping_enabled": false,
+      "email_alert_grouping_delay": 60,
+      "push_alert_enabled": false,
+      "is_owner": true,
+      "time_created": 1234567890,
+      "last_login_ip": "192.168.1.100",
+      "last_login_time": 1640995200,
+      "ubic_uuid": "00000000-0000-0000-0000-000000000000",
+      "update_id": "5f9f1c1b0000000000000000",
+      "permissions": [
+        "admin"
+      ],
+      "scopes": [
+        "admin:read",
+        "admin:write"
+      ]
+    }
+  ]
+}
