@@ -1,6 +1,6 @@
 {
   "name": "homer",
-  "version": "25.09.1",
+  "version": "25.10.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
