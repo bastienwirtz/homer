@@ -74,7 +74,7 @@ export default {
             let totalduration = 0;
             let rescounter = 0;
             job.results.forEach((res) => {
-              totalduration += parseInt(res.duration, 10) / 1000;
+              totalduration += parseInt(res.duration, 10) / 1000000;
               rescounter++;
             })
 

@@ -7,7 +7,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -24,7 +24,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -41,7 +41,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -58,7 +58,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -82,7 +82,7 @@
       {
         "status": 200,
         "hostname": "www.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -99,7 +99,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -116,7 +116,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -133,7 +133,7 @@
       {
         "status": 200,
         "hostname": "gateway.example.com",
-        "duration": 10000,
+        "duration": 10000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -157,7 +157,7 @@
       {
         "status": 200,
         "hostname": "ns1.example",
-        "duration": 20000,
+        "duration": 20000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -170,7 +170,7 @@
       {
         "status": 200,
         "hostname": "ns1.example.com",
-        "duration": 20000,
+        "duration": 20000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -183,7 +183,7 @@
       {
         "status": 200,
         "hostname": "ns1.example.com",
-        "duration": 20000,
+        "duration": 20000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
@@ -196,7 +196,7 @@
       {
         "status": 200,
         "hostname": "ns1.example.com",
-        "duration": 20000,
+        "duration": 20000000,
         "conditionResults": [
           {
             "condition": "[STATUS] == 200",
