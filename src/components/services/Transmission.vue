@@ -18,8 +18,7 @@
       </p>
     </template>
     <template #indicator>
-      <span v-if="!error" class="count"
-        >{{ count || 0 }}
+      <span v-if="!error" class="count">{{ count || 0 }}
         <template v-if="(count || 0) === 1">torrent</template>
         <template v-else>torrents</template>
       </span>
@@ -69,12 +68,8 @@ export default {
     },
   },
   created() {
-    const interval = parseInt(this.item.interval, 10) || 0;
-
-    // Set up interval if configured
-    if (interval > 0) {
-      setInterval(() => this.getStats(), interval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.getStats;
 
     // Initial fetch
     this.getStats();
