@@ -106,6 +106,7 @@ export default {
 
       // Check for deprecated keys and warn users
       const deprecatedKeys = [
+        "interval",
         "updateInterval",
         "checkInterval",
         "localCheckInterval",
