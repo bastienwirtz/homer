@@ -48,7 +48,11 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.fetch("/api/v1/endpoints/statuses", { method: "GET", cache: "no-cache" })
+      this.fetch("/api/v1/endpoints/statuses", {
+        method: "GET",
+        cache: "no-cache",
+        credentials: "include",
+      })
       .then((response) => {
         // Apply filtering by groups, if defined
         if (this.item.groups) {
