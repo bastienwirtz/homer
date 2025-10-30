@@ -59,6 +59,7 @@ Available services are located in `src/components/`:
 - [Uptime Kuma](#uptime-kuma)
 - [Vaultwarden](#vaultwarden)
 - [Wallabag](#wallabag)
+- [Wg-easy](#wg-easy)
 - [What's Up Docker](#whats-up-docker)
 
 > [!IMPORTANT]  
@@ -812,6 +813,20 @@ Displays Wallabag version.
   type: Wallabag
   logo: "assets/tools/sample.png"
   url: https://my-service.url
+```
+
+## Wg-easy
+
+This service displays a version string instead of a subtitle.  
+If a new version is available, it will also be shown alongside the current one. Except on small screens.  
+The indicator shows if Wg-easy is online, offline. Example configuration:
+
+```yaml
+- name: "Wireguard"
+  type: Wg-easy
+  logo: assets/tools/sample.png
+  url:  http://wg-easy.example.com
+  basic_auth: "admin:password"
 ```
 
 ## What's up Docker
