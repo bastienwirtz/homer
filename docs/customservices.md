@@ -775,6 +775,7 @@ Displays information from your UniFi Network Controller including connected clie
 
 - `auth`: Required. UniFi Controller credentials in "username:password" format
 - `site`: Optional. UniFi site name to monitor (default: "default")
+- `udm`: Optional. Set to `true` for UniFi Dream Machine (UDM/UDM Pro) to use `/proxy/network` prefix instead of `/manage` (default: false)
 - `legacy`: Optional. Set to `false` to use modern `/api/auth/login` endpoint instead of legacy `/api/login` (default: true)
 - `updateInterval`: Optional. How often to refresh data in milliseconds (default: 30000)
 

@@ -72,14 +72,11 @@ export default {
       return this.item.site || "default";
     },
     prefix() {
-      // Check if URL indicates we need a prefix
-      if (this.item.apiUrl && this.item.apiUrl.includes("/manage")) {
-        return "/manage";
+      if (this.item.url && (this.item.url.includes("/manage") || this.item.url.includes("/proxy/network"))) {
+        // the configuration already include the prefix
+        return "";
       }
-      if (this.item.url && this.item.url.includes("/manage")) {
-        return "/manage";
-      }
-      return this.item.udm ? "/proxy/network" : "";
+      return this.item.udm ? "/proxy/network" : "/manage";
     },
     loginEndpoint() {
       // Most self-hosted controllers use /api/login (legacy endpoint)
@@ -127,7 +124,6 @@ export default {
         });
 
         this.sessionCookie = true;
-        return true;
       } catch (error) {
         console.error("Unifi authentication failed:", error);
         this.sessionCookie = null;
