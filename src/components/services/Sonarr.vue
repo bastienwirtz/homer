@@ -5,6 +5,9 @@
         <strong v-if="activity > 0" class="notif activity" title="Activity">
           {{ activity }}
         </strong>
+        <strong v-if="missing > 0" class="notif missing" title="Missing">
+          {{ missing }}
+        </strong>
         <strong v-if="warnings > 0" class="notif warnings" title="Warning">
           {{ warnings }}
         </strong>
@@ -25,7 +28,6 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 const V3_API = "/api/v3";
 const LEGACY_API = "/api";
@@ -36,43 +38,40 @@ export default {
   props: {
     item: Object,
   },
-  components: {
-    Generic,
+  data: () => {
+    return {
+      activity: null,
+      missing: null,
+      warnings: null,
+      errors: null,
+      serverError: false,
+    };
   },
   computed: {
     apiPath() {
       return this.item.legacyApi ? LEGACY_API : V3_API;
     },
   },
-  data: () => {
-    return {
-      activity: null,
-      warnings: null,
-      errors: null,
-      serverError: false,
-    };
-  },
   created: function () {
+    const checkInterval = parseInt(this.item.checkInterval, 10) || 0;
+    if (checkInterval > 0) {
+      setInterval(() => this.fetchConfig(), checkInterval);
+    }
+
     this.fetchConfig();
   },
   methods: {
     fetchConfig: function () {
+      const handleError = (e) => {
+        console.error(e);
+        this.serverError = true;
+      };
       this.fetch(`${this.apiPath}/health?apikey=${this.item.apikey}`)
         .then((health) => {
-          this.warnings = 0;
-          this.errors = 0;
-          for (var i = 0; i < health.length; i++) {
-            if (health[i].type == "warning") {
-              this.warnings++;
-            } else if (health[i].type == "error") {
-              this.errors++;
-            }
-          }
+          this.warnings = health.filter((h) => h.type === "warning").length;
+          this.errors = health.filter((h) => h.type === "errors").length;
         })
-        .catch((e) => {
-          console.error(e);
-          this.serverError = true;
-        });
+        .catch(handleError);
       this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
         .then((queue) => {
           this.activity = 0;
@@ -86,10 +85,12 @@ export default {
             this.activity = queue.totalRecords;
           }
         })
-        .catch((e) => {
-          console.error(e);
-          this.serverError = true;
-        });
+        .catch(handleError);
+      this.fetch(`${this.apiPath}/wanted/missing?apikey=${this.item.apikey}`)
+        .then((missing) => {
+          this.missing = missing.totalRecords;
+        })
+        .catch(handleError);
     },
   },
 };
@@ -113,6 +114,10 @@ export default {
 
     &.activity {
       background-color: #4fb5d6;
+    }
+
+    &.missing {
+      background-color: #9d00ff;
     }
 
     &.warnings {

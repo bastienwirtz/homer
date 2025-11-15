@@ -15,16 +15,12 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "SpeedtestTracker",
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     speedtest: null,

@@ -1,6 +1,6 @@
 ---
 # Homepage configuration
-# See https://fontawesome.com/v5/search for icons options
+# See https://fontawesome.com/search for icons options
 
 title: "Demo dashboard"
 subtitle: "Homer"
@@ -12,6 +12,9 @@ footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a hre
 
 # Optional theme customization
 theme: default
+
+# Optional theme customization (color overrrides)
+# overrrides can also be done using CSS vars 
 colors:
   light:
     highlight-primary: "#3367d6"
@@ -71,15 +74,28 @@ services:
   - name: "Applications"
     icon: "fas fa-cloud"
     items:
-      - name: "Awesome app"
-        logo: "assets/tools/sample.png"
-        subtitle: "Bookmark example"
-        tag: "app"
-        keywords: "self hosted reddit"
-        url: "https://www.reddit.com/r/selfhosted/"
-        target: "_blank" # optional html a tag target attribute
-      - name: "Another one"
-        logo: "assets/tools/sample2.png"
-        subtitle: "Another application"
-        tag: "app"
-        url: "#"
+      - name: "Get started"
+        icon: "fa-solid fa-download"
+        subtitle: "Start using Homer in a few minutes"
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#get-started"
+      - name: "Configuration"
+        icon: "fa-solid fa-sliders"
+        subtitle: "Configuration options documentation"
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md"
+      - name: "Theming"
+        icon: "fa-solid fa-palette"
+        subtitle: "Customize Homer appearance"
+        tag: "theming"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
+      - name: "Smart cards"
+        icon: "fa-solid fa-palette"
+        subtitle: "Displays dynamic information or actions."
+        tag: "setup"
+        url: "https://github.com/bastienwirtz/homer/blob/main/docs/customservices.md"
+      - name: "Dashboard icons"
+        icon: "fa-solid fa-icons"
+        subtitle: "Dashboard icons"
+        tag: "setup"
+        url: "https://github.com/walkxcode/dashboard-icons"

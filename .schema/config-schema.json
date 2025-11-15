@@ -1,0 +1,359 @@
+{
+  "$id": "https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "description": "https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md",
+  "examples": [],
+  "title": "Homer Dashboard configuration",
+  "type": "object",
+  "definitions": {
+    "Colors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "light": {
+          "$ref": "#/definitions/ColorSet"
+        },
+        "dark": {
+          "$ref": "#/definitions/ColorSet"
+        }
+      },
+      "title": "Colors"
+    },
+    "ColorSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "highlight-primary": {
+          "type": "string"
+        },
+        "highlight-secondary": {
+          "type": "string"
+        },
+        "highlight-hover": {
+          "type": "string"
+        },
+        "background": {
+          "type": "string"
+        },
+        "card-background": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "text-header": {
+          "type": "string"
+        },
+        "text-title": {
+          "type": "string"
+        },
+        "text-subtitle": {
+          "type": "string"
+        },
+        "card-shadow": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "link-hover": {
+          "type": "string"
+        },
+        "background-image": {
+          "type": "string"
+        }
+      }
+    },
+    "Defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "layout": {
+          "enum": [
+            "columns",
+            "list"
+          ],
+          "description": "Layout of the dashboard, either 'columns' or 'list'"
+        },
+        "colorTheme": {
+          "enum": [
+            "auto",
+            "light",
+            "dark"
+          ],
+          "description": "One of 'auto', 'light', or 'dark'"
+        }
+      },
+      "title": "Defaults"
+    },
+    "Hotkey": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "hotkey for search, e.g. Shift"
+        }
+      },
+      "required": [
+        "search"
+      ]
+    },
+    "Link": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name as seen in the navbar"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Fontawesome icon"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of the link. When #filename is used, it is a link to another homer page, while 'filename' is the name of the config file"
+        },
+        "target": {
+          "type": "string",
+          "description": "html tag target attribute like _blank for a new page"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "title": "Link"
+    },
+    "Message": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "mapping": {
+          "$ref": "#/definitions/Mapping",
+          "description": "Mapping for the content loaded from the URL"
+        },
+        "refreshInterval": {
+          "type": "integer",
+          "description": "The refresh interval in milliseconds for reloading the message url"
+        },
+        "style": {
+          "type": "string",
+          "description": "See https://bulma.io/documentation/components/message/#colors for styling options"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the message box"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Fontawesome icon for the message box"
+        },
+        "content": {
+          "type": "string",
+          "description": "HTML content for the message box"
+        }
+      },
+      "title": "Messagebox"
+    },
+    "Mapping": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "Mapping"
+    },
+    "Proxy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "useCredentials": {
+          "type": "boolean",
+          "description": "# send cookies & authorization headers when fetching service specific data. Set to `true` if you use an authentication proxy. Can be overrided on service level. "
+        },
+        "headers": {
+          "$ref": "#/definitions/Headers",
+          "description": "send custom headers when fetching service specific data. Can also be set on a service level."
+        }
+      },
+      "title": "Proxy"
+    },
+    "Headers": {
+      "type": "object",
+      "additionalProperties": true,
+      "title": "Headers"
+    },
+    "Service": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Service name"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Fontawesome icon for the service"
+        },
+        "logo": {
+          "type": "string",
+          "description": "A path to an image can also be provided. Note that icon take precedence if both icon and logo are set."
+        },
+        "class": {
+          "type": "string",
+          "description": "Optional css class to add on the service group. Example 'highlight-purple'"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Item"
+          }
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "Service"
+    },
+    "Item": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string",
+          "description": "Path to a logo. Alternatively a fa icon can be provided"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Fontawesome icon for the item, alternative for logo"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Show tag"
+        },
+        "keywords": {
+          "type": "string",
+          "description": "Optional keyword used for searching purpose"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of this item"
+        },
+        "target": {
+          "type": "string",
+          "description": "html tag target attribute like _blank for a new page"
+        },
+        "tagstyle": {
+          "type": "string",
+          "description": "Styleclass for the tag"
+        },
+        "type": {
+          "type": "string",
+          "description": "Optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`"
+        }
+      },
+      "title": "Item"
+    }
+  },
+  "properties": {
+    "externalConfig": {
+      "type": "string",
+      "description": "Use external configuration file. Using this will ignore remaining config in this file externalConfig: https://example.com/server-luci/config.yaml"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the dashboard"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subtitle of the dashboard"
+    },
+    "documentTitle": {
+      "type": "string",
+      "description": "Title of the document. When not filled, title (and subtitle will be used)"
+    },
+    "logo": {
+      "type": "string",
+      "description": "Path to logo image"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Dashboard icon"
+    },
+    "header": {
+      "type": "boolean",
+      "description": "Show header, default is true"
+    },
+    "hotkey": {
+      "$ref": "#/definitions/Hotkey",
+      "description": "Define hotkeys, for example for search"
+    },
+    "footer": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "description": "footer Line content. HTML is supported. Set false if you want to hide it."
+    },
+    "columns": {
+      "type": "string",
+      "description": "'auto' or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)",
+      "format": "integer"
+    },
+    "connectivityCheck": {
+      "type": "boolean",
+      "description": "# whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example). You should set it to true when using an authentication proxy, it also reloads the page when a redirection is detected when checking connectivity."
+    },
+    "proxy": {
+      "$ref": "#/definitions/Proxy",
+      "description": "Optional: Proxy / hosting option"
+    },
+    "defaults": {
+      "$ref": "#/definitions/Defaults"
+    },
+    "theme": {
+      "type": "string",
+      "description": "'default' or one of the themes available in 'src/assets/themes'"
+    },
+    "stylesheet": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Will load custom CSS files. Especially useful for custom icon sets. Entries are paths to the stylesheets"
+    },
+    "colors": {
+      "$ref": "#/definitions/Colors"
+    },
+    "message": {
+      "$ref": "#/definitions/Message",
+      "description": "Messagebox"
+    },
+    "links": {
+      "description": "Links in the navigation bar",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Link"
+      }
+    },
+    "services": {
+      "description": "Services",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Service"
+      }
+    }
+  }
+}

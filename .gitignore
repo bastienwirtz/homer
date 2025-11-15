@@ -24,3 +24,7 @@ yarn-error.log*
 config.yml
 
 .drone.yml
+
+# Specific Agent file
+CLAUDE.md
+GEMINI.md

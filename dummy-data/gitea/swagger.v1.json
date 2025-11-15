@@ -1,0 +1,11 @@
+{
+  "info": {
+    "description": "This documentation describes the Forgejo API.",
+    "title": "Forgejo API",
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "8.0.3+gitea-1.22.0"
+  }
+}

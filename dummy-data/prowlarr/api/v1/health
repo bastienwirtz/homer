@@ -1,0 +1,41 @@
+[
+  {
+    "source": "IndexerStatusCheck",
+    "type": "warning",
+    "message": "Indexer 1337x has been disabled due to recent failures: Connection timeout after 30 seconds",
+    "wikiUrl": "https://wiki.servarr.com/prowlarr/health#indexers-are-unavailable-due-to-recent-failures"
+  },
+  {
+    "source": "IndexerRSSCheck",
+    "type": "ok",
+    "message": "All indexer RSS feeds are functioning normally"
+  },
+  {
+    "source": "ApplicationStatusCheck", 
+    "type": "warning",
+    "message": "Application Sonarr sync failed: Unable to connect to Sonarr at http://sonarr:8989",
+    "wikiUrl": "https://wiki.servarr.com/prowlarr/health#applications-are-unavailable-due-to-recent-failures"
+  },
+  {
+    "source": "UpdateCheck",
+    "type": "ok",
+    "message": "Update available: 1.11.4.4173 -> 1.12.2.4211"
+  },
+  {
+    "source": "IndexerSearchCheck",
+    "type": "error",
+    "message": "Indexer TorrentLeech returned invalid search results: Malformed JSON response",
+    "wikiUrl": "https://wiki.servarr.com/prowlarr/health#indexer-search-failures"
+  },
+  {
+    "source": "ProxyCheck",
+    "type": "ok",
+    "message": "No proxy configuration issues detected"
+  },
+  {
+    "source": "IndexerLongTermStatusCheck",
+    "type": "warning",
+    "message": "Indexer RARBG has been failing for more than 6 hours: HTTP 403 Forbidden",
+    "wikiUrl": "https://wiki.servarr.com/prowlarr/health#indexers-are-unavailable-due-to-recent-failures"
+  }
+]

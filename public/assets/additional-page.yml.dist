@@ -24,7 +24,7 @@ links:
     url: "https://www.wikipedia.org/"
 
 services:
-  - name: "More applications on another page!"
+  - name: "More apps on another page!"
     icon: "fas fa-cloud"
     items:
       - name: "Awesome app on a second page!"

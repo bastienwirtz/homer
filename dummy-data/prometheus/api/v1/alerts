@@ -1,0 +1,99 @@
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "HighCPUUsage",
+          "instance": "localhost:9090",
+          "job": "prometheus",
+          "severity": "warning"
+        },
+        "annotations": {
+          "description": "CPU usage is above 80% for more than 5 minutes",
+          "summary": "High CPU usage detected"
+        },
+        "state": "firing",
+        "activeAt": "2024-01-15T10:30:00.000Z",
+        "value": "85.2"
+      },
+      {
+        "labels": {
+          "alertname": "HighMemoryUsage", 
+          "instance": "web-server-01:9090",
+          "job": "node-exporter",
+          "severity": "critical"
+        },
+        "annotations": {
+          "description": "Memory usage is above 90% for more than 10 minutes",
+          "summary": "Critical memory usage detected"
+        },
+        "state": "firing",
+        "activeAt": "2024-01-15T10:25:00.000Z",
+        "value": "92.8"
+      },
+      {
+        "labels": {
+          "alertname": "DiskSpaceLow",
+          "instance": "db-server-01:9090", 
+          "job": "node-exporter",
+          "severity": "warning",
+          "device": "/dev/sda1"
+        },
+        "annotations": {
+          "description": "Disk space is below 20% on {{ $labels.device }}",
+          "summary": "Low disk space warning"
+        },
+        "state": "pending",
+        "activeAt": "2024-01-15T11:00:00.000Z",
+        "value": "18.5"
+      },
+      {
+        "labels": {
+          "alertname": "ServiceDown",
+          "instance": "api-server-02:8080",
+          "job": "api-health-check",
+          "severity": "critical",
+          "service": "user-api"
+        },
+        "annotations": {
+          "description": "Service {{ $labels.service }} is not responding",
+          "summary": "Service is down"
+        },
+        "state": "pending",
+        "activeAt": "2024-01-15T11:10:00.000Z",
+        "value": "0"
+      },
+      {
+        "labels": {
+          "alertname": "DatabaseConnections",
+          "instance": "db-server-01:5432",
+          "job": "postgres-exporter", 
+          "severity": "info"
+        },
+        "annotations": {
+          "description": "Database connection count is normal",
+          "summary": "Database connections stable"
+        },
+        "state": "inactive",
+        "activeAt": "2024-01-15T09:00:00.000Z",
+        "value": "45"
+      },
+      {
+        "labels": {
+          "alertname": "HTTPResponseTime",
+          "instance": "web-server-02:80",
+          "job": "blackbox-exporter",
+          "severity": "info"
+        },
+        "annotations": {
+          "description": "HTTP response time is within acceptable limits",
+          "summary": "Response time normal"
+        },
+        "state": "inactive",
+        "activeAt": "2024-01-15T08:30:00.000Z",
+        "value": "150"
+      }
+    ]
+  }
+}

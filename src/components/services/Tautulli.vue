@@ -21,16 +21,12 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "Tautulli",
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     stats: null,
@@ -45,13 +41,18 @@ export default {
     },
   },
   created() {
+    const checkInterval = parseInt(this.item.checkInterval, 10) || 0;
+    if (checkInterval > 0) {
+      setInterval(() => this.fetchStatus(), checkInterval);
+    }
+
     this.fetchStatus();
   },
   methods: {
     fetchStatus: async function () {
       try {
         const response = await this.fetch(
-          `/api/v2?apikey=${this.item.apikey}&cmd=get_activity`
+          `/api/v2?apikey=${this.item.apikey}&cmd=get_activity`,
         );
         this.error = false;
         this.stats = response.response.data;

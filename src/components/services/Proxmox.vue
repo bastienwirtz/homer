@@ -76,16 +76,12 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "Proxmox",
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     vms: {
@@ -122,7 +118,7 @@ export default {
         };
         const status = await this.fetch(
           `/api2/json/nodes/${this.item.node}/status`,
-          options
+          options,
         );
         // main metrics:
         const decimalsToShow = this.item.hide_decimals ? 0 : 1;
@@ -139,7 +135,7 @@ export default {
         if (this.isValueShown("vms")) {
           const vms = await this.fetch(
             `/api2/json/nodes/${this.item.node}/qemu`,
-            options
+            options,
           );
           this.parseVMsAndLXCs(vms, this.vms);
         }
@@ -147,7 +143,7 @@ export default {
         if (this.isValueShown("lxcs")) {
           const lxcs = await this.fetch(
             `/api2/json/nodes/${this.item.node}/lxc`,
-            options
+            options,
           );
           this.parseVMsAndLXCs(lxcs, this.lxcs);
         }
@@ -172,9 +168,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.is-number {
-  font-family: "Lato";
-}
 .healthy {
   color: green;
 }

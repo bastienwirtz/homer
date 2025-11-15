@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div
-      class="card"
-      :style="`background-color:${item.background};`"
-      :class="item.class"
-    >
+    <div class="card" :style="`background-color:${item.background};`">
       <a :href="item.url" :target="item.target" rel="noreferrer">
         <div class="card-content">
           <div :class="mediaClass">
@@ -16,21 +12,39 @@
               </div>
               <div v-if="item.icon" class="media-left">
                 <figure class="image is-48x48">
-                  <i style="font-size: 35px" :class="['fa-fw', item.icon]"></i>
+                  <i style="font-size: 32px" :class="['fa-fw', item.icon]"></i>
                 </figure>
               </div>
             </slot>
             <div class="media-content">
               <slot name="content">
-                <p class="title is-4">{{ item.name }}</p>
-                <p class="subtitle is-6" v-if="item.subtitle">
+                <p class="title">{{ item.name }}</p>
+                <p v-if="item.quick" class="quicklinks">
+                  <a
+                    v-for="(link, linkIndex) in item.quick"
+                    :key="linkIndex"
+                    :style="`background-color:${link.color};`"
+                    :href="link.url"
+                    :target="link.target"
+                    rel="noreferrer"
+                  >
+                    <span v-if="link.icon"
+                      ><i
+                        style="font-size: 12px"
+                        :class="['fa-fw', link.icon]"
+                      ></i
+                    ></span>
+                    {{ link.name }}
+                  </a>
+                </p>
+                <p v-if="item.subtitle" class="subtitle">
                   {{ item.subtitle }}
                 </p>
               </slot>
             </div>
             <slot name="indicator" class="indicator"></slot>
           </div>
-          <div class="tag" :class="item.tagstyle" v-if="item.tag">
+          <div v-if="item.tag" class="tag" :class="item.tagstyle">
             <strong class="tag-text">#{{ item.tag }}</strong>
           </div>
         </div>
@@ -62,6 +76,25 @@ export default {
 
   img {
     max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+a[href=""] {
+  pointer-events: none;
+  cursor: default;
+}
+
+.quicklinks {
+  float: right;
+  a {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    margin-left: 6px;
+    border-radius: 100px;
+    background-color: var(--background);
+    z-index: 9999;
+    pointer-events: all;
   }
 }
 </style>

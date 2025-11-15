@@ -16,16 +16,12 @@
 
 <script>
 import service from "@/mixins/service.js";
-import Generic from "./Generic.vue";
 
 export default {
   name: "Paperless",
   mixins: [service],
   props: {
     item: Object,
-  },
-  components: {
-    Generic,
   },
   data: () => ({
     api: null,
@@ -40,7 +36,7 @@ export default {
       const apikey = this.item.apikey;
       if (!apikey) {
         console.error(
-          "apikey is not present in config.yml for the paperless entry!"
+          "apikey is not present in config.yml for the paperless entry!",
         );
         return;
       }

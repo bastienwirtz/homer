@@ -25,11 +25,6 @@ export default {
       message: {},
     };
   },
-  created: async function () {
-    // Look for a new message if an endpoint is provided.
-    this.message = Object.assign({}, this.item);
-    await this.getMessage();
-  },
   computed: {
     show: function () {
       return this.message.title || this.message.content;
@@ -39,6 +34,11 @@ export default {
     item: function (item) {
       this.message = Object.assign({}, item);
     },
+  },
+  created: async function () {
+    // Look for a new message if an endpoint is provided.
+    this.message = Object.assign({}, this.item);
+    await this.getMessage();
   },
   methods: {
     getMessage: async function () {
@@ -67,12 +67,14 @@ export default {
     },
 
     downloadMessage: function (url) {
-      return fetch(url).then(function (response) {
-        if (response.status != 200) {
-          return;
-        }
-        return response.json();
-      });
+      return fetch(url, { headers: { Accept: "application/json" } }).then(
+        function (response) {
+          if (response.status != 200) {
+            return;
+          }
+          return response.json();
+        },
+      );
     },
 
     mapRemoteMessage: function (message) {

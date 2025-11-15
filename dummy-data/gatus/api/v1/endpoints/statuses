@@ -1,0 +1,211 @@
+[
+  {
+    "name": "Gateway",
+    "group": "Services",
+    "key": "services_gateway",
+    "results": [
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": true,
+        "timestamp": "2025-05-26T07:35:41.784208588Z"
+      },
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": true,
+        "timestamp": "2025-05-26T07:40:41.804489793Z"
+      },
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": true,
+        "timestamp": "2025-05-26T07:45:41.837925713Z"
+      },
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": true,
+        "timestamp": "2025-05-26T07:50:41.848391366Z"
+      }
+    ]
+  },
+  {
+    "name": "Website",
+    "group": "External",
+    "key": "external_website",
+    "results": [
+      {
+        "status": 200,
+        "hostname": "www.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": false
+          }
+        ],
+        "success": false,
+        "timestamp": "2025-05-26T07:35:41.784208588Z"
+      },
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": false
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": false,
+        "timestamp": "2025-05-26T07:40:41.804489793Z"
+      },
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": true,
+        "timestamp": "2025-05-26T07:45:41.837925713Z"
+      },
+      {
+        "status": 200,
+        "hostname": "gateway.example.com",
+        "duration": 10000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": true
+          },
+          {
+            "condition": "[RESPONSE_TIME] < 500",
+            "success": true
+          }
+        ],
+        "success": true,
+        "timestamp": "2025-05-26T07:50:41.848391366Z"
+      }
+    ]
+  },
+  {
+    "name": "DNS",
+    "group": "Services",
+    "key": "services_dns",
+    "results": [
+      {
+        "status": 200,
+        "hostname": "ns1.example",
+        "duration": 20000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": false
+          }
+        ],
+        "success": false,
+        "timestamp": "2025-05-26T07:35:41.784208588Z"
+      },
+      {
+        "status": 200,
+        "hostname": "ns1.example.com",
+        "duration": 20000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": false
+          }
+        ],
+        "success": false,
+        "timestamp": "2025-05-26T07:40:41.804489793Z"
+      },
+      {
+        "status": 200,
+        "hostname": "ns1.example.com",
+        "duration": 20000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": false
+          }
+        ],
+        "success": false,
+        "timestamp": "2025-05-26T07:45:41.837925713Z"
+      },
+      {
+        "status": 200,
+        "hostname": "ns1.example.com",
+        "duration": 20000000,
+        "conditionResults": [
+          {
+            "condition": "[STATUS] == 200",
+            "success": false
+          }
+        ],
+        "success": false,
+        "timestamp": "2025-05-26T07:50:41.848391366Z"
+      }
+    ]
+  }
+]

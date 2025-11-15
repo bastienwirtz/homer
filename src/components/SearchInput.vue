@@ -1,15 +1,19 @@
 <template>
-  <div class="search-bar">
-    <label for="search" class="search-label"></label>
-    <input
-      type="text"
-      ref="search"
-      :value="value"
-      @input="search($event.target.value)"
-      @keyup.enter.exact="open()"
-      @keyup.alt.enter="open('_blank')"
-    />
-  </div>
+  <search class="search-bar">
+    <form role="search">
+      <label for="search" class="search-label"></label>
+      <input
+        id="search"
+        ref="search"
+        name="search"
+        type="search"
+        :value="value"
+        @input.stop="search($event.target.value)"
+        @keydown.enter.exact.prevent="open()"
+        @keydown.alt.enter.prevent="open('_blank')"
+      />
+    </form>
+  </search>
 </template>
 
 <script>
@@ -22,9 +26,10 @@ export default {
       default: "/",
     },
   },
+  emits: ["search-open", "search-focus", "search-cancel", "input"],
   mounted() {
     this._keyListener = function (event) {
-      if (event.key === this.hotkey) {
+      if (!this.hasFocus() && event.key === this.hotkey) {
         event.preventDefault();
         this.focus();
       }
@@ -42,6 +47,9 @@ export default {
       this.focus();
     }
   },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this._keyListener);
+  },
   methods: {
     open: function (target = null) {
       if (!this.$refs.search.value) {
@@ -54,6 +62,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.search.focus();
       });
+    },
+    hasFocus: function () {
+      return document.activeElement == this.$refs.search;
     },
     setSearchURL: function (value) {
       const url = new URL(window.location);
@@ -74,9 +85,6 @@ export default {
       this.setSearchURL(value);
       this.$emit("input", value.toLowerCase());
     },
-  },
-  beforeUnmount() {
-    document.removeEventListener("keydown", this._keyListener);
   },
 };
 </script>

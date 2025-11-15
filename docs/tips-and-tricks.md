@@ -2,6 +2,13 @@
 
 Here is a collection of neat tips and tricks that Homer users have come up with!
 
+## Dashboard icons
+
+Great source to find service icons
+
+- <https://selfh.st/icons/>
+- <https://github.com/homarr-labs/dashboard-icons>
+
 ## Use Homer as a custom "new tab" page
 
 #### `by @vosdev`
@@ -70,6 +77,21 @@ Then when Homer reads your config, it will substitute your anchors automatically
 
 The end result is that if you want to update the name or style of any particular tag, just update it once, in the tags section!
 Great if you have a lot of services or a lot of tags!  
+
+## YAML auto complete with a YAML schema 
+
+A lot of editor support auto completion, see <https://www.schemastore.org/json/>   
+The homer schema is available here: <https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json>
+
+For example with IntelliJ you can define:
+
+```yaml
+# $schema: https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json
+```
+With VSCode you can define it like this:
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json
+```
 
 ## Remotely edit your config with Code Server
 
@@ -190,3 +212,35 @@ So, using [Node-Red](https://nodered.org/docs/getting-started/) and a quick flow
 To get started, simply import [this flow](https://flows.nodered.org/flow/4b6406c9a684c26ace0430dd1826e95d) into your Node-Red instance and change the RSS feed in the "Get News RSS Feed" node to one of your choosing!
 
 So far, the flow has been tested with BBC News and Sky News, however it should be easy to modify the flow to work with other RSS feeds if they don't work out of the box!
+
+## Write HTML into the dashboard
+
+### Show latest camera feed
+
+#### `by @matheusvellone`
+
+The `message.content` config entry accepts HTML code, so you can add images.
+If you use Frigate, or have any `latest.jpg` URL for your camera, you can add it to your dashboard. You can also style the `div`/`img` tags to look nicer on your dashboard.
+
+```yml
+message:
+  title: Cameras
+  content: >
+    <div>
+      <a href="http://frigate.local:5000/cameras/garage">
+        <img src="http://frigate.local:5000/api/garage/latest.jpg?h=220"/>
+      </a>
+      <a href="http://frigate.local:5000/cameras/backyard">
+        <img src="http://frigate.local:5000/api/backyard/latest.jpg?h=220"/>
+      </a>
+    </div>
+```
+
+When using Frigate you can even add a live feed to your dashboard, like this:
+
+```yml
+message:
+  title: Cameras
+  content: >
+    <img src="http://frigate.local:5000/api/piscina"/>
+```

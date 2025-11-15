@@ -2,7 +2,7 @@
 	"domains_being_blocked": 152588,
 	"dns_queries_today": 0,
 	"ads_blocked_today": 0,
-	"ads_percentage_today": 42,
+	"percent_blocked": 42,
 	"unique_domains": 0,
 	"queries_forwarded": 0,
 	"queries_cached": 0,

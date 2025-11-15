@@ -1,0 +1,45 @@
+// Theme colors
+.light {
+  --highlight-primary: #3367d6;
+  --highlight-secondary: #4285f4;
+  --highlight-hover: #5a95f5;
+  --background: #f5f5f5;
+  --card-background: #ffffff;
+  --text: #363636;
+  --text-header: #ffffff;
+  --text-title: #303030;
+  --text-subtitle: #424242;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --link: #3273dc;
+  --link-hover: #363636;
+  --background-image: none;
+
+  --highlight-variant-inverted: #363636;
+}
+
+.dark {
+  --highlight-primary: #3367d6;
+  --highlight-secondary: #4285f4;
+  --highlight-hover: #5a95f5;
+  --background: #131313;
+  --card-background: #282828;
+  --text: #eaeaea;
+  --text-header: #ffffff;
+  --text-title: #fafafa;
+  --text-subtitle: #b6b6b6; 
+  --card-shadow: rgba(0, 0, 0, 0.4);
+  --link: #3273dc;
+  --link-hover: #144aa2;
+  --background-image: none;
+
+  --highlight-variant-inverted: #f5f5f5;
+}
+
+#app {
+  --highlight-blue: #444b6e;
+  --highlight-red: #c83e4d;
+  --highlight-pink: #ff6392;
+  --highlight-orange: #ff8a08;
+  --highlight-green: #22a699;
+  --highlight-purple: #711db0;
+}

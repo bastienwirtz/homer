@@ -1,0 +1,470 @@
+{
+  "totalFileCount": 3245,
+  "totalTranscodeCount": 3148,
+  "totalHealthCheckCount": 7278,
+  "sizeDiff": 5265.423687950708,
+  "_id": "statistics",
+  "tdarrScore": "99.97",
+  "healthCheckScore": "99.97",
+  "table0Count": 0,
+  "table2Count": 3244,
+  "table3Count": 0,
+  "table4Count": 1,
+  "table5Count": 3244,
+  "table6Count": 0,
+  "table1Count": 1,
+  "pies": [
+    [
+      "All",
+      "all",
+      3245,
+      3148,
+      5265.423687950708,
+      7278,
+      [
+        {
+          "name": "Transcode success",
+          "value": 1995
+        },
+        {
+          "name": "Not required",
+          "value": 1249
+        },
+        {
+          "name": "Queued",
+          "value": 1
+        }
+      ],
+      [
+        {
+          "name": "Success",
+          "value": 3244
+        },
+        {
+          "name": "Queued",
+          "value": 1
+        }
+      ],
+      [
+        {
+          "name": "hevc",
+          "value": 3172
+        },
+        {
+          "name": "vp9",
+          "value": 48
+        },
+        {
+          "name": "h264",
+          "value": 24
+        }
+      ],
+      [
+        {
+          "name": "mkv",
+          "value": 3115
+        },
+        {
+          "name": "webm",
+          "value": 48
+        },
+        {
+          "name": "mp4",
+          "value": 81
+        }
+      ],
+      [
+        {
+          "name": "1080p",
+          "value": 2582
+        },
+        {
+          "name": "480p",
+          "value": 406
+        },
+        {
+          "name": "720p",
+          "value": 224
+        },
+        {
+          "name": "4KUHD",
+          "value": 29
+        },
+        {
+          "name": "576p",
+          "value": 3
+        }
+      ],
+      [],
+      []
+    ],
+    [
+      "Type1",
+      "t7_0knr-z",
+      3,
+      0,
+      0,
+      3,
+      [
+        {
+          "name": "Not required",
+          "value": 3
+        }
+      ],
+      [
+        {
+          "name": "Success",
+          "value": 3
+        }
+      ],
+      [
+        {
+          "name": "hevc",
+          "value": 3
+        }
+      ],
+      [
+        {
+          "name": "mkv",
+          "value": 3
+        }
+      ],
+      [
+        {
+          "name": "480p",
+          "value": 3
+        }
+      ],
+      [],
+      []
+    ],
+    [
+      "Type2",
+      "ekyBRmWbD",
+      9,
+      13,
+      10.722183834761381,
+      65,
+      [
+        {
+          "name": "Transcode success",
+          "value": 9
+        }
+      ],
+      [
+        {
+          "name": "Success",
+          "value": 9
+        }
+      ],
+      [
+        {
+          "name": "hevc",
+          "value": 9
+        }
+      ],
+      [
+        {
+          "name": "mkv",
+          "value": 9
+        }
+      ],
+      [
+        {
+          "name": "480p",
+          "value": 1
+        },
+        {
+          "name": "576p",
+          "value": 1
+        },
+        {
+          "name": "720p",
+          "value": 4
+        },
+        {
+          "name": "1080p",
+          "value": 3
+        }
+      ],
+      [],
+      []
+    ],
+    [
+      "Type3",
+      "-dy1H5yNz",
+      2619,
+      2641,
+      2710.185842271894,
+      5837,
+      [
+        {
+          "name": "Transcode success",
+          "value": 1586
+        },
+        {
+          "name": "Not required",
+          "value": 1033
+        }
+      ],
+      [
+        {
+          "name": "Success",
+          "value": 2619
+        }
+      ],
+      [
+        {
+          "name": "hevc",
+          "value": 2571
+        },
+        {
+          "name": "vp9",
+          "value": 48
+        }
+      ],
+      [
+        {
+          "name": "mkv",
+          "value": 2510
+        },
+        {
+          "name": "webm",
+          "value": 48
+        },
+        {
+          "name": "mp4",
+          "value": 61
+        }
+      ],
+      [
+        {
+          "name": "1080p",
+          "value": 2050
+        },
+        {
+          "name": "720p",
+          "value": 186
+        },
+        {
+          "name": "480p",
+          "value": 383
+        }
+      ],
+      [],
+      []
+    ],
+    [
+      "Type4",
+      "ASRD2TAeP",
+      1,
+      11,
+      83.31165281962603,
+      32,
+      [
+        {
+          "name": "Queued",
+          "value": 1
+        }
+      ],
+      [
+        {
+          "name": "Queued",
+          "value": 1
+        }
+      ],
+      [
+        {
+          "name": "h264",
+          "value": 1
+        }
+      ],
+      [
+        {
+          "name": "mp4",
+          "value": 1
+        }
+      ],
+      [
+        {
+          "name": "1080p",
+          "value": 1
+        }
+      ],
+      [],
+      []
+    ],
+    [
+      "Type5",
+      "KQ03rLWIw",
+      11,
+      14,
+      17.225701110437512,
+      43,
+      [
+        {
+          "name": "Not required",
+          "value": 11
+        }
+      ],
+      [
+        {
+          "name": "Success",
+          "value": 11
+        }
+      ],
+      [
+        {
+          "name": "hevc",
+          "value": 11
+        }
+      ],
+      [
+        {
+          "name": "mkv",
+          "value": 11
+        }
+      ],
+      [
+        {
+          "name": "720p",
+          "value": 6
+        },
+        {
+          "name": "480p",
+          "value": 4
+        },
+        {
+          "name": "1080p",
+          "value": 1
+        }
+      ],
+      [],
+      []
+    ],
+    [
+      "Type6",
+      "RQhHe9OCl",
+      602,
+      473,
+      2420.9242209186777,
+      1300,
+      [
+        {
+          "name": "Not required",
+          "value": 202
+        },
+        {
+          "name": "Transcode success",
+          "value": 400
+        }
+      ],
+      [
+        {
+          "name": "Success",
+          "value": 602
+        }
+      ],
+      [
+        {
+          "name": "hevc",
+          "value": 578
+        },
+        {
+          "name": "h264",
+          "value": 23
+        }
+      ],
+      [
+        {
+          "name": "mkv",
+          "value": 582
+        },
+        {
+          "name": "mp4",
+          "value": 19
+        }
+      ],
+      [
+        {
+          "name": "480p",
+          "value": 15
+        },
+        {
+          "name": "1080p",
+          "value": 527
+        },
+        {
+          "name": "4KUHD",
+          "value": 29
+        },
+        {
+          "name": "720p",
+          "value": 28
+        },
+        {
+          "name": "576p",
+          "value": 2
+        }
+      ],
+      [],
+      []
+    ]
+  ],
+  "streamStats": {
+    "duration": {
+      "average": 3127,
+      "highest": 8548,
+      "total": 253273
+    },
+    "bit_rate": {
+      "average": 2242894,
+      "highest": 20149278,
+      "total": 181674395
+    },
+    "nb_frames": {
+      "average": 75320,
+      "highest": 204941,
+      "total": 6100852
+    }
+  },
+  "avgNumberOfStreamsInVideo": 5.049321824907522,
+  "languages": {
+    "ara": {
+      "count": 181
+    },
+    "est": {
+      "count": 62
+    },
+    "lav": {
+      "count": 62
+    },
+    "may": {
+      "count": 131
+    },
+    "nor": {
+      "count": 110
+    },
+    "chi": {
+      "count": 384
+    },
+    "ind": {
+      "count": 63
+    },
+    "rum": {
+      "count": 138
+    },
+    "nob": {
+      "count": 18
+    },
+    "srp": {
+      "count": 3
+    }
+  },
+  "DBPollPeriod": "1s",
+  "DBFetchTime": "1s",
+  "DBLoadStatus": "Stable",
+  "DBQueue": 0,
+  "processWarning": "",
+  "processWarningQueues": true
+}

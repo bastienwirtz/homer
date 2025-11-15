@@ -1,0 +1,16 @@
+[
+  {
+    "movieId": 1,
+    "title": "Inception (2010)",
+    "trackedDownloadStatus": "ok",
+    "trackedDownloadState": "importPending",
+    "id": 1
+  },
+  {
+    "movieId": 2,
+    "title": "The Matrix (1999)",
+    "trackedDownloadStatus": "warning",
+    "trackedDownloadState": "downloading",
+    "id": 2
+  }
+]

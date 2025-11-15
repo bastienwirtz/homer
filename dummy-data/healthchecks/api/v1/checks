@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "name": "Database Backup",
+      "tags": "backup database",
+      "desc": "Daily database backup job",
+      "grace": 3600,
+      "n_pings": 127,
+      "status": "up",
+      "last_ping": "2024-01-15T10:30:00+00:00",
+      "next_ping": "2024-01-16T10:30:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    {
+      "name": "Web Server Monitoring",
+      "tags": "web server nginx",
+      "desc": "Monitor web server health",
+      "grace": 300,
+      "n_pings": 2847,
+      "status": "up",
+      "last_ping": "2024-01-15T10:25:00+00:00",
+      "next_ping": "2024-01-15T10:30:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "b2c3d4e5-f6g7-8901-bcde-f23456789012"
+    },
+    {
+      "name": "SSL Certificate Check",
+      "tags": "ssl certificate",
+      "desc": "Weekly SSL certificate expiry check",
+      "grace": 86400,
+      "n_pings": 52,
+      "status": "up",
+      "last_ping": "2024-01-14T12:00:00+00:00",
+      "next_ping": "2024-01-21T12:00:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "c3d4e5f6-g7h8-9012-cdef-345678901234"
+    },
+    {
+      "name": "Log Cleanup Service",
+      "tags": "cleanup logs maintenance",
+      "desc": "Weekly log file cleanup",
+      "grace": 7200,
+      "n_pings": 15,
+      "status": "grace",
+      "last_ping": "2024-01-13T02:00:00+00:00",
+      "next_ping": "2024-01-20T02:00:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "d4e5f6g7-h8i9-0123-defa-456789012345"
+    },
+    {
+      "name": "Email Service",
+      "tags": "email smtp",
+      "desc": "Email service availability check",
+      "grace": 600,
+      "n_pings": 0,
+      "status": "down",
+      "last_ping": "2024-01-12T08:15:00+00:00",
+      "next_ping": "2024-01-15T08:15:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "e5f6g7h8-i9j0-1234-efab-567890123456"
+    },
+    {
+      "name": "API Health Check",
+      "tags": "api health",
+      "desc": "External API endpoint health monitoring",
+      "grace": 180,
+      "n_pings": 1440,
+      "status": "up",
+      "last_ping": "2024-01-15T10:28:00+00:00",
+      "next_ping": "2024-01-15T10:30:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "f6g7h8i9-j0k1-2345-fabc-678901234567"
+    },
+    {
+      "name": "Backup Verification",
+      "tags": "backup verify",
+      "desc": "Verify backup integrity",
+      "grace": 1800,
+      "n_pings": 45,
+      "status": "grace",
+      "last_ping": "2024-01-14T22:30:00+00:00",
+      "next_ping": "2024-01-15T22:30:00+00:00",
+      "manual_resume": false,
+      "methods": "",
+      "unique_key": "g7h8i9j0-k1l2-3456-gbcd-789012345678"
+    }
+  ]
+}
