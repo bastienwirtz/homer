@@ -32,6 +32,7 @@ Available services are located in `src/components/`:
 - [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
+- [Miniflux](#miniflux)
 - [Nextcloud](#nextcloud)
 - [OctoPrint / Moonraker](#octoprintmoonraker)
 - [Olivetin](#olivetin)
@@ -388,6 +389,22 @@ Displays News (grey), Warning (orange) or Error (red) notifications bubbles from
 The url must be the root url of Medusa application.
 
 **API Key**: The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Miniflux
+
+Displays the number of unread articles from your Miniflux RSS reader.
+
+```yaml
+- name: "Miniflux"
+  type: "Miniflux"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
+  apikey: "<---insert-api-key-here--->"
+  style: "status" # Either "status" or "counter"
+  checkInterval: 60000 # Optional: Interval (in ms) for updating the unread count
+```
+
+**API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
 
 ## Nextcloud
 
