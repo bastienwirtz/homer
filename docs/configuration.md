@@ -183,9 +183,9 @@ Empty values (either in `config.yml` or the endpoint data) will hide the element
 ## Connectivity checks
 
 As a webapp (PWA) the dashboard can still be displayed when your homer server is offline.
-The connectivity checker periodically send a HEAD request bypassing the PWA cache to the dashbord page to make sure it's still reachable.
+The connectivity checker periodically sends a HEAD request bypassing the PWA cache to the dashbord page to make sure it's still reachable.
 
-It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know is your conection is up. It also helps when using an authentication proxy, it will reloads the page if the authentication expires (when a redirection is send in response to the HEAD request).
+It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know if your conection is up. It also helps when using an authentication proxy, it will reload the page if the authentication expires (when a redirect is send in response to the HEAD request).
 
 ## Style Options
 
