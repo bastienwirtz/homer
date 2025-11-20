@@ -59,24 +59,18 @@ export default {
     },
   },
   created() {
-    // Set intervals if configured so the rates and/or torrent count
-    // will be updated.
-    const rateInterval = parseInt(this.item.rateInterval, 10) || 0;
-    const torrentInterval = parseInt(this.item.torrentInterval, 10) || 0;
-
-    if (rateInterval > 0) {
-      setInterval(() => this.fetchRates(), rateInterval);
-    }
-
-    if (torrentInterval > 0) {
-      setInterval(() => this.fetchCount(), torrentInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchAllData;
 
     // Fetch the initial values.
-    this.fetchRates();
-    this.fetchCount();
+    this.fetchAllData();
   },
   methods: {
+    // Combined method for scheduler - fetches both rates and count
+    fetchAllData: async function () {
+      this.fetchRates();
+      this.fetchCount();
+    },
     // Perform two calls to the XML-RPC service and fetch download
     // and upload rates. Values are saved to the `ul` and `dl`
     // properties.

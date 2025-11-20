@@ -130,6 +130,11 @@ export default {
     DarkMode,
     DynamicTheme,
   },
+  provide() {
+    return {
+      config: () => this.config,
+    };
+  },
   data: function () {
     return {
       loaded: false,
