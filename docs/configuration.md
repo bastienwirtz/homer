@@ -25,6 +25,11 @@ logo: "assets/logo.png"
 # Alternatively a fa icon can be provided:
 # icon: "fas fa-skull-crossbones"
 
+# Optional: Provide different logos for light and dark themes
+# logo:
+#   light: "assets/logo-light.png"
+#   dark: "assets/logo-dark.png"
+
 header: true # Set to false to hide the header
 # Optional: Different hotkey for search, defaults to "/"
 # hotkey:
@@ -139,6 +144,10 @@ services:
         logo: "assets/tools/sample.png"
         # Alternatively a fa icon can be provided:
         # icon: "fab fa-jenkins"
+        # Provide different logos for light and dark themes:
+        # logo:
+        #   light: "assets/tools/sample-light.png"
+        #   dark: "assets/tools/sample-dark.png"
         subtitle: "Bookmark example"
         tag: "app"
         keywords: "self hosted reddit" # optional keyword used for searching purpose

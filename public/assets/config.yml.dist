@@ -7,6 +7,11 @@ subtitle: "Homer"
 logo: "logo.png"
 # icon: "fas fa-skull-crossbones" # Optional icon
 
+# Optional: Provide different logos for light and dark themes
+# logo:
+#   light: "logo-light.png"
+#   dark: "logo-dark.png"
+
 header: true
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
@@ -76,6 +81,12 @@ services:
     items:
       - name: "Get started"
         icon: "fa-solid fa-download"
+        # Alternatively a logo can be provided:
+        # logo: "assets/tools/sample.png"
+        # Provide different logos for light and dark themes:
+        # logo:
+        #   light: "assets/tools/sample-light.png"
+        #   dark: "assets/tools/sample-dark.png"
         subtitle: "Start using Homer in a few minutes"
         tag: "setup"
         url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#get-started"
