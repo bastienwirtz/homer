@@ -38,13 +38,22 @@ export default {
   }),
   computed: {
     embyCount: function () {
-      if (this.item.libraryType === "music")
-        return `${this.songCount} songs, ${this.albumCount} albums`;
-      else if (this.item.libraryType === "movies")
-        return `${this.movieCount} movies`;
-      else if (this.item.libraryType === "series")
-        return `${this.episodeCount} eps, ${this.seriesCount} series`;
-      else return `wrong library type 💀`;
+      const types = this.item.libraryType.split('|');
+      const results = [];
+      
+      for (const type of types) {
+        if (type === "music") {
+          results.push(`${this.songCount} songs, ${this.albumCount} albums`);
+        } else if (type === "movies") {
+          results.push(`${this.movieCount} movies`);
+        } else if (type === "series") {
+          results.push(`${this.episodeCount} eps, ${this.seriesCount} series`);
+        } else {
+          results.push(`wrong library type 💀`);
+        }
+      }
+      
+      return results.join(', ');
     },
   },
   created() {
