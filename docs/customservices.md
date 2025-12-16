@@ -842,3 +842,18 @@ Display info about the number of container running and the number for which an u
   url: https://my-service.url
   subtitle: "Docker image update notifier"
 ```
+## Badge
+
+For shields.io Badge.  
+Use type *Badge*, and set the field *badge* with the url of the badge.
+
+```yaml
+- name: "Your APP"
+  type: Badge
+  logo: "assets/tools/sample.png"
+  url: "http://192.168.0.151/"
+  badge: https://img.shields.io/website?down_color=red&down_message=down&style=for-the-badge&up_color=green&up_message=up&url=http%3A%2F%2F192.168.0.151
+  # or any other badge, 
+  # Or any image, actually.
+  ```
+  
