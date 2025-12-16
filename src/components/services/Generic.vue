@@ -5,9 +5,9 @@
         <div class="card-content">
           <div :class="mediaClass">
             <slot name="icon">
-              <div v-if="item.logo" class="media-left">
+              <div v-if="logoUrl" class="media-left">
                 <figure class="image is-48x48">
-                  <img :src="item.logo" :alt="`${item.name} logo`" />
+                  <img :src="logoUrl" :alt="`${item.name} logo`" />
                 </figure>
               </div>
               <div v-if="item.icon" class="media-left">
@@ -59,9 +59,61 @@ export default {
   props: {
     item: Object,
   },
+  data() {
+    return {
+      isDark: false,
+    };
+  },
   computed: {
     mediaClass: function () {
       return { media: true, "no-subtitle": !this.item.subtitle };
+    },
+    logoUrl: function () {
+      if (!this.item.logo) {
+        return null;
+      }
+      
+      // Support both string format and object format (light/dark)
+      if (typeof this.item.logo === "string") {
+        return this.item.logo;
+      }
+      
+      // Object format with light and dark properties
+      if (typeof this.item.logo === "object") {
+        return this.isDark ? this.item.logo.dark : this.item.logo.light;
+      }
+      
+      return null;
+    },
+  },
+  mounted() {
+    // Initialize theme state
+    this.updateTheme();
+    
+    // Watch for theme changes on the app element
+    const observer = new MutationObserver(() => {
+      this.updateTheme();
+    });
+    
+    const appElement = document.getElementById('app');
+    if (appElement) {
+      observer.observe(appElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+    }
+    
+    this._themeObserver = observer;
+  },
+  beforeUnmount() {
+    if (this._themeObserver) {
+      this._themeObserver.disconnect();
+    }
+  },
+  methods: {
+    updateTheme() {
+      const appElement = document.getElementById('app');
+      this.isDark = appElement?.classList.contains('dark') || false;
     },
   },
 };
