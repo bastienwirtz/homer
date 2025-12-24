@@ -15,10 +15,14 @@
 </template>
 
 <script>
+import fetchOptions from "@/mixins/fetchOptions.js";
+
 export default {
   name: "Message",
+  mixins: [fetchOptions],
   props: {
     item: Object,
+    proxy: Object,
   },
   data: function () {
     return {
@@ -67,14 +71,15 @@ export default {
     },
 
     downloadMessage: function (url) {
-      return fetch(url, { headers: { Accept: "application/json" } }).then(
-        function (response) {
-          if (response.status != 200) {
-            return;
-          }
-          return response.json();
-        },
-      );
+      const defaultHeaders = this.item?.headers || { Accept: "application/json" };
+      const options = this.buildFetchOptions(defaultHeaders);
+
+      return fetch(url, options).then((response) => {
+        if (response.status !== 200) {
+          return;
+        }
+        return response.json();
+      });
     },
 
     mapRemoteMessage: function (message) {
