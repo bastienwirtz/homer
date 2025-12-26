@@ -406,6 +406,19 @@ Displays the number of unread articles from your Miniflux RSS reader.
 
 **API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
 
+## Navidrome
+
+Displays Navidrome status (online or offline), last sync datetime, numbers of music folders and artists.
+
+```yaml
+- name: Navidrome
+  type: Navidrome
+  logo: assets/tools/sample.png
+  url: https://my-service.url
+  username: <---insert-user-name-here--->
+  password: <---insert-password-here--->
+```
+
 ## Nextcloud
 
 Displays Nextcloud version and shows if Nextcloud is online, offline, or in [maintenance
