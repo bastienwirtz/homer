@@ -49,10 +49,10 @@ export default {
   methods: {
     fetchStatus: async function () {
       const headers = {
-        Authorization: `bearer ${this.item.apikey}`,
+        Authorization: `MediaBrowser Token="${this.item.apikey}"`,
       };
       try {
-        const response = await this.fetch("/proxy/getSessions", { headers });
+        const response = await this.fetch("/Sessions", { headers });
         this.error = false;
         this.stats = response;
       } catch (e) {
