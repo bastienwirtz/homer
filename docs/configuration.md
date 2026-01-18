@@ -125,6 +125,9 @@ links:
     icon: "fas fa-file-alt"
     url: "#page2"
 
+# Optional: enable periodic refresh for all smart cards that implements it (unless overriden at service configuration level).
+updateIntervalMs: 30000 # interval in milliseconds, minimum is 1000 (1s). Remove or set to 0 to disable. Can be overriden at service level. (default disabled)
+
 # Services
 # First level array represents a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
@@ -183,9 +186,9 @@ Empty values (either in `config.yml` or the endpoint data) will hide the element
 ## Connectivity checks
 
 As a webapp (PWA) the dashboard can still be displayed when your homer server is offline.
-The connectivity checker periodically sends a HEAD request bypassing the PWA cache to the dashbord page to make sure it's still reachable.
+The connectivity checker periodically sends a HEAD request bypassing the PWA cache to the dashboard page to make sure it's still reachable.
 
-It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know if your conection is up. It also helps when using an authentication proxy, it will reload the page if the authentication expires (when a redirect is send in response to the HEAD request).
+It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know if your connection is up. It also helps when using an authentication proxy, it will reload the page if the authentication expires (when a redirect is send in response to the HEAD request).
 
 ## Style Options
 

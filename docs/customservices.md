@@ -1,6 +1,6 @@
 # Smart cards
 
-Smart cards provide specific integrations for external services. They display additional information and extra features beyond basic service card. Smart cards are enabled by adding a `type` key to the service item in your YAML configuration.
+Smart cards provide specific integration for external services. They display additional information and extra features beyond basic service card. Smart cards are enabled by adding a `type` key to the service item in your YAML configuration.
 
 Each service integration has different requirements and may need additional configuration parameters (see card list below).
 
@@ -8,7 +8,7 @@ Each service integration has different requirements and may need additional conf
 > Your `config.yml` file is exposed at `/assets/config.yml` via HTTP. Any sensitive information (like API keys)
 > in this file is visible to anyone who can access your Homer instance. Only include API keys if your Homer
 > instance is protected by authentication or access controls **or use a proxy like [`CORSair`](https://github.com/bastienwirtz/corsair)
->  to inject your credentials safely**, using environment variable on the server side. 
+>  to inject your credentials safely**, using environment variable on the server side.
 
 Available services are located in `src/components/`:
 
@@ -38,7 +38,7 @@ Available services are located in `src/components/`:
 - [Olivetin](#olivetin)
 - [OpenHAB](#openhab)
 - [OpenWeatherMap](#openweathermap)
-- [Paperless-NGX](#paperlessng)
+- [Paperless-NGX](#paperless-ngx)
 - [PeaNUT](#peanut)
 - [PiAlert](#pialert)
 - [PiHole](#pihole)
@@ -67,7 +67,7 @@ Available services are located in `src/components/`:
 >
 > - All services hosted on the **same domain** as Homer (mydomain.tld/pihole, mydomain.tld/proxmox) to avoid cross-domain request entirely.
 > - All services configured to **accept cross-site requests** by sending the necessary CORS headers (either directly in service configuration or via proxy).
-> - **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/bastienwirtz/corsair), a light and simple solution)
+> - **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/bastienwirtz/corsair), a light and simple solution).
 >
 > If you experience any issues, see the [troubleshooting](troubleshooting.md#my-service-card-doesnt-work-nothing-appears-or-offline-status-is-displayed-pi-hole-sonarr-ping-) page.
 
@@ -81,7 +81,6 @@ Available services are located in `src/components/`:
   endpoint: https://my-service-api.url # Optional: alternative base URL used to fetch service data when necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
   headers: # Optional: Override global proxy.headers configuration.
-  autoUpdateInterval: # Optional: Time in ms. Some services can periodically fetch data (see below)
 ```
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
@@ -161,7 +160,6 @@ Displays unread article count and total subscriptions from your FreshRSS server.
 - name: "FreshRSS"  
   type: "FreshRSS"
   url: https://my-service.url
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
   username: "<---your-username--->"
   password: "<---your-password--->"
 ```
@@ -178,16 +176,13 @@ Two lines are needed in the config.yml :
 ```
 
 Optionally, the results can be filtered to only include jobs in the defined groups:
+
 ```yaml
   groups: [Services, External]
 ```
 
-The status can be checked regularly by defining an update Interval in ms:
-```yaml
-  autoUpdateInterval: 5000
-```
-
 The average times can be hidden (saves their calculation also) by setting the following:
+
 ```yaml
   hideaverages: true
 ```
@@ -300,7 +295,7 @@ Displays user count, photo/video counts, and storage usage from your Immich serv
 
 ## Jellystat
 
-Display the number of concurrent streams on your jellyfin server.
+Display the number of concurrent streams on your Jellyfin server.
 
 ```yaml
 - name: "Jellystat"
@@ -310,7 +305,7 @@ Display the number of concurrent streams on your jellyfin server.
   apikey: "<---insert-api-key-here--->"
 ```
 
-**API Key**: You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
+**API Key**: You can create an API key in the dashboard of you Jellystat server: settings/API Keys -> Add Key
 
 
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
@@ -323,7 +318,6 @@ Two lines are needed in the `config.yml`:
   type: "Lidarr" # "Lidarr" "Prowlarr", "Radarr" or "Sonarr"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the status
   apikey: "<---insert-api-key-here--->"
 ```
 
@@ -377,7 +371,7 @@ The API page can be found: Click on hamburger menu -> Click on your profile -> C
 
 ## Medusa
 
-Displays News (grey), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
+Displays News (gray), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
 
 ```yaml
 - name: "Medusa"
@@ -402,7 +396,6 @@ Displays the number of unread articles from your Miniflux RSS reader.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   style: "status" # Either "status" or "counter"
-  checkInterval: 60000 # Optional: Interval (in ms) for updating the unread count
 ```
 
 **API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
@@ -422,7 +415,7 @@ mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.
 ## OctoPrint/Moonraker
 
 The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
-Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See <https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation> for details.
+Moonraker's API mimics a few of OctoPrint's endpoints which makes these services compatible. See <https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation> for details.
 
 ```yaml
 - name: "Octoprint"
@@ -521,7 +514,6 @@ Displays stats from your PiAlert server.
   type: "PiAlert"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
 ## PiHole
@@ -536,7 +528,6 @@ Displays info about your local PiHole instance right on your Homer dashboard.
   # endpoint: "https://my-service-api.url" # optional, For v6 API, this is the base URL used to fetch Pi-hole data overwriting the url
   apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
   apiVersion: 5 # optional, defaults to 5. Use 6 if your PiHole instance uses API v6
-  autoUpdateInterval: 3000 # optional, defaults to 300000. interval in ms to check Pi-hole status
 ```
 
 **API Key**: Required only if Pi-hole web interface is password protected. Go to **Settings > API/Web Interface > Show API token**
@@ -561,7 +552,6 @@ Optionally, use `successCodes` to define which HTTP response status codes should
   # successCodes: [200, 418] # Optional, default to all 2xx HTTP response status codes
   # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
-  # autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
 ```
 
 ## Plex
@@ -651,7 +641,6 @@ for setting up qBittorrent.
   type: "qBittorrent"
   logo: "assets/tools/sample.png"
   url: https://my-service.url # Your rTorrent web UI, f.e. ruTorrent or Flood.
-  autoUpdateInterval: 2000 # Interval for updating the download, upload rates & torrent count
 ```
 
 ## rTorrent
@@ -668,7 +657,6 @@ for setting up rTorrent.
   logo: "assets/tools/sample.png"
   url: "https://my-service.url" # Your rTorrent web UI, f.e. ruTorrent or Flood.
   xmlrpc: "https://my-service.url:port" # Reverse proxy for rTorrent's XML-RPC.
-  autoUpdateInterval: 5000 # Interval for updating the download, upload rates & torrent count.
   username: "username" # Username for logging into rTorrent (if applicable).
   password: "password" # Password for logging into rTorrent (if applicable).
 ```
@@ -683,7 +671,6 @@ Displays the number of currently active downloads on your SABnzbd instance.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the download count
 ```
 
 **API Key**: An API key is required, and can be obtained from the "Config" > "General" section of the SABnzbd config in the web UI.
@@ -697,7 +684,6 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
   type: "Scrutiny"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the status
 ```
 
 ## SpeedtestTracker
@@ -720,7 +706,6 @@ Displays the number of currently active streams on you Plex instance.
   type: "Tautulli"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the status  
   apikey: "<---insert-api-key-here--->"
 ```
 
@@ -748,7 +733,6 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
   type: "Tdarr"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  autoUpdateInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
 
 ## Traefik
@@ -776,7 +760,6 @@ The service communicates with the Transmission RPC interface which needs to be a
   url: "http://192.168.1.2:9091" # Your Transmission web interface URL
   type: "Transmission"
   auth: "username:password" # Optional: HTTP Basic Auth
-  autoUpdateInterval: 5000 # Optional: Interval for refreshing data (ms)
   target: "_blank" # Optional: HTML a tag target attribute
 ```
 
