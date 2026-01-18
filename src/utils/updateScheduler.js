@@ -13,7 +13,6 @@ class UpdateScheduler {
     this.registeredComponents = new Map();
     this.globalTimer = null;
     this.tickCount = 0;
-    this.isRunning = false;
   }
 
   register(component, intervalMs, updateMethod) {
@@ -31,6 +30,11 @@ class UpdateScheduler {
 
     const intervalSeconds = Math.floor(intervalMs / 1000);
     const componentId = this.generateComponentId(component);
+
+    if (!componentId) {
+      console.error(`UpdateScheduler: invalid component id`);
+      return;
+    }
 
     this.registeredComponents.set(componentId, {
       component,
@@ -60,12 +64,11 @@ class UpdateScheduler {
 
   generateComponentId(component) {
     // Use component's unique identifier or Vue instance uid
-    return component._uid || component.$.uid || Symbol("component");
+    return component._uid || component.$.uid
   }
 
   startGlobalTimer() {
-    if (!this.globalTimer && !this.isRunning) {
-      this.isRunning = true;
+    if (!this.globalTimer) {
       this.tickCount = 0;
 
       this.globalTimer = setInterval(() => {
@@ -81,7 +84,6 @@ class UpdateScheduler {
     if (this.globalTimer) {
       clearInterval(this.globalTimer);
       this.globalTimer = null;
-      this.isRunning = false;
       this.tickCount = 0;
       console.log("UpdateScheduler: Global timer stopped");
     }
@@ -99,30 +101,6 @@ class UpdateScheduler {
       }
     }
   }
-
-  pause() {
-    if (this.globalTimer) {
-      clearInterval(this.globalTimer);
-      this.globalTimer = null;
-      this.isRunning = false;
-      console.log("UpdateScheduler: Paused");
-    }
-  }
-
-  resume() {
-    if (!this.globalTimer && this.registeredComponents.size > 0) {
-      this.startGlobalTimer();
-      console.log("UpdateScheduler: Resumed");
-    }
-  }
-
-  getStatus() {
-    return {
-      isRunning: this.isRunning,
-      registeredCount: this.registeredComponents.size,
-      tickCount: this.tickCount,
-    };
-  }
 }
 
 // Create and export global singleton instance
@@ -132,9 +110,9 @@ const updateScheduler = new UpdateScheduler();
 if (typeof document !== "undefined") {
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-      updateScheduler.pause();
-    } else {
-      updateScheduler.resume();
+      updateScheduler.stopGlobalTimer();
+    } else if (updateScheduler.registeredComponents.size > 0) {
+      updateScheduler.startGlobalTimer();
     }
   });
 }
