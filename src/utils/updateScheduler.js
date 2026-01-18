@@ -4,6 +4,10 @@
  * its own setInterval timer, all components register with this centralized scheduler.
  *
  */
+
+const TICK_INTERVAL_MS = 1000; // 1 second tick resolution
+const MIN_INTERVAL_MS = TICK_INTERVAL_MS; // Minimum allowed update interval
+
 class UpdateScheduler {
   constructor() {
     this.registeredComponents = new Map();
@@ -16,6 +20,13 @@ class UpdateScheduler {
     if (!component || !updateMethod || intervalMs <= 0) {
       console.warn("UpdateScheduler: Invalid registration parameters");
       return;
+    }
+
+    if (intervalMs < MIN_INTERVAL_MS) {
+      console.warn(
+        `UpdateScheduler: Interval ${intervalMs}ms is below minimum. Adjusting to ${MIN_INTERVAL_MS}ms`,
+      );
+      intervalMs = MIN_INTERVAL_MS;
     }
 
     const intervalSeconds = Math.floor(intervalMs / 1000);
@@ -60,7 +71,7 @@ class UpdateScheduler {
       this.globalTimer = setInterval(() => {
         this.tickCount++;
         this.processUpdates();
-      }, 1000);
+      }, TICK_INTERVAL_MS);
 
       console.log("UpdateScheduler: Global timer started");
     }

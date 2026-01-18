@@ -23,7 +23,8 @@ export default {
     if (this.endpoint && this.endpoint.endsWith("/")) {
       this.endpoint = this.endpoint.slice(0, -1);
     }
-
+  },
+  beforeMount: function () {
     // Initialize auto-update if configured
     this.initAutoUpdate();
   },
@@ -95,21 +96,21 @@ export default {
     },
     getUpdateInterval: function () {
       // Check if auto-update is explicitly disabled for this service
-      if (this.item.autoUpdateInterval === false) {
+      if (
+        this.item.updateInterval === false ||
+        this.item.updateInterval === 0
+      ) {
         return 0;
       }
 
       // Use service-specific interval if defined
-      if (this.item.autoUpdateInterval) {
-        return parseInt(this.item.autoUpdateInterval, 10) || 0;
+      if (this.item.updateInterval) {
+        return parseInt(this.item.updateInterval, 10) || 0;
       }
 
       // Check for deprecated keys and warn users
       const deprecatedKeys = [
-        "interval",
-        "updateInterval",
         "checkInterval",
-        "localCheckInterval",
         "downloadInterval",
         "rateInterval",
         "torrentInterval",
@@ -119,43 +120,25 @@ export default {
         if (this.item[key]) {
           console.warn(
             `[DEPRECATED] Service "${this.item.name || "unknown"}" uses deprecated config key "${key}". ` +
-              `Please use "autoUpdateInterval" instead. Support for "${key}" will be removed in a future version.`,
+              `Please use "updateInterval" instead. Support for "${key}" will be removed in a future version.`,
           );
           return parseInt(this.item[key], 10) || 0;
         }
       }
 
       // Use global auto-update configuration
-      return this.getGlobalAutoUpdateInterval();
+      return this.getGlobalUpdateInterval();
     },
 
-    getGlobalAutoUpdateInterval: function () {
-      const globalAutoUpdate = this.globalConfig.autoUpdate;
+    getGlobalUpdateInterval: function () {
+      const globalAutoUpdate = this.globalConfig.updateIntervalMs;
 
       // If auto-update is not configured globally, disable
       if (!globalAutoUpdate) {
         return 0;
       }
 
-      // If global auto-update is explicitly disabled
-      if (globalAutoUpdate.enabled === false) {
-        return 0;
-      }
-
-      // If autoUpdate is just a number (simplified config)
-      if (typeof globalAutoUpdate === "number") {
-        return globalAutoUpdate;
-      }
-
-      // If autoUpdate is an object, use defaultInterval
-      if (
-        typeof globalAutoUpdate === "object" &&
-        globalAutoUpdate.defaultInterval
-      ) {
-        return parseInt(globalAutoUpdate.defaultInterval, 10) || 0;
-      }
-
-      return 0;
+      return parseInt(globalAutoUpdate, 10) || 0;
     },
   },
 };
