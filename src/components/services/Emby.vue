@@ -48,12 +48,20 @@ export default {
     },
   },
   created() {
-    this.fetchServerStatus();
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchAll;
 
-    if (!this.item.subtitle && this.status !== "dead")
-      this.fetchServerMediaStats();
+    // Initial data fetch
+    this.fetchAll();
   },
   methods: {
+    fetchAll: async function () {
+      this.fetchServerStatus();
+
+      if (!this.item.subtitle) {
+        this.fetchServerMediaStats();
+      }
+    },
     fetchServerStatus: async function () {
       this.fetch("/System/info/public")
         .then((response) => {
