@@ -32,6 +32,19 @@ All service components follow this architecture:
 - Use the `service.js` mixin (`src/mixins/service.js`) for common API functionality
 - Use a custom `fetch` method provided by the service mixin to seamlessly support proxy configuration, custom headers, and credentials.
 
+### Auto-Update Configuration
+
+Services support automatic data refreshing using a centralized scheduler system with global and per-service configuration:
+
+#### Global Configuration
+
+`autoUpdate: 30000` - Set default interval for all services (30 seconds)
+
+#### Service Configuration
+- **Service-specific interval**: `updateInterval: 10000` - Override global default
+- **Disable per service**: `autoUpdateInterval: false` - Disable for specific service
+- **Use global default**: Omit `autoUpdateInterval` to use global setting
+
 ### Configuration & Routing
 
 - **Multi-page Support**: Hash-based routing without Vue Router
