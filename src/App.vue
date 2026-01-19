@@ -15,7 +15,7 @@
         <div v-cloak class="container">
           <div class="logo">
             <a href="#">
-              <img v-if="config.logo" :src="config.logo" alt="dashboard logo" />
+              <img v-if="logoUrl" :src="logoUrl" alt="dashboard logo" />
             </a>
             <i v-if="config.icon" :class="config.icon"></i>
           </div>
@@ -147,6 +147,23 @@ export default {
   computed: {
     configurationNeeded: function () {
       return (this.loaded && !this.services) || this.configNotFound;
+    },
+    logoUrl: function () {
+      if (!this.config || !this.config.logo) {
+        return null;
+      }
+      
+      // Support both string format and object format (light/dark)
+      if (typeof this.config.logo === "string") {
+        return this.config.logo;
+      }
+      
+      // Object format with light and dark properties
+      if (typeof this.config.logo === "object") {
+        return this.isDark ? this.config.logo.dark : this.config.logo.light;
+      }
+      
+      return null;
     },
   },
   created: async function () {
