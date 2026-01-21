@@ -24,6 +24,7 @@ Available services are located in `src/components/`:
 - [Glances](#glances)
 - [Gotify](#gotify)
 - [Healthchecks](#healthchecks)
+- [Hyper HDR](#hyper-hdr)
 - [Home Assistant](#home-assistant)
 - [Immich](#immich)
 - [Jellystat](#jellystat)
@@ -280,6 +281,17 @@ http:
   cors_allowed_origins:
     - "http://homer.local:8080"
     - "https://your-homer-domain.com"
+```
+
+## Hyper HDR
+
+Display Hyper HDR instance name and status.
+
+```yaml
+- name: "HyperHDR"
+  type: "HyperHDR"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
 ```
 
 ## Immich
