@@ -149,7 +149,7 @@ The `libraryType` configuration let you choose which stats to show.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
-  libraryType: "music" # Choose which stats to show. Can be one of: music, series or movies.
+  libraryType: "music" # Choose which stats to show. Can be: music, movies, series, or multiple types separated by | (e.g., "music|movies")
 ```
 
 ## FreshRSS
