@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "homer.fullname" . }}-config
+  labels:
+    {{- include "homer.labels" . | nindent 4 }}
+data:
+  {{ toYaml .Values.config.data | nindent 2 }}
