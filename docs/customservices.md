@@ -421,7 +421,7 @@ Displays network monitoring stats (connected devices, alerts, network activity) 
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
 
-**API Key**: Generate an API key in NetAlertx web interface under **Settings > API Access > Generate API Key** or in your installation documentation.
+**API Key**: Get your API key in NetAlertx web interface under **Settings > General > API token** or in your installation documentation.
 
 **Note**: NetAlertx is the modern fork/rename of PiAlert. Both integrations are available in Homer for compatibility.
 
