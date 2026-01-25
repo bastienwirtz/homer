@@ -85,45 +85,50 @@ export default {
     },
     initAutoUpdate: function () {
       // Check if component has defined an auto-update method and interval
-      const interval = this.getUpdateInterval();
-      if (
-        interval > 0 &&
-        this.autoUpdateMethod &&
-        typeof this.autoUpdateMethod === "function"
-      ) {
-        updateScheduler.register(this, interval, this.autoUpdateMethod);
+      if (typeof this.autoUpdateMethod !== "function") {
+        return;
       }
+
+      const interval = this.getUpdateInterval();
+      if (interval > 0) {
+        return;
+      }
+      updateScheduler.register(this, interval, this.autoUpdateMethod);
     },
     getUpdateInterval: function () {
+      let intervalKey = "updateIntervalMs";
+
+      if (!Object.hasOwn(this.item, intervalKey)) {
+        const deprecatedKeys = [
+          "checkInterval",
+          "downloadInterval",
+          "rateInterval",
+          "torrentInterval",
+          "updateInterval",
+        ];
+
+        for (const key of deprecatedKeys) {
+          if (Object.hasOwn(this.item, key)) {
+            console.warn(
+              `[DEPRECATED] Service "${this.item.name || "unknown"}" uses deprecated config key "${key}". ` +
+                `Please use "${intervalKey}" instead. Support for "${key}" will be removed in a future version.`,
+            );
+            intervalKey = key;
+            break;
+          }
+        }
+      }
+
+      let interval = this.item[intervalKey];
+
       // Check if auto-update is explicitly disabled for this service
-      if (
-        this.item.updateInterval === false ||
-        this.item.updateInterval === 0
-      ) {
+      if (interval === false || interval === 0) {
         return 0;
       }
 
       // Use service-specific interval if defined
-      if (this.item.updateInterval) {
+      if (interval) {
         return parseInt(this.item.updateInterval, 10) || 0;
-      }
-
-      // Check for deprecated keys and warn users
-      const deprecatedKeys = [
-        "checkInterval",
-        "downloadInterval",
-        "rateInterval",
-        "torrentInterval",
-      ];
-
-      for (const key of deprecatedKeys) {
-        if (this.item[key]) {
-          console.warn(
-            `[DEPRECATED] Service "${this.item.name || "unknown"}" uses deprecated config key "${key}". ` +
-              `Please use "updateInterval" instead. Support for "${key}" will be removed in a future version.`,
-          );
-          return parseInt(this.item[key], 10) || 0;
-        }
       }
 
       // Use global auto-update configuration
