@@ -18,7 +18,8 @@
       </p>
     </template>
     <template #indicator>
-      <span v-if="!error" class="count">{{ count || 0 }}
+      <span v-if="!error" class="count"
+        >{{ count || 0 }}
         <template v-if="(count || 0) === 1">torrent</template>
         <template v-else>torrents</template>
       </span>
