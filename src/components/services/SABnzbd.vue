@@ -80,11 +80,10 @@ export default {
     },
   },
   created() {
-    const downloadInterval = parseInt(this.item.downloadInterval, 10) || 0;
-    if (downloadInterval > 0) {
-      setInterval(() => this.fetchStatus(), downloadInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchStatus;
 
+    // Initial data fetch
     this.fetchStatus();
   },
   methods: {

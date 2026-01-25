@@ -47,6 +47,10 @@ export default {
     };
   },
   created: function () {
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchConfig;
+
+    // Initial data fetch
     this.fetchConfig();
   },
   methods: {

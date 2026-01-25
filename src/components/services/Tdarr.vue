@@ -54,11 +54,10 @@ export default {
     },
   },
   created() {
-    const checkInterval = parseInt(this.item.checkInterval, 10) || 0;
-    if (checkInterval > 0) {
-      setInterval(() => this.fetchStatus(), checkInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchStatus;
 
+    // Initial data fetch
     this.fetchStatus();
   },
   methods: {

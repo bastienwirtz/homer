@@ -67,6 +67,10 @@ links:
   #  icon: "fas fa-file-alt"
   #  url: "#additional-page" 
 
+
+# Optional: enable periodic refresh for all smart cards that implements it (unless overriden at service configuration level).
+updateIntervalMs: 30000 # interval in milliseconds, minimum is 1000 (1s). Remove or set to 0 to disable. Can be overriden at service level. (default disabled)
+
 # Services
 # First level array represent a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
