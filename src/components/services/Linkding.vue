@@ -26,6 +26,10 @@ export default {
     },
   },
   created() {
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchBookmarks;
+
+    // Initial data fetch
     this.fetchBookmarks();
   },
   methods: {

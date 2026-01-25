@@ -40,10 +40,10 @@ export default {
     statusMessage: false,
   }),
   created() {
-    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
-    if (updateInterval > 0) {
-      setInterval(() => this.fetchStatus(), updateInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchStatus;
+
+    // Initial data fetch
     this.fetchStatus();
   },
   methods: {

@@ -44,10 +44,17 @@ export default {
     },
   },
   created() {
-    this.fetchStatus();
-    this.fetchMessages();
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchAll;
+
+    // Initial data fetch
+    this.fetchAll();
   },
   methods: {
+    fetchAll: async function () {
+      this.fetchStatus();
+      this.fetchMessages();
+    },
     fetchStatus: async function () {
       await this.fetch(`/health`)
         .catch((e) => console.log(e))

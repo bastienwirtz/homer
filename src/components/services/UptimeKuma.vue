@@ -110,6 +110,11 @@ export default {
   created() {
     /* eslint-disable */
     this.item.url = `${this.item.url}/status/${this.dashboard}`;
+    
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchStatus;
+
+    // Initial data fetch
     this.fetchStatus();
   },
   methods: {
