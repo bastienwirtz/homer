@@ -87,6 +87,10 @@ Available services are located in `src/components/`:
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
 
+> [!TIP]
+> **Auto refresh of the card data**: Some cards support periodic update (see indication in detail below). It can be enabled or disabled globally for all service, or individually for each service using the `updateIntervalMs` configuration option.
+
+
 ## AdGuard Home
 
 Displays AdGuard Home protection status and blocked query statistics.
@@ -104,6 +108,8 @@ Displays AdGuard Home protection status and blocked query statistics.
 > headers:  
 >   Authorization: "Basic <base64-encoded for username:password>"
 > ```
+
+Auto refresh is supported by this integration.
 
 ## Copy to Clipboard
 
@@ -128,6 +134,8 @@ Displays counts of running, stopped, and error containers from Docker Socket Pro
   logo: "assets/tools/sample.png"
   endpoint: "https://my-service-api.url:port"
 ```
+
+Auto refresh is supported by this integration.
 
 ## Docuseal
 
@@ -154,6 +162,8 @@ The `libraryType` configuration let you choose which stats to show.
   libraryType: "music" # Choose which stats to show. Can be one of: music, series or movies.
 ```
 
+Auto refresh is supported by this integration.
+
 ## FreshRSS
 
 Displays unread article count and total subscriptions from your FreshRSS server.
@@ -165,6 +175,8 @@ Displays unread article count and total subscriptions from your FreshRSS server.
   username: "<---your-username--->"
   password: "<---your-password--->"
 ```
+
+Auto refresh is supported by this integration.
 
 ## Gatus
 
@@ -189,6 +201,8 @@ The average times can be hidden (saves their calculation also) by setting the fo
   hideaverages: true
 ```
 
+Auto refresh is supported by this integration.
+
 ## Gitea / Forgejo
 
 Displays a Gitea / Forgejo version.
@@ -211,6 +225,8 @@ Displays system metrics (CPU, memory, swap, load) from a Glances server.
   url: https://my-service.url
   stats: [cpu, mem] # Options: load, cpu, mem, swap
 ```
+
+Auto refresh is supported by this integration.  
 
 If you don't already have a glances server up and running, here is a sample Docker compose file to get you started:
 
@@ -239,6 +255,8 @@ Displays the number of outstanding messages and system health status.
   apikey: "<---insert-client-token-here--->"
 ```
 
+Auto refresh is supported by this integration.  
+
 **API Token**: Use a **client token** (not an app token).
 
 ## Healthchecks
@@ -251,6 +269,8 @@ Displays status counts (up/down/grace) from your Healthchecks monitoring service
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: Found in Healthchecks web interface under **Settings > API Access > API key (read-only)**.
 
@@ -303,6 +323,8 @@ Displays user count, photo/video counts, and storage usage from your Immich serv
   apikey: "<---insert-api-key-here--->"
 ```
 
+Auto refresh is supported by this integration.  
+
 **Requirements**: Immich server version `1.118.0` or later
 **API Key**: Create an API key in Immich web interface under **Administration > API Keys**
 
@@ -317,6 +339,8 @@ Display the number of concurrent streams on your Jellyfin server.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: You can create an API key in the dashboard of you Jellystat server: settings/API Keys -> Add Key
 
@@ -333,6 +357,8 @@ Two lines are needed in the `config.yml`:
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 The url must be the root url of Lidarr, Prowlarr, Readarr, Radarr or Sonarr application.
 
@@ -355,6 +381,8 @@ This integration supports at max 15 results from Linkding, but you can add it mu
   limit: 10 # Maximum number of items returned by Linkding, minimal 1 and max 15
   query: "#ToDo #Homer" # query to do on Linkding. Use #tagname to search for tags
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Matrix
 
@@ -411,6 +439,8 @@ Displays the number of unread articles from your Miniflux RSS reader.
   style: "status" # Either "status" or "counter"
 ```
 
+Auto refresh is supported by this integration.  
+
 **API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
 
 ## NetAlertx
@@ -455,8 +485,9 @@ Moonraker's API mimics a few of OctoPrint's endpoints which makes these services
   endpoint: "https://my-service-api.url:port"
   apikey: "<---insert-api-key-here--->"
   display: "text" # 'text' or 'bar'. Default to `text`.
-  
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Olivetin
 
@@ -536,6 +567,8 @@ Displays current status and UPS load of the UPS device.
   # device: "ups" # The ID of the device
 ```
 
+Auto refresh is supported by this integration.  
+
 ## PiAlert
 
 Displays stats from your PiAlert server.
@@ -546,6 +579,8 @@ Displays stats from your PiAlert server.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
 ```
+
+Auto refresh is supported by this integration.  
 
 ## PiHole
 
@@ -560,6 +595,8 @@ Displays info about your local PiHole instance right on your Homer dashboard.
   apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
   apiVersion: 5 # optional, defaults to 5. Use 6 if your PiHole instance uses API v6
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: Required only if Pi-hole web interface is password protected. Go to **Settings > API/Web Interface > Show API token**
 
@@ -590,6 +627,8 @@ Optionally, use `successCodes` to define which HTTP response status codes should
 >>>>>>> c25ffaf (fix: auto update system adjustments)
 ```
 
+Auto refresh is supported by this integration.  
+
 ## Plex
 
 Displays active streams, total movies, and total TV series from your Plex server.
@@ -602,6 +641,8 @@ Displays active streams, total movies, and total TV series from your Plex server
   endpoint: "https://my-service.url"
   token: "<---insert-plex-token-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **Plex Token**: See [How to find your Plex token](https://www.plexopedia.com/plex-media-server/general/plex-token/)
 
@@ -620,6 +661,8 @@ Displays container counts (running/dead/misc), version, and online status from y
     - "local"
 ```
 
+Auto refresh is supported by this integration.  
+
 **Requirements**: Portainer version 1.11 or later
 
 **API Key**: Generate an access token in Portainer UI. See [Creating an Access Token](https://docs.portainer.io/api/access#creating-an-access-token)
@@ -632,6 +675,8 @@ Displays container counts (running/dead/misc), version, and online status from y
   logo: "assets/tools/sample.png"
   url: https://my-service.url
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Proxmox
 
@@ -652,6 +697,8 @@ Displays status information of a Proxmox node (VMs running and disk, memory and 
   small_font_on_small_screens: true # uses small font on small screens (like mobile)
   small_font_on_desktop: true # uses small font on desktops (just in case you're showing much info)
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
 
@@ -679,6 +726,8 @@ for setting up qBittorrent.
   url: https://my-service.url # Your rTorrent web UI, f.e. ruTorrent or Flood.
 ```
 
+Auto refresh is supported by this integration.  
+
 ## rTorrent
 
 Displays the global upload and download rates, as well as the number of torrents
@@ -697,6 +746,8 @@ for setting up rTorrent.
   password: "password" # Password for logging into rTorrent (if applicable).
 ```
 
+Auto refresh is supported by this integration.  
+
 ## SABnzbd
 
 Displays the number of currently active downloads on your SABnzbd instance. 
@@ -708,6 +759,8 @@ Displays the number of currently active downloads on your SABnzbd instance.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: An API key is required, and can be obtained from the "Config" > "General" section of the SABnzbd config in the web UI.
 
@@ -721,6 +774,8 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
   logo: "assets/tools/sample.png"
   url: https://my-service.url
 ```
+
+Auto refresh is supported by this integration.  
 
 ## SpeedtestTracker
 
@@ -744,6 +799,8 @@ Displays the number of currently active streams on you Plex instance.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: An API key is required, and can be obtained from the "Web Interface" section of settings on the Tautulli web UI.
 
@@ -770,6 +827,8 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
   logo: "assets/tools/sample.png"
   url: https://my-service.url
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Traefik
 
@@ -799,6 +858,7 @@ The service communicates with the Transmission RPC interface which needs to be a
   target: "_blank" # Optional: HTML a tag target attribute
 ```
 
+Auto refresh is supported by this integration.  
 The service automatically handles Transmission's session management and CSRF protection.
 
 ## Truenas Scale
@@ -824,6 +884,8 @@ Displays overall status, uptime percentage, and incident information from your U
   url: https://my-service.url
   slug: "default" # status page slug, defaults to "default"
 ```
+
+Auto refresh is supported by this integration.  
 
 **Requirements**: Uptime Kuma version `1.13.1` or later (for [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1))
 
@@ -860,3 +922,5 @@ Display info about the number of container running and the number for which an u
   url: https://my-service.url
   subtitle: "Docker image update notifier"
 ```
+
+Auto refresh is supported by this integration.  
