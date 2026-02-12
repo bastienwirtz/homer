@@ -1,7 +1,16 @@
 <template>
   <Generic :item="item">
     <template #content>
-      <p class="title is-4">{{ item.name }}</p>
+      <p class="title is-4">
+        {{ item.name }}
+        <i
+          @click.stop.prevent="toggleBlocking"
+          @touchstart.stop.prevent="toggleBlocking"
+          class="control-icon fas"
+          :class="status === 'enabled' ? 'fa-pause' : 'fa-play'"
+          :title="status === 'enabled' ? 'Disable blocking for 5 minutes' : 'Enable blocking'"
+        ></i>
+      </p>
       <p class="subtitle is-6">
         <template v-if="item.subtitle">
           {{ item.subtitle }}
@@ -204,6 +213,58 @@ export default {
       this.status = result.status;
       this.percent_blocked = result.ads_percentage_today;
     },
+    toggleBlocking: async function () {
+      if (parseInt(this.item.apiVersion, 10) === 6) {
+        await this.toggleBlocking_v6();
+      } else {
+        await this.toggleBlocking_v5();
+      }
+    },
+    async toggleBlocking_v6() {
+      try {
+        if (!this.isAuthenticated && this.item.apikey) {
+          const authenticated = await this.authenticate();
+          if (!authenticated) return;
+        }
+
+        const newBlockingState = this.status !== 'enabled';
+        const body = newBlockingState
+          ? { blocking: true }
+          : { blocking: false, timer: 300 }; // 5 minutes = 300 seconds
+
+        await this.fetch(`api/dns/blocking?sid=${encodeURIComponent(this.sessionId)}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+
+        // Immediately update status for responsive UI
+        this.status = newBlockingState ? 'enabled' : 'disabled';
+
+        // Fetch the latest status to confirm
+        await this.fetchStatus();
+      } catch (e) {
+        this.handleError(`Failed to toggle blocking: ${e.message || e}`, "error");
+      }
+    },
+    async toggleBlocking_v5() {
+      try {
+        const endpoint = this.status === 'enabled' ? 'disable=300' : 'enable';
+        const authParam = this.item.apikey ? `&auth=${this.item.apikey}` : '';
+
+        await this.fetch(`/api.php?${endpoint}${authParam}`);
+
+        // Immediately update status for responsive UI
+        this.status = this.status === 'enabled' ? 'disabled' : 'enabled';
+
+        // Fetch the latest status to confirm
+        await this.fetchStatus_v5();
+      } catch (e) {
+        this.handleError(`Failed to toggle blocking: ${e}`, "error");
+      }
+    },
   },
 };
 </script>
@@ -239,6 +300,50 @@ export default {
     margin-right: 10px;
     border: 1px solid #000;
     border-radius: 7px;
+  }
+}
+
+.control-icon {
+  margin-left: 0.6em;
+  font-size: 0.6em;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
+  vertical-align: middle;
+  position: relative;
+  top: -0.1em;
+  z-index: 9999;
+  pointer-events: all;
+  border: 1.5px solid;
+  border-radius: 0.3em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8em;
+  height: 1.8em;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.fa-play {
+    color: #4caf50;
+    border-color: rgba(76, 175, 80, 0.4);
+
+    &:hover {
+      border-color: rgba(76, 175, 80, 0.7);
+    }
+  }
+
+  &.fa-pause {
+    color: #f39c12;
+    border-color: rgba(243, 156, 18, 0.4);
+    padding-top: 1px;
+    padding-left: 0;
+
+    &:hover {
+      border-color: rgba(243, 156, 18, 0.7);
+    }
   }
 }
 </style>
