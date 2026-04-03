@@ -561,6 +561,7 @@ Optionally, use `successCodes` to define which HTTP response status codes should
   # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
   # updateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
+  # endpoint: "https://www.wikimediastatus.net" # Optional, will override url for pinging
 ```
 
 ## Plex
