@@ -82,7 +82,7 @@ export default {
         return this.incident.incident.title;
       }
 
-      let message = "";
+      let message;
       switch (this.pageStatus) {
         case "good":
           message = "All Systems Operational";
@@ -114,13 +114,13 @@ export default {
   },
   methods: {
     fetchStatus: function () {
-      const now = Date.now()
+      const now = Date.now();
       this.fetch(`/api/status-page/${this.dashboard}?cachebust=${now}`)
         .catch((e) => console.error(e))
         .then((resp) => (this.incident = resp));
 
       this.fetch(
-        `/api/status-page/heartbeat/${this.dashboard}?cachebust=${now}`
+        `/api/status-page/heartbeat/${this.dashboard}?cachebust=${now}`,
       )
         .catch((e) => console.error(e))
         .then((resp) => (this.heartbeat = resp));
