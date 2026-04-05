@@ -1,5 +1,5 @@
 # build stage
-FROM --platform=$BUILDPLATFORM node:22-alpine3.21 AS build-stage
+FROM --platform=$BUILDPLATFORM node:24-alpine3.23 AS build-stage
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -15,7 +15,7 @@ COPY . .
 RUN pnpm build
 
 # production stage
-FROM alpine:3.21
+FROM alpine:3.23
 
 ARG VERSION_TAG=latest
 
