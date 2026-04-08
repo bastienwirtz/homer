@@ -51,6 +51,7 @@ Available services are located in `src/components/`:
 - [rTorrent](#rtorrent)
 - [SABnzbd](#sabnzbd)
 - [Scrutiny](#scrutiny)
+- [SFTPGo](#sftpgo)
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
@@ -699,6 +700,20 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   updateInterval: 5000 # (Optional) Interval (in ms) for updating the status
+```
+
+## SFTPGo
+
+This service displays a version string instead of a subtitle.  
+And this service display the number of active connections is hidden on small screen.  
+The indicator shows SFTPGo is online, offline. Example configuration:
+
+```yaml
+- name: "SFTPGO container"
+  type: "SFTPGo"
+  logo: assets/tools/sample.png
+  url:  http://sftp-go.example.com
+  sftpgo_api_key: "hYdn26pTteWZNzbAXoiqgR.jG7TKwtoMRAMrJAGgdr3Ha"
 ```
 
 ## SpeedtestTracker

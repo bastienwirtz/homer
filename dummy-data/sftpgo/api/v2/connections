@@ -1,0 +1,22 @@
+[
+	{
+		"username": "test",
+		"connection_id": "SFTP_94f5b2b9f379173fa9cd0b8a836a7f40d860e4299e167793722d1e957a94e4d2_1",
+		"client_version": "SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.13",
+		"remote_address": "192.168.1.15:37616",
+		"connection_time": 1751462552179,
+		"last_activity": 1751462552179,
+		"current_time": 1751462680531,
+		"protocol": "SFTP"
+	},
+	{
+		"username": "test",
+		"connection_id": "SFTP_f50a640bded5f2dda3f9861b0f73c1d9220fe65da1de1bbb5c549618221a6455_1",
+		"client_version": "SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.13",
+		"remote_address": "192.168.1.15:37680",
+		"connection_time": 1751462590652,
+		"last_activity": 1751462590652,
+		"current_time": 1751462680531,
+		"protocol": "SFTP"
+	}
+]
