@@ -108,8 +108,10 @@ export default {
     },
   },
   created() {
-    /* eslint-disable */
-    this.item.url = `${this.item.url}/status/${this.dashboard}`;
+    // eslint-disable-next-line vue/no-mutating-props
+    this.item.url = this.item.url.endsWith(this.dashboard)
+      ? this.item.url
+      : `${this.item.url}/status/${this.dashboard}`;
     this.fetchStatus();
   },
   methods: {
