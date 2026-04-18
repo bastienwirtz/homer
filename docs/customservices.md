@@ -454,8 +454,9 @@ Displays network monitoring stats (connected devices, alerts, network activity) 
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   # endpoint: "https://my-service-api.url" # Optional: alternative base URL used to fetch service data when necessary.
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
+
+Auto refresh is supported by this integration.
 
 **API Key**: Get your API key in NetAlertx web interface under **Settings > General > API token** or in your installation documentation.
 
@@ -620,14 +621,10 @@ Optionally, use `successCodes` to define which HTTP response status codes should
   # successCodes: [200, 418] # Optional, default to all 2xx HTTP response status codes
   # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
-<<<<<<< HEAD
-  # updateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
   # endpoint: "https://www.wikimediastatus.net" # Optional, will override url for pinging
-=======
->>>>>>> c25ffaf (fix: auto update system adjustments)
 ```
 
-Auto refresh is supported by this integration.  
+Auto refresh is supported by this integration.
 
 ## Plex
 
