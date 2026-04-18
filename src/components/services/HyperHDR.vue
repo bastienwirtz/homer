@@ -69,7 +69,7 @@ export default {
         return 0;
       }
 
-      this.instances.length - this.running;
+      return this.instances.length - this.running;
     },
 
     status: function () {
