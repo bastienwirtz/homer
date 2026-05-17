@@ -98,6 +98,12 @@ title: "Demo dashboard for $VITE_HOSTNAME"
 ```
 - Note: `${VITE_HOSTNAME}` would also be valid
 
+This would evalute to:
+
+```
+Demo dashboard for example.com
+```
+
 ## YAML auto complete with a YAML schema
 
 A lot of editor support auto completion, see <https://www.schemastore.org/json/>
