@@ -82,8 +82,8 @@ Great if you have a lot of services or a lot of tags!
 
 #### `by @sizzlesloth`
 
-Environment variables prefixed with `VITE_` can be included. This is great for when you have
-configuration that changes.
+Environment variables prefixed with `VITE_` can be used in your YAML configuration. This is great
+for when you have values that can change, or want to refer to the same value in multiple places.
 
 For example, if we ran the container with:
 
