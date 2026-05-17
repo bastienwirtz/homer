@@ -169,6 +169,12 @@ export default {
         return this.config.hotkey.search;
       }
     },
+    parseEnvVars: function (body) {
+      return body.replace(
+        /\$\{?([A-Za-z0-9_-]+)\}?/g,
+        (_, name) => window.env[name] ?? ''
+      );
+    },
     buildDashboard: async function () {
       const defaults = parse(defaultConfig);
       let config;
@@ -219,6 +225,7 @@ export default {
         const that = this;
         return response
           .text()
+          .then(body => this.parseEnvVars(body))
           .then((body) => {
             return parse(body, { merge: true });
           })

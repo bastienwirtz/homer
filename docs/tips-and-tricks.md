@@ -40,7 +40,7 @@ Using Anchoring, you can define all your tags and their styles once like this: (
 
 ```yaml
 # Some pre-defined tag styles. reference these using <<: *{NAME} inside an item definition; For Example, <<: *Apps
-tags: 
+tags:
   Favourite: &Favourite
     - tag: "Favourite"
       tagstyle: "is-medium is-primary"
@@ -49,7 +49,7 @@ tags:
       tagstyle: "is-medium is-success"
   Apps: &Apps
     - tag: "App"
-      tagstyle: "is-medium is-info"      
+      tagstyle: "is-medium is-info"
 ```
 
 and then simply reference these pre-defined (anchored) tags in each item like so:
@@ -76,11 +76,31 @@ Then when Homer reads your config, it will substitute your anchors automatically
 ```
 
 The end result is that if you want to update the name or style of any particular tag, just update it once, in the tags section!
-Great if you have a lot of services or a lot of tags!  
+Great if you have a lot of services or a lot of tags!
 
-## YAML auto complete with a YAML schema 
+## Environment Variables
 
-A lot of editor support auto completion, see <https://www.schemastore.org/json/>   
+#### `by @sizzlesloth`
+
+Environment variables prefixed with `VITE_` can be included. This is great for when you have
+configuration that changes.
+
+For example, if we ran the container with:
+
+```bash
+docker run ... -e VITE_HOSTNAME=example.com ...
+```
+
+We can refer to the environment variable in our YAML like so:
+
+```yaml
+title: "Demo dashboard for $VITE_HOSTNAME"
+```
+- Note: `${VITE_HOSTNAME}` would also be valid
+
+## YAML auto complete with a YAML schema
+
+A lot of editor support auto completion, see <https://www.schemastore.org/json/>
 The homer schema is available here: <https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json>
 
 For example with IntelliJ you can define:
