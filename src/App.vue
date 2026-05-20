@@ -44,6 +44,12 @@
           @updated="vlayout = $event"
         />
 
+        <DensityToggle
+          name="homer-density"
+          :default-value="configDensity"
+          @updated="onDensityUpdated"
+        />
+
         <SearchInput
           class="navbar-item is-inline-block-mobile"
           :hotkey="searchHotkey()"
@@ -114,6 +120,7 @@ import SearchInput from "./components/SearchInput.vue";
 import SettingToggle from "./components/SettingToggle.vue";
 import DarkMode from "./components/DarkMode.vue";
 import DynamicTheme from "./components/DynamicTheme.vue";
+import DensityToggle from "./components/DensityToggle.vue";
 
 import defaultConfig from "./assets/defaults.yml?raw";
 
@@ -129,6 +136,7 @@ export default {
     SettingToggle,
     DarkMode,
     DynamicTheme,
+    DensityToggle,
   },
   provide() {
     return {
@@ -152,6 +160,14 @@ export default {
   computed: {
     configurationNeeded: function () {
       return (this.loaded && !this.services) || this.configNotFound;
+    },
+    configDensity: function() {
+      // Lese die Density aus der Config, Fallback auf "normal"
+      const density = this.config?.defaults?.density || "normal";
+      
+      // Validiere den Wert
+      const validDensities = ["normal", "compact", "ultracompact"];
+      return validDensities.includes(density) ? density : "normal";
     },
   },
   created: async function () {
@@ -188,6 +204,9 @@ export default {
       }
       this.config = merge(defaults, config);
       this.services = this.config.services;
+
+      const savedDensity = localStorage.getItem("homer-density") || localStorage["homer-density"];
+      document.documentElement.setAttribute("data-density", savedDensity);
 
       document.title =
         this.config.documentTitle ||
