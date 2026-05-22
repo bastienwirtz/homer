@@ -17,7 +17,7 @@
         <strong
           v-if="serverError"
           class="notif alert"
-          title="Connection error to PiAlert server, check the url in config.yml"
+          title="Connection error to NetAlertx server, check the url in config.yml"
           >?</strong
         >
       </div>
@@ -29,7 +29,7 @@
 import service from "@/mixins/service.js";
 
 export default {
-  name: "PiAlert",
+  name: "NetAlertx",
   mixins: [service],
   props: {
     item: Object,
@@ -52,12 +52,13 @@ export default {
   },
   methods: {
     fetchStatus: async function () {
-      this.fetch("/php/server/devices.php?action=getDevicesTotals")
+      this.fetch("/devices/totals", { headers: { Authorization: `Bearer ${this.item.apikey}` } })
         .then((response) => {
-          this.total = response[0];
-          this.connected = response[1];
-          this.newdevices = response[3];
-          this.downalert = response[4];
+          this.total = response.total || response[0] || 0;
+          this.connected = response.connected || response[1] || 0;
+          this.newdevices = response.new || response[3] || 0;
+          this.downalert = response.down || response[4] || 0;
+          this.serverError = false;
         })
         .catch((e) => {
           console.log(e);

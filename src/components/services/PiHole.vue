@@ -39,8 +39,6 @@ export default {
     retryCount: 0,
     maxRetries: 3,
     retryDelay: 5000,
-    localCheckInterval: 1000, // Default value or a fallback
-    pollInterval: null,
   }),
   computed: {
     percentage: function () {
@@ -57,39 +55,22 @@ export default {
   },
   created() {
     if (parseInt(this.item.apiVersion, 10) === 6) {
-      // Set the interval to the checkInterval or default to 5 minutes
-      this.localCheckInterval = parseInt(this.item.checkInterval, 10) || 300000;
       this.loadCachedSession();
-      this.startStatusPolling();
+
+      // Set up auto-update method for the scheduler
+      this.autoUpdateMethod = this.fetchStatus;
     } else {
-      this.fetchStatus_v5();
+      // Set up auto-update method for the scheduler
+      this.autoUpdateMethod = this.fetchStatus_v5();
     }
-  },
-  beforeUnmount() {
-    if (parseInt(this.item.apiVersion, 10) === 6) {
-      this.stopStatusPolling();
-    }
+    // Initial data fetch
+    this.autoUpdateMethod();
   },
   methods: {
     handleError: function (error, status) {
       console.error(error);
       this.subtitle = error;
       this.status = status;
-    },
-    startStatusPolling: function () {
-      this.fetchStatus();
-      if (this.localCheckInterval < 1000) {
-        this.localCheckInterval = 1000;
-      }
-      this.pollInterval = setInterval(
-        this.fetchStatus,
-        this.localCheckInterval,
-      );
-    },
-    stopStatusPolling: function () {
-      if (this.pollInterval) {
-        clearInterval(this.pollInterval);
-      }
     },
     loadCachedSession: function () {
       try {

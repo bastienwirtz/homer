@@ -8,6 +8,10 @@ The default theme can be changed using the yaml configuration file
 theme: default # 'default', 'walkxcode', or 'neon' see files in 'src/assets/themes'.
 ```
 
+## Favicon
+
+Use your own favicon by changing the icons files in the `assets/icons` directory. More information on the format [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).
+
 ## Colors and background customization
 
 Default colors and background can be customized for each theme variant (light and dark), using either the yaml config file, or the css variables (see "Additional stylesheets" below).

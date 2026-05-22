@@ -1,4 +1,4 @@
-# PWA Icons / Images 
+# PWA Icons / Images
 
 We suggest you to create a svg or png icon (if it is a png icon, with the maximum resolution possible) for your application and use it to generate a favicon package in [Favicon Generator](https://realfavicongenerator.net/).
 
