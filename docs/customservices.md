@@ -29,6 +29,7 @@ Available services are located in `src/components/`:
 - [Immich](#immich)
 - [Jellystat](#jellystat)
 - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [LibrisLog](#librislog)
 - [Linkding](#linkding)
 - [Matrix](#matrix)
 - [Mealie](#mealie)
@@ -383,6 +384,22 @@ This integration supports at max 15 results from Linkding, but you can add it mu
 ```
 
 Auto refresh is supported by this integration.  
+
+## LibrisLog
+
+Displays library statistics from your LibrisLog book tracker: total books, books read, currently reading, and want-to-read counts.
+
+```yaml
+- name: "LibrisLog"
+  type: "LibrisLog"
+  logo: "https://docs.librislog.app/logo.png"
+  url: "https://my-service.url"
+  apikey: "<---insert-api-key-here--->"
+```
+
+Auto refresh is supported by this integration.
+
+**API Key**: Generate an API key in your LibrisLog instance settings.
 
 ## Matrix
 
