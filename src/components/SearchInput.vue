@@ -36,8 +36,8 @@ export default {
       if (event.key === "Escape") {
         this.cancel();
       }
-    };
-    document.addEventListener("keydown", this._keyListener.bind(this));
+    }.bind(this);
+    document.addEventListener("keydown", this._keyListener);
 
     // fill search from get parameter.
     const search = new URLSearchParams(window.location.search).get("search");
