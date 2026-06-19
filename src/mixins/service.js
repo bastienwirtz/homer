@@ -90,7 +90,7 @@ export default {
       }
 
       const interval = this.getUpdateInterval();
-      if (interval > 0) {
+      if (interval <= 0) {
         return;
       }
       updateScheduler.register(this, interval, this.autoUpdateMethod);
@@ -128,7 +128,7 @@ export default {
 
       // Use service-specific interval if defined
       if (interval) {
-        return parseInt(this.item.updateInterval, 10) || 0;
+        return parseInt(interval, 10) || 0;
       }
 
       // Use global auto-update configuration
