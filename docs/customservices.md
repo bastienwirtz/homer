@@ -862,6 +862,10 @@ The service automatically handles Transmission's session management and CSRF pro
 
 Displays TrueNAS version.
 
+1. In the TrueNAS web interface, click your user avatar in the top-right corner and select "API Keys".
+2. Click "Add", give the key a name such as "homer", and confirm.
+3. Copy the generated key immediately - TrueNAS only shows it once - and paste it as the API Key when creating the integration in homer.
+
 ```yaml
 - name: "Truenas"
   type: "TruenasScale"
