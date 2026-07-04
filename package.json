@@ -14,25 +14,22 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "bulma": "^1.0.4",
     "lodash.merge": "^4.6.2",
-    "vue": "^3.5.32",
+    "vue": "^3.5.39",
     "yaml": "^2.8.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@vitejs/plugin-vue": "^6.0.5",
-    "eslint": "^10.1.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-vue": "~10.8.0",
-    "globals": "^17.4.0",
+    "eslint-plugin-vue": "~10.9.2",
+    "globals": "^17.7.0",
     "http-server": "^14.1.1",
-    "prettier": "^3.8.1",
-    "sass-embedded": "^1.99.0",
-    "vite": "^8.0.5",
-    "vite-plugin-pwa": "^1.2.0"
+    "prettier": "^3.9.4",
+    "sass-embedded": "^1.100.0",
+    "vite": "^8.1.3",
+    "vite-plugin-pwa": "^1.3.0"
   },
   "license": "Apache-2.0",
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
-  "pnpm": {
-    "neverBuiltDependencies": []
-  }
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
 }
