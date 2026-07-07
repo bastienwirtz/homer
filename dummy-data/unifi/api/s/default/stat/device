@@ -1,0 +1,350 @@
+{
+  "meta": {
+    "rc": "ok"
+  },
+  "data": [
+    {
+      "_id": "5f9f1c1b0000000000000001",
+      "adopted": true,
+      "cfgversion": "0123456789abcdef",
+      "config_network": {
+        "type": "dhcp"
+      },
+      "connect_request_ip": "192.168.1.10",
+      "connect_request_port": "45678",
+      "considered_lost_at": 1640999999,
+      "device_id": "5f9f1c1b0000000000000001",
+      "disabled": false,
+      "discovered_via": "l2",
+      "downlink_table": [],
+      "ethernet_table": [
+        {
+          "mac": "aa:bb:cc:dd:ee:01",
+          "name": "eth0",
+          "num_port": 1
+        }
+      ],
+      "fw_caps": 123456789,
+      "guest_token": "abcdefghijklmnopqrstuvwxyz123456",
+      "has_eth1": false,
+      "has_speaker": false,
+      "inform_ip": "192.168.1.1",
+      "inform_url": "http://192.168.1.1:8080/inform",
+      "ip": "192.168.1.10",
+      "last_seen": 1640995200,
+      "led_override": "default",
+      "led_override_color": "#0066cc",
+      "led_override_color_brightness": 100,
+      "mac": "aa:bb:cc:dd:ee:01",
+      "model": "U6-Lite",
+      "name": "Living Room AP",
+      "next_interval": 30,
+      "num_sta": 8,
+      "port_table": [],
+      "radio_table": [
+        {
+          "radio": "ng",
+          "name": "wifi0",
+          "channel": 6,
+          "ht": 20,
+          "tx_power": 17,
+          "min_rssi_enabled": false,
+          "min_rssi": -79,
+          "sens_level_enabled": false,
+          "antenna_gain": 2,
+          "builtin_antenna": true,
+          "builtin_ant_gain": 2,
+          "nss": 2,
+          "radio_caps": 7679
+        },
+        {
+          "radio": "na",
+          "name": "wifi1",
+          "channel": 36,
+          "ht": 80,
+          "tx_power": 20,
+          "min_rssi_enabled": false,
+          "min_rssi": -79,
+          "sens_level_enabled": false,
+          "antenna_gain": 2,
+          "builtin_antenna": true,
+          "builtin_ant_gain": 2,
+          "nss": 2,
+          "radio_caps": 7679
+        }
+      ],
+      "serial": "ABC1234567890",
+      "state": 1,
+      "type": "uap",
+      "uplink": {
+        "type": "wire",
+        "mac": "aa:bb:cc:dd:ee:ff",
+        "speed": 1000,
+        "full_duplex": true
+      },
+      "uptime": 86400,
+      "version": "6.2.35.14526",
+      "wifi_caps": 123456789,
+      "wlangroup_id_na": "5f9f1c1b0000000000000010",
+      "wlangroup_id_ng": "5f9f1c1b0000000000000010"
+    },
+    {
+      "_id": "5f9f1c1b0000000000000002",
+      "adopted": true,
+      "cfgversion": "0123456789abcdef",
+      "config_network": {
+        "type": "dhcp"
+      },
+      "connect_request_ip": "192.168.1.11",
+      "connect_request_port": "45678",
+      "considered_lost_at": 1640999999,
+      "device_id": "5f9f1c1b0000000000000002",
+      "disabled": false,
+      "discovered_via": "l2",
+      "downlink_table": [],
+      "ethernet_table": [
+        {
+          "mac": "aa:bb:cc:dd:ee:02",
+          "name": "eth0",
+          "num_port": 1
+        }
+      ],
+      "fw_caps": 123456789,
+      "guest_token": "abcdefghijklmnopqrstuvwxyz123457",
+      "has_eth1": false,
+      "has_speaker": false,
+      "inform_ip": "192.168.1.1",
+      "inform_url": "http://192.168.1.1:8080/inform",
+      "ip": "192.168.1.11",
+      "last_seen": 1640995200,
+      "led_override": "default",
+      "led_override_color": "#0066cc",
+      "led_override_color_brightness": 100,
+      "mac": "aa:bb:cc:dd:ee:02",
+      "model": "U6-Pro",
+      "name": "Office AP",
+      "next_interval": 30,
+      "num_sta": 12,
+      "port_table": [],
+      "radio_table": [
+        {
+          "radio": "ng",
+          "name": "wifi0",
+          "channel": 11,
+          "ht": 40,
+          "tx_power": 20,
+          "min_rssi_enabled": false,
+          "min_rssi": -79,
+          "sens_level_enabled": false,
+          "antenna_gain": 2,
+          "builtin_antenna": true,
+          "builtin_ant_gain": 2,
+          "nss": 4,
+          "radio_caps": 7679
+        },
+        {
+          "radio": "na",
+          "name": "wifi1",
+          "channel": 44,
+          "ht": 160,
+          "tx_power": 22,
+          "min_rssi_enabled": false,
+          "min_rssi": -79,
+          "sens_level_enabled": false,
+          "antenna_gain": 2,
+          "builtin_antenna": true,
+          "builtin_ant_gain": 2,
+          "nss": 4,
+          "radio_caps": 7679
+        }
+      ],
+      "serial": "DEF1234567890",
+      "state": 1,
+      "type": "uap",
+      "uplink": {
+        "type": "wire",
+        "mac": "aa:bb:cc:dd:ee:ff",
+        "speed": 1000,
+        "full_duplex": true
+      },
+      "uptime": 172800,
+      "version": "6.2.35.14526",
+      "wifi_caps": 123456789,
+      "wlangroup_id_na": "5f9f1c1b0000000000000010",
+      "wlangroup_id_ng": "5f9f1c1b0000000000000010"
+    },
+    {
+      "_id": "5f9f1c1b0000000000000003",
+      "adopted": true,
+      "cfgversion": "0123456789abcdef",
+      "connect_request_ip": "192.168.1.2",
+      "connect_request_port": "45678",
+      "considered_lost_at": 1640999999,
+      "device_id": "5f9f1c1b0000000000000003",
+      "disabled": false,
+      "discovered_via": "l2",
+      "downlink_table": [
+        {
+          "mac": "aa:bb:cc:dd:ee:01",
+          "port_idx": 1,
+          "speed": 1000,
+          "full_duplex": true
+        },
+        {
+          "mac": "aa:bb:cc:dd:ee:02",
+          "port_idx": 2,
+          "speed": 1000,
+          "full_duplex": true
+        }
+      ],
+      "ethernet_table": [
+        {
+          "mac": "aa:bb:cc:dd:ee:03",
+          "name": "eth0",
+          "num_port": 1
+        }
+      ],
+      "fw_caps": 123456789,
+      "inform_ip": "192.168.1.1",
+      "inform_url": "http://192.168.1.1:8080/inform",
+      "ip": "192.168.1.2",
+      "last_seen": 1640995200,
+      "led_override": "default",
+      "led_override_color": "#0066cc",
+      "led_override_color_brightness": 100,
+      "mac": "aa:bb:cc:dd:ee:03",
+      "model": "USW-24-POE",
+      "name": "Main Switch",
+      "next_interval": 30,
+      "num_sta": 0,
+      "port_overrides": [],
+      "port_table": [
+        {
+          "port_idx": 1,
+          "media": "GE",
+          "port_poe": true,
+          "poe_caps": 7,
+          "poe_class": "Class 0",
+          "poe_enable": true,
+          "poe_mode": "auto",
+          "poe_power": "8.50",
+          "poe_voltage": "53.40",
+          "portconf_id": "5f9f1c1b0000000000000020",
+          "autoneg": true,
+          "enable": true,
+          "flowctrl_rx": false,
+          "flowctrl_tx": false,
+          "full_duplex": true,
+          "is_uplink": false,
+          "mac_table": [
+            {
+              "age": 0,
+              "authorized": true,
+              "hostname": "living-room-ap",
+              "ip": "192.168.1.10",
+              "mac": "aa:bb:cc:dd:ee:01",
+              "oui": "Ubiquiti",
+              "uptime": 86400,
+              "vlan": 1
+            }
+          ],
+          "name": "Port 1",
+          "op_mode": "switch",
+          "rx_broadcast": 1234,
+          "rx_bytes": 123456789,
+          "rx_dropped": 0,
+          "rx_errors": 0,
+          "rx_multicast": 5678,
+          "rx_packets": 987654,
+          "satisfaction": 100,
+          "speed": 1000,
+          "stp_pathcost": 0,
+          "stp_state": "forwarding",
+          "tx_broadcast": 1234,
+          "tx_bytes": 123456789,
+          "tx_dropped": 0,
+          "tx_errors": 0,
+          "tx_multicast": 5678,
+          "tx_packets": 987654,
+          "up": true
+        }
+      ],
+      "serial": "GHI1234567890",
+      "state": 1,
+      "type": "usw",
+      "uplink": {
+        "type": "wire",
+        "mac": "aa:bb:cc:dd:ee:ff",
+        "speed": 1000,
+        "full_duplex": true
+      },
+      "uptime": 259200,
+      "version": "6.2.35.14526"
+    },
+    {
+      "_id": "5f9f1c1b0000000000000004",
+      "adopted": true,
+      "cfgversion": "0123456789abcdef",
+      "connect_request_ip": "192.168.1.1",
+      "connect_request_port": "45678",
+      "considered_lost_at": 1640999999,
+      "device_id": "5f9f1c1b0000000000000004",
+      "disabled": false,
+      "discovered_via": "l2",
+      "ethernet_table": [
+        {
+          "mac": "aa:bb:cc:dd:ee:04",
+          "name": "eth0",
+          "num_port": 1
+        }
+      ],
+      "fw_caps": 123456789,
+      "inform_ip": "192.168.1.1",
+      "inform_url": "http://192.168.1.1:8080/inform",
+      "ip": "192.168.1.1",
+      "last_seen": 1640995200,
+      "led_override": "default",
+      "led_override_color": "#0066cc",
+      "led_override_color_brightness": 100,
+      "mac": "aa:bb:cc:dd:ee:04",
+      "model": "UDM-Pro",
+      "name": "Dream Machine Pro",
+      "next_interval": 30,
+      "num_sta": 0,
+      "port_table": [
+        {
+          "port_idx": 1,
+          "media": "GE",
+          "port_poe": false,
+          "portconf_id": "5f9f1c1b0000000000000021",
+          "autoneg": true,
+          "enable": true,
+          "flowctrl_rx": false,
+          "flowctrl_tx": false,
+          "full_duplex": true,
+          "is_uplink": true,
+          "name": "Port 1",
+          "op_mode": "switch",
+          "rx_bytes": 123456789,
+          "rx_dropped": 0,
+          "rx_errors": 0,
+          "rx_packets": 987654,
+          "satisfaction": 100,
+          "speed": 1000,
+          "stp_pathcost": 0,
+          "stp_state": "forwarding",
+          "tx_bytes": 123456789,
+          "tx_dropped": 0,
+          "tx_errors": 0,
+          "tx_packets": 987654,
+          "up": true
+        }
+      ],
+      "serial": "JKL1234567890",
+      "state": 1,
+      "type": "udm",
+      "uptime": 345600,
+      "version": "2.4.27.14586"
+    }
+  ]
+}
