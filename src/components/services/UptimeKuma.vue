@@ -33,7 +33,7 @@ export default {
     heartbeat: null,
   }),
   computed: {
-    dashboard: function () {
+    slug: function () {
       return this.item.slug ? this.item.slug : "default";
     },
     status: function () {
@@ -108,9 +108,6 @@ export default {
     },
   },
   created() {
-    /* eslint-disable */
-    this.item.url = `${this.item.url}/status/${this.dashboard}`;
-    
     // Set up auto-update method for the scheduler
     this.autoUpdateMethod = this.fetchStatus;
 
@@ -120,13 +117,11 @@ export default {
   methods: {
     fetchStatus: function () {
       const now = Date.now();
-      this.fetch(`/api/status-page/${this.dashboard}?cachebust=${now}`)
+      this.fetch(`/api/status-page/${this.slug}?cachebust=${now}`)
         .catch((e) => console.error(e))
         .then((resp) => (this.incident = resp));
 
-      this.fetch(
-        `/api/status-page/heartbeat/${this.dashboard}?cachebust=${now}`,
-      )
+      this.fetch(`/api/status-page/heartbeat/${this.slug}?cachebust=${now}`)
         .catch((e) => console.error(e))
         .then((resp) => (this.heartbeat = resp));
     },
