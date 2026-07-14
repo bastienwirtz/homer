@@ -900,8 +900,33 @@ Displays overall status, uptime percentage, and incident information from your U
   type: "UptimeKuma"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  slug: "default" # status page slug, defaults to "default"
+  slug: "default" # status page the stats are read from, defaults to "default"
 ```
+
+`slug` selects which status page the card reads its status and uptime from. It does not affect where the
+card links to: as with any other service, that is whatever `url` is set to, which in most cases points at
+the status page.
+
+> [!IMPORTANT]
+> **Potentially breaking change**: on version `26.04.2` and earlier, this card rewrote `url` and always
+> sent you to `<url>/status/<slug>`. It no longer does, so a card that used to open a status page now
+> opens `url` as configured.
+>
+> If you want the card to keep opening a status page, either:
+>
+> - point `url` straight at the status page. In that case `endpoint` must be set to the Uptime Kuma base
+>   url, otherwise the API calls are made against the status page path and fail:
+>
+>   ```yaml
+>   - name: "Uptime Kuma"
+>     type: "UptimeKuma"
+>     url: https://my-service.url/status/my-slug # where the card links to
+>     endpoint: https://my-service.url # where the API lives
+>     slug: "my-slug"
+>   ```
+>
+> - or set **Settings > General > Entry Page** in Uptime Kuma to that status page, which sends everyone
+>   landing on the base url there, and leaves the Homer config untouched.
 
 Auto refresh is supported by this integration.  
 
