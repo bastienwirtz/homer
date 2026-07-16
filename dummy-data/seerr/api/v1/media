@@ -1,0 +1,34 @@
+{
+  "pageInfo": {
+    "page": 1,
+    "pages": 7,
+    "pageSize": 20,
+    "results": 132
+  },
+  "results": [
+    {
+      "id": 1,
+      "mediaType": "movie",
+      "tmdbId": 693134,
+      "tvdbId": null,
+      "imdbId": null,
+      "status": 5,
+      "status4k": 1,
+      "createdAt": "2026-06-02T18:12:41.000Z",
+      "updatedAt": "2026-06-04T09:31:02.000Z",
+      "mediaAddedAt": "2026-06-04T09:31:02.000Z"
+    },
+    {
+      "id": 2,
+      "mediaType": "tv",
+      "tmdbId": 94997,
+      "tvdbId": 371572,
+      "imdbId": null,
+      "status": 4,
+      "status4k": 1,
+      "createdAt": "2026-06-11T20:03:55.000Z",
+      "updatedAt": "2026-07-09T07:44:18.000Z",
+      "mediaAddedAt": "2026-06-14T22:10:09.000Z"
+    }
+  ]
+}

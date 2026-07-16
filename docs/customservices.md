@@ -54,6 +54,7 @@ Available services are located in `src/components/`:
 - [rTorrent](#rtorrent)
 - [SABnzbd](#sabnzbd)
 - [Scrutiny](#scrutiny)
+- [Seerr](#seerr)
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
@@ -790,6 +791,34 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
 ```
 
 Auto refresh is supported by this integration.  
+
+## Seerr
+
+Displays the Seerr version as the subtitle, with icons next to it when an update is available or a restart is required, plus badges counting available media, pending requests, processing requests and open issues.
+
+```yaml
+- name: "Seerr"
+  type: "Seerr"
+  logo: "assets/tools/sample.png"
+  url: "http://seerr.example.com"
+  apikey: "<---insert-api-key-here--->"
+  # subtitle: "Requests"   # (Optional) Overrides the version subtitle.
+  # monitor:               # (Optional) Hide things; anything you don't mention stays on.
+  #   media: false             # hide the available media badge
+  #   issues: false            # hide the open issues badge
+  #   server: false            # hide both subtitle icons
+  #   requests:                # or name them individually to hide only part of a group
+  #     pending: false             # hide the pending badge, keep the processing one
+  # monitor: false         # (Optional) Or hide every icon and badge (version-only card).
+```
+
+Auto refresh is supported by this integration.
+
+**Authentication**: generate an API key under **Settings > General** in your Seerr instance. The badges need it; the version subtitle works without one.
+
+**Monitoring**: everything is shown by default, so `monitor` is only for hiding things: **anything you don't mention stays on**. `server` and `requests` each cover two items, so they take `false` to hide both, or a map to hide just one. Badge counts are capped at `99+`.
+
+**Available media**: counts partially available shows (those with some requested seasons still missing) alongside fully available ones.
 
 ## SpeedtestTracker
 
