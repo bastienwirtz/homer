@@ -54,6 +54,7 @@ Available services are located in `src/components/`:
 - [rTorrent](#rtorrent)
 - [SABnzbd](#sabnzbd)
 - [Scrutiny](#scrutiny)
+- [Seerr](#seerr)
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
@@ -790,6 +791,30 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
 ```
 
 Auto refresh is supported by this integration.  
+
+## Seerr
+
+Displays the Seerr version as the subtitle, with icons next to it when an update is available or a restart is required, plus badges counting available media, pending requests, processing requests and open issues.
+
+```yaml
+- name: "Seerr"
+  type: "Seerr"
+  logo: "assets/tools/sample.png"
+  url: "http://seerr.example.com"
+  apikey: "<---insert-api-key-here--->"
+  # subtitle: "Requests"  # (Optional) Overrides the version subtitle.
+  # hide: []              # (Optional) hides items. Possible values are
+  #                       # "updateAvailable", "restartRequired", "media",
+  #                       # "pending", "processing" and "issues".
+```
+
+Auto refresh is supported by this integration.
+
+**Authentication**: generate an API key under **Settings > General** in your Seerr instance. The badges need it; the version subtitle works without one.
+
+**Hiding items**: everything is shown by default; list a key under `hide` to remove it. `updateAvailable` and `restartRequired` are the two subtitle icons; `media`, `pending`, `processing` and `issues` are the four badges. Hide all six for a version-only card. Badge counts are capped at `99+`.
+
+**Available media**: counts partially available shows (those with some requested seasons still missing) alongside fully available ones.
 
 ## SpeedtestTracker
 

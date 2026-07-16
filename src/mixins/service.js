@@ -33,6 +33,13 @@ export default {
     updateScheduler.unregister(this);
   },
   methods: {
+    isValueShown(key) {
+      return !(this.item.hide || []).includes(key);
+    },
+    // Long counts blow out a small pill.
+    capCount(value, max = 99) {
+      return typeof value === "number" && value > max ? `${max}+` : value;
+    },
     fetch: function (path, init, json = true) {
       let options = {};
 
