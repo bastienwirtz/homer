@@ -460,6 +460,19 @@ Auto refresh is supported by this integration.
 
 **API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
 
+## Navidrome
+
+Displays Navidrome status (online or offline), last sync datetime, numbers of music folders and artists.
+
+```yaml
+- name: Navidrome
+  type: Navidrome
+  logo: assets/tools/sample.png
+  url: https://my-service.url
+  username: <---insert-user-name-here--->
+  password: <---insert-password-here--->
+```
+
 ## NetAlertx
 
 Displays network monitoring stats (connected devices, alerts, network activity) from your NetAlertx server.
