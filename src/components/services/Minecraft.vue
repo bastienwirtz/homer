@@ -38,6 +38,10 @@ export default {
     },
   }),
   created() {
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchServerStatus;
+
+    // Initial data fetch
     this.fetchServerStatus();
   },
   methods: {
