@@ -1,0 +1,23 @@
+{
+    "http": {
+        "routers": { "total": 12, "warnings": 1, "errors": 1 },
+        "services": { "total": 11, "warnings": 0, "errors": 2 },
+        "middlewares": { "total": 5, "warnings": 1, "errors": 0 }
+    },
+    "tcp": {
+        "routers": { "total": 3, "warnings": 0, "errors": 0 },
+        "services": { "total": 3, "warnings": 0, "errors": 0 },
+        "middlewares": { "total": 1, "warnings": 0, "errors": 0 }
+    },
+    "udp": {
+        "routers": { "total": 2, "warnings": 0, "errors": 0 },
+        "services": { "total": 2, "warnings": 0, "errors": 0 }
+    },
+    "certificates": { "total": 4, "warnings": 0, "errors": 0 },
+    "features": {
+        "tracing": "",
+        "metrics": "",
+        "accessLog": true
+    },
+    "providers": ["Docker", "File", "KubernetesIngress"]
+}

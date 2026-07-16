@@ -3,17 +3,30 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="versionstring">
-          Version {{ versionstring }}
-        </template>
+        <template v-if="item.subtitle">{{ item.subtitle }}</template>
+        <template v-else-if="versionstring"
+          >Version {{ versionstring }}</template
+        >
       </p>
     </template>
     <template #indicator>
-      <div v-if="status" class="status" :class="status">
-        {{ status }}
+      <div class="notifs">
+        <strong
+          v-for="badge in visibleBadges"
+          :key="badge.key"
+          class="notif"
+          :style="{ backgroundColor: badge.color }"
+          :title="badge.label"
+        >
+          {{ badge.text }}
+        </strong>
+        <strong
+          v-if="serverError"
+          class="notif errors"
+          title="Connection error to Traefik API, check url in config.yml"
+        >
+          ?
+        </strong>
       </div>
     </template>
   </Generic>
@@ -22,6 +35,26 @@
 <script>
 import service from "@/mixins/service.js";
 
+// Protocol sections nest categories; certificates is a flat {total, warnings, errors}.
+const protocols = ["http", "tcp", "udp"];
+const categories = ["routers", "services", "middlewares"];
+
+// Key doubles as the data key its response lands on.
+const endpoints = {
+  overview: "/api/overview",
+  version: "/api/version",
+};
+
+// Indicator badges; key doubles as the hide key.
+const badges = [
+  { key: "routers", label: "Routers", color: "#2ac194" },
+  { key: "services", label: "Services", color: "#2aa2c1" },
+  { key: "middlewares", label: "Middlewares", color: "#2a57c1" },
+  { key: "certificates", label: "Certificates", color: "#c1482a" },
+  { key: "warnings", label: "Warnings", color: "#c1942a" },
+  { key: "errors", label: "Errors", color: "#c12a57" },
+];
+
 export default {
   name: "Traefik",
   mixins: [service],
@@ -29,65 +62,108 @@ export default {
     item: Object,
   },
   data: () => ({
-    fetchOk: null,
-    versionstring: null,
+    overview: null,
+    version: null,
+    failed: {},
   }),
   computed: {
-    status: function () {
-      return this.fetchOk ? "online" : "offline";
+    serverError() {
+      return Object.values(this.failed).some(Boolean);
+    },
+    versionstring() {
+      return this.version?.Version;
+    },
+    counts() {
+      const totals = Object.fromEntries(badges.map((badge) => [badge.key, 0]));
+      const overview = this.overview;
+      if (!overview) return totals;
+      for (const protocol of protocols) {
+        const section = overview[protocol];
+        if (!section) continue;
+        for (const category of categories) {
+          const entry = section[category];
+          if (!entry) continue;
+          totals[category] += entry.total || 0;
+          totals.warnings += entry.warnings || 0;
+          totals.errors += entry.errors || 0;
+        }
+      }
+      const certificates = overview.certificates;
+      if (certificates) {
+        totals.certificates += certificates.total || 0;
+        totals.warnings += certificates.warnings || 0;
+        totals.errors += certificates.errors || 0;
+      }
+      return totals;
+    },
+    visibleBadges() {
+      return badges
+        .filter(
+          (badge) => this.isValueShown(badge.key) && this.counts[badge.key] > 0,
+        )
+        .map((badge) => ({
+          ...badge,
+          text: this.capCount(this.counts[badge.key]),
+        }));
     },
   },
   created() {
-    this.fetchStatus();
+    this.fetchOptions = this.item.basic_auth
+      ? { headers: { Authorization: `Basic ${btoa(this.item.basic_auth)}` } }
+      : {};
+    this.endpointsToFetch = this.resolveEndpoints();
+    if (this.endpointsToFetch.length) {
+      this.autoUpdateMethod = this.fetchStats;
+      this.fetchStats();
+    }
   },
   methods: {
-    fetchStatus: async function () {
-      let headers = {};
-      if (this.item.basic_auth) {
-        const encodedCredentials = btoa(this.item.basic_auth);
-        headers["Authorization"] = `Basic ${encodedCredentials}`;
-      }
-      this.fetch("/api/version", { headers })
-        .then((response) => {
-          this.fetchOk = true;
-          this.versionstring = response.Version;
+    // A subtitle override hides the version, so skip it then.
+    resolveEndpoints() {
+      const keys = [];
+      if (!this.item.subtitle) keys.push("version");
+      if (badges.some((badge) => this.isValueShown(badge.key)))
+        keys.push("overview");
+      return keys;
+    },
+    load(key) {
+      return this.fetch(endpoints[key], this.fetchOptions)
+        .then((data) => {
+          this[key] = data;
+          this.failed[key] = false;
         })
         .catch((e) => {
-          this.fetchOk = false;
-          console.log(e);
+          console.error(e);
+          this.failed[key] = true;
         });
+    },
+    // Each load catches its own failure, so one bad endpoint can't sink the batch.
+    fetchStats() {
+      return Promise.all(this.endpointsToFetch.map((key) => this.load(key)));
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-  white-space: nowrap;
-  margin-left: 0.25rem;
+.notifs {
+  position: absolute;
+  color: white;
+  font-family: sans-serif;
+  top: 0.3em;
+  right: 0.5em;
 
-  &.online:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-
-  &.offline:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-
-  &:before {
-    content: " ";
+  .notif {
     display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
+    padding: 0.2em 0.35em;
+    border-radius: 0.25em;
+    position: relative;
+    margin-left: 0.3em;
+    font-size: 0.8em;
+
+    &.errors {
+      background-color: #c12a57;
+    }
   }
 }
 </style>
