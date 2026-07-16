@@ -450,8 +450,7 @@ Displays the status of a Minecraft server using mcsrvstat.us.
 
 ```yaml
 - name: "Minecraft"
-  host: "127.0.0.1"
-  port: "25565"
+  url: "127.0.0.1:25565"
   logo: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/minecraft.svg"
   type: Minecraft
 ```
