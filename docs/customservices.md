@@ -846,15 +846,49 @@ Auto refresh is supported by this integration.
 
 ## Traefik
 
-Displays Traefik.
+Displays Traefik stats counts as colored badges: routers, services, middlewares, certificates, warnings and errors. Each count is the sum across the monitored sections.
+
+Auto refresh is supported by this integration.
+
+> [!IMPORTANT]
+> **Potentially breaking change**: on version `26.04.2` and earlier, this card only displayed the Traefik version.
+> It now also shows badges for routers, services, middlewares, certificates, warnings and errors, with everything monitored by default.
+>
+> To keep the old version-only card, turn the badges off:
+>
+> ```yaml
+> - name: "Traefik"
+>   type: "Traefik"
+>   url: "http://traefik.example.com"
+>   monitor: false
+> ```
 
 ```yaml
 - name: "Traefik"
   type: "Traefik"
   logo: "assets/tools/sample.png"
   url: "http://traefik.example.com"
-  # basic_auth: "admin:password"  # (Optional) Send Authorization header. 
+  # basic_auth: "admin:password"  # (Optional) Send Authorization header.
+  # subtitle: "Reverse proxy"     # (Optional) Overrides the version subtitle (skips the /api/version call).
+  # monitor: false                # (Optional) Disable every badge (version-only card).
+  # monitor:                      # (Optional) Or fine-tune what is counted; everything is on by default.
+  #   certificates: false             # don't count certificates at all
+  #   tcp:
+  #     services: false               # count tcp, minus its services
+  #   http:
+  #     routers: { warnings: false }  # http.routers total + errors, but not its warnings
 ```
+
+**Monitored sections**: every section the overview exposes is counted by default: `http`, `tcp` and `udp` (each with `routers`/`services`/`middlewares`), plus `certificates`. Use `monitor` only to turn things off or fine-tune them; **anything you don't mention stays on**.
+
+- **Section** (`http`/`tcp`/`udp`/`certificates`): accepts `false` (ignore it), `true` (the default), or, for the protocols, a map of categories.
+- **Category** (and `certificates`): accepts `false`, `true`, or `{ warnings, errors }`. The total is always counted while the entry is enabled, and `warnings`/`errors` each default to counted unless set to `false`.
+- **`enabled: false`**: an explicit equivalent to `false`, accepted anywhere `false` is (`monitor` itself, a section, or a category). Handy when you also want to set other keys: `http: false` and `http: { enabled: false }` do the same thing.
+- **`monitor: false`** (or `monitor: { enabled: false }`): disables every badge and skips the `/api/overview` request entirely, leaving just the version subtitle.
+
+UDP has no concept of middlewares, so its section only exposes `routers` and `services`.
+
+**Version**: the version (from `/api/version`) is shown as the subtitle. Setting `subtitle` overrides it, in which case the version request is skipped.
 
 **Authentication**: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (`Basic <encoded_value>`). The value must be formatted as "admin:password".
 
