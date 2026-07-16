@@ -3,11 +3,11 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-        <template v-if="status === 'running'">
-          {{ software }} | v{{ version }} | {{ players.online }}/{{ players.max }} players
+        <template v-if="item.subtitle">
+          {{ item.subtitle }}
         </template>
-        <template v-else>
-          Minecraft Server
+        <template v-else-if="status === 'running'">
+          {{ software }} | v{{ version }} | {{ players.online }}/{{ players.max }} players
         </template>
       </p>
     </template>
