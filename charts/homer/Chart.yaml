@@ -1,0 +1,12 @@
+apiVersion: v2
+name: homer
+description: A very simple static homepage for your server.
+
+type: application
+
+version: 0.1.0
+
+appVersion: "v23.09.1"
+
+sources:
+- https://github.com/bastienwirtz/homer
