@@ -18,6 +18,7 @@ Available services are located in `src/components/`:
 - [Docuseal](#docuseal)
 - [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
+- [EVCC](#evcc)
 - [FreshRSS](#freshrss)
 - [Gatus](#gatus)
 - [Gitea / Forgejo](#gitea--forgejo)
@@ -164,6 +165,17 @@ The `libraryType` configuration let you choose which stats to show.
 ```
 
 Auto refresh is supported by this integration.
+
+## EVCC
+
+Displays the battery power and SOC, Home Power, Grid Power and Solar Power from EVCC.
+
+```yaml
+- name: "EVCC"
+  type: "Evcc"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
+```
 
 ## FreshRSS
 
