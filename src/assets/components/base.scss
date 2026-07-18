@@ -9,6 +9,54 @@
 }
 
 @layer base {
+  /* =========================================================
+     Normal (current Style)
+     ========================================================= */
+
+  html[data-density='normal'] {
+    --density-card-height: 85px;
+    --density-card-padding: 1.3rem;
+    --density-title-size: 1.1em;
+    --density-subtitle-size: 0.9em;
+    --density-group-spacing: 1.2rem;
+    --density-column-gap: 0.75rem;
+    --density-tag-offset: 1rem;
+    --density-icon-size: 32px;
+    --density-icon-box: 48px;
+  }
+
+  /* =========================================================
+     Compact
+     ========================================================= */
+
+  html[data-density='compact'] {
+    --density-card-height: 63.75px;
+    --density-card-padding: 0.9rem;
+    --density-title-size: 0.825em;
+    --density-subtitle-size: 0.675em;
+    --density-group-spacing: 0.9rem;
+    --density-column-gap: 0.5625rem;
+    --density-tag-offset: 0.75rem;
+    --density-icon-size: 24px;
+    --density-icon-box: 36px;
+  }
+
+  /* =========================================================
+     Ultra Compact
+     ========================================================= */
+
+  html[data-density='ultracompact'] {
+    --density-card-height: 42.5px;
+    --density-card-padding: 0.65rem;
+    --density-title-size: 0.55em;
+    --density-subtitle-size: 0.45em;
+    --density-group-spacing: 0.6rem;
+    --density-column-gap: 0.375rem;
+    --density-tag-offset: 0.5rem;
+    --density-icon-size: 16px;
+    --density-icon-box: 24px;
+  }
+
   html,
   body,
   body #app-mount,
@@ -35,6 +83,7 @@
 
       a {
         color: var(--link);
+
         &:hover {
           color: var(--link-hover);
         }
@@ -44,6 +93,7 @@
         font-weight: 500;
         color: var(--text-title);
       }
+
       .subtitle {
         color: var(--text-subtitle);
       }
@@ -51,10 +101,15 @@
       .card {
         background-color: var(--card-background);
         box-shadow: 0 2px 15px 0 var(--card-shadow);
+
         &:hover {
           background-color: var(--card-background);
         }
+
+        transition: all 0.2s ease-in-out;
+        height: 100%;
       }
+
       .component-error .card {
         border: 1px solid rgba(255, 33, 33, 0.664);
         background-color: rgba(255, 58, 58, 0.24);
@@ -128,6 +183,7 @@
 
         .logo {
           float: left;
+
           i {
             vertical-align: top;
             padding: 8px 15px;
@@ -141,22 +197,26 @@
           }
         }
       }
+
       .navbar {
         background-color: var(--highlight-secondary);
 
         a {
           color: var(--text-header);
           padding: 8px 12px;
+
           &:hover,
           &:focus {
             color: var(--text-header);
             background-color: var(--highlight-hover);
           }
         }
+
         .navbar-menu {
           background-color: inherit;
         }
       }
+
       .navbar-end {
         text-align: right;
       }
@@ -168,13 +228,14 @@
       h2 {
         padding-bottom: 0px;
         @include ellipsis();
+
         i {
           color: var(--highlight-primary);
         }
       }
 
       .title {
-        font-size: 1.1em;
+        font-size: var(--density-title-size);
         line-height: 1.3em;
         font-weight: 500;
         margin-bottom: 3px;
@@ -182,13 +243,13 @@
       }
 
       .subtitle {
-        font-size: 0.9em;
+        font-size: var(--density-subtitle-size);
         font-weight: 300;
         @include ellipsis();
       }
 
       .container {
-        padding: 1.2rem 0.75rem;
+        padding: var(--density-group-spacing) var(--density-column-gap);
       }
 
       .message {
@@ -221,7 +282,7 @@
       .tag {
         color: #ffffff;
         position: absolute;
-        bottom: 1rem;
+        bottom: var(--density-tag-offset);
         right: -0.2rem;
         width: 3px;
         overflow: hidden;
@@ -263,13 +324,13 @@
       }
 
       .card-content {
-        height: 85px;
-        padding: 1.3rem;
+        height: var(--density-card-height);
+        padding: var(--density-card-padding);
       }
 
       .layout-vertical {
         h2.group-title {
-          padding-bottom: 0.75rem;
+          padding-bottom: var(--density-group-spacing);
         }
 
         .card {
@@ -313,6 +374,7 @@
     .search-bar {
       position: relative;
       display: inline-block;
+
       input {
         border: none;
         background-color: var(--highlight-hover);
