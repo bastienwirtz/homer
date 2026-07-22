@@ -57,6 +57,7 @@ Available services are located in `src/components/`:
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
+- [Tennis](#tennis)
 - [Traefik](#traefik)
 - [Transmission](#transmission)
 - [TrueNas Scale](#truenas-scale)
@@ -843,6 +844,41 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
 ```
 
 Auto refresh is supported by this integration.  
+
+## Tennis
+
+Displays the live tennis match currently in progress, using the
+[Live Tennis API](https://livetennisapi.com): the two players, the tournament and round,
+the sets won and the current game (games and points of the set being played). A dot marks
+the player serving. When several matches are live, the first one is shown and the others
+are counted in the subtitle.
+
+```yaml
+- name: "Tennis"
+  type: "Tennis"
+  logo: "assets/tools/sample.png"
+  url: "https://livetennisapi.com" # Card link, not used for the API call
+  endpoint: "https://api.livetennisapi.com/api/public/v1"
+  apikey: "<---insert-api-key-here--->"
+  tour: "atp" # Optional: atp, wta, challenger, itf or juniors. Defaults to all tours.
+  limit: 5 # Optional: how many live matches to fetch (1-10, default 5). The first is displayed.
+  updateIntervalMs: 120000 # Optional: see the rate limit note below.
+```
+
+Auto refresh is supported by this integration.
+
+**API key**: a free key is available at <https://livetennisapi.com/subscribe/free>. It is
+sent as an `X-API-Key` header.
+
+**Rate limit**: the free tier allows **30 requests per minute**. Homer sends one request per
+refresh and per card, so keep `updateIntervalMs` well above the limit — `120000` (2 minutes)
+is a safe default. Lower it only if your plan allows it.
+
+> [!WARNING]  
+> As stated at the top of this page, your `config.yml` is served at `/assets/config.yml`, so
+> the `apikey` above is readable by anyone who can reach your Homer instance. Only put a key
+> there if your instance is protected by authentication, or use a proxy such as
+> [`CORSair`](https://github.com/bastienwirtz/corsair) to inject the key server-side.
 
 ## Traefik
 
