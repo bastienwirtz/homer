@@ -1,0 +1,77 @@
+{
+  "page": 1,
+  "pageSize": 20,
+  "sortKey": "progress",
+  "sortDirection": "descending",
+  "totalRecords": 3,
+  "records": [
+    {
+      "seriesId": 1,
+      "episodeId": 12345,
+      "seasonNumber": 5,
+      "episodeNumber": 8,
+      "title": "The Office S05E08 - Business Trip",
+      "size": 1073741824,
+      "sizeleft": 0,
+      "timeleft": "00:00:00",
+      "estimatedCompletionTime": "2024-01-15T10:30:00Z",
+      "status": "completed",
+      "trackedDownloadStatus": "ok",
+      "trackedDownloadState": "importPending",
+      "statusMessages": [],
+      "downloadId": "download123abc",
+      "protocol": "torrent",
+      "downloadClient": "qBittorrent",
+      "indexer": "Prowlarr",
+      "outputPath": "/downloads/complete/The.Office.US.S05E08.720p.WEB.x264-GROUP",
+      "id": 1
+    },
+    {
+      "seriesId": 2,
+      "episodeId": 67890,
+      "seasonNumber": 3,
+      "episodeNumber": 15,
+      "title": "Breaking Bad S03E15 - Half Measures",
+      "size": 2147483648,
+      "sizeleft": 536870912,
+      "timeleft": "00:15:23",
+      "estimatedCompletionTime": "2024-01-15T10:45:23Z",
+      "status": "downloading",
+      "trackedDownloadStatus": "ok",
+      "trackedDownloadState": "downloading",
+      "statusMessages": [],
+      "downloadId": "download456def",
+      "protocol": "torrent",
+      "downloadClient": "qBittorrent",
+      "indexer": "Prowlarr",
+      "outputPath": "/downloads/incomplete/Breaking.Bad.S03E15.1080p.BluRay.x264-GROUP",
+      "id": 2
+    },
+    {
+      "seriesId": 3,
+      "episodeId": 11121,
+      "seasonNumber": 1,
+      "episodeNumber": 3,
+      "title": "Better Call Saul S01E03 - Nacho",
+      "size": 1610612736,
+      "sizeleft": 1073741824,
+      "timeleft": "01:24:15",
+      "estimatedCompletionTime": "2024-01-15T12:09:15Z",
+      "status": "downloading",
+      "trackedDownloadStatus": "warning",
+      "trackedDownloadState": "downloading",
+      "statusMessages": [
+        {
+          "title": "Slow Download Speed",
+          "messages": ["Download speed is below expected threshold"]
+        }
+      ],
+      "downloadId": "download789ghi",
+      "protocol": "usenet",
+      "downloadClient": "SABnzbd",
+      "indexer": "NZBgeek",
+      "outputPath": "/downloads/incomplete/Better.Call.Saul.S01E03.720p.WEB.x264-GROUP",
+      "id": 3
+    }
+  ]
+}

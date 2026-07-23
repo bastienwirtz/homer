@@ -1,0 +1,35 @@
+[
+  {
+    "source": "IndexerStatusCheck",
+    "type": "warning",
+    "message": "Indexer MusicBrainzDB is unavailable due to recent indexer errors: Service temporarily unavailable",
+    "wikiUrl": "https://wiki.servarr.com/lidarr/health#indexers-are-unavailable-due-to-recent-failures"
+  },
+  {
+    "source": "ImportMechanismCheck",
+    "type": "ok", 
+    "message": "No issues with import mechanism checks"
+  },
+  {
+    "source": "DownloadClientStatusCheck",
+    "type": "ok",
+    "message": "All download clients are available"
+  },
+  {
+    "source": "RootFolderCheck",
+    "type": "error",
+    "message": "Missing root folder: /music",
+    "wikiUrl": "https://wiki.servarr.com/lidarr/health#missing-root-folder"
+  },
+  {
+    "source": "UpdateCheck",
+    "type": "ok",
+    "message": "Update available: 1.3.6.3557 -> 2.0.7.3849"
+  },
+  {
+    "source": "MetadataProviderCheck",
+    "type": "warning",
+    "message": "Metadata provider Last.fm API key is invalid or expired",
+    "wikiUrl": "https://wiki.servarr.com/lidarr/health#metadata-provider-issues"
+  }
+]

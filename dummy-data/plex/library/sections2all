@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaContainer size="89" allowSync="1" art="/:/resources/show-fanart.jpg" identifier="com.plexapp.plugins.library" librarySectionID="2" librarySectionTitle="TV Shows" librarySectionUUID="efgh5678-90ab-cdef-1234-567890abcdef" mediaTagPrefix="/system/bundle/media/flags/" mediaTagVersion="1705317600" mixedParents="0" nocache="1" offset="0" thumb="/:/resources/show.png" title1="TV Shows" title2="All Shows" totalSize="89" viewGroup="show" viewMode="458752">
+  <Directory ratingKey="2001" key="/library/metadata/2001" guid="plex://show/5d9c081fe98e47001e0c2001" type="show" title="Breaking Bad" titleSort="Breaking Bad" contentRating="TV-MA" summary="A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future." rating="9.5" year="2008" thumb="/library/metadata/2001/thumb/1705317600" art="/library/metadata/2001/art/1705317600" banner="/library/metadata/2001/banner/1705317600" duration="2820000" originallyAvailableAt="2008-01-20" leafCount="62" viewedLeafCount="62" childCount="5" addedAt="1705144800" updatedAt="1705317600">
+    <Genre tag="Crime" />
+    <Genre tag="Drama" />
+    <Genre tag="Thriller" />
+  </Directory>
+  <Directory ratingKey="2002" key="/library/metadata/2002" guid="plex://show/5d9c081fe98e47001e0c2002" type="show" title="Friends" titleSort="Friends" contentRating="TV-14" summary="Follows the personal and professional lives of six twenty to thirty-something-year-old friends living in Manhattan." rating="8.9" year="1994" thumb="/library/metadata/2002/thumb/1705317600" art="/library/metadata/2002/art/1705317600" banner="/library/metadata/2002/banner/1705317600" duration="1320000" originallyAvailableAt="1994-09-22" leafCount="236" viewedLeafCount="236" childCount="10" addedAt="1705144800" updatedAt="1705317600">
+    <Genre tag="Comedy" />
+    <Genre tag="Romance" />
+  </Directory>
+  <!-- 87 more shows would be here, showing just two for brevity -->
+</MediaContainer>

@@ -1,23 +1,32 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import pluginVue from "eslint-plugin-vue";
-import eslintConfigPrettier from "@vue/eslint-config-prettier";
+import { defineConfig, globalIgnores } from 'eslint/config'
+import globals from 'globals'
+import js from '@eslint/js'
+import pluginVue from 'eslint-plugin-vue'
+import skipFormatting from 'eslint-config-prettier/flat'
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  { files: ["**/*.{js,mjs,cjs,vue}"] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...pluginVue.configs["flat/recommended"],
-  eslintConfigPrettier,
+export default defineConfig([
   {
+    name: 'app/files-to-lint',
+    files: ['**/*.{vue,js,mjs,jsx}'],
+  },
+  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        __APP_VERSION__: "readable",
+      },
+    },
+  },
+  js.configs.recommended,
+  ...pluginVue.configs['flat/essential'],
+  skipFormatting,
+  {
+    files: ['**/*.{vue,js}'],
     rules: {
       "vue/multi-word-component-names": "off",
       "vue/require-default-prop": "off",
-      "vue/no-v-html": "off",
+      "vue/no-v-html": "off", 
     },
   },
-  {
-    ignores: ["**/dist/**", "**/dist-ssr/**", "**/coverage/**"],
-  },
-];
+])

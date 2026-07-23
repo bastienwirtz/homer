@@ -1,0 +1,18 @@
+{
+  "totalRecipes": 247,
+  "totalUsers": 5,
+  "totalGroups": 2,
+  "totalCategories": 18,
+  "totalTags": 42,
+  "totalTools": 15,
+  "totalMealPlans": 156,
+  "totalShoppingLists": 28,
+  "totalComments": 89,
+  "lastUpdated": "2024-01-15T10:30:00Z",
+  "version": "1.0.0",
+  "demoStatus": false,
+  "allowSignup": true,
+  "defaultGroup": "Home",
+  "buildVersion": "v1.0.0-1234567",
+  "apiVersion": "v1"
+}

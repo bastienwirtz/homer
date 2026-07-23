@@ -32,28 +32,18 @@ export default {
   }),
   computed: {
     status_text: function () {
-      switch (this.ups_status) {
-        case "OL":
-          return "online";
-        case "OB":
-          return "on battery";
-        case "LB":
-          return "low battery";
-        default:
-          return "unknown";
-      }
+      const status = this.ups_status;
+      if (status.includes("LB"))     return "low battery";
+      if (status.includes("OB"))     return "on battery";
+      if (status.includes("OL"))     return "online";
+      return "unknown";
     },
     status_class: function () {
-      switch (this.ups_status) {
-        case "OL":
-          return "online";
-        case "OB": // On battery
-          return "pending";
-        case "LB": // Low battery
-          return "offline";
-        default:
-          return "unknown";
-      }
+      const status = this.ups_status;
+      if (status.includes("LB"))     return "offline";
+      if (status.includes("OB"))     return "pending";
+      if (status.includes("OL"))     return "online";
+      return "unknown";
     },
     load: function () {
       if (this.ups_load) {
@@ -63,6 +53,10 @@ export default {
     },
   },
   created() {
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchStatus;
+
+    // Initial data fetch
     this.fetchStatus();
   },
   methods: {

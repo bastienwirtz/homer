@@ -1,0 +1,45 @@
+{
+  "location_name": "Home",
+  "latitude": 40.7128,
+  "longitude": -74.0060,
+  "elevation": 10,
+  "unit_system": {
+    "length": "km",
+    "mass": "kg",
+    "pressure": "Pa",
+    "temperature": "°C",
+    "volume": "L"
+  },
+  "time_zone": "America/New_York",
+  "components": [
+    "automation",
+    "climate",
+    "device_tracker",
+    "frontend",
+    "history",
+    "light",
+    "logger",
+    "media_player",
+    "recorder",
+    "script",
+    "sensor",
+    "switch",
+    "system_health",
+    "weather"
+  ],
+  "config_dir": "/config",
+  "allowlist_external_dirs": [
+    "/config",
+    "/share"
+  ],
+  "allowlist_external_urls": [],
+  "version": "2024.1.5",
+  "config_source": "storage",
+  "recovery_mode": false,
+  "state": "RUNNING",
+  "external_url": null,
+  "internal_url": null,
+  "currency": "USD",
+  "country": "US",
+  "language": "en"
+}

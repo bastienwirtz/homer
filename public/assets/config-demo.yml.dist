@@ -120,7 +120,7 @@ services:
         units: "metric"
         endpoint: "/dummy-data/openweather/weather"
         type: "OpenWeather"
-  - name: "Ressources"
+  - name: "Resources"
     icon: "fa-regular fa-bookmark"
     class: highlight-inverted
     items:

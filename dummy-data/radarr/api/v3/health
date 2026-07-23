@@ -1,0 +1,35 @@
+[
+  {
+    "source": "IndexerStatusCheck",
+    "type": "warning",
+    "message": "Indexer TorrentDay is unavailable due to recent indexer errors: HTTP 503 Service Unavailable",
+    "wikiUrl": "https://wiki.servarr.com/radarr/health#indexers-are-unavailable-due-to-recent-failures"
+  },
+  {
+    "source": "ImportMechanismCheck",
+    "type": "ok",
+    "message": "No issues with import mechanism checks"
+  },
+  {
+    "source": "DownloadClientStatusCheck",
+    "type": "ok",
+    "message": "All download clients are available"
+  },
+  {
+    "source": "RootFolderCheck",
+    "type": "warning",
+    "message": "Missing root folder: /movies",
+    "wikiUrl": "https://wiki.servarr.com/radarr/health#missing-root-folder"
+  },
+  {
+    "source": "UpdateCheck",
+    "type": "ok",
+    "message": "Update available: 4.7.5.7809 -> 5.0.3.8127"
+  },
+  {
+    "source": "DiskSpaceCheck",
+    "type": "error",
+    "message": "Disk space is critically low on /movies: 2.1 GB remaining",
+    "wikiUrl": "https://wiki.servarr.com/radarr/health#disk-space"
+  }
+]

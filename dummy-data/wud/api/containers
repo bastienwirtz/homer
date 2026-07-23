@@ -1,0 +1,182 @@
+[
+  {
+    "id": "nginx-proxy",
+    "name": "nginx-proxy", 
+    "watcher": "docker",
+    "image": {
+      "registry": {
+        "name": "hub.docker.com",
+        "url": "https://registry-1.docker.io/v2"
+      },
+      "name": "nginx",
+      "tag": {
+        "value": "1.25.3",
+        "semver": true
+      },
+      "digest": {
+        "watch": false,
+        "repo": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef"
+      },
+      "architecture": "amd64",
+      "os": "linux",
+      "created": "2023-12-15T10:30:00Z"
+    },
+    "result": {
+      "tag": "1.25.4"
+    },
+    "updateAvailable": true,
+    "status": "running",
+    "created": "2024-01-10T08:15:00Z",
+    "updated": "2024-01-15T11:30:00Z"
+  },
+  {
+    "id": "postgres-db",
+    "name": "postgres-db",
+    "watcher": "docker", 
+    "image": {
+      "registry": {
+        "name": "hub.docker.com",
+        "url": "https://registry-1.docker.io/v2"
+      },
+      "name": "postgres",
+      "tag": {
+        "value": "15.5-alpine",
+        "semver": true
+      },
+      "digest": {
+        "watch": false,
+        "repo": "sha256:2345678901abcdef2345678901abcdef2345678901abcdef2345678901abcdef"
+      },
+      "architecture": "amd64",
+      "os": "linux", 
+      "created": "2023-11-28T14:22:00Z"
+    },
+    "result": {
+      "tag": "16.1-alpine"
+    },
+    "updateAvailable": true,
+    "status": "running",
+    "created": "2024-01-08T12:45:00Z",
+    "updated": "2024-01-15T11:30:00Z"
+  },
+  {
+    "id": "redis-cache",
+    "name": "redis-cache",
+    "watcher": "docker",
+    "image": {
+      "registry": {
+        "name": "hub.docker.com",
+        "url": "https://registry-1.docker.io/v2"
+      },
+      "name": "redis",
+      "tag": {
+        "value": "7.2.4-alpine",
+        "semver": true
+      },
+      "digest": {
+        "watch": false,
+        "repo": "sha256:3456789012abcdef3456789012abcdef3456789012abcdef3456789012abcdef"
+      },
+      "architecture": "amd64",
+      "os": "linux",
+      "created": "2024-01-12T09:18:00Z"
+    },
+    "result": {
+      "tag": "7.2.4-alpine"
+    },
+    "updateAvailable": false,
+    "status": "running",
+    "created": "2024-01-12T16:20:00Z",
+    "updated": "2024-01-15T11:30:00Z"
+  },
+  {
+    "id": "portainer-agent",
+    "name": "portainer-agent",
+    "watcher": "docker",
+    "image": {
+      "registry": {
+        "name": "hub.docker.com", 
+        "url": "https://registry-1.docker.io/v2"
+      },
+      "name": "portainer/agent",
+      "tag": {
+        "value": "2.19.4",
+        "semver": true
+      },
+      "digest": {
+        "watch": false,
+        "repo": "sha256:4567890123abcdef4567890123abcdef4567890123abcdef4567890123abcdef"
+      },
+      "architecture": "amd64",
+      "os": "linux",
+      "created": "2024-01-05T07:42:00Z"
+    },
+    "result": {
+      "tag": "2.19.4"
+    },
+    "updateAvailable": false,
+    "status": "running",
+    "created": "2024-01-05T14:30:00Z",
+    "updated": "2024-01-15T11:30:00Z"
+  },
+  {
+    "id": "app-backend",
+    "name": "app-backend",
+    "watcher": "docker",
+    "image": {
+      "registry": {
+        "name": "hub.docker.com",
+        "url": "https://registry-1.docker.io/v2"
+      },
+      "name": "node",
+      "tag": {
+        "value": "18.19.0-alpine",
+        "semver": true
+      },
+      "digest": {
+        "watch": false,
+        "repo": "sha256:5678901234abcdef5678901234abcdef5678901234abcdef5678901234abcdef"
+      },
+      "architecture": "amd64",
+      "os": "linux",
+      "created": "2023-12-28T11:15:00Z"
+    },
+    "result": {
+      "tag": "20.11.0-alpine"
+    },
+    "updateAvailable": true,
+    "status": "running",
+    "created": "2024-01-07T09:12:00Z", 
+    "updated": "2024-01-15T11:30:00Z"
+  },
+  {
+    "id": "prometheus",
+    "name": "prometheus",
+    "watcher": "docker",
+    "image": {
+      "registry": {
+        "name": "quay.io",
+        "url": "https://quay.io/v2"
+      },
+      "name": "prometheus/prometheus",
+      "tag": {
+        "value": "v2.48.1",
+        "semver": true
+      },
+      "digest": {
+        "watch": false,
+        "repo": "sha256:6789012345abcdef6789012345abcdef6789012345abcdef6789012345abcdef"
+      },
+      "architecture": "amd64", 
+      "os": "linux",
+      "created": "2023-12-20T16:33:00Z"
+    },
+    "result": {
+      "tag": "v2.49.1"
+    },
+    "updateAvailable": true,
+    "status": "running",
+    "created": "2024-01-03T13:55:00Z",
+    "updated": "2024-01-15T11:30:00Z"
+  }
+]

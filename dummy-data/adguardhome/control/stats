@@ -1,0 +1,51 @@
+{
+  "time_units": "hours",
+  "num_dns_queries": 28947,
+  "num_blocked_filtering": 12489,
+  "num_replaced_safebrowsing": 0,
+  "num_replaced_safesearch": 0,
+  "num_replaced_parental": 0,
+  "avg_processing_time": 0.34,
+  "top_queried_domains": [
+    {
+      "name": "example.com",
+      "count": 1289
+    },
+    {
+      "name": "api.github.com",
+      "count": 892
+    }
+  ],
+  "top_clients": [
+    {
+      "name": "192.168.1.100",
+      "count": 8945
+    },
+    {
+      "name": "192.168.1.101",
+      "count": 6234
+    }
+  ],
+  "top_blocked_domains": [
+    {
+      "name": "ads.google.com",
+      "count": 1245
+    },
+    {
+      "name": "tracker.example.com",
+      "count": 987
+    }
+  ],
+  "dns_queries": [
+    12450, 13200, 14100, 13800, 12900, 11200, 10800, 9600, 8200, 7800,
+    9200, 10500, 12100, 13600, 14800, 15200, 14900, 13700, 12800, 11900,
+    11200, 10800, 10200, 9800
+  ],
+  "blocked_filtering": [
+    5200, 5800, 6100, 5900, 5400, 4800, 4600, 4200, 3600, 3400,
+    4000, 4500, 5200, 5800, 6300, 6500, 6300, 5800, 5400, 5100,
+    4800, 4600, 4300, 4200
+  ],
+  "replaced_safebrowsing": [],
+  "replaced_parental": []
+}

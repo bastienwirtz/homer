@@ -1,0 +1,36 @@
+{
+  "total": 42,
+  "entries": [
+    {
+      "id": 888,
+      "user_id": 1,
+      "feed_id": 42,
+      "title": "Example Unread Entry",
+      "url": "http://example.org/article.html",
+      "comments_url": "",
+      "author": "John Doe",
+      "content": "<p>This is an unread RSS entry</p>",
+      "hash": "29f99e4074cdacca1766f47697d03c66070ef6a14770a1fd5a867483c207a1bb",
+      "published_at": "2025-11-11T16:15:19Z",
+      "created_at": "2025-11-11T16:15:19Z",
+      "status": "unread",
+      "share_code": "",
+      "starred": false,
+      "reading_time": 5,
+      "enclosures": null,
+      "feed": {
+        "id": 42,
+        "user_id": 1,
+        "title": "Tech Blog",
+        "site_url": "http://example.org",
+        "feed_url": "http://example.org/feed.atom",
+        "checked_at": "2025-11-11T21:06:03.133839Z",
+        "category": {
+          "id": 22,
+          "user_id": 1,
+          "title": "Technology"
+        }
+      }
+    }
+  ]
+}

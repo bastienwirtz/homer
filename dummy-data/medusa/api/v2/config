@@ -1,0 +1,108 @@
+{
+  "system": {
+    "news": {
+      "unread": 3,
+      "latest": [
+        {
+          "title": "Medusa v1.0.19 Released",
+          "date": "2024-01-14",
+          "content": "Bug fixes and performance improvements",
+          "read": false
+        },
+        {
+          "title": "New indexer support added",
+          "date": "2024-01-12", 
+          "content": "Support for additional torrent indexers",
+          "read": false
+        },
+        {
+          "title": "Database maintenance completed",
+          "date": "2024-01-10",
+          "content": "Weekly database optimization finished",
+          "read": false
+        }
+      ]
+    },
+    "version": {
+      "version": "1.0.19",
+      "branch": "master",
+      "commit": "abc123def456",
+      "dbVersion": 44,
+      "pythonVersion": "3.11.7"
+    },
+    "os": {
+      "platform": "Linux",
+      "release": "6.5.0-15-generic",
+      "version": "#15~22.04.1-Ubuntu"
+    },
+    "memory": {
+      "used": 512.5,
+      "total": 8192.0,
+      "percent": 6.3
+    }
+  },
+  "main": {
+    "logs": {
+      "numWarnings": 2,
+      "numErrors": 1,
+      "loggingLevels": [
+        "DEBUG",
+        "INFO", 
+        "WARNING",
+        "ERROR"
+      ],
+      "currentLevel": "INFO"
+    },
+    "general": {
+      "webHost": "0.0.0.0",
+      "webPort": 8081,
+      "webRoot": "",
+      "launchBrowser": false,
+      "versionNotify": true,
+      "autoUpdate": false,
+      "logDir": "/app/Logs",
+      "dataDir": "/app/Data",
+      "configVersion": 12
+    },
+    "showDefaults": {
+      "status": "Skipped/Wanted/Snatched/Downloaded",
+      "statusAfter": "Downloaded",
+      "season_folders": true,
+      "anime": false,
+      "scene": false,
+      "archive_firstmatch": false,
+      "quality_default": "Standard Definition",
+      "subtitles": false,
+      "flatten_folders": false,
+      "indexer_default": "tvdb",
+      "indexer_timeout": 20,
+      "skip_removed_files": false
+    }
+  },
+  "search": {
+    "general": {
+      "randomize_providers": false,
+      "download_propers": true,
+      "check_propers_interval": "daily",
+      "propers_search_days": 2,
+      "backlog_days": 7,
+      "cache_trimming": false,
+      "max_cache_age": 30
+    },
+    "nzb": {
+      "nzbs": false,
+      "nzbs_uid": "",
+      "nzbs_hash": ""
+    },
+    "torrent": {
+      "torrent_method": "blackhole",
+      "torrent_path": "",
+      "torrent_seed_time": 0,
+      "torrent_paused": false,
+      "torrent_high_bandwidth": false,
+      "torrent_label": "",
+      "torrent_label_anime": "",
+      "torrent_verify_cert": false
+    }
+  }
+}

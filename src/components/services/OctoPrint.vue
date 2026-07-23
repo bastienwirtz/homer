@@ -82,10 +82,18 @@ export default {
   },
   created() {
     this.display = this.item.display == "bar" ? this.item.display : "text";
-    this.fetchPrinterStatus();
-    this.fetchStatus();
+
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchAll;
+
+    // Initial data fetch
+    this.fetchAll();
   },
   methods: {
+    fetchAll: async function () {
+      this.fetchPrinterStatus();
+      this.fetchStatus();
+    },
     fetchStatus: async function () {
       try {
         const response = await this.fetch(`api/job?apikey=${this.item.apikey}`);

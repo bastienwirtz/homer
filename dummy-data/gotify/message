@@ -1,0 +1,65 @@
+{
+  "messages": [
+    {
+      "id": 1,
+      "appid": 1,
+      "message": "System backup completed successfully",
+      "title": "Backup Service",
+      "priority": 2,
+      "date": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "appid": 2,
+      "message": "Database optimization finished",
+      "title": "Database Manager",
+      "priority": 1,
+      "date": "2024-01-15T09:15:00Z"
+    },
+    {
+      "id": 3,
+      "appid": 1,
+      "message": "Server restart scheduled for maintenance",
+      "title": "System Admin",
+      "priority": 5,
+      "date": "2024-01-15T08:45:00Z"
+    },
+    {
+      "id": 4,
+      "appid": 3,
+      "message": "New user registration: john.doe@example.com",
+      "title": "User Management",
+      "priority": 1,
+      "date": "2024-01-15T07:20:00Z"
+    },
+    {
+      "id": 5,
+      "appid": 2,
+      "message": "Weekly report generated and sent",
+      "title": "Report Generator",
+      "priority": 2,
+      "date": "2024-01-14T18:00:00Z"
+    },
+    {
+      "id": 6,
+      "appid": 4,
+      "message": "Security scan completed - no threats detected",
+      "title": "Security Monitor",
+      "priority": 2,
+      "date": "2024-01-14T16:30:00Z"
+    },
+    {
+      "id": 7,
+      "appid": 1,
+      "message": "Disk usage is at 85% on /var partition",
+      "title": "System Monitor",
+      "priority": 4,
+      "date": "2024-01-14T14:15:00Z"
+    }
+  ],
+  "paging": {
+    "size": 7,
+    "since": 0,
+    "limit": 100
+  }
+}

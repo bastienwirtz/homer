@@ -1,0 +1,94 @@
+[
+  {
+    "Id": 1,
+    "Name": "local",
+    "Type": 1,
+    "URL": "unix:///var/run/docker.sock",
+    "GroupId": 1,
+    "PublicURL": "",
+    "Status": 1,
+    "UserAccessPolicies": {},
+    "TeamAccessPolicies": {},
+    "Extensions": [],
+    "TagIds": [],
+    "AssociatedEndpoints": [],
+    "Snapshots": [
+      {
+        "Time": 1705317600,
+        "DockerVersion": "24.0.7",
+        "Swarm": false,
+        "TotalCPU": 8,
+        "TotalMemory": 16777216000,
+        "RunningContainerCount": 12,
+        "StoppedContainerCount": 5,
+        "HealthyContainerCount": 10,
+        "UnhealthyContainerCount": 0,
+        "VolumeCount": 25,
+        "ImageCount": 47,
+        "ServiceCount": 0,
+        "StackCount": 0,
+        "DockerRootDir": "/var/lib/docker"
+      }
+    ],
+    "Kubernetes": {
+      "Snapshots": []
+    },
+    "Agent": {
+      "NodeName": "",
+      "ChecklnInterval": 5,
+      "Version": ""
+    },
+    "Edge": {
+      "AsyncMode": false,
+      "PingInterval": 60,
+      "CommandInterval": 5,
+      "SnapshotInterval": 5
+    }
+  },
+  {
+    "Id": 2, 
+    "Name": "production",
+    "Type": 2,
+    "URL": "tcp://prod-docker:2376",
+    "GroupId": 1,
+    "PublicURL": "https://prod-docker.example.com",
+    "Status": 1,
+    "UserAccessPolicies": {},
+    "TeamAccessPolicies": {},
+    "Extensions": [],
+    "TagIds": [],
+    "AssociatedEndpoints": [],
+    "Snapshots": [
+      {
+        "Time": 1705317600,
+        "DockerVersion": "24.0.7",
+        "Swarm": false,
+        "TotalCPU": 16,
+        "TotalMemory": 33554432000,
+        "RunningContainerCount": 25,
+        "StoppedContainerCount": 3,
+        "HealthyContainerCount": 23,
+        "UnhealthyContainerCount": 2,
+        "VolumeCount": 40,
+        "ImageCount": 75,
+        "ServiceCount": 0,
+        "StackCount": 0,
+        "DockerRootDir": "/var/lib/docker"
+      }
+    ],
+    "Kubernetes": {
+      "Snapshots": []
+    },
+    "Agent": {
+      "NodeName": "",
+      "ChecklnInterval": 5,
+      "Version": ""
+    },
+    "Edge": {
+      "AsyncMode": false,
+      "PingInterval": 60,
+      "CommandInterval": 5,
+      "SnapshotInterval": 5
+    }
+  }
+]

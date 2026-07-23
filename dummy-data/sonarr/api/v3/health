@@ -1,0 +1,29 @@
+[
+  {
+    "source": "IndexerStatusCheck",
+    "type": "warning",
+    "message": "Indexer MyIndexer is unavailable due to recent indexer errors: Request timeout",
+    "wikiUrl": "https://wiki.servarr.com/sonarr/health#indexers-are-unavailable-due-to-recent-failures"
+  },
+  {
+    "source": "ImportMechanismCheck", 
+    "type": "ok",
+    "message": "No issues with import mechanism checks"
+  },
+  {
+    "source": "DownloadClientStatusCheck",
+    "type": "ok", 
+    "message": "All download clients are available"
+  },
+  {
+    "source": "RootFolderCheck",
+    "type": "warning",
+    "message": "Missing root folder: /media/tv",
+    "wikiUrl": "https://wiki.servarr.com/sonarr/health#missing-root-folder"
+  },
+  {
+    "source": "UpdateCheck",
+    "type": "ok",
+    "message": "Update available: 3.0.10.1567 -> 4.0.1.929"
+  }
+]

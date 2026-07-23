@@ -1,0 +1,162 @@
+{
+  "success": true,
+  "data": {
+    "summary": {
+      "0x5000cca264eb01d7": {
+        "device": {
+          "wwn": "0x5000cca264eb01d7",
+          "device_name": "Samsung SSD 980 1TB",
+          "device_uuid": "WWN-0x5000cca264eb01d7",
+          "device_serial_id": "S64HNE0T123456A",
+          "device_label": "",
+          "manufacture": "Samsung",
+          "model_name": "Samsung SSD 980 1TB",
+          "interface_type": "nvme",
+          "interface_speed": "",
+          "serial_number": "S64HNE0T123456A",
+          "firmware": "2B4QGXA7",
+          "rotational_speed": 0,
+          "capacity": 1000204886016,
+          "form_factor": "",
+          "smart_support": true,
+          "device_protocol": "NVMe",
+          "device_type": "",
+          "device_status": 0,
+          "created_at": "2024-01-15T10:30:00Z",
+          "updated_at": "2024-01-15T11:45:00Z",
+          "deleted_at": null
+        },
+        "smart": {
+          "collector_date": "2024-01-15T11:45:00Z",
+          "temp": 35,
+          "power_on_hours": 2847,
+          "power_cycle_count": 1247
+        }
+      },
+      "0x5000cca264eb01d8": {
+        "device": {
+          "wwn": "0x5000cca264eb01d8",
+          "device_name": "Western Digital WD Blue 2TB",
+          "device_uuid": "WWN-0x5000cca264eb01d8", 
+          "device_serial_id": "WD-WCC4N7DS2468",
+          "device_label": "",
+          "manufacture": "Western Digital",
+          "model_name": "WDC WD20EZAZ-00GXCB0",
+          "interface_type": "ata",
+          "interface_speed": "",
+          "serial_number": "WD-WCC4N7DS2468",
+          "firmware": "80.00A80",
+          "rotational_speed": 5400,
+          "capacity": 2000398934016,
+          "form_factor": "",
+          "smart_support": true,
+          "device_protocol": "ATA",
+          "device_type": "",
+          "device_status": 0,
+          "created_at": "2024-01-15T10:30:00Z",
+          "updated_at": "2024-01-15T11:45:00Z",
+          "deleted_at": null
+        },
+        "smart": {
+          "collector_date": "2024-01-15T11:45:00Z",
+          "temp": 41,
+          "power_on_hours": 8942,
+          "power_cycle_count": 892
+        }
+      },
+      "0x500a0751e6b8a7c3": {
+        "device": {
+          "wwn": "0x500a0751e6b8a7c3",
+          "device_name": "Seagate Barracuda 4TB",
+          "device_uuid": "WWN-0x500a0751e6b8a7c3",
+          "device_serial_id": "ST4000DM004-2CV104",
+          "device_label": "",
+          "manufacture": "Seagate",
+          "model_name": "ST4000DM004-2CV104",
+          "interface_type": "ata",
+          "interface_speed": "",
+          "serial_number": "ZFN123AB",
+          "firmware": "0001",
+          "rotational_speed": 5400,
+          "capacity": 4000787030016,
+          "form_factor": "",
+          "smart_support": true,
+          "device_protocol": "ATA",
+          "device_type": "",
+          "device_status": 2,
+          "created_at": "2024-01-15T10:30:00Z",
+          "updated_at": "2024-01-15T11:45:00Z",
+          "deleted_at": null
+        },
+        "smart": {
+          "collector_date": "2024-01-15T11:45:00Z",
+          "temp": 47,
+          "power_on_hours": 12456,
+          "power_cycle_count": 456
+        }
+      },
+      "0x5000cca264eb01d9": {
+        "device": {
+          "wwn": "0x5000cca264eb01d9",
+          "device_name": "Kingston NV2 500GB",
+          "device_uuid": "WWN-0x5000cca264eb01d9",
+          "device_serial_id": "50026B7784123456",
+          "device_label": "",
+          "manufacture": "Kingston",
+          "model_name": "KINGSTON SNV2S500G",
+          "interface_type": "nvme",
+          "interface_speed": "",
+          "serial_number": "50026B7784123456",
+          "firmware": "SNV2S2.1.0",
+          "rotational_speed": 0,
+          "capacity": 500107862016,
+          "form_factor": "",
+          "smart_support": true,
+          "device_protocol": "NVMe",
+          "device_type": "",
+          "device_status": 4,
+          "created_at": "2024-01-15T10:30:00Z",
+          "updated_at": "2024-01-15T11:45:00Z",
+          "deleted_at": null
+        },
+        "smart": {
+          "collector_date": "2024-01-15T11:45:00Z",
+          "temp": 52,
+          "power_on_hours": 1247,
+          "power_cycle_count": 89
+        }
+      },
+      "0x5000cca264eb01da": {
+        "device": {
+          "wwn": "0x5000cca264eb01da",
+          "device_name": "Crucial MX500 1TB",
+          "device_uuid": "WWN-0x5000cca264eb01da",
+          "device_serial_id": "194251A12345",
+          "device_label": "",
+          "manufacture": "Crucial",
+          "model_name": "CT1000MX500SSD1",
+          "interface_type": "ata",
+          "interface_speed": "",
+          "serial_number": "194251A12345",
+          "firmware": "M3CR033",
+          "rotational_speed": 0,
+          "capacity": 1000204886016,
+          "form_factor": "",
+          "smart_support": true,
+          "device_protocol": "ATA",
+          "device_type": "",
+          "device_status": 0,
+          "created_at": "2024-01-15T10:30:00Z",
+          "updated_at": "2024-01-15T11:45:00Z",
+          "deleted_at": null
+        },
+        "smart": {
+          "collector_date": "2024-01-15T11:45:00Z",
+          "temp": 39,
+          "power_on_hours": 5642,
+          "power_cycle_count": 1089
+        }
+      }
+    }
+  }
+}

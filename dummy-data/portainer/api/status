@@ -1,0 +1,38 @@
+{
+  "Version": "2.19.4",
+  "APIVersion": "2.19.4",
+  "DatabaseVersion": "34",
+  "Build": {
+    "BuildNumber": "1234567890",
+    "ImageTag": "2.19.4-alpine",
+    "NodejsVersion": "v18.17.1",
+    "YarnVersion": "1.22.19",
+    "WebpackVersion": "5.88.2",
+    "GoVersion": "go1.21.5"
+  },
+  "InstanceID": "portainer-instance-abc123def456",
+  "Edition": "CE",
+  "DemoEnvironment": {
+    "Enabled": false,
+    "URL": ""
+  },
+  "AnalyticsEnabled": false,
+  "AuthenticationMethod": 1,
+  "Users": 3,
+  "ValidLicense": false,
+  "LicenseInfo": {
+    "Company": "",
+    "CreatedAt": 0,
+    "ExpiresAt": 0,
+    "LicenseKey": "",
+    "ProductEdition": "",
+    "Seats": 0,
+    "Valid": false
+  },
+  "RequiredPasswordLength": 12,
+  "UserSessionTimeout": "8h",
+  "Features": {
+    "EdgeDeviceUntrustedMode": false
+  },
+  "EdgeAgentCheckinIntervalSeconds": 5
+}

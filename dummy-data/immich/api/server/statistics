@@ -1,0 +1,41 @@
+{
+  "photos": 12847,
+  "videos": 1523,
+  "usage": 248576851456,
+  "usageByUser": [
+    {
+      "userId": "user-1234-5678-9abc-def0",
+      "userName": "john.doe",
+      "photos": 8945,
+      "videos": 892,
+      "usage": 156789012345
+    },
+    {
+      "userId": "user-2345-6789-abcd-ef01",
+      "userName": "jane.smith",
+      "photos": 2134,
+      "videos": 423,
+      "usage": 67891234567
+    },
+    {
+      "userId": "user-3456-789a-bcde-f012",
+      "userName": "family.shared",
+      "photos": 1768,
+      "videos": 208,
+      "usage": 23896604544
+    }
+  ],
+  "usageRaw": 248576851456,
+  "photosGrowth": {
+    "date": "2024-01-15",
+    "value": 42
+  },
+  "videosGrowth": {
+    "date": "2024-01-15", 
+    "value": 7
+  },
+  "usageGrowth": {
+    "date": "2024-01-15",
+    "value": 2147483648
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "count": 12,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "url": "https://github.com/bastienwirtz/homer",
+      "title": "Homer - A very simple static homepage for your server",
+      "description": "A dead simple static HOMepage for your servER to keep your services on hand, from a simple yaml configuration file.",
+      "notes": "",
+      "website_title": "GitHub",
+      "website_description": "GitHub is where over 100 million developers shape the future of software, together.",
+      "web_archive_snapshot_url": "",
+      "favicon_url": "https://github.githubassets.com/favicons/favicon.svg",
+      "preview_image_url": "",
+      "is_archived": false,
+      "unread": false,
+      "shared": false,
+      "tag_names": ["selfhosted", "dashboard", "yaml"],
+      "date_added": "2024-01-15T10:30:00.123456Z",
+      "date_modified": "2024-01-15T10:30:00.123456Z"
+    },
+    {
+      "id": 2,
+      "url": "https://docs.docker.com/",
+      "title": "Docker Documentation",
+      "description": "Official Docker documentation with guides, references, and tutorials for containerization.",
+      "notes": "Essential for container management",
+      "website_title": "Docker Docs",
+      "website_description": "Docker helps developers build, share, run, and verify applications anywhere.",
+      "web_archive_snapshot_url": "",
+      "favicon_url": "https://docs.docker.com/favicons/docs@2x.ico",
+      "preview_image_url": "",
+      "is_archived": false,
+      "unread": false,
+      "shared": false,
+      "tag_names": ["docker", "containers", "documentation"],
+      "date_added": "2024-01-14T15:20:00.123456Z",
+      "date_modified": "2024-01-14T15:20:00.123456Z"
+    },
+    {
+      "id": 3,
+      "url": "https://nginx.org/en/docs/",
+      "title": "nginx documentation",
+      "description": "Official nginx web server documentation covering installation, configuration, and modules.",
+      "notes": "",
+      "website_title": "nginx",
+      "website_description": "nginx [engine x] is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP/UDP proxy server.",
+      "web_archive_snapshot_url": "",
+      "favicon_url": "https://nginx.org/favicon.ico",
+      "preview_image_url": "",
+      "is_archived": false,
+      "unread": false,
+      "shared": false,
+      "tag_names": ["nginx", "webserver", "proxy"],
+      "date_added": "2024-01-13T09:45:00.123456Z",
+      "date_modified": "2024-01-13T09:45:00.123456Z"
+    }
+  ]
+}
