@@ -15,10 +15,13 @@
 </template>
 
 <script>
+import fetchOptions from "@/utils/fetchOptions.js";
+
 export default {
   name: "Message",
   props: {
     item: Object,
+    proxy: Object,
   },
   data: function () {
     return {
@@ -67,14 +70,16 @@ export default {
     },
 
     downloadMessage: function (url) {
-      return fetch(url, { headers: { Accept: "application/json" } }).then(
-        function (response) {
-          if (response.status != 200) {
-            return;
-          }
-          return response.json();
-        },
-      );
+      const options = fetchOptions(this.proxy, this.item);
+      // Keep asking for JSON unless the configuration supplied its own headers.
+      options.headers ??= { Accept: "application/json" };
+
+      return fetch(url, options).then((response) => {
+        if (response.status !== 200) {
+          return;
+        }
+        return response.json();
+      });
     },
 
     mapRemoteMessage: function (message) {
