@@ -15,11 +15,10 @@
 </template>
 
 <script>
-import fetchOptions from "@/mixins/fetchOptions.js";
+import fetchOptions from "@/utils/fetchOptions.js";
 
 export default {
   name: "Message",
-  mixins: [fetchOptions],
   props: {
     item: Object,
     proxy: Object,
@@ -71,8 +70,9 @@ export default {
     },
 
     downloadMessage: function (url) {
-      const defaultHeaders = this.item?.headers || { Accept: "application/json" };
-      const options = this.buildFetchOptions(defaultHeaders);
+      const options = fetchOptions(this.proxy, this.item);
+      // Keep asking for JSON unless the configuration supplied its own headers.
+      options.headers ??= { Accept: "application/json" };
 
       return fetch(url, options).then((response) => {
         if (response.status !== 200) {

@@ -1,15 +1,7 @@
 import updateScheduler from "@/utils/updateScheduler.js";
-import fetchOptions from "@/mixins/fetchOptions.js";
+import fetchOptions from "@/utils/fetchOptions.js";
 
 export default {
-  mixins: [fetchOptions],
-  props: {
-    proxy: Object,
-  },
-
-
-export default {
-  mixins: [fetchOptions],
   props: {
     proxy: Object,
   },
@@ -53,7 +45,10 @@ export default {
         url = `${this.endpoint}/${path}`;
       }
 
-      const options = this.buildFetchOptions(init);
+      const options = {
+        ...fetchOptions(this.proxy, this.item),
+        ...init,
+      };
 
       return fetch(url, options).then((response) => {
         let success = response.ok;
