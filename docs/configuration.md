@@ -47,6 +47,7 @@ proxy:
 defaults:
   layout: columns # Either 'columns', or 'list'
   colorTheme: auto # One of 'auto', 'light', or 'dark'
+  iconWidth: auto # Either 'auto', or 'fixed'
 
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
@@ -200,6 +201,10 @@ Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](h
 - `is-danger` (red)
 
 You can read the [bulma modifiers page](https://bulma.io/documentation/start/syntax/) for other options regarding size, style, or state.
+
+### Icon width
+
+Font Awesome 7 gives every icon the same width, which is what the `fa-fw` class used to do on its own. Homer keeps the previous behaviour by default, so each icon takes up only the space it needs. Set `iconWidth: fixed` under the `defaults` key to opt into the uniform width, which lines up icons in a column when you list several services with different icons.
 
 ## Theming & customization
 

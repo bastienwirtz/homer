@@ -82,6 +82,13 @@
             "dark"
           ],
           "description": "One of 'auto', 'light', or 'dark'"
+        },
+        "iconWidth": {
+          "enum": [
+            "auto",
+            "fixed"
+          ],
+          "description": "Icon width, either 'auto' (default, each icon keeps its natural width) or 'fixed' (the Font Awesome 7 look, every icon gets the same width)"
         }
       },
       "title": "Defaults"
