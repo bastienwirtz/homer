@@ -83,7 +83,7 @@ Available services are located in `src/components/`:
   url: https://my-service.url # Optional: Card link and API base url unless 'endpoint' is provided (see below) 
   endpoint: https://my-service-api.url # Optional: alternative base URL used to fetch service data when necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
-  headers: # Optional: Override global proxy.headers configuration.
+  headers: # Optional: Per-item headers, layered over (and overriding) proxy.headers. A card setting the same header wins over both.
 ```
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
