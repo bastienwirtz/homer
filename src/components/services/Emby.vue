@@ -74,13 +74,21 @@ export default {
         });
     },
     fetchServerMediaStats: async function () {
-      const headers = {
-        "X-Emby-Token": this.item.apikey,
-      };
+      // Jellyfin 12 no longer accepts X-Emby-Token. Opt-in, so Emby stays untouched.
+      const headers =
+        this.item.legacyAuth === false
+          ? {
+              Authorization: `MediaBrowser Token="${encodeURIComponent(this.item.apikey)}"`,
+            }
+          : { "X-Emby-Token": this.item.apikey };
 
-      var data = await this.fetch("/items/counts", { headers }).catch((e) => {
+      const data = await this.fetch("/items/counts", { headers }).catch((e) => {
         console.log(e);
       });
+
+      if (!data) {
+        return;
+      }
 
       this.albumCount = data.AlbumCount;
       this.songCount = data.SongCount;
