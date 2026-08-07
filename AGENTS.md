@@ -31,6 +31,8 @@ All service components follow this architecture:
 - Extend `Generic.vue` using Vue slots (`<template #indicator>`, `<template #content>`, `<template #icon>`)
 - Use the `service.js` mixin (`src/mixins/service.js`) for common API functionality
 - Use a custom `fetch` method provided by the service mixin to seamlessly support proxy configuration, custom headers, and credentials.
+- Never call the native `fetch` in a service component. `OpenWeather` (third-party public API) and `Rtorrent` (XML-RPC on a separate host) are the only exceptions, and are not examples to follow.
+- Pass the service's own headers (an API key, an `Authorization` header, ...) as the `init.headers` argument of `this.fetch(path, init, json)`. They layer over the user's `proxy.headers` and item `headers` rather than replacing them, so a card must never build its headers from `proxy` or `item.headers` itself. Names are compared case-insensitively, and the card value wins on conflict.
 
 ### Auto-Update Configuration
 
