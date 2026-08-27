@@ -29,7 +29,7 @@ Any service consuming an API must use the [`service`](https://github.com/bastien
 - **Refresh**: assign the method to re-run to `this.autoUpdateMethod`, the mixin schedules it using `updateIntervalMs`.
 
 > [!NOTE]
-> `OpenWeather` and `Rtorrent` bypass the mixin, respectively for a third-party public API and an XML-RPC host. Don't use them as an example for a new service.
+> Some services like `OpenWeather` and `Rtorrent` bypass the mixin, respectively for a third-party public API and an XML-RPC host. Don't use them as an example for a new service.
 
 ### Skeleton
 
