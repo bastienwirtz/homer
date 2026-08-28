@@ -161,11 +161,10 @@ The `libraryType` configuration let you choose which stats to show.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   libraryType: "music" # Choose which stats to show. Can be one of: music, series or movies.
-  # legacyAuth: false # (Optional) Defaults to true. Set to false for Jellyfin 12 and newer.
+  # legacyAuth: false # (Optional) Force the authorization scheme. Auto-detected from the server version by default.
 ```
 
-> [!IMPORTANT]
-> Jellyfin 12 disables legacy authorization on upgrade, which stops the `X-Emby-Token` header this card sends by default from being accepted. Set `legacyAuth: false` to send `Authorization: MediaBrowser Token="..."` instead, which works on every Jellyfin release. Emby is unaffected and should keep the default.
+Jellyfin 12 disables legacy authorization on upgrade, which stops the `X-Emby-Token` header this card sends by default from being accepted. The card detects the server version and sends `Authorization: MediaBrowser Token="..."` instead, which works on every Jellyfin release. Emby is unaffected and keeps the default. Set `legacyAuth` to override that detection on a server configured to accept only one of them.
 
 Auto refresh is supported by this integration.
 
