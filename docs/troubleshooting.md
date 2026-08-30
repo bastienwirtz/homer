@@ -59,3 +59,12 @@ For some basic debugging steps, you can:
 - Check with a large city such as Amsterdam as the specified location within your configuration.
 - Make sure your web browser is running the latest version of the homer configuration after updating the location (Ctrl + Shift + R).
 - Check for errors within the browser console (Ctrl + Shift + I) relating to api.openweathermap.org
+
+## An icon stopped rendering after the Font Awesome 7 upgrade
+
+Homer now ships Font Awesome 7, and the upgrade keeps everything that still exists working. Icons set through the configuration (`icon: "fas fa-server"`) render as before, including the older `fa`, `fas`, `far` and `fab` syntax, and custom stylesheets referencing the `"Font Awesome 6 Free"` and `"Font Awesome 6 Brands"` families keep working too, as Homer aliases them onto the version 7 webfonts.
+
+Only one icon is lost: **`fa-vector-square` no longer exists**. Font Awesome renamed it to `draw-square` and made that icon Pro only, so the free version Homer ships has no glyph for it and it renders as an empty box. Replace it with `object-group` or `crop-simple`, the closest free matches.
+
+> [!NOTE]
+> Font Awesome 7 also gives every icon the same width by default. Homer keeps the previous behaviour, so nothing moves after upgrading. See [icon width](configuration.md#icon-width) if you want the new look.

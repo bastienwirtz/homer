@@ -5,6 +5,7 @@
     :class="[
       `theme-${config.theme}`,
       `page-${currentPage}`,
+      `fa-width-${config.defaults.iconWidth}`,
       isDark ? 'dark' : 'light',
       !config.footer ? 'no-footer' : '',
     ]"

@@ -1,5 +1,20 @@
 import updateScheduler from "@/utils/updateScheduler.js";
 
+// Header names are case-insensitive, so they are lowercased before merging and
+// each source overrides the previous one whatever its casing. Unset values are
+// skipped: a card must not replace a configured header with `undefined`.
+function mergeHeaders(...sources) {
+  const merged = {};
+  for (const source of sources) {
+    for (const [name, value] of Object.entries(source ?? {})) {
+      if (value !== undefined && value !== null) {
+        merged[name.toLowerCase()] = value;
+      }
+    }
+  }
+  return merged;
+}
+
 export default {
   props: {
     proxy: Object,
@@ -47,22 +62,21 @@ export default {
         options.credentials = "include";
       }
 
-      if (this.proxy?.headers && !!this.proxy.headers) {
-        options.headers = this.proxy.headers;
-      }
-
       // Each item can override the credential settings
       if (this.item.useCredentials !== undefined) {
         options.credentials =
           this.item.useCredentials === true ? "include" : "omit";
       }
 
-      // Each item can have their own headers
-      if (this.item.headers !== undefined && !!this.item.headers) {
-        options.headers = this.item.headers;
-      }
-
       options = Object.assign(options, init);
+
+      // Headers are layered: proxy configuration, then item configuration,
+      // then the ones built by the service itself.
+      options.headers = mergeHeaders(
+        this.proxy?.headers,
+        this.item.headers,
+        init?.headers,
+      );
 
       if (path.startsWith("/")) {
         path = path.slice(1);
