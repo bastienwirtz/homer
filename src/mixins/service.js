@@ -1,19 +1,5 @@
 import updateScheduler from "@/utils/updateScheduler.js";
-
-// Header names are case-insensitive, so they are lowercased before merging and
-// each source overrides the previous one whatever its casing. Unset values are
-// skipped: a card must not replace a configured header with `undefined`.
-function mergeHeaders(...sources) {
-  const merged = {};
-  for (const source of sources) {
-    for (const [name, value] of Object.entries(source ?? {})) {
-      if (value !== undefined && value !== null) {
-        merged[name.toLowerCase()] = value;
-      }
-    }
-  }
-  return merged;
-}
+import fetchOptions from "@/utils/fetchOptions.js";
 
 export default {
   props: {
@@ -56,28 +42,6 @@ export default {
       return typeof value === "number" && value > max ? `${max}+` : value;
     },
     fetch: function (path, init, json = true) {
-      let options = {};
-
-      if (this.proxy?.useCredentials) {
-        options.credentials = "include";
-      }
-
-      // Each item can override the credential settings
-      if (this.item.useCredentials !== undefined) {
-        options.credentials =
-          this.item.useCredentials === true ? "include" : "omit";
-      }
-
-      options = Object.assign(options, init);
-
-      // Headers are layered: proxy configuration, then item configuration,
-      // then the ones built by the service itself.
-      options.headers = mergeHeaders(
-        this.proxy?.headers,
-        this.item.headers,
-        init?.headers,
-      );
-
       if (path.startsWith("/")) {
         path = path.slice(1);
       }
@@ -87,6 +51,12 @@ export default {
       if (path) {
         url = `${this.endpoint}/${path}`;
       }
+
+      const options = fetchOptions({
+        proxy: this.proxy,
+        item: this.item,
+        init,
+      });
 
       return fetch(url, options).then((response) => {
         let success = response.ok;

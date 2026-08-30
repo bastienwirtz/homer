@@ -148,6 +148,14 @@
           "type": "integer",
           "description": "The refresh interval in milliseconds for reloading the message url"
         },
+        "useCredentials": {
+          "type": "boolean",
+          "description": "send cookies & authorization headers when fetching the message url. `false` omits them, even same-origin. Not covered by the global proxy configuration."
+        },
+        "headers": {
+          "$ref": "#/definitions/Headers",
+          "description": "send custom headers when fetching the message url. Not covered by the global proxy configuration."
+        },
         "style": {
           "type": "string",
           "description": "See https://bulma.io/documentation/components/message/#colors for styling options"
