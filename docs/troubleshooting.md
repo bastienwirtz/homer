@@ -7,23 +7,68 @@ You might be facing a permission issue. First of all, check your container logs 
 ```sh
 $ docker logs homer
 [...]
-Assets directory not writable. Check assets directory permissions & docker user or skip default assets install by setting the INIT_ASSETS env var to 0
+Assets directory not writable. Check assets directory permissions & docker user or skip default assets install by setting the INIT_ASSETS env var to 0.
 ```
 
-In this case you need to make sure your mounted assets directory have the same GID / UID the container user have (default 1000:1000), and that the read and write permission is granted for the user or the group.
+In this case you need to make sure your mounted assets directory have the same GID / UID the web server runs as (default 1000:1000), and that the read and write permission is granted for the user or the group.
 
 You can either:
 
-- Update your assets directory permissions (ex: `chown -R 1000:1000 /your/assets/folder/`, `chmod -R u+rw /your/assets/folder/`)
+- Set the `PUID` / `PGID` env vars to the owner of your assets directory (ex: `-e PUID=1001 -e PGID=1001`). The container will fix the ownership of the assets directory for you on startup, then drop to that user.
+- Update your assets directory permissions yourself (ex: `chown -R 1000:1000 /your/assets/folder/`, `chmod -R u+rw /your/assets/folder/`)
 - Change the docker user by using the `--user` arguments with docker cli or `user: 1000:1000` with docker compose.
 
 > [!NOTE]
 >
-> - **Do not** use env var to set the GID / UID of the user running container. Use the Docker `user` option.
-> - **Do not** use 0:0 as a user value, it would be a security risk, and it's not guaranty to work.
+> - **Do not** use the `UID` / `GID` env vars: they are build time only and have no effect at runtime. Use `PUID` / `PGID`, or the Docker `user` option.
+> - `PUID` / `PGID` and the Docker `user` option are mutually exclusive. `--user` means the container never runs as root, so it cannot fix the ownership of the assets directory for you, and `PUID` / `PGID` are ignored (a warning is logged).
+> - **Do not** use `0:0` as a `PUID` / `PGID` value, it would be a security risk. It is refused.
 
 Check this [thread](https://github.com/bastienwirtz/homer/issues/459) for more information about debugging
 permission issues.
+
+## My config.yml shows up as a directory
+
+Docker creates a **directory** when the host path of a bind mounted file does not exist yet, so mounting a single configuration file that has not been created first gives you a directory named `config.yml`:
+
+```sh
+$ docker logs homer
+[...]
+Error: /www/assets/config.yml is a directory, not a file.
+Docker creates a directory when the host path of a bind mounted file does not exist.
+Create the file on the host, remove the directory, then restart the container.
+```
+
+Create the file on the host first, remove the directory docker made, then restart the container:
+
+```sh
+docker compose down
+rmdir /path/to/your/config.yml
+curl -o /path/to/your/config.yml https://raw.githubusercontent.com/bastienwirtz/homer/main/public/assets/config.yml.dist
+docker compose up -d
+```
+
+> [!TIP]
+> Mounting the whole assets directory (`/path/to/assets:/www/assets`) instead of a single file avoids this entirely, and lets Homer install its default assets for you.
+
+## My docker container exits immediately after dropping capabilities
+
+By default the container starts as root, fixes the ownership of the assets directory, then drops to `PUID`:`PGID`. That requires the `CHOWN`, `SETUID` and `SETGID` [capabilities](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities), so dropping them (ex: `--cap-drop=ALL`, or the `restricted` Kubernetes [pod security standard](https://kubernetes.io/docs/concepts/security/pod-security-standards/)) makes the startup fail:
+
+```sh
+$ docker logs homer
+[...]
+su-exec: setgroups(1000): Operation not permitted   # SETUID / SETGID are missing
+Starting as root requires the CHOWN capability, add it back or use the docker user option.
+```
+
+You can either:
+
+- Add the required capabilities back (ex: `--cap-drop=ALL --cap-add=CHOWN --cap-add=SETUID --cap-add=SETGID`).
+- Run the container with the docker `user` option (ex: `--user 1000:1000`). **This needs no capability at all**: the container never runs as root, so it never changes any ownership and never drops privileges. Your assets directory must already be readable and writable by that user.
+
+> [!NOTE]
+> If your assets directory is not readable by root (ex: mode `700` and owned by another user), the `DAC_OVERRIDE` capability is needed as well, otherwise only its top level is fixed and `Warning: some entries of /www/assets could not be chowned.` is logged.
 
 ## My service card doesn't work, nothing appears or offline status is displayed (pi-hole, sonarr, ping, ...)
 

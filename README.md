@@ -88,7 +88,9 @@ docker run -d \
 ```
 
 > [!NOTE]  
-> The container will run using a user uid and gid 1000 by default, add `--user <your-UID>:<your-GID>` to the docker command to adjust it if necessary. Make sure this match the permissions of your assets directory.
+> The web server runs as uid and gid 1000 by default. If your assets directory is owned by a different user, set the `PUID` & `PGID` env vars to match it (ex: `-e PUID=1001 -e PGID=1001`): the container fixes the ownership of the assets directory on startup, then drops to that user.
+>
+> Alternatively, add `--user <your-UID>:<your-GID>` to the docker command. In that case nothing is chowned for you, and `PUID`/`PGID` are ignored: you own the permissions of the assets directory.
 
 **or `docker-compose`**
 
@@ -101,16 +103,20 @@ services:
       - /path/to/config/dir:/www/assets # Make sure your local config directory exists
     ports:
       - 8080:8080
-    user: 1000:1000 # default
     environment:
-      - INIT_ASSETS=1 # default, requires the config directory to be writable for the container user (see user option)
+      - INIT_ASSETS=1 # default, requires the config directory to be writable for the container user
+      - PUID=1000 # default, the user the web server runs as
+      - PGID=1000 # default
     restart: unless-stopped
 ```
 
 **Environment variables:**
 
 - **`INIT_ASSETS`** (default: `1`)
-Install example configuration file & assets (favicons, ...) to help you get started.
+Install example configuration file & assets (favicons, ...) to help you get started. Only missing files are added, so your own files are never modified or overwritten, and a directory created by an older version picks up newly shipped assets. Requires the assets directory to be writable. Set to `0` to leave the directory completely untouched.
+
+- **`PUID`** / **`PGID`** (default: `1000`)
+User and group the web server runs as. The container starts as root, fixes the ownership of the assets directory, then drops to `PUID`:`PGID` before starting the web server, which never runs as root. Setting them to `0` is refused. Because it starts as root, this requires the `CHOWN`, `SETUID` and `SETGID` capabilities (see [troubleshooting](docs/troubleshooting.md#my-docker-container-exits-immediately-after-dropping-capabilities)). Both they and the capabilities are unnecessary if the container is started with the docker `--user` option, which bypasses this whole mechanism (a warning is logged if they are set anyway).
 
 - **`SUBFOLDER`** (default: `null`)
 If you would like to host Homer in a subfolder, (ex: *<http://my-domain/homer>*), set this to the subfolder path (ex `/homer`).
