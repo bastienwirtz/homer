@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import fetchOptions from "@/utils/fetchOptions.js";
+
 export default {
   name: "Message",
   props: {
@@ -67,14 +69,17 @@ export default {
     },
 
     downloadMessage: function (url) {
-      return fetch(url, { headers: { Accept: "application/json" } }).then(
-        function (response) {
-          if (response.status != 200) {
-            return;
-          }
-          return response.json();
-        },
-      );
+      const options = fetchOptions({
+        item: this.item,
+        init: { headers: { Accept: "application/json" } },
+      });
+
+      return fetch(url, options).then(function (response) {
+        if (response.status != 200) {
+          return;
+        }
+        return response.json();
+      });
     },
 
     mapRemoteMessage: function (message) {
