@@ -879,7 +879,7 @@ Displays Traefik stats counts as colored badges: routers, services, middlewares,
 Auto refresh is supported by this integration.
 
 > [!IMPORTANT]
-> **Potentially breaking change**: on version `26.04.2` and earlier, this card only displayed the Traefik version.
+> **Potentially breaking change**: on version `26.08.3` and earlier, this card only displayed the Traefik version.
 > It now also shows badges for routers, services, middlewares, certificates, warnings and errors.
 >
 > To keep the old version-only card, hide every badge:
