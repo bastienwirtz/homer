@@ -874,15 +874,38 @@ Auto refresh is supported by this integration.
 
 ## Traefik
 
-Displays Traefik.
+Displays Traefik stats counts as colored badges: routers, services, middlewares, certificates, warnings and errors. Each count is the sum across all sections.
+
+Auto refresh is supported by this integration.
+
+> [!IMPORTANT]
+> **Potentially breaking change**: on version `26.08.3` and earlier, this card only displayed the Traefik version.
+> It now also shows badges for routers, services, middlewares, certificates, warnings and errors.
+>
+> To keep the old version-only card, hide every badge:
+>
+> ```yaml
+> - name: "Traefik"
+>   type: "Traefik"
+>   url: "http://traefik.example.com"
+>   hide: ["routers", "services", "middlewares", "certificates", "warnings", "errors"]
+> ```
 
 ```yaml
 - name: "Traefik"
   type: "Traefik"
   logo: "assets/tools/sample.png"
   url: "http://traefik.example.com"
-  # basic_auth: "admin:password"  # (Optional) Send Authorization header. 
+  # basic_auth: "admin:password"  # (Optional) Send Authorization header.
+  # subtitle: "Reverse proxy"     # (Optional) Overrides the version subtitle (skips the /api/version call).
+  # hide: []                      # (Optional) hides badges. Possible values are
+  #                               # "routers", "services", "middlewares",
+  #                               # "certificates", "warnings" and "errors".
 ```
+
+**Hiding badges**: every badge is shown by default; list a key under `hide` to remove it. Routers, services and middlewares are summed across `http`, `tcp` and `udp`; warnings and errors are summed across those plus `certificates`. Hide all six for a version-only card. Badge counts are capped at `99+`.
+
+**Version**: the version (from `/api/version`) is shown as the subtitle. Setting `subtitle` overrides it, in which case the version request is skipped.
 
 **Authentication**: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (`Basic <encoded_value>`). The value must be formatted as "admin:password".
 
