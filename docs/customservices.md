@@ -18,6 +18,7 @@ Available services are located in `src/components/`:
 - [Docuseal](#docuseal)
 - [Docker Socket Proxy](#docker-socket-proxy)
 - [Emby / Jellyfin](#emby--jellyfin)
+- [EVCC](#evcc)
 - [FreshRSS](#freshrss)
 - [Gatus](#gatus)
 - [Gitea / Forgejo](#gitea--forgejo)
@@ -168,6 +169,17 @@ The `libraryType` configuration let you choose which stats to show.
 Jellyfin 12 disables legacy authorization on upgrade, which stops the `X-Emby-Token` header this card sends by default from being accepted. The card detects the server version and sends `Authorization: MediaBrowser Token="..."` instead, which works on every Jellyfin release. Emby is unaffected and keeps the default. Set `legacyAuth` to override that detection on a server configured to accept only one of them.
 
 Auto refresh is supported by this integration.
+
+## EVCC
+
+Displays the battery power and SOC, Home Power, Grid Power and Solar Power from EVCC.
+
+```yaml
+- name: "EVCC"
+  type: "Evcc"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
+```
 
 ## FreshRSS
 
