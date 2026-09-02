@@ -30,10 +30,30 @@ Default colors and background can be customized for each theme variant (light an
 | `text-title`          | `--text-title`          | service card title color |
 | `text-subtitle`       | `--text-subtitle`       | service card subtitle color  |
 | `card-shadow`         | `--card-shadow`         | Service card `box-shadow` |
-| `link`                | `--link`                | Links color (footer & message), service card icon color  |
+| `link`                | `--link`                | Links color (footer & message), service card icon color (unless the item carries a `highlight-*` class) |
 | `link-hover`          | `--link-hover`          | Links hover color (footer & message), service card icon hover color |
 | `background-image`    | `--background-image`    | page background image url (when used in css, set `url(<image-url>)` instead of just the url. see example below)|
 
+Service card colors are shared by every card. Set them under both `light` and `dark` unless you want them to differ.
+
+| yaml | css | description |
+| --------------------- | ----------------------- | --- |
+| `status-online`       | `--status-online`       | status dot, reachable and healthy |
+| `status-offline`      | `--status-offline`      | status dot, down or errored |
+| `status-warning`      | `--status-warning`      | status dot, needs attention |
+| `status-busy`         | `--status-busy`         | status dot, working (pulsing) |
+| `status-unknown`      | `--status-unknown`      | status dot, state not known |
+| `badge-info`          | `--badge-info`          | badge, activity counters |
+| `badge-success`       | `--badge-success`       | badge, healthy totals |
+| `badge-warning`       | `--badge-warning`       | badge, warnings |
+| `badge-danger`        | `--badge-danger`        | badge, errors |
+| `badge-accent`        | `--badge-accent`        | badge, secondary counters |
+| `badge-neutral`       | `--badge-neutral`       | badge, plain totals |
+| `badge-text`          | `--badge-text`          | badge text color |
+
+Card geometry is not part of `colors:`, but the same custom properties can be overridden from an additional stylesheet (see below). Defaults are in `assets/components/base.scss`: `--card-height` (`85px`), `--card-icon-size` (`48px`), `--card-pad` (`1.3rem`), `--card-pad-block` (`0.75rem`), `--card-radius` (`0.75rem`) and `--card-lift` (`3px`, the hover rise).
+
+The icon is pinned `--card-pad` from the top of the card, so keep `--card-height` above `--card-pad` plus `--card-icon-size` (about `70px` at the defaults) or it overflows the bottom. Lower `--card-icon-size` to go shorter than that.
 
 YAML example
 

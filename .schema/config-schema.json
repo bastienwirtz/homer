@@ -61,6 +61,42 @@
         },
         "background-image": {
           "type": "string"
+        },
+        "status-online": {
+          "type": "string"
+        },
+        "status-offline": {
+          "type": "string"
+        },
+        "status-warning": {
+          "type": "string"
+        },
+        "status-busy": {
+          "type": "string"
+        },
+        "status-unknown": {
+          "type": "string"
+        },
+        "badge-info": {
+          "type": "string"
+        },
+        "badge-success": {
+          "type": "string"
+        },
+        "badge-warning": {
+          "type": "string"
+        },
+        "badge-danger": {
+          "type": "string"
+        },
+        "badge-accent": {
+          "type": "string"
+        },
+        "badge-neutral": {
+          "type": "string"
+        },
+        "badge-text": {
+          "type": "string"
         }
       }
     },
@@ -265,9 +301,53 @@
         "type": {
           "type": "string",
           "description": "Optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`"
+        },
+        "class": {
+          "type": "string",
+          "description": "Optional css class to add on the item, useful with a custom stylesheet. Example 'highlight-purple'"
+        },
+        "background": {
+          "type": "string",
+          "description": "Optional color for the card, to set it directly without a custom stylesheet"
+        },
+        "quick": {
+          "type": "array",
+          "description": "Shortcut links shown as small pills along the bottom of the card",
+          "items": {
+            "$ref": "#/definitions/QuickLink"
+          }
         }
       },
       "title": "Item"
+    },
+    "QuickLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of this shortcut"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Fontawesome icon shown inside the pill"
+        },
+        "target": {
+          "type": "string",
+          "description": "html tag target attribute like _blank for a new page"
+        },
+        "color": {
+          "type": "string",
+          "description": "Optional background color for the pill"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "title": "QuickLink"
     }
   },
   "properties": {

@@ -1,100 +1,145 @@
 <template>
+  <!-- Takes the `item.class` fallthrough, which themes match as an ancestor. -->
   <div>
-    <div class="card" :style="`background-color:${item.background};`">
-      <a :href="item.url" :target="item.target" rel="noreferrer">
-        <div class="card-content">
-          <div :class="mediaClass">
-            <slot name="icon">
-              <div v-if="item.logo" class="media-left">
-                <figure class="image is-48x48">
-                  <img :src="item.logo" :alt="`${item.name} logo`" />
-                </figure>
-              </div>
-              <div v-if="item.icon" class="media-left">
-                <figure class="image is-48x48">
-                  <i style="font-size: 32px" :class="['fa-fw', item.icon]"></i>
-                </figure>
+    <div class="card-wrapper">
+      <div class="card" :style="cardStyle">
+        <div
+          class="card-content"
+          :class="{
+            'has-icon': $slots.icon || item.logo || item.icon,
+            'has-lane': !!item.quick,
+          }"
+        >
+          <a
+            class="card-link"
+            :href="item.url"
+            :target="item.target"
+            :aria-label="item.url ? item.name : null"
+            rel="noreferrer"
+          ></a>
+          <slot name="icon">
+            <div v-if="item.icon" class="card-icon">
+              <figure class="image">
+                <i :class="['fa-fw', item.icon]"></i>
+              </figure>
+            </div>
+            <div v-else-if="item.logo" class="card-icon">
+              <figure class="image">
+                <img :src="item.logo" :alt="`${item.name} logo`" />
+              </figure>
+            </div>
+          </slot>
+          <div class="card-body">
+            <!-- TODO(cards-migrate-to-api): drop #content once every card is migrated. -->
+            <slot name="content">
+              <p class="title">{{ item.name }}</p>
+              <div
+                v-if="item.subtitle || $slots.subtitle || subtitle"
+                class="subtitle"
+              >
+                <template v-if="item.subtitle">{{ item.subtitle }}</template>
+                <slot v-else name="subtitle">{{ subtitle }}</slot>
               </div>
             </slot>
-            <div class="media-content">
-              <slot name="content">
-                <p class="title">{{ item.name }}</p>
-                <p v-if="item.quick" class="quicklinks">
-                  <a
-                    v-for="(link, linkIndex) in item.quick"
-                    :key="linkIndex"
-                    :style="`background-color:${link.color};`"
-                    :href="link.url"
-                    :target="link.target"
-                    rel="noreferrer"
-                  >
-                    <span v-if="link.icon"
-                      ><i
-                        style="font-size: 12px"
-                        :class="['fa-fw', link.icon]"
-                      ></i
-                    ></span>
-                    {{ link.name }}
-                  </a>
-                </p>
-                <p v-if="item.subtitle" class="subtitle">
-                  {{ item.subtitle }}
-                </p>
-              </slot>
-            </div>
-            <slot name="indicator" class="indicator"></slot>
           </div>
-          <div v-if="item.tag" class="tag" :class="item.tagstyle">
-            <strong class="tag-text">#{{ item.tag }}</strong>
+          <div v-if="$slots.badges || visibleBadges.length" class="card-badges">
+            <slot name="badges">
+              <!-- A link, or it would swallow the card click. -->
+              <a
+                v-for="badge in visibleBadges"
+                :key="badge.key"
+                class="badge"
+                :class="badge.tone"
+                :title="badge.label"
+                :href="item.url"
+                :target="item.target"
+                tabindex="-1"
+                rel="noreferrer"
+              >
+                {{ badge.text }}
+              </a>
+            </slot>
+          </div>
+          <div
+            v-if="$slots.aside || $slots.indicator || status"
+            class="card-aside"
+          >
+            <slot name="aside">
+              <!-- TODO(cards-migrate-to-api): drop #indicator once every card is migrated. -->
+              <slot name="indicator">
+                <div v-if="status" class="status" :class="status.state">
+                  {{ status.label }}
+                </div>
+              </slot>
+            </slot>
+          </div>
+          <div v-if="item.quick || item.tag" class="card-lane">
+            <p v-if="item.quick" class="quicklinks">
+              <a
+                v-for="(link, linkIndex) in item.quick"
+                :key="linkIndex"
+                :style="link.color ? `background-color:${link.color};` : null"
+                :href="link.url"
+                :target="link.target"
+                rel="noreferrer"
+              >
+                <span v-if="link.icon"
+                  ><i
+                    style="font-size: 12px"
+                    :class="['fa-fw', link.icon]"
+                  ></i></span
+                >{{ link.name }}
+              </a>
+            </p>
+            <div v-if="item.tag" class="tag-slot">
+              <a
+                class="tag"
+                :class="item.tagstyle"
+                :href="item.url"
+                :target="item.target"
+                tabindex="-1"
+                aria-hidden="true"
+                rel="noreferrer"
+              >
+                <strong class="tag-text">#{{ item.tag }}</strong>
+              </a>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { capCount } from "@/utils/format.js";
+
+const isEmpty = (badge) =>
+  badge.value === "" ||
+  badge.value === null ||
+  badge.value === undefined ||
+  (badge.value === 0 && !badge.showZero);
+
 export default {
   name: "Generic",
   props: {
     item: Object,
+    subtitle: String,
+    status: Object,
+    badges: Array,
   },
   computed: {
-    mediaClass: function () {
-      return { media: true, "no-subtitle": !this.item.subtitle };
+    cardStyle() {
+      return this.item.background
+        ? { backgroundColor: this.item.background }
+        : null;
+    },
+    visibleBadges() {
+      const hidden = this.item.hide || [];
+      return (this.badges ?? [])
+        .filter((badge) => !hidden.includes(badge.key) && !isEmpty(badge))
+        .map((badge) => ({ ...badge, text: capCount(badge.value) }));
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.media-left {
-  .image {
-    display: flex;
-    align-items: center;
-  }
-
-  img {
-    max-height: 100%;
-    object-fit: contain;
-  }
-}
-
-a[href=""] {
-  pointer-events: none;
-  cursor: default;
-}
-
-.quicklinks {
-  float: right;
-  a {
-    font-size: 0.75rem;
-    padding: 3px 6px;
-    margin-left: 6px;
-    border-radius: 100px;
-    background-color: var(--background);
-    z-index: 9999;
-    pointer-events: all;
-  }
-}
-</style>
