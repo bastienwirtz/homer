@@ -1,5 +1,6 @@
 @import url("~/@fortawesome/fontawesome-free/css/all.css") layer(base);
 @import url("@/assets/components/status.scss") layer(base);
+@import url("@/assets/components/badges.scss") layer(base);
 @import url("@/assets/webfonts/webfonts.scss") layer(base);
 
 @mixin ellipsis() {
@@ -25,6 +26,13 @@
     font-variation-settings: "wdth" 100;
 
     #app {
+      --card-height: 85px;
+      --card-icon-size: 48px;
+      --card-pad: 1.3rem;
+      --card-pad-block: 0.75rem;
+      --card-radius: 0.75rem;
+      --card-lift: 3px;
+
       height: auto;
       min-height: 100%;
       background-image: var(--background-image);
@@ -51,10 +59,8 @@
       .card {
         background-color: var(--card-background);
         box-shadow: 0 2px 15px 0 var(--card-shadow);
-        &:hover {
-          background-color: var(--card-background);
-        }
       }
+
       .component-error .card {
         border: 1px solid rgba(255, 33, 33, 0.664);
         background-color: rgba(255, 58, 58, 0.24);
@@ -204,67 +210,278 @@
         }
       }
 
-      .media.no-subtitle {
+      .card {
+        border: none;
+        border-radius: var(--card-radius);
+        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+        transition:
+          transform 300ms cubic-bezier(0.165, 0.84, 0.44, 1),
+          border-color 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+        overflow: visible;
+      }
+
+      // Stacking context, or hover flip-flops between adjacent cards.
+      .card-wrapper {
+        position: relative;
+        z-index: 0;
+      }
+
+      .card-wrapper:hover {
+        .card {
+          transform: translateY(calc(-1 * var(--card-lift)));
+        }
+
+        .card-badges .badge,
+        .tag {
+          pointer-events: auto;
+        }
+
+        .tag {
+          max-width: 100%;
+          padding: 0 0.75em;
+
+          .tag-text {
+            opacity: 1;
+          }
+        }
+
+        .tag-slot:hover .tag {
+          z-index: 4;
+          max-width: max-content;
+        }
+      }
+
+      .card-content {
+        --card-text-start: var(--card-pad);
+
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-areas:
+          "body badges"
+          "body aside";
+        align-items: center;
+        column-gap: 0.5rem;
+        row-gap: 2px;
+        height: var(--card-height);
+        padding: var(--card-pad-block) var(--card-pad);
+        padding-inline-start: var(--card-text-start);
+        border-radius: inherit;
+        color: var(--link);
+
+        &.has-icon {
+          --card-text-start: calc(
+            var(--card-pad) + var(--card-icon-size) + 0.5rem
+          );
+        }
+
+        &.has-lane {
+          --card-pad-block: 0.5rem;
+          grid-template-rows: auto minmax(0, 1fr) auto;
+          grid-template-areas:
+            "body badges"
+            "body aside"
+            "lane lane";
+          row-gap: 0;
+        }
+      }
+
+      .card-wrapper:hover .card-content {
+        color: var(--link-hover);
+      }
+
+      .card-link {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: inherit;
+
+        &:not([href]),
+        &[href=""] {
+          pointer-events: none;
+          cursor: default;
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--highlight-secondary);
+          outline-offset: -2px;
+        }
+      }
+
+      // Lifts real controls above the `.card-link` overlay. Not the tag: it
+      // keeps `z-index: 2` so an unfurled tag passes under the badges.
+      .card-content :is(a, button, select, input):not(.card-link, .tag) {
+        position: relative;
+        z-index: 3;
+      }
+
+      .card-icon {
+        position: absolute;
+        inset-inline-start: var(--card-pad);
+        inset-block-start: var(--card-pad);
+        width: var(--card-icon-size);
+        height: var(--card-icon-size);
+
+        .image {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+        }
+
+        img {
+          max-height: 100%;
+          object-fit: contain;
+        }
+
+        i {
+          font-size: calc(var(--card-icon-size) * 0.667);
+        }
+      }
+
+      .card-body {
+        grid-area: body;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+
+        > .title,
+        > .subtitle {
+          margin: 0;
+        }
+      }
+
+      .card-aside {
+        grid-area: aside;
+        // TODO(cards-migrate-to-api): keeps unmigrated indicators above `.card-link` so
+        // their `title` shows, at the cost of the click. Drop with the last card.
+        z-index: 3;
         display: flex;
         align-items: center;
+        gap: 0.5rem;
+        justify-self: end;
       }
 
-      .media-left {
-        margin-inline-end: 0.5rem;
-      }
-
-      .media-content {
+      .card-lane {
+        grid-area: lane;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 0;
+        min-height: 1.25rem;
+        margin-inline-start: calc(-1 * var(--card-text-start));
+        margin-inline-end: calc(-1 * var(--card-pad) - 0.2rem);
+        padding-inline-start: var(--card-text-start);
         overflow: hidden;
-        text-overflow: inherit;
+        pointer-events: none;
+      }
+
+      .card-content:not(.has-lane) .card-lane {
+        position: absolute;
+        inset-inline: 0 -0.2rem;
+        inset-block-end: var(--card-pad-block);
+        margin-inline: 0;
+        padding-inline-start: 0;
+      }
+
+      .tag-slot {
+        position: relative;
+        flex: 1 1 0;
+        min-width: 2rem;
+        // Anchors the tag to the lane's bottom, not its moving centre.
+        align-self: stretch;
+      }
+
+      .quicklinks {
+        display: flex;
+        min-width: 0;
+        gap: 0.35rem;
+        max-width: calc(100% - var(--card-pad));
+
+        a {
+          pointer-events: auto;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 0.75rem;
+          line-height: 1.35;
+          padding: 1px 7px;
+          border-radius: 100px;
+          background-color: var(--background);
+        }
+      }
+
+      .card-badges {
+        grid-area: badges;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        justify-self: end;
+        align-self: start;
+        position: relative;
+        z-index: 3;
+        pointer-events: none;
+        margin-inline-end: calc(0.5rem - var(--card-pad));
+
+        .badge {
+          // Not in badges.scss: `#app a` outranks it there.
+          color: var(--badge-text);
+          text-decoration: none;
+
+          &:hover {
+            color: var(--badge-text);
+          }
+        }
       }
 
       .tag {
-        color: #ffffff;
         position: absolute;
-        bottom: 1rem;
-        right: -0.2rem;
-        width: 3px;
-        overflow: hidden;
-        transition: all 0.2s ease-out;
+        z-index: 2;
+        inset-inline-end: 0;
+        inset-block-end: 0;
+        height: 1.25rem;
+        width: max-content;
+        max-width: 3px;
+        border-radius: 0.3125rem;
         padding: 0;
+        overflow: hidden;
+        color: #ffffff;
+        // Collapsed, it is a sliver in the gutter between two cards.
+        pointer-events: none;
+        transition: padding 0.12s ease-out;
+
+        &:hover {
+          color: #ffffff;
+        }
 
         &:not([class*="is-"]) {
           background-color: var(--highlight-secondary);
         }
 
         .tag-text {
-          display: none;
+          opacity: 0;
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          transition: opacity 0.1s ease-out;
         }
       }
 
-      .card {
-        border: none;
-        border-radius: 0.75rem;
-        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-        transition: cubic-bezier(0.165, 0.84, 0.44, 1) 300ms;
-        overflow: visible;
-
-        a {
-          outline: none;
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        .tag,
+        .tag .tag-text {
+          transition: none;
         }
-      }
 
-      .card:hover {
-        transform: translate(0, -3px);
-
-        .tag {
-          width: auto;
-          padding: 0 0.75em;
-
-          .tag-text {
-            display: block;
-          }
+        .card-wrapper:hover .card {
+          transform: none;
         }
-      }
-
-      .card-content {
-        height: 85px;
-        padding: 1.3rem;
       }
 
       .layout-vertical {
@@ -276,14 +493,14 @@
           border-radius: 0;
         }
 
-        .column div:first-of-type .card {
-          border-top-left-radius: 0.75rem;
-          border-top-right-radius: 0.75rem;
+        .column > div:first-of-type .card {
+          border-top-left-radius: var(--card-radius);
+          border-top-right-radius: var(--card-radius);
         }
 
-        .column div:last-child .card {
-          border-bottom-left-radius: 0.75rem;
-          border-bottom-right-radius: 0.75rem;
+        .column > div:last-child .card {
+          border-bottom-left-radius: var(--card-radius);
+          border-bottom-right-radius: var(--card-radius);
         }
       }
     }
@@ -368,5 +585,6 @@
 
   .group-logo {
     float: left;
+    margin-inline-end: 0.5rem;
   }
 }

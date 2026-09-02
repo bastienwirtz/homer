@@ -14,7 +14,7 @@ A dashboard can contain a lot of items, so performance is very important.
 
 The [`Generic`](https://github.com/bastienwirtz/homer/blob/main/src/components/services/Generic.vue) service provides a typical card layout which
 you can extend to add specific features. Unless you want a completely different design, extended the generic service is the recommended way. It gives you 3 [slots](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) to extend: `icon`, `content` and `indicator`. 
-Each one is **optional**, and will display the usual information if omitted.
+Each one is **optional**, and will display the usual information if omitted. Content given to `icon` must be a `.card-icon` element: the card is a grid, and anything else lands outside the icon zone.
 
 Each service must implement the `item` [property](https://vuejs.org/v2/guide/components-props.html) and bind it the Generic component if used.
 
@@ -27,6 +27,7 @@ Any service consuming an API must use the [`service`](https://github.com/bastien
 - **Credentials**: `proxy.useCredentials` and its per-item override are applied for you.
 - **Response**: returned as parsed JSON, or as text when `json` is `false`.
 - **Refresh**: assign the method to re-run to `this.autoUpdateMethod`, the mixin schedules it using `updateIntervalMs`.
+- **Formatting**: `capCount(value, max)` lives in [`@/utils/format.js`](https://github.com/bastienwirtz/homer/blob/main/src/utils/format.js), not on the mixin. It is a pure function, so import it where you need it, including from components that are not cards. Anything needing `this` (the item config, the proxy, the lifecycle) belongs on the mixin instead.
 
 > [!NOTE]
 > Some services like `OpenWeather` and `Rtorrent` bypass the mixin, respectively for a third-party public API and an XML-RPC host. Don't use them as an example for a new service.
