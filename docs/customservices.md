@@ -35,6 +35,7 @@ Available services are located in `src/components/`:
 - [Mealie](#mealie)
 - [Medusa](#medusa)
 - [Miniflux](#miniflux)
+- [Mylar](#mylar)
 - [NetAlertx](#netalertx)
 - [Nextcloud](#nextcloud)
 - [OctoPrint / Moonraker](#octoprintmoonraker)
@@ -85,13 +86,21 @@ Available services are located in `src/components/`:
   endpoint: https://my-service-api.url # Optional: alternative base URL used to fetch service data when necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
   headers: # Optional: Per-item headers, layered over (and overriding) proxy.headers. A card setting the same header wins over both.
+  hide: [] # Optional: List of keys to remove from this card, badges and card-specific fields alike (see each card below for the keys it offers).
 ```
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
 
-> [!TIP]
-> **Auto refresh of the card data**: Some cards support periodic update (see indication in detail below). It can be enabled or disabled globally for all service, or individually for each service using the `updateIntervalMs` configuration option.
+Every smart card uses the same layout: icon, name and subtitle, a **status chip** on the right, **badges** along the top, and the `quick` links and `tag` sharing the bottom. A card only shows the parts it has data for.
 
+- **Status chip**: green is healthy, red down, amber needs attention, pulsing green busy, grey unknown. Nothing shows until the first request settles.
+- **Badges**: blue activity, green healthy totals, amber warnings, red errors, purple a secondary count, grey a plain total. Zero is hidden, and `?` means the API was unreachable. Hover one for its meaning. Counts above 99 read `99+`, unless the exact figure matters (a photo library, a device total).
+
+Badges are removed with the `hide` option, using the keys listed in each service's section below. Every card that talks to an API also offers `serverError`, for the `?` badge.
+
+> [!TIP]
+> **Auto refresh of the card data**: cards refresh on the `updateIntervalMs` interval, set globally or per service; `false` or `0` turns it off.
+> Docuseal, Gitea, Matrix, OliveTin, Traefik, TrueNAS Scale, Vaultwarden and Wallabag only read a version, so they are fetched once and never polled.
 
 ## AdGuard Home
 
@@ -110,8 +119,6 @@ Displays AdGuard Home protection status and blocked query statistics.
 > headers:  
 >   Authorization: "Basic <base64-encoded for username:password>"
 > ```
-
-Auto refresh is supported by this integration.
 
 ## Copy to Clipboard
 
@@ -135,9 +142,8 @@ Displays counts of running, stopped, and error containers from Docker Socket Pro
   type: "DockerSocketProxy"
   logo: "assets/tools/sample.png"
   endpoint: "https://my-service-api.url:port"
+  hide: [] # Optional: badges to hide: "running", "stopped", "errors", "serverError".
 ```
-
-Auto refresh is supported by this integration.
 
 ## Docuseal
 
@@ -167,8 +173,6 @@ The `libraryType` configuration let you choose which stats to show.
 
 Jellyfin 12 disables legacy authorization on upgrade, which stops the `X-Emby-Token` header this card sends by default from being accepted. The card detects the server version and sends `Authorization: MediaBrowser Token="..."` instead, which works on every Jellyfin release. Emby is unaffected and keeps the default. Set `legacyAuth` to override that detection on a server configured to accept only one of them.
 
-Auto refresh is supported by this integration.
-
 ## FreshRSS
 
 Displays unread article count and total subscriptions from your FreshRSS server.
@@ -179,9 +183,8 @@ Displays unread article count and total subscriptions from your FreshRSS server.
   url: https://my-service.url
   username: "<---your-username--->"
   password: "<---your-password--->"
+  hide: [] # Optional: badges to hide: "subscriptions", "unread", "serverError".
 ```
-
-Auto refresh is supported by this integration.
 
 ## Gatus
 
@@ -206,8 +209,6 @@ The average times can be hidden (saves their calculation also) by setting the fo
   hideaverages: true
 ```
 
-Auto refresh is supported by this integration.
-
 ## Gitea / Forgejo
 
 Displays a Gitea / Forgejo version.
@@ -229,9 +230,8 @@ Displays system metrics (CPU, memory, swap, load) from a Glances server.
   icon: "fa-solid fa-heart-pulse"
   url: https://my-service.url
   stats: [cpu, mem] # Options: load, cpu, mem, swap
+  hide: [] # Optional: badges to hide: "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 If you don't already have a glances server up and running, here is a sample Docker compose file to get you started:
 
@@ -260,8 +260,6 @@ Displays the number of outstanding messages and system health status.
   apikey: "<---insert-client-token-here--->"
 ```
 
-Auto refresh is supported by this integration.  
-
 **API Token**: Use a **client token** (not an app token).
 
 ## Healthchecks
@@ -273,9 +271,8 @@ Displays status counts (up/down/grace) from your Healthchecks monitoring service
   type: "Healthchecks"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "up", "down", "grace", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 **API Key**: Found in Healthchecks web interface under **Settings > API Access > API key (read-only)**.
 
@@ -314,6 +311,7 @@ Display Hyper HDR instance name and status.
   type: "HyperHDR"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
+  hide: [] # Optional: badges to hide: "running", "stopped".
 ```
 
 ## Immich
@@ -326,9 +324,8 @@ Displays user count, photo/video counts, and storage usage from your Immich serv
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "users", "photos", "videos", "usage", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 **Requirements**: Immich server version `1.118.0` or later
 **API Key**: Create an API key in Immich web interface under **Administration > API Keys**
@@ -343,12 +340,10 @@ Display the number of concurrent streams on your Jellyfin server.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "streams", "serverError".
 ```
 
-Auto refresh is supported by this integration.  
-
 **API Key**: You can create an API key in the dashboard of you Jellystat server: settings/API Keys -> Add Key
-
 
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
 
@@ -361,9 +356,8 @@ Two lines are needed in the `config.yml`:
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "activity", "missing", "warnings", "errors", "serverError". Prowlarr has only the last three.
 ```
-
-Auto refresh is supported by this integration.  
 
 The url must be the root url of Lidarr, Prowlarr, Readarr, Radarr or Sonarr application.
 
@@ -387,8 +381,6 @@ This integration supports at max 15 results from Linkding, but you can add it mu
   query: "#ToDo #Homer" # query to do on Linkding. Use #tagname to search for tags
 ```
 
-Auto refresh is supported by this integration.  
-
 ## LibrisLog
 
 Displays library statistics from your LibrisLog book tracker: total books, books read, currently reading, and want-to-read counts.
@@ -399,9 +391,8 @@ Displays library statistics from your LibrisLog book tracker: total books, books
   logo: "https://docs.librislog.app/logo.png"
   url: "https://my-service.url"
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "reading", "want-to-read", "serverError".
 ```
-
-Auto refresh is supported by this integration.
 
 **API Key**: Generate an API key in your LibrisLog instance settings.
 
@@ -426,6 +417,7 @@ Displays the number of recipes Mealie is keeping organized or the planned meal f
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "serverError".
 ```
 
 **API Key**: You will have to set an API key in the field `apikey` which can be created in your Mealie installation.
@@ -441,11 +433,27 @@ Displays News (gray), Warning (orange) or Error (red) notifications bubbles from
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "news", "warnings", "errors", "serverError".
 ```
 
 The url must be the root url of Medusa application.
 
 **API Key**: The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Mylar
+
+Displays the number of wanted and upcoming issues from a Mylar3 instance.
+
+```yaml
+- name: "Mylar"
+  type: "Mylar"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
+  apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "wanted", "upcoming", "serverError".
+```
+
+**API Key**: found in Mylar under Settings > Web Interface > API.
 
 ## Miniflux
 
@@ -458,9 +466,8 @@ Displays the number of unread articles from your Miniflux RSS reader.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   style: "status" # Either "status" or "counter"
+  hide: [] # Optional: badges to hide: "unread", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 **API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
 
@@ -475,9 +482,8 @@ Displays network monitoring stats (connected devices, alerts, network activity) 
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   # endpoint: "https://my-service-api.url" # Optional: alternative base URL used to fetch service data when necessary.
+  hide: [] # Optional: badges to hide: "total", "connected", "newdevices", "downalert", "serverError".
 ```
-
-Auto refresh is supported by this integration.
 
 **API Key**: Get your API key in NetAlertx web interface under **Settings > General > API token** or in your installation documentation.
 
@@ -508,8 +514,6 @@ Moonraker's API mimics a few of OctoPrint's endpoints which makes these services
   apikey: "<---insert-api-key-here--->"
   display: "text" # 'text' or 'bar'. Default to `text`.
 ```
-
-Auto refresh is supported by this integration.  
 
 ## Olivetin
 
@@ -573,6 +577,7 @@ Displays total number of documents stored.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "serverError".
 ```
 
 **API Key**: API key can be generated in Settings > Administration > Auth Tokens
@@ -589,8 +594,6 @@ Displays current status and UPS load of the UPS device.
   # device: "ups" # The ID of the device
 ```
 
-Auto refresh is supported by this integration.  
-
 ## PiAlert
 
 Displays stats from your PiAlert server.
@@ -600,9 +603,8 @@ Displays stats from your PiAlert server.
   type: "PiAlert"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
+  hide: [] # Optional: badges to hide: "total", "connected", "newdevices", "downalert", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 ## PiHole
 
@@ -617,8 +619,6 @@ Displays info about your local PiHole instance right on your Homer dashboard.
   apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
   apiVersion: 5 # optional, defaults to 5. Use 6 if your PiHole instance uses API v6
 ```
-
-Auto refresh is supported by this integration.  
 
 **API Key**: Required only if Pi-hole web interface is password protected. Go to **Settings > API/Web Interface > Show API token**
 
@@ -645,8 +645,6 @@ Optionally, use `successCodes` to define which HTTP response status codes should
   # endpoint: "https://www.wikimediastatus.net" # Optional, will override url for pinging
 ```
 
-Auto refresh is supported by this integration.
-
 ## Plex
 
 Displays active streams, total movies, and total TV series from your Plex server.
@@ -658,9 +656,8 @@ Displays active streams, total movies, and total TV series from your Plex server
   url: "https://my-service.url/web"
   endpoint: "https://my-service.url"
   token: "<---insert-plex-token-here--->"
+  hide: [] # Optional: badges to hide: "streams", "series", "movies", "warnings", "errors", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 **Plex Token**: See [How to find your Plex token](https://www.plexopedia.com/plex-media-server/general/plex-token/)
 
@@ -677,9 +674,8 @@ Displays container counts (running/dead/misc), version, and online status from y
   environments: # optional: specific environments to check
     - "raspberry"
     - "local"
+  hide: [] # Optional: badges to hide: "running", "dead", "misc".
 ```
-
-Auto refresh is supported by this integration.  
 
 **Requirements**: Portainer version 1.11 or later
 
@@ -693,8 +689,6 @@ Auto refresh is supported by this integration.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
 ```
-
-Auto refresh is supported by this integration.  
 
 ## Proxmox
 
@@ -711,12 +705,10 @@ Displays status information of a Proxmox node (VMs running and disk, memory and 
   api_token: "PVEAPIToken=root@pam!your-api-token-name=your-api-token-key"
   # values below this line are optional (default value are false/empty):
   hide_decimals: true # removes decimals from stats values.
-  hide: [] # hides information. Possible values are "vms", "vms_total", "lxcs", "lxcs_total", "disk", "mem" and "cpu".
+  hide: [] # Optional: hides "vms", "vms_total", "lxcs", "lxcs_total", "disk", "mem", "cpu", "serverError".
   small_font_on_small_screens: true # uses small font on small screens (like mobile)
   small_font_on_desktop: true # uses small font on desktops (just in case you're showing much info)
 ```
-
-Auto refresh is supported by this integration.  
 
 **API Key**: You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
 
@@ -742,9 +734,8 @@ for setting up qBittorrent.
   type: "qBittorrent"
   logo: "assets/tools/sample.png"
   url: https://my-service.url # Your rTorrent web UI, f.e. ruTorrent or Flood.
+  hide: [] # Optional: badges to hide: "torrents", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 ## rTorrent
 
@@ -762,9 +753,8 @@ for setting up rTorrent.
   xmlrpc: "https://my-service.url:port" # Reverse proxy for rTorrent's XML-RPC.
   username: "username" # Username for logging into rTorrent (if applicable).
   password: "password" # Password for logging into rTorrent (if applicable).
+  hide: [] # Optional: badges to hide: "torrents", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 ## SABnzbd
 
@@ -776,9 +766,8 @@ Displays the number of currently active downloads on your SABnzbd instance.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "downloads", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 **API Key**: An API key is required, and can be obtained from the "Config" > "General" section of the SABnzbd config in the web UI.
 
@@ -791,9 +780,8 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
   type: "Scrutiny"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
+  hide: [] # Optional: badges to hide: "passed", "failed", "unknown", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 ## Seerr
 
@@ -811,8 +799,6 @@ Displays the Seerr version as the subtitle, with icons next to it when an update
   #                       # "pending", "processing" and "issues".
 ```
 
-Auto refresh is supported by this integration.
-
 **Authentication**: generate an API key under **Settings > General** in your Seerr instance. The badges need it; the version subtitle works without one.
 
 **Hiding items**: everything is shown by default; list a key under `hide` to remove it. `updateAvailable` and `restartRequired` are the two subtitle icons; `media`, `pending`, `processing` and `issues` are the four badges. Hide all six for a version-only card. Badge counts are capped at `99+`.
@@ -828,6 +814,7 @@ Displays the download and upload speeds in Mbit/s and the ping in ms.
   type: "SpeedtestTracker"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
+  hide: [] # Optional: badges to hide: "serverError".
 ```
 
 ## Tautulli
@@ -840,9 +827,8 @@ Displays the number of currently active streams on you Plex instance.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
+  hide: [] # Optional: badges to hide: "streams", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 **API Key**: An API key is required, and can be obtained from the "Web Interface" section of settings on the Tautulli web UI.
 
@@ -868,9 +854,8 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
   type: "Tdarr"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
+  hide: [] # Optional: badges to hide: "queue", "errored", "serverError".
 ```
-
-Auto refresh is supported by this integration.  
 
 ## Traefik
 
@@ -898,9 +883,9 @@ The service communicates with the Transmission RPC interface which needs to be a
   type: "Transmission"
   auth: "username:password" # Optional: HTTP Basic Auth
   target: "_blank" # Optional: HTML a tag target attribute
+  hide: [] # Optional: badges to hide: "torrents", "serverError".
 ```
 
-Auto refresh is supported by this integration.  
 The service automatically handles Transmission's session management and CSRF protection.
 
 ## Truenas Scale
@@ -956,8 +941,6 @@ the status page.
 > - or set **Settings > General > Entry Page** in Uptime Kuma to that status page, which sends everyone
 >   landing on the base url there, and leaves the Homer config untouched.
 
-Auto refresh is supported by this integration.  
-
 **Requirements**: Uptime Kuma version `1.13.1` or later (for [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1))
 
 ## Vaultwarden
@@ -992,6 +975,6 @@ Display info about the number of container running and the number for which an u
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   subtitle: "Docker image update notifier"
+  hide: [] # Optional: badges to hide: "running", "update", "serverError".
 ```
 
-Auto refresh is supported by this integration.  

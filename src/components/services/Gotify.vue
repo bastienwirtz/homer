@@ -1,108 +1,59 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="messages > 0">
-          <template v-if="messages > 100">100+</template>
-          <template v-else>{{ messages }}</template>
-          <template v-if="messages === 1"> message</template>
-          <template v-else> messages</template>
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div v-if="status" class="status" :class="status"></div>
-    </template>
-  </Generic>
+  <Generic :item="item" :subtitle="messageCount" :status="status" />
 </template>
 
 <script>
 import service from "@/mixins/service.js";
+import { capCount } from "@/utils/format.js";
 
 export default {
   name: "Gotify",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     health: {},
     messages: 0,
+    serverError: null,
   }),
   computed: {
+    messageCount: function () {
+      if (!this.messages) {
+        return null;
+      }
+      const count = capCount(this.messages);
+      return `${count} message${this.messages === 1 ? "" : "s"}`;
+    },
     status: function () {
+      if (this.serverError || !this.health?.health) {
+        return this.reachabilityStatus();
+      }
       const statuses = [this.health.health, this.health.database];
 
       if (statuses.includes("red")) {
-        return "red";
+        return { state: "offline" };
       } else if (statuses.includes("orange")) {
-        return "orange";
+        return { state: "warning" };
       }
 
-      return "green";
+      return { state: "online" };
     },
-  },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchAll;
-
-    // Initial data fetch
-    this.fetchAll();
   },
   methods: {
-    fetchAll: async function () {
-      this.fetchStatus();
-      this.fetchMessages();
-    },
-    fetchStatus: async function () {
-      await this.fetch(`/health`)
-        .catch((e) => console.log(e))
-        .then((resp) => (this.health = resp));
-    },
-    fetchMessages: async function () {
-      const headers = {
-        "X-Gotify-Key": this.item.apikey,
-      };
-      await this.fetch(`/message?limit=100`, { headers })
-        .catch((e) => console.log(e))
-        .then((resp) => (this.messages = resp.messages.length));
+    fetchData: function () {
+      const headers = { "X-Gotify-Key": this.item.apikey };
+
+      return this.load(
+        this.fetch(`/health`).then((health) => {
+          this.health = health;
+        }),
+        // Needs a client token, and only feeds the subtitle, so a missing key
+        // must not make the whole card look unreachable.
+        this.fetch(`/message?limit=100`, { headers })
+          .then((messages) => {
+            this.messages = messages.messages.length;
+          })
+          .catch((e) => console.warn("Gotify messages unavailable:", e)),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.green:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-
-  &.orange:before {
-    background-color: #ee863e;
-    border-color: #e77322;
-    box-shadow: 0 0 5px 1px #ee863e;
-  }
-
-  &.red:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
-}
-</style>

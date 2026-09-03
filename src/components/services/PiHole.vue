@@ -1,38 +1,22 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="percentage">
-          {{ percentage }}&percnt; blocked
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div v-if="status" class="status" :class="status">
-        {{ status }}
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :subtitle="subtitle" :status="status" />
 </template>
 
 <script>
 import service from "@/mixins/service.js";
 
+const BLOCKING_STATE = {
+  enabled: "online",
+  disabled: "warning",
+  error: "offline",
+};
+
 export default {
   name: "PiHole",
   mixins: [service],
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
-  },
   data: () => ({
-    status: "",
+    blocking: "",
+    errorMessage: "",
     percent_blocked: 0,
     sessionId: null,
     sessionExpiry: null,
@@ -41,6 +25,17 @@ export default {
     retryDelay: 5000,
   }),
   computed: {
+    status: function () {
+      if (!this.blocking) {
+        return null;
+      }
+      return { state: BLOCKING_STATE[this.blocking], label: this.blocking };
+    },
+    subtitle: function () {
+      return (
+        this.errorMessage || (this.percentage && `${this.percentage}% blocked`)
+      );
+    },
     percentage: function () {
       if (this.percent_blocked >= 0) {
         return this.percent_blocked.toFixed(1);
@@ -61,16 +56,16 @@ export default {
       this.autoUpdateMethod = this.fetchStatus;
     } else {
       // Set up auto-update method for the scheduler
-      this.autoUpdateMethod = this.fetchStatus_v5();
+      this.autoUpdateMethod = this.fetchStatus_v5;
     }
     // Initial data fetch
     this.autoUpdateMethod();
   },
   methods: {
-    handleError: function (error, status) {
+    handleError: function (error, state = "error") {
       console.error(error);
-      this.subtitle = error;
-      this.status = status;
+      this.errorMessage = error;
+      this.blocking = state;
     },
     loadCachedSession: function () {
       try {
@@ -160,8 +155,9 @@ export default {
           throw new Error("Invalid response format");
         }
 
-        this.status = status_response.blocking;
+        this.blocking = status_response.blocking;
         this.percent_blocked = summary_response.queries.percent_blocked;
+        this.errorMessage = "";
         this.retryCount = 0;
       } catch (e) {
         const isAuthError =
@@ -170,7 +166,7 @@ export default {
           this.removeCacheSession();
           return this.retryWithDelay();
         }
-        this.handleError(`Failed to fetch status: ${e.message || e}`, "error");
+        this.handleError(`Failed to fetch status: ${e.message || e}`);
         this.removeCacheSession();
       }
     },
@@ -178,48 +174,16 @@ export default {
       const authQueryParams = this.item.apikey
         ? `?summaryRaw&auth=${this.item.apikey}`
         : "";
-      const result = await this.fetch(`/api.php${authQueryParams}`).catch((e) =>
-        this.handleError(`Failed to fetch status: ${e}`, "error"),
-      );
+      try {
+        const result = await this.fetch(`/api.php${authQueryParams}`);
 
-      this.status = result.status;
-      this.percent_blocked = result.ads_percentage_today;
+        this.blocking = result.status;
+        this.percent_blocked = result.ads_percentage_today;
+        this.errorMessage = "";
+      } catch (e) {
+        this.handleError(`Failed to fetch status: ${e}`);
+      }
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.enabled:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-
-  &.disabled:before {
-    background-color: #f5a623;
-    border-color: #e59400;
-    box-shadow: 0 0 5px 1px #f5a623;
-  }
-
-  &.error:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
-}
-</style>

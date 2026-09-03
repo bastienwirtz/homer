@@ -64,7 +64,7 @@ class UpdateScheduler {
 
   generateComponentId(component) {
     // Use component's unique identifier or Vue instance uid
-    return component._uid || component.$.uid
+    return component._uid || component.$.uid;
   }
 
   startGlobalTimer() {

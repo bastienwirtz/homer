@@ -30,17 +30,14 @@
             </div>
           </slot>
           <div class="card-body">
-            <!-- TODO(cards-migrate-to-api): drop #content once every card is migrated. -->
-            <slot name="content">
-              <p class="title">{{ item.name }}</p>
-              <div
-                v-if="item.subtitle || $slots.subtitle || subtitle"
-                class="subtitle"
-              >
-                <template v-if="item.subtitle">{{ item.subtitle }}</template>
-                <slot v-else name="subtitle">{{ subtitle }}</slot>
-              </div>
-            </slot>
+            <p class="title">{{ item.name }}</p>
+            <div
+              v-if="item.subtitle || $slots.subtitle || subtitle"
+              class="subtitle"
+            >
+              <template v-if="item.subtitle">{{ item.subtitle }}</template>
+              <slot v-else name="subtitle">{{ subtitle }}</slot>
+            </div>
           </div>
           <div v-if="$slots.badges || visibleBadges.length" class="card-badges">
             <slot name="badges">
@@ -60,17 +57,11 @@
               </a>
             </slot>
           </div>
-          <div
-            v-if="$slots.aside || $slots.indicator || status"
-            class="card-aside"
-          >
+          <div v-if="$slots.aside || status" class="card-aside">
             <slot name="aside">
-              <!-- TODO(cards-migrate-to-api): drop #indicator once every card is migrated. -->
-              <slot name="indicator">
-                <div v-if="status" class="status" :class="status.state">
-                  {{ status.label }}
-                </div>
-              </slot>
+              <div v-if="status" class="status" :class="status.state">
+                {{ status.label }}
+              </div>
             </slot>
           </div>
           <div v-if="item.quick || item.tag" class="card-lane">
@@ -120,6 +111,9 @@ const isEmpty = (badge) =>
   badge.value === undefined ||
   (badge.value === 0 && !badge.showZero);
 
+const badgeText = (badge) =>
+  badge.cap === false ? badge.value : capCount(badge.value, badge.cap ?? 99);
+
 export default {
   name: "Generic",
   props: {
@@ -138,7 +132,7 @@ export default {
       const hidden = this.item.hide || [];
       return (this.badges ?? [])
         .filter((badge) => !hidden.includes(badge.key) && !isEmpty(badge))
-        .map((badge) => ({ ...badge, text: capCount(badge.value) }));
+        .map((badge) => ({ ...badge, text: badgeText(badge) }));
     },
   },
 };
