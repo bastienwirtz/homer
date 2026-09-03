@@ -316,6 +316,36 @@
           "items": {
             "$ref": "#/definitions/QuickLink"
           }
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Smart cards only: alternative base URL used to fetch service data when it differs from the card url"
+        },
+        "headers": {
+          "$ref": "#/definitions/Headers",
+          "description": "Smart cards only: per-item headers, layered over (and overriding) proxy.headers"
+        },
+        "useCredentials": {
+          "type": "boolean",
+          "description": "Smart cards only: override the global proxy.useCredentials configuration"
+        },
+        "successCodes": {
+          "type": "array",
+          "description": "Smart cards only: HTTP status codes to treat as a success instead of the default 2xx",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "updateIntervalMs": {
+          "type": ["integer", "boolean"],
+          "description": "Smart cards only: refresh interval in milliseconds, overriding the global one. Set to 0 or false to disable"
+        },
+        "hide": {
+          "type": "array",
+          "description": "Smart cards only: badge keys, plus any card-specific field keys, to remove from this card (see docs/customservices.md)",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "Item"
@@ -393,6 +423,10 @@
         }
       ],
       "description": "footer Line content. HTML is supported. Set false if you want to hide it."
+    },
+    "updateIntervalMs": {
+      "type": ["integer", "boolean"],
+      "description": "Default refresh interval in milliseconds for every smart card that supports it, minimum 1000. Remove or set to 0 to disable. Can be overriden per item"
     },
     "columns": {
       "type": "string",

@@ -1,5 +1,4 @@
 import updateScheduler from "@/utils/updateScheduler.js";
-import { capCount } from "@/utils/format.js";
 
 // Header names are case-insensitive, so they are lowercased before merging and
 // each source overrides the previous one whatever its casing. Unset values are
@@ -18,6 +17,7 @@ function mergeHeaders(...sources) {
 
 export default {
   props: {
+    item: Object,
     proxy: Object,
   },
   inject: {
@@ -30,6 +30,9 @@ export default {
     globalConfig() {
       return this.config() || {};
     },
+    versionSubtitle() {
+      return this.versionstring ? `Version ${this.versionstring}` : null;
+    },
   },
   created: function () {
     // Custom service often consume info from an API using the item link (url) as a base url,
@@ -38,6 +41,13 @@ export default {
 
     if (this.endpoint && this.endpoint.endsWith("/")) {
       this.endpoint = this.endpoint.slice(0, -1);
+    }
+
+    // A card's own created() runs after this one, so it can still override
+    // autoUpdateMethod to pick a method at runtime.
+    if (typeof this.fetchData === "function") {
+      this.autoUpdateMethod = this.fetchData;
+      this.fetchData();
     }
   },
   beforeMount: function () {
@@ -52,7 +62,45 @@ export default {
     isValueShown(key) {
       return !(this.item.hide || []).includes(key);
     },
-    capCount,
+    reachabilityStatus() {
+      if (this.serverError === null || this.serverError === undefined) {
+        return null;
+      }
+      return this.serverError
+        ? { state: "offline", label: "offline" }
+        : { state: "online", label: "online" };
+    },
+    async load(...requests) {
+      let failed = false;
+      await Promise.all(
+        requests.map((request) =>
+          request.catch((e) => {
+            console.error(e);
+            failed = true;
+          }),
+        ),
+      );
+      this.serverError = failed;
+    },
+    requireConfig(...keys) {
+      const missing = keys.filter((key) => !this.item[key]);
+      if (!missing.length) {
+        return true;
+      }
+      console.error(
+        `Missing ${missing.join(", ")} in config.yml for the "${this.item.name || this.item.type}" entry.`,
+      );
+      this.serverError = true;
+      return false;
+    },
+    connectionBadge() {
+      return {
+        key: "serverError",
+        label: `Connection error to the ${this.item.type} API, check the url and credentials in config.yml`,
+        value: this.serverError ? "?" : null,
+        tone: "danger",
+      };
+    },
     fetch: function (path, init, json = true) {
       let options = {};
 
@@ -94,7 +142,7 @@ export default {
 
         if (!success) {
           throw new Error(
-            `Fail to fetch ressource: (${response.status} error)`,
+            `Failed to fetch resource: (${response.status} error)`,
             { cause: response },
           );
         }

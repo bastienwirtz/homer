@@ -1,98 +1,43 @@
 <template>
-  <Generic :item="item">
-    <template #indicator>
-      <div class="notifs">
-        <strong
-          v-if="streams > 0"
-          class="notif playing"
-          :title="`${streams} active stream${streams > 1 ? 's' : ''}`"
-        >
-          {{ streams }}
-        </strong>
-        <i
-          v-if="error"
-          class="notif error fa-solid fa-triangle-exclamation"
-          title="Unable to fetch current status"
-        ></i>
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :badges="badges" />
 </template>
 <script>
 import service from "@/mixins/service.js";
 
 export default {
-  name: "Jellyfin",
+  name: "Jellystat",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     stats: null,
-    error: false,
+    serverError: null,
   }),
   computed: {
     streams: function () {
-      if (!this.stats) {
-        return "";
-      }
-      let nb_streams = 0;
-      for (let stream of this.stats) {
-        if ("NowPlayingItem" in stream) nb_streams++;
-      }
-      return nb_streams;
+      return this.stats?.filter((stream) => "NowPlayingItem" in stream).length;
+    },
+    badges() {
+      return [
+        {
+          key: "streams",
+          label: "Active streams",
+          value: this.streams,
+          tone: "success",
+        },
+        this.connectionBadge(),
+      ];
     },
   },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
-  },
   methods: {
-    fetchStatus: async function () {
+    fetchData: function () {
       const headers = {
         Authorization: `bearer ${this.item.apikey}`,
       };
-      try {
-        const response = await this.fetch("/proxy/getSessions", { headers });
-        this.error = false;
-        this.stats = response;
-      } catch (e) {
-        this.error = true;
-        console.error(e);
-      }
+      return this.load(
+        this.fetch("/proxy/getSessions", { headers }).then((response) => {
+          this.stats = response;
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-
-  .notif {
-    display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-
-    &.playing {
-      background-color: #28a9a3;
-    }
-
-    &.error {
-      border-radius: 50%;
-      aspect-ratio: 1;
-      background-color: #e51111;
-    }
-  }
-}
-</style>

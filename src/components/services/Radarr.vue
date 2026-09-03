@@ -1,28 +1,5 @@
 <template>
-  <Generic :item="item">
-    <template #indicator>
-      <div class="notifs">
-        <strong v-if="activity > 0" class="notif activity" title="Activity">
-          {{ activity }}
-        </strong>
-        <strong v-if="missing > 0" class="notif missing" title="Missing">
-          {{ missing }}
-        </strong>
-        <strong v-if="warnings > 0" class="notif warnings" title="Warning">
-          {{ warnings }}
-        </strong>
-        <strong v-if="errors > 0" class="notif errors" title="Error">
-          {{ errors }}
-        </strong>
-        <strong
-          v-if="serverError"
-          class="notif errors"
-          title="Connection error to Radarr API, check url and apikey in config.yml"
-          >?</strong
-        >
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :badges="badges" />
 </template>
 
 <script>
@@ -34,125 +11,101 @@ const LEGACY_API = "/api";
 export default {
   name: "Radarr",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => {
     return {
       activity: null,
       missing: null,
       warnings: null,
       errors: null,
-      serverError: false,
+      serverError: null,
     };
   },
   computed: {
     apiPath() {
       return this.item.legacyApi ? LEGACY_API : V3_API;
     },
-  },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchConfig;
-
-    // Initial data fetch
-    this.fetchConfig();
+    badges() {
+      return [
+        {
+          key: "activity",
+          label: "Activity",
+          value: this.activity,
+          tone: "info",
+        },
+        {
+          key: "missing",
+          label: "Missing",
+          value: this.missing,
+          tone: "accent",
+        },
+        {
+          key: "warnings",
+          label: "Warning",
+          value: this.warnings,
+          tone: "warning",
+        },
+        { key: "errors", label: "Error", value: this.errors, tone: "danger" },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
-    fetchConfig: function () {
-      const handleError = (e) => {
-        console.error(e);
-        this.serverError = true;
-      };
-      this.fetch(`${this.apiPath}/health?apikey=${this.item.apikey}`)
-        .then((health) => {
-          this.warnings = 0;
-          this.errors = 0;
-          for (var i = 0; i < health.length; i++) {
-            if (health[i].type == "warning") {
-              this.warnings++;
-            } else if (health[i].type == "error") {
-              this.errors++;
-            }
-          }
-        })
-        .catch(handleError);
-      if (!this.item.legacyApi) {
-        this.fetch(`${this.apiPath}/queue/details?apikey=${this.item.apikey}`)
-          .then((queue) => {
-            for (var i = 0; i < queue.length; i++) {
-              if (queue[i].trackedDownloadStatus == "warning") {
-                this.warnings++;
-              } else if (queue[i].trackedDownloadStaus == "error") {
-                this.errors++;
-              }
-            }
-          })
-          .catch(handleError);
-      }
-      this.fetch(`${this.apiPath}/queue?apikey=${this.item.apikey}`)
-        .then((queue) => {
-          this.activity = 0;
+    fetchData: function () {
+      const apikey = this.item.apikey;
 
-          if (this.item.legacyApi) {
-            for (var i = 0; i < queue.length; i++) {
-              if (queue[i].movie) {
-                this.activity++;
-              }
-            }
-          } else {
-            this.activity = queue.totalRecords;
-          }
-        })
-        .catch(handleError);
-      if (!this.item.legacyApi) {
-        this.fetch(
-          `${this.apiPath}/wanted/missing?pageSize=1&apikey=${this.item.apikey}`,
-        )
-          .then((overview) => {
+      // Both feed warnings/errors, so they are assigned once rather than
+      // incremented from two concurrent responses.
+      const health = this.fetch(`${this.apiPath}/health?apikey=${apikey}`).then(
+        (entries) => ({
+          warnings: entries.filter((h) => h.type == "warning").length,
+          errors: entries.filter((h) => h.type == "error").length,
+        }),
+      );
+
+      const requests = [
+        this.fetch(`${this.apiPath}/queue?apikey=${apikey}`).then((queue) => {
+          this.activity = this.item.legacyApi
+            ? queue.filter((entry) => entry.movie).length
+            : queue.totalRecords;
+        }),
+      ];
+
+      if (this.item.legacyApi) {
+        requests.push(
+          health.then((counts) => {
+            this.warnings = counts.warnings;
+            this.errors = counts.errors;
+          }),
+        );
+      } else {
+        requests.push(
+          Promise.all([
+            health,
+            this.fetch(`${this.apiPath}/queue/details?apikey=${apikey}`),
+          ]).then(([counts, queue]) => {
+            this.warnings =
+              counts.warnings +
+              queue.filter((e) => e.trackedDownloadStatus == "warning").length;
+            this.errors =
+              counts.errors +
+              queue.filter((e) => e.trackedDownloadStatus == "error").length;
+          }),
+          this.fetch(
+            `${this.apiPath}/wanted/missing?pageSize=1&apikey=${apikey}`,
+          ).then((overview) =>
             this.fetch(
-              `${this.apiPath}/wanted/missing?pageSize=${overview.totalRecords}&apikey=${this.item.apikey}`,
+              `${this.apiPath}/wanted/missing?pageSize=${overview.totalRecords}&apikey=${apikey}`,
             ).then((movies) => {
               this.missing = movies.records.filter(
                 (m) => m.monitored && m.isAvailable && !m.hasFile,
               ).length;
-            });
-          })
-          .catch(handleError);
+            }),
+          ),
+        );
       }
+
+      return this.load(...requests);
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-  .notif {
-    display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-    &.activity {
-      background-color: #4fb5d6;
-    }
-
-    &.missing {
-      background-color: #9d00ff;
-    }
-    &.warnings {
-      background-color: #d08d2e;
-    }
-
-    &.errors {
-      background-color: #e51111;
-    }
-  }
-}
-</style>
