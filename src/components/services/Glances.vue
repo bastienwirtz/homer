@@ -1,16 +1,13 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-for="(statItem, index) in item.stats" :key="statItem">
-          <span v-if="stats[statItem]" :title="stats[statItem].label">
-            <i :class="stats[statItem].icon"></i> {{ stats[statItem].value }}
-            {{ stats[statItem].unit }}
-            <span v-if="index != item.stats.length - 1"> / </span>
-          </span>
-        </template>
-      </p>
+  <Generic :item="item" :badges="badges">
+    <template #subtitle>
+      <template v-for="(statItem, index) in item.stats" :key="statItem">
+        <span v-if="stats[statItem]" :title="stats[statItem].label">
+          <i :class="stats[statItem].icon"></i> {{ stats[statItem].value }}
+          {{ stats[statItem].unit }}
+          <span v-if="index != item.stats.length - 1"> / </span>
+        </span>
+      </template>
     </template>
   </Generic>
 </template>
@@ -21,24 +18,19 @@ import service from "@/mixins/service.js";
 export default {
   name: "Glances",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     stats: [],
-    error: null,
+    serverError: null,
   }),
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStat;
-
-    // Initial data fetch
-    this.fetchStat();
+  computed: {
+    badges() {
+      return [this.connectionBadge()];
+    },
   },
   methods: {
-    fetchStat: async function () {
-      this.fetch(`/api/4/quicklook`)
-        .then((response) => {
+    fetchData: function () {
+      return this.load(
+        this.fetch(`/api/4/quicklook`).then((response) => {
           this.stats["load"] = {
             value: response.load,
             label: "System load",
@@ -63,11 +55,8 @@ export default {
             icon: "fa-solid fa-file-arrow-down",
             unit: "%",
           };
-        })
-        .catch((e) => {
-          console.log(e);
-          this.error = "Unable to get metrics";
-        });
+        }),
+      );
     },
   },
 };

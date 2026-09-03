@@ -1,20 +1,9 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="api"> {{ count }} {{ level }} alerts </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div v-if="api" class="status" :class="level">
-        {{ count }}
-      </div>
-    </template>
-  </Generic>
+  <Generic
+    :item="item"
+    :subtitle="api && `${count} ${level} alerts`"
+    :status="status"
+  />
 </template>
 
 <script>
@@ -26,13 +15,17 @@ const AlertsStatus = Object.freeze({
   inactive: "inactive",
 });
 
+const ALERT_STATE = {
+  firing: "offline",
+  pending: "warning",
+  inactive: "online",
+};
+
 export default {
   name: "Prometheus",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
+    serverError: null,
     api: {
       status: "",
       count: 0,
@@ -57,17 +50,20 @@ export default {
       }
       return AlertsStatus.inactive;
     },
-  },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
+    status: function () {
+      if (this.serverError) {
+        return this.reachabilityStatus();
+      }
+      return this.api && { state: ALERT_STATE[this.level], label: this.count };
+    },
   },
   methods: {
-    fetchStatus: async function () {
-      this.api = await this.fetch("api/v1/alerts").catch((e) => console.log(e));
+    fetchData: function () {
+      return this.load(
+        this.fetch("api/v1/alerts").then((api) => {
+          this.api = api;
+        }),
+      );
     },
     countFiring: function () {
       if (this.api) {
@@ -96,38 +92,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.firing:before {
-    background-color: #d65c68;
-    border-color: #e87d88;
-    box-shadow: 0 0 5px 1px #d65c68;
-  }
-
-  &.pending:before {
-    background-color: #e8bb7d;
-    border-color: #d6a35c;
-    box-shadow: 0 0 5px 1px #e8bb7d;
-  }
-
-  &.inactive:before {
-    background-color: #8fe87d;
-    border-color: #70d65c;
-    box-shadow: 0 0 5px 1px #8fe87d;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
-}
-</style>
