@@ -1,34 +1,5 @@
 <template>
-  <Generic :item="item">
-    <template #indicator>
-      <div class="notifs">
-        <strong
-          v-if="running > 0"
-          class="notif running"
-          title="Running Containers"
-        >
-          {{ running }}
-        </strong>
-        <strong
-          v-if="stopped > 0"
-          class="notif stopped"
-          title="Stopped Containers"
-        >
-          {{ stopped }}
-        </strong>
-        <strong v-if="errors > 0" class="notif errors" title="Error">
-          {{ errors }}
-        </strong>
-        <strong
-          v-if="serverError"
-          class="notif errors"
-          title="Connection error to Docker Socket Proxy API"
-        >
-          Unavailable
-        </strong>
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :badges="badges" />
 </template>
 
 <script>
@@ -36,74 +7,47 @@ import service from "@/mixins/service.js";
 export default {
   name: "DockerSocketProxy",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => {
     return {
       running: null,
       stopped: null,
       errors: null,
-      serverError: false,
+      serverError: null,
     };
   },
-  created: function () {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchData;
-
-    // Initial data fetch
-    this.fetchData();
+  computed: {
+    badges() {
+      return [
+        {
+          key: "running",
+          label: "Running Containers",
+          value: this.running,
+          tone: "success",
+        },
+        {
+          key: "stopped",
+          label: "Stopped Containers",
+          value: this.stopped,
+          tone: "neutral",
+        },
+        { key: "errors", label: "Error", value: this.errors, tone: "danger" },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
     fetchData: function () {
-      const handleError = (e) => {
-        console.error(e);
-        this.serverError = true;
-      };
-
-      // Fetch all containers (including stopped) from Docker Socket Proxy
-      this.fetch("/containers/json?all=true") // Docker endpoint for container statuses
-        .then((containers) => {
+      return this.load(
+        this.fetch("/containers/json?all=true").then((containers) => {
           this.running = containers.filter(
             (container) => container.State === "running",
           ).length;
           this.stopped = containers.filter(
             (container) => container.State === "exited",
           ).length;
-        })
-        .catch(handleError);
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-
-  .notif {
-    display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-
-    &.running {
-      background-color: #4fb5d6;
-    }
-
-    &.stopped {
-      background-color: #d08d2e;
-    }
-
-    &.errors {
-      background-color: #e51111;
-    }
-  }
-}
-</style>

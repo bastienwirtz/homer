@@ -1,17 +1,9 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="api">
-          happily storing {{ api.count }} documents
-        </template>
-      </p>
-    </template>
-  </Generic>
+  <Generic
+    :item="item"
+    :subtitle="api && `happily storing ${api.count} documents`"
+    :badges="badges"
+  />
 </template>
 
 <script>
@@ -20,31 +12,32 @@ import service from "@/mixins/service.js";
 export default {
   name: "Paperless",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     api: null,
+    serverError: null,
   }),
-  created() {
-    this.fetchStatus();
+  computed: {
+    badges() {
+      return [this.connectionBadge()];
+    },
   },
   methods: {
-    fetchStatus: async function () {
+    fetchData: async function () {
       if (this.item.subtitle != null) return;
 
-      const apikey = this.item.apikey;
-      if (!apikey) {
-        console.error(
-          "apikey is not present in config.yml for the paperless entry!",
-        );
+      if (!this.requireConfig("apikey")) {
         return;
       }
-      this.api = await this.fetch("/api/documents/", {
-        headers: {
-          Authorization: "Token " + this.item.apikey,
-        },
-      }).catch((e) => console.log(e));
+
+      return this.load(
+        this.fetch("/api/documents/", {
+          headers: {
+            Authorization: "Token " + this.item.apikey,
+          },
+        }).then((api) => {
+          this.api = api;
+        }),
+      );
     },
   },
 };

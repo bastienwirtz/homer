@@ -1,26 +1,13 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <span v-if="error" class="error">An error has occurred.</span>
-        <template v-else>
-          <span class="down monospace">
-            <p class="fas fa-download"></p>
-            {{ downRate }}
-          </span>
-          <span class="up monospace">
-            <p class="fas fa-upload"></p>
-            {{ upRate }}
-          </span>
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <span v-if="!error" class="count"
-        >{{ count }}
-        <template v-if="count === 1">torrent</template>
-        <template v-else>torrents</template>
+  <Generic :item="item" :badges="badges">
+    <template #subtitle>
+      <span class="is-family-monospace mr-3">
+        <i class="fas fa-download"></i>
+        {{ downRate }}
+      </span>
+      <span class="is-family-monospace">
+        <i class="fas fa-upload"></i>
+        {{ upRate }}
       </span>
     </template>
   </Generic>
@@ -28,30 +15,12 @@
 
 <script>
 import service from "@/mixins/service.js";
-const units = ["B", "KB", "MB", "GB"];
-
-// Take the rate in bytes and keep dividing it by 1k until the lowest
-// value for which we have a unit is determined. Return the value with
-// up to two decimals as a string and unit/s appended.
-const displayRate = (rate) => {
-  let i = 0;
-
-  while (rate > 1000 && i < units.length) {
-    rate /= 1000;
-    i++;
-  }
-  return (
-    Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
-      rate || 0,
-    ) + ` ${units[i]}/s`
-  );
-};
+import { displayRate } from "@/utils/format.js";
 
 export default {
   name: "QBittorrent",
   mixins: [service],
-  props: { item: Object },
-  data: () => ({ dl: null, ul: null, count: null, error: null }),
+  data: () => ({ dl: null, ul: null, count: null, serverError: null }),
   computed: {
     downRate: function () {
       return displayRate(this.dl);
@@ -59,61 +28,30 @@ export default {
     upRate: function () {
       return displayRate(this.ul);
     },
-  },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchAllData;
-
-    // Fetch initial values
-    this.fetchAllData();
+    badges: function () {
+      return [
+        {
+          key: "torrents",
+          label: "Torrents",
+          value: this.count,
+          tone: "neutral",
+        },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
-    // Combined method for scheduler - fetches both rates and count
-    fetchAllData: async function () {
-      this.getRate();
-      this.fetchCount();
-    },
-    fetchCount: async function () {
-      try {
-        const body = await this.fetch("/api/v2/torrents/info");
-        this.error = false;
-        this.count = body.length;
-      } catch (e) {
-        this.error = true;
-        console.error(e);
-      }
-    },
-    getRate: async function () {
-      try {
-        const body = await this.fetch("/api/v2/transfer/info");
-        this.error = false;
-        this.dl = body.dl_info_speed;
-        this.ul = body.up_info_speed;
-      } catch (e) {
-        this.error = true;
-        console.error(e);
-      }
+    fetchData: function () {
+      return this.load(
+        this.fetch("/api/v2/torrents/info").then((body) => {
+          this.count = body.length;
+        }),
+        this.fetch("/api/v2/transfer/info").then((body) => {
+          this.dl = body.dl_info_speed;
+          this.ul = body.up_info_speed;
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.error {
-  color: #e51111 !important;
-}
-
-.down {
-  margin-right: 1em;
-}
-
-.count {
-  color: var(--text);
-  font-size: 0.8em;
-}
-
-.monospace {
-  font-weight: 300;
-  font-family: monospace;
-}
-</style>

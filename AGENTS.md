@@ -22,15 +22,16 @@ Homer is a static Vue.js 3 PWA dashboard that loads configuration from YAML file
 - **Entry Point**: `src/main.js` mounts the Vue app
 - **Root Component**: `src/App.vue` handles layout, configuration loading, and routing
 - **Configuration System**: YAML-based with runtime merging of defaults (`src/assets/defaults.yml`) and user config (`/assets/config.yml`)
-- **Service Components**: 53 specialized integrations in `src/components/services/` that extend a Generic component pattern
+- **Service Components**: 58 specialized integrations in `src/components/services/` that extend a Generic component pattern
 
 ### Service Integration Pattern
 
 All service components follow this architecture:
 
-- Extend `Generic.vue` using Vue slots (`<template #indicator>`, `<template #content>`, `<template #icon>`)
-- Use the `service.js` mixin (`src/mixins/service.js`) for common API functionality
+- Render a single `Generic.vue` as the template root and feed it the `subtitle`, `status` and `badges` props, using a slot (`icon`, `subtitle`, `aside`, `badges`) only for richer content. `Generic` owns the card layout and `pnpm lint` enforces it.
+- Use the `service.js` mixin (`src/mixins/service.js`) for common API functionality. It supplies the `item` prop, calls your `fetchData()` on create and on the refresh schedule, and owns error state through `load()` and `serverError`.
 - Use a custom `fetch` method provided by the service mixin to seamlessly support proxy configuration, custom headers, and credentials.
+- Keep display formatting out of the mixin. `capCount`, `displayRate`, `displaySize` and `displayDuration` are pure functions in `src/utils/format.js`, importable by anything, including components that are not cards. Anything needing `this` (the item config, the proxy, the lifecycle) belongs on the mixin instead.
 - Never call the native `fetch` in a service component unless you have a specific reason not to. See `OpenWeather` (third-party public API) or `Rtorrent` (XML-RPC on a separate host) for use case where the service fetch is not suitable.
 - Pass the service's own headers (an API key, an `Authorization` header, ...) as the `init.headers` argument of `this.fetch(path, init, json)`. They layer over the user's `proxy.headers` and item `headers` rather than replacing them, so a card must never build its headers from `proxy` or `item.headers` itself. Names are compared case-insensitively, and the card value wins on conflict.
 
@@ -40,12 +41,14 @@ Services support automatic data refreshing using a centralized scheduler system 
 
 #### Global Configuration
 
-`autoUpdate: 30000` - Set default interval for all services (30 seconds)
+`updateIntervalMs: 30000` - Set default interval for all services (30 seconds)
 
 #### Service Configuration
-- **Service-specific interval**: `updateInterval: 10000` - Override global default
-- **Disable per service**: `autoUpdateInterval: false` - Disable for specific service
-- **Use global default**: Omit `autoUpdateInterval` to use global setting
+- **Service-specific interval**: `updateIntervalMs: 10000` - Override global default
+- **Disable per service**: `updateIntervalMs: false` (or `0`) - Disable for specific service
+- **Use global default**: Omit `updateIntervalMs` to use global setting
+
+The mixin still accepts `checkInterval`, `downloadInterval`, `rateInterval`, `torrentInterval` and `updateInterval`, logging a deprecation warning for each.
 
 ### Configuration & Routing
 

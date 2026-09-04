@@ -85,9 +85,54 @@ Available services are located in `src/components/`:
   endpoint: https://my-service-api.url # Optional: alternative base URL used to fetch service data when necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
   headers: # Optional: Per-item headers, layered over (and overriding) proxy.headers. A card setting the same header wins over both.
+  hide: [] # Optional: List of keys to remove from this card, badges and card-specific fields alike (see each card below for the keys it offers).
 ```
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
+
+Every smart card uses the same layout: icon, name and subtitle, a **status chip** on the right, **badges** along the top, and the `quick` links and `tag` sharing the bottom. A card only shows the parts it has data for.
+
+- **Status chip**: green is healthy, red down, amber needs attention, pulsing green busy, grey unknown. Nothing shows until the first request settles.
+- **Badges**: blue activity, green healthy totals, amber warnings, red errors, purple a secondary count, grey a plain total. Zero is hidden, counts above 99 read `99+`, and `?` means the API was unreachable. Hover one for its meaning.
+
+<details>
+<summary>Keys for the <code>hide</code> option</summary>
+
+Mostly badge keys; a few cards route their own fields through `hide` too.
+
+| card | keys |
+| --- | --- |
+| AdGuard Home, Docuseal, Emby / Jellyfin, Gatus, Gitea, Gotify, Home Assistant, Matrix, Nextcloud, OctoPrint, OliveTin, OpenHAB, PeaNUT, Pi-hole, Ping, Prometheus, Traefik, TrueNAS Scale, Uptime Kuma, Vaultwarden, Wallabag | no badges, these cards show a status chip |
+| Docker Socket Proxy | `running`, `stopped`, `errors`, `serverError` |
+| FreshRSS | `subscriptions`, `unread`, `serverError` |
+| Glances | `serverError` |
+| Healthchecks | `up`, `down`, `grace`, `serverError` |
+| HyperHDR | `running`, `stopped` |
+| Immich | `users`, `photos`, `videos`, `usage`, `serverError` |
+| Jellystat | `streams`, `serverError` |
+| LibrisLog | `reading`, `want-to-read`, `serverError` |
+| Lidarr | `activity`, `missing`, `warnings`, `errors`, `serverError` |
+| Mealie | `serverError` |
+| Medusa | `news`, `warnings`, `errors`, `serverError` |
+| Miniflux | `unread`, `serverError` |
+| Mylar | `wanted`, `upcoming`, `serverError` |
+| NetAlertx, PiAlert | `total`, `connected`, `newdevices`, `downalert`, `serverError` |
+| Paperless-ng | `serverError` |
+| Plex | `streams`, `series`, `movies`, `warnings`, `errors`, `serverError` |
+| Portainer | `running`, `dead`, `misc` |
+| Prowlarr | `warnings`, `errors`, `serverError` |
+| Proxmox | the subtitle fields `vms`, `vms_total`, `lxcs`, `lxcs_total`, `disk`, `mem`, `cpu`, plus `serverError` |
+| Radarr, Readarr, Sonarr | `activity`, `missing`, `warnings`, `errors`, `serverError` |
+| SABnzbd | `downloads`, `serverError` |
+| Scrutiny | `passed`, `failed`, `unknown`, `serverError` |
+| Seerr | `media`, `pending`, `processing`, `issues`, `serverError`, plus the subtitle icons `updateAvailable` and `restartRequired` |
+| Speedtest Tracker | `serverError` |
+| Tautulli | `streams`, `serverError` |
+| Tdarr | `queue`, `errored`, `serverError` |
+| Transmission, qBittorrent, rTorrent | `torrents`, `serverError` |
+| WUD | `running`, `update`, `serverError` |
+
+</details>
 
 > [!TIP]
 > **Auto refresh of the card data**: Some cards support periodic update (see indication in detail below). It can be enabled or disabled globally for all service, or individually for each service using the `updateIntervalMs` configuration option.

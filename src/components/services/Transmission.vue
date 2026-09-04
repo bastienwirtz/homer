@@ -1,27 +1,13 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p v-if="item.subtitle" class="subtitle is-6">{{ item.subtitle }}</p>
-      <p v-else class="subtitle is-6">
-        <span v-if="error" class="error">An error has occurred.</span>
-        <template v-else>
-          <span class="down monospace">
-            <p class="fas fa-download"></p>
-            {{ downRate }}
-          </span>
-          <span class="up monospace">
-            <p class="fas fa-upload"></p>
-            {{ upRate }}
-          </span>
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <span v-if="!error" class="count"
-        >{{ count || 0 }}
-        <template v-if="(count || 0) === 1">torrent</template>
-        <template v-else>torrents</template>
+  <Generic :item="item" :badges="badges">
+    <template #subtitle>
+      <span class="is-family-monospace mr-3">
+        <i class="fas fa-download"></i>
+        {{ downRate }}
+      </span>
+      <span class="is-family-monospace">
+        <i class="fas fa-upload"></i>
+        {{ upRate }}
       </span>
     </template>
   </Generic>
@@ -29,36 +15,17 @@
 
 <script>
 import service from "@/mixins/service.js";
-const units = ["B", "KB", "MB", "GB"];
-
-// Take the rate in bytes and keep dividing it by 1k until the lowest
-// value for which we have a unit is determined. Return the value with
-// up to two decimals as a string and unit/s appended.
-const displayRate = (rate) => {
-  let unitIndex = 0;
-
-  while (rate > 1000 && unitIndex < units.length - 1) {
-    rate /= 1000;
-    unitIndex++;
-  }
-  return (
-    Intl.NumberFormat(undefined, { maximumFractionDigits: 2 }).format(
-      rate || 0,
-    ) + ` ${units[unitIndex]}/s`
-  );
-};
+import { displayRate } from "@/utils/format.js";
 
 export default {
   name: "Transmission",
   mixins: [service],
-  props: { item: Object },
   data: () => ({
     dl: null,
     ul: null,
     count: null,
-    error: null,
+    serverError: null,
     sessionId: null,
-    retry: 0,
   }),
   computed: {
     downRate: function () {
@@ -67,21 +34,27 @@ export default {
     upRate: function () {
       return displayRate(this.ul);
     },
-  },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.getStats;
-
-    // Initial fetch
-    this.getStats();
+    badges: function () {
+      return [
+        {
+          key: "torrents",
+          label: "Active torrents",
+          value: this.count,
+          tone: "neutral",
+        },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
     /**
-     * Makes a request to Transmission RPC API with proper session handling
+     * Transmission answers 409 with a fresh session id whenever it rotates
+     * one, so every call gets its own retry.
      * @param {string} method - The RPC method to call
+     * @param {boolean} retried - Internal: guards against a retry loop
      * @returns {Promise<Object>} RPC response
      */
-    transmissionRequest: async function (method) {
+    transmissionRequest: async function (method, retried = false) {
       const options = this.getRequestHeaders(method);
 
       // Add session ID header if we have one
@@ -92,18 +65,25 @@ export default {
       try {
         return await this.fetch("transmission/rpc", options);
       } catch (error) {
-        // Handle Transmission's 409 session requirement
-        if (error.cause.status == 409 && this.retry <= 1) {
-          const sessionId = await this.getSession();
+        if (error.cause?.status === 409 && !retried) {
+          const sessionId = await this.readSessionId(error.cause);
           if (sessionId) {
             this.sessionId = sessionId;
-            this.retry++;
-            return this.transmissionRequest(method);
+            return this.transmissionRequest(method, true);
           }
         }
-        console.error("Transmission RPC error:", error);
         throw error;
       }
+    },
+    // Cross-origin the header needs Access-Control-Expose-Headers, but the id
+    // is also in the body, which is always readable.
+    readSessionId: async function (response) {
+      const header = response.headers.get("X-Transmission-Session-Id");
+      if (header) {
+        return header;
+      }
+      const body = await response.text().catch(() => "");
+      return body.match(/X-Transmission-Session-Id:\s*([^\s<]+)/)?.[1] ?? null;
     },
     getRequestHeaders: function (method) {
       const options = {
@@ -120,58 +100,22 @@ export default {
 
       return options;
     },
-    getSession: async function () {
-      try {
-        await this.fetch(
-          "transmission/rpc",
-          this.getRequestHeaders("session-get"),
-        );
-      } catch (error) {
-        if (error.cause.status == 409) {
-          return error.cause.headers.get("X-Transmission-Session-Id");
-        }
-      }
-    },
-    getStats: async function () {
-      try {
-        // Get session stats for transfer rates and torrent count
-        const statsResponse = await this.transmissionRequest("session-stats");
-        if (statsResponse?.result !== "success") {
-          throw new Error(
-            `Transmission RPC failed: ${statsResponse?.result || "Unknown error"}`,
-          );
-        }
+    fetchData: function () {
+      return this.load(
+        this.transmissionRequest("session-stats").then((statsResponse) => {
+          if (statsResponse?.result !== "success") {
+            throw new Error(
+              `Transmission RPC failed: ${statsResponse?.result || "Unknown error"}`,
+            );
+          }
 
-        const stats = statsResponse.arguments;
-        this.dl = stats.downloadSpeed ?? 0;
-        this.ul = stats.uploadSpeed ?? 0;
-        this.count = stats.activeTorrentCount ?? 0;
-        this.error = false;
-      } catch (e) {
-        this.error = true;
-        console.error("Transmission service error:", e);
-      }
+          const stats = statsResponse.arguments;
+          this.dl = stats.downloadSpeed ?? 0;
+          this.ul = stats.uploadSpeed ?? 0;
+          this.count = stats.activeTorrentCount ?? 0;
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.error {
-  color: #e51111 !important;
-}
-
-.down {
-  margin-right: 1em;
-}
-
-.count {
-  color: var(--text);
-  font-size: 0.8em;
-}
-
-.monospace {
-  font-weight: 300;
-  font-family: monospace;
-}
-</style>

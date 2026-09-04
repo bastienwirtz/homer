@@ -12,11 +12,22 @@ pnpm dev
 Custom services are small VueJs component (see `src/components/services/`) that add little features to a classic, "static", dashboard item. It should be very simple.
 A dashboard can contain a lot of items, so performance is very important. 
 
-The [`Generic`](https://github.com/bastienwirtz/homer/blob/main/src/components/services/Generic.vue) service provides a typical card layout which
-you can extend to add specific features. Unless you want a completely different design, extended the generic service is the recommended way. It gives you 3 [slots](https://vuejs.org/v2/guide/components-slots.html#Named-Slots) to extend: `icon`, `content` and `indicator`. 
-Each one is **optional**, and will display the usual information if omitted. Content given to `icon` must be a `.card-icon` element: the card is a grid, and anything else lands outside the icon zone.
+Each service must bind the `item` [property](https://vuejs.org/v2/guide/components-props.html) to the [`Generic`](https://github.com/bastienwirtz/homer/blob/main/src/components/services/Generic.vue) component, which owns the card layout.
 
-Each service must implement the `item` [property](https://vuejs.org/v2/guide/components-props.html) and bind it the Generic component if used.
+```Vue
+<Generic :item="item" :subtitle="rttLabel" :status="reachabilityStatus()" :badges="badges" />
+```
+
+- **`subtitle`** (string): the subtitle line. A config `subtitle` wins over it.
+- **`status`** (`{ state, label }`): the chip on the right. `state` is `online`, `offline`, `warning`, `busy` or `unknown`; `label` is optional.
+- **`badges`** (`[{ key, label, value, tone }]`): the counters along the top. `tone` is `info`, `success`, `warning`, `danger`, `accent` or `neutral`; `label` is the tooltip. Empty values, zeros (unless `showZero: true`) and any `key` in the item's `hide` are dropped, and counts cap at `99+`.
+
+The `icon`, `subtitle`, `aside` and `badges` slots take richer content, each replacing its zone.
+
+A card must surface an API failure exactly once: through its status chip if it has one, otherwise with a `connectionBadge()`.
+
+> [!IMPORTANT]
+> `pnpm lint` enforces this: a single `<Generic>` root, known slots, known `tone` / `state` values, no redeclared `item` prop, no `created()` that only wires `autoUpdateMethod`, a declared `serverError`, and no card restyling the shared chrome. Name a lookup table `_STATE` or `_TONE` in SCREAMING_CASE to have its values checked too.
 
 ### Fetching data
 
@@ -26,25 +37,30 @@ Any service consuming an API must use the [`service`](https://github.com/bastien
 - **Headers**: pass the service ones (an API key, an `Authorization` header, ...) as `init.headers`. The mixin layers them over the user's `proxy.headers` and item `headers`, so never read those yourself. If both set the same header, the service value wins.
 - **Credentials**: `proxy.useCredentials` and its per-item override are applied for you.
 - **Response**: returned as parsed JSON, or as text when `json` is `false`.
-- **Refresh**: assign the method to re-run to `this.autoUpdateMethod`, the mixin schedules it using `updateIntervalMs`.
-- **Formatting**: `capCount(value, max)` lives in [`@/utils/format.js`](https://github.com/bastienwirtz/homer/blob/main/src/utils/format.js), not on the mixin. It is a pure function, so import it where you need it, including from components that are not cards. Anything needing `this` (the item config, the proxy, the lifecycle) belongs on the mixin instead.
+- **Loading and refresh**: name the loading method `fetchData()`. The mixin runs it on create and on the `updateIntervalMs` schedule. To pick a method at runtime, set `this.autoUpdateMethod` in the card's own `created()` (see `PiHole`).
+- **Errors**: wrap the requests in `this.load(...)`, which logs any failure and sets `this.serverError`. Declare `serverError: null` in `data`; `null` means "not loaded yet".
+- **Card helpers**: `reachabilityStatus()` and `connectionBadge()` build the chip and error pill from `serverError`; `versionSubtitle`, `requireConfig("apikey")` and `isValueShown(key)` complete the mixin.
+- **Formatting**: `capCount(value, max)`, `displayRate(bytesPerSecond)`, `displaySize(bytes)` and `displayDuration(seconds)` live in [`@/utils/format.js`](https://github.com/bastienwirtz/homer/blob/main/src/utils/format.js), not on the mixin. They are pure functions, so import them where you need them. A template cannot see an import, so a card calling one from its markup exposes it through `methods` (see `OctoPrint`).
 
 > [!NOTE]
-> Some services like `OpenWeather` and `Rtorrent` bypass the mixin, respectively for a third-party public API and an XML-RPC host. Don't use them as an example for a new service.
+> Some services cannot use `this.fetch`: `OpenWeather` talks to a third-party public API and `Rtorrent` to an XML-RPC host. `Rtorrent` still uses the mixin for everything else, so follow it if you need a custom transport. `OpenWeather` uses none of it and is not a model for anything.
 
 ### Skeleton
 
 ```Vue
 <template>
-  <Generic :item="item">
+  <Generic :item="item" :subtitle="subtitle" :badges="badges">
     <template #icon>
-      <!-- left area containing the icon -->
+      <!-- left area, the item logo or icon by default -->
     </template>
-    <template #content>
-      <!-- main area containing the title, subtitle, ... -->
+    <template #subtitle>
+      <!-- subtitle line, for content richer than the `subtitle` prop -->
     </template>
-    <template #indicator>
-      <!-- top right area, empty by default -->
+    <template #aside>
+      <!-- right area, the `status` chip by default -->
+    </template>
+    <template #badges>
+      <!-- top band, the `badges` counters by default -->
     </template>
   </Generic>
 </template>
@@ -59,23 +75,31 @@ export default {
   components: {
     Generic,
   },
-  props: {
-    item: Object,
-  },
   data: () => ({
     stats: null,
+    serverError: null,
   }),
-  created() {
-    this.autoUpdateMethod = this.fetchStatus;
-    this.fetchStatus();
+  computed: {
+    subtitle() {
+      return this.stats && `${this.stats.total} things`;
+    },
+    badges() {
+      return [
+        { key: "errors", label: "Error", value: this.stats?.errors, tone: "danger" },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
-    fetchStatus: async function () {
+    fetchData() {
       const headers = this.item.apikey
         ? { "X-Api-Key": this.item.apikey }
         : {};
-      this.stats = await this.fetch("/api/stats", { headers }).catch((e) =>
-        console.error(e),
+
+      return this.load(
+        this.fetch("/api/stats", { headers }).then((stats) => {
+          this.stats = stats;
+        }),
       );
     },
   },

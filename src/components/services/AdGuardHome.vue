@@ -1,36 +1,26 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="stats">
-          {{ percentage }}&percnt; blocked
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div class="status" :class="protection">
-        {{ protection }}
-      </div>
-    </template>
-  </Generic>
+  <Generic
+    :item="item"
+    :subtitle="stats && `${percentage}% blocked`"
+    :status="protection"
+  />
 </template>
 
 <script>
 import service from "@/mixins/service.js";
 
+const PROTECTION = {
+  enabled: { state: "online", label: "enabled" },
+  disabled: { state: "warning", label: "disabled" },
+  unknown: { state: "unknown", label: "unknown" },
+};
+
 export default {
   name: "AdGuardHome",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => {
     return {
-      status: null,
+      serverStatus: null,
       stats: null,
     };
   },
@@ -45,69 +35,30 @@ export default {
       return "";
     },
     protection: function () {
-      if (this.status) {
-        return this.status.protection_enabled ? "enabled" : "disabled";
-      } else return "unknown";
+      if (!this.serverStatus) {
+        return PROTECTION.unknown;
+      }
+      return this.serverStatus.protection_enabled
+        ? PROTECTION.enabled
+        : PROTECTION.disabled;
     },
   },
-  created: function () {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
-  },
   methods: {
-    fetchStatus: async function () {
+    fetchData: async function () {
       this.fetch("/control/status")
         .then((status) => {
-          this.status = status;
+          this.serverStatus = status;
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.error(e));
 
       if (!this.item.subtitle) {
         this.fetch("/control/stats")
           .then((stats) => {
             this.stats = stats;
           })
-          .catch((e) => console.log(e));
+          .catch((e) => console.error(e));
       }
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.enabled:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0px 0px 4px 1px #94e185;
-  }
-
-  &.disabled:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0px 0px 4px 1px #c9404d;
-  }
-
-  &.unknown:before {
-    background-color: #c9c740;
-    border-color: #ccc935;
-    box-shadow: 0px 0px 4px 1px #c9c740;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
-}
-</style>

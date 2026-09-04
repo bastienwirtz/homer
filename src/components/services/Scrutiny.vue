@@ -1,25 +1,5 @@
 <template>
-  <Generic :item="item">
-    <template #indicator>
-      <div class="notifs">
-        <strong v-if="passed > 0" class="notif passed" title="Passed">
-          {{ passed }}
-        </strong>
-        <strong v-if="failed > 0" class="notif failed" title="Failed">
-          {{ failed }}
-        </strong>
-        <strong v-if="unknown > 0" class="notif unknown" title="Unknown">
-          {{ unknown }}
-        </strong>
-        <strong
-          v-if="serverError"
-          class="notif errors"
-          title="Connection error to Scrutiny API, check your url in config.yml"
-          >?</strong
-        >
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :badges="badges" />
 </template>
 
 <script>
@@ -28,79 +8,58 @@ import service from "@/mixins/service.js";
 export default {
   name: "Scrutiny",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => {
     return {
       passed: null,
       failed: null,
       unknown: null,
-      serverError: false,
+      serverError: null,
     };
   },
-  created: function () {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchSummary;
-
-    // Initial data fetch
-    this.fetchSummary();
+  computed: {
+    badges() {
+      return [
+        {
+          key: "passed",
+          label: "Passed",
+          value: this.passed,
+          tone: "success",
+        },
+        { key: "failed", label: "Failed", value: this.failed, tone: "danger" },
+        {
+          key: "unknown",
+          label: "Unknown",
+          value: this.unknown,
+          tone: "warning",
+        },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
-    fetchSummary: function () {
-      this.fetch(`/api/summary`)
-        .then((scrutinyData) => {
-          const devices = Object.values(scrutinyData.data.summary);       
+    fetchData: function () {
+      return this.load(
+        this.fetch(`/api/summary`).then((scrutinyData) => {
+          const devices = Object.values(scrutinyData.data.summary);
           const availableDevices = devices.filter(
             (device) =>
-              device.device.archived === false &&
-              !device.device.DeletedAt
+              device.device.archived === false && !device.device.DeletedAt,
           );
           this.passed =
             availableDevices.filter(
-              (device) => 
-                device.device.device_status === 0)?.length || 0;
+              (device) => device.device.device_status === 0,
+            )?.length || 0;
           this.failed =
             availableDevices.filter(
               (device) =>
                 device.device.device_status > 0 &&
-                device.device.device_status <= 3)?.length || 0;
-          this.unknown = availableDevices.length - (this.passed + this.failed) || 0;
-        })
-        .catch((e) => {
-          console.error(e);
-          this.serverError = true;
-        });
+                device.device.device_status <= 3,
+            )?.length || 0;
+          this.unknown =
+            availableDevices.length - (this.passed + this.failed) || 0;
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-  .notif {
-    display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-    &.passed {
-      background-color: green;
-    }
-
-    &.failed {
-      background-color: #e51111;
-    }
-
-    &.unknown {
-      background-color: #d08d2e;
-    }
-  }
-}
-</style>

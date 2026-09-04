@@ -1,28 +1,5 @@
 <template>
-  <Generic :item="item">
-    <template #indicator>
-      <div class="notifs">
-        <strong class="notif total" title="Total Devices">
-          {{ total }}
-        </strong>
-        <strong class="notif connected" title="Connected Devices">
-          {{ connected }}
-        </strong>
-        <strong class="notif newdevices" title="New Devices">
-          {{ newdevices }}
-        </strong>
-        <strong class="notif alert" title="Down Alerts">
-          {{ downalert }}
-        </strong>
-        <strong
-          v-if="serverError"
-          class="notif alert"
-          title="Connection error to NetAlertx server, check the url in config.yml"
-          >?</strong
-        >
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :badges="badges" />
 </template>
 
 <script>
@@ -31,75 +8,63 @@ import service from "@/mixins/service.js";
 export default {
   name: "NetAlertx",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => {
     return {
       total: 0,
       connected: 0,
       newdevices: 0,
       downalert: 0,
-      serverError: false,
+      serverError: null,
     };
   },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
+  computed: {
+    badges() {
+      return [
+        {
+          key: "total",
+          label: "Total Devices",
+          value: this.total,
+          tone: "neutral",
+          showZero: true,
+        },
+        {
+          key: "connected",
+          label: "Connected Devices",
+          value: this.connected,
+          tone: "success",
+          showZero: true,
+        },
+        {
+          key: "newdevices",
+          label: "New Devices",
+          value: this.newdevices,
+          tone: "info",
+          showZero: true,
+        },
+        {
+          key: "downalert",
+          label: "Down Alerts",
+          value: this.downalert,
+          tone: "danger",
+          showZero: true,
+        },
+        this.connectionBadge(),
+      ];
+    },
   },
   methods: {
-    fetchStatus: async function () {
-      this.fetch("/devices/totals", { headers: { Authorization: `Bearer ${this.item.apikey}` } })
-        .then((response) => {
+    fetchData: function () {
+      return this.load(
+        this.fetch("/devices/totals", {
+          headers: { Authorization: `Bearer ${this.item.apikey}` },
+        }).then((response) => {
           this.total = response.total || response[0] || 0;
           this.connected = response.connected || response[1] || 0;
           this.newdevices = response.new || response[3] || 0;
           this.downalert = response.down || response[4] || 0;
-          this.serverError = false;
-        })
-        .catch((e) => {
-          console.log(e);
-          this.serverError = true;
-        });
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-
-  .notif {
-    display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-
-    &.total {
-      background-color: #4fb5d6;
-    }
-
-    &.connected {
-      background-color: #4fd671;
-    }
-
-    &.newdevices {
-      background-color: #d08d2e;
-    }
-
-    &.alert {
-      background-color: #e51111;
-    }
-  }
-}
-</style>

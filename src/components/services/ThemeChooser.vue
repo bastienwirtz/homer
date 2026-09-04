@@ -1,19 +1,13 @@
 <template>
   <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <div class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <div class="select is-small">
-          <select v-model="theme" @change="switchTheme">
-            <option value="" disabled selected>Available themes</option>
-            <option value="theme-classic">classic</option>
-            <option value="theme-neon">neon</option>
-            <option value="theme-walkxcode">walkxcode</option>
-          </select>
-        </div>
+    <template #subtitle>
+      <div class="select is-small">
+        <select v-model="theme" @change="switchTheme">
+          <option value="" disabled selected>Available themes</option>
+          <option value="theme-classic">classic</option>
+          <option value="theme-neon">neon</option>
+          <option value="theme-walkxcode">walkxcode</option>
+        </select>
       </div>
     </template>
   </Generic>
@@ -49,9 +43,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.select,
+// Bulma sizes its controls at 2.5em, which overflows the card under the title.
+.select {
+  --bulma-control-height: 1.5rem;
+  --bulma-control-padding-vertical: 0;
+  --bulma-control-padding-horizontal: 0.5em;
+}
+
 select {
-  width: 100%;
   background-color: var(--card-background);
 }
 </style>

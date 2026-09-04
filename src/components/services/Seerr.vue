@@ -1,39 +1,13 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">{{ item.subtitle }}</template>
-        <template v-else-if="versionstring">
-          Version {{ versionstring }}
-          <i
-            v-for="icon in visibleIcons"
-            :key="icon.key"
-            class="state"
-            :class="icon.class"
-          ></i>
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div class="notifs">
-        <strong
-          v-for="badge in visibleBadges"
-          :key="badge.key"
-          class="notif"
-          :style="{ backgroundColor: badge.color }"
-          :title="badge.label"
-        >
-          {{ badge.text }}
-        </strong>
-        <strong
-          v-if="serverError"
-          class="notif errors"
-          title="Connection error to Seerr API, check url and apikey in config.yml"
-        >
-          ?
-        </strong>
-      </div>
+  <Generic :item="item" :badges="badges">
+    <template v-if="versionstring" #subtitle>
+      {{ versionSubtitle }}
+      <i
+        v-for="icon in visibleIcons"
+        :key="icon.key"
+        class="state"
+        :class="icon.class"
+      ></i>
     </template>
   </Generic>
 </template>
@@ -56,33 +30,33 @@ const icons = [
   { key: "restartRequired", class: "fa-solid fa-recycle" },
 ];
 
-// Indicator badges; count reads the response landed by `from`.
-const badges = [
+// Count reads the response landed by `from`.
+const counters = [
   {
     key: "media",
     label: "Available media",
-    color: "#2ac194",
+    tone: "success",
     from: "media",
     count: (data) => data?.pageInfo?.results,
   },
   {
     key: "pending",
     label: "Pending requests",
-    color: "#0a4bc4",
+    tone: "info",
     from: "requests",
     count: (data) => data?.pending,
   },
   {
     key: "processing",
     label: "Processing requests",
-    color: "#6f11a6",
+    tone: "accent",
     from: "requests",
     count: (data) => data?.processing,
   },
   {
     key: "issues",
     label: "Open issues",
-    color: "#c1942a",
+    tone: "warning",
     from: "issues",
     count: (data) => data?.open,
   },
@@ -91,9 +65,6 @@ const badges = [
 export default {
   name: "Seerr",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     status: null,
     requests: null,
@@ -105,22 +76,22 @@ export default {
     serverError() {
       return Object.values(this.failed).some(Boolean);
     },
-    visibleBadges() {
-      return badges
-        .map((badge) => {
-          const value = this.isValueShown(badge.key)
-            ? badge.count(this[badge.from]) || 0
-            : 0;
-          return { ...badge, value, text: this.capCount(value) };
-        })
-        .filter((badge) => badge.value > 0);
+    badges() {
+      return [
+        ...counters.map(({ count, from, ...badge }) => ({
+          ...badge,
+          value: count(this[from]),
+        })),
+        this.connectionBadge(),
+      ];
     },
     versionstring() {
       return this.status?.version;
     },
     visibleIcons() {
       return icons.filter(
-        (icon) => this.isValueShown(icon.key) && this.status?.[icon.key] === true,
+        (icon) =>
+          this.isValueShown(icon.key) && this.status?.[icon.key] === true,
       );
     },
   },
@@ -145,7 +116,7 @@ export default {
       if (this.isValueShown("issues")) keys.push("issues");
       return keys;
     },
-    load(key) {
+    loadEndpoint(key) {
       return this.fetch(endpoints[key], this.fetchOptions)
         .then((data) => {
           this[key] = data;
@@ -156,9 +127,10 @@ export default {
           this.failed[key] = true;
         });
     },
-    // Each load catches its own failure, so one bad endpoint can't sink the batch.
     fetchStats() {
-      return Promise.all(this.endpointsToFetch.map((key) => this.load(key)));
+      return Promise.all(
+        this.endpointsToFetch.map((key) => this.loadEndpoint(key)),
+      );
     },
   },
 };
@@ -167,26 +139,5 @@ export default {
 <style scoped lang="scss">
 .state {
   margin-left: 0.2em;
-}
-
-.notifs {
-  position: absolute;
-  color: white;
-  font-family: sans-serif;
-  top: 0.3em;
-  right: 0.5em;
-
-  .notif {
-    display: inline-block;
-    padding: 0.2em 0.35em;
-    border-radius: 0.25em;
-    position: relative;
-    margin-left: 0.3em;
-    font-size: 0.8em;
-
-    &.errors {
-      background-color: #c12a57;
-    }
-  }
 }
 </style>

@@ -1,46 +1,44 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="status">
-          {{ statusMessage }}
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div v-if="status" class="status" :class="status">
-        {{ uptime }}&percnt;
-      </div>
-    </template>
-  </Generic>
+  <Generic :item="item" :subtitle="statusMessage" :status="status" />
 </template>
 
 <script>
 import service from "@/mixins/service.js";
 
+const PAGE_STATE = {
+  good: "online",
+  warn: "warning",
+  bad: "offline",
+};
+
 export default {
   name: "UptimeKuma",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     incident: null,
     heartbeat: null,
+    serverError: null,
   }),
   computed: {
     slug: function () {
       return this.item.slug ? this.item.slug : "default";
     },
-    status: function () {
+    state: function () {
       if (!this.incident) {
         return "";
       }
       return this.incident.incident == null ? this.pageStatus : "bad";
+    },
+    status: function () {
+      if (this.serverError) {
+        return this.reachabilityStatus();
+      }
+      return (
+        this.state && {
+          state: PAGE_STATE[this.state],
+          label: `${this.uptime}%`,
+        }
+      );
     },
     lastHeartBeatList: function () {
       let result = {};
@@ -107,59 +105,23 @@ export default {
       return (percent * 100).toFixed(1);
     },
   },
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
-  },
   methods: {
-    fetchStatus: function () {
+    fetchData: function () {
       const now = Date.now();
-      this.fetch(`/api/status-page/${this.slug}?cachebust=${now}`)
-        .catch((e) => console.error(e))
-        .then((resp) => (this.incident = resp));
 
-      this.fetch(`/api/status-page/heartbeat/${this.slug}?cachebust=${now}`)
-        .catch((e) => console.error(e))
-        .then((resp) => (this.heartbeat = resp));
+      return this.load(
+        this.fetch(`/api/status-page/${this.slug}?cachebust=${now}`).then(
+          (incident) => {
+            this.incident = incident;
+          },
+        ),
+        this.fetch(
+          `/api/status-page/heartbeat/${this.slug}?cachebust=${now}`,
+        ).then((heartbeat) => {
+          this.heartbeat = heartbeat;
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-
-  &.good:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-
-  &.warn:before {
-    background-color: #f8a306;
-    border-color: #e1b35e;
-    box-shadow: 0 0 5px 1px #f8a306;
-  }
-
-  &.bad:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
-}
-</style>
