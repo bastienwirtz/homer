@@ -29,6 +29,7 @@ Available services are located in `src/components/`:
 - [Immich](#immich)
 - [Jellystat](#jellystat)
 - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [LibrisLog](#librislog)
 - [Linkding](#linkding)
 - [Matrix](#matrix)
 - [Mealie](#mealie)
@@ -53,6 +54,7 @@ Available services are located in `src/components/`:
 - [rTorrent](#rtorrent)
 - [SABnzbd](#sabnzbd)
 - [Scrutiny](#scrutiny)
+- [Seerr](#seerr)
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
@@ -82,7 +84,7 @@ Available services are located in `src/components/`:
   url: https://my-service.url # Optional: Card link and API base url unless 'endpoint' is provided (see below) 
   endpoint: https://my-service-api.url # Optional: alternative base URL used to fetch service data when necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
-  headers: # Optional: Override global proxy.headers configuration.
+  headers: # Optional: Per-item headers, layered over (and overriding) proxy.headers. A card setting the same header wins over both.
 ```
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
@@ -160,7 +162,10 @@ The `libraryType` configuration let you choose which stats to show.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   libraryType: "music" # Choose which stats to show. Can be one of: music, series or movies.
+  # legacyAuth: false # (Optional) Force the authorization scheme. Auto-detected from the server version by default.
 ```
+
+Jellyfin 12 disables legacy authorization on upgrade, which stops the `X-Emby-Token` header this card sends by default from being accepted. The card detects the server version and sends `Authorization: MediaBrowser Token="..."` instead, which works on every Jellyfin release. Emby is unaffected and keeps the default. Set `legacyAuth` to override that detection on a server configured to accept only one of them.
 
 Auto refresh is supported by this integration.
 
@@ -383,6 +388,22 @@ This integration supports at max 15 results from Linkding, but you can add it mu
 ```
 
 Auto refresh is supported by this integration.  
+
+## LibrisLog
+
+Displays library statistics from your LibrisLog book tracker: total books, books read, currently reading, and want-to-read counts.
+
+```yaml
+- name: "LibrisLog"
+  type: "LibrisLog"
+  logo: "https://docs.librislog.app/logo.png"
+  url: "https://my-service.url"
+  apikey: "<---insert-api-key-here--->"
+```
+
+Auto refresh is supported by this integration.
+
+**API Key**: Generate an API key in your LibrisLog instance settings.
 
 ## Matrix
 
@@ -774,6 +795,30 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
 
 Auto refresh is supported by this integration.  
 
+## Seerr
+
+Displays the Seerr version as the subtitle, with icons next to it when an update is available or a restart is required, plus badges counting available media, pending requests, processing requests and open issues.
+
+```yaml
+- name: "Seerr"
+  type: "Seerr"
+  logo: "assets/tools/sample.png"
+  url: "http://seerr.example.com"
+  apikey: "<---insert-api-key-here--->"
+  # subtitle: "Requests"  # (Optional) Overrides the version subtitle.
+  # hide: []              # (Optional) hides items. Possible values are
+  #                       # "updateAvailable", "restartRequired", "media",
+  #                       # "pending", "processing" and "issues".
+```
+
+Auto refresh is supported by this integration.
+
+**Authentication**: generate an API key under **Settings > General** in your Seerr instance. The badges need it; the version subtitle works without one.
+
+**Hiding items**: everything is shown by default; list a key under `hide` to remove it. `updateAvailable` and `restartRequired` are the two subtitle icons; `media`, `pending`, `processing` and `issues` are the four badges. Hide all six for a version-only card. Badge counts are capped at `99+`.
+
+**Available media**: counts partially available shows (those with some requested seasons still missing) alongside fully available ones.
+
 ## SpeedtestTracker
 
 Displays the download and upload speeds in Mbit/s and the ping in ms.
@@ -862,6 +907,10 @@ The service automatically handles Transmission's session management and CSRF pro
 
 Displays TrueNAS version.
 
+1. In the TrueNAS web interface, click your user avatar in the top-right corner and select "API Keys".
+2. Click "Add", give the key a name such as "homer", and confirm.
+3. Copy the generated key immediately - TrueNAS only shows it once - and paste it as the API Key when creating the integration in homer.
+
 ```yaml
 - name: "Truenas"
   type: "TruenasScale"
@@ -879,8 +928,33 @@ Displays overall status, uptime percentage, and incident information from your U
   type: "UptimeKuma"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  slug: "default" # status page slug, defaults to "default"
+  slug: "default" # status page the stats are read from, defaults to "default"
 ```
+
+`slug` selects which status page the card reads its status and uptime from. It does not affect where the
+card links to: as with any other service, that is whatever `url` is set to, which in most cases points at
+the status page.
+
+> [!IMPORTANT]
+> **Potentially breaking change**: on version `26.04.2` and earlier, this card rewrote `url` and always
+> sent you to `<url>/status/<slug>`. It no longer does, so a card that used to open a status page now
+> opens `url` as configured.
+>
+> If you want the card to keep opening a status page, either:
+>
+> - point `url` straight at the status page. In that case `endpoint` must be set to the Uptime Kuma base
+>   url, otherwise the API calls are made against the status page path and fail:
+>
+>   ```yaml
+>   - name: "Uptime Kuma"
+>     type: "UptimeKuma"
+>     url: https://my-service.url/status/my-slug # where the card links to
+>     endpoint: https://my-service.url # where the API lives
+>     slug: "my-slug"
+>   ```
+>
+> - or set **Settings > General > Entry Page** in Uptime Kuma to that status page, which sends everyone
+>   landing on the base url there, and leaves the Homer config untouched.
 
 Auto refresh is supported by this integration.  
 

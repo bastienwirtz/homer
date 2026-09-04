@@ -89,10 +89,11 @@ export default {
           let seriesCount = 0;
           Promise.all(
             seriesDirIds.map((seriesDirId) =>
-              fetch(
-                `${this.endpoint}/library/sections/${seriesDirId}/all?X-Plex-Token=${this.item.token}`,
+              this.fetch(
+                `/library/sections/${seriesDirId}/all?X-Plex-Token=${this.item.token}`,
+                {},
+                false,
               )
-                .then((response) => response.text())
                 .then((str) => {
                   const xml = parser.parseFromString(str, "application/xml");
                   seriesCount += xml.getElementsByTagName("Directory").length;
@@ -108,10 +109,11 @@ export default {
           let movieCount = 0;
           Promise.all(
             movieDirIds.map((movieDirId) =>
-              fetch(
-                `${this.endpoint}/library/sections/${movieDirId}/all?X-Plex-Token=${this.item.token}`,
+              this.fetch(
+                `/library/sections/${movieDirId}/all?X-Plex-Token=${this.item.token}`,
+                {},
+                false,
               )
-                .then((response) => response.text())
                 .then((str) => {
                   const xml = parser.parseFromString(str, "application/xml");
                   movieCount += xml.getElementsByTagName("Video").length;

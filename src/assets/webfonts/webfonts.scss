@@ -11,3 +11,33 @@
     U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+// Font Awesome 7 dropped the version 6 family names, keeping only the version 5 and 4 ones.
+// Custom stylesheets drawing an icon through a pseudo element still reference them, so alias
+// them onto the version 7 webfonts. Same files, so this costs no extra download.
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("~/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("~/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("~/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2")
+    format("woff2");
+}

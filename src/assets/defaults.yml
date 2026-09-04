@@ -17,6 +17,8 @@ defaults:
   colorTheme: auto
   # normal, compact, ultracompact
   density: normal
+  # auto, fixed
+  iconWidth: auto
 
 theme: default
 colors: ~
