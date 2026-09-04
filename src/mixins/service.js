@@ -1,4 +1,5 @@
 import updateScheduler from "@/utils/updateScheduler.js";
+import { capCount } from "@/utils/format.js";
 
 // Header names are case-insensitive, so they are lowercased before merging and
 // each source overrides the previous one whatever its casing. Unset values are
@@ -51,10 +52,7 @@ export default {
     isValueShown(key) {
       return !(this.item.hide || []).includes(key);
     },
-    // Long counts blow out a small pill.
-    capCount(value, max = 99) {
-      return typeof value === "number" && value > max ? `${max}+` : value;
-    },
+    capCount,
     fetch: function (path, init, json = true) {
       let options = {};
 
