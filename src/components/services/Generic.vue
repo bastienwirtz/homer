@@ -6,13 +6,22 @@
           <div :class="mediaClass">
             <slot name="icon">
               <div v-if="item.logo" class="media-left">
-                <figure class="image is-48x48">
+                <figure
+                  class="image"
+                  style="width: var(--density-icon-box); height: var(--density-icon-box);"
+                >
                   <img :src="item.logo" :alt="`${item.name} logo`" />
                 </figure>
               </div>
               <div v-if="item.icon" class="media-left">
-                <figure class="image is-48x48">
-                  <i style="font-size: 32px" :class="['fa-fw', item.icon]"></i>
+                <figure
+                  class="image"
+                  style="width: var(--density-icon-box); height: var(--density-icon-box);"
+                >
+                  <i
+                    style="font-size: var(--density-icon-size)"
+                    :class="['fa-fw', item.icon]"
+                  ></i>
                 </figure>
               </div>
             </slot>

@@ -83,6 +83,14 @@
           ],
           "description": "One of 'auto', 'light', or 'dark'"
         },
+        "density": {
+          "enum": [
+            "normal", 
+            "compact", 
+            "ultracompact"
+          ],
+          "description": "Density of the dashboard, one of 'normal', 'compact', or 'ultracompact'"
+        },
         "iconWidth": {
           "enum": [
             "auto",

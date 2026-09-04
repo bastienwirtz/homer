@@ -9,7 +9,7 @@
         <div class="card-content">
           <div class="media">
             <div v-if="icon" class="media-left" :class="item.background">
-              <figure class="image is-48x48">
+              <figure class="image" style="width: var(--density-icon-box); height: var(--density-icon-box);">
                 <img
                   :src="`https://openweathermap.org/img/wn/${icon}@2x.png`"
                   :alt="conditions"
