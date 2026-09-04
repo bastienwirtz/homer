@@ -123,7 +123,7 @@
 
         .container {
           min-height: 80px;
-          padding: 10px 0;
+          padding: 10px 0.75rem;
         }
 
         .logo {
@@ -131,11 +131,13 @@
           i {
             vertical-align: top;
             padding: 8px 15px;
+            margin-inline-start: -15px;
             font-size: 50px;
           }
 
           img {
             padding: 10px;
+            margin-inline-start: -10px;
             max-height: 70px;
             max-width: 70px;
           }
@@ -146,15 +148,19 @@
 
         a {
           color: var(--text-header);
-          padding: 8px 12px;
+          padding: 0.5rem 0.75rem;
           &:hover,
           &:focus {
             color: var(--text-header);
             background-color: var(--highlight-hover);
           }
         }
+        .navbar-brand {
+          margin-inline-start: 0;
+        }
         .navbar-menu {
           background-color: inherit;
+          margin-inline-end: 0;
         }
       }
       .navbar-end {
