@@ -114,6 +114,11 @@ services:
         endpoint: "/dummy-data/peanut"
         type: "PeaNUT"
         device: "ups"
+      - name: "Beszel"
+        logo: "https://raw.githubusercontent.com/henrygd/beszel/main/supplemental/logo.svg"
+        url: "https://beszel.dev/"
+        endpoint: "/dummy-data/beszel"
+        type: "Beszel"
       - name: "Weather"
         location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.

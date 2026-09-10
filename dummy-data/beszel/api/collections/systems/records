@@ -1,0 +1,15 @@
+{
+  "page": 1,
+  "perPage": 30,
+  "totalItems": 1,
+  "totalPages": 1,
+  "items": [
+    {
+      "id": "53o8l8k9frykzln",
+      "name": "Burhan-Server",
+      "status": "up",
+      "info": "{\"cpu\":4.15,\"mp\":55.61,\"dp\":53.87}",
+      "updated": "2026-09-10 22:45:00.000Z"
+    }
+  ]
+}
