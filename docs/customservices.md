@@ -14,6 +14,7 @@ Available services are located in `src/components/`:
 
 - [Common options](#common-options)
 - [AdGuard Home](#adguard-home)
+- [Beszel](#beszel)
 - [CopyToClipboard](#copy-to-clipboard)
 - [Docuseal](#docuseal)
 - [Docker Socket Proxy](#docker-socket-proxy)
@@ -110,6 +111,22 @@ Displays AdGuard Home protection status and blocked query statistics.
 > headers:  
 >   Authorization: "Basic <base64-encoded for username:password>"
 > ```
+
+Auto refresh is supported by this integration.
+
+## Beszel
+
+Displays [Beszel](https://beszel.dev/) system metrics (CPU, Memory, Disk usage) and online/offline status.
+
+```yaml
+- name: "Beszel"
+  type: "Beszel"
+  logo: "assets/tools/sample.png"
+  url: https://my-beszel.url
+  # token: "your-auth-token"  # Optional: PocketBase auth token if authentication is required
+  # system: "my-server-name"  # Optional: specific system name or ID (defaults to first system)
+  # hide: ["disk"]            # Optional: hide metrics ('cpu', 'mem', 'disk')
+```
 
 Auto refresh is supported by this integration.
 
