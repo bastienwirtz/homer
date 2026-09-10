@@ -115,7 +115,7 @@ services:
         type: "PeaNUT"
         device: "ups"
       - name: "Beszel"
-        logo: "https://raw.githubusercontent.com/henrygd/beszel/main/supplemental/logo.svg"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/beszel.png"
         url: "https://beszel.dev/"
         endpoint: "/dummy-data/beszel"
         type: "Beszel"

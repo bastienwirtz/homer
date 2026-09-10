@@ -3,7 +3,10 @@
     <template #content>
       <p class="title is-4">{{ item.name }}</p>
       <p class="subtitle is-6">
-        <template v-if="stats">
+        <template v-if="error">
+          {{ error }}
+        </template>
+        <template v-else-if="stats">
           <span v-if="isValueShown('cpu') && stats.cpu !== undefined" title="CPU Usage">
             <i class="fa-solid fa-microchip"></i> {{ stats.cpu }}%
           </span>
@@ -18,9 +21,6 @@
         </template>
         <template v-else-if="item.subtitle">
           {{ item.subtitle }}
-        </template>
-        <template v-else-if="error">
-          {{ error }}
         </template>
       </p>
     </template>
@@ -62,15 +62,28 @@ export default {
       const headers = {};
       const token = this.item.token || this.item.apikey;
       if (token) {
-        headers["Authorization"] = token.startsWith("Bearer ") ? token : token;
+        headers["Authorization"] = token.startsWith("Bearer ")
+          ? token
+          : `Bearer ${token}`;
       }
 
-      this.fetch("/api/collections/systems/records", { headers })
+      let endpoint = "/api/collections/systems/records";
+      if (this.item.system) {
+        const filter = `name="${this.item.system}" || id="${this.item.system}"`;
+        endpoint += `?filter=(${encodeURIComponent(filter)})`;
+      } else {
+        endpoint += "?perPage=1";
+      }
+
+      this.fetch(endpoint, { headers })
         .then((response) => {
           const items = response.items || [];
           if (!items.length) {
+            this.stats = null;
             this.status = "offline";
-            this.error = "No systems found";
+            this.error = this.item.system
+              ? `System "${this.item.system}" not found`
+              : "No systems found";
             return;
           }
 
@@ -79,9 +92,13 @@ export default {
             const found = items.find(
               (s) => s.name === this.item.system || s.id === this.item.system
             );
-            if (found) {
-              system = found;
+            if (!found) {
+              this.stats = null;
+              this.status = "offline";
+              this.error = `System "${this.item.system}" not found`;
+              return;
             }
+            system = found;
           }
 
           this.status = system.status === "up" ? "online" : "offline";
@@ -102,10 +119,13 @@ export default {
               mem: typeof info.mp === "number" ? Math.round(info.mp) : info.mp,
               disk: typeof info.dp === "number" ? Math.round(info.dp) : info.dp,
             };
+          } else {
+            this.stats = null;
           }
         })
         .catch((e) => {
           console.error(e);
+          this.stats = null;
           this.status = "offline";
           this.error = "Unable to connect to Beszel";
         });

@@ -121,7 +121,7 @@ Displays [Beszel](https://beszel.dev/) system metrics (CPU, Memory, Disk usage) 
 ```yaml
 - name: "Beszel"
   type: "Beszel"
-  logo: "assets/tools/beszel.svg"
+  logo: "assets/tools/sample.png"
   url: https://my-beszel.url
   # token: "your-auth-token"  # Optional: PocketBase auth token if authentication is required
   # system: "my-server-name"  # Optional: specific system name or ID (defaults to first system)
