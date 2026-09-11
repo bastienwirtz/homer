@@ -6,13 +6,16 @@
         <template v-if="error">
           {{ error }}
         </template>
+        <template v-else-if="item.subtitle">
+          {{ item.subtitle }}
+        </template>
         <template v-else-if="stats">
           <span
             v-if="isValueShown('memos') && stats.count !== undefined"
             title="Total Memos"
           >
             <i class="fa-solid fa-note-sticky"></i>
-            {{ stats.count }} {{ stats.count === 1 ? 'memo' : 'memos' }}
+            {{ memoCountText }}
           </span>
           <span
             v-if="isValueShown('version') && stats.version"
@@ -25,9 +28,6 @@
             </template>
             <i class="fa-solid fa-code-branch"></i> v{{ stats.version }}
           </span>
-        </template>
-        <template v-else-if="item.subtitle">
-          {{ item.subtitle }}
         </template>
       </p>
     </template>
@@ -62,6 +62,12 @@ export default {
       if (this.status === "offline") return "DOWN";
       return "";
     },
+    memoCountText() {
+      if (!this.stats || this.stats.count === undefined) return "";
+      const suffix = this.stats.hasMore ? "+" : "";
+      const label = this.stats.count === 1 && !this.stats.hasMore ? "memo" : "memos";
+      return `${this.stats.count}${suffix} ${label}`;
+    },
   },
   created() {
     this.autoUpdateMethod = this.fetchStats;
@@ -79,54 +85,42 @@ export default {
           : `Bearer ${token}`;
       }
 
+      let isProfileOnline = false;
       let version = null;
-      let count = 0;
-      let profileOk = false;
 
-      // 1. Fetch workspace profile to verify health and get version
+      // 1. Fetch workspace profile to verify health and discover version
       try {
         const profile = await this.fetch("/api/v1/workspace/profile", {
           headers,
         });
-        if (profile && profile.version) {
-          version = profile.version.replace(/^v/, "");
+        if (profile) {
+          isProfileOnline = true;
+          if (profile.version) {
+            version = profile.version.replace(/^v/, "");
+          }
         }
-        profileOk = true;
       } catch (profileErr) {
         console.warn("Memos workspace profile check failed:", profileErr);
-        const profileStatus = profileErr?.cause?.status;
-        if (profileStatus === 401 || profileStatus === 403) {
-          this.stats = null;
-          this.status = "online";
-          this.error = "Auth required for memos";
-          return;
-        }
       }
 
-      // 2. Fetch memos list with pagination support
+      // 2. Fetch memos with pagination support (capped traversal with truncation indicator)
       try {
+        let count = 0;
         let pageToken = "";
         let pagesFetched = 0;
-        const maxPages = 20;
+        const maxPages = 10;
+        const pageSize = 200;
+        let hasMore = false;
 
         do {
-          const params = new URLSearchParams();
-          params.set("pageSize", "100");
+          let memosEndpoint = `/api/v1/memos?pageSize=${pageSize}`;
           if (this.item.filter) {
-            params.set("filter", this.item.filter);
-          }
-          let parent = this.item.parent || this.item.user;
-          if (parent) {
-            if (typeof parent === "number" || !parent.startsWith("users/")) {
-              parent = `users/${parent}`;
-            }
-            params.set("parent", parent);
+            memosEndpoint += `&filter=${encodeURIComponent(this.item.filter)}`;
           }
           if (pageToken) {
-            params.set("pageToken", pageToken);
+            memosEndpoint += `&pageToken=${encodeURIComponent(pageToken)}`;
           }
 
-          const memosEndpoint = `/api/v1/memos?${params.toString()}`;
           const memosResponse = await this.fetch(memosEndpoint, { headers });
 
           if (memosResponse && Array.isArray(memosResponse.memos)) {
@@ -137,31 +131,44 @@ export default {
             typeof memosResponse.totalSize === "number"
           ) {
             count = memosResponse.totalSize;
-            break;
+            pageToken = "";
           } else {
-            break;
+            pageToken = "";
           }
+
           pagesFetched++;
         } while (pageToken && pagesFetched < maxPages);
+
+        if (pageToken) {
+          hasMore = true;
+        }
 
         this.status = "online";
         this.error = null;
         this.stats = {
           count,
+          hasMore,
           version,
         };
       } catch (err) {
-        console.error("Unable to connect to Memos:", err);
-        const httpStatus = err?.cause?.status;
-        this.stats = null;
-        if (httpStatus === 401 || httpStatus === 403) {
+        console.error("Memos fetch error:", err);
+        const errMsg = (err && (err.message || err.toString())) || "";
+        const isAuthError = errMsg.includes("401") || errMsg.includes("403");
+
+        if (isAuthError) {
+          // If the server responded with 401/403, the server is online but credentials are required/invalid
           this.status = "online";
           this.error = "Auth required for memos";
-        } else if (profileOk) {
+          this.stats = version ? { version } : null;
+        } else if (isProfileOnline) {
+          // Profile check succeeded earlier, so server is reachable
           this.status = "online";
-          this.error = "Failed to fetch memos";
+          this.error = "Unable to fetch memos";
+          this.stats = version ? { version } : null;
         } else {
+          // Host unreachable / network error / CORS failure
           this.status = "offline";
+          this.stats = null;
           this.error = "Unable to connect to Memos";
         }
       }

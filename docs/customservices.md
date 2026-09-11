@@ -457,15 +457,15 @@ Displays [Memos](https://usememos.com/) note count, version, and online/offline 
   type: "Memos"
   logo: "assets/tools/sample.png"
   url: https://my-memos.url
-  # token: "your-access-token"          # Optional: Access token if authentication is required
-  # user: "1"                          # Optional: User ID (or parent 'users/1') to query personal memos
+  # apikey: "your-access-token"        # Optional: Access token or apikey if authentication is required
+  # token: "your-access-token"         # Optional: Alias for apikey
   # filter: "visibilities == ['PUBLIC']" # Optional: AIP-160 filter for memos query
-  # hide: ["version"]                   # Optional: hide metrics ('memos', 'version')
+  # hide: ["version"]                  # Optional: hide metrics ('memos', 'version')
 ```
 
 Auto refresh is supported by this integration.
 
-**Access Token**: If your instance is private or you want to include private memos, generate an Access Token in your Memos instance under `Settings -> Access Tokens`.
+**Access Token**: If your instance is private or you want to include private memos, generate an Access Token in your Memos instance under `Settings -> Access Tokens`. You can specify the credential using either `apikey` or `token`.
 
 ## Miniflux
 
