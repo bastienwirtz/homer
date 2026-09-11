@@ -114,6 +114,11 @@ services:
         endpoint: "/dummy-data/peanut"
         type: "PeaNUT"
         device: "ups"
+      - name: "Memos"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/memos.png"
+        url: "https://usememos.com/"
+        endpoint: "/dummy-data/memos"
+        type: "Memos"
       - name: "Weather"
         location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
