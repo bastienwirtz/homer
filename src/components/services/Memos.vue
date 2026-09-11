@@ -79,40 +79,70 @@ export default {
           : `Bearer ${token}`;
       }
 
+      let version = null;
+      let count = 0;
+      let profileOk = false;
+
+      // 1. Fetch workspace profile to verify health and get version
       try {
-        let version = null;
-        let count = 0;
+        const profile = await this.fetch("/api/v1/workspace/profile", {
+          headers,
+        });
+        if (profile && profile.version) {
+          version = profile.version.replace(/^v/, "");
+        }
+        profileOk = true;
+      } catch (profileErr) {
+        console.warn("Memos workspace profile check failed:", profileErr);
+        const profileStatus = profileErr?.cause?.status;
+        if (profileStatus === 401 || profileStatus === 403) {
+          this.stats = null;
+          this.status = "online";
+          this.error = "Auth required for memos";
+          return;
+        }
+      }
 
-        // 1. Fetch workspace profile to verify health and get version
-        try {
-          const profile = await this.fetch("/api/v1/workspace/profile", {
-            headers,
-          });
-          if (profile && profile.version) {
-            version = profile.version.replace(/^v/, "");
+      // 2. Fetch memos list with pagination support
+      try {
+        let pageToken = "";
+        let pagesFetched = 0;
+        const maxPages = 20;
+
+        do {
+          const params = new URLSearchParams();
+          params.set("pageSize", "100");
+          if (this.item.filter) {
+            params.set("filter", this.item.filter);
           }
-        } catch (profileErr) {
-          console.warn("Memos workspace profile check failed:", profileErr);
-        }
+          let parent = this.item.parent || this.item.user;
+          if (parent) {
+            if (typeof parent === "number" || !parent.startsWith("users/")) {
+              parent = `users/${parent}`;
+            }
+            params.set("parent", parent);
+          }
+          if (pageToken) {
+            params.set("pageToken", pageToken);
+          }
 
-        // 2. Fetch memos list
-        let memosEndpoint = "/api/v1/memos";
-        if (this.item.filter) {
-          memosEndpoint += `?filter=${encodeURIComponent(this.item.filter)}`;
-        } else {
-          memosEndpoint += "?pageSize=100";
-        }
+          const memosEndpoint = `/api/v1/memos?${params.toString()}`;
+          const memosResponse = await this.fetch(memosEndpoint, { headers });
 
-        const memosResponse = await this.fetch(memosEndpoint, { headers });
-
-        if (memosResponse && Array.isArray(memosResponse.memos)) {
-          count = memosResponse.memos.length;
-        } else if (
-          memosResponse &&
-          typeof memosResponse.totalSize === "number"
-        ) {
-          count = memosResponse.totalSize;
-        }
+          if (memosResponse && Array.isArray(memosResponse.memos)) {
+            count += memosResponse.memos.length;
+            pageToken = memosResponse.nextPageToken || "";
+          } else if (
+            memosResponse &&
+            typeof memosResponse.totalSize === "number"
+          ) {
+            count = memosResponse.totalSize;
+            break;
+          } else {
+            break;
+          }
+          pagesFetched++;
+        } while (pageToken && pagesFetched < maxPages);
 
         this.status = "online";
         this.error = null;
@@ -122,11 +152,15 @@ export default {
         };
       } catch (err) {
         console.error("Unable to connect to Memos:", err);
-        if (this.stats && this.stats.version) {
+        const httpStatus = err?.cause?.status;
+        this.stats = null;
+        if (httpStatus === 401 || httpStatus === 403) {
           this.status = "online";
           this.error = "Auth required for memos";
+        } else if (profileOk) {
+          this.status = "online";
+          this.error = "Failed to fetch memos";
         } else {
-          this.stats = null;
           this.status = "offline";
           this.error = "Unable to connect to Memos";
         }
