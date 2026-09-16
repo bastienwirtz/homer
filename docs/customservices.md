@@ -113,6 +113,29 @@ Displays AdGuard Home protection status and blocked query statistics.
 
 Auto refresh is supported by this integration.
 
+## Authelia
+
+Displays who is currently signed in on an [Authelia](https://www.authelia.com/) portal,
+and whether the session is still valid.
+
+```yaml
+- name: "Authelia"
+  type: "Authelia"
+  logo: "assets/tools/sample.png"
+  url: https://auth.my-service.url/settings # Optional: the card links to the account settings page
+  endpoint: https://auth.my-service.url # Authelia portal base url
+  useCredentials: true # Optional: required when the portal sits on another origin.
+```
+
+The card reads `/api/user/info`, which Authelia only answers for a valid session.
+Served on a subpath of the dashboard domain, the portal shares its origin and the
+browser sends the session cookie on its own. From another origin, set
+`useCredentials: true` and have the portal allow it, see [CORS](troubleshooting.md).
+Without a session Authelia answers `403`, and the card reports `signed out` instead
+of an error.
+
+Auto refresh is supported by this integration.
+
 ## Copy to Clipboard
 
 Displays a service card with a copy button that copies the specified text to your clipboard when clicked.
