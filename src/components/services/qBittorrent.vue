@@ -59,6 +59,11 @@ export default {
     upRate: function () {
       return displayRate(this.ul);
     },
+    headers: function () {
+      return this.item.apikey
+        ? { Authorization: `Bearer ${this.item.apikey}` }
+        : {};
+    },
   },
   created() {
     // Set up auto-update method for the scheduler
@@ -74,8 +79,10 @@ export default {
       this.fetchCount();
     },
     fetchCount: async function () {
+      const headers = this.headers;
+
       try {
-        const body = await this.fetch("/api/v2/torrents/info");
+        const body = await this.fetch("/api/v2/torrents/info", { headers });
         this.error = false;
         this.count = body.length;
       } catch (e) {
@@ -84,8 +91,10 @@ export default {
       }
     },
     getRate: async function () {
+      const headers = this.headers;
+
       try {
-        const body = await this.fetch("/api/v2/transfer/info");
+        const body = await this.fetch("/api/v2/transfer/info", { headers });
         this.error = false;
         this.dl = body.dl_info_speed;
         this.ul = body.up_info_speed;
