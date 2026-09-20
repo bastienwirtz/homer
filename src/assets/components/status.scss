@@ -1,8 +1,9 @@
 .status {
-  --status-color: transparent;
+  --status-color: var(--status-unknown);
 
   display: inline-flex;
   align-items: center;
+  gap: 0.625rem;
   font-size: 0.8rem;
   white-space: nowrap;
   color: var(--text-title);
@@ -12,28 +13,20 @@
     flex-shrink: 0;
     width: 8px;
     height: 8px;
-    // TODO(cards-migrate-to-api): a `gap` on `.status` once no card ships its own
-    // margin here, which is unlayered and would stack rather than override.
-    margin-inline-end: 0.625rem;
     border-radius: 50%;
     background-color: var(--status-color);
     box-shadow: 0 0 5px 1px var(--status-color);
   }
 
-  // TODO(cards-migrate-to-api): `ready`, `error`, `pending` and `in-progress` are the
-  // pre-migration state names. Drop them once every card emits the new ones.
-  &.online,
-  &.ready {
+  &.online {
     --status-color: var(--status-online);
   }
 
-  &.offline,
-  &.error {
+  &.offline {
     --status-color: var(--status-offline);
   }
 
-  &.warning,
-  &.pending {
+  &.warning {
     --status-color: var(--status-warning);
   }
 
@@ -41,8 +34,7 @@
     --status-color: var(--status-unknown);
   }
 
-  &.busy,
-  &.in-progress {
+  &.busy {
     --status-color: var(--status-busy);
 
     &::before {
@@ -63,8 +55,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .status.busy::before,
-  .status.in-progress::before {
+  .status.busy::before {
     animation: none;
   }
 }

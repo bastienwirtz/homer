@@ -1,14 +1,9 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="speedtest">
-          <i class="fas fa-arrow-down"></i> {{ download }} Mbit/s |
-          <i class="fas fa-arrow-up"></i> {{ upload }} Mbit/s |
-          <i class="fas fa-stopwatch"></i> {{ ping }} ms
-        </template>
-      </p>
+  <Generic :item="item" :badges="badges">
+    <template v-if="speedtest" #subtitle>
+      <i class="fas fa-arrow-down"></i> {{ download }} Mbit/s |
+      <i class="fas fa-arrow-up"></i> {{ upload }} Mbit/s |
+      <i class="fas fa-stopwatch"></i> {{ ping }} ms
     </template>
   </Generic>
 </template>
@@ -19,13 +14,14 @@ import service from "@/mixins/service.js";
 export default {
   name: "SpeedtestTracker",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     speedtest: null,
+    serverError: null,
   }),
   computed: {
+    badges() {
+      return [this.connectionBadge()];
+    },
     download: function () {
       return this.format(this.speedtest?.download);
     },
@@ -36,16 +32,13 @@ export default {
       return this.format(this.speedtest?.ping);
     },
   },
-  created() {
-    this.fetchStatus();
-  },
   methods: {
-    fetchStatus: async function () {
-      this.fetch("/api/speedtest/latest")
-        .then((response) => {
+    fetchData: function () {
+      return this.load(
+        this.fetch("/api/speedtest/latest").then((response) => {
           this.speedtest = response.data;
-        })
-        .catch((e) => console.log(e));
+        }),
+      );
     },
     format: function (value) {
       return value ? parseFloat(value).toFixed(2) : "n/a";

@@ -356,9 +356,6 @@
 
       .card-aside {
         grid-area: aside;
-        // TODO(cards-migrate-to-api): keeps unmigrated indicators above `.card-link` so
-        // their `title` shows, at the cost of the click. Drop with the last card.
-        z-index: 3;
         display: flex;
         align-items: center;
         gap: 0.5rem;

@@ -1,22 +1,11 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <i class="fa-solid fa-signal"></i> {{ up }}/{{ total }}
-        <template v-if="avgRespTime > 0">
-          <span class="separator"> | </span>
-          <i class="fa-solid fa-stopwatch"></i> {{ avgRespTime }} ms avg.
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div v-if="status !== false" class="status" :class="status">
-        {{ percentageGood }}&percnt;
-      </div>
+  <Generic :item="item" :status="status">
+    <template #subtitle>
+      <i class="fa-solid fa-signal"></i> {{ up }}/{{ total }}
+      <template v-if="avgRespTime > 0">
+        <span class="mx-1"> | </span>
+        <i class="fa-solid fa-stopwatch"></i> {{ avgRespTime }} ms avg.
+      </template>
     </template>
   </Generic>
 </template>
@@ -27,32 +16,32 @@ import service from "@/mixins/service.js";
 export default {
   name: "Gatus",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     up: 0,
     down: 0,
     total: 0,
     avgRespTime: NaN,
     percentageGood: NaN,
-    status: false,
-    statusMessage: false,
+    state: null,
+    serverError: null,
   }),
-  created() {
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
+  computed: {
+    status: function () {
+      if (this.serverError) {
+        return this.reachabilityStatus();
+      }
+      return (
+        this.state && { state: this.state, label: `${this.percentageGood}%` }
+      );
+    },
   },
   methods: {
-    fetchStatus: async function () {
-      this.fetch("/api/v1/endpoints/statuses", {
-        method: "GET",
-        cache: "no-cache",
-      })
-        .then((response) => {
+    fetchData: function () {
+      return this.load(
+        this.fetch("/api/v1/endpoints/statuses", {
+          method: "GET",
+          cache: "no-cache",
+        }).then((response) => {
           // Apply filtering by groups, if defined
           if (this.item.groups) {
             response = response?.filter((job) => {
@@ -104,50 +93,17 @@ export default {
 
           // Status flag
           if (this.up == 0 && this.down == 0) {
-            this.status = false;
+            this.state = null;
           } else if (this.down == this.total) {
-            this.status = "bad";
+            this.state = "offline";
           } else if (this.up == this.total) {
-            this.status = "good";
+            this.state = "online";
           } else {
-            this.status = "warn";
+            this.state = "warning";
           }
-        })
-        .catch((e) => {
-          console.error(e);
-        });
+        }),
+      );
     },
   },
 };
 </script>
-
-<style scoped lang="scss">
-.status {
-  font-size: 0.8rem;
-  color: var(--text-title);
-  &.good:before {
-    background-color: #94e185;
-    border-color: #78d965;
-    box-shadow: 0 0 5px 1px #94e185;
-  }
-  &.warn:before {
-    background-color: #f8a306;
-    border-color: #e1b35e;
-    box-shadow: 0 0 5px 1px #f8a306;
-  }
-  &.bad:before {
-    background-color: #c9404d;
-    border-color: #c42c3b;
-    box-shadow: 0 0 5px 1px #c9404d;
-  }
-  &:before {
-    content: " ";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 10px;
-    border: 1px solid #000;
-    border-radius: 7px;
-  }
-}
-</style>
