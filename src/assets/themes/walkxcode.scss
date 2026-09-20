@@ -68,12 +68,12 @@
       border-radius: 0;
     }
 
-    .column div:first-of-type .card {
+    .column > div:first-of-type .card {
       border-top-left-radius: var(--border-radius);
       border-top-right-radius: var(--border-radius);
     }
 
-    .column div:last-child .card {
+    .column > div:last-child .card {
       border-bottom-left-radius: var(--border-radius);
       border-bottom-right-radius: var(--border-radius);
     }
