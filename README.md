@@ -121,6 +121,14 @@ If you would like to change internal port of Homer from default `8080` to your p
 - **`IPV6_DISABLE`** (default: 0)
 Set to `1` to disable listening on IPv6.
 
+### Using Easypanel
+
+[Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform, and Homer has a one-click deployment template there.
+
+[![Deploy on Easypanel](https://easypanel.io/img/deploy-on-easypanel-40.svg)](https://easypanel.io/templates/homer)
+
+The template sets up a persistent volume for `/www/assets` automatically.
+
 ### Using the release tarball (prebuilt, ready to use)
 
 Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a web server.
