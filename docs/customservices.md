@@ -34,6 +34,7 @@ Available services are located in `src/components/`:
 - [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
+- [Minecraft](#minecraft)
 - [Miniflux](#miniflux)
 - [NetAlertx](#netalertx)
 - [Nextcloud](#nextcloud)
@@ -446,6 +447,29 @@ Displays News (gray), Warning (orange) or Error (red) notifications bubbles from
 The url must be the root url of Medusa application.
 
 **API Key**: The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Minecraft
+
+Displays the status of a Minecraft server using mcsrvstat.us.
+
+```yaml
+- name: "Minecraft"
+  host: "SERVER_IP:PORT"
+  url: "https://minecraft.net"
+  logo: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/minecraft.svg"
+  useServerIcon: true
+  type: Minecraft
+```
+
+Shows the server type, version, current online player count and server icon.
+
+This component uses the API from https://mcsrvstat.us/ to retrieve server information.
+
+You can use 'url' to insert a link to your server's website or dashboard such as 'Plan' or anything else you like.
+
+Enter the 'IP:PORT' of your chosen server in the 'host' field, you can also use its domain name, such as 'mc.hypixel.net'.
+
+'useServerIcon' is Optional: set to false to keep 'logo' instead of the server icon
 
 ## Miniflux
 
