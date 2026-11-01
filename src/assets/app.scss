@@ -5,6 +5,7 @@
 @import url("~/bulma/css/bulma.css") layer(framework);
 @import url("@/assets/components/base.scss") layer(base);
 @import url("@/assets/components/highlights.scss") layer(base);
+@import url("@/assets/components/fontawesome-compat.scss") layer(base);
 
 // themes
 @import url("@/assets/themes/classic.scss") layer(theme);

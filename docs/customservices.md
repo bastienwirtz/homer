@@ -1,6 +1,6 @@
 # Smart cards
 
-Smart cards provide specific integrations for external services. They display additional information and extra features beyond basic service card. Smart cards are enabled by adding a `type` key to the service item in your YAML configuration.
+Smart cards provide specific integration for external services. They display additional information and extra features beyond basic service card. Smart cards are enabled by adding a `type` key to the service item in your YAML configuration.
 
 Each service integration has different requirements and may need additional configuration parameters (see card list below).
 
@@ -8,7 +8,7 @@ Each service integration has different requirements and may need additional conf
 > Your `config.yml` file is exposed at `/assets/config.yml` via HTTP. Any sensitive information (like API keys)
 > in this file is visible to anyone who can access your Homer instance. Only include API keys if your Homer
 > instance is protected by authentication or access controls **or use a proxy like [`CORSair`](https://github.com/bastienwirtz/corsair)
->  to inject your credentials safely**, using environment variable on the server side. 
+>  to inject your credentials safely**, using environment variable on the server side.
 
 Available services are located in `src/components/`:
 
@@ -24,21 +24,24 @@ Available services are located in `src/components/`:
 - [Glances](#glances)
 - [Gotify](#gotify)
 - [Healthchecks](#healthchecks)
+- [Hyper HDR](#hyper-hdr)
 - [Home Assistant](#home-assistant)
 - [Immich](#immich)
 - [Jellystat](#jellystat)
 - [Lidarr, Prowlarr, Sonarr, Readarr and Radarr](#lidarr-prowlarr-sonarr-readarr-and-radarr)
+- [LibrisLog](#librislog)
 - [Linkding](#linkding)
 - [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
 - [Miniflux](#miniflux)
+- [NetAlertx](#netalertx)
 - [Nextcloud](#nextcloud)
 - [OctoPrint / Moonraker](#octoprintmoonraker)
 - [Olivetin](#olivetin)
 - [OpenHAB](#openhab)
 - [OpenWeatherMap](#openweathermap)
-- [Paperless-NGX](#paperlessng)
+- [Paperless-NGX](#paperless-ngx)
 - [PeaNUT](#peanut)
 - [PiAlert](#pialert)
 - [PiHole](#pihole)
@@ -51,6 +54,7 @@ Available services are located in `src/components/`:
 - [rTorrent](#rtorrent)
 - [SABnzbd](#sabnzbd)
 - [Scrutiny](#scrutiny)
+- [Seerr](#seerr)
 - [Speedtest Tracker](#speedtesttracker)
 - [Tautulli](#tautulli)
 - [Tdarr](#tdarr)
@@ -67,7 +71,7 @@ Available services are located in `src/components/`:
 >
 > - All services hosted on the **same domain** as Homer (mydomain.tld/pihole, mydomain.tld/proxmox) to avoid cross-domain request entirely.
 > - All services configured to **accept cross-site requests** by sending the necessary CORS headers (either directly in service configuration or via proxy).
-> - **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/bastienwirtz/corsair), a light and simple solution)
+> - **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/bastienwirtz/corsair), a light and simple solution).
 >
 > If you experience any issues, see the [troubleshooting](troubleshooting.md#my-service-card-doesnt-work-nothing-appears-or-offline-status-is-displayed-pi-hole-sonarr-ping-) page.
 
@@ -80,10 +84,14 @@ Available services are located in `src/components/`:
   url: https://my-service.url # Optional: Card link and API base url unless 'endpoint' is provided (see below) 
   endpoint: https://my-service-api.url # Optional: alternative base URL used to fetch service data when necessary.
   useCredentials: false # Optional: Override global proxy.useCredentials configuration.
-  headers: # Optional: Override global proxy.headers configuration.
+  headers: # Optional: Per-item headers, layered over (and overriding) proxy.headers. A card setting the same header wins over both.
 ```
 
 If a subtitle is provided, (using the `subtitle` configuration key), **it will override (hide)** any custom information displayed on the subtitle line by the custom integration.
+
+> [!TIP]
+> **Auto refresh of the card data**: Some cards support periodic update (see indication in detail below). It can be enabled or disabled globally for all service, or individually for each service using the `updateIntervalMs` configuration option.
+
 
 ## AdGuard Home
 
@@ -102,6 +110,8 @@ Displays AdGuard Home protection status and blocked query statistics.
 > headers:  
 >   Authorization: "Basic <base64-encoded for username:password>"
 > ```
+
+Auto refresh is supported by this integration.
 
 ## Copy to Clipboard
 
@@ -127,6 +137,8 @@ Displays counts of running, stopped, and error containers from Docker Socket Pro
   endpoint: "https://my-service-api.url:port"
 ```
 
+Auto refresh is supported by this integration.
+
 ## Docuseal
 
 Displays the Docuseal version.
@@ -150,20 +162,26 @@ The `libraryType` configuration let you choose which stats to show.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   libraryType: "music" # Choose which stats to show. Can be one of: music, series or movies.
+  # legacyAuth: false # (Optional) Force the authorization scheme. Auto-detected from the server version by default.
 ```
+
+Jellyfin 12 disables legacy authorization on upgrade, which stops the `X-Emby-Token` header this card sends by default from being accepted. The card detects the server version and sends `Authorization: MediaBrowser Token="..."` instead, which works on every Jellyfin release. Emby is unaffected and keeps the default. Set `legacyAuth` to override that detection on a server configured to accept only one of them.
+
+Auto refresh is supported by this integration.
 
 ## FreshRSS
 
 Displays unread article count and total subscriptions from your FreshRSS server.
 
 ```yaml
-- name: "FreshRSS"
+- name: "FreshRSS"  
   type: "FreshRSS"
   url: https://my-service.url
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
   username: "<---your-username--->"
   password: "<---your-password--->"
 ```
+
+Auto refresh is supported by this integration.
 
 ## Gatus
 
@@ -177,19 +195,18 @@ Two lines are needed in the config.yml :
 ```
 
 Optionally, the results can be filtered to only include jobs in the defined groups:
+
 ```yaml
   groups: [Services, External]
 ```
 
-The status can be checked regularly by defining an update Interval in ms:
-```yaml
-  updateInterval: 5000
-```
-
 The average times can be hidden (saves their calculation also) by setting the following:
+
 ```yaml
   hideaverages: true
 ```
+
+Auto refresh is supported by this integration.
 
 ## Gitea / Forgejo
 
@@ -213,6 +230,8 @@ Displays system metrics (CPU, memory, swap, load) from a Glances server.
   url: https://my-service.url
   stats: [cpu, mem] # Options: load, cpu, mem, swap
 ```
+
+Auto refresh is supported by this integration.  
 
 If you don't already have a glances server up and running, here is a sample Docker compose file to get you started:
 
@@ -241,6 +260,8 @@ Displays the number of outstanding messages and system health status.
   apikey: "<---insert-client-token-here--->"
 ```
 
+Auto refresh is supported by this integration.  
+
 **API Token**: Use a **client token** (not an app token).
 
 ## Healthchecks
@@ -253,6 +274,8 @@ Displays status counts (up/down/grace) from your Healthchecks monitoring service
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: Found in Healthchecks web interface under **Settings > API Access > API key (read-only)**.
 
@@ -282,6 +305,17 @@ http:
     - "https://your-homer-domain.com"
 ```
 
+## Hyper HDR
+
+Display Hyper HDR instance name and status.
+
+```yaml
+- name: "HyperHDR"
+  type: "HyperHDR"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
+```
+
 ## Immich
 
 Displays user count, photo/video counts, and storage usage from your Immich server.
@@ -294,12 +328,14 @@ Displays user count, photo/video counts, and storage usage from your Immich serv
   apikey: "<---insert-api-key-here--->"
 ```
 
+Auto refresh is supported by this integration.  
+
 **Requirements**: Immich server version `1.118.0` or later
 **API Key**: Create an API key in Immich web interface under **Administration > API Keys**
 
 ## Jellystat
 
-Display the number of concurrent streams on your jellyfin server.
+Display the number of concurrent streams on your Jellyfin server.
 
 ```yaml
 - name: "Jellystat"
@@ -309,7 +345,9 @@ Display the number of concurrent streams on your jellyfin server.
   apikey: "<---insert-api-key-here--->"
 ```
 
-**API Key**: You can create an API key in the dashboard of you jellystat server: settings/API Keys -> Add Key
+Auto refresh is supported by this integration.  
+
+**API Key**: You can create an API key in the dashboard of you Jellystat server: settings/API Keys -> Add Key
 
 
 ## Lidarr, Prowlarr, Sonarr, Readarr and Radarr
@@ -322,9 +360,10 @@ Two lines are needed in the `config.yml`:
   type: "Lidarr" # "Lidarr" "Prowlarr", "Radarr" or "Sonarr"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  checkInterval: 5000 # (Optional) Interval (in ms) for updating the status
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 The url must be the root url of Lidarr, Prowlarr, Readarr, Radarr or Sonarr application.
 
@@ -347,6 +386,24 @@ This integration supports at max 15 results from Linkding, but you can add it mu
   limit: 10 # Maximum number of items returned by Linkding, minimal 1 and max 15
   query: "#ToDo #Homer" # query to do on Linkding. Use #tagname to search for tags
 ```
+
+Auto refresh is supported by this integration.  
+
+## LibrisLog
+
+Displays library statistics from your LibrisLog book tracker: total books, books read, currently reading, and want-to-read counts.
+
+```yaml
+- name: "LibrisLog"
+  type: "LibrisLog"
+  logo: "https://docs.librislog.app/logo.png"
+  url: "https://my-service.url"
+  apikey: "<---insert-api-key-here--->"
+```
+
+Auto refresh is supported by this integration.
+
+**API Key**: Generate an API key in your LibrisLog instance settings.
 
 ## Matrix
 
@@ -376,7 +433,7 @@ The API page can be found: Click on hamburger menu -> Click on your profile -> C
 
 ## Medusa
 
-Displays News (grey), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
+Displays News (gray), Warning (orange) or Error (red) notifications bubbles from the Medusa application.
 
 ```yaml
 - name: "Medusa"
@@ -401,10 +458,30 @@ Displays the number of unread articles from your Miniflux RSS reader.
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
   style: "status" # Either "status" or "counter"
-  checkInterval: 60000 # Optional: Interval (in ms) for updating the unread count
 ```
 
+Auto refresh is supported by this integration.  
+
 **API Key**: Generate an API key in Miniflux web interface under **Settings > API Keys > Create a new API key**
+
+## NetAlertx
+
+Displays network monitoring stats (connected devices, alerts, network activity) from your NetAlertx server.
+
+```yaml
+- name: "NetAlertx"
+  type: "NetAlertx"
+  logo: "assets/tools/sample.png"
+  url: https://my-service.url
+  apikey: "<---insert-api-key-here--->"
+  # endpoint: "https://my-service-api.url" # Optional: alternative base URL used to fetch service data when necessary.
+```
+
+Auto refresh is supported by this integration.
+
+**API Key**: Get your API key in NetAlertx web interface under **Settings > General > API token** or in your installation documentation.
+
+**Note**: NetAlertx is the modern fork/rename of PiAlert. Both integrations are available in Homer for compatibility.
 
 ## Nextcloud
 
@@ -421,7 +498,7 @@ mode](https://docs.nextcloud.com/server/stable/admin_manual/maintenance/upgrade.
 ## OctoPrint/Moonraker
 
 The OctoPrint/Moonraker service only needs an `apikey` & `endpoint` and optionally a `display` or `url` option. `url` can be used when you click on the service it will launch the `url`
-Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these services compatible. See <https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation> for details.
+Moonraker's API mimics a few of OctoPrint's endpoints which makes these services compatible. See <https://moonraker.readthedocs.io/en/latest/web_api/#octoprint-api-emulation> for details.
 
 ```yaml
 - name: "Octoprint"
@@ -430,8 +507,9 @@ Moonraker's API mimmicks a few of OctoPrint's endpoints which makes these servic
   endpoint: "https://my-service-api.url:port"
   apikey: "<---insert-api-key-here--->"
   display: "text" # 'text' or 'bar'. Default to `text`.
-  
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Olivetin
 
@@ -511,6 +589,8 @@ Displays current status and UPS load of the UPS device.
   # device: "ups" # The ID of the device
 ```
 
+Auto refresh is supported by this integration.  
+
 ## PiAlert
 
 Displays stats from your PiAlert server.
@@ -520,8 +600,9 @@ Displays stats from your PiAlert server.
   type: "PiAlert"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the stats
 ```
+
+Auto refresh is supported by this integration.  
 
 ## PiHole
 
@@ -535,8 +616,9 @@ Displays info about your local PiHole instance right on your Homer dashboard.
   # endpoint: "https://my-service-api.url" # optional, For v6 API, this is the base URL used to fetch Pi-hole data overwriting the url
   apikey: "<---insert-api-key-here--->" # optional, needed if web interface is password protected
   apiVersion: 5 # optional, defaults to 5. Use 6 if your PiHole instance uses API v6
-  checkInterval: 3000 # optional, defaults to 300000. interval in ms to check Pi-hole status
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: Required only if Pi-hole web interface is password protected. Go to **Settings > API/Web Interface > Show API token**
 
@@ -560,8 +642,10 @@ Optionally, use `successCodes` to define which HTTP response status codes should
   # successCodes: [200, 418] # Optional, default to all 2xx HTTP response status codes
   # timeout: 500 # Timeout in ms before ping is aborted. Default 2000
   # subtitle: "Bookmark example" # By default, request round trip time is displayed when subtitle is not set
-  # updateInterval: 5000 # (Optional) Interval (in ms) for updating ping status
+  # endpoint: "https://www.wikimediastatus.net" # Optional, will override url for pinging
 ```
+
+Auto refresh is supported by this integration.
 
 ## Plex
 
@@ -575,6 +659,8 @@ Displays active streams, total movies, and total TV series from your Plex server
   endpoint: "https://my-service.url"
   token: "<---insert-plex-token-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **Plex Token**: See [How to find your Plex token](https://www.plexopedia.com/plex-media-server/general/plex-token/)
 
@@ -593,6 +679,8 @@ Displays container counts (running/dead/misc), version, and online status from y
     - "local"
 ```
 
+Auto refresh is supported by this integration.  
+
 **Requirements**: Portainer version 1.11 or later
 
 **API Key**: Generate an access token in Portainer UI. See [Creating an Access Token](https://docs.portainer.io/api/access#creating-an-access-token)
@@ -605,6 +693,8 @@ Displays container counts (running/dead/misc), version, and online status from y
   logo: "assets/tools/sample.png"
   url: https://my-service.url
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Proxmox
 
@@ -625,6 +715,8 @@ Displays status information of a Proxmox node (VMs running and disk, memory and 
   small_font_on_small_screens: true # uses small font on small screens (like mobile)
   small_font_on_desktop: true # uses small font on desktops (just in case you're showing much info)
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: You can set it up in Proxmox under Permissions > API Tokens. You also need to know the realm the user of the API Token is assigned to (by default pam).
 
@@ -650,9 +742,9 @@ for setting up qBittorrent.
   type: "qBittorrent"
   logo: "assets/tools/sample.png"
   url: https://my-service.url # Your rTorrent web UI, f.e. ruTorrent or Flood.
-  rateInterval: 2000 # Interval for updating the download and upload rates.
-  torrentInterval: 5000 # Interval for updating the torrent count.
 ```
+
+Auto refresh is supported by this integration.  
 
 ## rTorrent
 
@@ -668,11 +760,11 @@ for setting up rTorrent.
   logo: "assets/tools/sample.png"
   url: "https://my-service.url" # Your rTorrent web UI, f.e. ruTorrent or Flood.
   xmlrpc: "https://my-service.url:port" # Reverse proxy for rTorrent's XML-RPC.
-  rateInterval: 5000 # Interval for updating the download and upload rates.
-  torrentInterval: 60000 # Interval for updating the torrent count.
   username: "username" # Username for logging into rTorrent (if applicable).
   password: "password" # Password for logging into rTorrent (if applicable).
 ```
+
+Auto refresh is supported by this integration.  
 
 ## SABnzbd
 
@@ -684,8 +776,9 @@ Displays the number of currently active downloads on your SABnzbd instance.
   logo: "assets/tools/sample.png"
   url: https://my-service.url
   apikey: "<---insert-api-key-here--->"
-  downloadInterval: 5000 # (Optional) Interval (in ms) for updating the download count
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: An API key is required, and can be obtained from the "Config" > "General" section of the SABnzbd config in the web UI.
 
@@ -698,8 +791,33 @@ Displays info about the total number of disk passed and failed S.M.A.R.T and scr
   type: "Scrutiny"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  updateInterval: 5000 # (Optional) Interval (in ms) for updating the status
 ```
+
+Auto refresh is supported by this integration.  
+
+## Seerr
+
+Displays the Seerr version as the subtitle, with icons next to it when an update is available or a restart is required, plus badges counting available media, pending requests, processing requests and open issues.
+
+```yaml
+- name: "Seerr"
+  type: "Seerr"
+  logo: "assets/tools/sample.png"
+  url: "http://seerr.example.com"
+  apikey: "<---insert-api-key-here--->"
+  # subtitle: "Requests"  # (Optional) Overrides the version subtitle.
+  # hide: []              # (Optional) hides items. Possible values are
+  #                       # "updateAvailable", "restartRequired", "media",
+  #                       # "pending", "processing" and "issues".
+```
+
+Auto refresh is supported by this integration.
+
+**Authentication**: generate an API key under **Settings > General** in your Seerr instance. The badges need it; the version subtitle works without one.
+
+**Hiding items**: everything is shown by default; list a key under `hide` to remove it. `updateAvailable` and `restartRequired` are the two subtitle icons; `media`, `pending`, `processing` and `issues` are the four badges. Hide all six for a version-only card. Badge counts are capped at `99+`.
+
+**Available media**: counts partially available shows (those with some requested seasons still missing) alongside fully available ones.
 
 ## SpeedtestTracker
 
@@ -721,9 +839,10 @@ Displays the number of currently active streams on you Plex instance.
   type: "Tautulli"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  checkInterval: 5000 # (Optional) Interval (in ms) for updating the status  
   apikey: "<---insert-api-key-here--->"
 ```
+
+Auto refresh is supported by this integration.  
 
 **API Key**: An API key is required, and can be obtained from the "Web Interface" section of settings on the Tautulli web UI.
 
@@ -749,8 +868,9 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
   type: "Tdarr"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  checkInterval: 5000 # (Optional) Interval (in ms) for updating the queue & error counts
 ```
+
+Auto refresh is supported by this integration.  
 
 ## Traefik
 
@@ -777,15 +897,19 @@ The service communicates with the Transmission RPC interface which needs to be a
   url: "http://192.168.1.2:9091" # Your Transmission web interface URL
   type: "Transmission"
   auth: "username:password" # Optional: HTTP Basic Auth
-  interval: 5000 # Optional: Interval for refreshing data (ms)
   target: "_blank" # Optional: HTML a tag target attribute
 ```
 
+Auto refresh is supported by this integration.  
 The service automatically handles Transmission's session management and CSRF protection.
 
 ## Truenas Scale
 
 Displays TrueNAS version.
+
+1. In the TrueNAS web interface, click your user avatar in the top-right corner and select "API Keys".
+2. Click "Add", give the key a name such as "homer", and confirm.
+3. Copy the generated key immediately - TrueNAS only shows it once - and paste it as the API Key when creating the integration in homer.
 
 ```yaml
 - name: "Truenas"
@@ -804,8 +928,35 @@ Displays overall status, uptime percentage, and incident information from your U
   type: "UptimeKuma"
   logo: "assets/tools/sample.png"
   url: https://my-service.url
-  slug: "default" # status page slug, defaults to "default"
+  slug: "default" # status page the stats are read from, defaults to "default"
 ```
+
+`slug` selects which status page the card reads its status and uptime from. It does not affect where the
+card links to: as with any other service, that is whatever `url` is set to, which in most cases points at
+the status page.
+
+> [!IMPORTANT]
+> **Potentially breaking change**: on version `26.04.2` and earlier, this card rewrote `url` and always
+> sent you to `<url>/status/<slug>`. It no longer does, so a card that used to open a status page now
+> opens `url` as configured.
+>
+> If you want the card to keep opening a status page, either:
+>
+> - point `url` straight at the status page. In that case `endpoint` must be set to the Uptime Kuma base
+>   url, otherwise the API calls are made against the status page path and fail:
+>
+>   ```yaml
+>   - name: "Uptime Kuma"
+>     type: "UptimeKuma"
+>     url: https://my-service.url/status/my-slug # where the card links to
+>     endpoint: https://my-service.url # where the API lives
+>     slug: "my-slug"
+>   ```
+>
+> - or set **Settings > General > Entry Page** in Uptime Kuma to that status page, which sends everyone
+>   landing on the base url there, and leaves the Homer config untouched.
+
+Auto refresh is supported by this integration.  
 
 **Requirements**: Uptime Kuma version `1.13.1` or later (for [multiple status pages support](https://github.com/louislam/uptime-kuma/releases/tag/1.13.1))
 
@@ -842,3 +993,5 @@ Display info about the number of container running and the number for which an u
   url: https://my-service.url
   subtitle: "Docker image update notifier"
 ```
+
+Auto refresh is supported by this integration.  

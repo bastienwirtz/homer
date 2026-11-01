@@ -52,6 +52,7 @@ proxy:
 defaults:
   layout: columns # Either 'columns', or 'list'
   colorTheme: auto # One of 'auto', 'light', or 'dark'
+  iconWidth: auto # Either 'auto', or 'fixed'
 
 # Optional theming
 theme: default # 'default' or one of the themes available in 'src/assets/themes'.
@@ -130,6 +131,9 @@ links:
     icon: "fas fa-file-alt"
     url: "#page2"
 
+# Optional: enable periodic refresh for all smart cards that implements it (unless overriden at service configuration level).
+updateIntervalMs: 30000 # interval in milliseconds, minimum is 1000 (1s). Remove or set to 0 to disable. Can be overriden at service level. (default disabled)
+
 # Services
 # First level array represents a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
@@ -192,9 +196,9 @@ Empty values (either in `config.yml` or the endpoint data) will hide the element
 ## Connectivity checks
 
 As a webapp (PWA) the dashboard can still be displayed when your homer server is offline.
-The connectivity checker periodically sends a HEAD request bypassing the PWA cache to the dashbord page to make sure it's still reachable.
+The connectivity checker periodically sends a HEAD request bypassing the PWA cache to the dashboard page to make sure it's still reachable.
 
-It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know if your conection is up. It also helps when using an authentication proxy, it will reload the page if the authentication expires (when a redirect is send in response to the HEAD request).
+It can be useful when you access your dashboard through a VPN or ssh tunnel for example, to know if your connection is up. It also helps when using an authentication proxy, it will reload the page if the authentication expires (when a redirect is send in response to the HEAD request).
 
 ## Style Options
 
@@ -206,6 +210,10 @@ Homer uses [bulma CSS](https://bulma.io/), which provides a [modifiers syntax](h
 - `is-danger` (red)
 
 You can read the [bulma modifiers page](https://bulma.io/documentation/start/syntax/) for other options regarding size, style, or state.
+
+### Icon width
+
+Font Awesome 7 gives every icon the same width, which is what the `fa-fw` class used to do on its own. Homer keeps the previous behaviour by default, so each icon takes up only the space it needs. Set `iconWidth: fixed` under the `defaults` key to opt into the uniform width, which lines up icons in a column when you list several services with different icons.
 
 ## Theming & customization
 

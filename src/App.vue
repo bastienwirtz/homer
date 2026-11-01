@@ -5,6 +5,7 @@
     :class="[
       `theme-${config.theme}`,
       `page-${currentPage}`,
+      `fa-width-${config.defaults.iconWidth}`,
       isDark ? 'dark' : 'light',
       !config.footer ? 'no-footer' : '',
     ]"
@@ -129,6 +130,11 @@ export default {
     SettingToggle,
     DarkMode,
     DynamicTheme,
+  },
+  provide() {
+    return {
+      config: () => this.config,
+    };
   },
   data: function () {
     return {

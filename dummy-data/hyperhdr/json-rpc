@@ -1,0 +1,1886 @@
+{
+  "command": "serverinfo",
+  "info": {
+    "activeEffects": [],
+    "activeLedColor": [],
+    "adjustment": [
+      {
+        "backlightColored": true,
+        "backlightThreshold": 1,
+        "black": [0, 0, 0],
+        "blue": [0, 0, 255],
+        "brightness": 100,
+        "brightnessCompensation": 100,
+        "classic_config": true,
+        "cyan": [0, 255, 255],
+        "gammaBlue": 1.5,
+        "gammaGreen": 1.5,
+        "gammaRed": 1.5,
+        "green": [0, 255, 0],
+        "id": "default",
+        "luminanceGain": 1,
+        "magenta": [255, 0, 255],
+        "red": [255, 0, 0],
+        "saturationGain": 1.5,
+        "temperatureBlue": 255,
+        "temperatureGreen": 255,
+        "temperatureRed": 255,
+        "white": [255, 255, 255],
+        "yellow": [255, 255, 0]
+      }
+    ],
+    "components": [
+      {
+        "enabled": true,
+        "name": "ALL"
+      },
+      {
+        "enabled": true,
+        "name": "HDR"
+      },
+      {
+        "enabled": true,
+        "name": "SMOOTHING"
+      },
+      {
+        "enabled": true,
+        "name": "BLACKBORDER"
+      },
+      {
+        "enabled": false,
+        "name": "FORWARDER"
+      },
+      {
+        "enabled": true,
+        "name": "VIDEOGRABBER"
+      },
+      {
+        "enabled": false,
+        "name": "SYSTEMGRABBER"
+      },
+      {
+        "enabled": true,
+        "name": "LEDDEVICE"
+      }
+    ],
+    "currentInstance": 0,
+    "effects": [
+      {
+        "name": "Music: fullscreen pulse (BLUE)"
+      },
+      {
+        "name": "Music: fullscreen pulse (GREEN)"
+      },
+      {
+        "name": "Music: fullscreen pulse (MULTI COLOR)"
+      },
+      {
+        "name": "Music: fullscreen pulse (MULTI COLOR FAST)"
+      },
+      {
+        "name": "Music: fullscreen pulse (MULTI COLOR SLOW)"
+      },
+      {
+        "name": "Music: fullscreen pulse (RED)"
+      },
+      {
+        "name": "Music: fullscreen pulse (WHITE)"
+      },
+      {
+        "name": "Music: fullscreen pulse (YELLOW)"
+      },
+      {
+        "name": "Music: quatro for LED strip (BLUE)"
+      },
+      {
+        "name": "Music: quatro for LED strip (GREEN)"
+      },
+      {
+        "name": "Music: quatro for LED strip (MULTI COLOR)"
+      },
+      {
+        "name": "Music: quatro for LED strip (MULTI COLOR FAST)"
+      },
+      {
+        "name": "Music: quatro for LED strip (MULTI COLOR SLOW)"
+      },
+      {
+        "name": "Music: quatro for LED strip (RED)"
+      },
+      {
+        "name": "Music: quatro for LED strip (WHITE)"
+      },
+      {
+        "name": "Music: quatro for LED strip (YELLOW)"
+      },
+      {
+        "name": "Music: stereo for LED strip (BLUE)"
+      },
+      {
+        "name": "Music: stereo for LED strip (GREEN)"
+      },
+      {
+        "name": "Music: stereo for LED strip (MULTI COLOR)"
+      },
+      {
+        "name": "Music: stereo for LED strip (MULTI COLOR FAST)"
+      },
+      {
+        "name": "Music: stereo for LED strip (MULTI COLOR SLOW)"
+      },
+      {
+        "name": "Music: stereo for LED strip (RED)"
+      },
+      {
+        "name": "Music: stereo for LED strip (WHITE)"
+      },
+      {
+        "name": "Music: stereo for LED strip (YELLOW)"
+      },
+      {
+        "name": "Music: equalizer test (turn on video preview)"
+      },
+      {
+        "name": "Music: pulse waves for LED strip (MULTI COLOR)"
+      },
+      {
+        "name": "Music: pulse waves for LED strip (MULTI COLOR FAST)"
+      },
+      {
+        "name": "Music: pulse waves for LED strip (MULTI COLOR SLOW)"
+      },
+      {
+        "name": "Atomic swirl"
+      },
+      {
+        "name": "Blue mood blobs"
+      },
+      {
+        "name": "Breath"
+      },
+      {
+        "name": "Candle"
+      },
+      {
+        "name": "Cinema brighten lights"
+      },
+      {
+        "name": "Cinema dim lights"
+      },
+      {
+        "name": "Cold mood blobs"
+      },
+      {
+        "name": "Double swirl"
+      },
+      {
+        "name": "Full color mood blobs"
+      },
+      {
+        "name": "Green mood blobs"
+      },
+      {
+        "name": "Knight rider"
+      },
+      {
+        "name": "Notify blue"
+      },
+      {
+        "name": "Plasma"
+      },
+      {
+        "name": "Police Lights Single"
+      },
+      {
+        "name": "Police Lights Solid"
+      },
+      {
+        "name": "Rainbow swirl"
+      },
+      {
+        "name": "Rainbow waves"
+      },
+      {
+        "name": "Red mood blobs"
+      },
+      {
+        "name": "Sea waves"
+      },
+      {
+        "name": "Sparks"
+      },
+      {
+        "name": "Strobe red"
+      },
+      {
+        "name": "Strobe white"
+      },
+      {
+        "name": "Rainbow swirl fast"
+      },
+      {
+        "name": "System Shutdown"
+      },
+      {
+        "name": "Warm mood blobs"
+      },
+      {
+        "name": "Waves with Color"
+      }
+    ],
+    "grabbers": {
+
+    },
+    "hasCEC": 0,
+    "hasPROTOBUF": 0,
+    "hostname": "tv",
+    "imageToLedMappingType": "advanced",
+    "instance": [
+      {
+        "friendly_name": "LG LED",
+        "instance": 0,
+        "running": true
+      }
+    ],
+    "lastError": "",
+    "ledDevices": {
+      "available": [
+        {
+          "group": "leds_group_2_network",
+          "name": "atmoorb"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "cololight"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "fadecandy"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "home_assistant"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "nanoleaf"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "philipshue"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "tpm2net"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "udpartnet"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "udpe131"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "udph801"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "udpraw"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "wled"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "yeelight"
+        },
+        {
+          "group": "leds_group_2_network",
+          "name": "zigbee2mqtt"
+        },
+        {
+          "group": "leds_group_5_debug",
+          "name": "file"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "adalight"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "atmo"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "dmx"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "karate"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "sedu"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "skydimo"
+        },
+        {
+          "group": "leds_group_3_serial",
+          "name": "tpm2"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "apa102"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "apa104"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "hd108"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "hyperspi"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "lpd6803"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "lpd8806"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "p9813"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "sk9822"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "sk6812spi"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "sk6822spi"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "ws2801"
+        },
+        {
+          "group": "leds_group_0_SPI",
+          "name": "ws2812spi"
+        },
+        {
+          "group": "leds_group_1_PWM",
+          "name": "piblaster"
+        }
+      ]
+    },
+    "leds": [
+      {
+        "group": 0,
+        "hmax": 0.5274,
+        "hmin": 0.5137,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.5411,
+        "hmin": 0.5274,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.5549,
+        "hmin": 0.5411,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.5686,
+        "hmin": 0.5549,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.5823,
+        "hmin": 0.5686,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.596,
+        "hmin": 0.5823,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.6097,
+        "hmin": 0.596,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.6234,
+        "hmin": 0.6097,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.6371,
+        "hmin": 0.6234,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.6508,
+        "hmin": 0.6371,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.6646,
+        "hmin": 0.6508,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.6783,
+        "hmin": 0.6646,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.692,
+        "hmin": 0.6783,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.7057,
+        "hmin": 0.692,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.7194,
+        "hmin": 0.7057,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.7331,
+        "hmin": 0.7194,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.7468,
+        "hmin": 0.7331,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.7606,
+        "hmin": 0.7468,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.7743,
+        "hmin": 0.7606,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.788,
+        "hmin": 0.7743,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8017,
+        "hmin": 0.788,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8154,
+        "hmin": 0.8017,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8291,
+        "hmin": 0.8154,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8428,
+        "hmin": 0.8291,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8565,
+        "hmin": 0.8428,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8703,
+        "hmin": 0.8565,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.884,
+        "hmin": 0.8703,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.8977,
+        "hmin": 0.884,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.9114,
+        "hmin": 0.8977,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.9251,
+        "hmin": 0.9114,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.9388,
+        "hmin": 0.9251,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.9525,
+        "hmin": 0.9388,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.9663,
+        "hmin": 0.9525,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.94,
+        "vmin": 0.9156
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.9156,
+        "vmin": 0.8911
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.8911,
+        "vmin": 0.8667
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.8667,
+        "vmin": 0.8422
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.8422,
+        "vmin": 0.8178
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.8178,
+        "vmin": 0.7933
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.7933,
+        "vmin": 0.7689
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.7689,
+        "vmin": 0.7444
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.7444,
+        "vmin": 0.72
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.72,
+        "vmin": 0.6956
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.6956,
+        "vmin": 0.6711
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.6711,
+        "vmin": 0.6467
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.6467,
+        "vmin": 0.6222
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.6222,
+        "vmin": 0.5978
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.5978,
+        "vmin": 0.5733
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.5733,
+        "vmin": 0.5489
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.5489,
+        "vmin": 0.5244
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.5244,
+        "vmin": 0.5
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.5,
+        "vmin": 0.4756
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.4756,
+        "vmin": 0.4511
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.4511,
+        "vmin": 0.4267
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.4267,
+        "vmin": 0.4022
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.4022,
+        "vmin": 0.3778
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.3778,
+        "vmin": 0.3533
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.3533,
+        "vmin": 0.3289
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.3289,
+        "vmin": 0.3044
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.3044,
+        "vmin": 0.28
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.28,
+        "vmin": 0.2556
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.2556,
+        "vmin": 0.2311
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.2311,
+        "vmin": 0.2067
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.2067,
+        "vmin": 0.1822
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.1822,
+        "vmin": 0.1578
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.1578,
+        "vmin": 0.1333
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.1333,
+        "vmin": 0.1089
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.1089,
+        "vmin": 0.0844
+      },
+      {
+        "group": 0,
+        "hmax": 1,
+        "hmin": 0.96,
+        "vmax": 0.0844,
+        "vmin": 0.06
+      },
+      {
+        "group": 0,
+        "hmax": 0.9663,
+        "hmin": 0.9525,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.9525,
+        "hmin": 0.9388,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.9388,
+        "hmin": 0.9251,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.9251,
+        "hmin": 0.9114,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.9114,
+        "hmin": 0.8977,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8977,
+        "hmin": 0.884,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.884,
+        "hmin": 0.8703,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8703,
+        "hmin": 0.8565,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8565,
+        "hmin": 0.8428,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8428,
+        "hmin": 0.8291,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8291,
+        "hmin": 0.8154,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8154,
+        "hmin": 0.8017,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.8017,
+        "hmin": 0.788,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.788,
+        "hmin": 0.7743,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.7743,
+        "hmin": 0.7606,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.7606,
+        "hmin": 0.7468,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.7468,
+        "hmin": 0.7331,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.7331,
+        "hmin": 0.7194,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.7194,
+        "hmin": 0.7057,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.7057,
+        "hmin": 0.692,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.692,
+        "hmin": 0.6783,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.6783,
+        "hmin": 0.6646,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.6646,
+        "hmin": 0.6508,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.6508,
+        "hmin": 0.6371,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.6371,
+        "hmin": 0.6234,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.6234,
+        "hmin": 0.6097,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.6097,
+        "hmin": 0.596,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.596,
+        "hmin": 0.5823,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5823,
+        "hmin": 0.5686,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5686,
+        "hmin": 0.5549,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5549,
+        "hmin": 0.5411,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5411,
+        "hmin": 0.5274,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5274,
+        "hmin": 0.5137,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5137,
+        "hmin": 0.5,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.5,
+        "hmin": 0.4863,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.4863,
+        "hmin": 0.4726,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.4726,
+        "hmin": 0.4589,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.4589,
+        "hmin": 0.4451,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.4451,
+        "hmin": 0.4314,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.4314,
+        "hmin": 0.4177,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.4177,
+        "hmin": 0.404,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.404,
+        "hmin": 0.3903,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.3903,
+        "hmin": 0.3766,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.3766,
+        "hmin": 0.3629,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.3629,
+        "hmin": 0.3492,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.3492,
+        "hmin": 0.3354,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.3354,
+        "hmin": 0.3217,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.3217,
+        "hmin": 0.308,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.308,
+        "hmin": 0.2943,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.2943,
+        "hmin": 0.2806,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.2806,
+        "hmin": 0.2669,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.2669,
+        "hmin": 0.2532,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.2532,
+        "hmin": 0.2394,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.2394,
+        "hmin": 0.2257,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.2257,
+        "hmin": 0.212,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.212,
+        "hmin": 0.1983,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1983,
+        "hmin": 0.1846,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1846,
+        "hmin": 0.1709,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1709,
+        "hmin": 0.1572,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1572,
+        "hmin": 0.1435,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1435,
+        "hmin": 0.1297,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1297,
+        "hmin": 0.116,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.116,
+        "hmin": 0.1023,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.1023,
+        "hmin": 0.0886,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.0886,
+        "hmin": 0.0749,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.0749,
+        "hmin": 0.0612,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.0612,
+        "hmin": 0.0475,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.0475,
+        "hmin": 0.0338,
+        "vmax": 0.06,
+        "vmin": 0
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.0844,
+        "vmin": 0.06
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.1089,
+        "vmin": 0.0844
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.1333,
+        "vmin": 0.1089
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.1578,
+        "vmin": 0.1333
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.1822,
+        "vmin": 0.1578
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.2067,
+        "vmin": 0.1822
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.2311,
+        "vmin": 0.2067
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.2556,
+        "vmin": 0.2311
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.28,
+        "vmin": 0.2556
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.3044,
+        "vmin": 0.28
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.3289,
+        "vmin": 0.3044
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.3533,
+        "vmin": 0.3289
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.3778,
+        "vmin": 0.3533
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.4022,
+        "vmin": 0.3778
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.4267,
+        "vmin": 0.4022
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.4511,
+        "vmin": 0.4267
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.4756,
+        "vmin": 0.4511
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.5,
+        "vmin": 0.4756
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.5244,
+        "vmin": 0.5
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.5489,
+        "vmin": 0.5244
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.5733,
+        "vmin": 0.5489
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.5978,
+        "vmin": 0.5733
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.6222,
+        "vmin": 0.5978
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.6467,
+        "vmin": 0.6222
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.6711,
+        "vmin": 0.6467
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.6956,
+        "vmin": 0.6711
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.72,
+        "vmin": 0.6956
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.7444,
+        "vmin": 0.72
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.7689,
+        "vmin": 0.7444
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.7933,
+        "vmin": 0.7689
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.8178,
+        "vmin": 0.7933
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.8422,
+        "vmin": 0.8178
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.8667,
+        "vmin": 0.8422
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.8911,
+        "vmin": 0.8667
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.9156,
+        "vmin": 0.8911
+      },
+      {
+        "group": 0,
+        "hmax": 0.04,
+        "hmin": 0,
+        "vmax": 0.94,
+        "vmin": 0.9156
+      },
+      {
+        "group": 0,
+        "hmax": 0.0475,
+        "hmin": 0.0338,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.0612,
+        "hmin": 0.0475,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.0749,
+        "hmin": 0.0612,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.0886,
+        "hmin": 0.0749,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1023,
+        "hmin": 0.0886,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.116,
+        "hmin": 0.1023,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1297,
+        "hmin": 0.116,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1435,
+        "hmin": 0.1297,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1572,
+        "hmin": 0.1435,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1709,
+        "hmin": 0.1572,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1846,
+        "hmin": 0.1709,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.1983,
+        "hmin": 0.1846,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.212,
+        "hmin": 0.1983,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.2257,
+        "hmin": 0.212,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.2394,
+        "hmin": 0.2257,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.2532,
+        "hmin": 0.2394,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.2669,
+        "hmin": 0.2532,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.2806,
+        "hmin": 0.2669,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.2943,
+        "hmin": 0.2806,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.308,
+        "hmin": 0.2943,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.3217,
+        "hmin": 0.308,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.3354,
+        "hmin": 0.3217,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.3492,
+        "hmin": 0.3354,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.3629,
+        "hmin": 0.3492,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.3766,
+        "hmin": 0.3629,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.3903,
+        "hmin": 0.3766,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.404,
+        "hmin": 0.3903,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.4177,
+        "hmin": 0.404,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.4314,
+        "hmin": 0.4177,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.4451,
+        "hmin": 0.4314,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.4589,
+        "hmin": 0.4451,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.4726,
+        "hmin": 0.4589,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.4863,
+        "hmin": 0.4726,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.5,
+        "hmin": 0.4863,
+        "vmax": 1,
+        "vmin": 0.94
+      },
+      {
+        "group": 0,
+        "hmax": 0.5137,
+        "hmin": 0.5,
+        "vmax": 1,
+        "vmin": 0.94
+      }
+    ],
+    "priorities": [
+      {
+        "active": true,
+        "componentId": "FLATBUFSERVER",
+        "origin": "webos@LocalSocket",
+        "priority": 140,
+        "visible": true
+      },
+      {
+        "active": false,
+        "componentId": "VIDEOGRABBER",
+        "origin": "System",
+        "priority": 240,
+        "visible": false
+      }
+    ],
+    "priorities_autoselect": true,
+    "sessions": [
+      {
+        "address": "ttyACM0",
+        "host": "Pico",
+        "name": "Pico/RP2040",
+        "port": -1
+      }
+    ],
+    "sound": {
+      "active": false,
+      "device": "",
+      "sound_available": [
+        "null | Discard all samples (playback) or generate zero samples (capture) | ",
+        "pulse | PulseAudio Sound Server | ",
+        "sysdefault:CARD=LGSIC | LGSIC, \nDefault Audio Device | Input"
+      ]
+    },
+    "videomodehdr": 1
+  },
+  "success": true,
+  "tan": 0
+}

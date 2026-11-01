@@ -101,6 +101,11 @@ export default {
   }),
   created() {
     if (this.item.hide) this.hide = this.item.hide;
+
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchStatus;
+
+    // Initial data fetch
     this.fetchStatus();
   },
   methods: {

@@ -1,0 +1,29 @@
+// Keeps custom stylesheets and dashboard HTML written against Font Awesome 6 working.
+// Everything here is a bridge to something version 7 removed, and is inert otherwise.
+// The version 6 font family aliases live alongside the other faces, in webfonts.scss.
+
+// Version 7 renamed `--fa-style-family-brands` to `--fa-family-brands`, without mapping the
+// old name. Honour it when set, so a custom icon set overriding the brands family keeps working.
+.fab,
+.fa-brands,
+.fa-classic.fa-brands {
+  --fa-family: var(--fa-style-family-brands, var(--fa-family-brands));
+}
+
+// Version 7 removed these, telling users to bring their own implementation. Dashboards put
+// arbitrary HTML in the footer, the message box and service subtitles, so anything hidden
+// with them would become visible text. Definitions are the version 6 ones.
+.sr-only,
+.fa-sr-only,
+.sr-only-focusable:not(:focus),
+.fa-sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -40,27 +40,32 @@ export default {
     };
   },
   created: function () {
-    const updateInterval = parseInt(this.item.updateInterval, 10) || 0;
-    if (updateInterval > 0) {
-      setInterval(() => this.fetchSummary(), updateInterval);
-    }
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchSummary;
+
+    // Initial data fetch
     this.fetchSummary();
   },
   methods: {
     fetchSummary: function () {
       this.fetch(`/api/summary`)
         .then((scrutinyData) => {
-          const devices = Object.values(scrutinyData.data.summary);
+          const devices = Object.values(scrutinyData.data.summary);       
+          const availableDevices = devices.filter(
+            (device) =>
+              device.device.archived === false &&
+              !device.device.DeletedAt
+          );
           this.passed =
-            devices.filter((device) => device.device.device_status === 0)
-              ?.length || 0;
+            availableDevices.filter(
+              (device) => 
+                device.device.device_status === 0)?.length || 0;
           this.failed =
-            devices.filter(
+            availableDevices.filter(
               (device) =>
                 device.device.device_status > 0 &&
-                device.device.device_status <= 3,
-            )?.length || 0;
-          this.unknown = devices.length - (this.passed + this.failed) || 0;
+                device.device.device_status <= 3)?.length || 0;
+          this.unknown = availableDevices.length - (this.passed + this.failed) || 0;
         })
         .catch((e) => {
           console.error(e);

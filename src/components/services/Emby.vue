@@ -48,31 +48,55 @@ export default {
     },
   },
   created() {
-    this.fetchServerStatus();
+    // Set up auto-update method for the scheduler
+    this.autoUpdateMethod = this.fetchAll;
 
-    if (!this.item.subtitle && this.status !== "dead")
-      this.fetchServerMediaStats();
+    // Initial data fetch
+    this.fetchAll();
   },
   methods: {
+    fetchAll: async function () {
+      const serverInfo = await this.fetchServerStatus();
+
+      if (!this.item.subtitle) {
+        this.fetchServerMediaStats(serverInfo);
+      }
+    },
     fetchServerStatus: async function () {
-      this.fetch("/System/info/public")
+      return this.fetch("/System/info/public")
         .then((response) => {
-          if (response.Id) this.status = "running";
-          else throw new Error();
+          if (!response.Id) throw new Error();
+          this.status = "running";
+          return response;
         })
         .catch((e) => {
           console.log(e);
           this.status = "dead";
+          return null;
         });
     },
-    fetchServerMediaStats: async function () {
-      const headers = {
-        "X-Emby-Token": this.item.apikey,
-      };
+    // Jellyfin 12 no longer accepts X-Emby-Token.
+    authHeaders: function (serverInfo) {
+      const isJellyfin12OrNewer =
+        serverInfo?.ProductName?.toLowerCase().includes("jellyfin") &&
+        parseInt(serverInfo.Version, 10) >= 12;
 
-      var data = await this.fetch("/items/counts", { headers }).catch((e) => {
+      const legacyAuth = this.item.legacyAuth ?? !isJellyfin12OrNewer;
+
+      return legacyAuth
+        ? { "X-Emby-Token": this.item.apikey }
+        : { Authorization: `MediaBrowser Token="${this.item.apikey}"` };
+    },
+    fetchServerMediaStats: async function (serverInfo) {
+      const headers = this.authHeaders(serverInfo);
+
+      const data = await this.fetch("/items/counts", { headers }).catch((e) => {
         console.log(e);
       });
+
+      if (!data) {
+        return;
+      }
 
       this.albumCount = data.AlbumCount;
       this.songCount = data.SongCount;
