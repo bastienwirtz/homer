@@ -6,9 +6,9 @@
   "items": [
     {
       "id": "53o8l8k9frykzln",
-      "name": "Burhan-Server",
+      "name": "my-server",
       "status": "up",
-      "info": "{\"cpu\":4.15,\"mp\":55.61,\"dp\":53.87}",
+      "info": { "cpu": 4.15, "mp": 55.61, "dp": 53.87 },
       "updated": "2026-09-10 22:45:00.000Z"
     }
   ]

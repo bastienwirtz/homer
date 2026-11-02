@@ -123,19 +123,19 @@ Displays AdGuard Home protection status and blocked query statistics.
 
 ## Beszel
 
-Displays [Beszel](https://beszel.dev/) system metrics (CPU, Memory, Disk usage) and online/offline status.
+Displays the status of a system monitored by [Beszel](https://beszel.dev/) (online, offline, paused or pending), with its CPU, memory and disk usage.
 
 ```yaml
 - name: "Beszel"
   type: "Beszel"
   logo: "assets/tools/sample.png"
   url: https://my-beszel.url
-  # token: "your-auth-token"  # Optional: PocketBase auth token if authentication is required
-  # system: "my-server-name"  # Optional: specific system name or ID (defaults to first system)
-  # hide: ["disk"]            # Optional: hide metrics ('cpu', 'mem', 'disk')
+  api_token: "<---insert-token-here--->"
+  system: "my-server-name" # Optional: system name or id. Defaults to the first system by name.
+  hide: [] # Optional: hides "cpu", "mem", "disk".
 ```
 
-Auto refresh is supported by this integration.
+<!-- TODO(brhnshn): document authentication, i.e. how to get an `api_token` (see the review on #1087). -->
 
 ## Copy to Clipboard
 

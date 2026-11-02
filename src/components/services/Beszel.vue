@@ -1,33 +1,14 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="error">
-          {{ error }}
-        </template>
-        <template v-else-if="stats">
-          <span v-if="isValueShown('cpu') && stats.cpu !== undefined" title="CPU Usage">
-            <i class="fa-solid fa-microchip"></i> {{ stats.cpu }}%
-          </span>
-          <span v-if="isValueShown('mem') && stats.mem !== undefined" title="RAM Usage">
-            <template v-if="isValueShown('cpu') && stats.cpu !== undefined"> / </template>
-            <i class="fa-solid fa-memory"></i> {{ stats.mem }}%
-          </span>
-          <span v-if="isValueShown('disk') && stats.disk !== undefined" title="Disk Usage">
-            <template v-if="(isValueShown('cpu') && stats.cpu !== undefined) || (isValueShown('mem') && stats.mem !== undefined)"> / </template>
-            <i class="fa-solid fa-hard-drive"></i> {{ stats.disk }}%
-          </span>
-        </template>
-        <template v-else-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-      </p>
-    </template>
-    <template #indicator>
-      <div v-if="status" class="status" :class="status">
-        {{ statusText }}
-      </div>
+  <Generic :item="item" :status="status">
+    <template v-if="metrics.length" #subtitle>
+      <span
+        v-for="(metric, index) in metrics"
+        :key="metric.key"
+        :title="metric.label"
+      >
+        <template v-if="index"> / </template>
+        <i :class="metric.icon"></i> {{ metric.value }}%
+      </span>
     </template>
   </Generic>
 </template>
@@ -35,100 +16,90 @@
 <script>
 import service from "@/mixins/service.js";
 
+const SYSTEM_STATUS = {
+  up: { state: "online", label: "online" },
+  down: { state: "offline", label: "offline" },
+  paused: { state: "warning", label: "paused" },
+  pending: { state: "busy", label: "pending" },
+};
+
+const METRICS = [
+  {
+    key: "cpu",
+    field: "cpu",
+    label: "CPU Usage",
+    icon: "fa-solid fa-microchip",
+  },
+  { key: "mem", field: "mp", label: "RAM Usage", icon: "fa-solid fa-memory" },
+  {
+    key: "disk",
+    field: "dp",
+    label: "Disk Usage",
+    icon: "fa-solid fa-hard-drive",
+  },
+];
+
 export default {
   name: "Beszel",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
-    stats: null,
-    status: "",
-    error: null,
+    system: null,
+    serverError: null,
   }),
   computed: {
-    statusText() {
-      if (this.status === "online") return "UP";
-      if (this.status === "offline") return "DOWN";
-      return "";
+    status() {
+      if (this.serverError || !this.system) {
+        return this.reachabilityStatus();
+      }
+      return (
+        SYSTEM_STATUS[this.system.status] ?? {
+          state: "unknown",
+          label: this.system.status || "unknown",
+        }
+      );
+    },
+    metrics() {
+      if (this.serverError || this.system?.status !== "up") {
+        return [];
+      }
+      const info = this.system.info ?? {};
+      return METRICS.filter(
+        ({ key, field }) =>
+          this.isValueShown(key) && typeof info[field] === "number",
+      ).map((metric) => ({ ...metric, value: Math.round(info[metric.field]) }));
     },
   },
-  created() {
-    this.autoUpdateMethod = this.fetchStats;
-    this.fetchStats();
-  },
   methods: {
-    fetchStats: async function () {
-      const headers = {};
-      const token = this.item.token || this.item.apikey;
-      if (token) {
-        headers["Authorization"] = token.startsWith("Bearer ")
-          ? token
-          : `Bearer ${token}`;
-      }
+    fetchData: function () {
+      const headers = this.item.api_token
+        ? { Authorization: `Bearer ${this.item.api_token}` }
+        : {};
+      const params = new URLSearchParams({
+        sort: "name",
+        perPage: "1000",
+        skipTotal: "1",
+        fields: "id,name,status,info",
+      });
+      const wanted = this.item.system ? String(this.item.system) : null;
 
-      let endpoint = "/api/collections/systems/records";
-      if (this.item.system) {
-        const filter = `name="${this.item.system}" || id="${this.item.system}"`;
-        endpoint += `?filter=(${encodeURIComponent(filter)})`;
-      } else {
-        endpoint += "?perPage=1";
-      }
-
-      this.fetch(endpoint, { headers })
-        .then((response) => {
-          const items = response.items || [];
-          if (!items.length) {
-            this.stats = null;
-            this.status = "offline";
-            this.error = this.item.system
-              ? `System "${this.item.system}" not found`
-              : "No systems found";
-            return;
-          }
-
-          let system = items[0];
-          if (this.item.system) {
-            const found = items.find(
-              (s) => s.name === this.item.system || s.id === this.item.system
+      return this.load(
+        this.fetch(`/api/collections/systems/records?${params}`, {
+          headers,
+        }).then((response) => {
+          const items = response.items ?? [];
+          const system = wanted
+            ? items.find((s) => s.name === wanted || s.id === wanted)
+            : items[0];
+          if (!system) {
+            throw new Error(
+              this.item.system
+                ? `Beszel system "${this.item.system}" not found, or not visible with this api_token`
+                : "No Beszel system visible with this api_token",
             );
-            if (!found) {
-              this.stats = null;
-              this.status = "offline";
-              this.error = `System "${this.item.system}" not found`;
-              return;
-            }
-            system = found;
           }
-
-          this.status = system.status === "up" ? "online" : "offline";
-          this.error = null;
-
-          let info = system.info;
-          if (typeof info === "string") {
-            try {
-              info = JSON.parse(info);
-            } catch {
-              info = null;
-            }
-          }
-
-          if (info) {
-            this.stats = {
-              cpu: typeof info.cpu === "number" ? Math.round(info.cpu) : info.cpu,
-              mem: typeof info.mp === "number" ? Math.round(info.mp) : info.mp,
-              disk: typeof info.dp === "number" ? Math.round(info.dp) : info.dp,
-            };
-          } else {
-            this.stats = null;
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-          this.stats = null;
-          this.status = "offline";
-          this.error = "Unable to connect to Beszel";
-        });
+          this.system = system;
+        }),
+      );
     },
   },
 };
