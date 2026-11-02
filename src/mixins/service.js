@@ -17,6 +17,7 @@ function mergeHeaders(...sources) {
 
 export default {
   props: {
+    item: Object,
     proxy: Object,
   },
   inject: {
@@ -38,6 +39,10 @@ export default {
     if (this.endpoint && this.endpoint.endsWith("/")) {
       this.endpoint = this.endpoint.slice(0, -1);
     }
+
+    if (typeof this.fetchData === "function") {
+      this.fetchData();
+    }
   },
   beforeMount: function () {
     // Initialize auto-update if configured
@@ -51,9 +56,44 @@ export default {
     isValueShown(key) {
       return !(this.item.hide || []).includes(key);
     },
-    // Long counts blow out a small pill.
-    capCount(value, max = 99) {
-      return typeof value === "number" && value > max ? `${max}+` : value;
+    reachabilityStatus() {
+      if (this.serverError === null || this.serverError === undefined) {
+        return null;
+      }
+      return this.serverError
+        ? { state: "offline", label: "offline" }
+        : { state: "online", label: "online" };
+    },
+    async load(...requests) {
+      let failed = false;
+      await Promise.all(
+        requests.map((request) =>
+          request.catch((e) => {
+            console.error(e);
+            failed = true;
+          }),
+        ),
+      );
+      this.serverError = failed;
+    },
+    requireConfig(...keys) {
+      const missing = keys.filter((key) => !this.item[key]);
+      if (!missing.length) {
+        return true;
+      }
+      console.error(
+        `Missing ${missing.join(", ")} in config.yml for the "${this.item.name || this.item.type}" entry.`,
+      );
+      this.serverError = true;
+      return false;
+    },
+    connectionBadge() {
+      return {
+        key: "serverError",
+        label: `Connection error to the ${this.item.type} API, check the url and credentials in config.yml`,
+        value: this.serverError ? "?" : null,
+        tone: "danger",
+      };
     },
     fetch: function (path, init, json = true) {
       let options = {};
@@ -96,7 +136,7 @@ export default {
 
         if (!success) {
           throw new Error(
-            `Fail to fetch ressource: (${response.status} error)`,
+            `Failed to fetch resource: (${response.status} error)`,
             { cause: response },
           );
         }
@@ -105,8 +145,13 @@ export default {
       });
     },
     initAutoUpdate: function () {
-      // Check if component has defined an auto-update method and interval
-      if (typeof this.autoUpdateMethod !== "function") {
+      if (this.$options.autoUpdate === false) {
+        return;
+      }
+
+      // A card's created() runs after the mixin's, so it can still pick a method.
+      const method = this.autoUpdateMethod ?? this.fetchData;
+      if (typeof method !== "function") {
         return;
       }
 
@@ -114,7 +159,7 @@ export default {
       if (interval <= 0) {
         return;
       }
-      updateScheduler.register(this, interval, this.autoUpdateMethod);
+      updateScheduler.register(this, interval, method);
     },
     getUpdateInterval: function () {
       let intervalKey = "updateIntervalMs";
