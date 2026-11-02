@@ -1,75 +1,66 @@
 <template>
-  <Generic :item="item">
-    <template #content>
-      <p class="title is-4">{{ item.name }}</p>
-      <p class="subtitle is-6">
-        <template v-if="item.subtitle">
-          {{ item.subtitle }}
-        </template>
-        <template v-else-if="vms">
-          <div v-if="loading">
-            <strong>Loading...</strong>
-          </div>
-          <div v-else-if="error">
-            <strong class="danger">Error loading info</strong>
-          </div>
-          <div
-            v-else
-            class="metrics"
-            :class="{
-              'is-size-7-mobile': item.small_font_on_small_screens,
-              'is-small': item.small_font_on_desktop,
-            }"
-          >
-            <span v-if="isValueShown('vms')" class="margined"
-              >VMs:
-              <span class="is-number"
-                ><span class="has-text-weight-bold">{{ vms.running }}</span
-                ><span v-if="isValueShown('vms_total')"
-                  >/{{ vms.total }}</span
-                ></span
-              ></span
-            >
-            <span v-if="isValueShown('lxcs')" class="margined"
-              >LXCs:
-              <span class="is-number"
-                ><span class="has-text-weight-bold">{{ lxcs.running }}</span
-                ><span v-if="isValueShown('lxcs_total')"
-                  >/{{ lxcs.total }}</span
-                ></span
-              ></span
-            >
-            <span v-if="isValueShown('disk')" class="margined"
-              >Disk:
-              <span
-                class="has-text-weight-bold is-number"
-                :class="statusClass(diskUsed)"
-                >{{ diskUsed }}%</span
-              ></span
-            >
-            <span v-if="isValueShown('mem')" class="margined"
-              >Mem:
-              <span
-                class="has-text-weight-bold is-number"
-                :class="statusClass(memoryUsed)"
-                >{{ memoryUsed }}%</span
-              ></span
-            >
-            <span v-if="isValueShown('cpu')" class="margined"
-              >CPU:
-              <span
-                class="has-text-weight-bold is-number"
-                :class="statusClass(cpuUsed)"
-                >{{ cpuUsed }}%</span
-              ></span
-            >
-          </div>
-        </template>
-      </p>
+  <Generic :item="item" :badges="badges">
+    <template v-if="vms" #subtitle>
+      <div v-if="loading">
+        <strong>Loading...</strong>
+      </div>
+      <div v-else-if="serverError">
+        <strong class="danger">Error loading info</strong>
+      </div>
+      <div
+        v-else
+        class="metrics"
+        :class="{
+          'is-size-7-mobile': item.small_font_on_small_screens,
+          'is-small': item.small_font_on_desktop,
+        }"
+      >
+        <span v-if="isValueShown('vms')" class="margined"
+          >VMs:
+          <span class="is-number"
+            ><span class="has-text-weight-bold">{{ vms.running }}</span
+            ><span v-if="isValueShown('vms_total')"
+              >/{{ vms.total }}</span
+            ></span
+          ></span
+        >
+        <span v-if="isValueShown('lxcs') && lxcs.total" class="margined"
+          >LXCs:
+          <span class="is-number"
+            ><span class="has-text-weight-bold">{{ lxcs.running }}</span
+            ><span v-if="isValueShown('lxcs_total')"
+              >/{{ lxcs.total }}</span
+            ></span
+          ></span
+        >
+        <span v-if="isValueShown('disk')" class="margined"
+          >Disk:
+          <span
+            class="has-text-weight-bold is-number"
+            :class="statusClass(diskUsed)"
+            >{{ diskUsed }}%</span
+          ></span
+        >
+        <span v-if="isValueShown('mem')" class="margined"
+          >Mem:
+          <span
+            class="has-text-weight-bold is-number"
+            :class="statusClass(memoryUsed)"
+            >{{ memoryUsed }}%</span
+          ></span
+        >
+        <span v-if="isValueShown('cpu')" class="margined"
+          >CPU:
+          <span
+            class="has-text-weight-bold is-number"
+            :class="statusClass(cpuUsed)"
+            >{{ cpuUsed }}%</span
+          ></span
+        >
+      </div>
     </template>
-    <template #indicator>
-      <i v-if="loading" class="fa fa-circle-notch fa-spin fa-2xl"></i>
-      <i v-if="error" class="fa fa-exclamation-circle fa-2xl danger"></i>
+    <template v-if="loading" #aside>
+      <i class="fa fa-circle-notch fa-spin fa-2xl"></i>
     </template>
   </Generic>
 </template>
@@ -80,9 +71,6 @@ import service from "@/mixins/service.js";
 export default {
   name: "Proxmox",
   mixins: [service],
-  props: {
-    item: Object,
-  },
   data: () => ({
     vms: {
       total: 0,
@@ -95,18 +83,13 @@ export default {
     memoryUsed: 0,
     diskUsed: 0,
     cpuUsed: 0,
-    hide: [],
-    error: false,
+    serverError: null,
     loading: true,
   }),
-  created() {
-    if (this.item.hide) this.hide = this.item.hide;
-
-    // Set up auto-update method for the scheduler
-    this.autoUpdateMethod = this.fetchStatus;
-
-    // Initial data fetch
-    this.fetchStatus();
+  computed: {
+    badges() {
+      return [this.connectionBadge()];
+    },
   },
   methods: {
     statusClass(value) {
@@ -114,7 +97,7 @@ export default {
       if (value > this.item.warning_value) return "warning";
       return "healthy";
     },
-    fetchStatus: async function () {
+    fetchData: async function () {
       try {
         const options = {
           headers: {
@@ -152,21 +135,16 @@ export default {
           );
           this.parseVMsAndLXCs(lxcs, this.lxcs);
         }
-        this.error = false;
+        this.serverError = false;
       } catch (err) {
-        console.log(err);
-        this.error = true;
+        console.error(err);
+        this.serverError = true;
       }
       this.loading = false;
     },
     parseVMsAndLXCs(items, value) {
-      value.total += items.data.length;
-      value.running += items.data.filter((i) => i.status === "running").length;
-      // if no vms, hide this value:
-      if (value.total == 0) this.hide.push("lxcs");
-    },
-    isValueShown(value) {
-      return this.hide.indexOf(value) == -1;
+      value.total = items.data.length;
+      value.running = items.data.filter((i) => i.status === "running").length;
     },
   },
 };
@@ -174,13 +152,13 @@ export default {
 
 <style scoped lang="scss">
 .healthy {
-  color: green;
+  color: var(--status-online);
 }
 .warning {
-  color: orange;
+  color: var(--status-warning);
 }
 .danger {
-  color: red;
+  color: var(--status-offline);
 }
 .metrics .margined:not(:first-child) {
   margin-left: 0.3rem;
