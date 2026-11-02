@@ -98,16 +98,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.media-left {
-  .image {
-    display: flex;
-    align-items: center;
-  }
-
-  img {
-    max-height: 100%;
-  }
-}
 .status {
   font-size: 0.8rem;
   color: var(--text-title);
