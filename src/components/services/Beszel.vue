@@ -6,7 +6,7 @@
         :key="metric.key"
         :title="metric.label"
       >
-        <template v-if="index"> / </template>
+        <span v-if="index" class="mx-1"> | </span>
         <i :class="metric.icon"></i> {{ metric.value }}%
       </span>
     </template>
