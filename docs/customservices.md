@@ -443,22 +443,24 @@ The url must be the root url of Medusa application.
 
 ## Memos
 
-Displays [Memos](https://usememos.com/) note count, version, and online/offline status.
+Displays the number of memos and the version of a [Memos](https://usememos.com/) instance, with its online / offline status.
 
 ```yaml
 - name: "Memos"
   type: "Memos"
   logo: "assets/tools/sample.png"
   url: https://my-memos.url
-  # apikey: "your-access-token"        # Optional: Access token or apikey if authentication is required
-  # token: "your-access-token"         # Optional: Alias for apikey
-  # filter: "visibilities == ['PUBLIC']" # Optional: AIP-160 filter for memos query
-  # hide: ["version"]                  # Optional: hide metrics ('memos', 'version')
+  apikey: "<---insert-access-token-here--->" # Optional: see below.
+  filter: 'pinned == true' # Optional: only count the memos matching this filter.
+  hide: [] # Optional: hides "memos", "version", "serverError".
 ```
 
-Auto refresh is supported by this integration.
+Works with Memos 0.22 and later, including the 26.x releases and their new API. The `filter` syntax is the one of your Memos version, see the `filter` field of `ListMemos` in its API documentation.
 
-**Access Token**: If your instance is private or you want to include private memos, generate an Access Token in your Memos instance under `Settings -> Access Tokens`. You can specify the credential using either `apikey` or `token`.
+**Access Token**: without `apikey`, only the public memos are counted, and a private instance shows as offline. To count your own memos too, create an access token in Memos under Settings > My Account > Access Tokens. Every memo that token's user can read is counted.
+
+> [!WARNING]
+> A Memos access token can do everything its user can, and `config.yml` can be read by anyone who can open Homer. Only set `apikey` if your Homer is not exposed to people who should not have that access. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
 
 ## Mylar
 
