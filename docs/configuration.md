@@ -141,13 +141,20 @@ services:
     items:
       - name: "Awesome app"
         logo: "assets/tools/sample.png"
-        # Alternatively a fa icon can be provided:
+        # Alternatively a fa icon can be provided. Note that icon take precedence if both icon and logo are set.
         # icon: "fab fa-jenkins"
         subtitle: "Bookmark example"
         tag: "app"
         keywords: "self hosted reddit" # optional keyword used for searching purpose
         url: "https://www.reddit.com/r/selfhosted/"
         target: "_blank" # optional html tag target attribute
+        # Optional shortcut links, shown as small pills along the bottom of the card.
+        quick:
+          - name: "Wiki"
+            url: "https://www.reddit.com/r/selfhosted/wiki/"
+            icon: "fas fa-book" # optional
+            target: "_blank" # optional
+            color: "#4285f4" # optional, overrides the default pill background
       - name: "Another one"
         logo: "assets/tools/sample2.png"
         subtitle: "Another application"

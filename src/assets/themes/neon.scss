@@ -85,7 +85,7 @@
 
   *[class^="highlight-"],
   *[class*=" highlight-"] {
-    .card:hover {
+    .card-wrapper:hover .card {
       border: 1px solid var(--highlight-color);
     }
   }
