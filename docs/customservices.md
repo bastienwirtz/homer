@@ -135,7 +135,14 @@ Displays the status of a system monitored by [Beszel](https://beszel.dev/) (onli
   hide: [] # Optional: hides "cpu", "mem", "disk".
 ```
 
-<!-- TODO(brhnshn): document authentication, i.e. how to get an `api_token` (see the review on #1087). -->
+**Getting an `api_token`**: Beszel has no API keys and only returns systems to signed-in users, so the card authenticates with a user token. Since `config.yml` can be read by anyone who can open Homer, use a dedicated read-only user and a token that can't be refreshed:
+
+1. **Create a read-only user.** In the PocketBase admin panel of your hub (`https://my-beszel.url/_/`, superuser account required), open the `users` collection and add a new user with the `readonly` role.
+2. **Share the systems to monitor with it.** In the `systems` collection, open each system the card should show and add the new user to its `users` field. A read-only user only sees the systems shared with it.
+3. **Generate the token.** Back in the `users` collection, open the new user and choose **Impersonate** in the record's dropdown menu. Set the token `duration` (in seconds) explicitly: `0` falls back to the default duration, which expires after a few days. Copy the generated token into `api_token`.
+
+> [!NOTE]
+> Impersonate tokens can't be refreshed. Once one expires, generate a new one. To revoke a token early, change the read-only user's password.
 
 ## Copy to Clipboard
 
