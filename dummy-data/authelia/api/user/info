@@ -1,0 +1,11 @@
+{
+  "status": "OK",
+  "data": {
+    "display_name": "John Doe",
+    "emails": ["john.doe@example.com"],
+    "method": "totp",
+    "has_totp": true,
+    "has_webauthn": false,
+    "has_duo": false
+  }
+}
