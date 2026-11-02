@@ -37,6 +37,7 @@ const counters = [
     key: "media",
     label: "Available media",
     tone: "success",
+    cap: false,
     from: "media",
     count: (data) => data?.pageInfo?.results,
   },
@@ -71,12 +72,9 @@ export default {
     requests: null,
     issues: null,
     media: null,
-    failed: {},
+    serverError: null,
   }),
   computed: {
-    serverError() {
-      return Object.values(this.failed).some(Boolean);
-    },
     badges() {
       return [
         ...counters.map(({ count, from, ...badge }) => ({
@@ -96,42 +94,24 @@ export default {
       );
     },
   },
-  created() {
-    this.fetchOptions = this.item.apikey
-      ? { headers: { "X-Api-Key": this.item.apikey } }
-      : {};
-    this.endpointsToFetch = this.resolveEndpoints();
-    if (this.endpointsToFetch.length) {
-      this.autoUpdateMethod = this.fetchStats;
-      this.fetchStats();
-    }
-  },
   methods: {
     displayVersion,
-    // A subtitle override hides the version, so skip status then.
-    resolveEndpoints() {
-      const keys = [];
-      if (!this.item.subtitle) keys.push("status");
-      if (this.isValueShown("media")) keys.push("media");
-      if (this.isValueShown("pending") || this.isValueShown("processing"))
-        keys.push("requests");
-      if (this.isValueShown("issues")) keys.push("issues");
-      return keys;
-    },
-    loadEndpoint(key) {
-      return this.fetch(endpoints[key], this.fetchOptions)
-        .then((data) => {
-          this[key] = data;
-          this.failed[key] = false;
-        })
-        .catch((e) => {
-          console.error(e);
-          this.failed[key] = true;
-        });
-    },
-    fetchStats() {
-      return Promise.all(
-        this.endpointsToFetch.map((key) => this.loadEndpoint(key)),
+    fetchData: function () {
+      const headers = { "X-Api-Key": this.item.apikey };
+      const keys = Object.keys(endpoints).filter(
+        (key) =>
+          key === "status" ||
+          counters.some(
+            (counter) => counter.from === key && this.isValueShown(counter.key),
+          ),
+      );
+
+      return this.load(
+        ...keys.map((key) =>
+          this.fetch(endpoints[key], { headers }).then((data) => {
+            this[key] = data;
+          }),
+        ),
       );
     },
   },
