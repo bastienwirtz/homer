@@ -100,7 +100,7 @@ Badges are removed with the `hide` option, using the keys listed in each service
 
 > [!TIP]
 > **Auto refresh of the card data**: cards refresh on the `updateIntervalMs` interval, set globally or per service; `false` or `0` turns it off.
-> Docuseal, Gitea, Matrix, OliveTin, Traefik, TrueNAS Scale, Vaultwarden and Wallabag only read a version, so they are fetched once and never polled.
+> Docuseal, Gitea, Matrix, OliveTin, TrueNAS Scale, Vaultwarden and Wallabag only read a version, so they are fetched once and never polled.
 
 ## AdGuard Home
 
@@ -859,15 +859,13 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
 
 ## Traefik
 
-Displays Traefik stats counts as colored badges: routers, services, middlewares, certificates, warnings and errors. Each count is the sum across all sections.
-
-Auto refresh is supported by this integration.
+Displays the Traefik version and online status, with badges counting routers, services, middlewares and certificates, plus any warnings and errors. Routers, services and middlewares are summed across `http`, `tcp` and `udp`; warnings and errors across those and the certificates. Certificates are only reported by Traefik 3.7 and later.
 
 > [!IMPORTANT]
 > **Potentially breaking change**: on version `26.08.3` and earlier, this card only displayed the Traefik version.
 > It now also shows badges for routers, services, middlewares, certificates, warnings and errors.
 >
-> To keep the old version-only card, hide every badge:
+> To keep the old version-only card, hide every badge, which also skips the `/api/overview` request:
 >
 > ```yaml
 > - name: "Traefik"
@@ -882,15 +880,8 @@ Auto refresh is supported by this integration.
   logo: "assets/tools/sample.png"
   url: "http://traefik.example.com"
   # basic_auth: "admin:password"  # (Optional) Send Authorization header.
-  # subtitle: "Reverse proxy"     # (Optional) Overrides the version subtitle (skips the /api/version call).
-  # hide: []                      # (Optional) hides badges. Possible values are
-  #                               # "routers", "services", "middlewares",
-  #                               # "certificates", "warnings" and "errors".
+  hide: [] # Optional: badges to hide: "routers", "services", "middlewares", "certificates", "warnings", "errors".
 ```
-
-**Hiding badges**: every badge is shown by default; list a key under `hide` to remove it. Routers, services and middlewares are summed across `http`, `tcp` and `udp`; warnings and errors are summed across those plus `certificates`. Hide all six for a version-only card. Badge counts are capped at `99+`.
-
-**Version**: the version (from `/api/version`) is shown as the subtitle. Setting `subtitle` overrides it, in which case the version request is skipped.
 
 **Authentication**: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (`Basic <encoded_value>`). The value must be formatted as "admin:password".
 
