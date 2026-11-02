@@ -100,7 +100,7 @@ Badges are removed with the `hide` option, using the keys listed in each service
 
 > [!TIP]
 > **Auto refresh of the card data**: cards refresh on the `updateIntervalMs` interval, set globally or per service; `false` or `0` turns it off.
-> Docuseal, Gitea, Matrix, OliveTin, Traefik, TrueNAS Scale, Vaultwarden and Wallabag only read a version, so they are fetched once and never polled.
+> Docuseal, Gitea, Matrix, OliveTin, TrueNAS Scale, Vaultwarden and Wallabag only read a version, so they are fetched once and never polled.
 
 ## AdGuard Home
 
@@ -859,14 +859,28 @@ Displays the number of currently queued items for transcoding on your Tdarr inst
 
 ## Traefik
 
-Displays Traefik.
+Displays the Traefik version and online status, with badges counting routers, services, middlewares and certificates, plus any warnings and errors. Routers, services and middlewares are summed across `http`, `tcp` and `udp`; warnings and errors across those and the certificates. Certificates are only reported by Traefik 3.7 and later.
+
+> [!IMPORTANT]
+> **Potentially breaking change**: on version `26.08.3` and earlier, this card only displayed the Traefik version.
+> It now also shows badges for routers, services, middlewares, certificates, warnings and errors.
+>
+> To keep the old version-only card, hide every badge, which also skips the `/api/overview` request:
+>
+> ```yaml
+> - name: "Traefik"
+>   type: "Traefik"
+>   url: "http://traefik.example.com"
+>   hide: ["routers", "services", "middlewares", "certificates", "warnings", "errors"]
+> ```
 
 ```yaml
 - name: "Traefik"
   type: "Traefik"
   logo: "assets/tools/sample.png"
   url: "http://traefik.example.com"
-  # basic_auth: "admin:password"  # (Optional) Send Authorization header. 
+  # basic_auth: "admin:password"  # (Optional) Send Authorization header.
+  hide: [] # Optional: badges to hide: "routers", "services", "middlewares", "certificates", "warnings", "errors".
 ```
 
 **Authentication**: If BasicAuth is set, credentials will be encoded in Base64 and sent as an Authorization header (`Basic <encoded_value>`). The value must be formatted as "admin:password".
