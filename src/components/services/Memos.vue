@@ -14,17 +14,14 @@ import { displayVersion } from "@/utils/format.js";
 // Memos moved its API twice: tried newest first, the one answering is kept.
 const API_LAYOUTS = [
   {
-    prefix: "/api",
     profile: "/api/instance/profile",
     stats: ["/api/users/-/stats", "/api/users:stats"],
   }, // 26.x
   {
-    prefix: "/api/v1",
     profile: "/api/v1/instance/profile",
-    stats: ["/api/v1/users/-/stats", "/api/v1/users:stats"],
+    stats: ["/api/v1/users:stats", "/api/v1/users/-/stats"],
   }, // 0.26 to 0.31
   {
-    prefix: "/api/v1",
     profile: "/api/v1/workspace/profile",
     stats: ["/api/v1/users:stats", "/api/v1/users/-/stats"],
   }, // 0.22 to 0.25
@@ -81,6 +78,9 @@ export default {
             .then(() => this.fetchMemoCount())
             .catch(() => {}),
         );
+      } else {
+        this.count = null;
+        this.countError = false;
       }
 
       await this.load(...requests);
@@ -114,6 +114,10 @@ export default {
         ? [this.apiStats]
         : this.api?.stats || [];
 
+      if (!endpoints.length) {
+        return;
+      }
+
       try {
         let lastError;
         for (const endpoint of endpoints) {
@@ -125,10 +129,16 @@ export default {
             return;
           } catch (e) {
             lastError = e;
+            const status = e.cause?.status;
+            if (status === 401 || status === 403) {
+              break;
+            }
           }
         }
-        // If cached apiStats failed, retry candidate stats endpoints for this layout
-        if (this.apiStats) {
+        const status = lastError?.cause?.status;
+        const isAuthError = status === 401 || status === 403;
+        // If cached apiStats failed and it was not an auth error, retry candidate stats endpoints
+        if (this.apiStats && !isAuthError) {
           this.apiStats = null;
           for (const endpoint of this.api?.stats || []) {
             try {
@@ -139,6 +149,9 @@ export default {
               return;
             } catch (e) {
               lastError = e;
+              if (e.cause?.status === 401 || e.cause?.status === 403) {
+                break;
+              }
             }
           }
         }
@@ -160,12 +173,37 @@ export default {
       if (!Array.isArray(list) || list.length === 0) {
         return 0;
       }
-      const stat = list[0];
+
+      let stat = list[0];
+      if (this.item.user) {
+        const target = this.item.user.toString();
+        const found = list.find(
+          (s) =>
+            s &&
+            (s.name === target ||
+              s.name === `users/${target}` ||
+              s.name === `users/${target}/stats` ||
+              s.username === target),
+        );
+        if (found) {
+          stat = found;
+        }
+      }
+
+      if (!stat || typeof stat !== "object") {
+        return 0;
+      }
       if (typeof stat.totalMemoCount === "number") {
         return stat.totalMemoCount;
       }
       if (typeof stat.total_memo_count === "number") {
         return stat.total_memo_count;
+      }
+      if (Array.isArray(stat.memoCreatedTimestamps)) {
+        return stat.memoCreatedTimestamps.length;
+      }
+      if (Array.isArray(stat.memo_created_timestamps)) {
+        return stat.memo_created_timestamps.length;
       }
       if (Array.isArray(stat.memoDisplayTimestamps)) {
         return stat.memoDisplayTimestamps.length;

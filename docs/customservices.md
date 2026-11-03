@@ -451,6 +451,7 @@ Displays the number of memos and the version of a [Memos](https://usememos.com/)
   logo: "assets/tools/sample.png"
   url: https://my-memos.url
   apikey: "<---insert-access-token-here--->" # Optional: see below.
+  # user: "username"                         # Optional: pick a specific user's stats on multi-user setups.
   hide: [] # Optional: hides "memos", "version".
 ```
 
