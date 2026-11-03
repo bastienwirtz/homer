@@ -1,0 +1,18 @@
+{
+  "userStats": [
+    {
+      "name": "users/1",
+      "totalMemoCount": 3,
+      "memoCreatedTimestamps": [
+        "2026-09-11T10:00:00Z",
+        "2026-09-11T11:30:00Z",
+        "2026-09-11T12:15:00Z"
+      ],
+      "memoDisplayTimestamps": [
+        "2026-09-11T10:00:00Z",
+        "2026-09-11T11:30:00Z",
+        "2026-09-11T12:15:00Z"
+      ]
+    }
+  ]
+}

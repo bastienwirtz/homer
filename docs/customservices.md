@@ -34,6 +34,7 @@ Available services are located in `src/components/`:
 - [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
+- [Memos](#memos)
 - [Miniflux](#miniflux)
 - [Mylar](#mylar)
 - [NetAlertx](#netalertx)
@@ -439,6 +440,27 @@ Displays News (gray), Warning (orange) or Error (red) notifications bubbles from
 The url must be the root url of Medusa application.
 
 **API Key**: The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Memos
+
+Displays the number of memos and the version of a [Memos](https://usememos.com/) instance, with its online / offline status.
+
+```yaml
+- name: "Memos"
+  type: "Memos"
+  logo: "assets/tools/sample.png"
+  url: https://my-memos.url
+  apikey: "<---insert-access-token-here--->" # Optional: see below.
+  # user: "username"                         # Optional: pick a specific user's stats on multi-user setups.
+  hide: [] # Optional: hides "memos", "version".
+```
+
+Works with Memos 0.22 and later, including the 26.x releases and their new API.
+
+**Access Token**: without `apikey`, a private instance shows online with its version, just without a count. The badge counts the token user's own memos (comments aren't counted), from Memos 0.26 onwards. To count your own memos, create an access token in Memos under Settings > My Account > Access Tokens.
+
+> [!WARNING]
+> A Memos access token can do everything its user can, and `config.yml` can be read by anyone who can open Homer. Only set `apikey` if your Homer is not exposed to people who should not have that access. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
 
 ## Mylar
 

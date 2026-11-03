@@ -1,0 +1,7 @@
+{
+  "version": "26.11.0",
+  "demo": false,
+  "instanceUrl": "https://memos.example",
+  "accessMode": "INSTANCE_ACCESS_MODE_PUBLIC",
+  "needsSetup": false
+}
