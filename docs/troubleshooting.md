@@ -69,7 +69,7 @@ Only one icon is lost: **`fa-vector-square` no longer exists**. Font Awesome ren
 > [!NOTE]
 > Font Awesome 7 also gives every icon the same width by default. Homer keeps the previous behaviour, so nothing moves after upgrading. See [icon width](configuration.md#icon-width) if you want the new look.
 
-## My custom stylesheet stopped styling the service cards since 26.09.20
+## My custom stylesheet stopped styling the service cards since 26.11.1
 
 Every card moved onto a shared layout, so a few selectors no longer match:
 
