@@ -210,6 +210,10 @@
         }
       }
 
+      .column.is-auto {
+        min-width: fit-content;
+      }
+
       .card {
         border: none;
         border-radius: var(--card-radius);
