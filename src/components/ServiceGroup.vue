@@ -1,6 +1,6 @@
 <template>
   <!-- Vertical layout: Group container wrapper -->
-  <div v-if="isVertical" :class="['column', `is-${12 / columns}`]">
+  <div v-if="isVertical" :class="['column', columnClass]">
     <GroupHeader v-if="group.name" :group="group" class="group-title" />
     <Service
       v-for="(item, index) in group.items"
@@ -24,11 +24,7 @@
       :key="`srv-${groupIndex}-${index}-${item.name || item.type}`"
       :item="item"
       :proxy="proxy"
-      :class="[
-        'column',
-        `is-${12 / columns}`,
-        `${item.class || group.class || ''}`,
-      ]"
+      :class="['column', columnClass, `${item.class || group.class || ''}`]"
     />
   </template>
 </template>
@@ -42,6 +38,14 @@ export default {
   components: {
     Service,
     GroupHeader,
+  },
+  computed: {
+    columnClass() {
+      const n = Number(this.columns);
+      return Number.isInteger(n) && n > 0 && 12 % n === 0
+        ? `is-${12 / n}`
+        : "is-auto";
+    },
   },
   props: {
     group: {
