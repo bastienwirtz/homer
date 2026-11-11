@@ -119,6 +119,11 @@ services:
         url: "https://usememos.com/"
         endpoint: "/dummy-data/memos"
         type: "Memos"
+      - name: "Beszel"
+        logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/beszel.png"
+        url: "https://beszel.dev/"
+        endpoint: "/dummy-data/beszel"
+        type: "Beszel"
       - name: "Weather"
         location: "Lille"
         apikey: "xxxxxxxxxxxx" # insert your own API key here. Request one from https://openweathermap.org/api.
