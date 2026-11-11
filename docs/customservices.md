@@ -35,6 +35,7 @@ Available services are located in `src/components/`:
 - [Matrix](#matrix)
 - [Mealie](#mealie)
 - [Medusa](#medusa)
+- [Memos](#memos)
 - [Miniflux](#miniflux)
 - [Mylar](#mylar)
 - [NetAlertx](#netalertx)
@@ -463,6 +464,23 @@ Displays News (gray), Warning (orange) or Error (red) notifications bubbles from
 The url must be the root url of Medusa application.
 
 **API Key**: The Medusa API key can be found in General configuration > Interface. It is needed to access Medusa API.
+
+## Memos
+
+Displays the number of memos and the version of a [Memos](https://usememos.com/) instance, with its online / offline status.
+
+```yaml
+- name: "Memos"
+  type: "Memos"
+  logo: "assets/tools/sample.png"
+  url: https://my-memos.url
+  apikey: "<---insert-access-token-here--->" # Optional: see below.
+  hide: [] # Optional: hides "memos", "version".
+```
+
+Requires Memos 26.10 or later. Older versions use a different API, and the card shows them as offline.
+
+**Access Token**: without `apikey`, a private instance shows online with its version, just without a count. The badge counts the token user's own memos (comments aren't counted). To get a token, create one in Memos under Settings > My Account > Access Tokens. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
 
 ## Mylar
 
