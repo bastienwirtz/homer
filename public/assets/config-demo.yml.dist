@@ -118,7 +118,6 @@ services:
         logo: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/memos.png"
         url: "https://usememos.com/"
         endpoint: "/dummy-data/memos"
-        apikey: "xxxxxxxxxxxx"
         type: "Memos"
       - name: "Weather"
         location: "Lille"

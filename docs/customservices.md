@@ -451,13 +451,12 @@ Displays the number of memos and the version of a [Memos](https://usememos.com/)
   logo: "assets/tools/sample.png"
   url: https://my-memos.url
   apikey: "<---insert-access-token-here--->" # Optional: see below.
-  # user: "username"                         # Optional: pick a specific user's stats on multi-user setups.
   hide: [] # Optional: hides "memos", "version".
 ```
 
-Works with Memos 0.22 and later, including the 26.x releases and their new API.
+Requires Memos 26.10 or later. Older versions use a different API, and the card shows them as offline.
 
-**Access Token**: without `apikey`, a private instance shows online with its version, just without a count. The badge counts the token user's own memos (comments aren't counted), from Memos 0.26 onwards. To count your own memos, create an access token in Memos under Settings > My Account > Access Tokens. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
+**Access Token**: without `apikey`, a private instance shows online with its version, just without a count. The badge counts the token user's own memos (comments aren't counted). To get a token, create one in Memos under Settings > My Account > Access Tokens. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
 
 ## Mylar
 
