@@ -457,10 +457,7 @@ Displays the number of memos and the version of a [Memos](https://usememos.com/)
 
 Works with Memos 0.22 and later, including the 26.x releases and their new API.
 
-**Access Token**: without `apikey`, a private instance shows online with its version, just without a count. The badge counts the token user's own memos (comments aren't counted), from Memos 0.26 onwards. To count your own memos, create an access token in Memos under Settings > My Account > Access Tokens.
-
-> [!WARNING]
-> A Memos access token can do everything its user can, and `config.yml` can be read by anyone who can open Homer. Only set `apikey` if your Homer is not exposed to people who should not have that access. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
+**Access Token**: without `apikey`, a private instance shows online with its version, just without a count. The badge counts the token user's own memos (comments aren't counted), from Memos 0.26 onwards. To count your own memos, create an access token in Memos under Settings > My Account > Access Tokens. Hiding `memos` skips the memo request entirely, leaving a version-only card that needs no token.
 
 ## Mylar
 
