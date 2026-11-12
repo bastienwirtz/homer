@@ -404,6 +404,7 @@ This integration supports at max 15 results from Linkding, but you can add it mu
   token: "<---insert-api-key-here--->"
   limit: 10 # Maximum number of items returned by Linkding, minimal 1 and max 15
   query: "#ToDo #Homer" # query to do on Linkding. Use #tagname to search for tags
+  target: "_blank" # Optional: open bookmarks in a new tab
 ```
 
 ## LibrisLog

@@ -44,6 +44,7 @@ export default {
             name: `${bookmark.title}`,
             subtitle: `${bookmark.description}`,
             url: bookmark.url,
+            target: this.item.target,
             logo: `${bookmark.favicon_url}`,
             tag: `${bookmark.tag_names.join(" #")}`,
           }));
