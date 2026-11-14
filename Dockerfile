@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 # build stage
 FROM --platform=$BUILDPLATFORM node:24-alpine3.23 AS build-stage
 
@@ -19,6 +21,10 @@ FROM alpine:3.23
 
 ARG VERSION_TAG=latest
 
+# Build-time only. Use PUID/PGID, or docker's --user, to pick the runtime user.
+ARG UID=1000
+ARG GID=1000
+
 LABEL \
     org.label-schema.schema-version="1.0" \
     org.label-schema.version="$VERSION_TAG" \
@@ -30,25 +36,22 @@ LABEL \
     org.opencontainers.image.source="https://github.com/bastienwirtz/homer" \
     org.opencontainers.image.url="https://hub.docker.com/r/b4bz/homer"
 
-ENV GID=1000 \
-    UID=1000 \
-    PORT=8080 \
+ENV PORT=8080 \
     SUBFOLDER="/_" \
     INIT_ASSETS=1 \
     IPV6_DISABLE=0
 
 RUN addgroup -S lighttpd -g ${GID} && adduser -D -S -u ${UID} lighttpd lighttpd && \
-    apk add -U --no-cache tzdata lighttpd
+    apk add -U --no-cache tzdata lighttpd su-exec
 
 WORKDIR /www
 
 COPY lighttpd.conf /lighttpd.conf
 COPY lighttpd-ipv6.sh /etc/lighttpd/ipv6.sh
 COPY entrypoint.sh /entrypoint.sh
-COPY --from=build-stage --chown=${UID}:${GID} /app/dist /www/
+COPY --from=build-stage --chown=${UID}:${GID} --exclude=assets /app/dist /www/
 COPY --from=build-stage --chown=${UID}:${GID} /app/dist/assets /www/default-assets
-
-USER ${UID}:${GID}
+RUN mkdir /www/assets && chown ${UID}:${GID} /www/assets
 
 HEALTHCHECK --start-period=10s --start-interval=1s --interval=30s --timeout=5s --retries=3 \
     CMD wget --no-verbose -Y off --tries=1 --spider http://127.0.0.1:${PORT}/ || exit 1

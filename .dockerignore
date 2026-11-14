@@ -1,4 +1,5 @@
-assets/*
+public/assets/config.yml
+dist
 dockerfile
 *.md
 .git
