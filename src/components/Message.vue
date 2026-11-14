@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { sanitizeHtml } from "@/utils/sanitize.js";
+
 export default {
   name: "Message",
   props: {
@@ -49,6 +51,12 @@ export default {
         let fetchedMessage = await this.downloadMessage(this.item.url);
         if (this.item.mapping) {
           fetchedMessage = this.mapRemoteMessage(fetchedMessage);
+        }
+
+        // Content fetched from a remote endpoint is untrusted, so sanitize it
+        // before it ends up in a v-html binding to avoid XSS.
+        if (typeof fetchedMessage.content === "string") {
+          fetchedMessage.content = sanitizeHtml(fetchedMessage.content);
         }
 
         // keep the original config value if no value is provided by the endpoint
