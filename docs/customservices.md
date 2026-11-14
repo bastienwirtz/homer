@@ -776,7 +776,8 @@ for setting up qBittorrent.
 - name: "qBittorrent"
   type: "qBittorrent"
   logo: "assets/tools/sample.png"
-  url: https://my-service.url # Your rTorrent web UI, f.e. ruTorrent or Flood.
+  url: https://my-service.url # Your qBittorrent web UI
+  apikey: "<---insert-api-key-here--->"
   hide: [] # Optional: badges to hide: "torrents", "serverError".
 ```
 
