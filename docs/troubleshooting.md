@@ -50,6 +50,22 @@ This should be a configuration issue.
 - Make sure the option `connectivityCheck` is set to `true` in configuration.
 - Check your proxy configuration, the expected behavior is to redirect user using a 302 to the login page when user is not authenticated.
 
+## My configuration changes are not showing up
+
+Your browser is serving a cached copy of `config.yml`. A quick way to confirm it is to open the dashboard in a private window: if your changes appear there but not in your normal window, this is what you are hitting.
+
+Force a reload with `Ctrl + Shift + R` (`Cmd + Shift + R` on macOS) to pick the changes up immediately.
+
+In the Docker image, Hommer's webserver tells browsers to revalidate the configuration on every load, revalidation is cheap as unchanged files are answered with a `304` and no body.
+
+> [!NOTE]
+> The `Last-Modified` date returned by `curl -I <your-homer-url>` is not a symptom. That request returns `index.html`, whose timestamp is set when the container image was built, so it is unrelated to when you last edited your configuration.
+
+If you serve Homer yourself rather than using the Docker image, you might want to reproduce the following configuration:
+
+- `Cache-Control: no-cache` for everything except `resources/`, which holds the build output. Despite the name, `no-cache` does not disable caching, it requires the browser to check whether its copy is still current.
+- `Cache-Control: public, max-age=31536000, immutable` for `resources/`. Those filenames contain a content hash, so a given name always refers to the same bytes.
+
 ## I put my API key into the OpenWeather service and it still isn't working
 
 If you have just made an OpenWeatherMap account and/or a newly-made API key, there is a high chance that you need to wait for it to be activated (often a few hours). If after waiting it still doesn't work, make sure to check the location you have provided since it may be an invalid location.
