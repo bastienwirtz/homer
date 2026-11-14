@@ -97,6 +97,10 @@ message:
   #   title: 'id' # use value from field 'id' as title
   #   content: 'value' # value from field 'value' as content
   # refreshInterval: 10000 # Optional: time interval to refresh message
+  # The global `proxy` block is not applied here: the message url is often a third party API. Use the two keys below when it sits behind an authentication proxy.
+  # useCredentials: true # Optional: send cookies & authorization headers when fetching the message url. `false` omits them, even same-origin.
+  # headers: # Optional: send custom headers when fetching the message url.
+  #   Test: "Example"
   #
   # Real example using chucknorris.io for showing Chuck Norris facts as messages:
   # url: https://api.chucknorris.io/jokes/random
