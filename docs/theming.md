@@ -10,7 +10,7 @@ theme: default # 'default', 'walkxcode', or 'neon' see files in 'src/assets/them
 
 ## Favicon
 
-Use your own favicon by changing the icons files in the `assets/icons` directory. More information on the format [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).
+Use your own favicon by changing the icons files in the `assets/icons` directory. More information on the format [here](https://github.com/homer-dashboard/homer/blob/main/public/assets/icons/README.md).
 
 ## Colors and background customization
 

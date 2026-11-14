@@ -18,7 +18,7 @@
     </h1>
     <p>
       <a
-        href="https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md#connectivity-checks"
+        href="https://github.com/homer-dashboard/homer/blob/main/docs/configuration.md#connectivity-checks"
         >More information →</a
       >
     </p>

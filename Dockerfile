@@ -27,7 +27,7 @@ LABEL \
     org.opencontainers.image.ref.name="b4bz/homer:${VERSION_TAG}" \
     org.opencontainers.image.version="$VERSION_TAG" \
     org.opencontainers.image.licenses="Apache-2.0 license" \
-    org.opencontainers.image.source="https://github.com/bastienwirtz/homer" \
+    org.opencontainers.image.source="https://github.com/homer-dashboard/homer" \
     org.opencontainers.image.url="https://hub.docker.com/r/b4bz/homer"
 
 ENV GID=1000 \

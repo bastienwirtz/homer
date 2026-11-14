@@ -8,7 +8,7 @@ logo: "logo.png"
 # icon: "fas fa-skull-crossbones" # Optional icon
 
 header: true
-footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">Bulma</a>, <a href="https://vuejs.org/">Vue.js</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">Bulma</a>, <a href="https://vuejs.org/">Vue.js</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/homer-dashboard/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 # Optional theme customization
 theme: default
@@ -22,18 +22,18 @@ defaults:
 message:
   style: "is-dark" # See https://bulma.io/documentation/components/message/#colors for styling options.
   title: "👋 Welcome!"
-  content: "Homer is a dead simple static HOMepage for your servER (or anything else) to keep your services and favorite links on hand, based on a simple yaml configuration file.<br /> Learn more at <a href='https://github.com/bastienwirtz/homer'>github.com/bastienwirtz/homer</a>"
+  content: "Homer is a dead simple static HOMepage for your servER (or anything else) to keep your services and favorite links on hand, based on a simple yaml configuration file.<br /> Learn more at <a href='https://github.com/homer-dashboard/homer'>github.com/homer-dashboard/homer</a>"
 
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
   - name: "Contribute!"
     icon: "fab fa-github"
-    url: "https://github.com/bastienwirtz/homer"
+    url: "https://github.com/homer-dashboard/homer"
     target: "_blank" # optional html a tag target attribute
   - name: "Documentation"
     icon: "fas fa-book"
-    url: "https://github.com/bastienwirtz/homer/blob/main/README.md#table-of-contents"
+    url: "https://github.com/homer-dashboard/homer/blob/main/README.md#table-of-contents"
   # this will link to a second homer page that will load config from additional-page.yml and keep default config values as in config.yml file
   # see url field and assets/additional-page.yml.dist used in this example:
   - name: "another page!"
@@ -51,22 +51,22 @@ services:
         icon: "fa-solid fa-download"
         subtitle: "Start using Homer in a few minutes"
         tag: "setup"
-        url: "https://github.com/bastienwirtz/homer?tab=readme-ov-file#get-started"
+        url: "https://github.com/homer-dashboard/homer?tab=readme-ov-file#get-started"
       - name: "Configuration"
         icon: "fa-solid fa-sliders"
         subtitle: "Configuration options documentation"
         tag: "setup"
-        url: "https://github.com/bastienwirtz/homer/blob/main/docs/configuration.md"
+        url: "https://github.com/homer-dashboard/homer/blob/main/docs/configuration.md"
       - name: "Theming"
         icon: "fa-solid fa-palette"
         subtitle: "Customize Homer appearance"
         tag: "theming"
-        url: "https://github.com/bastienwirtz/homer/blob/main/docs/theming.md"
+        url: "https://github.com/homer-dashboard/homer/blob/main/docs/theming.md"
       - name: "Smart cards"
         icon: "fa-solid fa-palette"
         subtitle: "Displays dynamic information or actions."
         tag: "setup"
-        url: "https://github.com/bastienwirtz/homer/blob/main/docs/customservices.md"
+        url: "https://github.com/homer-dashboard/homer/blob/main/docs/customservices.md"
       - name: "Dashboard icons"
         icon: "fa-solid fa-icons"
         tag: "setup"

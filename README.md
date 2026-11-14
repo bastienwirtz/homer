@@ -2,7 +2,7 @@
  <img
   width="180"
   alt="Homer's donut"
-  src="https://raw.githubusercontent.com//bastienwirtz/homer/main/public/logo.png">
+  src="https://raw.githubusercontent.com//homer-dashboard/homer/main/public/logo.png">
     <br/>
     Homer
 </h1>
@@ -17,7 +17,7 @@
  <a href="https://opensource.org/licenses/Apache-2.0"><img
   alt="License: Apache 2"
   src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
-  <a href="https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip"><img
+  <a href="https://github.com/homer-dashboard/homer/releases/latest/download/homer.zip"><img
   alt="Download homer static build"
   src="https://img.shields.io/badge/Download-homer.zip-orange"></a>
  <a href="https://twitter.com/acdlite/status/974390255393505280"><img
@@ -123,10 +123,10 @@ Set to `1` to disable listening on IPv6.
 
 ### Using the release tarball (prebuilt, ready to use)
 
-Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/bastienwirtz/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a web server.
+Download and extract the latest release (`homer.zip`) from the [release page](https://github.com/homer-dashboard/homer/releases), rename the `assets/config.yml.dist` file to `assets/config.yml`, and put it behind a web server.
 
 ```sh
-wget https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip
+wget https://github.com/homer-dashboard/homer/releases/latest/download/homer.zip
 unzip homer.zip -d homer
 cd homer
 cp assets/config.yml.dist assets/config.yml

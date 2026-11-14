@@ -22,7 +22,7 @@ You can either:
 > - **Do not** use env var to set the GID / UID of the user running container. Use the Docker `user` option.
 > - **Do not** use 0:0 as a user value, it would be a security risk, and it's not guaranty to work.
 
-Check this [thread](https://github.com/bastienwirtz/homer/issues/459) for more information about debugging
+Check this [thread](https://github.com/homer-dashboard/homer/issues/459) for more information about debugging
 permission issues.
 
 ## My service card doesn't work, nothing appears or offline status is displayed (pi-hole, sonarr, ping, ...)
@@ -41,7 +41,7 @@ To resolve this, you can either:
 
 - Host all your target service under the same domain & port.
 - Modify the target server configuration so that the response of the server included following header- `Access-Control-Allow-Origin: *` (<https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests>). It might be an option in the targeted service, otherwise depending on how the service is hosted, the proxy or web server can seamlessly add it.
-- **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/bastienwirtz/corsair), a light and simple solution)
+- **Use a proxy** to add the necessary CORS headers (lot of options, some of them described [here](https://enable-cors.org/server.html). Also check [`CORSair`](https://github.com/homer-dashboard/corsair), a light and simple solution)
 
 ## I am using an authentication proxy and homer says I am offline
 

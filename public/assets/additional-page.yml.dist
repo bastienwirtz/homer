@@ -17,7 +17,7 @@ links:
     url: "#"
   - name: "Contribute"
     icon: "fab fa-github"
-    url: "https://github.com/bastienwirtz/homer"
+    url: "https://github.com/homer-dashboard/homer"
     target: "_blank" # optional html a tag target attribute
   - name: "Wiki"
     icon: "fas fa-book"

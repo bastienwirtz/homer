@@ -17,7 +17,7 @@ UX and usability. If you are looking for a full featured dashboard, there are to
 
 ### Code of conduct and guidelines
 
-First of all, we expect everyone (contributors and maintainers alike) to respect the [Code of conduct](https://github.com/bastienwirtz/homer/blob/main/CODE_OF_CONDUCT.md). It is not a recommendation, it is mandatory.
+First of all, we expect everyone (contributors and maintainers alike) to respect the [Code of conduct](https://github.com/homer-dashboard/homer/blob/main/CODE_OF_CONDUCT.md). It is not a recommendation, it is mandatory.
 
 For all contributions, please respect the following guidelines:
 
@@ -35,7 +35,7 @@ feel free to open an issue to present your idea.
 
 ### Working with AI Agents
 
-This repository include an [`AGENTS.md`](https://github.com/bastienwirtz/homer/blob/main/AGENTS.md) instruction file for agents. It use an [open format](https://agents.md/), which most agent should natively use for context. However, for specific agent like Claude Code or Gemini, you will have to specifically ask it to read the file or create symlink:  
+This repository include an [`AGENTS.md`](https://github.com/homer-dashboard/homer/blob/main/AGENTS.md) instruction file for agents. It use an [open format](https://agents.md/), which most agent should natively use for context. However, for specific agent like Claude Code or Gemini, you will have to specifically ask it to read the file or create symlink:  
 
 ```sh
 ln -s AGENTS.md CLAUDE.md
@@ -45,9 +45,9 @@ ln -s AGENTS.md GEMINI.md
 ### How to submit a contribution
 
 The general process to submit a contribution is as follow:
-1. Take a look at the [development guideline](https://github.com/bastienwirtz/homer/blob/main/docs/development.md).
+1. Take a look at the [development guideline](https://github.com/homer-dashboard/homer/blob/main/docs/development.md).
 2. Create your own fork of the code
 3. Do the changes in your fork
-4. Make sure to fill the [pull request description](https://github.com/bastienwirtz/homer/blob/main/.github/PULL_REQUEST_TEMPLATE.md) properly.
+4. Make sure to fill the [pull request description](https://github.com/homer-dashboard/homer/blob/main/.github/PULL_REQUEST_TEMPLATE.md) properly.
 
 ### Happy coding :metal:
