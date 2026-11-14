@@ -39,6 +39,8 @@ jobs:
         with:
           push: true
           tags: |
+            homerdashboard/homer:latest
+            homerdashboard/homer:${{ github.ref_name }}
             b4bz/homer:latest
             b4bz/homer:${{ github.ref_name }}
             ghcr.io/${{ github.repository }}:latest
