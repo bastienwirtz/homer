@@ -23,6 +23,7 @@ export default {
   data: function () {
     return {
       message: {},
+      refreshTimer: null,
     };
   },
   computed: {
@@ -31,50 +32,70 @@ export default {
     },
   },
   watch: {
-    item: function (item) {
-      this.message = Object.assign({}, item);
+    item: {
+      immediate: true,
+      // A page switch rebuilds the config and replaces this prop, so the
+      // endpoint has to be queried again, not just reset to the config value.
+      handler: function (item) {
+        clearInterval(this.refreshTimer);
+        this.message = { ...item };
+        this.getMessage();
+
+        if (item?.url && item.refreshInterval) {
+          this.refreshTimer = setInterval(
+            this.getMessage,
+            item.refreshInterval,
+          );
+        }
+      },
     },
   },
-  created: async function () {
-    // Look for a new message if an endpoint is provided.
-    this.message = Object.assign({}, this.item);
-    await this.getMessage();
+  beforeUnmount: function () {
+    clearInterval(this.refreshTimer);
   },
   methods: {
     getMessage: async function () {
-      if (!this.item) {
+      const item = this.item;
+      if (!item?.url) {
         return;
       }
-      if (this.item.url) {
-        let fetchedMessage = await this.downloadMessage(this.item.url);
-        if (this.item.mapping) {
-          fetchedMessage = this.mapRemoteMessage(fetchedMessage);
-        }
 
-        // keep the original config value if no value is provided by the endpoint
-        const message = this.message;
-        for (const prop of ["title", "style", "content", "icon"]) {
-          if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
-            message[prop] = fetchedMessage[prop];
-          }
-        }
-        this.message = { ...message }; // Force computed property to re-evaluate
+      let fetchedMessage = await this.downloadMessage(item.url);
+
+      // A page switch during the fetch makes this response obsolete.
+      if (item !== this.item) {
+        return;
       }
 
-      if (this.item.refreshInterval) {
-        setTimeout(this.getMessage, this.item.refreshInterval);
+      if (item.mapping) {
+        fetchedMessage = this.mapRemoteMessage(fetchedMessage);
+      }
+
+      // keep the original config value if no value is provided by the endpoint
+      for (const prop of ["title", "style", "content", "icon"]) {
+        if (prop in fetchedMessage && fetchedMessage[prop] !== null) {
+          this.message[prop] = fetchedMessage[prop];
+        }
       }
     },
 
-    downloadMessage: function (url) {
-      return fetch(url, { headers: { Accept: "application/json" } }).then(
-        function (response) {
-          if (response.status != 200) {
-            return;
-          }
-          return response.json();
-        },
-      );
+    // Never rejects, so a failing endpoint cannot break the refresh loop.
+    downloadMessage: async function (url) {
+      try {
+        const response = await fetch(url, {
+          headers: { Accept: "application/json" },
+        });
+
+        if (!response.ok) {
+          throw new Error(`${response.status} error`);
+        }
+
+        const message = await response.json();
+        return message instanceof Object ? message : {};
+      } catch (error) {
+        console.warn(`Fail to fetch message from ${url}:`, error);
+        return {};
+      }
     },
 
     mapRemoteMessage: function (message) {
