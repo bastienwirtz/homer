@@ -5,7 +5,7 @@
   "results": [
     {
       "id": 1,
-      "url": "https://github.com/bastienwirtz/homer",
+      "url": "https://github.com/homer-dashboard/homer",
       "title": "Homer - A very simple static homepage for your server",
       "description": "A dead simple static HOMepage for your servER to keep your services on hand, from a simple yaml configuration file.",
       "notes": "",

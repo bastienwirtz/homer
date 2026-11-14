@@ -29,7 +29,7 @@ header: true # Set to false to hide the header
 # Optional: Different hotkey for search, defaults to "/"
 # hotkey:
 #   search: "Shift"
-footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
+footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/homer-dashboard/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
 connectivityCheck: true # whether you want to display a message when the apps are not accessible anymore (VPN disconnected for example).
@@ -115,11 +115,11 @@ message:
 links:
   - name: "Link 1"
     icon: "fab fa-github"
-    url: "https://github.com/bastienwirtz/homer"
+    url: "https://github.com/homer-dashboard/homer"
     target: "_blank" # optional html tag target attribute
   - name: "link 2"
     icon: "fas fa-book"
-    url: "https://github.com/bastienwirtz/homer"
+    url: "https://github.com/homer-dashboard/homer"
   # this will link to a second homer page that will load config from page2.yml and keep default config values as in config.yml file
   # see url field and assets/page.yml used in this example:
   - name: "Second Page"
@@ -228,4 +228,4 @@ The `/assets/manifest.json` can also be edited to change the app (pwa) name, des
 
 ## PWA Icons
 
-See icons documentation [here](https://github.com/bastienwirtz/homer/blob/main/public/assets/icons/README.md).
+See icons documentation [here](https://github.com/homer-dashboard/homer/blob/main/public/assets/icons/README.md).
